@@ -10,12 +10,23 @@ import { LeadData } from '@/types';
 
 type Stage = 'quiz' | 'lead-capture' | 'submitting';
 
+type SubmitResponse = {
+  success: boolean;
+  error?: string;
+  results?: unknown;
+};
+
+function isSubmitResponse(value: unknown): value is SubmitResponse {
+  return !!value && typeof value === 'object' && 'success' in value;
+}
+
 export default function DiagnosticPage() {
   const router = useRouter();
   const [stage, setStage] = useState<Stage>('quiz');
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [answers, setAnswers] = useState<Record<number, string>>({});
   const [isLoading, setIsLoading] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   const question = QUESTIONS[currentQuestion];
   const dimensionLabel = DIMENSION_META[question.dimension].label;
@@ -37,6 +48,7 @@ export default function DiagnosticPage() {
 
   const handleLeadSubmit = async (leadData: LeadData) => {
     setIsLoading(true);
+    setSubmitError(null);
     setStage('submitting');
     try {
       const response = await fetch('/api/submit', {
@@ -44,17 +56,28 @@ export default function DiagnosticPage() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ leadData, answers })
       });
-      const data = await response.json();
-      if (data.success) {
+
+      const payload: unknown = await response.json().catch(() => null);
+      const data = isSubmitResponse(payload) ? payload : null;
+
+      if (!response.ok) {
+        throw new Error(data?.error ?? 'Unable to submit your diagnostic right now.');
+      }
+
+      if (data?.success) {
         // Store results in sessionStorage for results page
         sessionStorage.setItem('diagnosticResults', JSON.stringify({
           results: data.results,
           leadData
         }));
         router.push('/results');
+        return;
       }
+
+      throw new Error(data?.error ?? 'Unable to submit your diagnostic right now.');
     } catch (error) {
       console.error(error);
+      setSubmitError(error instanceof Error ? error.message : 'Unable to submit your diagnostic right now.');
       setIsLoading(false);
       setStage('lead-capture');
     }
@@ -63,7 +86,14 @@ export default function DiagnosticPage() {
   if (stage === 'lead-capture' || stage === 'submitting') {
     return (
       <main className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
-        <LeadCaptureForm onSubmit={handleLeadSubmit} isLoading={isLoading} />
+        <div className="w-full">
+          <LeadCaptureForm onSubmit={handleLeadSubmit} isLoading={isLoading} />
+          {submitError && (
+            <p className="mx-auto mt-4 max-w-md text-center text-sm font-medium text-red-600">
+              {submitError}
+            </p>
+          )}
+        </div>
       </main>
     );
   }
