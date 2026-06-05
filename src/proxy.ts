@@ -1,6 +1,7 @@
-import { NextRequest, NextResponse } from 'next/server';
+import type { NextRequest } from 'next/server';
+import { NextResponse } from 'next/server';
 
-export function middleware(req: NextRequest) {
+export function proxy(req: NextRequest) {
   // Add basic origin checking for API routes
   if (req.nextUrl.pathname.startsWith('/api/')) {
     const origin = req.headers.get('origin');

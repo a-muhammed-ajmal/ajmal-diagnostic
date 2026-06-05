@@ -47,7 +47,7 @@ export function DiagnosticReportEmail({
           </Section>
 
           <Text style={{ color: '#374151', fontSize: '15px', fontStyle: 'italic', lineHeight: '1.6' }}>
-            "{primaryMeta.impactStatement}"
+            &ldquo;{primaryMeta.impactStatement}&rdquo;
           </Text>
 
           <Hr style={{ margin: '24px 0', borderColor: '#e5e7eb' }} />
