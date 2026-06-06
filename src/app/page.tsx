@@ -37,9 +37,9 @@ export default function Home() {
             Muhammed Ajmal
           </p>
           <p className="text-xs text-gray-400 tracking-wide">
-            <h1 className="text-4xl md:text-5xl font-extrabold text-[#1e3a5f] leading-tight mb-5">
-              Find the One Thing Stopping Your Business Growth
-            </h1>
+            Strategic Management Consulting · Dubai, UAE
+          </p>
+        </div>
         <Link
           href="/diagnostic"
           className="text-xs font-semibold text-blue-600 hover:text-blue-800 transition-colors hidden sm:block"
