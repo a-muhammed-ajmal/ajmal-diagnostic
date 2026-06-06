@@ -161,7 +161,13 @@ export default function ResultsPage() {
               <div key={dim.key}>
                 <div className="flex justify-between items-center mb-1">
                   <div className="flex items-center gap-2 flex-wrap">
-                    <span className={`font-medium text-sm ${dim.key === results.primaryConstraint ? 'text-red-600' : 'text-gray-700'}`}>
+                    <span
+                      className={`font-medium text-sm ${
+                        dim.key === results.primaryConstraint
+                          ? 'text-red-600'
+                          : 'text-gray-700'
+                      }`}
+                    >
                       {dim.label}
                     </span>
                     {dim.key === results.primaryConstraint && (
@@ -208,8 +214,8 @@ export default function ResultsPage() {
         {/* Honesty Notice */}
         <div className="bg-gray-50 border border-gray-200 rounded-xl p-5">
           <p className="text-gray-600 text-sm leading-relaxed">
-            <strong className="text-gray-800">An important distinction:</strong> This tool
-            has identified your constraint category — not the root cause within it.
+            <strong className="text-gray-800">An important distinction:</strong> This
+            tool has identified your constraint category — not the root cause within it.
             Understanding exactly why this constraint exists in your specific business is
             what the paid diagnostic is designed to uncover. That distinction matters.
           </p>
