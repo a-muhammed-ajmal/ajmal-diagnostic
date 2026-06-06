@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { QUESTIONS } from '@/lib/questions';
 import { DIMENSION_META } from '@/lib/scoring';
@@ -27,23 +27,54 @@ export default function DiagnosticPage() {
   const [answers, setAnswers] = useState<Record<number, string>>({});
   const [isLoading, setIsLoading] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
+  const autoAdvanceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const question = QUESTIONS[currentQuestion];
   const dimensionLabel = DIMENSION_META[question.dimension].label;
   const selectedAnswer = answers[question.id];
+  const isLastQuestion = currentQuestion === QUESTIONS.length - 1;
 
   const handleAnswer = (questionId: number, optionId: string) => {
     const newAnswers = { ...answers, [questionId]: optionId };
     setAnswers(newAnswers);
 
-    // Auto-advance after 400ms
-    setTimeout(() => {
+    if (autoAdvanceRef.current) {
+      clearTimeout(autoAdvanceRef.current);
+    }
+
+    autoAdvanceRef.current = setTimeout(() => {
       if (currentQuestion < QUESTIONS.length - 1) {
         setCurrentQuestion(prev => prev + 1);
       } else {
         setStage('lead-capture');
       }
     }, 400);
+  };
+
+  const handleNext = () => {
+    if (autoAdvanceRef.current) {
+      clearTimeout(autoAdvanceRef.current);
+    }
+    if (currentQuestion < QUESTIONS.length - 1) {
+      setCurrentQuestion(prev => prev + 1);
+    } else {
+      setStage('lead-capture');
+    }
+  };
+
+  const handleBack = () => {
+    if (autoAdvanceRef.current) {
+      clearTimeout(autoAdvanceRef.current);
+    }
+    setCurrentQuestion(prev => prev - 1);
+  };
+
+  const handleBackToQuiz = () => {
+    if (autoAdvanceRef.current) {
+      clearTimeout(autoAdvanceRef.current);
+    }
+    setCurrentQuestion(QUESTIONS.length - 1);
+    setStage('quiz');
   };
 
   const handleLeadSubmit = async (leadData: LeadData) => {
@@ -54,7 +85,7 @@ export default function DiagnosticPage() {
       const response = await fetch('/api/submit', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ leadData, answers })
+        body: JSON.stringify({ leadData, answers }),
       });
 
       const payload: unknown = await response.json().catch(() => null);
@@ -65,11 +96,10 @@ export default function DiagnosticPage() {
       }
 
       if (data?.success) {
-        // Store results in sessionStorage for results page
-        sessionStorage.setItem('diagnosticResults', JSON.stringify({
-          results: data.results,
-          leadData
-        }));
+        sessionStorage.setItem(
+          'diagnosticResults',
+          JSON.stringify({ results: data.results, leadData })
+        );
         router.push('/results');
         return;
       }
@@ -77,7 +107,9 @@ export default function DiagnosticPage() {
       throw new Error(data?.error ?? 'Unable to submit your diagnostic right now.');
     } catch (error) {
       console.error(error);
-      setSubmitError(error instanceof Error ? error.message : 'Unable to submit your diagnostic right now.');
+      setSubmitError(
+        error instanceof Error ? error.message : 'Unable to submit your diagnostic right now.'
+      );
       setIsLoading(false);
       setStage('lead-capture');
     }
@@ -87,6 +119,14 @@ export default function DiagnosticPage() {
     return (
       <main className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
         <div className="w-full">
+          <div className="max-w-md mx-auto mb-4">
+            <button
+              onClick={handleBackToQuiz}
+              className="flex items-center gap-1 text-sm text-gray-500 hover:text-gray-700 transition-colors"
+            >
+              ← Back to questions
+            </button>
+          </div>
           <LeadCaptureForm onSubmit={handleLeadSubmit} isLoading={isLoading} />
           {submitError && (
             <p className="mx-auto mt-4 max-w-md text-center text-sm font-medium text-red-600">
@@ -111,14 +151,24 @@ export default function DiagnosticPage() {
             onAnswer={handleAnswer}
             dimensionLabel={dimensionLabel}
           />
-          {selectedAnswer && currentQuestion < QUESTIONS.length - 1 && (
-            <button
-              onClick={() => setCurrentQuestion(prev => prev + 1)}
-              className="mt-6 w-full bg-blue-600 text-white py-3 rounded-xl font-medium hover:bg-blue-700 transition-colors"
-            >
-              Next Question →
-            </button>
-          )}
+          <div className="mt-6 flex gap-3">
+            {currentQuestion > 0 && (
+              <button
+                onClick={handleBack}
+                className="flex-1 border border-gray-300 text-gray-700 py-3 rounded-xl font-medium hover:bg-gray-50 transition-colors"
+              >
+                ← Back
+              </button>
+            )}
+            {selectedAnswer && (
+              <button
+                onClick={handleNext}
+                className="flex-1 bg-blue-600 text-white py-3 rounded-xl font-medium hover:bg-blue-700 transition-colors"
+              >
+                {isLastQuestion ? 'See My Results →' : 'Next →'}
+              </button>
+            )}
+          </div>
         </div>
       </div>
     </main>

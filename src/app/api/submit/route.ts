@@ -11,7 +11,7 @@ const submitSchema = z.object({
     name: z.string().min(2).max(100),
     email: z.string().email(),
     companyName: z.string().min(2).max(200),
-    revenueRange: z.enum(['under-500k', '500k-2m', '2m-5m', '5m-15m', 'over-15m'])
+    revenueRange: z.string().optional().default('')
   }),
   answers: z.record(z.string(), z.enum(['a', 'b', 'c', 'd']))
 });
