@@ -10,10 +10,15 @@ interface DiagnosticReportEmailProps {
   companyName: string;
   results: DiagnosticResult;
   calendlyLink: string;
+  whatsappLink?: string;
 }
 
 export function DiagnosticReportEmail({
-  name, companyName, results, calendlyLink
+  name,
+  companyName,
+  results,
+  calendlyLink,
+  whatsappLink = 'https://wa.me/971527218844?text=Hi%20Muhammed%2C%20I%20just%20completed%20the%20Business%20Constraint%20Diagnostic.%20I%20would%20like%20to%20discuss%20my%20results.',
 }: DiagnosticReportEmailProps) {
   const primaryMeta = DIMENSION_META[results.primaryConstraint];
   const firstName = name.split(' ')[0];
@@ -52,7 +57,9 @@ export function DiagnosticReportEmail({
 
           <Hr style={{ margin: '24px 0', borderColor: '#e5e7eb' }} />
 
-          <Heading style={{ color: '#1f2937', fontSize: '18px' }}>Your Scores Across All 5 Dimensions</Heading>
+          <Heading style={{ color: '#1f2937', fontSize: '18px' }}>
+            Your Scores Across All 5 Dimensions
+          </Heading>
           {results.dimensions.map(dim => (
             <Section key={dim.key} style={{ marginBottom: '12px' }}>
               <Text style={{ margin: '0 0 4px', fontWeight: 'bold', color: '#374151' }}>
@@ -66,7 +73,9 @@ export function DiagnosticReportEmail({
 
           <Hr style={{ margin: '24px 0', borderColor: '#e5e7eb' }} />
 
-          <Heading style={{ color: '#1f2937', fontSize: '18px' }}>3 Prioritised Directions for {results.primaryConstraintLabel}</Heading>
+          <Heading style={{ color: '#1f2937', fontSize: '18px' }}>
+            3 Prioritised Directions for {results.primaryConstraintLabel}
+          </Heading>
           {primaryMeta.actionDirections.map((direction, i) => (
             <Text key={i} style={{ color: '#374151', fontSize: '15px', lineHeight: '1.6' }}>
               {i + 1}. {direction}
@@ -81,26 +90,51 @@ export function DiagnosticReportEmail({
             </Text>
           </Section>
 
-          <Section style={{ textAlign: 'center', marginBottom: '32px' }}>
+          <Section style={{ textAlign: 'center' as const, marginBottom: '32px' }}>
             <Button
               href={calendlyLink}
               style={{
-                backgroundColor: '#1e3a5f', color: '#ffffff',
-                padding: '16px 32px', borderRadius: '8px',
-                fontSize: '16px', fontWeight: 'bold', textDecoration: 'none'
+                backgroundColor: '#1e3a5f',
+                color: '#ffffff',
+                padding: '16px 32px',
+                borderRadius: '8px',
+                fontSize: '16px',
+                fontWeight: 'bold',
+                textDecoration: 'none',
+                display: 'block',
+                marginBottom: '12px',
               }}
             >
-              Book Your Free 30-Minute Consultation →
+              Book Your Free Business Clarity Session (1 Hour) →
             </Button>
-            <Text style={{ color: '#9ca3af', fontSize: '13px', marginTop: '12px' }}>
-              Walk through your findings with Muhammed Ajmal personally. No pitch. Just clarity.
+
+            <Button
+              href={whatsappLink}
+              style={{
+                backgroundColor: '#25D366',
+                color: '#ffffff',
+                padding: '16px 32px',
+                borderRadius: '8px',
+                fontSize: '16px',
+                fontWeight: 'bold',
+                textDecoration: 'none',
+                display: 'block',
+                marginBottom: '12px',
+              }}
+            >
+              Message Me on WhatsApp Instead
+            </Button>
+
+            <Text style={{ color: '#9ca3af', fontSize: '13px', marginTop: '8px' }}>
+              60 minutes with Muhammed Ajmal personally. Walk through your findings, identify root causes, and define your next steps. No pitch. Just clarity.
             </Text>
           </Section>
 
           <Hr style={{ margin: '24px 0', borderColor: '#e5e7eb' }} />
-          <Text style={{ color: '#9ca3af', fontSize: '12px', textAlign: 'center' }}>
+          <Text style={{ color: '#9ca3af', fontSize: '12px', textAlign: 'center' as const }}>
             Muhammed Ajmal Consulting · Dubai, UAE · Strategic Management | Operational Excellence | AI-Driven Systems
           </Text>
+
         </Container>
       </Body>
     </Html>
