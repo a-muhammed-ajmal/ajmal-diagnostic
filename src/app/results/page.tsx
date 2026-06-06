@@ -232,7 +232,7 @@ export default function ResultsPage() {
             just helped you identify.
           </p>
 
-          
+          <a
             href={calendlyUrl}
             target="_blank"
             rel="noopener noreferrer"
@@ -241,7 +241,7 @@ export default function ResultsPage() {
             📅 Book Your Free Business Clarity Session (1 Hour)
           </a>
 
-          
+          <a
             href={whatsappUrl}
             target="_blank"
             rel="noopener noreferrer"
