@@ -56,13 +56,11 @@ export default function Home() {
           </span>
 
           <h1 className="text-4xl md:text-5xl font-extrabold text-[#1e3a5f] leading-tight mb-5">
-            What Is the Single Biggest Constraint
-            <br className="hidden md:block" /> Holding Your Business Back?
+            Find the Number One Thing Stopping Your Business Growth
           </h1>
 
           <p className="text-lg text-gray-500 leading-relaxed mb-8 max-w-xl mx-auto">
-            Answer 10 questions. Receive a clear diagnosis of your primary growth blocker
-            across 5 dimensions — and a personalised report delivered to your inbox.
+            Feeling like your business is stuck? Let's fix that. Take this 2-minute diagnostic to pinpoint exactly what is blocking your progress and get a clear plan in your inbox. 
           </p>
 
           <Link
