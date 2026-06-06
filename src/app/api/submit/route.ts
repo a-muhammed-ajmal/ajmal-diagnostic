@@ -92,7 +92,7 @@ export async function POST(req: NextRequest) {
     // 3. Handle failed Zod validation gracefully
     if (error instanceof z.ZodError) {
       return NextResponse.json(
-        { success: false, error: 'Invalid data format', details: error.issues },
+        { success: false, error: 'Invalid data format' },
         { status: 400 }
       );
     }
