@@ -1,15 +1,19 @@
 import type { Metadata, Viewport } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Plus_Jakarta_Sans, Inter } from "next/font/google";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const plusJakartaSans = Plus_Jakarta_Sans({
+  variable: "--font-jakarta",
   subsets: ["latin"],
+  weight: ["600", "700", "800"],
+  display: "swap",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  display: "swap",
 });
 
 export const viewport: Viewport = {
@@ -20,14 +24,17 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: "Business Constraint Diagnostic | Muhammed Ajmal Consulting",
+  title: {
+    default: "Muhammed Ajmal Consulting | Strategic Growth Architect for Founder-Led SMEs",
+    template: "%s | Muhammed Ajmal Consulting",
+  },
   description:
-    "Answer 10 questions. Identify the single constraint blocking your business growth. Free diagnostic for founder-led SMEs in the UAE and GCC.",
+    "Helping founder-led SMEs across the UAE and GCC build scalable, system-driven businesses through Strategic Growth Architecture™. Free diagnostic identifies your primary growth constraint.",
   openGraph: {
-    title: "What Is the Biggest Constraint in Your Business?",
+    title: "Strategic Growth Architecture for Founder-Led SMEs | UAE & GCC",
     description:
-      "Free 4-minute diagnostic. Identify your primary growth blocker across 5 dimensions. Built for founder-led SMEs in the UAE and GCC.",
-    url: "https://diagnostic.muhammedajmal.com",
+      "Escape the Founder Trap. Engineer Scalable Growth. Free 4-minute diagnostic identifies your primary business constraint.",
+    url: "https://muhammedajmal.com",
     type: "website",
   },
 };
@@ -40,9 +47,11 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${plusJakartaSans.variable} ${inter.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col bg-ivory text-navy font-body">
+        {children}
+      </body>
     </html>
   );
 }

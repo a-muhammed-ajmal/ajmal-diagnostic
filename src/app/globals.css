@@ -1,28 +1,39 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@theme {
+  --color-navy: #0F172A;
+  --color-gold: #C5A880;
+  --color-gold-bright: #D4AF37;
+  --color-ivory: #FAF9F6;
+  --color-crimson: #E11D48;
+  --color-emerald: #10B981;
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --font-heading: var(--font-jakarta), "Plus Jakarta Sans", sans-serif;
+  --font-body: var(--font-inter), "Inter", sans-serif;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: #FAF9F6;
+  color: #0F172A;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-jakarta), "Plus Jakarta Sans", sans-serif;
+}
+
+.gold-gradient-text {
+  background: linear-gradient(to right, #C5A880, #D4AF37);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+input, select, textarea {
+  font-size: 16px;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 @keyframes fade-in {
