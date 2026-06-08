@@ -53,8 +53,8 @@ export interface DiagnosticResult {
 export interface LeadData {
   name: string;
   email: string;
-  phone: string;
   companyName: string;
+  phone?: string;
   industry?: string;
   teamSize?: string;
   revenueRange?: string;
