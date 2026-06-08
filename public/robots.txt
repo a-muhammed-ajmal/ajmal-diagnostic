@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+Disallow: /admin/
+Disallow: /api/
+Disallow: /results/
+
+Sitemap: https://ajmalconsulting.com/sitemap.xml

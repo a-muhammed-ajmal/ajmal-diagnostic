@@ -117,34 +117,34 @@ export default function DiagnosticPage() {
 
   if (stage === 'lead-capture' || stage === 'submitting') {
     return (
-      <main className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
         <div className="w-full">
           <div className="max-w-md mx-auto mb-4">
             <button
               onClick={handleBackToQuiz}
-              className="flex items-center gap-1 text-sm text-gray-500 hover:text-gray-700 transition-colors"
+              className="flex items-center gap-1 text-sm text-navy/50 hover:text-navy transition-colors"
             >
               ← Back to questions
             </button>
           </div>
           <LeadCaptureForm onSubmit={handleLeadSubmit} isLoading={isLoading} />
           {submitError && (
-            <p className="mx-auto mt-4 max-w-md text-center text-sm font-medium text-red-600">
+            <p className="mx-auto mt-4 max-w-md text-center text-sm font-medium text-crimson">
               {submitError}
             </p>
           )}
         </div>
-      </main>
+      </div>
     );
   }
 
   return (
-    <main className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
       <div className="w-full max-w-2xl">
         <div className="mb-8">
           <ProgressBar current={currentQuestion + 1} total={QUESTIONS.length} />
         </div>
-        <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
+        <div className="bg-white rounded-2xl shadow-sm border border-navy/10 p-8">
           <QuestionCard
             question={question}
             selectedAnswer={selectedAnswer}
@@ -155,7 +155,7 @@ export default function DiagnosticPage() {
             {currentQuestion > 0 && (
               <button
                 onClick={handleBack}
-                className="flex-1 border border-gray-300 text-gray-700 py-3 rounded-xl font-medium hover:bg-gray-50 transition-colors"
+                className="flex-1 border border-navy/20 text-navy py-3 rounded-xl font-heading font-semibold hover:bg-ivory transition-colors min-h-[48px]"
               >
                 ← Back
               </button>
@@ -163,7 +163,7 @@ export default function DiagnosticPage() {
             {selectedAnswer && (
               <button
                 onClick={handleNext}
-                className="flex-1 bg-blue-600 text-white py-3 rounded-xl font-medium hover:bg-blue-700 transition-colors"
+                className="flex-1 bg-navy text-ivory py-3 rounded-xl font-heading font-bold hover:bg-navy/90 transition-colors min-h-[48px]"
               >
                 {isLastQuestion ? 'See My Results →' : 'Next →'}
               </button>
@@ -171,6 +171,6 @@ export default function DiagnosticPage() {
           </div>
         </div>
       </div>
-    </main>
+    </div>
   );
 }
