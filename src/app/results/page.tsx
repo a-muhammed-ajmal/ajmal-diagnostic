@@ -1,264 +1,145 @@
 'use client';
-
-import { useSyncExternalStore } from 'react';
-import Link from 'next/link';
-import type { DiagnosticResult, LeadData } from '@/types';
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { DiagnosticResult, LeadData } from '@/types';
 import { DIMENSION_META } from '@/lib/scoring';
 
-type StoredDiagnosticResults = {
-  results: DiagnosticResult;
-  leadData?: LeadData;
-};
-
-function isStoredDiagnosticResults(value: unknown): value is StoredDiagnosticResults {
-  if (!value || typeof value !== 'object') return false;
-  const candidate = value as Partial<StoredDiagnosticResults>;
-  return (
-    !!candidate.results &&
-    Array.isArray(candidate.results.dimensions) &&
-    typeof candidate.results.totalScore === 'number' &&
-    typeof candidate.results.primaryConstraint === 'string'
-  );
-}
-
-let cachedRawResults: string | null = null;
-let cachedStoredResults: StoredDiagnosticResults | null = null;
-
-function readStoredResults(): StoredDiagnosticResults | null {
-  const rawResults = window.sessionStorage.getItem('diagnosticResults');
-  if (rawResults === cachedRawResults) return cachedStoredResults;
-  cachedRawResults = rawResults;
-  cachedStoredResults = null;
-  if (!rawResults) return cachedStoredResults;
-  try {
-    const parsedResults: unknown = JSON.parse(rawResults);
-    if (isStoredDiagnosticResults(parsedResults)) {
-      cachedStoredResults = parsedResults;
-    }
-  } catch {
-    cachedStoredResults = null;
-  }
-  return cachedStoredResults;
-}
-
-function subscribeToSessionStorage(onStoreChange: () => void) {
-  window.addEventListener('storage', onStoreChange);
-  return () => window.removeEventListener('storage', onStoreChange);
-}
-
-function subscribeToHydration() {
-  return () => undefined;
-}
-
-const getHydratedSnapshot = () => true;
-const getServerSnapshot = () => false;
-const getEmptyResultsSnapshot = () => null;
-
 export default function ResultsPage() {
-  const hasLoaded = useSyncExternalStore(
-    subscribeToHydration,
-    getHydratedSnapshot,
-    getServerSnapshot
+  const router = useRouter();
+  const [data, setData] = useState<{ results: DiagnosticResult; leadData: LeadData } | null>(null);
+
+  useEffect(() => {
+    try {
+      const stored = sessionStorage.getItem('diagnosticResults');
+      if (!stored) { router.push('/'); return; }
+      setData(JSON.parse(stored));
+    } catch { router.push('/'); }
+  }, [router]);
+
+  if (!data) return (
+    <div className="min-h-screen bg-ivory flex items-center justify-center">
+      <div className="text-center">
+        <div className="w-8 h-8 border-2 border-gold border-t-transparent rounded-full animate-spin mx-auto mb-4" />
+        <p className="text-navy/60 font-body text-sm">Loading your results...</p>
+      </div>
+    </div>
   );
 
-  const storedResults = useSyncExternalStore(
-    subscribeToSessionStorage,
-    readStoredResults,
-    getEmptyResultsSnapshot
-  );
-
-  if (!hasLoaded) {
-    return (
-      <main className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <p className="text-sm text-gray-500">Loading your results...</p>
-      </main>
-    );
-  }
-
-  if (!storedResults) {
-    return (
-      <main className="min-h-screen bg-gray-50 flex items-center justify-center px-4">
-        <div className="max-w-md w-full text-center">
-          <p className="text-sm font-semibold uppercase tracking-wide text-blue-600 mb-3">
-            No results found
-          </p>
-          <h1 className="text-3xl font-bold text-gray-900 mb-4">
-            Complete the diagnostic first
-          </h1>
-          <p className="text-gray-600 mb-8">
-            Your report is created after you answer the diagnostic questions and submit your details.
-          </p>
-          <Link
-            href="/diagnostic"
-            className="inline-flex items-center justify-center rounded-xl bg-blue-600 px-8 py-4 text-base font-semibold text-white hover:bg-blue-700 transition-colors"
-          >
-            Start the Diagnostic
-          </Link>
-        </div>
-      </main>
-    );
-  }
-
-  const { results, leadData } = storedResults;
+  const { results, leadData } = data;
   const primaryMeta = DIMENSION_META[results.primaryConstraint];
-  const firstName = leadData?.name?.split(' ')[0] ?? 'there';
+  const secondaryMeta = DIMENSION_META[results.secondaryConstraint];
+  const firstName = leadData.name.split(' ')[0];
+  const calendlyLink = process.env.NEXT_PUBLIC_CALENDLY_LINK || '#';
 
-  const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? '971527218844';
-  const whatsappMessage = encodeURIComponent(
-    `Hi Muhammed, I just completed the Business Constraint Diagnostic. My primary constraint is ${results.primaryConstraintLabel}. I would like to discuss my results.`
-  );
-  const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`;
-  const calendlyUrl =
-    process.env.NEXT_PUBLIC_CALENDLY_LINK ??
-    'https://calendly.com/ajmalconsults/free-business-clarity-consultation';
+  const severityBadge: Record<string, string> = {
+    Critical: 'bg-crimson/10 text-crimson border-crimson/20',
+    Developing: 'bg-amber-50 text-amber-700 border-amber-200',
+    Progressing: 'bg-emerald/10 text-emerald border-emerald/20',
+  };
 
   return (
-    <main className="min-h-screen bg-gray-50 py-12 px-4">
-      <div className="max-w-3xl mx-auto space-y-6">
+    <div className="min-h-screen bg-ivory py-8 px-4 md:py-12">
+      <div className="max-w-3xl mx-auto space-y-5">
 
-        {/* Header */}
         <div className="text-center">
-          <p className="text-blue-600 font-semibold tracking-widest text-xs uppercase mb-2">
-            Business Constraint Diagnosis
-          </p>
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">
-            {firstName}, here is your diagnosis.
-          </h1>
-          {leadData?.email && (
-            <p className="text-gray-500 text-sm">
-              Your full report has been emailed to {leadData.email}
-            </p>
-          )}
+          <p className="text-gold font-heading font-bold tracking-widest text-xs uppercase mb-2">Strategic Growth Architecture™</p>
+          <h1 className="text-2xl md:text-3xl font-heading font-extrabold text-navy mb-2">{firstName}, here is your diagnosis.</h1>
+          <p className="text-navy/50 font-body text-sm">Your full report has been emailed to {leadData.email}</p>
         </div>
 
-        {/* Primary Constraint Card */}
-        <div className="bg-[#1e3a5f] text-white rounded-2xl p-8 shadow-lg">
-          <p className="text-blue-300 text-xs font-bold tracking-widest uppercase mb-3">
-            Primary Growth Constraint Identified
-          </p>
-          <h2 className="text-3xl font-bold mb-4">
-            {results.primaryConstraintLabel}
-          </h2>
-          <p className="text-blue-100 leading-relaxed text-sm">
-            {primaryMeta.constraintExplanation}
-          </p>
+        <div className="bg-navy rounded-2xl p-6 md:p-8 text-white text-center shadow-xl">
+          <p className="text-gold font-heading font-bold tracking-widest text-xs uppercase mb-4">Business Health Score</p>
+          <div className="text-5xl md:text-7xl font-heading font-extrabold mb-2">{results.healthScore}%</div>
+          <span className={`inline-block px-4 py-1 rounded-full text-sm font-heading font-bold border ${severityBadge[results.severityLabel]}`}>
+            {results.severityLabel}
+          </span>
+          <p className="text-ivory/40 text-xs mt-4 font-body">Critical: 0–39% · Developing: 40–69% · Progressing: 70–100%</p>
         </div>
 
-        {/* Impact Statement */}
+        <div className="bg-navy rounded-2xl p-6 md:p-8 shadow-lg">
+          <p className="text-blue-300 font-heading font-bold tracking-widest text-xs uppercase mb-2">Primary Growth Constraint</p>
+          <h2 className="text-2xl md:text-3xl font-heading font-bold text-white mb-4">{results.primaryConstraintLabel}</h2>
+          <p className="text-blue-100 leading-relaxed font-body text-sm">{primaryMeta.constraintExplanation}</p>
+        </div>
+
+        <div className="bg-white rounded-2xl p-5 md:p-6 border border-navy/10 shadow-sm">
+          <p className="text-navy/40 font-heading font-bold tracking-widest text-xs uppercase mb-2">Secondary Constraint</p>
+          <h3 className="text-lg md:text-xl font-heading font-bold text-navy mb-3">{results.secondaryConstraintLabel}</h3>
+          <p className="text-navy/70 font-body text-sm leading-relaxed">{secondaryMeta.secondaryExplanation}</p>
+        </div>
+
         <div className="bg-amber-50 border border-amber-200 rounded-xl p-5">
-          <p className="text-amber-800 italic leading-relaxed text-sm">
-            &ldquo;{primaryMeta.impactStatement}&rdquo;
-          </p>
+          <p className="text-amber-800 italic font-body text-sm leading-relaxed">"{primaryMeta.impactStatement}"</p>
         </div>
 
-        {/* Dimension Scores */}
-        <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
-          <h3 className="font-bold text-gray-900 text-lg mb-5">
-            Your Scores Across All 5 Dimensions
-          </h3>
-          <div className="space-y-5">
+        <div className="bg-white rounded-2xl p-5 md:p-6 border border-navy/10 shadow-sm">
+          <h3 className="font-heading font-bold text-navy text-base md:text-lg mb-5">Your Scores Across All 5 Dimensions</h3>
+          <div className="space-y-4">
             {results.dimensions.map(dim => (
               <div key={dim.key}>
-                <div className="flex justify-between items-center mb-1">
-                  <div className="flex items-center gap-2 flex-wrap">
-                    <span
-                      className={`font-medium text-sm ${
-                        dim.key === results.primaryConstraint
-                          ? 'text-red-600'
-                          : 'text-gray-700'
-                      }`}
-                    >
-                      {dim.label}
-                    </span>
-                    {dim.key === results.primaryConstraint && (
-                      <span className="text-xs bg-red-100 text-red-600 px-2 py-0.5 rounded-full font-medium">
-                        Primary Constraint
-                      </span>
-                    )}
-                  </div>
-                  <span className="text-sm font-bold text-gray-600 ml-2">
-                    {dim.score}/6
+                <div className="flex justify-between items-center mb-1 gap-2">
+                  <span className="font-heading font-semibold text-sm text-navy flex items-center gap-1.5 flex-wrap">
+                    {dim.label}
+                    {dim.key === results.primaryConstraint && <span className="text-[10px] bg-crimson/10 text-crimson px-2 py-0.5 rounded-full font-bold whitespace-nowrap">PRIMARY</span>}
+                    {dim.key === results.secondaryConstraint && <span className="text-[10px] bg-navy/10 text-navy/60 px-2 py-0.5 rounded-full font-bold whitespace-nowrap">SECONDARY</span>}
                   </span>
+                  <span className="font-heading font-bold text-sm text-navy/60 flex-shrink-0">{dim.score}/6</span>
                 </div>
                 <div className="w-full bg-gray-100 rounded-full h-3">
-                  <div
-                    className="h-3 rounded-full transition-all duration-1000"
-                    style={{
-                      width: `${dim.percentage}%`,
-                      backgroundColor: dim.color,
-                    }}
-                  />
+                  <div className="h-3 rounded-full transition-all duration-1000" style={{ width: `${dim.percentage}%`, backgroundColor: dim.color }} />
                 </div>
               </div>
             ))}
           </div>
         </div>
 
-        {/* Action Directions */}
-        <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
-          <h3 className="font-bold text-gray-900 text-lg mb-4">
-            3 Prioritised Directions for {results.primaryConstraintLabel}
-          </h3>
-          <div className="space-y-3">
-            {primaryMeta.actionDirections.map((direction, i) => (
-              <div key={i} className="flex gap-3">
-                <span className="flex-shrink-0 w-6 h-6 bg-blue-100 text-blue-700 rounded-full flex items-center justify-center text-xs font-bold">
-                  {i + 1}
-                </span>
-                <p className="text-gray-700 text-sm leading-relaxed">{direction}</p>
-              </div>
-            ))}
-          </div>
-        </div>
+        {results.aiPlan && (
+          <>
+            <div className="bg-emerald/5 border border-emerald/20 rounded-2xl p-5 md:p-6">
+              <p className="text-emerald font-heading font-bold tracking-widest text-xs uppercase mb-2">AI-Generated Action Plan — 30 Days</p>
+              <h3 className="font-heading font-bold text-navy text-base md:text-lg mb-4">Your First 30 Days: Primary Constraint Focus</h3>
+              <ul className="space-y-3">
+                {results.aiPlan.thirtyDayPriorities.map((p, i) => (
+                  <li key={i} className="flex items-start gap-3 text-navy/80 font-body text-sm">
+                    <span className="flex-shrink-0 w-6 h-6 bg-emerald text-white rounded-full flex items-center justify-center text-xs font-bold mt-0.5">{i + 1}</span>
+                    <span className="leading-relaxed">{p}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
 
-        {/* Honesty Notice */}
+            <div className="bg-blue-50 border border-blue-200 rounded-2xl p-5 md:p-6">
+              <p className="text-blue-600 font-heading font-bold tracking-widest text-xs uppercase mb-2">AI-Generated Action Plan — 90 Days</p>
+              <h3 className="font-heading font-bold text-navy text-base md:text-lg mb-4">Days 31–90: Building Deeper</h3>
+              <ul className="space-y-3">
+                {results.aiPlan.ninetyDayDirections.map((d, i) => (
+                  <li key={i} className="flex items-start gap-3 text-navy/80 font-body text-sm">
+                    <span className="flex-shrink-0 w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center text-xs font-bold mt-0.5">{i + 1}</span>
+                    <span className="leading-relaxed">{d}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </>
+        )}
+
         <div className="bg-gray-50 border border-gray-200 rounded-xl p-5">
-          <p className="text-gray-600 text-sm leading-relaxed">
-            <strong className="text-gray-800">An important distinction:</strong> This
-            tool has identified your constraint category — not the root cause within it.
-            Understanding exactly why this constraint exists in your specific business is
-            what the paid diagnostic is designed to uncover. That distinction matters.
+          <p className="text-navy/70 font-body text-sm leading-relaxed">
+            <strong className="text-navy">An important distinction:</strong> This diagnostic identifies your constraint category — not the root cause within it. Understanding exactly why this constraint exists in your specific business is what the paid diagnostic is designed to uncover.
           </p>
         </div>
 
-        {/* CTA */}
-        <div className="bg-white rounded-2xl p-8 shadow-sm border border-gray-100 text-center">
-          <h3 className="text-xl font-bold text-gray-900 mb-2">
-            You&apos;ve named your constraint. Now let&apos;s find the root cause.
-          </h3>
-          <p className="text-gray-600 mb-6 leading-relaxed text-sm">
-            Book a free 1-hour Business Clarity Session to walk through your findings
-            personally. This is not a sales call — it is the natural next step the tool
-            just helped you identify.
-          </p>
-
-          <a
-            href={calendlyUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center justify-center w-full bg-[#1e3a5f] text-white px-8 py-4 rounded-xl font-bold text-base hover:bg-blue-800 transition-colors mb-3"
-          >
-            📅 Book Your Free Business Clarity Session (1 Hour)
+        <div className="bg-navy rounded-2xl p-6 md:p-8 text-center shadow-xl">
+          <h3 className="font-heading font-bold text-white text-lg md:text-xl mb-2">You have named your constraint. Now let us find the root cause.</h3>
+          <p className="text-ivory/70 font-body text-sm mb-6 leading-relaxed">Book a free 30-minute consultation to walk through your findings with Muhammed Ajmal personally. This is not a sales call — it is the natural next step.</p>
+          <a href={calendlyLink} target="_blank" rel="noopener noreferrer"
+            className="inline-block bg-gold text-navy px-8 md:px-10 py-4 rounded-xl font-heading font-bold text-base hover:bg-gold-bright transition-colors shadow-lg min-h-[52px] w-full sm:w-auto text-center">
+            Book Your Free 30-Minute Consultation →
           </a>
-
-          <a
-            href={whatsappUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center justify-center w-full bg-[#25D366] text-white px-8 py-4 rounded-xl font-bold text-base hover:bg-green-500 transition-colors mb-4"
-          >
-            💬 Message Me on WhatsApp
-          </a>
-
-          <p className="text-gray-400 text-xs">
-            Not ready to book? WhatsApp is faster — your constraint is pre-filled in the message.
-          </p>
-          <p className="text-gray-400 text-xs mt-1">
-            Muhammed Ajmal · Dubai, UAE · Available remotely across the GCC
-          </p>
+          <p className="text-ivory/40 font-body text-xs mt-3">With Muhammed Ajmal · Dubai, UAE · Available remotely across the GCC</p>
         </div>
 
       </div>
-    </main>
+    </div>
   );
 }
