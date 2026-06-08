@@ -8,9 +8,9 @@ const leadSchema = z.object({
   email: z.string().email('Please enter a valid email'),
   phone: z.string().min(7, 'Please enter a valid phone number'),
   companyName: z.string().min(2, 'Please enter your company name'),
-  industry: z.string().min(1, 'Please select your industry'),
-  teamSize: z.string().min(1, 'Please select your team size'),
-  revenueRange: z.string().min(1, 'Please select a revenue range'),
+  industry: z.string().optional(),
+  teamSize: z.string().optional(),
+  revenueRange: z.string().optional(),
 });
 
 type LeadFormData = z.infer<typeof leadSchema>;
@@ -57,7 +57,7 @@ export function LeadCaptureForm({ onSubmit, isLoading }: LeadCaptureFormProps) {
           {errors.companyName && <p className="text-crimson text-xs mt-1">{errors.companyName.message}</p>}
         </div>
         <div>
-          <label className={labelClass}>Industry</label>
+          <label className={labelClass}>Industry <span className="font-normal text-navy/40">(optional)</span></label>
           <select {...register('industry')} className={inputClass}>
             <option value="">Select industry...</option>
             <option value="professional-services">Professional Services</option>
@@ -74,7 +74,7 @@ export function LeadCaptureForm({ onSubmit, isLoading }: LeadCaptureFormProps) {
           {errors.industry && <p className="text-crimson text-xs mt-1">{errors.industry.message}</p>}
         </div>
         <div>
-          <label className={labelClass}>Team Size</label>
+          <label className={labelClass}>Team Size <span className="font-normal text-navy/40">(optional)</span></label>
           <select {...register('teamSize')} className={inputClass}>
             <option value="">Select team size...</option>
             <option value="solo">Solo / Just me</option>
@@ -86,7 +86,7 @@ export function LeadCaptureForm({ onSubmit, isLoading }: LeadCaptureFormProps) {
           {errors.teamSize && <p className="text-crimson text-xs mt-1">{errors.teamSize.message}</p>}
         </div>
         <div>
-          <label className={labelClass}>Annual Revenue (AED)</label>
+          <label className={labelClass}>Annual Revenue (AED) <span className="font-normal text-navy/40">(optional)</span></label>
           <select {...register('revenueRange')} className={inputClass}>
             <option value="">Select range...</option>
             <option value="under-500k">Under AED 500K</option>

@@ -18,9 +18,9 @@ const submitSchema = z.object({
     email: z.string().email(),
     phone: z.string().min(7).max(20),
     companyName: z.string().min(2).max(200),
-    industry: z.string().min(1),
-    teamSize: z.string().min(1),
-    revenueRange: z.enum(['under-500k', '500k-2m', '2m-5m', '5m-15m', 'over-15m'])
+    industry: z.string().optional(),
+    teamSize: z.string().optional(),
+    revenueRange: z.string().optional(),
   }),
   answers: z.record(z.string(), z.enum(['a', 'b', 'c', 'd']))
 });
@@ -38,9 +38,9 @@ export async function POST(req: NextRequest) {
         email: leadData.email,
         phone: leadData.phone,
         company_name: leadData.companyName,
-        industry: leadData.industry,
-        team_size: leadData.teamSize,
-        revenue_range: leadData.revenueRange,
+        ...(leadData.industry ? { industry: leadData.industry } : {}),
+        ...(leadData.teamSize ? { team_size: leadData.teamSize } : {}),
+        ...(leadData.revenueRange ? { revenue_range: leadData.revenueRange } : {}),
         q1_answer: answers['1'], q2_answer: answers['2'],
         q3_answer: answers['3'], q4_answer: answers['4'],
         q5_answer: answers['5'], q6_answer: answers['6'],
@@ -65,9 +65,9 @@ export async function POST(req: NextRequest) {
     try {
       const aiPlan = await generateAIActionPlan(results, {
         companyName: leadData.companyName,
-        industry: leadData.industry,
-        teamSize: leadData.teamSize,
-        revenueRange: leadData.revenueRange,
+        industry: leadData.industry ?? '',
+        teamSize: leadData.teamSize ?? '',
+        revenueRange: leadData.revenueRange ?? '',
       });
       results.aiPlan = aiPlan;
       await supabase.from('diagnostic_leads').update({

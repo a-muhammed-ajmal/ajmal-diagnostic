@@ -55,9 +55,9 @@ export interface LeadData {
   email: string;
   phone: string;
   companyName: string;
-  industry: string;
-  teamSize: string;
-  revenueRange: string;
+  industry?: string;
+  teamSize?: string;
+  revenueRange?: string;
 }
 
 export interface Lead {
