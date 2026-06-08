@@ -31,6 +31,7 @@ export async function POST(req: NextRequest) {
     const { leadData, answers } = submitSchema.parse(body);
     const results = calculateResults(answers);
 
+    // Core insert — only the 4 columns guaranteed to exist on every table version
     const { data: lead, error: dbError } = await supabase
       .from('diagnostic_leads')
       .insert({
@@ -38,30 +39,35 @@ export async function POST(req: NextRequest) {
         email: leadData.email,
         phone: leadData.phone,
         company_name: leadData.companyName,
-        ...(leadData.industry ? { industry: leadData.industry } : {}),
-        ...(leadData.teamSize ? { team_size: leadData.teamSize } : {}),
-        ...(leadData.revenueRange ? { revenue_range: leadData.revenueRange } : {}),
-        q1_answer: answers['1'], q2_answer: answers['2'],
-        q3_answer: answers['3'], q4_answer: answers['4'],
-        q5_answer: answers['5'], q6_answer: answers['6'],
-        q7_answer: answers['7'], q8_answer: answers['8'],
-        q9_answer: answers['9'], q10_answer: answers['10'],
-        score_strategic_clarity: results.dimensions.find(d => d.key === 'strategic_clarity')?.score,
-        score_financial_visibility: results.dimensions.find(d => d.key === 'financial_visibility')?.score,
-        score_operations: results.dimensions.find(d => d.key === 'operations')?.score,
-        score_people_leadership: results.dimensions.find(d => d.key === 'people_leadership')?.score,
-        score_sales_growth: results.dimensions.find(d => d.key === 'sales_growth')?.score,
-        total_score: results.totalScore,
-        health_score: results.healthScore,
-        severity_label: results.severityLabel,
-        primary_constraint: results.primaryConstraint,
-        secondary_constraint: results.secondaryConstraint,
       })
-      .select()
+      .select('id')
       .single();
 
     if (dbError) throw dbError;
 
+    // Fire-and-forget: save extra fields (safe even if columns don't exist yet)
+    void supabase.from('diagnostic_leads').update({
+      ...(leadData.industry ? { industry: leadData.industry } : {}),
+      ...(leadData.teamSize ? { team_size: leadData.teamSize } : {}),
+      ...(leadData.revenueRange ? { revenue_range: leadData.revenueRange } : {}),
+      q1_answer: answers['1'],  q2_answer: answers['2'],
+      q3_answer: answers['3'],  q4_answer: answers['4'],
+      q5_answer: answers['5'],  q6_answer: answers['6'],
+      q7_answer: answers['7'],  q8_answer: answers['8'],
+      q9_answer: answers['9'],  q10_answer: answers['10'],
+      score_strategic_clarity:   results.dimensions.find(d => d.key === 'strategic_clarity')?.score,
+      score_financial_visibility: results.dimensions.find(d => d.key === 'financial_visibility')?.score,
+      score_operations:          results.dimensions.find(d => d.key === 'operations')?.score,
+      score_people_leadership:   results.dimensions.find(d => d.key === 'people_leadership')?.score,
+      score_sales_growth:        results.dimensions.find(d => d.key === 'sales_growth')?.score,
+      total_score:       results.totalScore,
+      health_score:      results.healthScore,
+      severity_label:    results.severityLabel,
+      primary_constraint:   results.primaryConstraint,
+      secondary_constraint: results.secondaryConstraint,
+    }).eq('id', lead.id);
+
+    // AI plan — non-blocking
     try {
       const aiPlan = await generateAIActionPlan(results, {
         companyName: leadData.companyName,
@@ -70,7 +76,7 @@ export async function POST(req: NextRequest) {
         revenueRange: leadData.revenueRange ?? '',
       });
       results.aiPlan = aiPlan;
-      await supabase.from('diagnostic_leads').update({
+      void supabase.from('diagnostic_leads').update({
         ai_plan_generated: true,
         ai_30day_plan: JSON.stringify(aiPlan.thirtyDayPriorities),
         ai_90day_plan: JSON.stringify(aiPlan.ninetyDayDirections),
@@ -80,6 +86,7 @@ export async function POST(req: NextRequest) {
       console.error('AI plan failed (non-blocking):', aiError);
     }
 
+    // Email — non-blocking
     try {
       const { error: emailError } = await resend.emails.send({
         from: `Muhammed Ajmal Consulting <${process.env.RESEND_FROM_EMAIL}>`,
@@ -93,7 +100,7 @@ export async function POST(req: NextRequest) {
         })
       });
       if (!emailError) {
-        await supabase.from('diagnostic_leads').update({ email_sent: true }).eq('id', lead.id);
+        void supabase.from('diagnostic_leads').update({ email_sent: true }).eq('id', lead.id);
       }
     } catch (emailError) {
       console.error('Email failed (non-blocking):', emailError);
@@ -105,7 +112,6 @@ export async function POST(req: NextRequest) {
     console.error('ERR_CODE:', e?.code);
     console.error('ERR_MSG:', e?.message);
     console.error('ERR_DETAILS:', e?.details);
-    console.error('ERR_HINT:', e?.hint);
     if (error instanceof z.ZodError) {
       return NextResponse.json({ success: false, error: 'Invalid data format' }, { status: 400 });
     }
