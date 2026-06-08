@@ -101,7 +101,11 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json({ success: true, results, leadId: lead.id });
   } catch (error) {
-    console.error('Submission error:', error);
+    const e = error as Record<string, unknown>;
+    console.error('ERR_CODE:', e?.code);
+    console.error('ERR_MSG:', e?.message);
+    console.error('ERR_DETAILS:', e?.details);
+    console.error('ERR_HINT:', e?.hint);
     if (error instanceof z.ZodError) {
       return NextResponse.json({ success: false, error: 'Invalid data format' }, { status: 400 });
     }
