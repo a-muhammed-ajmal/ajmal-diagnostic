@@ -127,8 +127,8 @@ export default function DiagnosticPage() {
               Free · 4 Minutes · 10 Questions
             </span>
             <h1
-              className="font-heading font-extrabold text-white leading-tight mb-5 max-w-2xl mx-auto"
-              style={{ fontSize: 'clamp(1.875rem, 5vw, 3.5rem)' }}
+              className="font-heading font-extrabold text-white leading-tight mb-5 max-w-3xl mx-auto"
+              style={{ fontSize: 'clamp(1.5rem, 3.5vw, 2.5rem)' }}
             >
               Does your business run on you —<br />
               or do you run your business?
