@@ -50,3 +50,21 @@ html {
 .animate-fade-in {
   animation: fade-in 0.3s ease-out;
 }
+
+.graph-overlay {
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(#0F172A 1px, transparent 1px), linear-gradient(90deg, #0F172A 1px, transparent 1px);
+  background-size: 40px 40px;
+  opacity: 0.04;
+  pointer-events: none;
+}
+
+.graph-overlay-dark {
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(#C5A880 1px, transparent 1px), linear-gradient(90deg, #C5A880 1px, transparent 1px);
+  background-size: 40px 40px;
+  opacity: 0.04;
+  pointer-events: none;
+}

@@ -12,14 +12,7 @@ export default function HomePage() {
     <>
       {/* ─── HERO ─────────────────────────────────────────────────────────── */}
       <section className="bg-navy text-ivory py-16 md:py-24 px-6 relative overflow-hidden">
-        <div
-          className="absolute inset-0 opacity-[0.04]"
-          style={{
-            backgroundImage:
-              'linear-gradient(#C5A880 1px, transparent 1px), linear-gradient(90deg, #C5A880 1px, transparent 1px)',
-            backgroundSize: '40px 40px',
-          }}
-        />
+        <div className="graph-overlay-dark" />
         <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-center relative z-10">
 
           {/* Left */}
@@ -95,8 +88,9 @@ export default function HomePage() {
       </section>
 
       {/* ─── PROBLEM ──────────────────────────────────────────────────────── */}
-      <section id="problem" className="py-16 md:py-24 px-6 bg-gray-50">
-        <div className="max-w-7xl mx-auto">
+      <section id="problem" className="py-16 md:py-24 px-6 bg-gray-50 relative overflow-hidden">
+        <div className="graph-overlay" />
+        <div className="max-w-7xl mx-auto relative z-10">
           <div className="text-center mb-10 md:mb-14">
             <span className="text-crimson font-heading font-bold tracking-widest text-sm uppercase mb-2 block">
               The Critical Constraint
@@ -148,8 +142,9 @@ export default function HomePage() {
       </section>
 
       {/* ─── SOLUTION / 3 PILLARS ─────────────────────────────────────────── */}
-      <section id="solution" className="py-16 md:py-24 px-6 bg-navy text-ivory border-y border-gold/20">
-        <div className="max-w-7xl mx-auto">
+      <section id="solution" className="py-16 md:py-24 px-6 bg-navy text-ivory border-y border-gold/20 relative overflow-hidden">
+        <div className="graph-overlay-dark" />
+        <div className="max-w-7xl mx-auto relative z-10">
           <div className="text-center mb-10 md:mb-14">
             <span className="text-emerald font-heading font-bold tracking-widest text-sm uppercase mb-2 block">
               The Methodology
@@ -209,8 +204,9 @@ export default function HomePage() {
       </section>
 
       {/* ─── INDUSTRY EXPERIENCE ──────────────────────────────────────────── */}
-      <section className="py-12 md:py-16 px-6 bg-gray-50 border-b border-navy/10">
-        <div className="max-w-7xl mx-auto">
+      <section className="py-12 md:py-16 px-6 bg-gray-50 border-b border-navy/10 relative overflow-hidden">
+        <div className="graph-overlay" />
+        <div className="max-w-7xl mx-auto relative z-10">
           <p className="text-center text-navy/40 font-body text-xs uppercase tracking-widest mb-8 font-semibold">
             Industry Experience Across
           </p>
@@ -246,14 +242,7 @@ export default function HomePage() {
 
       {/* ─── CTA ──────────────────────────────────────────────────────────── */}
       <section className="py-16 md:py-24 px-6 bg-navy text-ivory relative overflow-hidden">
-        <div
-          className="absolute inset-0 opacity-[0.04]"
-          style={{
-            backgroundImage:
-              'linear-gradient(#C5A880 1px, transparent 1px), linear-gradient(90deg, #C5A880 1px, transparent 1px)',
-            backgroundSize: '40px 40px',
-          }}
-        />
+        <div className="graph-overlay-dark" />
         <div className="max-w-4xl mx-auto text-center relative z-10">
           <h2 className="text-2xl sm:text-3xl md:text-5xl font-heading font-extrabold mb-6">
             What is the biggest constraint in your business?

@@ -20,16 +20,18 @@ const languages = ['English', 'Arabic / MSA', 'Hindi', 'Malayalam', 'Tamil', 'Ka
 export default function AboutPage() {
   return (
     <>
-      <section className="bg-navy text-ivory py-16 md:py-20 px-6">
-        <div className="max-w-4xl mx-auto text-center">
+      <section className="bg-navy text-ivory py-16 md:py-20 px-6 relative overflow-hidden">
+        <div className="graph-overlay-dark" />
+        <div className="max-w-4xl mx-auto text-center relative z-10">
           <span className="text-gold font-heading font-bold tracking-widest text-sm uppercase mb-3 block">Authority Profile</span>
           <h1 className="text-3xl md:text-5xl font-heading font-extrabold mb-5">The Architect</h1>
           <p className="font-body text-ivory/70 text-base md:text-lg max-w-2xl mx-auto">Strategic Growth Architect for founder-led SMEs across the UAE and GCC.</p>
         </div>
       </section>
 
-      <section className="py-16 md:py-20 px-6 bg-ivory">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row gap-12 md:gap-16 items-start">
+      <section className="py-16 md:py-20 px-6 bg-ivory relative overflow-hidden">
+        <div className="graph-overlay" />
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row gap-12 md:gap-16 items-start relative z-10">
           <div className="w-full md:w-2/5 flex-shrink-0">
             <div className="w-full aspect-[4/5] bg-navy rounded-xl relative shadow-xl overflow-hidden flex items-end max-w-sm mx-auto md:max-w-none">
               <div className="absolute inset-0 border-4 border-gold/20 m-4 rounded-lg pointer-events-none" />
@@ -76,8 +78,9 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="py-12 md:py-16 px-6 bg-ivory border-t border-navy/10">
-        <div className="max-w-2xl mx-auto text-center">
+      <section className="py-12 md:py-16 px-6 bg-ivory border-t border-navy/10 relative overflow-hidden">
+        <div className="graph-overlay" />
+        <div className="max-w-2xl mx-auto text-center relative z-10">
           <h2 className="font-heading font-extrabold text-2xl md:text-3xl text-navy mb-4">Start with the diagnostic.</h2>
           <p className="font-body text-navy/60 mb-8 text-sm md:text-base">Identify your primary growth constraint before our first conversation — so we start at the root cause, not the symptom.</p>
           <Link href="/diagnostic" className="inline-flex items-center justify-center bg-gold text-navy font-heading font-bold py-4 px-10 rounded text-base hover:bg-gold-bright transition-colors min-h-[52px] w-full sm:w-auto">

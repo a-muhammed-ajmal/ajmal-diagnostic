@@ -18,16 +18,18 @@ const services = [
 export default function ServicesPage() {
   return (
     <>
-      <section className="bg-navy text-ivory py-16 md:py-20 px-6">
-        <div className="max-w-4xl mx-auto text-center">
+      <section className="bg-navy text-ivory py-16 md:py-20 px-6 relative overflow-hidden">
+        <div className="graph-overlay-dark" />
+        <div className="max-w-4xl mx-auto text-center relative z-10">
           <span className="text-gold font-heading font-bold tracking-widest text-sm uppercase mb-3 block">Consulting Services</span>
           <h1 className="text-3xl md:text-5xl font-heading font-extrabold mb-5">Precision Interventions for<br /><span className="gold-gradient-text">Founder-Led Growth</span></h1>
           <p className="font-body text-ivory/70 text-base md:text-lg max-w-2xl mx-auto leading-relaxed">Six services, each designed to address a specific stage in the Strategic Growth Architecture™.</p>
         </div>
       </section>
 
-      <section className="py-12 md:py-16 px-6 bg-ivory">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
+      <section className="py-12 md:py-16 px-6 bg-ivory relative overflow-hidden">
+        <div className="graph-overlay" />
+        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5 relative z-10">
           {services.map(s => (
             <div key={s.n} className="bg-white p-7 md:p-8 rounded-xl border border-navy/10 hover:border-gold hover:shadow-lg transition-all duration-200 flex flex-col">
               <div className="flex justify-between items-start mb-5">
@@ -58,8 +60,9 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      <section className="py-12 md:py-16 px-6 bg-navy text-ivory">
-        <div className="max-w-2xl mx-auto text-center">
+      <section className="py-12 md:py-16 px-6 bg-navy text-ivory relative overflow-hidden">
+        <div className="graph-overlay-dark" />
+        <div className="max-w-2xl mx-auto text-center relative z-10">
           <h2 className="font-heading font-extrabold text-2xl md:text-3xl mb-4">Not sure which service fits?</h2>
           <p className="font-body text-ivory/70 mb-8 leading-relaxed text-sm md:text-base">Start with the free diagnostic. It identifies your primary constraint in 4 minutes — and the right service becomes obvious from your results.</p>
           <Link href="/diagnostic" className="inline-flex items-center justify-center bg-gold text-navy font-heading font-bold py-4 px-10 rounded text-base hover:bg-gold-bright transition-colors min-h-[52px] w-full sm:w-auto">

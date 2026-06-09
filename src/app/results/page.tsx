@@ -17,8 +17,9 @@ export default function ResultsPage() {
   }, [router]);
 
   if (!data) return (
-    <div className="min-h-screen bg-ivory flex items-center justify-center">
-      <div className="text-center">
+    <div className="min-h-screen bg-ivory flex items-center justify-center relative overflow-hidden">
+      <div className="graph-overlay" />
+      <div className="text-center relative z-10">
         <div className="w-8 h-8 border-2 border-gold border-t-transparent rounded-full animate-spin mx-auto mb-4" />
         <p className="text-navy/60 font-body text-sm">Loading your results...</p>
       </div>
@@ -38,8 +39,9 @@ export default function ResultsPage() {
   };
 
   return (
-    <div className="min-h-screen bg-ivory py-8 px-4 md:py-12">
-      <div className="max-w-3xl mx-auto space-y-5">
+    <div className="min-h-screen bg-ivory py-8 px-4 md:py-12 relative overflow-hidden">
+      <div className="graph-overlay" />
+      <div className="max-w-3xl mx-auto space-y-5 relative z-10">
 
         <div className="text-center">
           <p className="text-gold font-heading font-bold tracking-widest text-xs uppercase mb-2">Strategic Growth Architecture™</p>

@@ -117,8 +117,9 @@ export default function DiagnosticPage() {
 
   if (stage === 'lead-capture' || stage === 'submitting') {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
-        <div className="w-full">
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4 relative overflow-hidden">
+        <div className="graph-overlay" />
+        <div className="w-full relative z-10">
           <div className="max-w-md mx-auto mb-4">
             <button
               onClick={handleBackToQuiz}
@@ -139,8 +140,9 @@ export default function DiagnosticPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
-      <div className="w-full max-w-2xl">
+    <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4 relative overflow-hidden">
+      <div className="graph-overlay" />
+      <div className="w-full max-w-2xl relative z-10">
         <div className="mb-8">
           <ProgressBar current={currentQuestion + 1} total={QUESTIONS.length} />
         </div>
