@@ -8,8 +8,6 @@ const leadSchema = z.object({
   email: z.string().email('Please enter a valid email'),
   companyName: z.string().min(2, 'Please enter your company name'),
   phone: z.string().optional(),
-  industry: z.string().optional(),
-  teamSize: z.string().optional(),
   revenueRange: z.string().optional(),
 });
 
