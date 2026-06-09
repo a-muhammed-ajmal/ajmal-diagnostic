@@ -117,57 +117,121 @@ export default function DiagnosticPage() {
 
   if (stage === 'intro') {
     return (
-      <div className="min-h-screen bg-navy flex items-center justify-center px-6 py-12 relative overflow-hidden">
-        <div className="graph-overlay-dark" />
-        <div className="max-w-xl w-full text-center relative z-10">
+      <div className="bg-navy">
 
-          {/* Top label */}
-          <p className="text-gold font-heading font-bold tracking-widest text-xs uppercase mb-6">
-            Free Business Diagnostic · 4 Minutes · 10 Questions
-          </p>
-
-          {/* Headline */}
-          <h1 className="font-heading font-extrabold text-white leading-tight mb-6"
-              style={{ fontSize: 'clamp(1.75rem, 6vw, 3rem)' }}>
-            Does your business run on you —<br />
-            or do you run your business?
-          </h1>
-
-          {/* Subtext */}
-          <p className="font-body text-ivory/70 text-base leading-relaxed mb-8 max-w-md mx-auto">
-            Most founder-led SMEs hit an invisible growth wall. Answer 10 questions and find out
-            exactly what is blocking yours — with a personalised AI Action Plan delivered to your inbox.
-          </p>
-
-          {/* Benefits */}
-          <div className="inline-block text-left mb-8 space-y-3">
-            {[
-              'Your Business Health Score',
-              'Primary growth constraint identified',
-              'AI-generated 30 and 90-day action plan',
-              'Full report delivered by email',
-            ].map(item => (
-              <div key={item} className="flex items-start gap-3">
-                <span className="text-emerald font-bold flex-shrink-0 mt-0.5">✔</span>
-                <span className="font-body text-ivory/80 text-sm">{item}</span>
-              </div>
-            ))}
-          </div>
-
-          {/* CTA */}
-          <div>
+        {/* ── HERO ────────────────────────────────────────────────── */}
+        <section className="min-h-[100svh] flex flex-col items-center justify-center px-5 py-16 md:px-8 md:py-24 text-center relative overflow-hidden">
+          <div className="graph-overlay-dark" />
+          <div className="relative z-10 w-full">
+            <span className="inline-block bg-gold/10 border border-gold/30 text-gold text-xs font-heading font-bold tracking-widest uppercase px-4 py-2 rounded-full mb-6">
+              Free · 4 Minutes · 10 Questions
+            </span>
+            <h1
+              className="font-heading font-extrabold text-white leading-tight mb-5 max-w-2xl mx-auto"
+              style={{ fontSize: 'clamp(1.875rem, 5vw, 3.5rem)' }}
+            >
+              Does your business run on you —<br />
+              or do you run your business?
+            </h1>
+            <p className="font-body text-ivory/70 text-base md:text-lg leading-relaxed mb-8 max-w-md mx-auto">
+              Most founder-led SMEs hit an invisible growth wall. Answer 10 questions
+              and find out exactly what is blocking yours — with a personalised AI
+              Action Plan delivered to your inbox.
+            </p>
+            <div className="w-full max-w-xs mx-auto mb-8 text-left space-y-3">
+              {[
+                'Your Business Health Score',
+                'Primary growth constraint identified',
+                'AI-generated 30-day and 90-day action plan',
+                'Full report delivered to your inbox',
+              ].map((item) => (
+                <div key={item} className="flex items-start gap-3">
+                  <span className="flex-shrink-0 w-5 h-5 rounded-full bg-emerald/20 text-emerald text-xs font-bold flex items-center justify-center mt-0.5">✔</span>
+                  <span className="font-body text-sm text-ivory/90 leading-snug">{item}</span>
+                </div>
+              ))}
+            </div>
             <button
               onClick={() => setStage('quiz')}
-              className="w-full sm:w-auto inline-flex items-center justify-center bg-gold text-navy font-heading font-bold py-4 px-10 rounded text-base hover:bg-gold-bright transition-colors shadow-lg min-h-[52px]"
+              className="w-full max-w-xs mx-auto block bg-gold text-navy font-heading font-bold py-4 px-8 rounded-xl text-base md:text-lg min-h-[56px] hover:bg-gold-bright active:scale-95 transition-all duration-200 shadow-lg"
             >
               Start the Free Diagnostic →
             </button>
-            <p className="text-ivory/30 font-body text-xs mt-4">
+            <p className="font-body text-xs text-ivory/30 mt-3">
               No account needed · No spam · Takes 4 minutes
             </p>
           </div>
+        </section>
 
-        </div>
+        {/* ── STATS BAR ───────────────────────────────────────────── */}
+        <section className="bg-ivory py-8 px-5 border-b border-navy/10 relative overflow-hidden">
+          <div className="graph-overlay" />
+          <div className="flex flex-wrap justify-center gap-8 md:gap-16 relative z-10">
+            {[
+              { n: '10k+', l: 'LinkedIn Network' },
+              { n: '5', l: 'Growth Dimensions' },
+              { n: '4 min', l: 'To Your Results' },
+            ].map((s) => (
+              <div key={s.l} className="text-center">
+                <div className="font-heading font-bold text-2xl text-navy">{s.n}</div>
+                <div className="font-body text-xs text-navy/40 uppercase tracking-widest mt-1">{s.l}</div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* ── HOW IT WORKS ────────────────────────────────────────── */}
+        <section className="bg-ivory py-14 px-5 relative overflow-hidden">
+          <div className="graph-overlay" />
+          <div className="max-w-3xl mx-auto relative z-10">
+            <p className="text-center text-gold font-heading font-bold tracking-widest text-xs uppercase mb-3">How It Works</p>
+            <h2 className="text-center font-heading font-extrabold text-navy text-2xl md:text-3xl mb-10">
+              Three steps. Four minutes.
+            </h2>
+            <div className="flex flex-col md:flex-row items-start md:items-center justify-center gap-0 md:gap-4">
+              {[
+                { n: '01', title: 'Answer 10 Questions', body: 'Each question takes 30 seconds. No trick questions — just honest answers about how your business runs today.' },
+                { n: '02', title: 'Get Your Diagnosis', body: 'See your Business Health Score, your primary and secondary growth constraints, and exactly where your business is stuck.' },
+                { n: '03', title: 'Receive Your AI Action Plan', body: 'A personalised 30-day and 90-day plan — generated by AI, grounded in your specific scores — delivered to your inbox instantly.' },
+              ].map((step, i) => (
+                <div key={step.n} className="flex md:flex-col items-start md:items-center gap-4 md:gap-0 md:text-center max-w-xs w-full mb-8 md:mb-0 md:flex-1">
+                  <div className="flex-shrink-0 w-10 h-10 rounded-full bg-navy text-gold font-heading font-bold flex items-center justify-center text-sm md:mb-4">
+                    {step.n}
+                  </div>
+                  <div>
+                    <h3 className="font-heading font-bold text-navy text-sm mb-1">{step.title}</h3>
+                    <p className="font-body text-sm text-navy/60 leading-relaxed">{step.body}</p>
+                  </div>
+                  {i < 2 && <span className="hidden md:block text-gold/30 text-2xl mx-2 self-center">→</span>}
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ── BOTTOM CTA ──────────────────────────────────────────── */}
+        <section className="bg-navy py-16 px-5 text-center relative overflow-hidden">
+          <div className="graph-overlay-dark" />
+          <div className="relative z-10">
+            <h2 className="font-heading font-extrabold text-white text-2xl md:text-3xl mb-3">
+              Ready to find your constraint?
+            </h2>
+            <p className="font-body text-sm text-ivory/60 mb-8 max-w-sm mx-auto leading-relaxed">
+              It is free. It takes 4 minutes. And it will tell you something about
+              your business you will actually use.
+            </p>
+            <button
+              onClick={() => { window.scrollTo(0, 0); setStage('quiz'); }}
+              className="w-full max-w-xs mx-auto block bg-gold text-navy font-heading font-bold py-4 px-8 rounded-xl text-base min-h-[56px] hover:bg-gold-bright active:scale-95 transition-all duration-200 shadow-lg"
+            >
+              Start the Free Diagnostic →
+            </button>
+            <p className="font-body text-xs text-ivory/30 mt-3">
+              No account needed · No spam · Takes 4 minutes
+            </p>
+          </div>
+        </section>
+
       </div>
     );
   }
