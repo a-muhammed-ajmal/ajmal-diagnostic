@@ -40,7 +40,7 @@ export async function POST(req: NextRequest) {
         phone: leadData.phone || null,
         industry: leadData.industry || null,
         team_size: leadData.teamSize || null,
-        revenue_range: leadData.revenueRange || null,
+        revenue_range: leadData.revenueRange || '',
         q1_answer: answers['1'], q2_answer: answers['2'],
         q3_answer: answers['3'], q4_answer: answers['4'],
         q5_answer: answers['5'], q6_answer: answers['6'],
