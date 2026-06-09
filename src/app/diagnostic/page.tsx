@@ -8,7 +8,7 @@ import { ProgressBar } from '@/components/quiz/ProgressBar';
 import { LeadCaptureForm } from '@/components/lead/LeadCaptureForm';
 import { LeadData } from '@/types';
 
-type Stage = 'quiz' | 'lead-capture' | 'submitting';
+type Stage = 'intro' | 'quiz' | 'lead-capture' | 'submitting';
 
 type SubmitResponse = {
   success: boolean;
@@ -22,7 +22,7 @@ function isSubmitResponse(value: unknown): value is SubmitResponse {
 
 export default function DiagnosticPage() {
   const router = useRouter();
-  const [stage, setStage] = useState<Stage>('quiz');
+  const [stage, setStage] = useState<Stage>('intro');
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [answers, setAnswers] = useState<Record<number, string>>({});
   const [isLoading, setIsLoading] = useState(false);
@@ -114,6 +114,63 @@ export default function DiagnosticPage() {
       setStage('lead-capture');
     }
   };
+
+  if (stage === 'intro') {
+    return (
+      <div className="min-h-screen bg-navy flex items-center justify-center px-6 py-12 relative overflow-hidden">
+        <div className="graph-overlay-dark" />
+        <div className="max-w-xl w-full text-center relative z-10">
+
+          {/* Top label */}
+          <p className="text-gold font-heading font-bold tracking-widest text-xs uppercase mb-6">
+            Free Business Diagnostic · 4 Minutes · 10 Questions
+          </p>
+
+          {/* Headline */}
+          <h1 className="font-heading font-extrabold text-white leading-tight mb-6"
+              style={{ fontSize: 'clamp(1.75rem, 6vw, 3rem)' }}>
+            Does your business run on you —<br />
+            or do you run your business?
+          </h1>
+
+          {/* Subtext */}
+          <p className="font-body text-ivory/70 text-base leading-relaxed mb-8 max-w-md mx-auto">
+            Most founder-led SMEs hit an invisible growth wall. Answer 10 questions and find out
+            exactly what is blocking yours — with a personalised AI Action Plan delivered to your inbox.
+          </p>
+
+          {/* Benefits */}
+          <div className="inline-block text-left mb-8 space-y-3">
+            {[
+              'Your Business Health Score',
+              'Primary growth constraint identified',
+              'AI-generated 30 and 90-day action plan',
+              'Full report delivered by email',
+            ].map(item => (
+              <div key={item} className="flex items-start gap-3">
+                <span className="text-emerald font-bold flex-shrink-0 mt-0.5">✔</span>
+                <span className="font-body text-ivory/80 text-sm">{item}</span>
+              </div>
+            ))}
+          </div>
+
+          {/* CTA */}
+          <div>
+            <button
+              onClick={() => setStage('quiz')}
+              className="w-full sm:w-auto inline-flex items-center justify-center bg-gold text-navy font-heading font-bold py-4 px-10 rounded text-base hover:bg-gold-bright transition-colors shadow-lg min-h-[52px]"
+            >
+              Start the Free Diagnostic →
+            </button>
+            <p className="text-ivory/30 font-body text-xs mt-4">
+              No account needed · No spam · Takes 4 minutes
+            </p>
+          </div>
+
+        </div>
+      </div>
+    );
+  }
 
   if (stage === 'lead-capture' || stage === 'submitting') {
     return (
