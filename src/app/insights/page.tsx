@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Link from 'next/link';
 import { NewsletterForm } from '@/components/newsletter/NewsletterForm';
 
 export const metadata: Metadata = {
@@ -25,7 +26,20 @@ export default function InsightsPage() {
         </div>
       </section>
 
-      <section className="py-12 md:py-16 px-6 bg-ivory border-b border-navy/10 relative overflow-hidden">
+      <section className="py-12 md:py-16 px-6 bg-white relative overflow-hidden">
+        <div className="graph-overlay" />
+        <div className="max-w-4xl mx-auto relative z-10">
+          <p className="font-heading font-bold text-navy text-xs uppercase tracking-widest mb-6 text-center">Latest Article</p>
+          <Link href="/insights/the-5-stage-business-operating-system" className="block bg-ivory border border-navy/10 rounded-xl p-6 md:p-8 hover:border-gold transition-colors shadow-sm">
+            <span className="text-gold text-xs font-heading font-bold uppercase tracking-widest">SME Growth Architecture</span>
+            <h2 className="font-heading font-extrabold text-xl md:text-2xl text-navy mt-2 mb-2">The 5-Stage Business Operating System Every UAE SME Needs</h2>
+            <p className="font-body text-navy/60 text-sm leading-relaxed mb-3">Move from owner-dependent to system-driven with five stages: Diagnose, Design, Build, Optimize, Scale.</p>
+            <span className="text-gold font-heading font-bold text-sm">Read the article &rarr;</span>
+          </Link>
+        </div>
+      </section>
+
+      <section className="py-12 md:py-16 px-6 bg-ivory border-y border-navy/10 relative overflow-hidden">
         <div className="graph-overlay" />
         <div className="max-w-xl mx-auto text-center relative z-10">
           <h2 className="font-heading font-extrabold text-2xl text-navy mb-3">Get insights delivered</h2>
@@ -37,7 +51,7 @@ export default function InsightsPage() {
       <section className="py-12 md:py-16 px-6 bg-white relative overflow-hidden">
         <div className="graph-overlay" />
         <div className="max-w-4xl mx-auto relative z-10">
-          <p className="font-heading font-bold text-navy text-xs uppercase tracking-widest mb-6 text-center">Upcoming Content Categories</p>
+          <p className="font-heading font-bold text-navy text-xs uppercase tracking-widest mb-6 text-center">Content Categories</p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {categories.map(cat => (
               <div key={cat.name} className="bg-ivory border border-navy/10 rounded-xl p-5 hover:border-gold transition-colors">
@@ -46,14 +60,6 @@ export default function InsightsPage() {
               </div>
             ))}
           </div>
-        </div>
-      </section>
-
-      <section className="py-12 md:py-16 px-6 bg-navy text-ivory relative overflow-hidden">
-        <div className="graph-overlay-dark" />
-        <div className="max-w-2xl mx-auto text-center relative z-10">
-          <h2 className="font-heading font-extrabold text-xl md:text-2xl mb-3">First articles publishing soon.</h2>
-          <p className="font-body text-ivory/60 text-sm leading-relaxed">Subscribe above to be notified. In the meantime, the free diagnostic is the most direct way to apply the framework to your specific business.</p>
         </div>
       </section>
     </>
