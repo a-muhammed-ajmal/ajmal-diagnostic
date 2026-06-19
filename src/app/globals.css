@@ -1,70 +1,59 @@
 @import "tailwindcss";
 
 @theme {
-  --color-navy: #0F172A;
-  --color-gold: #C5A880;
-  --color-gold-bright: #D4AF37;
-  --color-ivory: #FAF9F6;
-  --color-crimson: #E11D48;
-  --color-emerald: #10B981;
+  /* === Orange brand system (matches the SGA carousels) ===
+     Token NAMES kept for back-compat so every existing utility recolors at once. */
+  --color-navy: #1A1A2E;          /* charcoal — primary text & dark sections (was #0F172A) */
+  --color-gold: #FF6535;          /* brand orange — CTAs, accents (was #C5A880) */
+  --color-gold-bright: #FF8159;   /* lighter orange — gradients / hover (was #D4AF37) */
+  --color-ivory: #FFFFFF;         /* white base (was #FAF9F6) */
+  --color-crimson: #E11D48;       /* error / emphasis */
+  --color-emerald: #10B981;       /* success / positive */
+
+  /* Semantic aliases for new components */
+  --color-ink: #1A1A2E;
+  --color-orange: #FF6535;
+  --color-orange-ink: #D6450F;    /* deep orange for orange text on white (AA contrast) */
+  --color-slate: #6B6B6B;         /* secondary text */
+  --color-line: #E5E5E5;          /* grid lines & borders */
 
   --font-heading: var(--font-jakarta), "Plus Jakarta Sans", sans-serif;
   --font-body: var(--font-inter), "Inter", sans-serif;
 }
 
+/* Base: white paper with a subtle graph-paper grid across the whole site */
 body {
-  background-color: #FAF9F6;
-  color: #0F172A;
+  background-color: #FFFFFF;
+  background-image:
+    linear-gradient(rgba(26, 26, 46, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(26, 26, 46, 0.045) 1px, transparent 1px);
+  background-size: 40px 40px;
+  color: #1A1A2E;
+}
+@media (max-width: 640px) { body { background-size: 28px 28px; } }
+
+h1, h2, h3, h4, h5, h6 { font-family: var(--font-jakarta), "Plus Jakarta Sans", sans-serif; }
+
+/* Orange gradient text (replaces the old gold gradient; old class name kept) */
+.gold-gradient-text, .orange-gradient-text {
+  background: linear-gradient(to right, #FF6535, #FF8159);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
 }
 
-h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-jakarta), "Plus Jakarta Sans", sans-serif;
-}
+input, select, textarea { font-size: 16px; }
+html { scroll-behavior: smooth; }
 
-.gold-gradient-text {
-  background: linear-gradient(to right, #C5A880, #D4AF37);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
+@keyframes fade-in { from { opacity:0; transform:translateX(16px);} to { opacity:1; transform:translateX(0);} }
+.animate-fade-in { animation: fade-in 0.3s ease-out; }
 
-input, select, textarea {
-  font-size: 16px;
-}
-
-html {
-  scroll-behavior: smooth;
-}
-
-@keyframes fade-in {
-  from {
-    opacity: 0;
-    transform: translateX(16px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-.animate-fade-in {
-  animation: fade-in 0.3s ease-out;
-}
-
+/* Section grid overlays (already placed across pages) — recolored to brand */
 .graph-overlay {
-  position: absolute;
-  inset: 0;
-  background-image: linear-gradient(#0F172A 1px, transparent 1px), linear-gradient(90deg, #0F172A 1px, transparent 1px);
-  background-size: 40px 40px;
-  opacity: 0.04;
-  pointer-events: none;
+  position:absolute; inset:0; pointer-events:none;
+  background-image: linear-gradient(#1A1A2E 1px, transparent 1px), linear-gradient(90deg,#1A1A2E 1px, transparent 1px);
+  background-size:40px 40px; opacity:0.04;
 }
-
 .graph-overlay-dark {
-  position: absolute;
-  inset: 0;
-  background-image: linear-gradient(#C5A880 1px, transparent 1px), linear-gradient(90deg, #C5A880 1px, transparent 1px);
-  background-size: 40px 40px;
-  opacity: 0.04;
-  pointer-events: none;
+  position:absolute; inset:0; pointer-events:none;
+  background-image: linear-gradient(#FF6535 1px, transparent 1px), linear-gradient(90deg,#FF6535 1px, transparent 1px);
+  background-size:40px 40px; opacity:0.07;
 }

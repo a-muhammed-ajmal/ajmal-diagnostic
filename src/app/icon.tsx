@@ -8,7 +8,7 @@ export default function Icon() {
     (
       <div
         style={{
-          background: '#0F172A',
+          background: '#1A1A2E',
           width: '100%',
           height: '100%',
           display: 'flex',
@@ -24,8 +24,8 @@ export default function Icon() {
             right: 2,
             width: 7,
             height: 7,
-            borderTop: '2px solid #C5A880',
-            borderRight: '2px solid #C5A880',
+            borderTop: '2px solid #FF6535',
+            borderRight: '2px solid #FF6535',
           }}
         />
         <div
@@ -37,8 +37,8 @@ export default function Icon() {
             letterSpacing: '-0.5px',
           }}
         >
-          <span style={{ color: '#FAF9F6' }}>M</span>
-          <span style={{ color: '#C5A880' }}>A</span>
+          <span style={{ color: '#FFFFFF' }}>M</span>
+          <span style={{ color: '#FF6535' }}>A</span>
         </div>
       </div>
     ),

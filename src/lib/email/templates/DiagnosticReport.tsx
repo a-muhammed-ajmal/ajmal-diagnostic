@@ -24,12 +24,12 @@ export function DiagnosticReportEmail({ name, companyName, results, calendlyLink
     <Html>
       <Head />
       <Preview>{`Your Business Health Score: ${results.healthScore}% (${results.severityLabel}) — Primary Constraint: ${results.primaryConstraintLabel}`}</Preview>
-      <Body style={{ backgroundColor: '#FAF9F6', fontFamily: 'Arial, sans-serif' }}>
+      <Body style={{ backgroundColor: '#FFFFFF', fontFamily: 'Arial, sans-serif' }}>
         <Container style={{ maxWidth: '600px', margin: '0 auto', padding: '40px 20px' }}>
-          <Text style={{ color: '#C5A880', fontSize: '11px', fontWeight: 'bold', letterSpacing: '3px', textTransform: 'uppercase', margin: '0 0 8px' }}>
+          <Text style={{ color: '#FF6535', fontSize: '11px', fontWeight: 'bold', letterSpacing: '3px', textTransform: 'uppercase', margin: '0 0 8px' }}>
             MUHAMMED AJMAL CONSULTING
           </Text>
-          <Heading style={{ color: '#0F172A', fontSize: '24px', margin: '0 0 4px' }}>
+          <Heading style={{ color: '#1A1A2E', fontSize: '24px', margin: '0 0 4px' }}>
             {firstName}, here is your business constraint diagnosis.
           </Heading>
           <Text style={{ color: '#6b7280', fontSize: '14px', margin: '0 0 24px' }}>
@@ -37,14 +37,14 @@ export function DiagnosticReportEmail({ name, companyName, results, calendlyLink
           </Text>
           <Hr style={{ borderColor: '#e5e7eb', margin: '0 0 24px' }} />
 
-          <Section style={{ backgroundColor: '#0F172A', borderRadius: '12px', padding: '24px', marginBottom: '16px' }}>
-            <Text style={{ color: '#C5A880', fontSize: '10px', fontWeight: 'bold', letterSpacing: '3px', margin: '0 0 8px' }}>BUSINESS HEALTH SCORE</Text>
+          <Section style={{ backgroundColor: '#1A1A2E', borderRadius: '12px', padding: '24px', marginBottom: '16px' }}>
+            <Text style={{ color: '#FF6535', fontSize: '10px', fontWeight: 'bold', letterSpacing: '3px', margin: '0 0 8px' }}>BUSINESS HEALTH SCORE</Text>
             <Heading style={{ color: '#ffffff', fontSize: '52px', margin: '0', lineHeight: '1' }}>{results.healthScore}%</Heading>
             <Text style={{ color: severityColor, fontSize: '16px', fontWeight: 'bold', margin: '4px 0 0' }}>{results.severityLabel}</Text>
             <Text style={{ color: '#94a3b8', fontSize: '11px', margin: '8px 0 0' }}>Critical: 0–39% · Developing: 40–69% · Progressing: 70–100%</Text>
           </Section>
 
-          <Section style={{ backgroundColor: '#0F172A', borderRadius: '12px', padding: '24px', marginBottom: '16px' }}>
+          <Section style={{ backgroundColor: '#1A1A2E', borderRadius: '12px', padding: '24px', marginBottom: '16px' }}>
             <Text style={{ color: '#93c5fd', fontSize: '10px', fontWeight: 'bold', letterSpacing: '2px', margin: '0 0 8px' }}>PRIMARY GROWTH CONSTRAINT</Text>
             <Heading style={{ color: '#ffffff', fontSize: '24px', margin: '0 0 12px' }}>{results.primaryConstraintLabel}</Heading>
             <Text style={{ color: '#bfdbfe', fontSize: '14px', lineHeight: '1.7', margin: 0 }}>{primaryMeta.constraintExplanation}</Text>
@@ -59,7 +59,7 @@ export function DiagnosticReportEmail({ name, companyName, results, calendlyLink
           <Text style={{ color: '#374151', fontSize: '14px', fontStyle: 'italic', lineHeight: '1.7' }}>"{primaryMeta.impactStatement}"</Text>
           <Hr style={{ borderColor: '#e5e7eb', margin: '24px 0' }} />
 
-          <Heading style={{ color: '#0F172A', fontSize: '18px', margin: '0 0 16px' }}>Scores Across All 5 Dimensions</Heading>
+          <Heading style={{ color: '#1A1A2E', fontSize: '18px', margin: '0 0 16px' }}>Scores Across All 5 Dimensions</Heading>
           {results.dimensions.map(dim => (
             <Section key={dim.key} style={{ marginBottom: '10px' }}>
               <Text style={{ margin: '0 0 4px', fontWeight: 'bold', color: '#374151', fontSize: '13px' }}>
@@ -75,14 +75,14 @@ export function DiagnosticReportEmail({ name, companyName, results, calendlyLink
             <>
               <Section style={{ backgroundColor: '#f0fdf4', border: '1px solid #bbf7d0', borderRadius: '12px', padding: '20px', marginBottom: '16px' }}>
                 <Text style={{ color: '#10B981', fontSize: '10px', fontWeight: 'bold', letterSpacing: '2px', margin: '0 0 8px' }}>AI-GENERATED: YOUR 30-DAY PRIORITY PLAN</Text>
-                <Heading style={{ color: '#0F172A', fontSize: '16px', margin: '0 0 12px' }}>Your First 30 Days</Heading>
+                <Heading style={{ color: '#1A1A2E', fontSize: '16px', margin: '0 0 12px' }}>Your First 30 Days</Heading>
                 {results.aiPlan.thirtyDayPriorities.map((p, i) => (
                   <Text key={i} style={{ color: '#1f2937', fontSize: '13px', lineHeight: '1.6', margin: '0 0 8px' }}>{i + 1}. {p}</Text>
                 ))}
               </Section>
               <Section style={{ backgroundColor: '#eff6ff', border: '1px solid #bfdbfe', borderRadius: '12px', padding: '20px', marginBottom: '24px' }}>
                 <Text style={{ color: '#2563EB', fontSize: '10px', fontWeight: 'bold', letterSpacing: '2px', margin: '0 0 8px' }}>AI-GENERATED: 90-DAY DIRECTION</Text>
-                <Heading style={{ color: '#0F172A', fontSize: '16px', margin: '0 0 12px' }}>Days 31–90</Heading>
+                <Heading style={{ color: '#1A1A2E', fontSize: '16px', margin: '0 0 12px' }}>Days 31–90</Heading>
                 {results.aiPlan.ninetyDayDirections.map((d, i) => (
                   <Text key={i} style={{ color: '#1f2937', fontSize: '13px', lineHeight: '1.6', margin: '0 0 8px' }}>{i + 1}. {d}</Text>
                 ))}
@@ -97,7 +97,7 @@ export function DiagnosticReportEmail({ name, companyName, results, calendlyLink
           </Section>
 
           <Section style={{ textAlign: 'center', marginBottom: '32px' }}>
-            <Button href={calendlyLink} style={{ backgroundColor: '#0F172A', color: '#ffffff', padding: '16px 32px', borderRadius: '8px', fontSize: '15px', fontWeight: 'bold', textDecoration: 'none', display: 'inline-block' }}>
+            <Button href={calendlyLink} style={{ backgroundColor: '#1A1A2E', color: '#ffffff', padding: '16px 32px', borderRadius: '8px', fontSize: '15px', fontWeight: 'bold', textDecoration: 'none', display: 'inline-block' }}>
               Book Your Free 30-Minute Consultation →
             </Button>
             <Text style={{ color: '#9ca3af', fontSize: '12px', marginTop: '12px' }}>With Muhammed Ajmal personally. No pitch. Just clarity.</Text>

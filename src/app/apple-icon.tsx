@@ -8,7 +8,7 @@ export default function AppleIcon() {
     (
       <div
         style={{
-          background: '#0F172A',
+          background: '#1A1A2E',
           width: '100%',
           height: '100%',
           display: 'flex',
@@ -25,8 +25,8 @@ export default function AppleIcon() {
             right: 14,
             width: 24,
             height: 24,
-            borderTop: '4px solid #C5A880',
-            borderRight: '4px solid #C5A880',
+            borderTop: '4px solid #FF6535',
+            borderRight: '4px solid #FF6535',
           }}
         />
         <div
@@ -38,8 +38,8 @@ export default function AppleIcon() {
             letterSpacing: '-4px',
           }}
         >
-          <span style={{ color: '#FAF9F6' }}>M</span>
-          <span style={{ color: '#C5A880' }}>A</span>
+          <span style={{ color: '#FFFFFF' }}>M</span>
+          <span style={{ color: '#FF6535' }}>A</span>
         </div>
       </div>
     ),
