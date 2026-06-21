@@ -1,59 +1,190 @@
 @import "tailwindcss";
 
 @theme {
-  /* === Orange brand system (matches the SGA carousels) ===
-     Token NAMES kept for back-compat so every existing utility recolors at once. */
-  --color-navy: #1A1A2E;          /* charcoal — primary text & dark sections (was #0F172A) */
-  --color-gold: #FF6535;          /* brand orange — CTAs, accents (was #C5A880) */
-  --color-gold-bright: #FF8159;   /* lighter orange — gradients / hover (was #D4AF37) */
-  --color-ivory: #FFFFFF;         /* white base (was #FAF9F6) */
-  --color-crimson: #E11D48;       /* error / emphasis */
-  --color-emerald: #10B981;       /* success / positive */
+  /* ── Brand primitives (orange + navy identity) ─────────────────────────── */
+  --color-navy:        #1A1A2E;   /* charcoal — primary text & dark sections */
+  --color-gold:        #FF6535;   /* brand orange — CTAs, accents */
+  --color-gold-bright: #FF8159;   /* lighter orange — gradients / hover */
+  --color-ivory:       #FFFFFF;   /* white base */
+  --color-crimson:     #E11D48;   /* error / emphasis */
+  --color-emerald:     #10B981;   /* success / positive */
 
-  /* Semantic aliases for new components */
-  --color-ink: #1A1A2E;
-  --color-orange: #FF6535;
-  --color-orange-ink: #D6450F;    /* deep orange for orange text on white (AA contrast) */
-  --color-slate: #6B6B6B;         /* secondary text */
-  --color-line: #E5E5E5;          /* grid lines & borders */
+  /* Neutral scale — full primitive ladder */
+  --color-neutral-50:  #f7f7f8;
+  --color-neutral-100: #ebebed;
+  --color-neutral-200: #d3d3d8;
+  --color-neutral-300: #b0b0b8;
+  --color-neutral-400: #84848f;
+  --color-neutral-500: #5d5d68;
+  --color-neutral-600: #44444d;
+  --color-neutral-700: #2f2f37;
+  --color-neutral-800: #1d1d24;
+  --color-neutral-900: #141419;
+  --color-neutral-950: #0b0b0f;
 
-  --font-heading: var(--font-jakarta), "Plus Jakarta Sans", sans-serif;
-  --font-body: var(--font-inter), "Inter", sans-serif;
+  /* Semantic aliases — back-compat names for existing components */
+  --color-ink:        #1A1A2E;
+  --color-orange:     #FF6535;
+  --color-orange-ink: #D6450F;    /* deep orange for text on white (AA contrast) */
+  --color-slate:      #6B6B6B;    /* secondary text */
+  --color-line:       #E5E5E5;    /* borders */
+
+  /* Semantic surface tokens — used by the design system */
+  --color-bg:           #FFFFFF;
+  --color-surface:      #FAFAFA;
+  --color-border:       #E5E5E5;
+  --color-text:         #1A1A2E;
+  --color-text-muted:   #6B6B6B;
+  --color-text-subtle:  #84848f;
+  --color-primary:      #FF6535;
+  --color-on-primary:   #FFFFFF;
+  --color-focus:        #D6450F;
+
+  /* Status palette */
+  --color-success: #10B981;
+  --color-warning: #F59E0B;
+  --color-danger:  #E11D48;
+  --color-info:    #3B82F6;
+
+  /* Typography — distinctive fonts, never Inter as the only choice */
+  --font-display:  var(--font-bricolage), "Bricolage Grotesque", ui-sans-serif, sans-serif;
+  --font-heading:  var(--font-bricolage), "Bricolage Grotesque", ui-sans-serif, sans-serif;
+  --font-sans:     var(--font-hanken), "Hanken Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-body:     var(--font-hanken), "Hanken Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-mono:     "JetBrains Mono", ui-monospace, monospace;
 }
 
-/* Base: white paper with a subtle graph-paper grid across the whole site */
+/* ── Non-Tailwind tokens (space, radius, motion, type scale, shadows) ──── */
+:root {
+  /* Space scale */
+  --space-1: 0.25rem; --space-2: 0.5rem;  --space-3: 0.75rem;
+  --space-4: 1rem;    --space-5: 1.5rem;  --space-6: 2rem;
+  --space-7: 3rem;    --space-8: 4rem;    --space-9: 6rem;
+
+  /* Radius scale */
+  --radius-1: 0.375rem; --radius-2: 0.625rem; --radius-3: 1rem; --radius-pill: 999px;
+
+  /* Motion */
+  --dur-1: 120ms; --dur-2: 220ms; --dur-3: 400ms; --dur-4: 650ms;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in:  cubic-bezier(0.5, 0, 0.75, 0);
+
+  /* Fluid type scale — min @360px, max @1240px */
+  --step--1: clamp(0.83rem, 0.78rem + 0.25vw, 0.94rem);
+  --step-0:  clamp(1.00rem, 0.93rem + 0.36vw, 1.13rem);
+  --step-1:  clamp(1.20rem, 1.07rem + 0.65vw, 1.50rem);
+  --step-2:  clamp(1.44rem, 1.21rem + 1.14vw, 2.00rem);
+  --step-3:  clamp(1.73rem, 1.36rem + 1.85vw, 2.67rem);
+  --step-4:  clamp(2.07rem, 1.49rem + 2.90vw, 3.55rem);
+  --step-5:  clamp(2.49rem, 1.59rem + 4.49vw, 4.74rem);
+
+  /* Shadow tokens */
+  --shadow-1: 0 1px 2px rgba(26,26,46,.06), 0 1px 1px rgba(26,26,46,.04);
+  --shadow-2: 0 4px 12px rgba(26,26,46,.08), 0 2px 4px rgba(26,26,46,.05);
+  --shadow-3: 0 18px 40px rgba(26,26,46,.16), 0 6px 12px rgba(26,26,46,.08);
+}
+
+/* ── Base: white paper with orange aurora glow + graph grid ─────────────── */
 body {
   background-color: #FFFFFF;
+  /* Three layers: (1) aurora radials fixed to viewport, (2+3) graph grid */
   background-image:
-    linear-gradient(rgba(26, 26, 46, 0.045) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(26, 26, 46, 0.045) 1px, transparent 1px);
-  background-size: 40px 40px;
+    radial-gradient(65% 55% at 90% -10%, rgba(255,101,53,.11), transparent 70%),
+    radial-gradient(50% 40% at -5% 20%,  rgba(255,129,89,.07), transparent 65%),
+    radial-gradient(40% 30% at 55% 110%, rgba(255,101,53,.06), transparent 70%),
+    linear-gradient(rgba(26,26,46,.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(26,26,46,.04) 1px, transparent 1px);
+  background-size: auto, auto, auto, 40px 40px, 40px 40px;
+  /* Aurora stays fixed as page scrolls; grid scrolls with content */
+  background-attachment: fixed, fixed, fixed, scroll, scroll;
   color: #1A1A2E;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
-@media (max-width: 640px) { body { background-size: 28px 28px; } }
 
-h1, h2, h3, h4, h5, h6 { font-family: var(--font-jakarta), "Plus Jakarta Sans", sans-serif; }
+/* Grain noise — kills the plasticky "AI screenshot" sheen on white backgrounds */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
 
-/* Orange gradient text (replaces the old gold gradient; old class name kept) */
+@media (max-width: 640px) {
+  body { background-size: auto, auto, auto, 28px 28px, 28px 28px; }
+}
+
+/* ── Typography defaults ─────────────────────────────────────────────────── */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-bricolage), "Bricolage Grotesque", ui-sans-serif, sans-serif;
+  text-wrap: balance;
+}
+p { text-wrap: pretty; }
+:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; }
+
+/* ── Brand utilities ─────────────────────────────────────────────────────── */
+/* Orange gradient text — old class name kept for back-compat */
 .gold-gradient-text, .orange-gradient-text {
   background: linear-gradient(to right, #FF6535, #FF8159);
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
+/* Section grid overlays */
+.graph-overlay {
+  position: absolute; inset: 0; pointer-events: none;
+  background-image:
+    linear-gradient(#1A1A2E 1px, transparent 1px),
+    linear-gradient(90deg, #1A1A2E 1px, transparent 1px);
+  background-size: 40px 40px;
+  opacity: 0.04;
+}
+.graph-overlay-dark {
+  position: absolute; inset: 0; pointer-events: none;
+  background-image:
+    linear-gradient(#FF6535 1px, transparent 1px),
+    linear-gradient(90deg, #FF6535 1px, transparent 1px);
+  background-size: 40px 40px;
+  opacity: 0.07;
+}
+
+/* ── Staggered entrance animation ────────────────────────────────────────── */
+.reveal {
+  opacity: 0;
+  transform: translateY(14px);
+  animation: rise var(--dur-4) var(--ease-out) both;
+}
+.reveal:nth-child(1) { animation-delay: .05s }
+.reveal:nth-child(2) { animation-delay: .13s }
+.reveal:nth-child(3) { animation-delay: .21s }
+.reveal:nth-child(4) { animation-delay: .29s }
+.reveal:nth-child(5) { animation-delay: .37s }
+
+@keyframes rise {
+  to { opacity: 1; transform: none; }
+}
+
+/* Legacy fade-in utility (kept for existing usages) */
+@keyframes fade-in {
+  from { opacity: 0; transform: translateX(16px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+.animate-fade-in { animation: fade-in 0.3s ease-out; }
+
+/* ── Accessibility ───────────────────────────────────────────────────────── */
 input, select, textarea { font-size: 16px; }
 html { scroll-behavior: smooth; }
 
-@keyframes fade-in { from { opacity:0; transform:translateX(16px);} to { opacity:1; transform:translateX(0);} }
-.animate-fade-in { animation: fade-in 0.3s ease-out; }
-
-/* Section grid overlays (already placed across pages) — recolored to brand */
-.graph-overlay {
-  position:absolute; inset:0; pointer-events:none;
-  background-image: linear-gradient(#1A1A2E 1px, transparent 1px), linear-gradient(90deg,#1A1A2E 1px, transparent 1px);
-  background-size:40px 40px; opacity:0.04;
-}
-.graph-overlay-dark {
-  position:absolute; inset:0; pointer-events:none;
-  background-image: linear-gradient(#FF6535 1px, transparent 1px), linear-gradient(90deg,#FF6535 1px, transparent 1px);
-  background-size:40px 40px; opacity:0.07;
+@media (prefers-reduced-motion: reduce) {
+  .reveal { animation: none; opacity: 1; transform: none; }
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

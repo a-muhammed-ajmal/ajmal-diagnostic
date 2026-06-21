@@ -17,18 +17,18 @@ export default function HomePage() {
 
           {/* Left */}
           <div>
-            <span className="text-gold font-heading font-bold tracking-widest text-xs md:text-sm uppercase mb-4 block">
+            <span className="reveal text-gold font-heading font-bold tracking-widest text-xs md:text-sm uppercase mb-4 block">
               Strategic Growth Architect for Founder-Led SMEs · UAE &amp; GCC
             </span>
-            <h1 className="text-2xl sm:text-3xl md:text-4xl xl:text-5xl font-heading font-extrabold leading-tight mb-6">
+            <h1 className="reveal text-2xl sm:text-3xl md:text-4xl xl:text-5xl font-heading font-extrabold leading-tight mb-6">
               Escape the Founder Trap.<br />
               <span className="gold-gradient-text">Engineer Scalable Growth.</span>
             </h1>
-            <p className="font-body text-ivory/90 text-base md:text-lg mb-8 max-w-lg leading-relaxed">
+            <p className="reveal font-body text-ivory/90 text-base md:text-lg mb-8 max-w-lg leading-relaxed">
               Scale your SME without your daily intervention. We engineer the growth infrastructure for UAE &amp; GCC
               founder-led businesses through Strategic Planning, Business Systems, and Operational Excellence.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4">
+            <div className="reveal flex flex-col sm:flex-row gap-4">
               <Link
                 href="/diagnostic"
                 className="inline-flex items-center justify-center bg-gold text-navy font-heading font-bold py-4 px-8 rounded hover:bg-gold-bright transition-colors shadow-lg text-base min-h-[52px]"
