@@ -8,20 +8,24 @@ This project has an established design system. Do NOT invent new tokens, colors,
 
 ## Brand Identity
 
-White base with graph-paper grid and orange aurora glow. NOT the dark aurora from the generic skill template.
+Soft white base with architectural graph-paper grid and subtle navy/gold/teal aurora. Voice: "McKinsey meets modern AI" — executive, analytical, practical.
 
 | Token | Value | Use |
 |---|---|---|
-| `--color-gold` / `--color-orange` | `#FF6535` | CTAs, accents, active states |
-| `--color-gold-bright` | `#FF8159` | Gradients, hover states |
-| `--color-navy` / `--color-ink` | `#1A1A2E` | Headings, dark sections, primary text |
-| `--color-ivory` | `#FFFFFF` | Background |
-| `--color-slate` / `--color-text-muted` | `#6B6B6B` | Secondary text |
-| `--color-line` / `--color-border` | `#E5E5E5` | Borders, dividers |
+| `--color-navy` / `--color-ink` | `#0B2545` | Executive Navy — headings, dark sections, trust |
+| `--color-gold` / `--color-orange` | `#C8A24A` | Executive Gold — CTAs, accents (10-15% usage only) |
+| `--color-gold-bright` | `#D4B366` | Lighter gold — hover states, gradients |
+| `--color-charcoal` | `#1A1A1A` | Strategic Charcoal — body text, precision |
+| `--color-ivory` | `#F9FAFB` | Soft White — primary background |
+| `--color-teal` | `#0D9488` | AI Teal — growth, digital transformation |
+| `--color-slate` / `--color-text-muted` | `#6B7280` | Secondary text |
+| `--color-line` / `--color-border` | `#E5E7EB` | Borders, dividers |
 | `--color-crimson` / `--color-danger` | `#E11D48` | Errors, destructive actions |
 | `--color-emerald` / `--color-success` | `#10B981` | Success states |
-| `--color-orange-ink` | `#D6450F` | Orange text on white (passes AA contrast) |
-| `--color-focus` | `#D6450F` | Focus rings |
+| `--color-gold-ink` | `#9A7A2A` | Dark gold for text on white (AA contrast) |
+| `--color-focus` | `#0B2545` | Focus rings (navy, not gold) |
+
+**Gold usage rule**: Never as background fill. Only for CTAs, success metrics, framework markers, accent details.
 
 Full neutral scale: `--color-neutral-50` through `--color-neutral-950`.
 
@@ -29,8 +33,8 @@ Full neutral scale: `--color-neutral-50` through `--color-neutral-950`.
 
 | Layer | Font | Token | Use |
 |---|---|---|---|
-| Display / Headings | Bricolage Grotesque | `font-heading`, `font-display` | h1–h6, hero text |
-| Body | Hanken Grotesk | `font-body`, `font-sans` | Paragraphs, UI text |
+| Display / Headings | Fraunces (serif) | `font-heading`, `font-display` | h1–h6, hero text, authority |
+| Body | Inter (sans-serif) | `font-body`, `font-sans` | Paragraphs, UI text |
 | Mono | JetBrains Mono | `font-mono` | Code, data, stats |
 
 Loaded via `next/font/google` in layout.tsx — do NOT add `<link>` tags for these fonts.
@@ -41,22 +45,22 @@ Loaded via `next/font/google` in layout.tsx — do NOT add `<link>` tags for the
 **Rules already applied globally:**
 - `text-wrap: balance` on all headings
 - `text-wrap: pretty` on all paragraphs
-- `letter-spacing: -0.02em` on large display text
+- Headings use serif font-family (Fraunces) via CSS rule
 
 ## Background & Atmosphere
 
 Already set on `body` in globals.css — do NOT override or duplicate:
-- **Aurora**: 3-layer orange radial gradients, `background-attachment: fixed`
-- **Graph grid**: 40×40px navy lines at 4% opacity (28px on mobile)
-- **Grain**: SVG fractal noise pseudo-element at 2.5% opacity
+- **Aurora**: 3-layer radial gradients (navy, teal, gold) — subtle, `background-attachment: fixed`
+- **Graph grid**: 40×40px navy lines at 3.5% opacity (28px on mobile)
+- **Grain**: SVG fractal noise pseudo-element at 2% opacity
 
 ## Existing Utility Classes
 
 | Class | Effect |
 |---|---|
-| `.orange-gradient-text` | Gradient text `#FF6535 → #FF8159` |
-| `.graph-overlay` | Navy grid on white sections (absolute positioned) |
-| `.graph-overlay-dark` | Orange grid on dark sections |
+| `.gold-gradient-text` / `.orange-gradient-text` | Gradient text `#C8A24A → #D4B366` |
+| `.graph-overlay` | Navy grid on light sections (absolute positioned) |
+| `.graph-overlay-dark` | Gold grid on dark sections |
 | `.reveal` | Staggered entrance animation (translateY + fade, 80ms apart) |
 
 ## Spacing, Radius, Motion Tokens
@@ -66,14 +70,14 @@ Already set on `body` in globals.css — do NOT override or duplicate:
 **Duration**: `--dur-1` (120ms) · `--dur-2` (220ms) · `--dur-3` (400ms) · `--dur-4` (650ms)
 **Easing**: `--ease-out` = `cubic-bezier(0.16, 1, 0.3, 1)` — luxurious/considered, matching a premium consulting brand
 
-**Shadows**: `--shadow-1` (subtle) · `--shadow-2` (card) · `--shadow-3` (modal/hero)
+**Shadows**: `--shadow-1` (subtle) · `--shadow-2` (card) · `--shadow-3` (modal/hero) — navy-tinted
 
 ## Tailwind Usage
 
 This project uses **Tailwind v4** — no `tailwind.config.js`. All custom tokens are in `globals.css` inside `@theme {}`.
 
 Use Tailwind utility classes with the project tokens:
-- `text-navy`, `bg-ivory`, `text-gold`, `border-line`
+- `text-navy`, `bg-ivory`, `text-gold`, `border-line`, `text-charcoal`, `text-teal`
 - `font-heading`, `font-body`
 - Use `cn()` (clsx + tailwind-merge) for conditional classes
 
@@ -93,17 +97,19 @@ Use Tailwind utility classes with the project tokens:
 - `input, select, textarea` forced to `16px` to prevent iOS zoom
 - All interactive elements must have `:focus-visible` styling (already global)
 - Minimum 48px touch targets on buttons
-- 4.5:1 contrast ratio for text — use `--color-orange-ink` (#D6450F) when placing orange text on white
+- 4.5:1 contrast ratio for text — use `--color-gold-ink` (#9A7A2A) when placing gold text on white
 
 ## Anti-Patterns for This Project
 
 | Don't | Do instead |
 |---|---|
-| Dark aurora / dark theme backgrounds | White base with graph-paper grid |
-| Inter or system-ui as heading font | Bricolage Grotesque via `font-heading` |
+| Dark aurora / dark theme backgrounds | Soft white base with graph-paper grid |
+| Sans-serif as heading font | Fraunces serif via `font-heading` |
 | Raw hex colors in JSX | Tailwind token classes (`text-navy`, `bg-gold`) |
 | New CSS custom properties for colors | Use existing tokens from globals.css |
 | `<link>` tags for Google Fonts | Fonts loaded via `next/font/google` in layout.tsx |
 | `transition: all` | Explicit: `transition: transform 220ms, opacity 220ms` |
 | Fixed `px` font sizes | Fluid `--step-N` scale or Tailwind `text-*` |
 | Inline `style={{}}` for layout | Tailwind classes + `cn()` |
+| Gold as background fill | Gold only for accents, CTAs, metrics (10-15%) |
+| Bright orange (#FF6535) | Executive Gold (#C8A24A) — subdued, premium |

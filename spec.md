@@ -16,9 +16,9 @@
 - [Add any additional constraints specific to this feature]
 
 ## Visual Requirements
-- Match the established aesthetic: white base + 40px graph-paper grid, orange brand (#FF6535)
-- Headings: Plus Jakarta Sans via `--font-heading`; body: Inter via `--font-body`
-- Use `.orange-gradient-text` for any gradient text
+- Match the established aesthetic: soft white base + 40px graph-paper grid, Executive Gold (#C8A24A) accents
+- Headings: Fraunces serif via `--font-heading`; body: Inter via `--font-body`
+- Use `.gold-gradient-text` for any gradient text
 - Use `.graph-overlay` or `.graph-overlay-dark` for section backgrounds
 - [Describe what the feature looks like — be specific enough to guide, open enough for AI creativity]
 
