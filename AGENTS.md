@@ -81,7 +81,7 @@ src/
 --color-emerald:               #10B981      /* success */
 ```
 
-**Fonts**: Fraunces serif (headings via `--font-heading`) · Inter (body via `--font-body`)
+**Fonts**: Plus Jakarta Sans (headings via `--font-heading`) · Inter (body via `--font-body`)
 
 **Background**: Soft White `#F9FAFB` with 40×40px graph-paper grid overlay using navy at 3.5% opacity, subtle navy/teal/gold aurora radials.
 

@@ -33,11 +33,13 @@ Full neutral scale: `--color-neutral-50` through `--color-neutral-950`.
 
 | Layer | Font | Token | Use |
 |---|---|---|---|
-| Display / Headings | Fraunces (serif) | `font-heading`, `font-display` | h1–h6, hero text, authority |
+| Display / Headings | Plus Jakarta Sans (sans-serif) | `font-heading`, `font-display` | h1–h6, hero text, authority |
 | Body | Inter (sans-serif) | `font-body`, `font-sans` | Paragraphs, UI text |
 | Mono | JetBrains Mono | `font-mono` | Code, data, stats |
 
 Loaded via `next/font/google` in layout.tsx — do NOT add `<link>` tags for these fonts.
+
+**CSS variable**: `--font-jakarta` (heading) · `--font-inter` (body)
 
 **Type scale** (fluid, clamp-based — use these, don't write raw font sizes):
 `--step--1` (0.83–0.94rem) · `--step-0` (1–1.13rem) · `--step-1` (1.2–1.5rem) · `--step-2` (1.44–2rem) · `--step-3` (1.73–2.67rem) · `--step-4` (2.07–3.55rem) · `--step-5` (2.49–4.74rem)
@@ -45,7 +47,7 @@ Loaded via `next/font/google` in layout.tsx — do NOT add `<link>` tags for the
 **Rules already applied globally:**
 - `text-wrap: balance` on all headings
 - `text-wrap: pretty` on all paragraphs
-- Headings use serif font-family (Fraunces) via CSS rule
+- Headings use Plus Jakarta Sans via CSS rule
 
 ## Background & Atmosphere
 
@@ -104,7 +106,7 @@ Use Tailwind utility classes with the project tokens:
 | Don't | Do instead |
 |---|---|
 | Dark aurora / dark theme backgrounds | Soft white base with graph-paper grid |
-| Sans-serif as heading font | Fraunces serif via `font-heading` |
+| Serif heading font (Fraunces, etc.) | Plus Jakarta Sans via `font-heading` |
 | Raw hex colors in JSX | Tailwind token classes (`text-navy`, `bg-gold`) |
 | New CSS custom properties for colors | Use existing tokens from globals.css |
 | `<link>` tags for Google Fonts | Fonts loaded via `next/font/google` in layout.tsx |
