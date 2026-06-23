@@ -46,7 +46,7 @@ src/
     newsletter/     # NewsletterForm
     ui/             # Primitive components (Button, etc.)
   lib/
-    supabase/       # client.ts (browser) + server.ts (RSC/Route Handler)
+    supabase/       # server.ts (createAdminClient) + client.ts (createBrowserClient)
     ai.ts           # Anthropic client
     email/          # React Email templates
     scoring.ts      # Quiz scoring logic
@@ -59,7 +59,7 @@ src/
 ## Coding Standards
 - **Components**: PascalCase filenames, named exports, no default exports for components
 - **API routes**: `route.ts` with named exports (`GET`, `POST`, etc.)
-- **Supabase client**: use `src/lib/supabase/client.ts` in Client Components, `server.ts` in Server Components and Route Handlers
+- **Supabase client**: use `createAdminClient()` from `src/lib/supabase/server.ts` in Route Handlers and Server Components; `createBrowserClient()` from `client.ts` for Client Components
 - **Forms**: always `react-hook-form` + `zod` schema — no uncontrolled inputs
 - **Classes**: `cn()` helper (clsx + tailwind-merge) for conditional Tailwind classes
 - **No raw hex in JSX**: all colors via CSS custom properties defined in `globals.css`
@@ -103,6 +103,6 @@ src/
 
 ## Key Constraints
 - Tailwind v4 has **no config file** — custom tokens go in `globals.css` inside `@theme {}`
-- Supabase SSR requires cookie-based client — always use the `server.ts` helper in RSC
+- Supabase: `createAdminClient()` uses the service-role key (bypasses RLS) — use only in Route Handlers, never client-side
 - Email templates are React components rendered via `@react-email/render` before sending through Resend
 - Admin auth is cookie-based (not Supabase Auth) — see `src/lib/adminAuth.ts`
