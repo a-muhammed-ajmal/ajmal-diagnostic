@@ -1,11 +1,11 @@
 @import "tailwindcss";
 
 @theme {
-  /* ── Brand primitives (Executive Navy + Gold identity) ────────────────── */
-  --color-navy:        #0B2545;   /* Executive Navy — trust, leadership, stability */
-  --color-gold:        #C8A24A;   /* Executive Gold — achievement, exclusivity (10-15% usage) */
-  --color-gold-bright: #D4B366;   /* Lighter gold — hover states, gradients */
-  --color-charcoal:    #1A1A1A;   /* Strategic Charcoal — body text, precision */
+  /* ── Brand primitives (Orange + Charcoal-Navy identity) ────────────────── */
+  --color-navy:        #1A1A2E;   /* Charcoal-Navy — dark sections, strong text */
+  --color-gold:        #FF6535;   /* Brand Orange — primary CTA, accents, active states */
+  --color-gold-bright: #FF8159;   /* Brand Orange hover / gradient end */
+  --color-charcoal:    #1A1A2E;   /* body text, precision */
   --color-ivory:       #F9FAFB;   /* Soft White — primary digital background */
   --color-teal:        #0D9488;   /* AI Teal — growth, digital transformation */
   --color-crimson:     #E11D48;   /* error / emphasis */
@@ -25,23 +25,23 @@
   --color-neutral-950: #0b0b0f;
 
   /* Semantic aliases */
-  --color-ink:        #0B2545;
-  --color-orange:     #C8A24A;     /* legacy alias → now maps to gold */
-  --color-gold-ink:   #9A7A2A;     /* dark gold for text on white (AA contrast) */
+  --color-ink:        #1A1A2E;
+  --color-orange:     #FF6535;     /* brand orange */
+  --color-gold-ink:   #D6450F;     /* dark orange for text on white (AA contrast) */
   --color-slate:      #6B7280;     /* secondary text */
   --color-line:       #E5E7EB;     /* borders */
-  --color-footer:     #0B1120;     /* deepened navy — footer background */
+  --color-footer:     #0B1120;     /* deepened charcoal-navy — footer background */
 
   /* Semantic surface tokens */
   --color-bg:           #F9FAFB;
   --color-surface:      #FFFFFF;
   --color-border:       #E5E7EB;
-  --color-text:         #1A1A1A;
+  --color-text:         #1A1A2E;
   --color-text-muted:   #6B7280;
   --color-text-subtle:  #84848f;
-  --color-primary:      #C8A24A;
-  --color-on-primary:   #0B2545;
-  --color-focus:        #0B2545;
+  --color-primary:      #FF6535;
+  --color-on-primary:   #1A1A2E;
+  --color-focus:        #FF6535;
 
   /* Status palette */
   --color-success:    #10B981;
@@ -50,9 +50,9 @@
   --color-danger:     #E11D48;
   --color-info:       #3B82F6;
 
-  /* Typography — Plus Jakarta Sans headings + Inter body */
-  --font-display:  var(--font-jakarta), "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
-  --font-heading:  var(--font-jakarta), "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  /* Typography — Inter only */
+  --font-display:  var(--font-inter), "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-heading:  var(--font-inter), "Inter", ui-sans-serif, system-ui, sans-serif;
   --font-sans:     var(--font-inter), "Inter", ui-sans-serif, system-ui, sans-serif;
   --font-body:     var(--font-inter), "Inter", ui-sans-serif, system-ui, sans-serif;
   --font-mono:     "JetBrains Mono", ui-monospace, monospace;
@@ -82,24 +82,24 @@
   --step-4:  clamp(2.07rem, 1.49rem + 2.90vw, 3.55rem);
   --step-5:  clamp(2.49rem, 1.59rem + 4.49vw, 4.74rem);
 
-  /* Shadow tokens — navy-tinted */
-  --shadow-1: 0 1px 2px rgba(11,37,69,.06), 0 1px 1px rgba(11,37,69,.04);
-  --shadow-2: 0 4px 12px rgba(11,37,69,.08), 0 2px 4px rgba(11,37,69,.05);
-  --shadow-3: 0 18px 40px rgba(11,37,69,.14), 0 6px 12px rgba(11,37,69,.07);
+  /* Shadow tokens — charcoal-navy-tinted */
+  --shadow-1: 0 1px 2px rgba(26,26,46,.06), 0 1px 1px rgba(26,26,46,.04);
+  --shadow-2: 0 4px 12px rgba(26,26,46,.08), 0 2px 4px rgba(26,26,46,.05);
+  --shadow-3: 0 18px 40px rgba(26,26,46,.14), 0 6px 12px rgba(26,26,46,.07);
 }
 
-/* ── Base: soft white with architectural grid + subtle navy aurora ──────── */
+/* ── Base: soft white with architectural grid + subtle orange aurora ────── */
 body {
   background-color: #F9FAFB;
   background-image:
-    radial-gradient(65% 55% at 90% -10%, rgba(11,37,69,.06), transparent 70%),
+    radial-gradient(65% 55% at 90% -10%, rgba(26,26,46,.06), transparent 70%),
     radial-gradient(50% 40% at -5% 20%,  rgba(13,148,136,.04), transparent 65%),
-    radial-gradient(40% 30% at 55% 110%, rgba(200,162,74,.05), transparent 70%),
-    linear-gradient(rgba(11,37,69,.035) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(11,37,69,.035) 1px, transparent 1px);
+    radial-gradient(40% 30% at 55% 110%, rgba(255,101,53,.06), transparent 70%),
+    linear-gradient(rgba(26,26,46,.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(26,26,46,.035) 1px, transparent 1px);
   background-size: auto, auto, auto, 40px 40px, 40px 40px;
   background-attachment: fixed, fixed, fixed, scroll, scroll;
-  color: #1A1A1A;
+  color: #1A1A2E;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
@@ -121,7 +121,7 @@ body::before {
 
 /* ── Typography defaults ─────────────────────────────────────────────────── */
 h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-jakarta), "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  font-family: var(--font-inter), "Inter", ui-sans-serif, system-ui, sans-serif;
   text-wrap: balance;
 }
 p { text-wrap: pretty; }
@@ -129,7 +129,7 @@ p { text-wrap: pretty; }
 
 /* ── Brand utilities ─────────────────────────────────────────────────────── */
 .gold-gradient-text, .orange-gradient-text {
-  background: linear-gradient(to right, #C8A24A, #D4B366);
+  background: linear-gradient(to right, #FF6535, #FF8159);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -139,16 +139,16 @@ p { text-wrap: pretty; }
 .graph-overlay {
   position: absolute; inset: 0; pointer-events: none;
   background-image:
-    linear-gradient(#0B2545 1px, transparent 1px),
-    linear-gradient(90deg, #0B2545 1px, transparent 1px);
+    linear-gradient(#1A1A2E 1px, transparent 1px),
+    linear-gradient(90deg, #1A1A2E 1px, transparent 1px);
   background-size: 40px 40px;
   opacity: 0.035;
 }
 .graph-overlay-dark {
   position: absolute; inset: 0; pointer-events: none;
   background-image:
-    linear-gradient(#C8A24A 1px, transparent 1px),
-    linear-gradient(90deg, #C8A24A 1px, transparent 1px);
+    linear-gradient(#FF6535 1px, transparent 1px),
+    linear-gradient(90deg, #FF6535 1px, transparent 1px);
   background-size: 40px 40px;
   opacity: 0.07;
 }

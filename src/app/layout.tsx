@@ -1,21 +1,14 @@
 import type { Metadata, Viewport } from "next";
-import { Plus_Jakarta_Sans, Inter } from "next/font/google";
+import { Inter } from "next/font/google";
 import "./globals.css";
 import { Navigation } from "@/components/layout/Navigation";
 import { Footer } from "@/components/layout/Footer";
 import { cn } from "@/lib/utils";
 
-const plusJakartaSans = Plus_Jakarta_Sans({
-  variable: "--font-jakarta",
-  subsets: ["latin"],
-  weight: ["600", "700", "800"],
-  display: "swap",
-});
-
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
-  weight: ["400", "500", "600"],
+  weight: ["400", "500", "600", "700", "800"],
   display: "swap",
 });
 
@@ -49,7 +42,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={cn(plusJakartaSans.variable, inter.variable, "h-full antialiased")}
+      className={cn(inter.variable, "h-full antialiased")}
     >
       <body className="min-h-full flex flex-col bg-ivory text-navy font-body">
         <Navigation />

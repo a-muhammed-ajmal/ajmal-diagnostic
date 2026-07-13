@@ -65,14 +65,15 @@ src/
 - **No raw hex in JSX**: all colors via CSS custom properties defined in `globals.css`
 
 ## Design System
-**Soft white base with architectural graph-paper grid** — "McKinsey meets modern AI" executive aesthetic.
+**Soft white base with architectural graph-paper grid** — orange-accented executive aesthetic (per `/frontend-design`).
 
 ```css
 /* Brand tokens — defined in src/app/globals.css @theme block */
---color-navy / --color-ink:    #0B2545      /* Executive Navy — trust, leadership */
---color-gold / --color-orange: #C8A24A      /* Executive Gold — CTAs, accents (10-15% usage) */
---color-gold-bright:           #D4B366      /* lighter gold — hover, gradients */
---color-charcoal:              #1A1A1A      /* Strategic Charcoal — body text */
+--color-navy / --color-ink:    #1A1A2E      /* Charcoal-Navy — dark sections, strong text */
+--color-gold / --color-orange: #FF6535      /* Brand Orange — CTAs, accents, active states */
+--color-gold-bright:           #FF8159      /* brand orange hover / gradient end */
+--color-gold-ink:              #D6450F      /* dark orange for text on white (AA contrast) */
+--color-charcoal:              #1A1A2E      /* body text */
 --color-ivory:                 #F9FAFB      /* Soft White — primary background */
 --color-teal:                  #0D9488      /* AI Teal — growth, digital transformation */
 --color-slate:                 #6B7280      /* secondary text */
@@ -81,14 +82,14 @@ src/
 --color-emerald:               #10B981      /* success */
 ```
 
-**Fonts**: Plus Jakarta Sans (headings via `--font-heading`) · Inter (body via `--font-body`)
+**Fonts**: Inter only, everywhere — headings (`--font-heading`) and body (`--font-body`) both resolve to Inter. No Plus Jakarta Sans, no serif.
 
-**Background**: Soft White `#F9FAFB` with 40×40px graph-paper grid overlay using navy at 3.5% opacity, subtle navy/teal/gold aurora radials.
+**Background**: Soft White `#F9FAFB` with 40×40px graph-paper grid overlay using charcoal-navy at 3.5% opacity, subtle navy/teal/orange aurora radials.
 
 **Utility classes** (already in globals.css):
-- `.gold-gradient-text` / `.orange-gradient-text` — gradient text `#C8A24A → #D4B366`
-- `.graph-overlay` — navy grid on light sections
-- `.graph-overlay-dark` — gold grid on dark sections
+- `.gold-gradient-text` / `.orange-gradient-text` — gradient text `#FF6535 → #FF8159`
+- `.graph-overlay` — charcoal-navy grid on light sections
+- `.graph-overlay-dark` — brand orange grid on dark sections
 
 ## Pages
 | Route | Purpose |

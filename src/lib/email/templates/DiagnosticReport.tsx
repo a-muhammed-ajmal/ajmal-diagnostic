@@ -48,7 +48,7 @@ export function DiagnosticReportEmail({
         >
           <Text
             style={{
-              color: "#C8A24A",
+              color: "#FF6535",
               fontSize: "11px",
               fontWeight: "bold",
               letterSpacing: "3px",
@@ -59,7 +59,7 @@ export function DiagnosticReportEmail({
             MUHAMMED AJMAL CONSULTING
           </Text>
           <Heading
-            style={{ color: "#0B2545", fontSize: "24px", margin: "0 0 4px" }}
+            style={{ color: "#1A1A2E", fontSize: "24px", margin: "0 0 4px" }}
           >
             {firstName}, here is your business constraint diagnosis.
           </Heading>
@@ -72,7 +72,7 @@ export function DiagnosticReportEmail({
 
           <Section
             style={{
-              backgroundColor: "#0B2545",
+              backgroundColor: "#1A1A2E",
               borderRadius: "12px",
               padding: "24px",
               marginBottom: "16px",
@@ -80,7 +80,7 @@ export function DiagnosticReportEmail({
           >
             <Text
               style={{
-                color: "#C8A24A",
+                color: "#FF6535",
                 fontSize: "10px",
                 fontWeight: "bold",
                 letterSpacing: "3px",
@@ -118,7 +118,7 @@ export function DiagnosticReportEmail({
 
           <Section
             style={{
-              backgroundColor: "#0B2545",
+              backgroundColor: "#1A1A2E",
               borderRadius: "12px",
               padding: "24px",
               marginBottom: "16px",
@@ -206,7 +206,7 @@ export function DiagnosticReportEmail({
           <Hr style={{ borderColor: "#e5e7eb", margin: "24px 0" }} />
 
           <Heading
-            style={{ color: "#0B2545", fontSize: "18px", margin: "0 0 16px" }}
+            style={{ color: "#1A1A2E", fontSize: "18px", margin: "0 0 16px" }}
           >
             Scores Across All 5 Dimensions
           </Heading>
@@ -254,7 +254,7 @@ export function DiagnosticReportEmail({
                 </Text>
                 <Heading
                   style={{
-                    color: "#0B2545",
+                    color: "#1A1A2E",
                     fontSize: "16px",
                     margin: "0 0 12px",
                   }}
@@ -297,7 +297,7 @@ export function DiagnosticReportEmail({
                 </Text>
                 <Heading
                   style={{
-                    color: "#0B2545",
+                    color: "#1A1A2E",
                     fontSize: "16px",
                     margin: "0 0 12px",
                   }}
@@ -350,7 +350,7 @@ export function DiagnosticReportEmail({
             <Button
               href={calendlyLink}
               style={{
-                backgroundColor: "#0B2545",
+                backgroundColor: "#1A1A2E",
                 color: "#ffffff",
                 padding: "16px 32px",
                 borderRadius: "8px",
