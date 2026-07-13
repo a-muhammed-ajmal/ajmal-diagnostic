@@ -3,18 +3,23 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { DiagnosticResult, LeadData } from '@/types';
 import { DIMENSION_META } from '@/lib/scoring';
+import { cn } from '@/lib/utils';
 
 export default function ResultsPage() {
   const router = useRouter();
-  const [data, setData] = useState<{ results: DiagnosticResult; leadData: LeadData } | null>(null);
-
-  useEffect(() => {
+  const [data] = useState<{ results: DiagnosticResult; leadData: LeadData } | null>(() => {
+    if (typeof window === 'undefined') return null;
     try {
       const stored = sessionStorage.getItem('diagnosticResults');
-      if (!stored) { router.push('/'); return; }
-      setData(JSON.parse(stored));
-    } catch { router.push('/'); }
-  }, [router]);
+      return stored ? JSON.parse(stored) : null;
+    } catch {
+      return null;
+    }
+  });
+
+  useEffect(() => {
+    if (!data) router.push('/');
+  }, [data, router]);
 
   if (!data) return (
     <div className="min-h-screen bg-ivory flex items-center justify-center relative overflow-hidden">
@@ -34,7 +39,7 @@ export default function ResultsPage() {
 
   const severityBadge: Record<string, string> = {
     Critical: 'bg-crimson/10 text-crimson border-crimson/20',
-    Developing: 'bg-amber-50 text-amber-700 border-amber-200',
+    Developing: 'bg-warning/10 text-warning-ink border-warning/20',
     Progressing: 'bg-emerald/10 text-emerald border-emerald/20',
   };
 
@@ -52,16 +57,16 @@ export default function ResultsPage() {
         <div className="bg-navy rounded-2xl p-6 md:p-8 text-white text-center shadow-xl">
           <p className="text-gold font-heading font-bold tracking-widest text-xs uppercase mb-4">Business Health Score</p>
           <div className="text-5xl md:text-7xl font-heading font-extrabold mb-2">{results.healthScore}%</div>
-          <span className={`inline-block px-4 py-1 rounded-full text-sm font-heading font-bold border ${severityBadge[results.severityLabel]}`}>
+          <span className={cn('inline-block px-4 py-1 rounded-full text-sm font-heading font-bold border', severityBadge[results.severityLabel])}>
             {results.severityLabel}
           </span>
           <p className="text-ivory/40 text-xs mt-4 font-body">Critical: 0–39% · Developing: 40–69% · Progressing: 70–100%</p>
         </div>
 
         <div className="bg-navy rounded-2xl p-6 md:p-8 shadow-lg">
-          <p className="text-blue-300 font-heading font-bold tracking-widest text-xs uppercase mb-2">Primary Growth Constraint</p>
+          <p className="text-teal font-heading font-bold tracking-widest text-xs uppercase mb-2">Primary Growth Constraint</p>
           <h2 className="text-2xl md:text-3xl font-heading font-bold text-white mb-4">{results.primaryConstraintLabel}</h2>
-          <p className="text-blue-100 leading-relaxed font-body text-sm">{primaryMeta.constraintExplanation}</p>
+          <p className="text-ivory/70 leading-relaxed font-body text-sm">{primaryMeta.constraintExplanation}</p>
         </div>
 
         <div className="bg-white rounded-2xl p-5 md:p-6 border border-navy/10 shadow-sm">
@@ -70,8 +75,8 @@ export default function ResultsPage() {
           <p className="text-navy/70 font-body text-sm leading-relaxed">{secondaryMeta.secondaryExplanation}</p>
         </div>
 
-        <div className="bg-amber-50 border border-amber-200 rounded-xl p-5">
-          <p className="text-amber-800 italic font-body text-sm leading-relaxed">"{primaryMeta.impactStatement}"</p>
+        <div className="bg-warning/10 border border-warning/20 rounded-xl p-5">
+          <p className="text-warning-ink italic font-body text-sm leading-relaxed">&ldquo;{primaryMeta.impactStatement}&rdquo;</p>
         </div>
 
         <div className="bg-white rounded-2xl p-5 md:p-6 border border-navy/10 shadow-sm">
@@ -87,7 +92,7 @@ export default function ResultsPage() {
                   </span>
                   <span className="font-heading font-bold text-sm text-navy/60 flex-shrink-0">{dim.score}/6</span>
                 </div>
-                <div className="w-full bg-gray-100 rounded-full h-3">
+                <div className="w-full bg-line rounded-full h-3">
                   <div className="h-3 rounded-full transition-all duration-1000" style={{ width: `${dim.percentage}%`, backgroundColor: dim.color }} />
                 </div>
               </div>
@@ -110,13 +115,13 @@ export default function ResultsPage() {
               </ul>
             </div>
 
-            <div className="bg-blue-50 border border-blue-200 rounded-2xl p-5 md:p-6">
-              <p className="text-blue-600 font-heading font-bold tracking-widest text-xs uppercase mb-2">AI-Generated Action Plan — 90 Days</p>
+            <div className="bg-teal/5 border border-teal/20 rounded-2xl p-5 md:p-6">
+              <p className="text-teal font-heading font-bold tracking-widest text-xs uppercase mb-2">AI-Generated Action Plan — 90 Days</p>
               <h3 className="font-heading font-bold text-navy text-base md:text-lg mb-4">Days 31–90: Building Deeper</h3>
               <ul className="space-y-3">
                 {results.aiPlan.ninetyDayDirections.map((d, i) => (
                   <li key={i} className="flex items-start gap-3 text-navy/80 font-body text-sm">
-                    <span className="flex-shrink-0 w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center text-xs font-bold mt-0.5">{i + 1}</span>
+                    <span className="flex-shrink-0 w-6 h-6 bg-teal text-white rounded-full flex items-center justify-center text-xs font-bold mt-0.5">{i + 1}</span>
                     <span className="leading-relaxed">{d}</span>
                   </li>
                 ))}
@@ -125,7 +130,7 @@ export default function ResultsPage() {
           </>
         )}
 
-        <div className="bg-gray-50 border border-gray-200 rounded-xl p-5">
+        <div className="bg-ivory border border-line rounded-xl p-5">
           <p className="text-navy/70 font-body text-sm leading-relaxed">
             <strong className="text-navy">An important distinction:</strong> This diagnostic identifies your constraint category — not the root cause within it. Understanding exactly why this constraint exists in your specific business is what the paid diagnostic is designed to uncover.
           </p>

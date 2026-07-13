@@ -18,12 +18,12 @@ export function QuestionCard({
   return (
     <div className="w-full animate-fade-in">
       <div className="mb-2">
-        <span className="text-xs font-semibold tracking-widest text-blue-600 uppercase">
+        <span className="text-xs font-heading font-semibold tracking-widest text-gold-ink uppercase">
           {dimensionLabel}
         </span>
       </div>
 
-      <h2 className="text-xl font-semibold text-gray-900 mb-6 leading-relaxed">
+      <h2 className="text-xl font-heading font-semibold text-navy mb-6 leading-relaxed">
         {question.text}
       </h2>
 

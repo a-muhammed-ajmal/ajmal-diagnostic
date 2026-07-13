@@ -2,6 +2,7 @@ import { requireAdminAuth } from "@/lib/adminAuth";
 import { createAdminClient } from "@/lib/supabase/server";
 import Link from "next/link";
 import type { Lead } from "@/types";
+import { cn } from "@/lib/utils";
 
 const supabase = createAdminClient();
 
@@ -14,12 +15,12 @@ export default async function AdminLeadsPage() {
 
   const severityColors: Record<string, string> = {
     Critical: "bg-crimson/10 text-crimson",
-    Developing: "bg-amber-100 text-amber-700",
+    Developing: "bg-warning/10 text-warning-ink",
     Progressing: "bg-emerald/10 text-emerald",
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-ivory">
       <nav className="bg-navy text-ivory px-6 py-4 flex justify-between items-center">
         <div className="font-heading font-bold text-sm">
           M<span className="text-gold">A</span> · Consultant Workspace
@@ -111,7 +112,7 @@ export default async function AdminLeadsPage() {
                           </div>
                           {lead.severity_label && (
                             <span
-                              className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${severityColors[lead.severity_label] || ""}`}
+                              className={cn("text-[10px] font-bold px-2 py-0.5 rounded-full", severityColors[lead.severity_label])}
                             >
                               {lead.severity_label}
                             </span>
@@ -124,21 +125,21 @@ export default async function AdminLeadsPage() {
                     </td>
                     <td className="px-4 py-3">
                       <span
-                        className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${lead.email_sent ? "bg-emerald/10 text-emerald" : "bg-crimson/10 text-crimson"}`}
+                        className={cn("text-[10px] font-bold px-2 py-0.5 rounded-full", lead.email_sent ? "bg-emerald/10 text-emerald" : "bg-crimson/10 text-crimson")}
                       >
                         {lead.email_sent ? "✔ Sent" : "✗ Pending"}
                       </span>
                     </td>
                     <td className="px-4 py-3">
                       <span
-                        className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${lead.ai_plan_generated ? "bg-emerald/10 text-emerald" : "bg-gray-100 text-gray-500"}`}
+                        className={cn("text-[10px] font-bold px-2 py-0.5 rounded-full", lead.ai_plan_generated ? "bg-emerald/10 text-emerald" : "bg-line text-slate")}
                       >
                         {lead.ai_plan_generated ? "✔ Ready" : "—"}
                       </span>
                     </td>
                     <td className="px-4 py-3">
                       <span
-                        className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${lead.booked_call ? "bg-emerald/10 text-emerald" : "bg-gray-100 text-gray-500"}`}
+                        className={cn("text-[10px] font-bold px-2 py-0.5 rounded-full", lead.booked_call ? "bg-emerald/10 text-emerald" : "bg-line text-slate")}
                       >
                         {lead.booked_call ? "✔ Booked" : "—"}
                       </span>

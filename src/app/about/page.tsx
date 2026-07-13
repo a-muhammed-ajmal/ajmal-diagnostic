@@ -49,7 +49,7 @@ export default function AboutPage() {
             <p className="font-body text-navy/70 leading-relaxed mb-6 text-sm md:text-base">My background spans strategic management, warehouse and supply chain operations, commercial services, project execution, and business growth initiatives across the UAE market — covering food and beverages, financial advisory, and marketing automation.</p>
 
             <div className="border-l-4 border-gold pl-5 md:pl-6 mb-8">
-              <p className="font-heading text-base md:text-lg font-semibold italic text-navy/80">"What gets you to AED 1 Million will actively prevent you from reaching AED 10 Million without the right architecture."</p>
+              <p className="font-heading text-base md:text-lg font-semibold italic text-navy/80">&ldquo;What gets you to AED 1 Million will actively prevent you from reaching AED 10 Million without the right architecture.&rdquo;</p>
             </div>
 
             <h3 className="font-heading font-bold text-navy text-base md:text-lg mb-4">Professional Credentials</h3>

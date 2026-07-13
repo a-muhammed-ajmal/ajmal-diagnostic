@@ -30,6 +30,7 @@
   --color-gold-ink:   #9A7A2A;     /* dark gold for text on white (AA contrast) */
   --color-slate:      #6B7280;     /* secondary text */
   --color-line:       #E5E7EB;     /* borders */
+  --color-footer:     #0B1120;     /* deepened navy — footer background */
 
   /* Semantic surface tokens */
   --color-bg:           #F9FAFB;
@@ -43,10 +44,11 @@
   --color-focus:        #0B2545;
 
   /* Status palette */
-  --color-success: #10B981;
-  --color-warning: #F59E0B;
-  --color-danger:  #E11D48;
-  --color-info:    #3B82F6;
+  --color-success:    #10B981;
+  --color-warning:    #F59E0B;
+  --color-warning-ink: #92400E;  /* dark amber for AA text contrast on white */
+  --color-danger:     #E11D48;
+  --color-info:       #3B82F6;
 
   /* Typography — Plus Jakarta Sans headings + Inter body */
   --font-display:  var(--font-jakarta), "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;

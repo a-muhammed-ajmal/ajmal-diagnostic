@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Menu, X } from 'lucide-react';
+import { cn } from '@/lib/utils';
 
 const navLinks = [
   { href: '/#problem', label: 'The Founder Trap' },
@@ -21,23 +22,26 @@ export function Navigation() {
   const isDiagnostic = pathname?.startsWith('/diagnostic');
   const isResults = pathname?.startsWith('/results');
 
+  const [prevPathname, setPrevPathname] = useState(pathname);
+  if (pathname !== prevPathname) {
+    setPrevPathname(pathname);
+    setMobileOpen(false);
+  }
+
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 10);
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  useEffect(() => {
-    setMobileOpen(false);
-  }, [pathname]);
-
   if (isAdmin || isDiagnostic) return null;
 
   return (
     <nav
-      className={`bg-navy/95 backdrop-blur-md text-ivory py-4 px-4 md:px-6 border-b border-gold/20 sticky top-0 z-50 transition-shadow duration-300 ${
-        scrolled ? 'shadow-lg shadow-black/30' : ''
-      }`}
+      className={cn(
+        'bg-navy/95 backdrop-blur-md text-ivory py-4 px-4 md:px-6 border-b border-gold/20 sticky top-0 z-50 transition-shadow duration-300',
+        scrolled && 'shadow-lg shadow-black/30'
+      )}
     >
       <div className="max-w-7xl mx-auto flex justify-between items-center">
 
@@ -95,9 +99,10 @@ export function Navigation() {
 
       {/* Mobile menu — smooth animated open/close */}
       <div
-        className={`lg:hidden border-t border-gold/20 mt-3 overflow-hidden transition-all duration-300 ease-in-out ${
+        className={cn(
+          'lg:hidden border-t border-gold/20 mt-3 overflow-hidden transition-all duration-300 ease-in-out',
           mobileOpen ? 'max-h-[520px] opacity-100 pt-3 pb-2' : 'max-h-0 opacity-0'
-        }`}
+        )}
       >
         {navLinks.map(link => (
           <Link

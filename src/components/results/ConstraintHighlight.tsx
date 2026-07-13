@@ -14,22 +14,22 @@ type ConstraintHighlightProps = {
 
 export function ConstraintHighlight({ constraintKey, meta }: ConstraintHighlightProps) {
   return (
-    <section className="rounded-lg border border-blue-100 bg-blue-50 p-6">
-      <p className="text-sm font-semibold uppercase tracking-wide text-blue-700">
+    <section className="rounded-lg border border-navy/10 bg-navy/5 p-6">
+      <p className="text-sm font-heading font-semibold uppercase tracking-wide text-navy/70">
         Primary growth constraint
       </p>
-      <h1 className="mt-2 text-3xl font-bold text-slate-950">{meta.label}</h1>
-      <p className="mt-4 text-base leading-7 text-slate-700">{meta.constraintExplanation}</p>
+      <h1 className="mt-2 text-3xl font-heading font-bold text-navy">{meta.label}</h1>
+      <p className="mt-4 text-base leading-7 font-body text-charcoal/80">{meta.constraintExplanation}</p>
       <div className="mt-5 rounded-lg bg-white p-4 shadow-sm">
-        <p className="text-sm font-semibold text-slate-950">Business impact</p>
-        <p className="mt-2 text-sm leading-6 text-slate-600">{meta.impactStatement}</p>
+        <p className="text-sm font-heading font-semibold text-navy">Business impact</p>
+        <p className="mt-2 text-sm leading-6 font-body text-slate">{meta.impactStatement}</p>
       </div>
       <div className="mt-5">
-        <p className="text-sm font-semibold text-slate-950">Recommended next moves</p>
+        <p className="text-sm font-heading font-semibold text-navy">Recommended next moves</p>
         <ul className="mt-3 space-y-3">
           {meta.actionDirections.map((action) => (
-            <li key={`${constraintKey}-${action}`} className="flex gap-3 text-sm leading-6 text-slate-700">
-              <span className="mt-2 h-2 w-2 shrink-0 rounded-full bg-blue-600" />
+            <li key={`${constraintKey}-${action}`} className="flex gap-3 text-sm leading-6 font-body text-charcoal/80">
+              <span className="mt-2 h-2 w-2 shrink-0 rounded-full bg-gold" />
               <span>{action}</span>
             </li>
           ))}

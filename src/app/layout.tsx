@@ -3,6 +3,7 @@ import { Plus_Jakarta_Sans, Inter } from "next/font/google";
 import "./globals.css";
 import { Navigation } from "@/components/layout/Navigation";
 import { Footer } from "@/components/layout/Footer";
+import { cn } from "@/lib/utils";
 
 const plusJakartaSans = Plus_Jakarta_Sans({
   variable: "--font-jakarta",
@@ -48,7 +49,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${plusJakartaSans.variable} ${inter.variable} h-full antialiased`}
+      className={cn(plusJakartaSans.variable, inter.variable, "h-full antialiased")}
     >
       <body className="min-h-full flex flex-col bg-ivory text-navy font-body">
         <Navigation />

@@ -201,7 +201,7 @@ export function DiagnosticReportEmail({
               lineHeight: "1.7",
             }}
           >
-            "{primaryMeta.impactStatement}"
+            &ldquo;{primaryMeta.impactStatement}&rdquo;
           </Text>
           <Hr style={{ borderColor: "#e5e7eb", margin: "24px 0" }} />
 

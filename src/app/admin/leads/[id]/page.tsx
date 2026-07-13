@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import type { Lead } from "@/types";
 import { DIMENSION_META } from "@/lib/scoring";
 import type { DimensionKey } from "@/types";
+import { cn } from "@/lib/utils";
 
 const supabase = createAdminClient();
 
@@ -78,12 +79,12 @@ export default async function LeadBriefingPage({
 
   const severityColors: Record<string, string> = {
     Critical: "bg-crimson/10 text-crimson border-crimson/20",
-    Developing: "bg-amber-100 text-amber-700 border-amber-200",
+    Developing: "bg-warning/10 text-warning-ink border-warning/20",
     Progressing: "bg-emerald/10 text-emerald border-emerald/20",
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-ivory">
       <nav className="bg-navy text-ivory px-6 py-4 flex justify-between items-center">
         <div className="flex items-center gap-4">
           <Link
@@ -138,7 +139,7 @@ export default async function LeadBriefingPage({
               </div>
               {typedLead.severity_label && (
                 <span
-                  className={`text-xs font-bold px-3 py-1 rounded-full border ${severityColors[typedLead.severity_label] || ""}`}
+                  className={cn("text-xs font-bold px-3 py-1 rounded-full border", severityColors[typedLead.severity_label])}
                 >
                   {typedLead.severity_label}
                 </span>
@@ -220,10 +221,10 @@ export default async function LeadBriefingPage({
                     style={{
                       width: `${(d.score / 6) * 100}%`,
                       backgroundColor: d.isPrimary
-                        ? "#C41E3A"
+                        ? "var(--color-crimson)"
                         : d.isSecondary
-                          ? "#C9A84C"
-                          : "#1B2B4B",
+                          ? "var(--color-gold)"
+                          : "var(--color-navy)",
                     }}
                   />
                 </div>
@@ -340,7 +341,7 @@ export default async function LeadBriefingPage({
             ].map((flag) => (
               <div key={flag.label} className="text-center">
                 <div
-                  className={`text-2xl font-bold mb-1 ${flag.value ? "text-emerald" : "text-navy/20"}`}
+                  className={cn("text-2xl font-bold mb-1", flag.value ? "text-emerald" : "text-navy/20")}
                 >
                   {flag.value ? "✔" : "○"}
                 </div>

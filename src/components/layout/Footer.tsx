@@ -10,7 +10,7 @@ export function Footer() {
   if (isAdmin || isDiagnostic) return null;
 
   return (
-    <footer className="bg-[#0b1120] text-ivory py-12 px-6 border-t border-navy">
+    <footer className="bg-footer text-ivory py-12 px-6 border-t border-navy">
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
         <div>
           <div className="font-heading font-bold tracking-widest text-sm uppercase mb-3">Muhammed Ajmal Consulting</div>

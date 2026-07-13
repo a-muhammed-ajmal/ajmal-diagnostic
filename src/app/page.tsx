@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import { cn } from '@/lib/utils';
 
 export const metadata: Metadata = {
   title: 'Muhammed Ajmal Consulting | Strategic Growth Architect — Dubai, UAE',
@@ -88,7 +89,7 @@ export default function HomePage() {
       </section>
 
       {/* ─── PROBLEM ──────────────────────────────────────────────────────── */}
-      <section id="problem" className="py-16 md:py-24 px-6 bg-gray-50 relative overflow-hidden">
+      <section id="problem" className="py-16 md:py-24 px-6 bg-ivory relative overflow-hidden">
         <div className="graph-overlay" />
         <div className="max-w-7xl mx-auto relative z-10">
           <div className="text-center mb-10 md:mb-14">
@@ -182,9 +183,11 @@ export default function HomePage() {
             ].map((p, i) => (
               <div
                 key={i}
-                className={`p-8 md:p-10 ${p.bg} ${
-                  i < 2 ? 'border-b md:border-b-0 md:border-r border-gold/20' : ''
-                } hover:bg-gold/10 transition-colors duration-300`}
+                className={cn(
+                  'p-8 md:p-10 hover:bg-gold/10 transition-colors duration-300',
+                  p.bg,
+                  i < 2 && 'border-b md:border-b-0 md:border-r border-gold/20'
+                )}
               >
                 <div className="text-gold font-heading font-bold text-sm md:text-base mb-3">{p.pillar}</div>
                 <h3 className="font-heading font-bold text-xl md:text-2xl mb-4 text-ivory">{p.title}</h3>
@@ -204,7 +207,7 @@ export default function HomePage() {
       </section>
 
       {/* ─── INDUSTRY EXPERIENCE ──────────────────────────────────────────── */}
-      <section className="py-12 md:py-16 px-6 bg-gray-50 border-b border-navy/10 relative overflow-hidden">
+      <section className="py-12 md:py-16 px-6 bg-ivory border-b border-navy/10 relative overflow-hidden">
         <div className="graph-overlay" />
         <div className="max-w-7xl mx-auto relative z-10">
           <p className="text-center text-navy/40 font-body text-xs uppercase tracking-widest mb-8 font-semibold">
