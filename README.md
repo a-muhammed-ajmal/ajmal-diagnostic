@@ -12,14 +12,28 @@ prospects through a protected admin dashboard.
 - **Anthropic** (`@anthropic-ai/sdk`) — generates the action plan
 - **Resend** + `@react-email/components` — transactional email
 - **react-hook-form** + **zod** — forms and validation
-- **Vercel Analytics** + optional Google Analytics — funnel tracking
+- **Vercel Analytics** — funnel tracking
 
 ## Getting started
 
 ```bash
 npm install
-cp .env.example .env.local   # then fill in the values
-npm run dev                  # http://localhost:3000
+npm run dev   # http://localhost:3000
+```
+
+Create a `.env.local` with these keys (values from Supabase, Resend, Anthropic and your
+Calendly link):
+
+```bash
+NEXT_PUBLIC_SUPABASE_URL=
+NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=
+SUPABASE_SERVICE_ROLE_KEY=
+RESEND_API_KEY=
+RESEND_FROM_EMAIL=
+ANTHROPIC_API_KEY=
+ADMIN_PASSWORD=
+NEXT_PUBLIC_SITE_URL=https://www.muhammedajmal.com
+NEXT_PUBLIC_CALENDLY_LINK=https://calendly.com/your-handle/your-event
 ```
 
 The build **fails loudly** if `NEXT_PUBLIC_CALENDLY_LINK` is missing or malformed

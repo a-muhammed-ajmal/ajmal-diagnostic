@@ -9,9 +9,6 @@ import { createAdminClient } from "@/lib/supabase/server";
  * table (see supabase/migrations) rather than in process memory: Vercel functions are
  * per-instance and cold-start frequently, so an in-memory Map would reset constantly and
  * would not span instances.
- *
- * If UPSTASH_REDIS_REST_URL and UPSTASH_REDIS_REST_TOKEN are both set, the limiter uses
- * Upstash Redis instead — same limits, one less database round-trip. No code change needed.
  */
 
 export interface RateLimitRule {
@@ -31,10 +28,6 @@ export interface RateLimitResult {
   retryAfterSeconds: number;
 }
 
-const UPSTASH_URL = process.env.UPSTASH_REDIS_REST_URL;
-const UPSTASH_TOKEN = process.env.UPSTASH_REDIS_REST_TOKEN;
-const usingUpstash = Boolean(UPSTASH_URL && UPSTASH_TOKEN);
-
 /**
  * The caller's IP. Vercel populates x-forwarded-for; the left-most entry is the client.
  * Falls back to a constant so a missing header degrades to a shared bucket rather than
@@ -52,44 +45,6 @@ export function getClientIp(req: NextRequest): string {
 /** Normalises an email so casing and whitespace cannot be used to mint fresh buckets. */
 export function normaliseEmail(email: string): string {
   return email.trim().toLowerCase();
-}
-
-async function consumeUpstash(rule: RateLimitRule): Promise<RateLimitResult> {
-  const key = `ratelimit:${rule.scope}:${rule.identifier}`;
-
-  // Pipeline INCR + TTL read, then set the expiry only on first hit.
-  const res = await fetch(`${UPSTASH_URL}/pipeline`, {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${UPSTASH_TOKEN}`,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify([
-      ["INCR", key],
-      ["TTL", key],
-    ]),
-    cache: "no-store",
-  });
-
-  if (!res.ok) throw new Error(`Upstash returned ${res.status}`);
-
-  const payload = (await res.json()) as Array<{ result: number }>;
-  const count = Number(payload[0]?.result ?? 0);
-  let ttl = Number(payload[1]?.result ?? -1);
-
-  if (ttl < 0) {
-    await fetch(`${UPSTASH_URL}/expire/${encodeURIComponent(key)}/${rule.windowSeconds}`, {
-      method: "POST",
-      headers: { Authorization: `Bearer ${UPSTASH_TOKEN}` },
-      cache: "no-store",
-    });
-    ttl = rule.windowSeconds;
-  }
-
-  return {
-    allowed: count <= rule.limit,
-    retryAfterSeconds: ttl > 0 ? ttl : rule.windowSeconds,
-  };
 }
 
 async function consumeSupabase(rule: RateLimitRule): Promise<RateLimitResult> {
@@ -118,7 +73,7 @@ async function consumeSupabase(rule: RateLimitRule): Promise<RateLimitResult> {
  */
 export async function consume(rule: RateLimitRule): Promise<RateLimitResult> {
   try {
-    return usingUpstash ? await consumeUpstash(rule) : await consumeSupabase(rule);
+    return await consumeSupabase(rule);
   } catch (error) {
     console.error(`Rate limit check failed for ${rule.scope} (failing open):`, error);
     return { allowed: true, retryAfterSeconds: 0 };
