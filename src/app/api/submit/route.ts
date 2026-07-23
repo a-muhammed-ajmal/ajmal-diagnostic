@@ -4,6 +4,8 @@ import { calculateResults } from "@/lib/scoring";
 import { generateAIActionPlan } from "@/lib/ai";
 import { Resend } from "resend";
 import { DiagnosticReportEmail } from "@/lib/email/templates/DiagnosticReport";
+import { CALENDLY_LINK } from "@/lib/env";
+import { enforcePublicFormLimits } from "@/lib/rateLimit";
 import { z } from "zod";
 
 const submitSchema = z.object({
@@ -21,10 +23,16 @@ const submitSchema = z.object({
 
 export async function POST(req: NextRequest) {
   try {
-    const supabase = createAdminClient();
-    const resend = new Resend(process.env.RESEND_API_KEY);
     const body = await req.json();
     const { leadData, answers } = submitSchema.parse(body);
+
+    // Guard before any paid work: each accepted request costs one Anthropic call
+    // plus one Resend send.
+    const limited = await enforcePublicFormLimits(req, "submit", leadData.email);
+    if (limited) return limited;
+
+    const supabase = createAdminClient();
+    const resend = new Resend(process.env.RESEND_API_KEY);
     const results = calculateResults(answers);
 
     const { data: lead, error: dbError } = await supabase
@@ -102,7 +110,7 @@ export async function POST(req: NextRequest) {
           name: leadData.name,
           companyName: leadData.companyName,
           results,
-          calendlyLink: process.env.CALENDLY_LINK || "#",
+          calendlyLink: CALENDLY_LINK,
         }),
       });
       if (!emailError) {

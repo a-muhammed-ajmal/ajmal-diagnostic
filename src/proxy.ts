@@ -31,10 +31,20 @@ export function proxy(req: NextRequest) {
         .map((host) => host.toLowerCase())
     );
 
-    // Allow requests without an Origin header, such as direct server-to-server calls.
-    if (originHost && !allowedHosts.has(originHost)) {
+    if (originHost) {
+      if (!allowedHosts.has(originHost)) {
+        return NextResponse.json(
+          { success: false, error: 'Forbidden: Invalid Origin' },
+          { status: 403 }
+        );
+      }
+    } else if (req.method !== 'GET' && req.method !== 'HEAD') {
+      // A state-changing request with no Origin header is not a browser form submission —
+      // it is a script. Browsers always send Origin on cross-origin and same-origin POSTs.
+      // Previously these were waved through, which let a plain curl reach the paid
+      // Anthropic and Resend calls behind /api/submit.
       return NextResponse.json(
-        { success: false, error: 'Forbidden: Invalid Origin' },
+        { success: false, error: 'Forbidden: Missing Origin' },
         { status: 403 }
       );
     }

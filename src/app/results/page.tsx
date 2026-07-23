@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { DiagnosticResult, LeadData } from '@/types';
 import { DIMENSION_META } from '@/lib/scoring';
+import { CALENDLY_LINK } from '@/lib/env';
 import { cn } from '@/lib/utils';
 
 export default function ResultsPage() {
@@ -35,7 +36,6 @@ export default function ResultsPage() {
   const primaryMeta = DIMENSION_META[results.primaryConstraint];
   const secondaryMeta = DIMENSION_META[results.secondaryConstraint];
   const firstName = leadData.name.split(' ')[0];
-  const calendlyLink = process.env.NEXT_PUBLIC_CALENDLY_LINK || '#';
 
   const severityBadge: Record<string, string> = {
     Critical: 'bg-crimson/10 text-crimson border-crimson/20',
@@ -139,7 +139,7 @@ export default function ResultsPage() {
         <div className="bg-navy rounded-2xl p-6 md:p-8 text-center shadow-xl">
           <h3 className="font-heading font-bold text-white text-lg md:text-xl mb-2">You have named your constraint. Now let us find the root cause.</h3>
           <p className="text-ivory/70 font-body text-sm mb-6 leading-relaxed">Book a free 30-minute consultation to walk through your findings with Muhammed Ajmal personally. This is not a sales call — it is the natural next step.</p>
-          <a href={calendlyLink} target="_blank" rel="noopener noreferrer"
+          <a href={CALENDLY_LINK} target="_blank" rel="noopener noreferrer"
             className="inline-block bg-gold text-navy px-8 md:px-10 py-4 rounded-xl font-heading font-bold text-base hover:bg-gold-bright transition-colors shadow-lg min-h-[52px] w-full sm:w-auto text-center">
             Book Your Free 30-Minute Consultation →
           </a>
