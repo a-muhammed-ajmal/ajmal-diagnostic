@@ -221,3 +221,147 @@ html { scroll-behavior: smooth; }
     scroll-behavior: auto !important;
   }
 }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   Scroll-driven animations — native CSS only (animation-timeline).
+   Runs on the compositor, no main-thread cost, no JavaScript.
+   Every effect is doubly guarded: the browser must support animation-timeline
+   AND the user must not have asked for reduced motion. With both stripped, the
+   page is complete and readable — these are pure enhancements.
+   ══════════════════════════════════════════════════════════════════════════ */
+
+/* ── Long-form article typography (article template only) ─────────────────── */
+.article-longform {
+  --measure: 68ch;
+}
+.article-longform p,
+.article-longform ul,
+.article-longform ol {
+  max-width: var(--measure);
+}
+.article-longform > p {
+  font-size: 1.075rem;
+  line-height: 1.7;
+}
+@media (min-width: 768px) {
+  .article-longform > p { font-size: 1.15rem; }
+}
+
+/* ── Vertical stage rail ──────────────────────────────────────────────────── */
+.stage-rail { list-style: none; margin: 0; padding: 0; }
+.stage-item { position: relative; }
+.stage-item + .stage-item { margin-top: 1.5rem; }
+
+/* Mobile: the rail collapses to a simple left accent border on each card. */
+.stage-card { border-left: 3px solid var(--color-gold); }
+.stage-marker { display: none; }
+
+@media (min-width: 768px) {
+  .stage-rail { position: relative; padding-left: 64px; }
+  /* The connecting line down the left of the five stages. */
+  .stage-rail::before {
+    content: "";
+    position: absolute;
+    left: 21px;
+    top: 22px;
+    bottom: 22px;
+    width: 2px;
+    background: var(--color-line);
+  }
+  .stage-card { border-left: 1px solid rgba(26, 26, 46, 0.1); }
+  .stage-marker {
+    display: flex;
+    position: absolute;
+    left: 0;
+    top: 18px;
+    width: 44px;
+    height: 44px;
+    border-radius: var(--radius-pill);
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+    border: 2px solid var(--color-line);
+    color: var(--color-gold-ink);
+    font-weight: 800;
+    z-index: 1;
+  }
+}
+
+/* ── Sticky table of contents (desktop only) ──────────────────────────────── */
+.article-toc { display: none; }
+@media (min-width: 1024px) {
+  .article-toc {
+    display: block;
+    position: sticky;
+    top: 96px;
+    align-self: start;
+  }
+}
+.article-toc a { transition: color 150ms var(--ease-out); }
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+
+    /* 5.1 — Reading progress bar (article pages). */
+    .reading-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 3px;
+      width: 100%;
+      background: var(--color-gold);
+      transform: scaleX(0);
+      transform-origin: 0 50%;
+      z-index: 60;
+      animation: reading-progress-grow linear both;
+      animation-timeline: scroll(root block);
+    }
+    @keyframes reading-progress-grow { to { transform: scaleX(1); } }
+
+    /* 5.2 — Stage reveal: fade + rise as each card enters view (max 12px). */
+    .stage-reveal {
+      animation: stage-reveal-in linear both;
+      animation-timeline: view();
+      animation-range: entry 10% cover 30%;
+    }
+    @keyframes stage-reveal-in {
+      from { opacity: 0; transform: translateY(12px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* 5.7 — Same restrained reveal on homepage section headings. */
+    .heading-reveal {
+      animation: stage-reveal-in linear both;
+      animation-timeline: view();
+      animation-range: entry 5% cover 25%;
+    }
+  }
+
+  /* 5.3 — On desktop, the marker fills with the accent colour as it passes
+     through the middle of the viewport. */
+  @media (prefers-reduced-motion: no-preference) and (min-width: 768px) {
+    .stage-marker {
+      animation: stage-marker-fill steps(1, end) both;
+      animation-timeline: view();
+      animation-range: cover 35% cover 60%;
+    }
+    @keyframes stage-marker-fill {
+      to {
+        background: var(--color-gold);
+        border-color: var(--color-gold);
+        color: var(--color-navy);
+      }
+    }
+  }
+}
+
+/* When scroll-driven animations are unsupported, the progress bar must not show. */
+@supports not (animation-timeline: view()) {
+  .reading-progress { display: none; }
+}
+.reading-progress { display: none; }
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .reading-progress { display: block; }
+  }
+}

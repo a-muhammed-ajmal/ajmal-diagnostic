@@ -2,8 +2,16 @@ import Link from 'next/link';
 import { getArticle, getReadingTime, type ArticleStat } from '@/lib/articles';
 import { pageMetadata } from '@/lib/metadata';
 import { articleJsonLd, articleBreadcrumbJsonLd, jsonLdScript } from '@/lib/jsonLd';
+import { ArticleToc, type TocItem } from '@/components/insights/ArticleToc';
 
 const article = getArticle('the-5-stage-business-operating-system')!;
+
+const SECTION_IDS = {
+  founderTrap: 'the-founder-trap',
+  theFix: 'the-fix',
+  payoff: 'enterprise-value',
+  whereToStart: 'where-to-start',
+} as const;
 
 const baseMetadata = pageMetadata({
   title: article.metaTitle,
@@ -25,9 +33,12 @@ export const metadata = {
 
 function StatCallout({ stat }: { stat: ArticleStat }) {
   return (
-    <div className="bg-white border-l-4 border-gold rounded-r-lg p-5 shadow-sm">
-      <p className="font-heading font-bold text-navy text-lg">{stat.statement}</p>
-      <p className="font-body text-navy/50 text-xs mt-2">
+    <div className="bg-white border-l-4 border-gold rounded-r-xl p-5 md:p-6 shadow-sm my-6">
+      <p className="font-heading font-extrabold text-navy text-4xl md:text-5xl leading-none mb-3 gold-gradient-text">
+        {stat.value}
+      </p>
+      <p className="font-heading font-bold text-navy text-base md:text-lg leading-snug">{stat.statement}</p>
+      <p className="font-body text-navy/50 text-xs mt-3">
         Source:{' '}
         {stat.sources.map((s, i) => (
           <span key={s.url}>
@@ -55,8 +66,16 @@ export default function ArticlePage() {
     year: 'numeric',
   });
 
+  const tocItems: TocItem[] = [
+    { id: SECTION_IDS.founderTrap, label: article.founderTrap.heading },
+    { id: SECTION_IDS.theFix, label: article.theFix.heading },
+    { id: SECTION_IDS.payoff, label: article.payoff.heading },
+    ...(article.whereToStart ? [{ id: SECTION_IDS.whereToStart, label: article.whereToStart.heading }] : []),
+  ];
+
   return (
     <article>
+      <div className="reading-progress" aria-hidden="true" />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: jsonLdScript(articleJsonLd(article)) }}
@@ -65,6 +84,7 @@ export default function ArticlePage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: jsonLdScript(articleBreadcrumbJsonLd(article)) }}
       />
+
       <section className="bg-navy text-ivory py-16 md:py-20 px-6 relative overflow-hidden">
         <div className="graph-overlay-dark" />
         <div className="max-w-3xl mx-auto relative z-10">
@@ -79,102 +99,107 @@ export default function ArticlePage() {
 
       <section className="py-12 md:py-16 px-6 bg-ivory relative overflow-hidden">
         <div className="graph-overlay" />
-        <div className="max-w-3xl mx-auto relative z-10 space-y-5">
-          {article.intro.map((p, i) => (
-            <p key={i} className="font-body text-navy/80 text-base md:text-lg leading-relaxed">{p}</p>
-          ))}
+        <div className="max-w-3xl lg:max-w-6xl mx-auto relative z-10 lg:flex lg:gap-12 lg:items-start">
+          <div className="article-longform lg:flex-1 lg:min-w-0 space-y-5">
+            {article.intro.map((p, i) => (
+              <p key={i} className="font-body text-navy/80 leading-relaxed">{p}</p>
+            ))}
 
-          <h2 className="font-heading font-extrabold text-2xl text-navy pt-4">{article.founderTrap.heading}</h2>
-          <p className="font-body text-navy/80 leading-relaxed">{article.founderTrap.body}</p>
-          <StatCallout stat={article.founderTrap.stat} />
+            <h2 id={SECTION_IDS.founderTrap} className="font-heading font-extrabold text-2xl text-navy pt-4 scroll-mt-24">{article.founderTrap.heading}</h2>
+            <p className="font-body text-navy/80 leading-relaxed">{article.founderTrap.body}</p>
+            <StatCallout stat={article.founderTrap.stat} />
 
-          <h2 className="font-heading font-extrabold text-2xl text-navy pt-4">{article.theFix.heading}</h2>
-          <StatCallout stat={article.theFix.stat} />
-          <p className="font-body text-navy/80 leading-relaxed">{article.theFix.body}</p>
+            <h2 id={SECTION_IDS.theFix} className="font-heading font-extrabold text-2xl text-navy pt-4 scroll-mt-24">{article.theFix.heading}</h2>
+            <StatCallout stat={article.theFix.stat} />
+            <p className="font-body text-navy/80 leading-relaxed">{article.theFix.body}</p>
 
-          <div className="space-y-6 pt-2">
-            {article.theFix.stages.map(s => (
-              <div key={s.n}>
-                <div className="bg-white border border-navy/10 rounded-xl p-5 md:p-6">
-                  <div className="flex gap-4">
-                    <span className="font-heading font-extrabold text-gold-ink text-2xl leading-none">{s.n}</span>
-                    <div>
-                      <h3 className="font-heading font-bold text-navy text-lg mb-1">{s.name}</h3>
-                      <p className="font-body text-navy/70 text-sm leading-relaxed">{s.body}</p>
+            <ol className="stage-rail pt-2">
+              {article.theFix.stages.map(s => (
+                <li key={s.n} className="stage-item">
+                  <span className="stage-marker" aria-hidden="true">{s.n}</span>
+                  <div className="stage-card stage-reveal bg-white rounded-xl p-5 md:p-6">
+                    <div className="flex gap-4">
+                      <span className="md:hidden font-heading font-extrabold text-gold-ink text-2xl leading-none">{s.n}</span>
+                      <div>
+                        <h3 className="font-heading font-bold text-navy text-lg mb-1">{s.name}</h3>
+                        <p className="font-body text-navy/70 text-sm leading-relaxed">{s.body}</p>
+                      </div>
                     </div>
+
+                    {s.practice && s.practice.length > 0 && (
+                      <div className="mt-5">
+                        <p className="font-heading font-semibold text-navy text-xs uppercase tracking-widest mb-3">What this looks like in practice</p>
+                        <ul className="space-y-2">
+                          {s.practice.map((p, i) => (
+                            <li key={i} className="flex items-start gap-2 font-body text-sm text-navy/80 leading-relaxed">
+                              <span className="text-gold-ink font-bold mt-0.5 flex-shrink-0">&rarr;</span>
+                              <span>{p}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+
+                    {s.ask && (
+                      <div className="mt-5">
+                        <p className="font-heading font-semibold text-gold-ink text-xs uppercase tracking-widest mb-1">Ask yourself</p>
+                        <p className="font-body italic text-navy/80 text-sm md:text-base leading-relaxed">{s.ask}</p>
+                      </div>
+                    )}
                   </div>
 
-                  {s.practice && s.practice.length > 0 && (
-                    <div className="mt-5 pl-0 sm:pl-10">
-                      <p className="font-heading font-semibold text-navy text-xs uppercase tracking-widest mb-3">What this looks like in practice</p>
-                      <ul className="space-y-2">
-                        {s.practice.map((p, i) => (
-                          <li key={i} className="flex items-start gap-2 font-body text-sm text-navy/80 leading-relaxed">
-                            <span className="text-gold-ink font-bold mt-0.5 flex-shrink-0">→</span>
-                            <span>{p}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
+                  {s.n === '03' && (
+                    <p className="font-body text-navy/70 text-sm md:text-base text-center pt-6">
+                      Not sure which stage is yours?{' '}
+                      <Link href="/diagnostic" className="text-gold-ink font-heading font-bold underline hover:text-gold transition-colors">
+                        The free 4-minute diagnostic names it &rarr;
+                      </Link>
+                    </p>
                   )}
+                </li>
+              ))}
+            </ol>
 
-                  {s.ask && (
-                    <div className="mt-5 pl-0 sm:pl-10">
-                      <p className="font-heading font-semibold text-gold-ink text-xs uppercase tracking-widest mb-1">Ask yourself</p>
-                      <p className="font-body italic text-navy/80 text-sm md:text-base leading-relaxed">{s.ask}</p>
-                    </div>
-                  )}
-                </div>
+            <h2 id={SECTION_IDS.payoff} className="font-heading font-extrabold text-2xl text-navy pt-4 scroll-mt-24">{article.payoff.heading}</h2>
+            <p className="font-body text-navy/80 leading-relaxed">{article.payoff.body}</p>
+            <div className="border-l-4 border-gold pl-6">
+              <p className="font-heading text-lg md:text-xl font-semibold italic text-navy/80">{article.payoff.pullQuote}</p>
+            </div>
 
-                {s.n === '03' && (
-                  <p className="font-body text-navy/70 text-sm md:text-base text-center pt-6">
-                    Not sure which stage is yours?{' '}
-                    <Link href="/diagnostic" className="text-gold-ink font-heading font-bold underline hover:text-gold transition-colors">
-                      The free 4-minute diagnostic names it &rarr;
-                    </Link>
-                  </p>
-                )}
+            {article.whereToStart && (
+              <>
+                <h2 id={SECTION_IDS.whereToStart} className="font-heading font-extrabold text-2xl text-navy pt-4 scroll-mt-24">{article.whereToStart.heading}</h2>
+                {article.whereToStart.body.map((p, i) => (
+                  <p key={i} className="font-body text-navy/80 leading-relaxed">{p}</p>
+                ))}
+              </>
+            )}
+
+            {/* Author bio — initials avatar (no photo asset exists in the repo). */}
+            <div className="mt-6 flex flex-col sm:flex-row gap-5 items-start bg-white border border-navy/10 rounded-xl p-6">
+              <div
+                className="relative w-16 h-16 flex-shrink-0 flex items-center justify-center border-2 border-navy/15 rounded-lg bg-navy"
+                aria-hidden="true"
+              >
+                <span className="font-heading font-extrabold text-xl tracking-tighter leading-none text-ivory">
+                  M<span className="text-gold">A</span>
+                </span>
+                <div className="absolute -right-1 -top-1 w-2.5 h-2.5 border-t-2 border-r-2 border-gold" />
               </div>
-            ))}
-          </div>
-
-          <h2 className="font-heading font-extrabold text-2xl text-navy pt-4">{article.payoff.heading}</h2>
-          <p className="font-body text-navy/80 leading-relaxed">{article.payoff.body}</p>
-          <div className="border-l-4 border-gold pl-6">
-            <p className="font-heading text-lg md:text-xl font-semibold italic text-navy/80">{article.payoff.pullQuote}</p>
-          </div>
-
-          {article.whereToStart && (
-            <>
-              <h2 className="font-heading font-extrabold text-2xl text-navy pt-4">{article.whereToStart.heading}</h2>
-              {article.whereToStart.body.map((p, i) => (
-                <p key={i} className="font-body text-navy/80 leading-relaxed">{p}</p>
-              ))}
-            </>
-          )}
-
-          {/* Author bio — initials avatar (no photo asset exists in the repo). */}
-          <div className="mt-6 flex flex-col sm:flex-row gap-5 items-start bg-white border border-navy/10 rounded-xl p-6">
-            <div
-              className="relative w-16 h-16 flex-shrink-0 flex items-center justify-center border-2 border-navy/15 rounded-lg bg-navy"
-              aria-hidden="true"
-            >
-              <span className="font-heading font-extrabold text-xl tracking-tighter leading-none text-ivory">
-                M<span className="text-gold">A</span>
-              </span>
-              <div className="absolute -right-1 -top-1 w-2.5 h-2.5 border-t-2 border-r-2 border-gold" />
-            </div>
-            <div>
-              <p className="font-heading font-bold text-navy text-base">{article.author.name}</p>
-              <p className="font-body text-gold-ink text-xs uppercase tracking-widest mb-3">{article.author.role}</p>
-              {article.author.bioParagraphs.map((p, i) => (
-                <p key={i} className="font-body text-navy/70 text-sm leading-relaxed mb-2">{p}</p>
-              ))}
-              <Link href="/about" className="font-body text-gold-ink text-sm font-heading font-bold underline hover:text-gold transition-colors">
-                More about Muhammed Ajmal &rarr;
-              </Link>
+              <div>
+                <p className="font-heading font-bold text-navy text-base">{article.author.name}</p>
+                <p className="font-body text-gold-ink text-xs uppercase tracking-widest mb-3">{article.author.role}</p>
+                {article.author.bioParagraphs.map((p, i) => (
+                  <p key={i} className="font-body text-navy/70 text-sm leading-relaxed mb-2">{p}</p>
+                ))}
+                <Link href="/about" className="font-body text-gold-ink text-sm font-heading font-bold underline hover:text-gold transition-colors">
+                  More about Muhammed Ajmal &rarr;
+                </Link>
+              </div>
             </div>
           </div>
+
+          <ArticleToc items={tocItems} />
         </div>
       </section>
 
