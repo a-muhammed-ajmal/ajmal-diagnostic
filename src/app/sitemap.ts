@@ -1,5 +1,5 @@
 import { MetadataRoute } from 'next';
-import { ARTICLES } from '@/lib/articles';
+import { ARTICLES, CATEGORIES } from '@/lib/articles';
 import { SITE_URL } from '@/lib/env';
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -24,5 +24,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
-  return [...staticRoutes, ...articleRoutes];
+  // Only categories that actually have articles behind them.
+  const categoryRoutes: MetadataRoute.Sitemap = CATEGORIES.filter((c) =>
+    ARTICLES.some((a) => a.categorySlug === c.slug),
+  ).map((c) => ({
+    url: `${base}/insights/category/${c.slug}`,
+    lastModified: now,
+    changeFrequency: 'weekly',
+    priority: 0.5,
+  }));
+
+  return [...staticRoutes, ...articleRoutes, ...categoryRoutes];
 }

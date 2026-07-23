@@ -18,6 +18,7 @@ export default function ContactPage() {
           <span className="text-gold font-heading font-bold tracking-widest text-sm uppercase mb-3 block">Get Started</span>
           <h1 className="text-3xl md:text-5xl font-heading font-extrabold mb-5">Book a Strategy Session</h1>
           <p className="font-body text-ivory/70 text-base md:text-lg max-w-2xl mx-auto">Book directly via Calendly, or send an enquiry and receive a response within 24 hours.</p>
+          <p className="font-body text-ivory/40 text-sm max-w-2xl mx-auto mt-4">This practice works with founder-led SMEs typically in the AED 500K&ndash;15M annual revenue range, across the UAE and GCC.</p>
         </div>
       </section>
 
