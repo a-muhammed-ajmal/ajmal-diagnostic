@@ -209,6 +209,56 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* ─── HOW ENGAGEMENTS ARE RUN ──────────────────────────────────────── */}
+      <section className="py-16 md:py-24 px-6 bg-ivory relative overflow-hidden">
+        <div className="graph-overlay" />
+        <div className="max-w-5xl mx-auto relative z-10">
+          <div className="text-center mb-10 md:mb-14">
+            <span className="text-gold-ink font-heading font-bold tracking-widest text-sm uppercase mb-2 block">
+              How It Works
+            </span>
+            <h2 className="heading-reveal text-3xl md:text-4xl font-heading font-extrabold text-navy">
+              How engagements are run
+            </h2>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+            {[
+              {
+                n: '01',
+                title: 'Diagnosis before proposals',
+                body: 'Every engagement begins with diagnosis, not proposals. You will know your primary constraint before any scope is discussed.',
+              },
+              {
+                n: '02',
+                title: 'Fixed, written scope',
+                body: 'Deliverables, timelines, and review points are agreed before work begins. No open-ended retainers.',
+              },
+              {
+                n: '03',
+                title: 'You own everything built',
+                body: 'SOPs, systems, accounts, and data remain yours, in your accounts, editable by your team.',
+              },
+              {
+                n: '04',
+                title: 'Progress is measured, not asserted',
+                body: 'Each engagement defines its own success metrics at the start, and reports against them.',
+              },
+            ].map((card) => (
+              <div
+                key={card.n}
+                className="bg-white p-7 rounded-xl shadow-sm border border-navy/10 hover:border-gold card-interactive flex gap-5"
+              >
+                <span className="font-heading font-extrabold text-gold-ink text-2xl leading-none flex-shrink-0">{card.n}</span>
+                <div>
+                  <h3 className="font-heading font-bold text-navy text-base md:text-lg mb-2">{card.title}</h3>
+                  <p className="font-body text-sm text-navy/70 leading-relaxed">{card.body}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* ─── INDUSTRY EXPERIENCE ──────────────────────────────────────────── */}
       <section className="py-12 md:py-16 px-6 bg-ivory border-b border-navy/10 relative overflow-hidden">
         <div className="graph-overlay" />
@@ -246,6 +296,32 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* ─── WHERE MOST ENGAGEMENTS START ─────────────────────────────────── */}
+      <section className="py-16 md:py-24 px-6 bg-ivory relative overflow-hidden">
+        <div className="graph-overlay" />
+        <div className="max-w-3xl mx-auto relative z-10">
+          <span className="text-gold-ink font-heading font-bold tracking-widest text-sm uppercase mb-3 block">
+            Where most engagements start
+          </span>
+          <p className="font-body text-navy/80 text-base md:text-lg leading-relaxed mb-5">
+            In the UAE, WhatsApp is where business conversations happen, and messages are read within
+            minutes. Yet most SMEs still handle enquiries by hand. A customer messages three businesses
+            at 9 pm — two reply the next morning, one replies in seconds and wins the work.
+          </p>
+          <p className="font-body text-navy/80 text-base md:text-lg leading-relaxed mb-6">
+            That is why many engagements begin with the Lead Response System: a single, contained
+            intervention that proves the method inside a week. The full architecture follows once the
+            result is visible.
+          </p>
+          <Link
+            href="/services"
+            className="text-gold-ink font-heading font-bold text-sm uppercase tracking-wider underline hover:text-gold transition-colors"
+          >
+            See the Lead Response System &rarr;
+          </Link>
+        </div>
+      </section>
+
       {/* ─── CTA ──────────────────────────────────────────────────────────── */}
       <section className="py-16 md:py-24 px-6 bg-navy text-ivory relative overflow-hidden">
         <div className="graph-overlay-dark" />
@@ -268,7 +344,7 @@ export default function HomePage() {
           </p>
           <div className="pt-10 md:pt-12 border-t border-gold/20 mt-10 md:mt-12 flex flex-wrap items-center justify-center gap-8 md:gap-10">
             {[
-              { stat: '10k+', label: 'LinkedIn Network' },
+              { stat: '4 min', label: 'Free Diagnostic' },
               { stat: 'UAE/GCC', label: 'Primary Market' },
               { stat: 'AI', label: 'Enabled Systems' },
               { stat: '6', label: 'Business Languages' },
