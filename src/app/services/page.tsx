@@ -31,6 +31,7 @@ export default function ServicesPage() {
 
       <section className="py-12 md:py-16 px-6 bg-ivory relative overflow-hidden">
         <div className="graph-overlay" />
+        <h2 className="sr-only">Consulting services</h2>
         <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5 relative z-10">
           {services.map(s => (
             <div key={s.n} className="bg-white p-7 md:p-8 rounded-xl border border-navy/10 hover:border-gold card-interactive flex flex-col">
