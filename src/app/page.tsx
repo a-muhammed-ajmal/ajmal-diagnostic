@@ -99,7 +99,7 @@ export default function HomePage() {
             <span className="text-crimson font-heading font-bold tracking-widest text-sm uppercase mb-2 block">
               The Critical Constraint
             </span>
-            <h2 className="text-3xl md:text-4xl font-heading font-extrabold text-navy mb-4">
+            <h2 className="heading-reveal text-3xl md:text-4xl font-heading font-extrabold text-navy mb-4">
               4 Symptoms of the Founder Trap
             </h2>
             <p className="font-body text-navy/70 max-w-2xl mx-auto text-sm md:text-base">
@@ -153,7 +153,7 @@ export default function HomePage() {
             <span className="text-emerald font-heading font-bold tracking-widest text-sm uppercase mb-2 block">
               The Methodology
             </span>
-            <h2 className="text-3xl md:text-4xl font-heading font-extrabold mb-4">
+            <h2 className="heading-reveal text-3xl md:text-4xl font-heading font-extrabold mb-4">
               The 3 Pillars of Scalability
             </h2>
             <p className="font-body text-ivory/70 max-w-2xl mx-auto text-sm md:text-base">
@@ -250,7 +250,7 @@ export default function HomePage() {
       <section className="py-16 md:py-24 px-6 bg-navy text-ivory relative overflow-hidden">
         <div className="graph-overlay-dark" />
         <div className="max-w-4xl mx-auto text-center relative z-10">
-          <h2 className="text-2xl sm:text-3xl md:text-5xl font-heading font-extrabold mb-6">
+          <h2 className="heading-reveal text-2xl sm:text-3xl md:text-5xl font-heading font-extrabold mb-6">
             What is the biggest constraint in your business?
           </h2>
           <p className="font-body text-base md:text-lg text-ivory/70 mb-10">
