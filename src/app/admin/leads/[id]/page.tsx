@@ -7,8 +7,6 @@ import { DIMENSION_META } from "@/lib/scoring";
 import type { DimensionKey } from "@/types";
 import { cn } from "@/lib/utils";
 
-const supabase = createAdminClient();
-
 function toTitleCase(snake: string) {
   return snake.replace(/_/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
 }
@@ -27,6 +25,7 @@ export default async function LeadBriefingPage({
   params: Promise<{ id: string }>;
 }) {
   await requireAdminAuth();
+  const supabase = createAdminClient();
   const { id } = await params;
 
   const { data: lead, error } = await supabase

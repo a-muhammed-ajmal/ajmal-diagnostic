@@ -3,9 +3,6 @@ import { createAdminClient } from "@/lib/supabase/server";
 import { Resend } from "resend";
 import { z } from "zod";
 
-const supabase = createAdminClient();
-const resend = new Resend(process.env.RESEND_API_KEY);
-
 const schema = z.object({
   name: z.string().min(2).max(100),
   email: z.string().email(),
@@ -17,6 +14,8 @@ const schema = z.object({
 
 export async function POST(req: NextRequest) {
   try {
+    const supabase = createAdminClient();
+    const resend = new Resend(process.env.RESEND_API_KEY);
     const data = schema.parse(await req.json());
 
     await supabase.from("contact_enquiries").insert({

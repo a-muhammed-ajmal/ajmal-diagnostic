@@ -6,9 +6,6 @@ import { Resend } from "resend";
 import { DiagnosticReportEmail } from "@/lib/email/templates/DiagnosticReport";
 import { z } from "zod";
 
-const supabase = createAdminClient();
-const resend = new Resend(process.env.RESEND_API_KEY);
-
 const submitSchema = z.object({
   leadData: z.object({
     name: z.string().min(2).max(100),
@@ -24,6 +21,8 @@ const submitSchema = z.object({
 
 export async function POST(req: NextRequest) {
   try {
+    const supabase = createAdminClient();
+    const resend = new Resend(process.env.RESEND_API_KEY);
     const body = await req.json();
     const { leadData, answers } = submitSchema.parse(body);
     const results = calculateResults(answers);

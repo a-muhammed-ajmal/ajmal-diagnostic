@@ -3,10 +3,9 @@ import { createAdminClient } from "@/lib/supabase/server";
 import { z } from "zod";
 import crypto from "crypto";
 
-const supabase = createAdminClient();
-
 export async function POST(req: NextRequest) {
   try {
+    const supabase = createAdminClient();
     const { password } = z
       .object({ password: z.string() })
       .parse(await req.json());

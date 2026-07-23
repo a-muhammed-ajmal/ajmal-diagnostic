@@ -4,10 +4,9 @@ import Link from "next/link";
 import type { Lead } from "@/types";
 import { cn } from "@/lib/utils";
 
-const supabase = createAdminClient();
-
 export default async function AdminLeadsPage() {
   await requireAdminAuth();
+  const supabase = createAdminClient();
   const { data: leads } = await supabase
     .from("diagnostic_leads")
     .select("*")
