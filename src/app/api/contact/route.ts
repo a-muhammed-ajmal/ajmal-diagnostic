@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createAdminClient } from "@/lib/supabase/server";
+import { ContactNotificationEmail } from "@/lib/email/templates/ContactNotification";
+import { enforcePublicFormLimits } from "@/lib/rateLimit";
 import { Resend } from "resend";
 import { z } from "zod";
 
@@ -14,9 +16,14 @@ const schema = z.object({
 
 export async function POST(req: NextRequest) {
   try {
+    const data = schema.parse(await req.json());
+
+    // Guard before the Resend send.
+    const limited = await enforcePublicFormLimits(req, "contact", data.email);
+    if (limited) return limited;
+
     const supabase = createAdminClient();
     const resend = new Resend(process.env.RESEND_API_KEY);
-    const data = schema.parse(await req.json());
 
     await supabase.from("contact_enquiries").insert({
       name: data.name,
@@ -27,20 +34,13 @@ export async function POST(req: NextRequest) {
       message: data.message,
     });
 
+    // Rendered as React so every attacker-controlled value is escaped.
     await resend.emails.send({
       from: `Muhammed Ajmal Consulting <${process.env.RESEND_FROM_EMAIL}>`,
       to: process.env.RESEND_FROM_EMAIL!,
+      replyTo: data.email,
       subject: `New Enquiry: ${data.inquiryType} — ${data.companyName}`,
-      html: `
-        <h2>New Contact Enquiry</h2>
-        <p><strong>Name:</strong> ${data.name}</p>
-        <p><strong>Email:</strong> ${data.email}</p>
-        <p><strong>Phone:</strong> ${data.phone}</p>
-        <p><strong>Company:</strong> ${data.companyName}</p>
-        <p><strong>Type:</strong> ${data.inquiryType}</p>
-        <p><strong>Message:</strong></p>
-        <p>${data.message}</p>
-      `,
+      react: ContactNotificationEmail(data),
     });
 
     return NextResponse.json({ success: true });
