@@ -1,11 +1,13 @@
-import type { Metadata } from 'next';
 import { ContactForm } from '@/components/contact/ContactForm';
 import { CalendlyWidget } from '@/components/contact/CalendlyWidget';
+import { pageMetadata } from '@/lib/metadata';
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: 'Contact | Book a Strategy Session',
+  absoluteTitle: true,
   description: 'Book a free 30-minute consultation or send an enquiry. Serving founder-led SMEs in Dubai, UAE, and across the GCC.',
-};
+  path: '/contact',
+});
 
 export default function ContactPage() {
   return (

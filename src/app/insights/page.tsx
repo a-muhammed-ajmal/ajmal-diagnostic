@@ -1,11 +1,13 @@
-import type { Metadata } from 'next';
 import Link from 'next/link';
 import { NewsletterForm } from '@/components/newsletter/NewsletterForm';
+import { pageMetadata } from '@/lib/metadata';
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: 'Insights | SME Growth, Operational Excellence & AI Systems',
+  absoluteTitle: true,
   description: 'Practical frameworks and thought leadership for founder-led SME growth across the UAE and GCC.',
-};
+  path: '/insights',
+});
 
 const categories = [
   { name: 'SME Growth Architecture', desc: 'Scaling frameworks, strategic planning, and growth infrastructure for founder-led businesses.' },

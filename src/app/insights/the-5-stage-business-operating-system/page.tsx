@@ -1,12 +1,26 @@
-import type { Metadata } from 'next';
 import Link from 'next/link';
 import { getArticle, getReadingTime, type ArticleStat } from '@/lib/articles';
+import { pageMetadata } from '@/lib/metadata';
+import { articleJsonLd, articleBreadcrumbJsonLd, jsonLdScript } from '@/lib/jsonLd';
 
 const article = getArticle('the-5-stage-business-operating-system')!;
 
-export const metadata: Metadata = {
+const baseMetadata = pageMetadata({
   title: article.metaTitle,
+  absoluteTitle: true,
   description: article.description,
+  path: `/insights/${article.slug}`,
+  type: 'article',
+});
+
+export const metadata = {
+  ...baseMetadata,
+  openGraph: {
+    ...baseMetadata.openGraph,
+    publishedTime: article.publishedAt,
+    modifiedTime: article.updatedAt,
+    authors: [article.author.name],
+  },
 };
 
 function StatCallout({ stat }: { stat: ArticleStat }) {
@@ -43,6 +57,14 @@ export default function ArticlePage() {
 
   return (
     <article>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: jsonLdScript(articleJsonLd(article)) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: jsonLdScript(articleBreadcrumbJsonLd(article)) }}
+      />
       <section className="bg-navy text-ivory py-16 md:py-20 px-6 relative overflow-hidden">
         <div className="graph-overlay-dark" />
         <div className="max-w-3xl mx-auto relative z-10">

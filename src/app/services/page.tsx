@@ -1,10 +1,11 @@
-import type { Metadata } from 'next';
 import Link from 'next/link';
+import { pageMetadata } from '@/lib/metadata';
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: 'Consulting Services',
-  description: 'Six precision consulting services for founder-led SMEs: Business Growth Diagnostic, Strategic Planning, Business Systems Development, Process Optimization, Performance Management, and AI & Automation Advisory.',
-};
+  description: 'Consulting services for founder-led SMEs across the UAE and GCC — from a free growth diagnostic to strategic planning, systems development, process optimization, performance management, and AI automation.',
+  path: '/services',
+});
 
 const services = [
   { n: '01', name: 'Business Growth Diagnostic', stage: 'Diagnose', problem: 'You sense there is a growth constraint but cannot pinpoint which system, team issue, or strategic gap is causing it.', deliverables: ['10-dimension business health assessment', 'Primary and secondary constraint identification', 'AI-generated 30-day and 90-day action plan', 'Strategic priorities report'], ideal: 'Founder-led SMEs with AED 500K–15M revenue ready to understand the real bottleneck before investing in solutions.' },

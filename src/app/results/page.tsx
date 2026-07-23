@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { DiagnosticResult, LeadData } from '@/types';
+import { track } from '@vercel/analytics';
 import { DIMENSION_META } from '@/lib/scoring';
 import { CALENDLY_LINK } from '@/lib/env';
 import { cn } from '@/lib/utils';
@@ -140,6 +141,7 @@ export default function ResultsPage() {
           <h3 className="font-heading font-bold text-white text-lg md:text-xl mb-2">You have named your constraint. Now let us find the root cause.</h3>
           <p className="text-ivory/70 font-body text-sm mb-6 leading-relaxed">Book a free 30-minute consultation to walk through your findings with Muhammed Ajmal personally. This is not a sales call — it is the natural next step.</p>
           <a href={CALENDLY_LINK} target="_blank" rel="noopener noreferrer"
+            onClick={() => track('calendly_click', { from: 'results' })}
             className="inline-block bg-gold text-navy px-8 md:px-10 py-4 rounded-xl font-heading font-bold text-base hover:bg-gold-bright transition-colors shadow-lg min-h-[52px] w-full sm:w-auto text-center">
             Book Your Free 30-Minute Consultation →
           </a>

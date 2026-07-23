@@ -1,10 +1,13 @@
-import type { Metadata } from 'next';
 import Link from 'next/link';
+import { pageMetadata } from '@/lib/metadata';
+import { personAndServiceJsonLd, jsonLdScript } from '@/lib/jsonLd';
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: 'About Muhammed Ajmal | Strategic Growth Architect',
+  absoluteTitle: true,
   description: 'Dubai-based Strategic Growth Architect helping founder-led SMEs across the UAE and GCC build scalable, system-driven businesses.',
-};
+  path: '/about',
+});
 
 const credentials = [
   'Google AI Professional Certificate 2026 — Credential: SCSUP9BBKX10',
@@ -20,6 +23,10 @@ const languages = ['English', 'Arabic / MSA', 'Hindi', 'Malayalam', 'Tamil', 'Ka
 export default function AboutPage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: jsonLdScript(personAndServiceJsonLd()) }}
+      />
       <section className="bg-navy text-ivory py-16 md:py-20 px-6 relative overflow-hidden">
         <div className="graph-overlay-dark" />
         <div className="max-w-4xl mx-auto text-center relative z-10">
