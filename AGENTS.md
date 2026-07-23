@@ -39,18 +39,23 @@ src/
     page.tsx        # Home
   components/
     layout/         # Navigation, Footer
-    quiz/           # QuizContainer, QuestionCard, OptionButton, ProgressBar
-    results/        # ResultsDashboard, DimensionBar, CTASection, ConstraintHighlight
+    quiz/           # QuestionCard, OptionButton, ProgressBar
     contact/        # ContactForm, CalendlyWidget
     lead/           # LeadCaptureForm
     newsletter/     # NewsletterForm
-    ui/             # Primitive components (Button, etc.)
+    insights/       # ArticleToc
   lib/
     supabase/       # server.ts (createAdminClient) + client.ts (createBrowserClient)
     ai.ts           # Anthropic client
-    email/          # React Email templates
+    email/templates/# React Email templates (DiagnosticReport, ContactNotification)
     scoring.ts      # Quiz scoring logic
     questions.ts    # Quiz question data
+    articles.ts     # Insights content registry (source of truth for articles)
+    metadata.ts     # Per-page metadata helper
+    jsonLd.ts       # Structured-data builders
+    rateLimit.ts    # IP + email rate limiting
+    readingTime.ts  # Read-time from word count
+    env.ts          # Build-time-validated public env (Calendly, site URL)
     adminAuth.ts    # Admin session helpers
   types/
     index.ts        # Shared TypeScript types
@@ -97,11 +102,14 @@ src/
 | `/` | Home / hero |
 | `/about` | About Ajmal |
 | `/services` | Services overview |
-| `/results` | Case studies / results |
 | `/diagnostic` | Interactive business quiz |
+| `/results` | Diagnostic output — the personalised report shown after the quiz (client-rendered from sessionStorage; not a case-studies page) |
 | `/contact` | Contact form + Calendly |
 | `/insights` | Articles index |
 | `/insights/[slug]` | Individual article |
+| `/insights/category/[slug]` | Category-filtered article listing |
+| `/privacy` | Privacy policy (PDPL-aligned) |
+| `/unsubscribe` | Newsletter unsubscribe confirmation |
 | `/admin` | Lead management dashboard (protected) |
 
 ## Key Constraints
