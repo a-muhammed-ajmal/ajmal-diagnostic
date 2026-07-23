@@ -110,7 +110,10 @@ export const ARTICLES: Article[] = [
     author: {
       name: "Muhammed Ajmal",
       role: "Strategic Growth Architect",
-      bioParagraphs: [],
+      bioParagraphs: [
+        "Muhammed Ajmal is a Strategic Growth Architect based in Dubai, working with founder-led SMEs across the UAE and GCC.",
+        "He specialises in SME strategic management and operational excellence — helping founders move from exhausting daily operations to engineering genuine enterprise value, by building the growth infrastructure of a business rather than only advising on it.",
+      ],
     },
     intro: [
       "Most founder-led businesses in the UAE do not have a growth problem. They have a dependency problem. The business runs on the founder — not on a system — and that single fact quietly caps how large it can become.",
@@ -153,26 +156,56 @@ export const ARTICLES: Article[] = [
           n: "01",
           name: "Diagnose",
           body: "Find the real constraint before you fix anything. Map where decisions bottleneck, where cash leaks, and where work gets redone. Most founders treat symptoms; the operating system starts with an honest diagnosis.",
+          practice: [
+            "List every task this week that only you can do — approvals, pricing calls, the WhatsApp replies key clients expect from you personally. That list is your dependency map.",
+            "Pull your last 20 invoices and mark the gap between sent and paid. Slow client payments are the most common cash constraint for UAE SMEs, and you cannot fix what you have not measured.",
+            "Ask your team where work sits waiting. The answer is usually a decision only you are allowed to make.",
+          ],
+          ask: "If you switched off your phone for two weeks, what would break first?",
         },
         {
           n: "02",
           name: "Design",
           body: "Design the structure before you build it: role scorecards, decision rights, KPIs, and an SOP map. Clarity on paper precedes systems in practice.",
+          practice: [
+            "Take the three things that interrupt you most — refunds, discounts, small hires — and write a one-line rule so someone else can decide each one within a set limit.",
+            "Draft a simple scorecard for each role: three to five things that define success, written in the languages your team actually works in.",
+            "Decide who owns the WhatsApp inbox and what a good reply looks like, so first response stops depending on you being awake.",
+          ],
+          ask: "For each decision that reaches you, can you name the person who should own it — without answering 'me'?",
         },
         {
           n: "03",
           name: "Build",
           body: "Install the rails — one CRM, one source of truth, documented golden-path SOPs, and automated lead capture, follow-ups, and reporting.",
+          practice: [
+            "Route every enquiry — WhatsApp, web form, walk-in — into one CRM, or even one shared sheet, so no lead lives only on a personal phone.",
+            "Write the golden-path SOP for your most common job in plain steps a new hire can follow on day one. This pays off fastest where visa-linked turnover means you re-hire often.",
+            "Set one automated first reply on WhatsApp so every enquiry is acknowledged instantly, in English and Arabic, even overnight.",
+          ],
+          ask: "If your best salesperson left tomorrow, would their pipeline leave with them?",
         },
         {
           n: "04",
           name: "Optimize",
           body: "Tighten the engine. A weekly KPI rhythm and an issue-solving cadence so quality stops depending on your personal standards.",
+          practice: [
+            "Pick three numbers to review every week — cash in, cash out, and one measure of delivery quality — and hold a 30-minute meeting around them.",
+            "Give the team a checklist for what 'done correctly' means on your main service, so quality stops depending on who is on shift.",
+            "Attack the slowest part of your cash cycle: invoice the day work is delivered instead of at month-end, and agree clearer payment terms up front.",
+          ],
+          ask: "Do you learn about a problem from your numbers, or from an angry customer?",
         },
         {
           n: "05",
           name: "Scale",
           body: "With the system running, you scale capacity instead of chaos. Develop leaders, expand, and step back — the business holds without you in every room.",
+          practice: [
+            "Name a second-in-command for your busiest function and give them real authority for one month, then review what actually broke.",
+            "Document induction so a new hire is productive in days, not weeks — essential where staff turnover is tied to visa moves.",
+            "Block one day a week when you are unreachable to the team, and watch what the system handles without you.",
+          ],
+          ask: "Is the business growing because of your effort this week, or because of the system you built last quarter?",
         },
       ],
     },
@@ -181,6 +214,12 @@ export const ARTICLES: Article[] = [
       body: "The reward is not only your weekends back. A business that does not depend on one person is worth more — often meaningfully more.",
       pullQuote:
         "Buyers pay for a business that keeps running, not for a job that stops when you do. A company that depends on its owner is priced as a job; one that runs on systems is priced as an asset.",
+    },
+    whereToStart: {
+      heading: "Where to start",
+      body: [
+        "The honest first move is not to build anything — it is to find out which of these five stages is actually holding you back. Installing systems on the wrong constraint only adds cost and complexity. Diagnose first, fix the one thing that limits everything else, and let the rest follow.",
+      ],
     },
     cta: {
       heading: "Which stage is your bottleneck?",
