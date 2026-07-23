@@ -1,14 +1,11 @@
 import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
-import { GoogleAnalytics } from "@next/third-parties/google";
 import "./globals.css";
 import { Navigation } from "@/components/layout/Navigation";
 import { Footer } from "@/components/layout/Footer";
 import { SITE_NAME } from "@/lib/metadata";
 import { cn } from "@/lib/utils";
-
-const gaId = process.env.NEXT_PUBLIC_GA_ID;
 
 const inter = Inter({
   variable: "--font-inter",
@@ -59,7 +56,6 @@ export default function RootLayout({
         <main className="flex-1">{children}</main>
         <Footer />
         <Analytics />
-        {gaId ? <GoogleAnalytics gaId={gaId} /> : null}
       </body>
     </html>
   );
