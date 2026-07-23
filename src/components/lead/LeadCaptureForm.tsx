@@ -160,6 +160,12 @@ export function LeadCaptureForm({ onSubmit, isLoading }: LeadCaptureFormProps) {
           </select>
         </div>
 
+        <p className="text-xs text-navy/50 text-center font-body">
+          By continuing you agree to our{" "}
+          <a href="/privacy" className="text-gold-ink underline hover:text-gold transition-colors">Privacy Policy</a>.
+          Your report is generated with AI.
+        </p>
+
         <button
           type="submit"
           disabled={isLoading}

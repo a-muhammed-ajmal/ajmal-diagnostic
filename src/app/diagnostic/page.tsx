@@ -168,7 +168,7 @@ export default function DiagnosticPage() {
           <div className="graph-overlay" />
           <div className="flex flex-wrap justify-center gap-8 md:gap-16 relative z-10">
             {[
-              { n: '10k+', l: 'LinkedIn Network' },
+              { n: '10', l: 'Questions' },
               { n: '5', l: 'Growth Dimensions' },
               { n: '4 min', l: 'To Your Results' },
             ].map((s) => (

@@ -46,6 +46,10 @@ export function NewsletterForm() {
         {status === 'loading' ? 'Subscribing...' : 'Subscribe →'}
       </button>
       {status === 'error' && <p role="alert" className="text-crimson text-xs mt-1 w-full">Something went wrong. Try again.</p>}
+      <p className="text-xs text-navy/50 font-body w-full sm:basis-full">
+        By subscribing you agree to our{' '}
+        <a href="/privacy" className="text-gold-ink underline hover:text-gold transition-colors">Privacy Policy</a>.
+      </p>
     </form>
   );
 }
