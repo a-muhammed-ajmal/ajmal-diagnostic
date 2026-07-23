@@ -35,6 +35,16 @@ shipping. Set that variable both locally and in the Vercel project environment.
 | `npm run start` | Serve the production build |
 | `npm run lint` | ESLint |
 | `npm test` | Jest test suite |
+| `npm run test:coverage` | Jest with coverage |
+
+## Project stats
+
+| Metric | Value |
+|---|---|
+| Tests | 15 (Jest) — `scoring.ts` 100% covered |
+| DB tables | 5 (RLS on all) |
+| Migrations | 2 (`20260723000001`–`20260723000002`) |
+| Routes | App Router (see `AGENTS.md` for the full page list) |
 
 ## Project layout
 
