@@ -43,7 +43,7 @@ export default function AboutPage() {
           </div>
 
           <div className="md:w-3/5">
-            <span className="text-gold font-heading font-bold tracking-widest text-xs uppercase mb-2 block">Who I Am</span>
+            <span className="text-gold-ink eyebrow mb-2 block">Who I Am</span>
             <h2 className="text-2xl md:text-3xl font-heading font-extrabold text-navy mb-6">I built the system. My team implements the framework.</h2>
             <p className="font-body text-navy/70 leading-relaxed mb-5 text-sm md:text-base">As a specialist in SME Strategic Management and Operational Excellence in the UAE and GCC, I help founders transition from exhausting daily operations to engineering genuine enterprise value. My practice focuses on engineering the growth infrastructure of a business — not just advising.</p>
             <p className="font-body text-navy/70 leading-relaxed mb-6 text-sm md:text-base">My background spans strategic management, warehouse and supply chain operations, commercial services, project execution, and business growth initiatives across the UAE market — covering food and beverages, financial advisory, and marketing automation.</p>
@@ -70,7 +70,7 @@ export default function AboutPage() {
             </div>
 
             <div className="bg-navy rounded-xl p-5 md:p-6">
-              <p className="text-gold font-heading font-bold tracking-widest text-xs uppercase mb-3">Consulting Philosophy</p>
+              <p className="text-gold eyebrow mb-3">Consulting Philosophy</p>
               <p className="font-body text-ivory/80 text-sm leading-relaxed mb-3">Sustainable growth is not achieved through effort alone. It is achieved through the right strategy, supported by the appropriate systems, executed by the correct people, measured through the correct metrics, and continuously improved through disciplined accountability.</p>
               <p className="font-body text-ivory/50 text-xs">This is not traditional consulting. It is the engineering of a business&apos;s growth infrastructure.</p>
             </div>
@@ -83,7 +83,7 @@ export default function AboutPage() {
         <div className="max-w-2xl mx-auto text-center relative z-10">
           <h2 className="font-heading font-extrabold text-2xl md:text-3xl text-navy mb-4">Start with the diagnostic.</h2>
           <p className="font-body text-navy/60 mb-8 text-sm md:text-base">Identify your primary growth constraint before our first conversation — so we start at the root cause, not the symptom.</p>
-          <Link href="/diagnostic" className="inline-flex items-center justify-center bg-gold text-navy font-heading font-bold py-4 px-10 rounded text-base hover:bg-gold-bright transition-colors min-h-[52px] w-full sm:w-auto">
+          <Link href="/diagnostic" className="inline-flex items-center justify-center bg-gold text-navy font-heading font-bold py-4 px-10 rounded-xl text-base hover:bg-gold-bright transition-colors min-h-[52px] w-full sm:w-auto">
             Free Business Constraint Diagnostic →
           </Link>
         </div>

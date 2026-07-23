@@ -28,6 +28,8 @@
   --color-ink:        #1A1A2E;
   --color-orange:     #FF6535;     /* brand orange */
   --color-gold-ink:   #D6450F;     /* dark orange for text on white (AA contrast) */
+  --color-teal-ink:    #0F766E;    /* teal for small text on white — 5.5:1 */
+  --color-emerald-ink: #047857;    /* emerald for small text on white — 5.5:1 */
   --color-slate:      #6B7280;     /* secondary text */
   --color-line:       #E5E7EB;     /* borders */
   --color-footer:     #0B1120;     /* deepened charcoal-navy — footer background */
@@ -151,6 +153,36 @@ p { text-wrap: pretty; }
     linear-gradient(90deg, #FF6535 1px, transparent 1px);
   background-size: 40px 40px;
   opacity: 0.07;
+}
+
+/* ── Component utilities ─────────────────────────────────────────────────── */
+
+/* 44×44 minimum — every icon-only control */
+.tap-target { min-height: 44px; min-width: 44px; }
+
+/* Eyebrow label — section kickers above headings.
+   Shape only; colour stays a utility so it can vary with the section
+   (gold-ink on light, gold on navy, teal/emerald on the results callouts). */
+.eyebrow {
+  font-weight: 700;
+  font-size: 0.75rem;      /* text-xs */
+  line-height: 1rem;       /* text-xs */
+  letter-spacing: 0.1em;   /* tracking-widest */
+  text-transform: uppercase;
+}
+
+/* Interactive card hover — lift + elevate.
+   Border colour stays a Tailwind utility on each card so the accent can vary
+   (gold by default, crimson on the Founder Trap cards). */
+.card-interactive {
+  transition:
+    border-color 150ms var(--ease-out),
+    box-shadow   150ms var(--ease-out),
+    transform    150ms var(--ease-out);
+}
+.card-interactive:hover {
+  box-shadow: 0 4px 16px rgba(26, 26, 46, 0.12);
+  transform: translateY(-1px);
 }
 
 /* ── Staggered entrance animation ────────────────────────────────────────── */

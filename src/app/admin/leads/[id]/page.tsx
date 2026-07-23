@@ -80,7 +80,7 @@ export default async function LeadBriefingPage({
   const severityColors: Record<string, string> = {
     Critical: "bg-crimson/10 text-crimson border-crimson/20",
     Developing: "bg-warning/10 text-warning-ink border-warning/20",
-    Progressing: "bg-emerald/10 text-emerald border-emerald/20",
+    Progressing: "bg-emerald/10 text-emerald-ink border-emerald/20",
   };
 
   return (
@@ -119,7 +119,7 @@ export default async function LeadBriefingPage({
               <div className="flex flex-wrap gap-2 mt-3">
                 <a
                   href={`mailto:${typedLead.email}`}
-                  className="font-body text-xs text-gold hover:underline"
+                  className="font-body text-xs text-gold-ink hover:underline"
                 >
                   {typedLead.email}
                 </a>
@@ -206,7 +206,7 @@ export default async function LeadBriefingPage({
                       </span>
                     )}
                     {d.isSecondary && (
-                      <span className="text-[10px] font-bold bg-gold/10 text-gold px-2 py-0.5 rounded-full">
+                      <span className="text-[10px] font-bold bg-gold/10 text-gold-ink px-2 py-0.5 rounded-full">
                         SECONDARY
                       </span>
                     )}
@@ -217,7 +217,7 @@ export default async function LeadBriefingPage({
                 </div>
                 <div className="h-2 bg-navy/10 rounded-full overflow-hidden">
                   <div
-                    className="h-full rounded-full transition-all"
+                    className="h-full rounded-full transition-[width]"
                     style={{
                       width: `${(d.score / 6) * 100}%`,
                       backgroundColor: d.isPrimary
@@ -341,7 +341,7 @@ export default async function LeadBriefingPage({
             ].map((flag) => (
               <div key={flag.label} className="text-center">
                 <div
-                  className={cn("text-2xl font-bold mb-1", flag.value ? "text-emerald" : "text-navy/20")}
+                  className={cn("text-2xl font-bold mb-1", flag.value ? "text-emerald-ink" : "text-navy/20")}
                 >
                   {flag.value ? "✔" : "○"}
                 </div>

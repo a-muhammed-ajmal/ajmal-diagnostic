@@ -39,7 +39,7 @@ export function ContactForm() {
 
   if (submitted) return (
     <div className="bg-emerald/10 border border-emerald/30 rounded-2xl p-8 text-center">
-      <div className="text-emerald text-3xl mb-3">✔</div>
+      <div className="text-emerald-ink text-3xl mb-3">✔</div>
       <h3 className="font-heading font-bold text-navy text-xl mb-2">Enquiry Received</h3>
       <p className="font-body text-navy/70 text-sm">You will receive a response within 24 hours.</p>
     </div>
@@ -48,30 +48,30 @@ export function ContactForm() {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
       <div>
-        <label className={labelClass}>Full Name</label>
-        <input {...register('name')} className={inputClass} placeholder="First and last name" />
-        {errors.name && <p className="text-crimson text-xs mt-1">Please enter your name</p>}
+        <label htmlFor="name" className={labelClass}>Full Name</label>
+        <input {...register('name')} id="name" className={inputClass} placeholder="First and last name" />
+        {errors.name && <p role="alert" className="text-crimson text-xs mt-1">Please enter your name</p>}
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
-          <label className={labelClass}>Business Email</label>
-          <input {...register('email')} type="email" className={inputClass} placeholder="you@company.com" />
-          {errors.email && <p className="text-crimson text-xs mt-1">Valid email required</p>}
+          <label htmlFor="email" className={labelClass}>Business Email</label>
+          <input {...register('email')} id="email" type="email" className={inputClass} placeholder="you@company.com" />
+          {errors.email && <p role="alert" className="text-crimson text-xs mt-1">Valid email required</p>}
         </div>
         <div>
-          <label className={labelClass}>Phone Number</label>
-          <input {...register('phone')} type="tel" className={inputClass} placeholder="+971 50 000 0000" />
-          {errors.phone && <p className="text-crimson text-xs mt-1">Phone number required</p>}
+          <label htmlFor="phone" className={labelClass}>Phone Number</label>
+          <input {...register('phone')} id="phone" type="tel" className={inputClass} placeholder="+971 50 000 0000" />
+          {errors.phone && <p role="alert" className="text-crimson text-xs mt-1">Phone number required</p>}
         </div>
       </div>
       <div>
-        <label className={labelClass}>Company Name</label>
-        <input {...register('companyName')} className={inputClass} placeholder="Your business name" />
-        {errors.companyName && <p className="text-crimson text-xs mt-1">Company name required</p>}
+        <label htmlFor="companyName" className={labelClass}>Company Name</label>
+        <input {...register('companyName')} id="companyName" className={inputClass} placeholder="Your business name" />
+        {errors.companyName && <p role="alert" className="text-crimson text-xs mt-1">Company name required</p>}
       </div>
       <div>
-        <label className={labelClass}>Inquiry Type</label>
-        <select {...register('inquiryType')} className={inputClass}>
+        <label htmlFor="inquiryType" className={labelClass}>Inquiry Type</label>
+        <select {...register('inquiryType')} id="inquiryType" className={inputClass}>
           <option value="">Select...</option>
           <option value="diagnostic-followup">Follow-up on Diagnostic Results</option>
           <option value="strategic-planning">Strategic Planning</option>
@@ -81,14 +81,14 @@ export function ContactForm() {
           <option value="ai-automation">AI &amp; Automation Advisory</option>
           <option value="general">General Enquiry</option>
         </select>
-        {errors.inquiryType && <p className="text-crimson text-xs mt-1">Please select an inquiry type</p>}
+        {errors.inquiryType && <p role="alert" className="text-crimson text-xs mt-1">Please select an inquiry type</p>}
       </div>
       <div>
-        <label className={labelClass}>Message</label>
-        <textarea {...register('message')} rows={4} className={inputClass} placeholder="Brief description of your situation and what you are looking to address..." />
-        {errors.message && <p className="text-crimson text-xs mt-1">Please provide a brief message (min 20 characters)</p>}
+        <label htmlFor="message" className={labelClass}>Message</label>
+        <textarea {...register('message')} id="message" rows={4} className={inputClass} placeholder="Brief description of your situation and what you are looking to address..." />
+        {errors.message && <p role="alert" className="text-crimson text-xs mt-1">Please provide a brief message (min 20 characters)</p>}
       </div>
-      {error && <p className="text-crimson text-sm">{error}</p>}
+      {error && <p role="alert" className="text-crimson text-sm">{error}</p>}
       <button
         type="submit"
         disabled={isSubmitting}

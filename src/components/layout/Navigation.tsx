@@ -72,7 +72,7 @@ export function Navigation() {
               className="relative group hover:text-gold transition-colors duration-200"
             >
               {link.label}
-              <span className="absolute -bottom-1 left-0 w-0 h-px bg-gold group-hover:w-full transition-all duration-300" />
+              <span className="absolute -bottom-1 left-0 w-0 h-px bg-gold group-hover:w-full transition-[width] duration-300" />
             </Link>
           ))}
         </div>
@@ -82,15 +82,16 @@ export function Navigation() {
           {!isResults && (
             <Link
               href="/diagnostic"
-              className="hidden sm:inline-flex items-center bg-gold text-navy font-heading font-bold py-2 px-4 rounded hover:bg-gold-bright transition-colors text-sm min-h-[38px]"
+              className="hidden sm:inline-flex items-center bg-gold text-navy font-heading font-bold py-2 px-4 rounded-xl hover:bg-gold-bright transition-colors text-sm min-h-[44px]"
             >
               Free Diagnostic
             </Link>
           )}
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
-            className="lg:hidden p-2 text-ivory hover:text-gold transition-colors"
+            className="lg:hidden tap-target inline-flex items-center justify-center text-ivory hover:text-gold transition-colors"
             aria-label="Toggle menu"
+            aria-expanded={mobileOpen}
           >
             {mobileOpen ? <X size={22} /> : <Menu size={22} />}
           </button>
@@ -100,7 +101,7 @@ export function Navigation() {
       {/* Mobile menu — smooth animated open/close */}
       <div
         className={cn(
-          'lg:hidden border-t border-gold/20 mt-3 overflow-hidden transition-all duration-300 ease-in-out',
+          'lg:hidden border-t border-gold/20 mt-3 overflow-hidden transition-[max-height,opacity,padding] duration-300 ease-in-out',
           mobileOpen ? 'max-h-[520px] opacity-100 pt-3 pb-2' : 'max-h-0 opacity-0'
         )}
       >
@@ -117,7 +118,7 @@ export function Navigation() {
         <Link
           href="/diagnostic"
           onClick={() => setMobileOpen(false)}
-          className="block mt-3 bg-gold text-navy font-heading font-bold py-3 px-5 rounded text-sm text-center hover:bg-gold-bright transition-colors"
+          className="block mt-3 bg-gold text-navy font-heading font-bold py-3 px-5 rounded-xl text-sm text-center hover:bg-gold-bright transition-colors"
         >
           Free Diagnostic →
         </Link>

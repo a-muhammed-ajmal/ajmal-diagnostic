@@ -30,11 +30,11 @@ export default function InsightsPage() {
         <div className="graph-overlay" />
         <div className="max-w-4xl mx-auto relative z-10">
           <p className="font-heading font-bold text-navy text-xs uppercase tracking-widest mb-6 text-center">Latest Article</p>
-          <Link href="/insights/the-5-stage-business-operating-system" className="block bg-ivory border border-navy/10 rounded-xl p-6 md:p-8 hover:border-gold transition-colors shadow-sm">
-            <span className="text-gold text-xs font-heading font-bold uppercase tracking-widest">SME Growth Architecture</span>
+          <Link href="/insights/the-5-stage-business-operating-system" className="block bg-ivory border border-navy/10 rounded-xl p-6 md:p-8 hover:border-gold card-interactive shadow-sm">
+            <span className="text-gold-ink text-xs font-heading font-bold uppercase tracking-widest">SME Growth Architecture</span>
             <h2 className="font-heading font-extrabold text-xl md:text-2xl text-navy mt-2 mb-2">The 5-Stage Business Operating System Every UAE SME Needs</h2>
             <p className="font-body text-navy/60 text-sm leading-relaxed mb-3">Move from owner-dependent to system-driven with five stages: Diagnose, Design, Build, Optimize, Scale.</p>
-            <span className="text-gold font-heading font-bold text-sm">Read the article &rarr;</span>
+            <span className="text-gold-ink font-heading font-bold text-sm">Read the article &rarr;</span>
           </Link>
         </div>
       </section>
@@ -54,7 +54,7 @@ export default function InsightsPage() {
           <p className="font-heading font-bold text-navy text-xs uppercase tracking-widest mb-6 text-center">Content Categories</p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {categories.map(cat => (
-              <div key={cat.name} className="bg-ivory border border-navy/10 rounded-xl p-5 hover:border-gold transition-colors">
+              <div key={cat.name} className="bg-ivory border border-navy/10 rounded-xl p-5 hover:border-gold card-interactive">
                 <h3 className="font-heading font-bold text-navy text-sm mb-2">{cat.name}</h3>
                 <p className="font-body text-xs text-navy/60 leading-relaxed">{cat.desc}</p>
               </div>

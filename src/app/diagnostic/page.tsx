@@ -153,7 +153,7 @@ export default function DiagnosticPage() {
             </div>
             <button
               onClick={() => setStage('quiz')}
-              className="w-full max-w-xs mx-auto block bg-gold text-navy font-heading font-bold py-4 px-8 rounded-xl text-base md:text-lg min-h-[56px] hover:bg-gold-bright active:scale-95 transition-all duration-200 shadow-lg"
+              className="w-full max-w-xs mx-auto block bg-gold text-navy font-heading font-bold py-4 px-8 rounded-xl text-base md:text-lg min-h-[56px] hover:bg-gold-bright active:scale-95 transition-[background-color,transform] duration-200 shadow-lg"
             >
               Start the Free Diagnostic →
             </button>
@@ -184,7 +184,7 @@ export default function DiagnosticPage() {
         <section className="bg-ivory py-14 px-5 relative overflow-hidden">
           <div className="graph-overlay" />
           <div className="max-w-3xl mx-auto relative z-10">
-            <p className="text-center text-gold font-heading font-bold tracking-widest text-xs uppercase mb-3">How It Works</p>
+            <p className="text-center text-gold-ink eyebrow mb-3">How It Works</p>
             <h2 className="text-center font-heading font-extrabold text-navy text-2xl md:text-3xl mb-10">
               Three steps. Four minutes.
             </h2>
@@ -222,7 +222,7 @@ export default function DiagnosticPage() {
             </p>
             <button
               onClick={() => { window.scrollTo(0, 0); setStage('quiz'); }}
-              className="w-full max-w-xs mx-auto block bg-gold text-navy font-heading font-bold py-4 px-8 rounded-xl text-base min-h-[56px] hover:bg-gold-bright active:scale-95 transition-all duration-200 shadow-lg"
+              className="w-full max-w-xs mx-auto block bg-gold text-navy font-heading font-bold py-4 px-8 rounded-xl text-base min-h-[56px] hover:bg-gold-bright active:scale-95 transition-[background-color,transform] duration-200 shadow-lg"
             >
               Start the Free Diagnostic →
             </button>
@@ -244,14 +244,14 @@ export default function DiagnosticPage() {
           <div className="max-w-md mx-auto mb-4">
             <button
               onClick={handleBackToQuiz}
-              className="flex items-center gap-1 text-sm text-navy/50 hover:text-navy transition-colors"
+              className="tap-target flex items-center gap-1 text-sm text-navy/50 hover:text-navy transition-colors"
             >
               ← Back to questions
             </button>
           </div>
           <LeadCaptureForm onSubmit={handleLeadSubmit} isLoading={isLoading} />
           {submitError && (
-            <p className="mx-auto mt-4 max-w-md text-center text-sm font-medium text-crimson">
+            <p role="alert" className="mx-auto mt-4 max-w-md text-center text-sm font-medium text-crimson">
               {submitError}
             </p>
           )}

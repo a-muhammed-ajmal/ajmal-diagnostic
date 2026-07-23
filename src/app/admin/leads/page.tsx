@@ -16,7 +16,7 @@ export default async function AdminLeadsPage() {
   const severityColors: Record<string, string> = {
     Critical: "bg-crimson/10 text-crimson",
     Developing: "bg-warning/10 text-warning-ink",
-    Progressing: "bg-emerald/10 text-emerald",
+    Progressing: "bg-emerald/10 text-emerald-ink",
   };
 
   return (
@@ -84,7 +84,7 @@ export default async function AdminLeadsPage() {
                     <td className="px-4 py-3">
                       <Link
                         href={`/admin/leads/${lead.id}`}
-                        className="font-heading font-semibold text-navy hover:text-gold transition-colors whitespace-nowrap"
+                        className="font-heading font-semibold text-navy hover:text-gold-ink transition-colors whitespace-nowrap"
                       >
                         {lead.name}
                       </Link>
@@ -125,21 +125,21 @@ export default async function AdminLeadsPage() {
                     </td>
                     <td className="px-4 py-3">
                       <span
-                        className={cn("text-[10px] font-bold px-2 py-0.5 rounded-full", lead.email_sent ? "bg-emerald/10 text-emerald" : "bg-crimson/10 text-crimson")}
+                        className={cn("text-[10px] font-bold px-2 py-0.5 rounded-full", lead.email_sent ? "bg-emerald/10 text-emerald-ink" : "bg-crimson/10 text-crimson")}
                       >
                         {lead.email_sent ? "✔ Sent" : "✗ Pending"}
                       </span>
                     </td>
                     <td className="px-4 py-3">
                       <span
-                        className={cn("text-[10px] font-bold px-2 py-0.5 rounded-full", lead.ai_plan_generated ? "bg-emerald/10 text-emerald" : "bg-line text-slate")}
+                        className={cn("text-[10px] font-bold px-2 py-0.5 rounded-full", lead.ai_plan_generated ? "bg-emerald/10 text-emerald-ink" : "bg-line text-slate")}
                       >
                         {lead.ai_plan_generated ? "✔ Ready" : "—"}
                       </span>
                     </td>
                     <td className="px-4 py-3">
                       <span
-                        className={cn("text-[10px] font-bold px-2 py-0.5 rounded-full", lead.booked_call ? "bg-emerald/10 text-emerald" : "bg-line text-slate")}
+                        className={cn("text-[10px] font-bold px-2 py-0.5 rounded-full", lead.booked_call ? "bg-emerald/10 text-emerald-ink" : "bg-line text-slate")}
                       >
                         {lead.booked_call ? "✔ Booked" : "—"}
                       </span>

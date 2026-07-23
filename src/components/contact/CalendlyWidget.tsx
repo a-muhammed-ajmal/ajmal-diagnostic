@@ -15,7 +15,7 @@ export function CalendlyWidget() {
   return (
     <div
       className="calendly-inline-widget rounded-xl overflow-hidden border border-navy/10"
-      data-url={`${process.env.NEXT_PUBLIC_CALENDLY_LINK}?background_color=FAF9F6&text_color=0F172A&primary_color=C5A880`}
+      data-url={`${process.env.NEXT_PUBLIC_CALENDLY_LINK}?background_color=F9FAFB&text_color=1A1A2E&primary_color=FF6535`}
       style={{ minWidth: '320px', height: '700px' }}
     />
   );

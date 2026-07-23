@@ -53,7 +53,7 @@ export default function ArticlePage() {
           <div className="space-y-3 pt-2">
             {stages.map(s => (
               <div key={s.n} className="flex gap-4 bg-white border border-navy/10 rounded-xl p-5">
-                <span className="font-heading font-extrabold text-gold text-2xl leading-none">{s.n}</span>
+                <span className="font-heading font-extrabold text-gold-ink text-2xl leading-none">{s.n}</span>
                 <div>
                   <h3 className="font-heading font-bold text-navy text-lg mb-1">{s.name}</h3>
                   <p className="font-body text-navy/70 text-sm leading-relaxed">{s.body}</p>
@@ -81,7 +81,7 @@ export default function ArticlePage() {
         <div className="max-w-2xl mx-auto text-center relative z-10">
           <h2 className="font-heading font-extrabold text-2xl md:text-3xl mb-4">Which stage is your bottleneck?</h2>
           <p className="font-body text-ivory/70 mb-8 leading-relaxed">The free 4-minute diagnostic identifies your primary growth constraint and sends a personalised action plan to your inbox.</p>
-          <Link href="/diagnostic" className="inline-flex items-center justify-center bg-gold text-navy font-heading font-bold py-4 px-10 rounded hover:bg-gold-bright transition-colors shadow-lg text-base min-h-[52px]">Take the Free Diagnostic &rarr;</Link>
+          <Link href="/diagnostic" className="inline-flex items-center justify-center bg-gold text-navy font-heading font-bold py-4 px-10 rounded-xl hover:bg-gold-bright transition-colors shadow-lg text-base min-h-[52px]">Take the Free Diagnostic &rarr;</Link>
         </div>
       </section>
     </article>

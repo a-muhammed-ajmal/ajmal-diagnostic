@@ -49,13 +49,13 @@ export default function ResultsPage() {
       <div className="max-w-3xl mx-auto space-y-5 relative z-10">
 
         <div className="text-center">
-          <p className="text-gold font-heading font-bold tracking-widest text-xs uppercase mb-2">Strategic Growth Architecture™</p>
+          <p className="text-gold-ink eyebrow mb-2">Strategic Growth Architecture™</p>
           <h1 className="text-2xl md:text-3xl font-heading font-extrabold text-navy mb-2">{firstName}, here is your diagnosis.</h1>
           <p className="text-navy/50 font-body text-sm">Your full report has been emailed to {leadData.email}</p>
         </div>
 
         <div className="bg-navy rounded-2xl p-6 md:p-8 text-white text-center shadow-xl">
-          <p className="text-gold font-heading font-bold tracking-widest text-xs uppercase mb-4">Business Health Score</p>
+          <p className="text-gold eyebrow mb-4">Business Health Score</p>
           <div className="text-5xl md:text-7xl font-heading font-extrabold mb-2">{results.healthScore}%</div>
           <span className={cn('inline-block px-4 py-1 rounded-full text-sm font-heading font-bold border', severityBadge[results.severityLabel])}>
             {results.severityLabel}
@@ -64,13 +64,13 @@ export default function ResultsPage() {
         </div>
 
         <div className="bg-navy rounded-2xl p-6 md:p-8 shadow-lg">
-          <p className="text-teal font-heading font-bold tracking-widest text-xs uppercase mb-2">Primary Growth Constraint</p>
+          <p className="text-teal eyebrow mb-2">Primary Growth Constraint</p>
           <h2 className="text-2xl md:text-3xl font-heading font-bold text-white mb-4">{results.primaryConstraintLabel}</h2>
           <p className="text-ivory/70 leading-relaxed font-body text-sm">{primaryMeta.constraintExplanation}</p>
         </div>
 
         <div className="bg-white rounded-2xl p-5 md:p-6 border border-navy/10 shadow-sm">
-          <p className="text-navy/40 font-heading font-bold tracking-widest text-xs uppercase mb-2">Secondary Constraint</p>
+          <p className="text-navy/40 eyebrow mb-2">Secondary Constraint</p>
           <h3 className="text-lg md:text-xl font-heading font-bold text-navy mb-3">{results.secondaryConstraintLabel}</h3>
           <p className="text-navy/70 font-body text-sm leading-relaxed">{secondaryMeta.secondaryExplanation}</p>
         </div>
@@ -93,7 +93,7 @@ export default function ResultsPage() {
                   <span className="font-heading font-bold text-sm text-navy/60 flex-shrink-0">{dim.score}/6</span>
                 </div>
                 <div className="w-full bg-line rounded-full h-3">
-                  <div className="h-3 rounded-full transition-all duration-1000" style={{ width: `${dim.percentage}%`, backgroundColor: dim.color }} />
+                  <div className="h-3 rounded-full transition-[width] duration-1000" style={{ width: `${dim.percentage}%`, backgroundColor: dim.color }} />
                 </div>
               </div>
             ))}
@@ -103,7 +103,7 @@ export default function ResultsPage() {
         {results.aiPlan && (
           <>
             <div className="bg-emerald/5 border border-emerald/20 rounded-2xl p-5 md:p-6">
-              <p className="text-emerald font-heading font-bold tracking-widest text-xs uppercase mb-2">AI-Generated Action Plan — 30 Days</p>
+              <p className="text-emerald-ink eyebrow mb-2">AI-Generated Action Plan — 30 Days</p>
               <h3 className="font-heading font-bold text-navy text-base md:text-lg mb-4">Your First 30 Days: Primary Constraint Focus</h3>
               <ul className="space-y-3">
                 {results.aiPlan.thirtyDayPriorities.map((p, i) => (
@@ -116,7 +116,7 @@ export default function ResultsPage() {
             </div>
 
             <div className="bg-teal/5 border border-teal/20 rounded-2xl p-5 md:p-6">
-              <p className="text-teal font-heading font-bold tracking-widest text-xs uppercase mb-2">AI-Generated Action Plan — 90 Days</p>
+              <p className="text-teal-ink eyebrow mb-2">AI-Generated Action Plan — 90 Days</p>
               <h3 className="font-heading font-bold text-navy text-base md:text-lg mb-4">Days 31–90: Building Deeper</h3>
               <ul className="space-y-3">
                 {results.aiPlan.ninetyDayDirections.map((d, i) => (

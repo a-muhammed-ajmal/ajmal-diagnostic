@@ -32,13 +32,13 @@ export default function HomePage() {
             <div className="reveal flex flex-col sm:flex-row gap-4">
               <Link
                 href="/diagnostic"
-                className="inline-flex items-center justify-center bg-gold text-navy font-heading font-bold py-4 px-8 rounded hover:bg-gold-bright transition-colors shadow-lg text-base min-h-[52px]"
+                className="inline-flex items-center justify-center bg-gold text-navy font-heading font-bold py-4 px-8 rounded-xl hover:bg-gold-bright transition-colors shadow-lg text-base min-h-[52px]"
               >
                 Discover Your Business Constraint →
               </Link>
               <Link
                 href="/contact"
-                className="inline-flex items-center justify-center border border-gold/50 text-gold font-heading font-bold py-4 px-8 rounded hover:bg-gold/10 transition-colors text-base min-h-[52px]"
+                className="inline-flex items-center justify-center border border-gold/50 text-gold font-heading font-bold py-4 px-8 rounded-xl hover:bg-gold/10 transition-colors text-base min-h-[52px]"
               >
                 Book a Strategy Call
               </Link>
@@ -128,7 +128,7 @@ export default function HomePage() {
             ].map((card) => (
               <div
                 key={card.n}
-                className="bg-white p-7 rounded-xl shadow-sm border border-navy/10 hover:border-crimson/30 hover:shadow-md transition-all duration-300 relative overflow-hidden group"
+                className="bg-white p-7 rounded-xl shadow-sm border border-navy/10 hover:border-crimson/30 card-interactive relative overflow-hidden group"
               >
                 <div className="absolute top-0 left-0 w-full h-1 bg-crimson transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300" />
                 <div className="w-10 h-10 bg-crimson/10 text-crimson rounded-full flex items-center justify-center font-heading font-bold text-sm mb-5">
@@ -232,7 +232,7 @@ export default function HomePage() {
             ].map((anchor) => (
               <div
                 key={anchor.co}
-                className="bg-white border border-navy/10 rounded-xl p-6 hover:border-gold/40 hover:shadow-md transition-all duration-300"
+                className="bg-white border border-navy/10 rounded-xl p-6 hover:border-gold card-interactive"
               >
                 <div className="w-2 h-2 bg-gold rounded-full mb-3" />
                 <p className="font-heading font-bold text-navy text-sm mb-2">{anchor.co}</p>
@@ -256,7 +256,7 @@ export default function HomePage() {
           </p>
           <Link
             href="/diagnostic"
-            className="inline-flex items-center justify-center bg-gold text-navy font-heading font-bold py-4 md:py-5 px-10 md:px-12 rounded text-base md:text-lg hover:bg-gold-bright transition-colors shadow-lg min-h-[52px] w-full sm:w-auto"
+            className="inline-flex items-center justify-center bg-gold text-navy font-heading font-bold py-4 md:py-5 px-10 md:px-12 rounded-xl text-base md:text-lg hover:bg-gold-bright transition-colors shadow-lg min-h-[52px] w-full sm:w-auto"
           >
             Start Your Free Diagnostic →
           </Link>

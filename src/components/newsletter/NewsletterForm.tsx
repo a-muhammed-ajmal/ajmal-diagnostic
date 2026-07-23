@@ -21,14 +21,16 @@ export function NewsletterForm() {
 
   if (status === 'success') return (
     <div className="bg-emerald/10 border border-emerald/30 rounded-xl p-6 text-center">
-      <p className="text-emerald font-heading font-bold text-lg mb-1">✔ You are subscribed.</p>
+      <p className="text-emerald-ink font-heading font-bold text-lg mb-1">✔ You are subscribed.</p>
       <p className="text-navy/60 font-body text-sm">You will hear from us when there is something worth sending.</p>
     </div>
   );
 
   return (
     <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3">
+      <label htmlFor="newsletter-email" className="sr-only">Email address</label>
       <input
+        id="newsletter-email"
         type="email"
         value={email}
         onChange={e => setEmail(e.target.value)}
@@ -43,7 +45,7 @@ export function NewsletterForm() {
       >
         {status === 'loading' ? 'Subscribing...' : 'Subscribe →'}
       </button>
-      {status === 'error' && <p className="text-crimson text-xs mt-1 w-full">Something went wrong. Try again.</p>}
+      {status === 'error' && <p role="alert" className="text-crimson text-xs mt-1 w-full">Something went wrong. Try again.</p>}
     </form>
   );
 }

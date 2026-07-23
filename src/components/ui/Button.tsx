@@ -8,7 +8,7 @@ const VARIANT_CLASSES = {
 } as const;
 
 const SIZE_CLASSES = {
-  sm: 'text-sm px-4 py-2 min-h-[38px]',
+  sm: 'text-sm px-4 py-2 min-h-[44px]',
   md: 'text-base px-6 py-3 min-h-[44px]',
   lg: 'text-base px-8 py-4 min-h-[52px]',
 } as const;

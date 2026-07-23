@@ -32,7 +32,7 @@ export function Footer() {
         </div>
         <div>
           <div className="font-heading font-semibold text-xs uppercase tracking-widest text-gold mb-3">Get Started</div>
-          <Link href="/diagnostic" className="inline-block bg-gold text-navy font-heading font-bold py-3 px-6 rounded text-sm hover:bg-gold-bright transition-colors mb-3">
+          <Link href="/diagnostic" className="inline-block bg-gold text-navy font-heading font-bold py-3 px-6 rounded-xl text-sm hover:bg-gold-bright transition-colors mb-3">
             Free Business Diagnostic →
           </Link>
           <p className="font-body text-xs text-ivory/40">Dubai, UAE · Remote across the GCC</p>

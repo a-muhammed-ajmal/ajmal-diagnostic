@@ -12,7 +12,7 @@ export function OptionButton({ optionId, text, selected, onSelect }: OptionButto
     <button
       onClick={() => onSelect(optionId)}
       className={cn(
-        'w-full text-left px-5 py-4 rounded-xl border-2 transition-all duration-200 font-body',
+        'w-full text-left px-5 py-4 rounded-xl border-2 transition-[border-color,background-color,color] duration-200 font-body',
         selected
           ? 'border-navy bg-navy/5 text-navy font-medium'
           : 'border-line bg-white text-charcoal/80 hover:border-gold hover:bg-ivory'

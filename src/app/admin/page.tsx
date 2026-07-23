@@ -29,14 +29,15 @@ export default function AdminLoginPage() {
       <div className="bg-white rounded-2xl shadow-2xl p-10 w-full max-w-sm">
         <div className="text-center mb-8">
           <div className="font-heading font-extrabold text-navy text-2xl mb-1">
-            M<span className="text-gold">A</span>
+            M<span className="text-gold-ink">A</span>
           </div>
           <p className="font-heading font-bold text-navy text-sm uppercase tracking-widest">Admin Access</p>
         </div>
         <form onSubmit={handleLogin} className="space-y-4">
           <div>
-            <label className="block text-sm font-heading font-semibold text-navy mb-1">Password</label>
+            <label htmlFor="admin-password" className="block text-sm font-heading font-semibold text-navy mb-1">Password</label>
             <input
+              id="admin-password"
               type="password"
               value={password}
               onChange={e => setPassword(e.target.value)}
@@ -45,7 +46,7 @@ export default function AdminLoginPage() {
               required
             />
           </div>
-          {error && <p className="text-crimson text-sm">{error}</p>}
+          {error && <p role="alert" className="text-crimson text-sm">{error}</p>}
           <button
             type="submit"
             disabled={loading}

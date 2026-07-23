@@ -36,7 +36,7 @@ export function LeadCaptureForm({ onSubmit, isLoading }: LeadCaptureFormProps) {
   return (
     <div className="max-w-md mx-auto bg-white rounded-2xl shadow-lg p-8 border border-navy/5">
       <div className="text-center mb-6">
-        <p className="text-gold font-heading font-bold tracking-widest text-xs uppercase mb-2">
+        <p className="text-gold-ink eyebrow mb-2">
           Diagnostic Complete
         </p>
         <h2 className="text-2xl font-heading font-bold text-navy mb-2">
@@ -50,51 +50,55 @@ export function LeadCaptureForm({ onSubmit, isLoading }: LeadCaptureFormProps) {
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
         <div>
-          <label className={labelClass}>Full Name</label>
+          <label htmlFor="lead-name" className={labelClass}>Full Name</label>
           <input
             {...register("name")}
+            id="lead-name"
             className={inputClass}
             placeholder="First and last name"
           />
           {errors.name && (
-            <p className="text-crimson text-xs mt-1">{errors.name.message}</p>
+            <p role="alert" className="text-crimson text-xs mt-1">{errors.name.message}</p>
           )}
         </div>
 
         <div>
-          <label className={labelClass}>Business Email</label>
+          <label htmlFor="lead-email" className={labelClass}>Business Email</label>
           <input
             {...register("email")}
+            id="lead-email"
             type="email"
             className={inputClass}
             placeholder="you@company.com"
           />
           {errors.email && (
-            <p className="text-crimson text-xs mt-1">{errors.email.message}</p>
+            <p role="alert" className="text-crimson text-xs mt-1">{errors.email.message}</p>
           )}
         </div>
 
         <div>
-          <label className={labelClass}>Company Name</label>
+          <label htmlFor="lead-companyName" className={labelClass}>Company Name</label>
           <input
             {...register("companyName")}
+            id="lead-companyName"
             className={inputClass}
             placeholder="Your business name"
           />
           {errors.companyName && (
-            <p className="text-crimson text-xs mt-1">
+            <p role="alert" className="text-crimson text-xs mt-1">
               {errors.companyName.message}
             </p>
           )}
         </div>
 
         <div>
-          <label className={labelClass}>
+          <label htmlFor="lead-phone" className={labelClass}>
             Phone Number{" "}
             <span className="text-navy/30 font-normal text-xs">(optional)</span>
           </label>
           <input
             {...register("phone")}
+            id="lead-phone"
             type="tel"
             className={inputClass}
             placeholder="+971 50 000 0000"
@@ -102,11 +106,12 @@ export function LeadCaptureForm({ onSubmit, isLoading }: LeadCaptureFormProps) {
         </div>
 
         <div>
-          <label className={labelClass}>
+          <label htmlFor="lead-industry" className={labelClass}>
             Industry{" "}
             <span className="text-navy/30 font-normal text-xs">(optional)</span>
           </label>
-          <select {...register("industry")} className={inputClass}>
+          <select {...register("industry")}
+            id="lead-industry" className={inputClass}>
             <option value="">Select industry...</option>
             <option value="retail-ecommerce">Retail & E-Commerce</option>
             <option value="professional-services">Professional Services</option>
@@ -124,11 +129,12 @@ export function LeadCaptureForm({ onSubmit, isLoading }: LeadCaptureFormProps) {
         </div>
 
         <div>
-          <label className={labelClass}>
+          <label htmlFor="lead-teamSize" className={labelClass}>
             Team Size{" "}
             <span className="text-navy/30 font-normal text-xs">(optional)</span>
           </label>
-          <select {...register("teamSize")} className={inputClass}>
+          <select {...register("teamSize")}
+            id="lead-teamSize" className={inputClass}>
             <option value="">Select size...</option>
             <option value="1-5">1–5</option>
             <option value="6-15">6–15</option>
@@ -139,11 +145,12 @@ export function LeadCaptureForm({ onSubmit, isLoading }: LeadCaptureFormProps) {
         </div>
 
         <div>
-          <label className={labelClass}>
+          <label htmlFor="lead-revenueRange" className={labelClass}>
             Annual Revenue{" "}
             <span className="text-navy/30 font-normal text-xs">(optional)</span>
           </label>
-          <select {...register("revenueRange")} className={inputClass}>
+          <select {...register("revenueRange")}
+            id="lead-revenueRange" className={inputClass}>
             <option value="">Select range...</option>
             <option value="under-500k">Under AED 500K</option>
             <option value="500k-2m">AED 500K – 2M</option>

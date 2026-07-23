@@ -31,7 +31,7 @@ export default function ServicesPage() {
         <div className="graph-overlay" />
         <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5 relative z-10">
           {services.map(s => (
-            <div key={s.n} className="bg-white p-7 md:p-8 rounded-xl border border-navy/10 hover:border-gold hover:shadow-lg transition-all duration-200 flex flex-col">
+            <div key={s.n} className="bg-white p-7 md:p-8 rounded-xl border border-navy/10 hover:border-gold card-interactive flex flex-col">
               <div className="flex justify-between items-start mb-5">
                 <div className="w-12 h-12 bg-navy text-gold rounded flex items-center justify-center font-heading font-bold text-xl">{s.n}</div>
                 <span className="text-xs font-heading font-semibold text-ivory bg-navy px-3 py-1 rounded-full">{s.stage}</span>
@@ -43,7 +43,7 @@ export default function ServicesPage() {
                 <ul className="space-y-2">
                   {s.deliverables.map(d => (
                     <li key={d} className="flex items-start gap-2 font-body text-sm text-navy/80">
-                      <span className="text-emerald font-bold mt-0.5 flex-shrink-0">✔</span>{d}
+                      <span className="text-emerald-ink font-bold mt-0.5 flex-shrink-0">✔</span>{d}
                     </li>
                   ))}
                 </ul>
@@ -52,7 +52,7 @@ export default function ServicesPage() {
                 <p className="font-heading font-semibold text-navy text-[10px] uppercase tracking-widest mb-1">Ideal For</p>
                 <p className="font-body text-xs text-navy/70 leading-relaxed">{s.ideal}</p>
               </div>
-              <Link href="/contact" className="w-full text-center text-gold font-heading font-bold text-sm uppercase tracking-wider hover:text-gold-bright transition-colors">
+              <Link href="/contact" className="w-full text-center text-gold-ink font-heading font-bold text-sm uppercase tracking-wider hover:text-gold transition-colors">
                 Book a Strategy Call →
               </Link>
             </div>
@@ -65,7 +65,7 @@ export default function ServicesPage() {
         <div className="max-w-2xl mx-auto text-center relative z-10">
           <h2 className="font-heading font-extrabold text-2xl md:text-3xl mb-4">Not sure which service fits?</h2>
           <p className="font-body text-ivory/70 mb-8 leading-relaxed text-sm md:text-base">Start with the free diagnostic. It identifies your primary constraint in 4 minutes — and the right service becomes obvious from your results.</p>
-          <Link href="/diagnostic" className="inline-flex items-center justify-center bg-gold text-navy font-heading font-bold py-4 px-10 rounded text-base hover:bg-gold-bright transition-colors min-h-[52px] w-full sm:w-auto">
+          <Link href="/diagnostic" className="inline-flex items-center justify-center bg-gold text-navy font-heading font-bold py-4 px-10 rounded-xl text-base hover:bg-gold-bright transition-colors min-h-[52px] w-full sm:w-auto">
             Start Your Free Diagnostic →
           </Link>
         </div>
