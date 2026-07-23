@@ -1,6 +1,7 @@
 'use client';
 import { useState, useRef } from 'react';
 import { useRouter } from 'next/navigation';
+import { track } from '@vercel/analytics';
 import { QUESTIONS } from '@/lib/questions';
 import { DIMENSION_META } from '@/lib/scoring';
 import { QuestionCard } from '@/components/quiz/QuestionCard';
@@ -34,6 +35,18 @@ export default function DiagnosticPage() {
   const selectedAnswer = answers[question.id];
   const isLastQuestion = currentQuestion === QUESTIONS.length - 1;
 
+  // Funnel: diagnostic start → complete → email captured → Calendly click.
+  const startQuiz = () => {
+    track('diagnostic_start');
+    window.scrollTo(0, 0);
+    setStage('quiz');
+  };
+
+  const goToLeadCapture = () => {
+    track('diagnostic_complete');
+    setStage('lead-capture');
+  };
+
   const handleAnswer = (questionId: number, optionId: string) => {
     const newAnswers = { ...answers, [questionId]: optionId };
     setAnswers(newAnswers);
@@ -46,7 +59,7 @@ export default function DiagnosticPage() {
       if (currentQuestion < QUESTIONS.length - 1) {
         setCurrentQuestion(prev => prev + 1);
       } else {
-        setStage('lead-capture');
+        goToLeadCapture();
       }
     }, 400);
   };
@@ -58,7 +71,7 @@ export default function DiagnosticPage() {
     if (currentQuestion < QUESTIONS.length - 1) {
       setCurrentQuestion(prev => prev + 1);
     } else {
-      setStage('lead-capture');
+      goToLeadCapture();
     }
   };
 
@@ -96,6 +109,7 @@ export default function DiagnosticPage() {
       }
 
       if (data?.success) {
+        track('email_captured');
         sessionStorage.setItem(
           'diagnosticResults',
           JSON.stringify({ results: data.results, leadData })
@@ -152,7 +166,7 @@ export default function DiagnosticPage() {
               ))}
             </div>
             <button
-              onClick={() => setStage('quiz')}
+              onClick={startQuiz}
               className="w-full max-w-xs mx-auto block bg-gold text-navy font-heading font-bold py-4 px-8 rounded-xl text-base md:text-lg min-h-[56px] hover:bg-gold-bright active:scale-95 transition-[background-color,transform] duration-200 shadow-lg"
             >
               Start the Free Diagnostic →
@@ -221,7 +235,7 @@ export default function DiagnosticPage() {
               your business you will actually use.
             </p>
             <button
-              onClick={() => { window.scrollTo(0, 0); setStage('quiz'); }}
+              onClick={startQuiz}
               className="w-full max-w-xs mx-auto block bg-gold text-navy font-heading font-bold py-4 px-8 rounded-xl text-base min-h-[56px] hover:bg-gold-bright active:scale-95 transition-[background-color,transform] duration-200 shadow-lg"
             >
               Start the Free Diagnostic →

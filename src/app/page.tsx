@@ -1,12 +1,15 @@
-import type { Metadata } from 'next';
 import Link from 'next/link';
 import { cn } from '@/lib/utils';
+import { pageMetadata } from '@/lib/metadata';
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: 'Muhammed Ajmal Consulting | Strategic Growth Architect — Dubai, UAE',
+  absoluteTitle: true,
+  ogTitle: 'Strategic Growth Architecture for Founder-Led SMEs | UAE & GCC',
   description:
     'Scale your UAE or GCC SME without daily founder intervention. Strategic Growth Architecture™ — Diagnose → Design → Build → Optimize → Scale. Free diagnostic.',
-};
+  path: '/',
+});
 
 export default function HomePage() {
   return (

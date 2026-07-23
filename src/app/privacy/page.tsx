@@ -13,14 +13,15 @@
  *   - The retention periods reflect how long you genuinely keep each record.
  *   - The "Last updated" date is refreshed whenever the policy changes.
  */
-import type { Metadata } from 'next';
 import Link from 'next/link';
+import { pageMetadata } from '@/lib/metadata';
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: 'Privacy Policy',
   description:
     'How Muhammed Ajmal Consulting collects, uses, and protects your personal data, aligned to the UAE Personal Data Protection Law (Federal Decree-Law No. 45 of 2021).',
-};
+  path: '/privacy',
+});
 
 const LAST_UPDATED = '23 July 2026';
 const PRIVACY_EMAIL = 'privacy@muhammedajmal.com';

@@ -1,5 +1,6 @@
 'use client';
 import Script from 'next/script';
+import { track } from '@vercel/analytics';
 import { CALENDLY_LINK } from '@/lib/env';
 
 // Calendly attaches this to window once widget.js has loaded.
@@ -15,6 +16,7 @@ const POPUP_URL = `${CALENDLY_LINK}?background_color=F9FAFB&text_color=1A1A2E&pr
 
 export function CalendlyWidget() {
   const openPopup = () => {
+    track('calendly_click', { from: 'contact' });
     if (window.Calendly) {
       window.Calendly.initPopupWidget({ url: POPUP_URL });
       return;
