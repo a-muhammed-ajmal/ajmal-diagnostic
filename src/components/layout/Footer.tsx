@@ -25,6 +25,7 @@ export function Footer() {
               { href: '/about', label: 'About' },
               { href: '/insights', label: 'Insights' },
               { href: '/contact', label: 'Contact' },
+              { href: '/privacy', label: 'Privacy' },
             ].map(l => (
               <li key={l.href}><Link href={l.href} className="font-body text-xs text-ivory/50 hover:text-gold transition-colors">{l.label}</Link></li>
             ))}

@@ -89,6 +89,10 @@ export function ContactForm() {
         {errors.message && <p role="alert" className="text-crimson text-xs mt-1">Please provide a brief message (min 20 characters)</p>}
       </div>
       {error && <p role="alert" className="text-crimson text-sm">{error}</p>}
+      <p className="text-xs text-navy/50 font-body">
+        By sending this enquiry you agree to our{' '}
+        <a href="/privacy" className="text-gold-ink underline hover:text-gold transition-colors">Privacy Policy</a>.
+      </p>
       <button
         type="submit"
         disabled={isSubmitting}
