@@ -35,13 +35,17 @@ export async function POST(req: NextRequest) {
     });
 
     // Rendered as React so every attacker-controlled value is escaped.
-    await resend.emails.send({
+    const { error } = await resend.emails.send({
       from: `Muhammed Ajmal Consulting <${process.env.RESEND_FROM_EMAIL}>`,
       to: process.env.RESEND_FROM_EMAIL!,
       replyTo: data.email,
       subject: `New Enquiry: ${data.inquiryType} — ${data.companyName}`,
       react: ContactNotificationEmail(data),
     });
+
+    if (error) {
+      console.error("Contact notification email failed:", error);
+    }
 
     return NextResponse.json({ success: true });
   } catch (error) {
