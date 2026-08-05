@@ -5,7 +5,7 @@ import { ImageResponse } from 'next/og';
 // the CSS custom properties in globals.css. These values match the design tokens exactly
 // (--color-navy #1A1A2E, --color-gold #FF6535, --color-ivory #F9FAFB).
 
-export const alt = 'Muhammed Ajmal · Strategic Growth Architecture™';
+export const alt = 'Muhammed Ajmal · Strategic Growth Architecture';
 export const size = { width: 1200, height: 630 };
 export const contentType = 'image/png';
 
@@ -93,7 +93,7 @@ export default function OpengraphImage() {
         <div style={{ display: 'flex', alignItems: 'center' }}>
           <div style={{ width: 48, height: 4, background: '#FF6535', marginRight: 20 }} />
           <span style={{ color: '#F9FAFB', fontSize: 24, fontWeight: 600 }}>
-            Muhammed Ajmal · Strategic Growth Architecture™
+            Muhammed Ajmal · Strategic Growth Architecture
           </span>
         </div>
       </div>

@@ -14,7 +14,7 @@ export function Footer() {
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
         <div>
           <div className="font-heading font-bold tracking-widest text-sm uppercase mb-3">Muhammed Ajmal Consulting</div>
-          <p className="font-body text-xs text-ivory/40 leading-relaxed max-w-xs">Strategic Growth Architecture™ for founder-led SMEs across the UAE and GCC.</p>
+          <p className="font-body text-xs text-ivory/40 leading-relaxed max-w-xs">Strategic Growth Architecture for founder-led SMEs across the UAE and GCC.</p>
         </div>
         <div>
           <div className="font-heading font-semibold text-xs uppercase tracking-widest text-gold mb-3">Quick Links</div>
@@ -41,7 +41,7 @@ export function Footer() {
       </div>
       <div className="max-w-7xl mx-auto border-t border-ivory/10 mt-8 pt-6 flex flex-col md:flex-row justify-between items-center gap-3">
         <p className="font-body text-xs text-ivory/30">© 2026 Muhammed Ajmal. All Rights Reserved.</p>
-        <p className="font-body text-xs text-ivory/30">Strategic Growth Architecture™ is a proprietary framework.</p>
+        <p className="font-body text-xs text-ivory/30">Strategic Growth Architecture is a proprietary framework of Muhammed Ajmal Consulting.</p>
       </div>
     </footer>
   );

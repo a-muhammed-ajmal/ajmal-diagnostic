@@ -84,7 +84,7 @@ export default function ArticleOpengraphImage() {
         <div style={{ display: 'flex', alignItems: 'center' }}>
           <div style={{ width: 48, height: 4, background: '#FF6535', marginRight: 20 }} />
           <span style={{ color: '#F9FAFB', fontSize: 24, fontWeight: 600 }}>
-            Muhammed Ajmal · Strategic Growth Architecture™
+            Muhammed Ajmal · Strategic Growth Architecture
           </span>
         </div>
       </div>

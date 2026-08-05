@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     template: "%s | Muhammed Ajmal Consulting",
   },
   description:
-    "Helping founder-led SMEs across the UAE and GCC build scalable, system-driven businesses through Strategic Growth Architecture™. Free diagnostic identifies your primary growth constraint.",
+    "Helping founder-led SMEs across the UAE and GCC build scalable, system-driven businesses through Strategic Growth Architecture. Free diagnostic identifies your primary growth constraint.",
   openGraph: {
     title: "Strategic Growth Architecture for Founder-Led SMEs | UAE & GCC",
     description:

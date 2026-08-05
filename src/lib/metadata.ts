@@ -3,6 +3,25 @@ import { SITE_URL } from "./env";
 
 export const SITE_NAME = "Muhammed Ajmal Consulting";
 
+/**
+ * The studio headshot in /public. Site-wide brand identity rather than article content,
+ * so it lives here instead of on ArticleAuthor — /about and the JSON-LD Person nodes use
+ * it too, and none of those are article-scoped.
+ *
+ * A string path rather than a static import: JSON-LD needs a stable absolute URL, and a
+ * static import resolves to a content-hashed /_next/static/media/… path that changes
+ * between builds.
+ */
+export const AUTHOR_HEADSHOT = {
+  src: "/images/muhammed-ajmal.jpg",
+  width: 1440,
+  height: 1440,
+  alt: "Muhammed Ajmal, Strategic Growth Architect, Dubai",
+} as const;
+
+/** Absolute form — schema.org image fields must not be relative. */
+export const AUTHOR_HEADSHOT_URL = `${SITE_URL}${AUTHOR_HEADSHOT.src}`;
+
 interface PageMetadataOptions {
   /** Page-specific title. Brand is appended unless `absoluteTitle` is set. */
   title: string;

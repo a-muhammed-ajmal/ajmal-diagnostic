@@ -25,7 +25,7 @@ export default function ServicesPage() {
         <div className="max-w-4xl mx-auto text-center relative z-10">
           <span className="text-gold font-heading font-bold tracking-widest text-sm uppercase mb-3 block">Consulting Services</span>
           <h1 className="text-3xl md:text-5xl font-heading font-extrabold mb-5">Precision Interventions for<br /><span className="gold-gradient-text">Founder-Led Growth</span></h1>
-          <p className="font-body text-ivory/70 text-base md:text-lg max-w-2xl mx-auto leading-relaxed">Six services, each designed to address a specific stage in the Strategic Growth Architecture™.</p>
+          <p className="font-body text-ivory/70 text-base md:text-lg max-w-2xl mx-auto leading-relaxed">Six services, each designed to address a specific stage in the Strategic Growth Architecture.</p>
         </div>
       </section>
 

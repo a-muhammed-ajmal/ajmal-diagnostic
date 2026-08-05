@@ -21,23 +21,16 @@ npm install
 npm run dev   # http://localhost:3000
 ```
 
-Create a `.env.local` with these keys (values from Supabase, Resend, Anthropic and your
-Calendly link):
+Copy `.env.example` to `.env.local` and fill in the values (from Supabase, Resend,
+Anthropic and your Calendly link):
 
 ```bash
-NEXT_PUBLIC_SUPABASE_URL=
-NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=
-SUPABASE_SERVICE_ROLE_KEY=
-RESEND_API_KEY=
-RESEND_FROM_EMAIL=
-ANTHROPIC_API_KEY=
-ADMIN_PASSWORD=
-NEXT_PUBLIC_SITE_URL=https://www.muhammedajmal.com
-NEXT_PUBLIC_CALENDLY_LINK=https://calendly.com/your-handle/your-event
+cp .env.example .env.local
 ```
 
-The build **fails loudly** if `NEXT_PUBLIC_CALENDLY_LINK` is missing or malformed
-(see `src/lib/env.ts`) — this is deliberate, it prevents a broken booking link from
+The build **fails loudly** if `NEXT_PUBLIC_CALENDLY_LINK` is missing or malformed. The
+check runs in `next.config.ts` before compilation starts, and again in `src/lib/env.ts`
+as a second line of defence — this is deliberate, it prevents a broken booking link from
 shipping. Set that variable both locally and in the Vercel project environment.
 
 ## Scripts
@@ -55,7 +48,7 @@ shipping. Set that variable both locally and in the Vercel project environment.
 
 | Metric | Value |
 |---|---|
-| Tests | 15 (Jest) — `scoring.ts` 100% covered |
+| Tests | 36 (Jest) — 25.88% lines overall; `scoring.ts` and `calendly.ts` 100% covered |
 | DB tables | 5 (RLS on all) |
 | Migrations | 2 (`20260723000001`–`20260723000002`) |
 | Routes | App Router (see `AGENTS.md` for the full page list) |

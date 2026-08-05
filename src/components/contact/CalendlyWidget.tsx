@@ -2,6 +2,7 @@
 import Script from 'next/script';
 import { track } from '@vercel/analytics';
 import { CALENDLY_LINK } from '@/lib/env';
+import { calendlyPopupUrl } from '@/lib/calendly';
 
 // Calendly attaches this to window once widget.js has loaded.
 declare global {
@@ -12,7 +13,7 @@ declare global {
   }
 }
 
-const POPUP_URL = `${CALENDLY_LINK}?background_color=F9FAFB&text_color=1A1A2E&primary_color=FF6535`;
+const POPUP_URL = calendlyPopupUrl(CALENDLY_LINK);
 
 export function CalendlyWidget() {
   const openPopup = () => {

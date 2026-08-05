@@ -1,5 +1,6 @@
 import Link from 'next/link';
-import { pageMetadata } from '@/lib/metadata';
+import Image from 'next/image';
+import { pageMetadata, AUTHOR_HEADSHOT } from '@/lib/metadata';
 import { personAndServiceJsonLd, jsonLdScript } from '@/lib/jsonLd';
 
 export const metadata = pageMetadata({
@@ -41,8 +42,22 @@ export default function AboutPage() {
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row gap-12 md:gap-16 items-start relative z-10">
           <div className="w-full md:w-2/5 flex-shrink-0">
             <div className="w-full aspect-[4/5] bg-navy rounded-xl relative shadow-xl overflow-hidden flex items-end max-w-sm mx-auto md:max-w-none">
+              {/*
+                The source is square and the frame is 4:5, so object-cover scales to the
+                frame height and the overflow is purely horizontal, split evenly — the
+                face stays centred without an explicit object-position.
+              */}
+              <Image
+                src={AUTHOR_HEADSHOT.src}
+                alt={AUTHOR_HEADSHOT.alt}
+                fill
+                priority
+                sizes="(min-width: 768px) 40vw, (min-width: 432px) 24rem, 100vw"
+                className="object-cover"
+              />
               <div className="absolute inset-0 border-4 border-gold/20 m-4 rounded-lg pointer-events-none" />
-              <div className="p-6 md:p-8 w-full bg-gradient-to-t from-navy via-navy/60 to-transparent">
+              {/* z-10: `fill` is absolutely positioned, so a static caption would paint underneath it. */}
+              <div className="relative z-10 p-6 md:p-8 w-full bg-gradient-to-t from-navy via-navy/60 to-transparent">
                 <div className="font-heading font-bold text-ivory text-xl md:text-2xl">Muhammed Ajmal</div>
                 <div className="text-gold text-xs tracking-widest uppercase mt-1">Strategic Growth Architect · Dubai, UAE</div>
               </div>

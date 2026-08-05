@@ -50,7 +50,7 @@ export default function ResultsPage() {
       <div className="max-w-3xl mx-auto space-y-5 relative z-10">
 
         <div className="text-center">
-          <p className="text-gold-ink eyebrow mb-2">Strategic Growth Architecture™</p>
+          <p className="text-gold-ink eyebrow mb-2">Strategic Growth Architecture</p>
           <h1 className="text-2xl md:text-3xl font-heading font-extrabold text-navy mb-2">{firstName}, here is your diagnosis.</h1>
           <p className="text-navy/50 font-body text-sm">Your full report has been emailed to {leadData.email}</p>
         </div>

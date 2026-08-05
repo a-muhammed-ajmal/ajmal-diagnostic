@@ -66,7 +66,7 @@ export function DiagnosticReportEmail({
           <Text
             style={{ color: "#6B7280", fontSize: "14px", margin: "0 0 24px" }}
           >
-            Prepared for {companyName} · Strategic Growth Architecture™
+            Prepared for {companyName} · Strategic Growth Architecture
           </Text>
           <Hr style={{ borderColor: "#E5E7EB", margin: "0 0 24px" }} />
 
@@ -374,7 +374,7 @@ export function DiagnosticReportEmail({
             style={{ color: "#6B7280", fontSize: "11px", textAlign: "center" }}
           >
             Muhammed Ajmal Consulting · Dubai, UAE · Strategic Growth
-            Architecture™
+            Architecture
           </Text>
         </Container>
       </Body>

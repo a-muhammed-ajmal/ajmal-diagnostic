@@ -7,7 +7,7 @@ export const metadata = pageMetadata({
   absoluteTitle: true,
   ogTitle: 'Strategic Growth Architecture for Founder-Led SMEs | UAE & GCC',
   description:
-    'Scale your UAE or GCC SME without daily founder intervention. Strategic Growth Architecture™ — Diagnose → Design → Build → Optimize → Scale. Free diagnostic.',
+    'Scale your UAE or GCC SME without daily founder intervention. Strategic Growth Architecture — Diagnose → Design → Build → Optimize → Scale. Free diagnostic.',
   path: '/',
 });
 
@@ -48,14 +48,14 @@ export default function HomePage() {
             </div>
           </div>
 
-          {/* Right — SGA™ Card */}
+          {/* Right — SGA Card */}
           <div className="relative h-72 md:h-80 w-full flex items-center justify-center">
             <div className="hidden sm:block absolute w-64 h-64 border border-gold/20 rounded-full animate-[spin_25s_linear_infinite]" />
             <div className="hidden sm:block absolute w-80 h-80 border border-gold/10 rounded-full animate-[spin_35s_linear_infinite_reverse]" />
             <div className="bg-navy border border-gold/40 p-6 md:p-8 rounded-xl shadow-2xl relative z-10 max-w-xs w-full text-center">
-              <div className="text-gold font-heading font-bold text-2xl mb-1">SGA™</div>
+              <div className="text-gold font-heading font-bold text-2xl mb-1">SGA</div>
               <div className="text-[10px] text-ivory/60 uppercase tracking-widest mb-5 text-center">
-                Strategic Growth Architecture™
+                Strategic Growth Architecture
               </div>
               <div className="space-y-2">
                 {[

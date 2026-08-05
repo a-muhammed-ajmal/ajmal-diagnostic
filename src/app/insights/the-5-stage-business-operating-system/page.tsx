@@ -1,6 +1,7 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { getArticle, getReadingTime, type ArticleStat } from '@/lib/articles';
-import { pageMetadata } from '@/lib/metadata';
+import { pageMetadata, AUTHOR_HEADSHOT } from '@/lib/metadata';
 import { articleJsonLd, articleBreadcrumbJsonLd, jsonLdScript } from '@/lib/jsonLd';
 import { ArticleToc, type TocItem } from '@/components/insights/ArticleToc';
 
@@ -175,15 +176,20 @@ export default function ArticlePage() {
               </>
             )}
 
-            {/* Author bio — initials avatar (no photo asset exists in the repo). */}
+            {/*
+              Author bio. alt="" because the name and role sit directly beside the photo —
+              a real alt would just repeat them. No overflow-hidden on the wrapper: the
+              gold corner bracket is deliberately outside the box and would be clipped.
+            */}
             <div className="mt-6 flex flex-col sm:flex-row gap-5 items-start bg-white border border-navy/10 rounded-xl p-6">
-              <div
-                className="relative w-16 h-16 flex-shrink-0 flex items-center justify-center border-2 border-navy/15 rounded-lg bg-navy"
-                aria-hidden="true"
-              >
-                <span className="font-heading font-extrabold text-xl tracking-tighter leading-none text-ivory">
-                  M<span className="text-gold">A</span>
-                </span>
+              <div className="relative w-16 h-16 flex-shrink-0 border-2 border-navy/15 rounded-lg bg-navy">
+                <Image
+                  src={AUTHOR_HEADSHOT.src}
+                  alt=""
+                  width={64}
+                  height={64}
+                  className="w-full h-full object-cover rounded-md"
+                />
                 <div className="absolute -right-1 -top-1 w-2.5 h-2.5 border-t-2 border-r-2 border-gold" />
               </div>
               <div>

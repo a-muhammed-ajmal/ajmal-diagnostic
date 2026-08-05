@@ -2099,7 +2099,7 @@ h1, h2, h3, h4, h5, h6 {
           <button class="option-btn" onclick="selectOption(this)">
             <span class="option-dot"></span>
             <div>
-              <div class="option-text">SGA™ Full Program</div>
+              <div class="option-text">SGA Full Program</div>
               <div style="font-size:11px;color:var(--text-muted);margin-top:2px;">12-week implementation</div>
             </div>
           </button>

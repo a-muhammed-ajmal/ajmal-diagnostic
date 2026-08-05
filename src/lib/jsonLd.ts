@@ -1,5 +1,5 @@
 import { SITE_URL } from "./env";
-import { SITE_NAME } from "./metadata";
+import { SITE_NAME, AUTHOR_HEADSHOT_URL } from "./metadata";
 import type { Article } from "./articles";
 
 /**
@@ -23,6 +23,7 @@ export function personAndServiceJsonLd() {
         name: "Muhammed Ajmal",
         jobTitle: "Strategic Growth Architect",
         url: `${SITE_URL}/about`,
+        image: AUTHOR_HEADSHOT_URL,
         knowsLanguage: ["English", "Arabic", "Hindi", "Malayalam", "Tamil", "Kannada"],
         worksFor: { "@id": `${SITE_URL}#service` },
       },
@@ -56,6 +57,7 @@ export function articleJsonLd(article: Article) {
       "@type": "Person",
       name: article.author.name,
       url: `${SITE_URL}/about`,
+      image: AUTHOR_HEADSHOT_URL,
     },
     publisher: {
       "@type": "Organization",
