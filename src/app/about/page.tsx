@@ -4,9 +4,9 @@ import { pageMetadata, AUTHOR_HEADSHOT } from '@/lib/metadata';
 import { personAndServiceJsonLd, jsonLdScript } from '@/lib/jsonLd';
 
 export const metadata = pageMetadata({
-  title: 'About Muhammed Ajmal | Strategic Growth Architect',
+  title: 'About Muhammed Ajmal | Business Operations & Growth Consultant',
   absoluteTitle: true,
-  description: 'Dubai-based Strategic Growth Architect helping founder-led SMEs across the UAE and GCC build scalable, system-driven businesses.',
+  description: 'Helping UAE founder-led SMEs build operating systems, reduce founder dependency, and enable consistent team execution.',
   path: '/about',
 });
 

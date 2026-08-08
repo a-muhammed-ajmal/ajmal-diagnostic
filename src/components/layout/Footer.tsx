@@ -17,8 +17,9 @@ export function Footer() {
           <p className="font-body text-xs text-ivory/40 leading-relaxed max-w-xs">Strategic Growth Architecture for founder-led SMEs across the UAE and GCC.</p>
         </div>
         <div>
-          <div className="font-heading font-semibold text-xs uppercase tracking-widest text-gold mb-3">Quick Links</div>
-          <ul className="space-y-2">
+          <nav aria-label="Footer quick links">
+            <div className="font-heading font-semibold text-xs uppercase tracking-widest text-gold mb-3">Quick Links</div>
+            <ul className="space-y-1">
             {[
               { href: '/diagnostic', label: 'Free Diagnostic' },
               { href: '/services', label: 'Services' },
@@ -27,9 +28,18 @@ export function Footer() {
               { href: '/contact', label: 'Contact' },
               { href: '/privacy', label: 'Privacy' },
             ].map(l => (
-              <li key={l.href}><Link href={l.href} className="font-body text-xs text-ivory/50 hover:text-gold transition-colors">{l.label}</Link></li>
+              <li key={l.href}>
+                <Link
+                  href={l.href}
+                  className="flex items-center font-body text-sm text-ivory/80 hover:text-gold transition-colors px-0 py-2 min-h-[44px]"
+                  aria-label={l.label}
+                >
+                  {l.label}
+                </Link>
+              </li>
             ))}
-          </ul>
+            </ul>
+          </nav>
         </div>
         <div>
           <div className="font-heading font-semibold text-xs uppercase tracking-widest text-gold mb-3">Get Started</div>

@@ -4,9 +4,9 @@ import { pageMetadata } from '@/lib/metadata';
 import { ARTICLES, CATEGORIES, getReadingTime, type Article } from '@/lib/articles';
 
 export const metadata = pageMetadata({
-  title: 'Insights | SME Growth, Operational Excellence & AI Systems',
+  title: 'SME Growth Insights & Frameworks | Muhammed Ajmal Consulting',
   absoluteTitle: true,
-  description: 'Practical frameworks and thought leadership for founder-led SME growth across the UAE and GCC.',
+  description: 'Operating systems, process optimization frameworks, and strategies for scaling founder-led UAE SMEs.',
   path: '/insights',
 });
 
