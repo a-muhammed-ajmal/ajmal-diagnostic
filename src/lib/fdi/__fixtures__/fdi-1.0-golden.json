@@ -1,0 +1,2447 @@
+{
+  "_comment": "GENERATED, COMMITTED, FROZEN. §18 reproducibility fixture for FDI-1.0. Do not hand-edit; regenerating it to make a failing test pass would re-score history.",
+  "diagnosticVersion": "FDI-1.0",
+  "questionSetVersion": "FDI-QS-1.0",
+  "scoringModelVersion": "FDI-SM-1.0",
+  "bandConfigVersion": "FDI-BC-1.0",
+  "cases": [
+    {
+      "label": "all items at minimum",
+      "targets": {
+        "DS": 0,
+        "EC": 0,
+        "OV": 0
+      },
+      "result": {
+        "versions": {
+          "instrument": "FDI",
+          "diagnostic": "FDI-1.0",
+          "questionSet": "FDI-QS-1.0",
+          "scoringModel": "FDI-SM-1.0",
+          "bandConfig": "FDI-BC-1.0"
+        },
+        "answers": [
+          {
+            "questionId": "DS1",
+            "componentKey": "DS",
+            "optionId": "DS1-A",
+            "score": 0
+          },
+          {
+            "questionId": "DS2",
+            "componentKey": "DS",
+            "optionId": "DS2-A",
+            "score": 0
+          },
+          {
+            "questionId": "DS3",
+            "componentKey": "DS",
+            "optionId": "DS3-A",
+            "score": 0
+          },
+          {
+            "questionId": "DS4",
+            "componentKey": "DS",
+            "optionId": "DS4-A",
+            "score": 0
+          },
+          {
+            "questionId": "EC1",
+            "componentKey": "EC",
+            "optionId": "EC1-A",
+            "score": 0
+          },
+          {
+            "questionId": "EC2",
+            "componentKey": "EC",
+            "optionId": "EC2-A",
+            "score": 0
+          },
+          {
+            "questionId": "EC3",
+            "componentKey": "EC",
+            "optionId": "EC3-A",
+            "score": 0
+          },
+          {
+            "questionId": "EC4",
+            "componentKey": "EC",
+            "optionId": "EC4-A",
+            "score": 0
+          },
+          {
+            "questionId": "OV1",
+            "componentKey": "OV",
+            "optionId": "OV1-A",
+            "score": 0
+          },
+          {
+            "questionId": "OV2",
+            "componentKey": "OV",
+            "optionId": "OV2-A",
+            "score": 0
+          },
+          {
+            "questionId": "OV3",
+            "componentKey": "OV",
+            "optionId": "OV3-A",
+            "score": 0
+          },
+          {
+            "questionId": "OV4",
+            "componentKey": "OV",
+            "optionId": "OV4-A",
+            "score": 0
+          }
+        ],
+        "components": [
+          {
+            "key": "DS",
+            "label": "Decision Speed",
+            "raw": 0,
+            "rawMax": 12,
+            "unrounded": 0,
+            "display": 0,
+            "alert": false
+          },
+          {
+            "key": "EC",
+            "label": "Execution Consistency",
+            "raw": 0,
+            "rawMax": 12,
+            "unrounded": 0,
+            "display": 0,
+            "alert": false
+          },
+          {
+            "key": "OV",
+            "label": "Operational Visibility",
+            "raw": 0,
+            "rawMax": 12,
+            "unrounded": 0,
+            "display": 0,
+            "alert": false
+          }
+        ],
+        "fdi": {
+          "unrounded": 0,
+          "display": 0
+        },
+        "band": {
+          "key": "low",
+          "label": "Low Founder Dependency",
+          "displayRange": "0–24"
+        },
+        "alerts": [],
+        "concentration": {
+          "componentKeys": [
+            "DS",
+            "EC",
+            "OV"
+          ],
+          "labels": [
+            "Decision Speed",
+            "Execution Consistency",
+            "Operational Visibility"
+          ],
+          "raw": 0,
+          "unrounded": 0,
+          "display": 0
+        }
+      }
+    },
+    {
+      "label": "all items at maximum",
+      "targets": {
+        "DS": 12,
+        "EC": 12,
+        "OV": 12
+      },
+      "result": {
+        "versions": {
+          "instrument": "FDI",
+          "diagnostic": "FDI-1.0",
+          "questionSet": "FDI-QS-1.0",
+          "scoringModel": "FDI-SM-1.0",
+          "bandConfig": "FDI-BC-1.0"
+        },
+        "answers": [
+          {
+            "questionId": "DS1",
+            "componentKey": "DS",
+            "optionId": "DS1-D",
+            "score": 3
+          },
+          {
+            "questionId": "DS2",
+            "componentKey": "DS",
+            "optionId": "DS2-D",
+            "score": 3
+          },
+          {
+            "questionId": "DS3",
+            "componentKey": "DS",
+            "optionId": "DS3-D",
+            "score": 3
+          },
+          {
+            "questionId": "DS4",
+            "componentKey": "DS",
+            "optionId": "DS4-D",
+            "score": 3
+          },
+          {
+            "questionId": "EC1",
+            "componentKey": "EC",
+            "optionId": "EC1-D",
+            "score": 3
+          },
+          {
+            "questionId": "EC2",
+            "componentKey": "EC",
+            "optionId": "EC2-D",
+            "score": 3
+          },
+          {
+            "questionId": "EC3",
+            "componentKey": "EC",
+            "optionId": "EC3-D",
+            "score": 3
+          },
+          {
+            "questionId": "EC4",
+            "componentKey": "EC",
+            "optionId": "EC4-D",
+            "score": 3
+          },
+          {
+            "questionId": "OV1",
+            "componentKey": "OV",
+            "optionId": "OV1-D",
+            "score": 3
+          },
+          {
+            "questionId": "OV2",
+            "componentKey": "OV",
+            "optionId": "OV2-D",
+            "score": 3
+          },
+          {
+            "questionId": "OV3",
+            "componentKey": "OV",
+            "optionId": "OV3-D",
+            "score": 3
+          },
+          {
+            "questionId": "OV4",
+            "componentKey": "OV",
+            "optionId": "OV4-D",
+            "score": 3
+          }
+        ],
+        "components": [
+          {
+            "key": "DS",
+            "label": "Decision Speed",
+            "raw": 12,
+            "rawMax": 12,
+            "unrounded": 100,
+            "display": 100,
+            "alert": true
+          },
+          {
+            "key": "EC",
+            "label": "Execution Consistency",
+            "raw": 12,
+            "rawMax": 12,
+            "unrounded": 100,
+            "display": 100,
+            "alert": true
+          },
+          {
+            "key": "OV",
+            "label": "Operational Visibility",
+            "raw": 12,
+            "rawMax": 12,
+            "unrounded": 100,
+            "display": 100,
+            "alert": true
+          }
+        ],
+        "fdi": {
+          "unrounded": 100,
+          "display": 100
+        },
+        "band": {
+          "key": "very_high",
+          "label": "Very High Founder Dependency",
+          "displayRange": "75–100"
+        },
+        "alerts": [
+          {
+            "raw": 12,
+            "unrounded": 100,
+            "display": 100,
+            "components": [
+              {
+                "key": "DS",
+                "label": "Decision Speed"
+              },
+              {
+                "key": "EC",
+                "label": "Execution Consistency"
+              },
+              {
+                "key": "OV",
+                "label": "Operational Visibility"
+              }
+            ]
+          }
+        ],
+        "concentration": {
+          "componentKeys": [
+            "DS",
+            "EC",
+            "OV"
+          ],
+          "labels": [
+            "Decision Speed",
+            "Execution Consistency",
+            "Operational Visibility"
+          ],
+          "raw": 12,
+          "unrounded": 100,
+          "display": 100
+        }
+      }
+    },
+    {
+      "label": "all items scoring 1",
+      "targets": {
+        "DS": 4,
+        "EC": 4,
+        "OV": 4
+      },
+      "result": {
+        "versions": {
+          "instrument": "FDI",
+          "diagnostic": "FDI-1.0",
+          "questionSet": "FDI-QS-1.0",
+          "scoringModel": "FDI-SM-1.0",
+          "bandConfig": "FDI-BC-1.0"
+        },
+        "answers": [
+          {
+            "questionId": "DS1",
+            "componentKey": "DS",
+            "optionId": "DS1-D",
+            "score": 3
+          },
+          {
+            "questionId": "DS2",
+            "componentKey": "DS",
+            "optionId": "DS2-B",
+            "score": 1
+          },
+          {
+            "questionId": "DS3",
+            "componentKey": "DS",
+            "optionId": "DS3-A",
+            "score": 0
+          },
+          {
+            "questionId": "DS4",
+            "componentKey": "DS",
+            "optionId": "DS4-A",
+            "score": 0
+          },
+          {
+            "questionId": "EC1",
+            "componentKey": "EC",
+            "optionId": "EC1-D",
+            "score": 3
+          },
+          {
+            "questionId": "EC2",
+            "componentKey": "EC",
+            "optionId": "EC2-B",
+            "score": 1
+          },
+          {
+            "questionId": "EC3",
+            "componentKey": "EC",
+            "optionId": "EC3-A",
+            "score": 0
+          },
+          {
+            "questionId": "EC4",
+            "componentKey": "EC",
+            "optionId": "EC4-A",
+            "score": 0
+          },
+          {
+            "questionId": "OV1",
+            "componentKey": "OV",
+            "optionId": "OV1-D",
+            "score": 3
+          },
+          {
+            "questionId": "OV2",
+            "componentKey": "OV",
+            "optionId": "OV2-B",
+            "score": 1
+          },
+          {
+            "questionId": "OV3",
+            "componentKey": "OV",
+            "optionId": "OV3-A",
+            "score": 0
+          },
+          {
+            "questionId": "OV4",
+            "componentKey": "OV",
+            "optionId": "OV4-A",
+            "score": 0
+          }
+        ],
+        "components": [
+          {
+            "key": "DS",
+            "label": "Decision Speed",
+            "raw": 4,
+            "rawMax": 12,
+            "unrounded": 33.333333333333336,
+            "display": 33,
+            "alert": false
+          },
+          {
+            "key": "EC",
+            "label": "Execution Consistency",
+            "raw": 4,
+            "rawMax": 12,
+            "unrounded": 33.333333333333336,
+            "display": 33,
+            "alert": false
+          },
+          {
+            "key": "OV",
+            "label": "Operational Visibility",
+            "raw": 4,
+            "rawMax": 12,
+            "unrounded": 33.333333333333336,
+            "display": 33,
+            "alert": false
+          }
+        ],
+        "fdi": {
+          "unrounded": 33.333333333333336,
+          "display": 33
+        },
+        "band": {
+          "key": "moderate",
+          "label": "Moderate Founder Dependency",
+          "displayRange": "25–49"
+        },
+        "alerts": [],
+        "concentration": {
+          "componentKeys": [
+            "DS",
+            "EC",
+            "OV"
+          ],
+          "labels": [
+            "Decision Speed",
+            "Execution Consistency",
+            "Operational Visibility"
+          ],
+          "raw": 4,
+          "unrounded": 33.333333333333336,
+          "display": 33
+        }
+      }
+    },
+    {
+      "label": "all items scoring 2",
+      "targets": {
+        "DS": 8,
+        "EC": 8,
+        "OV": 8
+      },
+      "result": {
+        "versions": {
+          "instrument": "FDI",
+          "diagnostic": "FDI-1.0",
+          "questionSet": "FDI-QS-1.0",
+          "scoringModel": "FDI-SM-1.0",
+          "bandConfig": "FDI-BC-1.0"
+        },
+        "answers": [
+          {
+            "questionId": "DS1",
+            "componentKey": "DS",
+            "optionId": "DS1-D",
+            "score": 3
+          },
+          {
+            "questionId": "DS2",
+            "componentKey": "DS",
+            "optionId": "DS2-D",
+            "score": 3
+          },
+          {
+            "questionId": "DS3",
+            "componentKey": "DS",
+            "optionId": "DS3-C",
+            "score": 2
+          },
+          {
+            "questionId": "DS4",
+            "componentKey": "DS",
+            "optionId": "DS4-A",
+            "score": 0
+          },
+          {
+            "questionId": "EC1",
+            "componentKey": "EC",
+            "optionId": "EC1-D",
+            "score": 3
+          },
+          {
+            "questionId": "EC2",
+            "componentKey": "EC",
+            "optionId": "EC2-D",
+            "score": 3
+          },
+          {
+            "questionId": "EC3",
+            "componentKey": "EC",
+            "optionId": "EC3-C",
+            "score": 2
+          },
+          {
+            "questionId": "EC4",
+            "componentKey": "EC",
+            "optionId": "EC4-A",
+            "score": 0
+          },
+          {
+            "questionId": "OV1",
+            "componentKey": "OV",
+            "optionId": "OV1-D",
+            "score": 3
+          },
+          {
+            "questionId": "OV2",
+            "componentKey": "OV",
+            "optionId": "OV2-D",
+            "score": 3
+          },
+          {
+            "questionId": "OV3",
+            "componentKey": "OV",
+            "optionId": "OV3-C",
+            "score": 2
+          },
+          {
+            "questionId": "OV4",
+            "componentKey": "OV",
+            "optionId": "OV4-A",
+            "score": 0
+          }
+        ],
+        "components": [
+          {
+            "key": "DS",
+            "label": "Decision Speed",
+            "raw": 8,
+            "rawMax": 12,
+            "unrounded": 66.66666666666667,
+            "display": 67,
+            "alert": false
+          },
+          {
+            "key": "EC",
+            "label": "Execution Consistency",
+            "raw": 8,
+            "rawMax": 12,
+            "unrounded": 66.66666666666667,
+            "display": 67,
+            "alert": false
+          },
+          {
+            "key": "OV",
+            "label": "Operational Visibility",
+            "raw": 8,
+            "rawMax": 12,
+            "unrounded": 66.66666666666667,
+            "display": 67,
+            "alert": false
+          }
+        ],
+        "fdi": {
+          "unrounded": 66.66666666666667,
+          "display": 67
+        },
+        "band": {
+          "key": "high",
+          "label": "High Founder Dependency",
+          "displayRange": "50–74"
+        },
+        "alerts": [],
+        "concentration": {
+          "componentKeys": [
+            "DS",
+            "EC",
+            "OV"
+          ],
+          "labels": [
+            "Decision Speed",
+            "Execution Consistency",
+            "Operational Visibility"
+          ],
+          "raw": 8,
+          "unrounded": 66.66666666666667,
+          "display": 67
+        }
+      }
+    },
+    {
+      "label": "decision speed saturated, others zero",
+      "targets": {
+        "DS": 12,
+        "EC": 0,
+        "OV": 0
+      },
+      "result": {
+        "versions": {
+          "instrument": "FDI",
+          "diagnostic": "FDI-1.0",
+          "questionSet": "FDI-QS-1.0",
+          "scoringModel": "FDI-SM-1.0",
+          "bandConfig": "FDI-BC-1.0"
+        },
+        "answers": [
+          {
+            "questionId": "DS1",
+            "componentKey": "DS",
+            "optionId": "DS1-D",
+            "score": 3
+          },
+          {
+            "questionId": "DS2",
+            "componentKey": "DS",
+            "optionId": "DS2-D",
+            "score": 3
+          },
+          {
+            "questionId": "DS3",
+            "componentKey": "DS",
+            "optionId": "DS3-D",
+            "score": 3
+          },
+          {
+            "questionId": "DS4",
+            "componentKey": "DS",
+            "optionId": "DS4-D",
+            "score": 3
+          },
+          {
+            "questionId": "EC1",
+            "componentKey": "EC",
+            "optionId": "EC1-A",
+            "score": 0
+          },
+          {
+            "questionId": "EC2",
+            "componentKey": "EC",
+            "optionId": "EC2-A",
+            "score": 0
+          },
+          {
+            "questionId": "EC3",
+            "componentKey": "EC",
+            "optionId": "EC3-A",
+            "score": 0
+          },
+          {
+            "questionId": "EC4",
+            "componentKey": "EC",
+            "optionId": "EC4-A",
+            "score": 0
+          },
+          {
+            "questionId": "OV1",
+            "componentKey": "OV",
+            "optionId": "OV1-A",
+            "score": 0
+          },
+          {
+            "questionId": "OV2",
+            "componentKey": "OV",
+            "optionId": "OV2-A",
+            "score": 0
+          },
+          {
+            "questionId": "OV3",
+            "componentKey": "OV",
+            "optionId": "OV3-A",
+            "score": 0
+          },
+          {
+            "questionId": "OV4",
+            "componentKey": "OV",
+            "optionId": "OV4-A",
+            "score": 0
+          }
+        ],
+        "components": [
+          {
+            "key": "DS",
+            "label": "Decision Speed",
+            "raw": 12,
+            "rawMax": 12,
+            "unrounded": 100,
+            "display": 100,
+            "alert": true
+          },
+          {
+            "key": "EC",
+            "label": "Execution Consistency",
+            "raw": 0,
+            "rawMax": 12,
+            "unrounded": 0,
+            "display": 0,
+            "alert": false
+          },
+          {
+            "key": "OV",
+            "label": "Operational Visibility",
+            "raw": 0,
+            "rawMax": 12,
+            "unrounded": 0,
+            "display": 0,
+            "alert": false
+          }
+        ],
+        "fdi": {
+          "unrounded": 33.333333333333336,
+          "display": 33
+        },
+        "band": {
+          "key": "moderate",
+          "label": "Moderate Founder Dependency",
+          "displayRange": "25–49"
+        },
+        "alerts": [
+          {
+            "raw": 12,
+            "unrounded": 100,
+            "display": 100,
+            "components": [
+              {
+                "key": "DS",
+                "label": "Decision Speed"
+              }
+            ]
+          }
+        ],
+        "concentration": {
+          "componentKeys": [
+            "DS"
+          ],
+          "labels": [
+            "Decision Speed"
+          ],
+          "raw": 12,
+          "unrounded": 100,
+          "display": 100
+        }
+      }
+    },
+    {
+      "label": "component exactly at the alert threshold",
+      "targets": {
+        "DS": 9,
+        "EC": 0,
+        "OV": 0
+      },
+      "result": {
+        "versions": {
+          "instrument": "FDI",
+          "diagnostic": "FDI-1.0",
+          "questionSet": "FDI-QS-1.0",
+          "scoringModel": "FDI-SM-1.0",
+          "bandConfig": "FDI-BC-1.0"
+        },
+        "answers": [
+          {
+            "questionId": "DS1",
+            "componentKey": "DS",
+            "optionId": "DS1-D",
+            "score": 3
+          },
+          {
+            "questionId": "DS2",
+            "componentKey": "DS",
+            "optionId": "DS2-D",
+            "score": 3
+          },
+          {
+            "questionId": "DS3",
+            "componentKey": "DS",
+            "optionId": "DS3-D",
+            "score": 3
+          },
+          {
+            "questionId": "DS4",
+            "componentKey": "DS",
+            "optionId": "DS4-A",
+            "score": 0
+          },
+          {
+            "questionId": "EC1",
+            "componentKey": "EC",
+            "optionId": "EC1-A",
+            "score": 0
+          },
+          {
+            "questionId": "EC2",
+            "componentKey": "EC",
+            "optionId": "EC2-A",
+            "score": 0
+          },
+          {
+            "questionId": "EC3",
+            "componentKey": "EC",
+            "optionId": "EC3-A",
+            "score": 0
+          },
+          {
+            "questionId": "EC4",
+            "componentKey": "EC",
+            "optionId": "EC4-A",
+            "score": 0
+          },
+          {
+            "questionId": "OV1",
+            "componentKey": "OV",
+            "optionId": "OV1-A",
+            "score": 0
+          },
+          {
+            "questionId": "OV2",
+            "componentKey": "OV",
+            "optionId": "OV2-A",
+            "score": 0
+          },
+          {
+            "questionId": "OV3",
+            "componentKey": "OV",
+            "optionId": "OV3-A",
+            "score": 0
+          },
+          {
+            "questionId": "OV4",
+            "componentKey": "OV",
+            "optionId": "OV4-A",
+            "score": 0
+          }
+        ],
+        "components": [
+          {
+            "key": "DS",
+            "label": "Decision Speed",
+            "raw": 9,
+            "rawMax": 12,
+            "unrounded": 75,
+            "display": 75,
+            "alert": true
+          },
+          {
+            "key": "EC",
+            "label": "Execution Consistency",
+            "raw": 0,
+            "rawMax": 12,
+            "unrounded": 0,
+            "display": 0,
+            "alert": false
+          },
+          {
+            "key": "OV",
+            "label": "Operational Visibility",
+            "raw": 0,
+            "rawMax": 12,
+            "unrounded": 0,
+            "display": 0,
+            "alert": false
+          }
+        ],
+        "fdi": {
+          "unrounded": 25,
+          "display": 25
+        },
+        "band": {
+          "key": "moderate",
+          "label": "Moderate Founder Dependency",
+          "displayRange": "25–49"
+        },
+        "alerts": [
+          {
+            "raw": 9,
+            "unrounded": 75,
+            "display": 75,
+            "components": [
+              {
+                "key": "DS",
+                "label": "Decision Speed"
+              }
+            ]
+          }
+        ],
+        "concentration": {
+          "componentKeys": [
+            "DS"
+          ],
+          "labels": [
+            "Decision Speed"
+          ],
+          "raw": 9,
+          "unrounded": 75,
+          "display": 75
+        }
+      }
+    },
+    {
+      "label": "component one step below the alert threshold",
+      "targets": {
+        "DS": 8,
+        "EC": 0,
+        "OV": 0
+      },
+      "result": {
+        "versions": {
+          "instrument": "FDI",
+          "diagnostic": "FDI-1.0",
+          "questionSet": "FDI-QS-1.0",
+          "scoringModel": "FDI-SM-1.0",
+          "bandConfig": "FDI-BC-1.0"
+        },
+        "answers": [
+          {
+            "questionId": "DS1",
+            "componentKey": "DS",
+            "optionId": "DS1-D",
+            "score": 3
+          },
+          {
+            "questionId": "DS2",
+            "componentKey": "DS",
+            "optionId": "DS2-D",
+            "score": 3
+          },
+          {
+            "questionId": "DS3",
+            "componentKey": "DS",
+            "optionId": "DS3-C",
+            "score": 2
+          },
+          {
+            "questionId": "DS4",
+            "componentKey": "DS",
+            "optionId": "DS4-A",
+            "score": 0
+          },
+          {
+            "questionId": "EC1",
+            "componentKey": "EC",
+            "optionId": "EC1-A",
+            "score": 0
+          },
+          {
+            "questionId": "EC2",
+            "componentKey": "EC",
+            "optionId": "EC2-A",
+            "score": 0
+          },
+          {
+            "questionId": "EC3",
+            "componentKey": "EC",
+            "optionId": "EC3-A",
+            "score": 0
+          },
+          {
+            "questionId": "EC4",
+            "componentKey": "EC",
+            "optionId": "EC4-A",
+            "score": 0
+          },
+          {
+            "questionId": "OV1",
+            "componentKey": "OV",
+            "optionId": "OV1-A",
+            "score": 0
+          },
+          {
+            "questionId": "OV2",
+            "componentKey": "OV",
+            "optionId": "OV2-A",
+            "score": 0
+          },
+          {
+            "questionId": "OV3",
+            "componentKey": "OV",
+            "optionId": "OV3-A",
+            "score": 0
+          },
+          {
+            "questionId": "OV4",
+            "componentKey": "OV",
+            "optionId": "OV4-A",
+            "score": 0
+          }
+        ],
+        "components": [
+          {
+            "key": "DS",
+            "label": "Decision Speed",
+            "raw": 8,
+            "rawMax": 12,
+            "unrounded": 66.66666666666667,
+            "display": 67,
+            "alert": false
+          },
+          {
+            "key": "EC",
+            "label": "Execution Consistency",
+            "raw": 0,
+            "rawMax": 12,
+            "unrounded": 0,
+            "display": 0,
+            "alert": false
+          },
+          {
+            "key": "OV",
+            "label": "Operational Visibility",
+            "raw": 0,
+            "rawMax": 12,
+            "unrounded": 0,
+            "display": 0,
+            "alert": false
+          }
+        ],
+        "fdi": {
+          "unrounded": 22.22222222222222,
+          "display": 22
+        },
+        "band": {
+          "key": "low",
+          "label": "Low Founder Dependency",
+          "displayRange": "0–24"
+        },
+        "alerts": [],
+        "concentration": {
+          "componentKeys": [
+            "DS"
+          ],
+          "labels": [
+            "Decision Speed"
+          ],
+          "raw": 8,
+          "unrounded": 66.66666666666667,
+          "display": 67
+        }
+      }
+    },
+    {
+      "label": "two components tied highest",
+      "targets": {
+        "DS": 12,
+        "EC": 2,
+        "OV": 12
+      },
+      "result": {
+        "versions": {
+          "instrument": "FDI",
+          "diagnostic": "FDI-1.0",
+          "questionSet": "FDI-QS-1.0",
+          "scoringModel": "FDI-SM-1.0",
+          "bandConfig": "FDI-BC-1.0"
+        },
+        "answers": [
+          {
+            "questionId": "DS1",
+            "componentKey": "DS",
+            "optionId": "DS1-D",
+            "score": 3
+          },
+          {
+            "questionId": "DS2",
+            "componentKey": "DS",
+            "optionId": "DS2-D",
+            "score": 3
+          },
+          {
+            "questionId": "DS3",
+            "componentKey": "DS",
+            "optionId": "DS3-D",
+            "score": 3
+          },
+          {
+            "questionId": "DS4",
+            "componentKey": "DS",
+            "optionId": "DS4-D",
+            "score": 3
+          },
+          {
+            "questionId": "EC1",
+            "componentKey": "EC",
+            "optionId": "EC1-C",
+            "score": 2
+          },
+          {
+            "questionId": "EC2",
+            "componentKey": "EC",
+            "optionId": "EC2-A",
+            "score": 0
+          },
+          {
+            "questionId": "EC3",
+            "componentKey": "EC",
+            "optionId": "EC3-A",
+            "score": 0
+          },
+          {
+            "questionId": "EC4",
+            "componentKey": "EC",
+            "optionId": "EC4-A",
+            "score": 0
+          },
+          {
+            "questionId": "OV1",
+            "componentKey": "OV",
+            "optionId": "OV1-D",
+            "score": 3
+          },
+          {
+            "questionId": "OV2",
+            "componentKey": "OV",
+            "optionId": "OV2-D",
+            "score": 3
+          },
+          {
+            "questionId": "OV3",
+            "componentKey": "OV",
+            "optionId": "OV3-D",
+            "score": 3
+          },
+          {
+            "questionId": "OV4",
+            "componentKey": "OV",
+            "optionId": "OV4-D",
+            "score": 3
+          }
+        ],
+        "components": [
+          {
+            "key": "DS",
+            "label": "Decision Speed",
+            "raw": 12,
+            "rawMax": 12,
+            "unrounded": 100,
+            "display": 100,
+            "alert": true
+          },
+          {
+            "key": "EC",
+            "label": "Execution Consistency",
+            "raw": 2,
+            "rawMax": 12,
+            "unrounded": 16.666666666666668,
+            "display": 17,
+            "alert": false
+          },
+          {
+            "key": "OV",
+            "label": "Operational Visibility",
+            "raw": 12,
+            "rawMax": 12,
+            "unrounded": 100,
+            "display": 100,
+            "alert": true
+          }
+        ],
+        "fdi": {
+          "unrounded": 72.22222222222223,
+          "display": 72
+        },
+        "band": {
+          "key": "high",
+          "label": "High Founder Dependency",
+          "displayRange": "50–74"
+        },
+        "alerts": [
+          {
+            "raw": 12,
+            "unrounded": 100,
+            "display": 100,
+            "components": [
+              {
+                "key": "DS",
+                "label": "Decision Speed"
+              },
+              {
+                "key": "OV",
+                "label": "Operational Visibility"
+              }
+            ]
+          }
+        ],
+        "concentration": {
+          "componentKeys": [
+            "DS",
+            "OV"
+          ],
+          "labels": [
+            "Decision Speed",
+            "Operational Visibility"
+          ],
+          "raw": 12,
+          "unrounded": 100,
+          "display": 100
+        }
+      }
+    },
+    {
+      "label": "first band edge, evenly distributed",
+      "targets": {
+        "DS": 3,
+        "EC": 3,
+        "OV": 3
+      },
+      "result": {
+        "versions": {
+          "instrument": "FDI",
+          "diagnostic": "FDI-1.0",
+          "questionSet": "FDI-QS-1.0",
+          "scoringModel": "FDI-SM-1.0",
+          "bandConfig": "FDI-BC-1.0"
+        },
+        "answers": [
+          {
+            "questionId": "DS1",
+            "componentKey": "DS",
+            "optionId": "DS1-D",
+            "score": 3
+          },
+          {
+            "questionId": "DS2",
+            "componentKey": "DS",
+            "optionId": "DS2-A",
+            "score": 0
+          },
+          {
+            "questionId": "DS3",
+            "componentKey": "DS",
+            "optionId": "DS3-A",
+            "score": 0
+          },
+          {
+            "questionId": "DS4",
+            "componentKey": "DS",
+            "optionId": "DS4-A",
+            "score": 0
+          },
+          {
+            "questionId": "EC1",
+            "componentKey": "EC",
+            "optionId": "EC1-D",
+            "score": 3
+          },
+          {
+            "questionId": "EC2",
+            "componentKey": "EC",
+            "optionId": "EC2-A",
+            "score": 0
+          },
+          {
+            "questionId": "EC3",
+            "componentKey": "EC",
+            "optionId": "EC3-A",
+            "score": 0
+          },
+          {
+            "questionId": "EC4",
+            "componentKey": "EC",
+            "optionId": "EC4-A",
+            "score": 0
+          },
+          {
+            "questionId": "OV1",
+            "componentKey": "OV",
+            "optionId": "OV1-D",
+            "score": 3
+          },
+          {
+            "questionId": "OV2",
+            "componentKey": "OV",
+            "optionId": "OV2-A",
+            "score": 0
+          },
+          {
+            "questionId": "OV3",
+            "componentKey": "OV",
+            "optionId": "OV3-A",
+            "score": 0
+          },
+          {
+            "questionId": "OV4",
+            "componentKey": "OV",
+            "optionId": "OV4-A",
+            "score": 0
+          }
+        ],
+        "components": [
+          {
+            "key": "DS",
+            "label": "Decision Speed",
+            "raw": 3,
+            "rawMax": 12,
+            "unrounded": 25,
+            "display": 25,
+            "alert": false
+          },
+          {
+            "key": "EC",
+            "label": "Execution Consistency",
+            "raw": 3,
+            "rawMax": 12,
+            "unrounded": 25,
+            "display": 25,
+            "alert": false
+          },
+          {
+            "key": "OV",
+            "label": "Operational Visibility",
+            "raw": 3,
+            "rawMax": 12,
+            "unrounded": 25,
+            "display": 25,
+            "alert": false
+          }
+        ],
+        "fdi": {
+          "unrounded": 25,
+          "display": 25
+        },
+        "band": {
+          "key": "moderate",
+          "label": "Moderate Founder Dependency",
+          "displayRange": "25–49"
+        },
+        "alerts": [],
+        "concentration": {
+          "componentKeys": [
+            "DS",
+            "EC",
+            "OV"
+          ],
+          "labels": [
+            "Decision Speed",
+            "Execution Consistency",
+            "Operational Visibility"
+          ],
+          "raw": 3,
+          "unrounded": 25,
+          "display": 25
+        }
+      }
+    },
+    {
+      "label": "first band edge, unevenly distributed",
+      "targets": {
+        "DS": 1,
+        "EC": 4,
+        "OV": 4
+      },
+      "result": {
+        "versions": {
+          "instrument": "FDI",
+          "diagnostic": "FDI-1.0",
+          "questionSet": "FDI-QS-1.0",
+          "scoringModel": "FDI-SM-1.0",
+          "bandConfig": "FDI-BC-1.0"
+        },
+        "answers": [
+          {
+            "questionId": "DS1",
+            "componentKey": "DS",
+            "optionId": "DS1-B",
+            "score": 1
+          },
+          {
+            "questionId": "DS2",
+            "componentKey": "DS",
+            "optionId": "DS2-A",
+            "score": 0
+          },
+          {
+            "questionId": "DS3",
+            "componentKey": "DS",
+            "optionId": "DS3-A",
+            "score": 0
+          },
+          {
+            "questionId": "DS4",
+            "componentKey": "DS",
+            "optionId": "DS4-A",
+            "score": 0
+          },
+          {
+            "questionId": "EC1",
+            "componentKey": "EC",
+            "optionId": "EC1-D",
+            "score": 3
+          },
+          {
+            "questionId": "EC2",
+            "componentKey": "EC",
+            "optionId": "EC2-B",
+            "score": 1
+          },
+          {
+            "questionId": "EC3",
+            "componentKey": "EC",
+            "optionId": "EC3-A",
+            "score": 0
+          },
+          {
+            "questionId": "EC4",
+            "componentKey": "EC",
+            "optionId": "EC4-A",
+            "score": 0
+          },
+          {
+            "questionId": "OV1",
+            "componentKey": "OV",
+            "optionId": "OV1-D",
+            "score": 3
+          },
+          {
+            "questionId": "OV2",
+            "componentKey": "OV",
+            "optionId": "OV2-B",
+            "score": 1
+          },
+          {
+            "questionId": "OV3",
+            "componentKey": "OV",
+            "optionId": "OV3-A",
+            "score": 0
+          },
+          {
+            "questionId": "OV4",
+            "componentKey": "OV",
+            "optionId": "OV4-A",
+            "score": 0
+          }
+        ],
+        "components": [
+          {
+            "key": "DS",
+            "label": "Decision Speed",
+            "raw": 1,
+            "rawMax": 12,
+            "unrounded": 8.333333333333334,
+            "display": 8,
+            "alert": false
+          },
+          {
+            "key": "EC",
+            "label": "Execution Consistency",
+            "raw": 4,
+            "rawMax": 12,
+            "unrounded": 33.333333333333336,
+            "display": 33,
+            "alert": false
+          },
+          {
+            "key": "OV",
+            "label": "Operational Visibility",
+            "raw": 4,
+            "rawMax": 12,
+            "unrounded": 33.333333333333336,
+            "display": 33,
+            "alert": false
+          }
+        ],
+        "fdi": {
+          "unrounded": 25,
+          "display": 25
+        },
+        "band": {
+          "key": "moderate",
+          "label": "Moderate Founder Dependency",
+          "displayRange": "25–49"
+        },
+        "alerts": [],
+        "concentration": {
+          "componentKeys": [
+            "EC",
+            "OV"
+          ],
+          "labels": [
+            "Execution Consistency",
+            "Operational Visibility"
+          ],
+          "raw": 4,
+          "unrounded": 33.333333333333336,
+          "display": 33
+        }
+      }
+    },
+    {
+      "label": "second band edge",
+      "targets": {
+        "DS": 12,
+        "EC": 6,
+        "OV": 0
+      },
+      "result": {
+        "versions": {
+          "instrument": "FDI",
+          "diagnostic": "FDI-1.0",
+          "questionSet": "FDI-QS-1.0",
+          "scoringModel": "FDI-SM-1.0",
+          "bandConfig": "FDI-BC-1.0"
+        },
+        "answers": [
+          {
+            "questionId": "DS1",
+            "componentKey": "DS",
+            "optionId": "DS1-D",
+            "score": 3
+          },
+          {
+            "questionId": "DS2",
+            "componentKey": "DS",
+            "optionId": "DS2-D",
+            "score": 3
+          },
+          {
+            "questionId": "DS3",
+            "componentKey": "DS",
+            "optionId": "DS3-D",
+            "score": 3
+          },
+          {
+            "questionId": "DS4",
+            "componentKey": "DS",
+            "optionId": "DS4-D",
+            "score": 3
+          },
+          {
+            "questionId": "EC1",
+            "componentKey": "EC",
+            "optionId": "EC1-D",
+            "score": 3
+          },
+          {
+            "questionId": "EC2",
+            "componentKey": "EC",
+            "optionId": "EC2-D",
+            "score": 3
+          },
+          {
+            "questionId": "EC3",
+            "componentKey": "EC",
+            "optionId": "EC3-A",
+            "score": 0
+          },
+          {
+            "questionId": "EC4",
+            "componentKey": "EC",
+            "optionId": "EC4-A",
+            "score": 0
+          },
+          {
+            "questionId": "OV1",
+            "componentKey": "OV",
+            "optionId": "OV1-A",
+            "score": 0
+          },
+          {
+            "questionId": "OV2",
+            "componentKey": "OV",
+            "optionId": "OV2-A",
+            "score": 0
+          },
+          {
+            "questionId": "OV3",
+            "componentKey": "OV",
+            "optionId": "OV3-A",
+            "score": 0
+          },
+          {
+            "questionId": "OV4",
+            "componentKey": "OV",
+            "optionId": "OV4-A",
+            "score": 0
+          }
+        ],
+        "components": [
+          {
+            "key": "DS",
+            "label": "Decision Speed",
+            "raw": 12,
+            "rawMax": 12,
+            "unrounded": 100,
+            "display": 100,
+            "alert": true
+          },
+          {
+            "key": "EC",
+            "label": "Execution Consistency",
+            "raw": 6,
+            "rawMax": 12,
+            "unrounded": 50,
+            "display": 50,
+            "alert": false
+          },
+          {
+            "key": "OV",
+            "label": "Operational Visibility",
+            "raw": 0,
+            "rawMax": 12,
+            "unrounded": 0,
+            "display": 0,
+            "alert": false
+          }
+        ],
+        "fdi": {
+          "unrounded": 50,
+          "display": 50
+        },
+        "band": {
+          "key": "high",
+          "label": "High Founder Dependency",
+          "displayRange": "50–74"
+        },
+        "alerts": [
+          {
+            "raw": 12,
+            "unrounded": 100,
+            "display": 100,
+            "components": [
+              {
+                "key": "DS",
+                "label": "Decision Speed"
+              }
+            ]
+          }
+        ],
+        "concentration": {
+          "componentKeys": [
+            "DS"
+          ],
+          "labels": [
+            "Decision Speed"
+          ],
+          "raw": 12,
+          "unrounded": 100,
+          "display": 100
+        }
+      }
+    },
+    {
+      "label": "third band edge, three-way alert",
+      "targets": {
+        "DS": 9,
+        "EC": 9,
+        "OV": 9
+      },
+      "result": {
+        "versions": {
+          "instrument": "FDI",
+          "diagnostic": "FDI-1.0",
+          "questionSet": "FDI-QS-1.0",
+          "scoringModel": "FDI-SM-1.0",
+          "bandConfig": "FDI-BC-1.0"
+        },
+        "answers": [
+          {
+            "questionId": "DS1",
+            "componentKey": "DS",
+            "optionId": "DS1-D",
+            "score": 3
+          },
+          {
+            "questionId": "DS2",
+            "componentKey": "DS",
+            "optionId": "DS2-D",
+            "score": 3
+          },
+          {
+            "questionId": "DS3",
+            "componentKey": "DS",
+            "optionId": "DS3-D",
+            "score": 3
+          },
+          {
+            "questionId": "DS4",
+            "componentKey": "DS",
+            "optionId": "DS4-A",
+            "score": 0
+          },
+          {
+            "questionId": "EC1",
+            "componentKey": "EC",
+            "optionId": "EC1-D",
+            "score": 3
+          },
+          {
+            "questionId": "EC2",
+            "componentKey": "EC",
+            "optionId": "EC2-D",
+            "score": 3
+          },
+          {
+            "questionId": "EC3",
+            "componentKey": "EC",
+            "optionId": "EC3-D",
+            "score": 3
+          },
+          {
+            "questionId": "EC4",
+            "componentKey": "EC",
+            "optionId": "EC4-A",
+            "score": 0
+          },
+          {
+            "questionId": "OV1",
+            "componentKey": "OV",
+            "optionId": "OV1-D",
+            "score": 3
+          },
+          {
+            "questionId": "OV2",
+            "componentKey": "OV",
+            "optionId": "OV2-D",
+            "score": 3
+          },
+          {
+            "questionId": "OV3",
+            "componentKey": "OV",
+            "optionId": "OV3-D",
+            "score": 3
+          },
+          {
+            "questionId": "OV4",
+            "componentKey": "OV",
+            "optionId": "OV4-A",
+            "score": 0
+          }
+        ],
+        "components": [
+          {
+            "key": "DS",
+            "label": "Decision Speed",
+            "raw": 9,
+            "rawMax": 12,
+            "unrounded": 75,
+            "display": 75,
+            "alert": true
+          },
+          {
+            "key": "EC",
+            "label": "Execution Consistency",
+            "raw": 9,
+            "rawMax": 12,
+            "unrounded": 75,
+            "display": 75,
+            "alert": true
+          },
+          {
+            "key": "OV",
+            "label": "Operational Visibility",
+            "raw": 9,
+            "rawMax": 12,
+            "unrounded": 75,
+            "display": 75,
+            "alert": true
+          }
+        ],
+        "fdi": {
+          "unrounded": 75,
+          "display": 75
+        },
+        "band": {
+          "key": "very_high",
+          "label": "Very High Founder Dependency",
+          "displayRange": "75–100"
+        },
+        "alerts": [
+          {
+            "raw": 9,
+            "unrounded": 75,
+            "display": 75,
+            "components": [
+              {
+                "key": "DS",
+                "label": "Decision Speed"
+              },
+              {
+                "key": "EC",
+                "label": "Execution Consistency"
+              },
+              {
+                "key": "OV",
+                "label": "Operational Visibility"
+              }
+            ]
+          }
+        ],
+        "concentration": {
+          "componentKeys": [
+            "DS",
+            "EC",
+            "OV"
+          ],
+          "labels": [
+            "Decision Speed",
+            "Execution Consistency",
+            "Operational Visibility"
+          ],
+          "raw": 9,
+          "unrounded": 75,
+          "display": 75
+        }
+      }
+    },
+    {
+      "label": "decimal components throughout",
+      "targets": {
+        "DS": 5,
+        "EC": 5,
+        "OV": 5
+      },
+      "result": {
+        "versions": {
+          "instrument": "FDI",
+          "diagnostic": "FDI-1.0",
+          "questionSet": "FDI-QS-1.0",
+          "scoringModel": "FDI-SM-1.0",
+          "bandConfig": "FDI-BC-1.0"
+        },
+        "answers": [
+          {
+            "questionId": "DS1",
+            "componentKey": "DS",
+            "optionId": "DS1-D",
+            "score": 3
+          },
+          {
+            "questionId": "DS2",
+            "componentKey": "DS",
+            "optionId": "DS2-C",
+            "score": 2
+          },
+          {
+            "questionId": "DS3",
+            "componentKey": "DS",
+            "optionId": "DS3-A",
+            "score": 0
+          },
+          {
+            "questionId": "DS4",
+            "componentKey": "DS",
+            "optionId": "DS4-A",
+            "score": 0
+          },
+          {
+            "questionId": "EC1",
+            "componentKey": "EC",
+            "optionId": "EC1-D",
+            "score": 3
+          },
+          {
+            "questionId": "EC2",
+            "componentKey": "EC",
+            "optionId": "EC2-C",
+            "score": 2
+          },
+          {
+            "questionId": "EC3",
+            "componentKey": "EC",
+            "optionId": "EC3-A",
+            "score": 0
+          },
+          {
+            "questionId": "EC4",
+            "componentKey": "EC",
+            "optionId": "EC4-A",
+            "score": 0
+          },
+          {
+            "questionId": "OV1",
+            "componentKey": "OV",
+            "optionId": "OV1-D",
+            "score": 3
+          },
+          {
+            "questionId": "OV2",
+            "componentKey": "OV",
+            "optionId": "OV2-C",
+            "score": 2
+          },
+          {
+            "questionId": "OV3",
+            "componentKey": "OV",
+            "optionId": "OV3-A",
+            "score": 0
+          },
+          {
+            "questionId": "OV4",
+            "componentKey": "OV",
+            "optionId": "OV4-A",
+            "score": 0
+          }
+        ],
+        "components": [
+          {
+            "key": "DS",
+            "label": "Decision Speed",
+            "raw": 5,
+            "rawMax": 12,
+            "unrounded": 41.666666666666664,
+            "display": 42,
+            "alert": false
+          },
+          {
+            "key": "EC",
+            "label": "Execution Consistency",
+            "raw": 5,
+            "rawMax": 12,
+            "unrounded": 41.666666666666664,
+            "display": 42,
+            "alert": false
+          },
+          {
+            "key": "OV",
+            "label": "Operational Visibility",
+            "raw": 5,
+            "rawMax": 12,
+            "unrounded": 41.666666666666664,
+            "display": 42,
+            "alert": false
+          }
+        ],
+        "fdi": {
+          "unrounded": 41.666666666666664,
+          "display": 42
+        },
+        "band": {
+          "key": "moderate",
+          "label": "Moderate Founder Dependency",
+          "displayRange": "25–49"
+        },
+        "alerts": [],
+        "concentration": {
+          "componentKeys": [
+            "DS",
+            "EC",
+            "OV"
+          ],
+          "labels": [
+            "Decision Speed",
+            "Execution Consistency",
+            "Operational Visibility"
+          ],
+          "raw": 5,
+          "unrounded": 41.666666666666664,
+          "display": 42
+        }
+      }
+    },
+    {
+      "label": "mixed asymmetric profile",
+      "targets": {
+        "DS": 10,
+        "EC": 7,
+        "OV": 7
+      },
+      "result": {
+        "versions": {
+          "instrument": "FDI",
+          "diagnostic": "FDI-1.0",
+          "questionSet": "FDI-QS-1.0",
+          "scoringModel": "FDI-SM-1.0",
+          "bandConfig": "FDI-BC-1.0"
+        },
+        "answers": [
+          {
+            "questionId": "DS1",
+            "componentKey": "DS",
+            "optionId": "DS1-D",
+            "score": 3
+          },
+          {
+            "questionId": "DS2",
+            "componentKey": "DS",
+            "optionId": "DS2-D",
+            "score": 3
+          },
+          {
+            "questionId": "DS3",
+            "componentKey": "DS",
+            "optionId": "DS3-D",
+            "score": 3
+          },
+          {
+            "questionId": "DS4",
+            "componentKey": "DS",
+            "optionId": "DS4-B",
+            "score": 1
+          },
+          {
+            "questionId": "EC1",
+            "componentKey": "EC",
+            "optionId": "EC1-D",
+            "score": 3
+          },
+          {
+            "questionId": "EC2",
+            "componentKey": "EC",
+            "optionId": "EC2-D",
+            "score": 3
+          },
+          {
+            "questionId": "EC3",
+            "componentKey": "EC",
+            "optionId": "EC3-B",
+            "score": 1
+          },
+          {
+            "questionId": "EC4",
+            "componentKey": "EC",
+            "optionId": "EC4-A",
+            "score": 0
+          },
+          {
+            "questionId": "OV1",
+            "componentKey": "OV",
+            "optionId": "OV1-D",
+            "score": 3
+          },
+          {
+            "questionId": "OV2",
+            "componentKey": "OV",
+            "optionId": "OV2-D",
+            "score": 3
+          },
+          {
+            "questionId": "OV3",
+            "componentKey": "OV",
+            "optionId": "OV3-B",
+            "score": 1
+          },
+          {
+            "questionId": "OV4",
+            "componentKey": "OV",
+            "optionId": "OV4-A",
+            "score": 0
+          }
+        ],
+        "components": [
+          {
+            "key": "DS",
+            "label": "Decision Speed",
+            "raw": 10,
+            "rawMax": 12,
+            "unrounded": 83.33333333333333,
+            "display": 83,
+            "alert": true
+          },
+          {
+            "key": "EC",
+            "label": "Execution Consistency",
+            "raw": 7,
+            "rawMax": 12,
+            "unrounded": 58.333333333333336,
+            "display": 58,
+            "alert": false
+          },
+          {
+            "key": "OV",
+            "label": "Operational Visibility",
+            "raw": 7,
+            "rawMax": 12,
+            "unrounded": 58.333333333333336,
+            "display": 58,
+            "alert": false
+          }
+        ],
+        "fdi": {
+          "unrounded": 66.66666666666667,
+          "display": 67
+        },
+        "band": {
+          "key": "high",
+          "label": "High Founder Dependency",
+          "displayRange": "50–74"
+        },
+        "alerts": [
+          {
+            "raw": 10,
+            "unrounded": 83.33333333333333,
+            "display": 83,
+            "components": [
+              {
+                "key": "DS",
+                "label": "Decision Speed"
+              }
+            ]
+          }
+        ],
+        "concentration": {
+          "componentKeys": [
+            "DS"
+          ],
+          "labels": [
+            "Decision Speed"
+          ],
+          "raw": 10,
+          "unrounded": 83.33333333333333,
+          "display": 83
+        }
+      }
+    },
+    {
+      "label": "mixed with low visibility",
+      "targets": {
+        "DS": 7,
+        "EC": 3,
+        "OV": 10
+      },
+      "result": {
+        "versions": {
+          "instrument": "FDI",
+          "diagnostic": "FDI-1.0",
+          "questionSet": "FDI-QS-1.0",
+          "scoringModel": "FDI-SM-1.0",
+          "bandConfig": "FDI-BC-1.0"
+        },
+        "answers": [
+          {
+            "questionId": "DS1",
+            "componentKey": "DS",
+            "optionId": "DS1-D",
+            "score": 3
+          },
+          {
+            "questionId": "DS2",
+            "componentKey": "DS",
+            "optionId": "DS2-D",
+            "score": 3
+          },
+          {
+            "questionId": "DS3",
+            "componentKey": "DS",
+            "optionId": "DS3-B",
+            "score": 1
+          },
+          {
+            "questionId": "DS4",
+            "componentKey": "DS",
+            "optionId": "DS4-A",
+            "score": 0
+          },
+          {
+            "questionId": "EC1",
+            "componentKey": "EC",
+            "optionId": "EC1-D",
+            "score": 3
+          },
+          {
+            "questionId": "EC2",
+            "componentKey": "EC",
+            "optionId": "EC2-A",
+            "score": 0
+          },
+          {
+            "questionId": "EC3",
+            "componentKey": "EC",
+            "optionId": "EC3-A",
+            "score": 0
+          },
+          {
+            "questionId": "EC4",
+            "componentKey": "EC",
+            "optionId": "EC4-A",
+            "score": 0
+          },
+          {
+            "questionId": "OV1",
+            "componentKey": "OV",
+            "optionId": "OV1-D",
+            "score": 3
+          },
+          {
+            "questionId": "OV2",
+            "componentKey": "OV",
+            "optionId": "OV2-D",
+            "score": 3
+          },
+          {
+            "questionId": "OV3",
+            "componentKey": "OV",
+            "optionId": "OV3-D",
+            "score": 3
+          },
+          {
+            "questionId": "OV4",
+            "componentKey": "OV",
+            "optionId": "OV4-B",
+            "score": 1
+          }
+        ],
+        "components": [
+          {
+            "key": "DS",
+            "label": "Decision Speed",
+            "raw": 7,
+            "rawMax": 12,
+            "unrounded": 58.333333333333336,
+            "display": 58,
+            "alert": false
+          },
+          {
+            "key": "EC",
+            "label": "Execution Consistency",
+            "raw": 3,
+            "rawMax": 12,
+            "unrounded": 25,
+            "display": 25,
+            "alert": false
+          },
+          {
+            "key": "OV",
+            "label": "Operational Visibility",
+            "raw": 10,
+            "rawMax": 12,
+            "unrounded": 83.33333333333333,
+            "display": 83,
+            "alert": true
+          }
+        ],
+        "fdi": {
+          "unrounded": 55.55555555555556,
+          "display": 56
+        },
+        "band": {
+          "key": "high",
+          "label": "High Founder Dependency",
+          "displayRange": "50–74"
+        },
+        "alerts": [
+          {
+            "raw": 10,
+            "unrounded": 83.33333333333333,
+            "display": 83,
+            "components": [
+              {
+                "key": "OV",
+                "label": "Operational Visibility"
+              }
+            ]
+          }
+        ],
+        "concentration": {
+          "componentKeys": [
+            "OV"
+          ],
+          "labels": [
+            "Operational Visibility"
+          ],
+          "raw": 10,
+          "unrounded": 83.33333333333333,
+          "display": 83
+        }
+      }
+    },
+    {
+      "label": "near-ceiling profile",
+      "targets": {
+        "DS": 11,
+        "EC": 12,
+        "OV": 10
+      },
+      "result": {
+        "versions": {
+          "instrument": "FDI",
+          "diagnostic": "FDI-1.0",
+          "questionSet": "FDI-QS-1.0",
+          "scoringModel": "FDI-SM-1.0",
+          "bandConfig": "FDI-BC-1.0"
+        },
+        "answers": [
+          {
+            "questionId": "DS1",
+            "componentKey": "DS",
+            "optionId": "DS1-D",
+            "score": 3
+          },
+          {
+            "questionId": "DS2",
+            "componentKey": "DS",
+            "optionId": "DS2-D",
+            "score": 3
+          },
+          {
+            "questionId": "DS3",
+            "componentKey": "DS",
+            "optionId": "DS3-D",
+            "score": 3
+          },
+          {
+            "questionId": "DS4",
+            "componentKey": "DS",
+            "optionId": "DS4-C",
+            "score": 2
+          },
+          {
+            "questionId": "EC1",
+            "componentKey": "EC",
+            "optionId": "EC1-D",
+            "score": 3
+          },
+          {
+            "questionId": "EC2",
+            "componentKey": "EC",
+            "optionId": "EC2-D",
+            "score": 3
+          },
+          {
+            "questionId": "EC3",
+            "componentKey": "EC",
+            "optionId": "EC3-D",
+            "score": 3
+          },
+          {
+            "questionId": "EC4",
+            "componentKey": "EC",
+            "optionId": "EC4-D",
+            "score": 3
+          },
+          {
+            "questionId": "OV1",
+            "componentKey": "OV",
+            "optionId": "OV1-D",
+            "score": 3
+          },
+          {
+            "questionId": "OV2",
+            "componentKey": "OV",
+            "optionId": "OV2-D",
+            "score": 3
+          },
+          {
+            "questionId": "OV3",
+            "componentKey": "OV",
+            "optionId": "OV3-D",
+            "score": 3
+          },
+          {
+            "questionId": "OV4",
+            "componentKey": "OV",
+            "optionId": "OV4-B",
+            "score": 1
+          }
+        ],
+        "components": [
+          {
+            "key": "DS",
+            "label": "Decision Speed",
+            "raw": 11,
+            "rawMax": 12,
+            "unrounded": 91.66666666666667,
+            "display": 92,
+            "alert": true
+          },
+          {
+            "key": "EC",
+            "label": "Execution Consistency",
+            "raw": 12,
+            "rawMax": 12,
+            "unrounded": 100,
+            "display": 100,
+            "alert": true
+          },
+          {
+            "key": "OV",
+            "label": "Operational Visibility",
+            "raw": 10,
+            "rawMax": 12,
+            "unrounded": 83.33333333333333,
+            "display": 83,
+            "alert": true
+          }
+        ],
+        "fdi": {
+          "unrounded": 91.66666666666667,
+          "display": 92
+        },
+        "band": {
+          "key": "very_high",
+          "label": "Very High Founder Dependency",
+          "displayRange": "75–100"
+        },
+        "alerts": [
+          {
+            "raw": 12,
+            "unrounded": 100,
+            "display": 100,
+            "components": [
+              {
+                "key": "EC",
+                "label": "Execution Consistency"
+              }
+            ]
+          },
+          {
+            "raw": 11,
+            "unrounded": 91.66666666666667,
+            "display": 92,
+            "components": [
+              {
+                "key": "DS",
+                "label": "Decision Speed"
+              }
+            ]
+          },
+          {
+            "raw": 10,
+            "unrounded": 83.33333333333333,
+            "display": 83,
+            "components": [
+              {
+                "key": "OV",
+                "label": "Operational Visibility"
+              }
+            ]
+          }
+        ],
+        "concentration": {
+          "componentKeys": [
+            "EC"
+          ],
+          "labels": [
+            "Execution Consistency"
+          ],
+          "raw": 12,
+          "unrounded": 100,
+          "display": 100
+        }
+      }
+    }
+  ]
+}
