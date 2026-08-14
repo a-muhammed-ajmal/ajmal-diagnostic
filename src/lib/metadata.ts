@@ -16,7 +16,7 @@ export const AUTHOR_HEADSHOT = {
   src: "/images/muhammed-ajmal.jpg",
   width: 1440,
   height: 1440,
-  alt: "Muhammed Ajmal, Strategic Growth Architect, Dubai",
+  alt: "Muhammed Ajmal, Business Operations and Growth Consultant, Dubai",
 } as const;
 
 /** Absolute form — schema.org image fields must not be relative. */

@@ -1,39 +1,40 @@
-import { ContactForm } from '@/components/contact/ContactForm';
-import { CalendlyWidget } from '@/components/contact/CalendlyWidget';
-import { pageMetadata } from '@/lib/metadata';
+import Link from "next/link";
+import { CalendlyWidget } from "@/components/contact/CalendlyWidget";
+import { ContactForm } from "@/components/contact/ContactForm";
+import { pageMetadata } from "@/lib/metadata";
 
 export const metadata = pageMetadata({
-  title: 'Contact | Book a Strategy Session',
-  absoluteTitle: true,
-  description: 'Book a free 30-minute consultation or send an enquiry. Serving founder-led SMEs in Dubai, UAE, and across the GCC.',
-  path: '/contact',
+  title: "Contact",
+  description: "Start with the Free Diagnostic or contact Muhammed Ajmal Consulting. Built for founder-led UAE SMEs with operating changes to make.",
+  path: "/contact",
 });
 
 export default function ContactPage() {
   return (
     <>
-      <section className="bg-navy text-ivory py-16 md:py-20 px-6 relative overflow-hidden">
+      <section className="relative overflow-hidden bg-navy px-6 py-16 text-ivory md:py-20">
         <div className="graph-overlay-dark" />
-        <div className="max-w-4xl mx-auto text-center relative z-10">
-          <span className="text-gold font-heading font-bold tracking-widest text-sm uppercase mb-3 block">Get Started</span>
-          <h1 className="text-3xl md:text-5xl font-heading font-extrabold mb-5">Book a Strategy Session</h1>
-          <p className="font-body text-ivory/70 text-base md:text-lg max-w-2xl mx-auto">Book directly via Calendly, or send an enquiry and receive a response within 24 hours.</p>
-          <p className="font-body text-ivory/40 text-sm max-w-2xl mx-auto mt-4">This practice works with founder-led SMEs typically in the AED 500K&ndash;15M annual revenue range, across the UAE and GCC.</p>
+        <div className="relative z-10 mx-auto max-w-4xl text-center">
+          <p className="eyebrow mb-3 text-gold">Get started</p>
+          <h1 className="font-heading text-[length:var(--step-5)] font-extrabold leading-[1.02]">Start with the Free Diagnostic.</h1>
+          <p className="mx-auto mt-5 max-w-2xl font-body text-base leading-relaxed text-ivory/70 md:text-lg">It is the practical first step for founders who want a clearer view of where the business still depends on them.</p>
+          <Link href="/diagnostic" className="mt-8 inline-flex min-h-[52px] items-center justify-center rounded-xl bg-gold px-8 py-4 font-heading text-base font-bold text-navy transition-colors hover:bg-gold-bright">Take the Free Diagnostic →</Link>
+          <p className="mx-auto mt-5 max-w-2xl font-body text-sm leading-relaxed text-ivory/50">This practice is built for founder-led UAE businesses with AED 1M–10M annual revenue, 5–50 employees, and operating changes the founder can approve.</p>
         </div>
       </section>
 
-      <section className="py-12 md:py-16 px-6 bg-ivory relative overflow-hidden">
+      <section className="relative overflow-hidden bg-ivory px-6 py-12 md:py-16">
         <div className="graph-overlay" />
-        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-12 relative z-10">
+        <div className="relative z-10 mx-auto grid max-w-7xl gap-10 md:gap-12 lg:grid-cols-2">
           <div>
-            <h2 className="font-heading font-bold text-navy text-xl md:text-2xl mb-2">Send an Enquiry</h2>
-            <p className="font-body text-navy/60 text-sm mb-6">For specific questions or project scopes. Response within 24 hours.</p>
-            <ContactForm />
+            <h2 className="font-heading text-2xl font-bold text-navy">Send an enquiry</h2>
+            <p className="mt-2 font-body text-sm leading-relaxed text-navy/60">For a specific question or a scope you would like to discuss.</p>
+            <div className="mt-6"><ContactForm /></div>
           </div>
           <div>
-            <h2 className="font-heading font-bold text-navy text-xl md:text-2xl mb-2">Book Directly</h2>
-            <p className="font-body text-navy/60 text-sm mb-6">A free 30-minute consultation — focused on your business, not a sales pitch.</p>
-            <CalendlyWidget />
+            <h2 className="font-heading text-2xl font-bold text-navy">Book a conversation</h2>
+            <p className="mt-2 font-body text-sm leading-relaxed text-navy/60">If you have completed the diagnostic or need to discuss an operating challenge, choose a suitable time.</p>
+            <div className="mt-6"><CalendlyWidget /></div>
           </div>
         </div>
       </section>

@@ -4,9 +4,9 @@ import { pageMetadata } from '@/lib/metadata';
 import { ARTICLES, CATEGORIES, getReadingTime, type Article } from '@/lib/articles';
 
 export const metadata = pageMetadata({
-  title: 'SME Growth Insights & Frameworks | Muhammed Ajmal Consulting',
+  title: 'Insights for Founder-Led UAE SMEs | Muhammed Ajmal Consulting',
   absoluteTitle: true,
-  description: 'Operating systems, process optimization frameworks, and strategies for scaling founder-led UAE SMEs.',
+  description: 'Practical insights on founder dependency, operating systems, ownership, visibility, and applied AI for founder-led UAE SMEs.',
   path: '/insights',
 });
 
@@ -56,9 +56,9 @@ export default function InsightsPage() {
       <section className="bg-navy text-ivory py-16 md:py-20 px-6 relative overflow-hidden">
         <div className="graph-overlay-dark" />
         <div className="max-w-4xl mx-auto text-center relative z-10">
-          <span className="text-gold font-heading font-bold tracking-widest text-sm uppercase mb-3 block">Thought Leadership</span>
+          <span className="text-gold font-heading font-bold tracking-widest text-sm uppercase mb-3 block">Practical thinking</span>
           <h1 className="text-3xl md:text-5xl font-heading font-extrabold mb-5">Insights</h1>
-          <p className="font-body text-ivory/70 text-base md:text-lg max-w-2xl mx-auto">Practical frameworks for founder-led SME growth across the UAE and GCC.</p>
+          <p className="font-body text-ivory/70 text-base md:text-lg max-w-2xl mx-auto">Practical insight on founder dependency, stronger operating systems, and applied AI for founder-led UAE SMEs.</p>
         </div>
       </section>
 
@@ -85,7 +85,7 @@ export default function InsightsPage() {
         <div className="graph-overlay" />
         <div className="max-w-xl mx-auto text-center relative z-10">
           <h2 className="font-heading font-extrabold text-2xl text-navy mb-3">Get insights delivered</h2>
-          <p className="font-body text-navy/60 text-sm mb-6">Practical frameworks for scaling your SME. No fluff. Delivered when there is something worth sending.</p>
+          <p className="font-body text-navy/60 text-sm mb-6">Practical operating insight for founder-led UAE SMEs. Delivered when there is something worth sending.</p>
           <NewsletterForm />
           <p className="font-body text-navy/50 text-xs mt-4">No spam. Unsubscribe anytime. Typically one email a month.</p>
         </div>

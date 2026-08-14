@@ -38,7 +38,7 @@ const dataCollected: { item: string; detail: string }[] = [
 
 const processors: { name: string; role: string; location: string }[] = [
   { name: 'Supabase', role: 'Database hosting — stores your submissions.', location: 'Servers outside the UAE' },
-  { name: 'Anthropic', role: 'AI processing — generates your personalised action plan.', location: 'Servers outside the UAE' },
+  { name: 'Anthropic', role: 'AI processing — generates your personalized reflection plan.', location: 'Servers outside the UAE' },
   { name: 'Resend', role: 'Email delivery — sends your report and our replies.', location: 'Servers outside the UAE' },
   { name: 'Vercel', role: 'Website hosting and infrastructure.', location: 'Servers outside the UAE' },
   { name: 'Calendly', role: 'Consultation scheduling, if you choose to book a call.', location: 'Servers outside the UAE' },
@@ -121,7 +121,7 @@ export default function PrivacyPage() {
             <p>
               Your diagnostic report is generated with the help of artificial intelligence. Your scores and
               the business context you provide are sent to Anthropic&apos;s Claude model to produce a
-              personalised action plan. This is automated processing. You have the right to object to it —
+              personalized reflection plan. This is automated processing. You have the right to object to it —
               if you would prefer a report prepared without AI, contact us and we will arrange it.
             </p>
           </Section>

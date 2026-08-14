@@ -1,360 +1,167 @@
-import Link from 'next/link';
-import { cn } from '@/lib/utils';
-import { pageMetadata } from '@/lib/metadata';
+import Link from "next/link";
+import {
+  CommercialLadder,
+  DependencyIndexPreview,
+  FounderSystemVisual,
+  FounderTrapDiagram,
+} from "@/components/home/SystemVisuals";
+import { pageMetadata } from "@/lib/metadata";
 
 export const metadata = pageMetadata({
-  title: 'Muhammed Ajmal Consulting | Strategic Growth Architect — Dubai, UAE',
+  title: "Muhammed Ajmal Consulting | Business Operations & Growth Consultant — Dubai, UAE",
   absoluteTitle: true,
-  ogTitle: 'Strategic Growth Architecture for Founder-Led SMEs | UAE & GCC',
+  ogTitle: "Build a business that grows beyond the founder | Muhammed Ajmal Consulting",
   description:
-    'Scale your UAE or GCC SME without daily founder intervention. Strategic Growth Architecture — Diagnose → Design → Build → Optimize → Scale. Free diagnostic.',
-  path: '/',
+    "Business operations and growth consulting for founder-led UAE SMEs. Build systems, ownership, visibility, and consistent execution that reduce founder dependency.",
+  path: "/",
 });
+
+const scopeAreas = [
+  ["Strategy", "Direction, priorities, positioning, and growth choices."],
+  ["Systems", "Processes, SOPs, management rhythm, KPIs, and structure."],
+  ["People", "Roles, ownership, decision rights, accountability, and capability."],
+  ["Applied AI", "Automation and AI where they improve capacity, speed, or visibility."],
+];
+
+const qualification = [
+  "Founder-led",
+  "United Arab Emirates",
+  "AED 1M–10M annual revenue",
+  "5–50 employees",
+  "3+ years operating",
+  "Growth still depends heavily on the founder",
+];
 
 export default function HomePage() {
   return (
     <>
-      {/* ─── HERO ─────────────────────────────────────────────────────────── */}
-      <section className="bg-navy text-ivory py-16 md:py-24 px-6 relative overflow-hidden">
+      <section className="relative overflow-hidden bg-navy px-6 py-16 text-ivory md:py-24">
         <div className="graph-overlay-dark" />
-        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-center relative z-10">
-
-          {/* Left */}
+        <div className="relative z-10 mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-[1fr_0.9fr] lg:gap-16">
           <div>
-            <span className="reveal text-gold font-heading font-bold tracking-widest text-xs md:text-sm uppercase mb-4 block">
-              Strategic Growth Architect for Founder-Led SMEs · UAE &amp; GCC
+            <span className="reveal mb-4 block font-heading text-xs font-bold uppercase tracking-widest text-gold md:text-sm">
+              Business Operations &amp; Growth Consultant · Dubai, UAE
             </span>
-            <h1 className="reveal text-2xl sm:text-3xl md:text-4xl xl:text-5xl font-heading font-extrabold leading-tight mb-6">
-              Escape the Founder Trap.<br />
-              <span className="gold-gradient-text">Engineer Scalable Growth.</span>
+            <h1 className="reveal font-heading text-[length:var(--step-5)] font-extrabold leading-[0.98]">
+              Build a business that <span className="orange-gradient-text">grows beyond the founder.</span>
             </h1>
-            <p className="reveal font-body text-ivory/90 text-base md:text-lg mb-8 max-w-lg leading-relaxed">
-              Scale your SME without your daily intervention. We engineer the growth infrastructure for UAE &amp; GCC
-              founder-led businesses through Strategic Planning, Business Systems, and Operational Excellence.
+            <p className="reveal mt-6 max-w-xl font-body text-base leading-relaxed text-ivory/80 md:text-lg">
+              Muhammed Ajmal Consulting helps founder-led UAE SMEs build successful, scalable businesses by reducing founder dependency through better systems, clearer ownership, useful visibility, and consistent execution.
             </p>
-            <div className="reveal flex flex-col sm:flex-row gap-4">
-              <Link
-                href="/diagnostic"
-                className="inline-flex items-center justify-center bg-gold text-navy font-heading font-bold py-4 px-8 rounded-xl hover:bg-gold-bright transition-colors shadow-lg text-base min-h-[52px]"
-              >
-                Discover Your Business Constraint →
+            <div className="reveal mt-8 flex flex-col gap-3 sm:flex-row">
+              <Link href="/diagnostic" className="inline-flex min-h-[52px] items-center justify-center rounded-xl bg-gold px-7 py-4 font-heading text-base font-bold text-navy shadow-lg transition-colors hover:bg-gold-bright">
+                Take the Free Diagnostic <span aria-hidden="true">&nbsp;→</span>
               </Link>
-              <Link
-                href="/contact"
-                className="inline-flex items-center justify-center border border-gold/50 text-gold font-heading font-bold py-4 px-8 rounded-xl hover:bg-gold/10 transition-colors text-base min-h-[52px]"
-              >
-                Book a Strategy Call
+              <Link href="#how-it-works" className="inline-flex min-h-[52px] items-center justify-center rounded-xl border border-ivory/35 px-7 py-4 font-heading text-base font-bold text-ivory transition-colors hover:border-gold hover:text-gold">
+                See How It Works
               </Link>
             </div>
           </div>
-
-          {/* Right — SGA Card */}
-          <div className="relative h-72 md:h-80 w-full flex items-center justify-center">
-            <div className="hidden sm:block absolute w-64 h-64 border border-gold/20 rounded-full animate-[spin_25s_linear_infinite]" />
-            <div className="hidden sm:block absolute w-80 h-80 border border-gold/10 rounded-full animate-[spin_35s_linear_infinite_reverse]" />
-            <div className="bg-navy border border-gold/40 p-6 md:p-8 rounded-xl shadow-2xl relative z-10 max-w-xs w-full text-center">
-              <div className="text-gold font-heading font-bold text-2xl mb-1">SGA</div>
-              <div className="text-[10px] text-ivory/60 uppercase tracking-widest mb-5 text-center">
-                Strategic Growth Architecture
-              </div>
-              <div className="space-y-2">
-                {[
-                  'Strategic Clarity',
-                  'Operational Systems',
-                  'Team Accountability',
-                  'Revenue Predictability',
-                  'Scalable Growth',
-                ].map((item) => (
-                  <div
-                    key={item}
-                    className="bg-ivory/5 border border-ivory/10 p-2.5 text-xs text-left flex justify-between items-center rounded"
-                  >
-                    <span className="text-ivory/80">{item}</span>
-                    <span className="text-emerald font-bold">✔</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
+          <FounderSystemVisual />
         </div>
       </section>
 
-      {/* ─── PROCESS STRIP ────────────────────────────────────────────────── */}
-      <section className="bg-gold py-5 px-6">
-        <div className="max-w-5xl mx-auto flex flex-wrap justify-center items-center gap-2 text-navy font-heading font-bold text-xs md:text-sm">
-          {['Diagnose', 'Design', 'Build', 'Optimize', 'Scale'].map((step, i) => (
-            <span key={step} className="flex items-center gap-2">
+      <section className="bg-gold px-6 py-5" aria-label="Growth Formula">
+        <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-center gap-x-3 gap-y-1 font-heading text-xs font-bold text-navy md:text-sm">
+          {["Vision", "Strategy", "Systems", "People", "Execution", "Accountability"].map((step, index) => (
+            <span key={step} className="flex items-center gap-3">
               <span>{step}</span>
-              {i < 4 && <span className="text-navy/40">→</span>}
+              {index < 5 && <span className="text-navy/45" aria-hidden="true">→</span>}
             </span>
           ))}
         </div>
       </section>
 
-      {/* ─── PROBLEM ──────────────────────────────────────────────────────── */}
-      <section id="problem" className="py-16 md:py-24 px-6 bg-ivory relative overflow-hidden">
+      <section id="founder-trap" className="relative overflow-hidden bg-ivory px-6 py-16 md:py-24">
         <div className="graph-overlay" />
-        <div className="max-w-7xl mx-auto relative z-10">
-          <div className="text-center mb-10 md:mb-14">
-            <span className="text-crimson font-heading font-bold tracking-widest text-sm uppercase mb-2 block">
-              The Critical Constraint
-            </span>
-            <h2 className="heading-reveal text-3xl md:text-4xl font-heading font-extrabold text-navy mb-4">
-              4 Symptoms of the Founder Trap
-            </h2>
-            <p className="font-body text-navy/70 max-w-2xl mx-auto text-sm md:text-base">
-              Why your business cannot scale past its current ceiling without systemic intervention.
-            </p>
+        <div className="relative z-10 mx-auto max-w-6xl">
+          <div className="mx-auto mb-10 max-w-2xl text-center md:mb-14">
+            <p className="eyebrow mb-3 text-crimson">The Founder Trap</p>
+            <h2 className="heading-reveal font-heading text-[length:var(--step-4)] font-extrabold leading-tight text-navy">When growth still depends on one person.</h2>
+            <p className="mt-4 font-body text-base leading-relaxed text-navy/65">The pattern is visible in how decisions move, where knowledge sits, how the team responds to change, and whether work is done consistently.</p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
-            {[
-              {
-                n: '01',
-                title: 'Approval Bottlenecks',
-                body: 'Every decision, minor or major, requires founder sign-off, slowing execution to your personal bandwidth.',
-              },
-              {
-                n: '02',
-                title: 'Hero Culture',
-                body: 'Reliance on ad-hoc individual effort rather than repeatable, documented systems that anyone can follow.',
-              },
-              {
-                n: '03',
-                title: 'Firefighting Cycle',
-                body: 'Strategic planning is constantly derailed by daily operational emergencies that should never reach you.',
-              },
-              {
-                n: '04',
-                title: 'Stagnant Quality',
-                body: 'As client volume increases, delivery quality fluctuates because your standards exist only in your head.',
-              },
-            ].map((card) => (
-              <div
-                key={card.n}
-                className="bg-white p-7 rounded-xl shadow-sm border border-navy/10 hover:border-crimson/30 card-interactive relative overflow-hidden group"
-              >
-                <div className="absolute top-0 left-0 w-full h-1 bg-crimson transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300" />
-                <div className="w-10 h-10 bg-crimson/10 text-crimson rounded-full flex items-center justify-center font-heading font-bold text-sm mb-5">
-                  {card.n}
-                </div>
-                <h3 className="font-heading font-bold text-navy text-base md:text-lg mb-3">{card.title}</h3>
-                <p className="font-body text-sm text-navy/70 leading-relaxed">{card.body}</p>
-              </div>
+          <FounderTrapDiagram />
+        </div>
+      </section>
+
+      <DependencyIndexPreview />
+
+      <section id="how-it-works" className="relative overflow-hidden bg-white px-6 py-16 md:py-24">
+        <div className="graph-overlay" />
+        <div className="relative z-10 mx-auto max-w-5xl">
+          <div className="mx-auto max-w-2xl text-center">
+            <p className="eyebrow mb-3 text-gold-ink">How we work</p>
+            <h2 className="heading-reveal font-heading text-[length:var(--step-4)] font-extrabold leading-tight text-navy">One commercial journey. Each stage leads to the next.</h2>
+            <p className="mt-4 font-body text-base leading-relaxed text-navy/65">The right next step depends on what evidence shows—not on choosing from a menu of disconnected services.</p>
+          </div>
+          <CommercialLadder />
+          <div className="mt-10 text-center"><Link href="/services" className="inline-flex min-h-12 items-center justify-center rounded-xl border border-navy px-7 py-3 font-heading text-sm font-bold text-navy transition-colors hover:bg-navy hover:text-ivory">See the full journey <span aria-hidden="true">&nbsp;→</span></Link></div>
+        </div>
+      </section>
+
+      <section className="bg-ivory px-6 py-16 md:py-24">
+        <div className="mx-auto max-w-6xl">
+          <div className="mx-auto max-w-2xl text-center">
+            <p className="eyebrow mb-3 text-teal-ink">Operating scope</p>
+            <h2 className="font-heading text-[length:var(--step-4)] font-extrabold leading-tight text-navy">The areas of work that make an operating system work.</h2>
+            <p className="mt-4 font-body text-base leading-relaxed text-navy/65">These are areas of work, not another framework.</p>
+          </div>
+          <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+            {scopeAreas.map(([title, body], index) => (
+              <article key={title} className="relative overflow-hidden rounded-2xl border border-navy/10 bg-white p-6 shadow-sm">
+                <span className="font-mono text-xs text-teal-ink">0{index + 1}</span>
+                <div className="mt-5 h-px w-full bg-teal/25" aria-hidden="true" />
+                <h3 className="mt-5 font-heading text-xl font-bold text-navy">{title}</h3>
+                <p className="mt-3 font-body text-sm leading-relaxed text-navy/60">{body}</p>
+              </article>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ─── SOLUTION / 3 PILLARS ─────────────────────────────────────────── */}
-      <section id="solution" className="py-16 md:py-24 px-6 bg-navy text-ivory border-y border-gold/20 relative overflow-hidden">
+      <section className="relative overflow-hidden bg-white px-6 py-16 md:py-24">
+        <div className="graph-overlay" />
+        <div className="relative z-10 mx-auto max-w-6xl">
+          <div className="mx-auto max-w-2xl text-center">
+            <p className="eyebrow mb-3 text-gold-ink">Strategic Growth Architecture</p>
+            <h2 className="font-heading text-[length:var(--step-4)] font-extrabold leading-tight text-navy">A system that shifts responsibility out of the founder&apos;s head.</h2>
+          </div>
+          <div className="mt-10 grid gap-3 md:grid-cols-6">
+            {["Founder", "Team", "Systems", "Automation", "Data", "Scale"].map((layer, index) => (
+              <div key={layer} className="group relative rounded-2xl border border-navy/10 bg-ivory p-5 transition-[transform,border-color] duration-200 hover:-translate-y-1 hover:border-gold">
+                <span className="font-mono text-[11px] text-gold-ink">0{index + 1}</span>
+                <p className="mt-7 font-heading text-base font-bold text-navy">{layer}</p>
+                {index < 5 && <span className="absolute -right-3 top-1/2 z-10 hidden h-6 w-6 -translate-y-1/2 items-center justify-center rounded-full border border-gold/30 bg-white text-gold-ink md:flex" aria-hidden="true">→</span>}
+              </div>
+            ))}
+          </div>
+          <p className="mx-auto mt-7 max-w-2xl text-center font-body text-sm leading-relaxed text-navy/60">The architecture is progressive: each layer gives the next one a stronger foundation.</p>
+        </div>
+      </section>
+
+      <section className="relative overflow-hidden bg-ivory px-6 py-16 md:py-24">
+        <div className="graph-overlay" />
+        <div className="relative z-10 mx-auto max-w-6xl rounded-3xl border border-navy/10 bg-white p-7 shadow-sm md:p-10">
+          <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+            <div>
+              <p className="eyebrow mb-3 text-teal-ink">Built for</p>
+              <h2 className="font-heading text-[length:var(--step-3)] font-extrabold leading-tight text-navy">Founder-led UAE SMEs ready to make operating changes.</h2>
+              <p className="mt-4 font-body text-sm leading-relaxed text-navy/65">Primary sectors include real estate and business services, trading and distribution, and construction and contracting.</p>
+            </div>
+            <ul className="grid gap-3 sm:grid-cols-2">
+              {qualification.map((item) => <li key={item} className="flex items-start gap-3 rounded-xl border border-navy/10 bg-ivory px-4 py-3 font-body text-sm text-navy/80"><span className="mt-0.5 text-teal-ink" aria-hidden="true">✓</span>{item}</li>)}
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section className="relative overflow-hidden bg-navy px-6 py-16 text-ivory md:py-24">
         <div className="graph-overlay-dark" />
-        <div className="max-w-7xl mx-auto relative z-10">
-          <div className="text-center mb-10 md:mb-14">
-            <span className="text-emerald font-heading font-bold tracking-widest text-sm uppercase mb-2 block">
-              The Methodology
-            </span>
-            <h2 className="heading-reveal text-3xl md:text-4xl font-heading font-extrabold mb-4">
-              The 3 Pillars of Scalability
-            </h2>
-            <p className="font-body text-ivory/70 max-w-2xl mx-auto text-sm md:text-base">
-              Transitioning from Owner-Driven to System-Driven and Team-Enabled.
-            </p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 border border-gold/20 rounded-xl overflow-hidden">
-            {[
-              {
-                pillar: 'Pillar 1',
-                title: 'Committed & Competent Teams',
-                body: 'A scalable business is built on collective ownership. We install the A.S.K. framework, role scorecards, and accountability cadence.',
-                items: ['A.S.K. Framework Hiring', 'Role Scorecards & KPIs', 'Accountability Cadence'],
-                bg: 'bg-navy/50',
-              },
-              {
-                pillar: 'Pillar 2',
-                title: 'Simple & Sustainable Systems',
-                body: 'Complexity is the enemy of execution. We build lightweight, clear standard operating procedures and meeting rhythms.',
-                items: ['"Golden Path" Process SOPs', 'Measured Execution Systems', 'Optimized Delegation Rules'],
-                bg: 'bg-gold/5',
-              },
-              {
-                pillar: 'Pillar 3',
-                title: 'Profitable & Magnetic Strategies',
-                body: 'Deploy marketing, sales, and delivery strategies that operate predictably without you at the centre.',
-                items: ['Predictable Revenue Engine', 'High-Margin Business Models', 'Institutional Valuation Growth'],
-                bg: 'bg-navy/50',
-              },
-            ].map((p, i) => (
-              <div
-                key={i}
-                className={cn(
-                  'p-8 md:p-10 hover:bg-gold/10 transition-colors duration-300',
-                  p.bg,
-                  i < 2 && 'border-b md:border-b-0 md:border-r border-gold/20'
-                )}
-              >
-                <div className="text-gold font-heading font-bold text-sm md:text-base mb-3">{p.pillar}</div>
-                <h3 className="font-heading font-bold text-xl md:text-2xl mb-4 text-ivory">{p.title}</h3>
-                <p className="font-body text-sm text-ivory/70 mb-6 leading-relaxed">{p.body}</p>
-                <ul className="space-y-3">
-                  {p.items.map((item) => (
-                    <li key={item} className="flex items-start gap-2 font-body text-sm text-ivory/90">
-                      <span className="text-emerald font-bold mt-0.5">✔</span>
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ─── HOW ENGAGEMENTS ARE RUN ──────────────────────────────────────── */}
-      <section className="py-16 md:py-24 px-6 bg-ivory relative overflow-hidden">
-        <div className="graph-overlay" />
-        <div className="max-w-5xl mx-auto relative z-10">
-          <div className="text-center mb-10 md:mb-14">
-            <span className="text-gold-ink font-heading font-bold tracking-widest text-sm uppercase mb-2 block">
-              How It Works
-            </span>
-            <h2 className="heading-reveal text-3xl md:text-4xl font-heading font-extrabold text-navy">
-              How engagements are run
-            </h2>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-            {[
-              {
-                n: '01',
-                title: 'Diagnosis before proposals',
-                body: 'Every engagement begins with diagnosis, not proposals. You will know your primary constraint before any scope is discussed.',
-              },
-              {
-                n: '02',
-                title: 'Fixed, written scope',
-                body: 'Deliverables, timelines, and review points are agreed before work begins. No open-ended retainers.',
-              },
-              {
-                n: '03',
-                title: 'You own everything built',
-                body: 'SOPs, systems, accounts, and data remain yours, in your accounts, editable by your team.',
-              },
-              {
-                n: '04',
-                title: 'Progress is measured, not asserted',
-                body: 'Each engagement defines its own success metrics at the start, and reports against them.',
-              },
-            ].map((card) => (
-              <div
-                key={card.n}
-                className="bg-white p-7 rounded-xl shadow-sm border border-navy/10 hover:border-gold card-interactive flex gap-5"
-              >
-                <span className="font-heading font-extrabold text-gold-ink text-2xl leading-none flex-shrink-0">{card.n}</span>
-                <div>
-                  <h3 className="font-heading font-bold text-navy text-base md:text-lg mb-2">{card.title}</h3>
-                  <p className="font-body text-sm text-navy/70 leading-relaxed">{card.body}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ─── INDUSTRY EXPERIENCE ──────────────────────────────────────────── */}
-      <section className="py-12 md:py-16 px-6 bg-ivory border-b border-navy/10 relative overflow-hidden">
-        <div className="graph-overlay" />
-        <div className="max-w-7xl mx-auto relative z-10">
-          <p className="text-center text-navy/40 font-body text-xs uppercase tracking-widest mb-8 font-semibold">
-            Industry Experience Across
-          </p>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-            {[
-              {
-                co: 'Food & Beverages Sector',
-                result: 'SOP systems development, inventory optimization, and operational workflow design.',
-              },
-              {
-                co: 'Corporate Services Sector',
-                result:
-                  'Financial strategy and advisory, business advisory frameworks, and pipeline management systems.',
-              },
-              {
-                co: 'Technology & Solutions Sector',
-                result:
-                  'Lead generation systems, marketing automation architecture, analytics, and performance reporting.',
-              },
-            ].map((anchor) => (
-              <div
-                key={anchor.co}
-                className="bg-white border border-navy/10 rounded-xl p-6 hover:border-gold card-interactive"
-              >
-                <div className="w-2 h-2 bg-gold rounded-full mb-3" />
-                <p className="font-heading font-bold text-navy text-sm mb-2">{anchor.co}</p>
-                <p className="font-body text-xs text-navy/60 leading-relaxed">{anchor.result}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ─── WHERE MOST ENGAGEMENTS START ─────────────────────────────────── */}
-      <section className="py-16 md:py-24 px-6 bg-ivory relative overflow-hidden">
-        <div className="graph-overlay" />
-        <div className="max-w-3xl mx-auto relative z-10">
-          <span className="text-gold-ink font-heading font-bold tracking-widest text-sm uppercase mb-3 block">
-            Where most engagements start
-          </span>
-          <p className="font-body text-navy/80 text-base md:text-lg leading-relaxed mb-5">
-            In the UAE, WhatsApp is where business conversations happen, and messages are read within
-            minutes. Yet most SMEs still handle enquiries by hand. A customer messages three businesses
-            at 9 pm — two reply the next morning, one replies in seconds and wins the work.
-          </p>
-          <p className="font-body text-navy/80 text-base md:text-lg leading-relaxed mb-6">
-            That is why many engagements begin with the Lead Response System: a single, contained
-            intervention that proves the method inside a week. The full architecture follows once the
-            result is visible.
-          </p>
-          <Link
-            href="/services"
-            className="text-gold-ink font-heading font-bold text-sm uppercase tracking-wider underline hover:text-gold transition-colors"
-          >
-            See the Lead Response System &rarr;
-          </Link>
-        </div>
-      </section>
-
-      {/* ─── CTA ──────────────────────────────────────────────────────────── */}
-      <section className="py-16 md:py-24 px-6 bg-navy text-ivory relative overflow-hidden">
-        <div className="graph-overlay-dark" />
-        <div className="max-w-4xl mx-auto text-center relative z-10">
-          <h2 className="heading-reveal text-2xl sm:text-3xl md:text-5xl font-heading font-extrabold mb-6">
-            What is the biggest constraint in your business?
-          </h2>
-          <p className="font-body text-base md:text-lg text-ivory/70 mb-10">
-            Answer 10 questions. In 4 minutes, identify the single constraint blocking your growth — with a
-            personalised AI Action Plan delivered to your inbox.
-          </p>
-          <Link
-            href="/diagnostic"
-            className="inline-flex items-center justify-center bg-gold text-navy font-heading font-bold py-4 md:py-5 px-10 md:px-12 rounded-xl text-base md:text-lg hover:bg-gold-bright transition-colors shadow-lg min-h-[52px] w-full sm:w-auto"
-          >
-            Start Your Free Diagnostic →
-          </Link>
-          <p className="text-ivory/30 font-body text-sm mt-4">
-            4 minutes · No account required · Report delivered by email
-          </p>
-          <div className="pt-10 md:pt-12 border-t border-gold/20 mt-10 md:mt-12 flex flex-wrap items-center justify-center gap-8 md:gap-10">
-            {[
-              { stat: '4 min', label: 'Free Diagnostic' },
-              { stat: 'UAE/GCC', label: 'Primary Market' },
-              { stat: 'AI', label: 'Enabled Systems' },
-              { stat: '6', label: 'Business Languages' },
-            ].map((s) => (
-              <div key={s.stat} className="text-center">
-                <div className="font-heading font-bold text-xl md:text-2xl text-gold">{s.stat}</div>
-                <div className="font-body text-xs uppercase tracking-widest text-ivory/40 mt-1">{s.label}</div>
-              </div>
-            ))}
-          </div>
+        <div className="relative z-10 mx-auto max-w-3xl text-center">
+          <p className="eyebrow mb-3 text-gold">Start with clarity</p>
+          <h2 className="font-heading text-[length:var(--step-4)] font-extrabold leading-tight">Find out where your business still depends on you.</h2>
+          <p className="mx-auto mt-5 max-w-xl font-body text-base leading-relaxed text-ivory/70">Start with a practical free diagnostic for founder-led UAE SMEs. It gives you a clearer view of the business behavior worth examining next.</p>
+          <Link href="/diagnostic" className="mt-8 inline-flex min-h-[52px] items-center justify-center rounded-xl bg-gold px-9 py-4 font-heading text-base font-bold text-navy shadow-lg transition-colors hover:bg-gold-bright">Take the Free Diagnostic <span aria-hidden="true">&nbsp;→</span></Link>
         </div>
       </section>
     </>

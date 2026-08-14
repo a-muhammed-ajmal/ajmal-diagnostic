@@ -1,113 +1,97 @@
-import Link from 'next/link';
-import Image from 'next/image';
-import { pageMetadata, AUTHOR_HEADSHOT } from '@/lib/metadata';
-import { personAndServiceJsonLd, jsonLdScript } from '@/lib/jsonLd';
+import Image from "next/image";
+import Link from "next/link";
+import { AUTHOR_HEADSHOT, pageMetadata } from "@/lib/metadata";
+import { jsonLdScript, personAndServiceJsonLd } from "@/lib/jsonLd";
 
 export const metadata = pageMetadata({
-  title: 'About Muhammed Ajmal | Business Operations & Growth Consultant',
+  title: "About Muhammed Ajmal | Business Operations & Growth Consultant",
   absoluteTitle: true,
-  description: 'Helping UAE founder-led SMEs build operating systems, reduce founder dependency, and enable consistent team execution.',
-  path: '/about',
+  description: "Muhammed Ajmal is a Dubai-based Business Operations & Growth Consultant helping founder-led UAE SMEs build stronger systems, ownership, visibility, and execution.",
+  path: "/about",
 });
 
 const credentials = [
-  'Google AI Professional Certificate 2026 — Credential: SCSUP9BBKX10',
-  'AI for Brainstorming and Planning — Google (2026)',
-  'Business Development Foundations — LinkedIn (2024)',
-  'Mastering Project Management — LinkedIn (2024)',
-  'Basics of Business Consulting — Alison (2024)',
-  'Advanced Diploma in Digital Marketing — Digimark Academy (2022)',
+  "Google AI Professional Certificate 2026 — Credential: SCSUP9BBKX10",
+  "AI for Brainstorming and Planning — Google (2026)",
+  "Business Development Foundations — LinkedIn (2024)",
+  "Mastering Project Management — LinkedIn (2024)",
+  "Basics of Business Consulting — Alison (2024)",
+  "Advanced Diploma in Digital Marketing — Digimark Academy (2022)",
 ];
 
-const languages = ['English', 'Arabic / MSA', 'Hindi', 'Malayalam', 'Tamil', 'Kannada'];
+const principles = [
+  ["Simple", "Use operating structures people can understand and apply."],
+  ["Practical", "Prioritize changes that fit the reality of the business."],
+  ["Sustainable", "Build systems the team can maintain after implementation."],
+];
 
 export default function AboutPage() {
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: jsonLdScript(personAndServiceJsonLd()) }}
-      />
-      <section className="bg-navy text-ivory py-16 md:py-20 px-6 relative overflow-hidden">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdScript(personAndServiceJsonLd()) }} />
+
+      <section className="relative overflow-hidden bg-navy px-6 py-16 text-ivory md:py-20">
         <div className="graph-overlay-dark" />
-        <div className="max-w-4xl mx-auto text-center relative z-10">
-          <span className="text-gold font-heading font-bold tracking-widest text-sm uppercase mb-3 block">Authority Profile</span>
-          <h1 className="text-3xl md:text-5xl font-heading font-extrabold mb-5">The Architect</h1>
-          <p className="font-body text-ivory/70 text-base md:text-lg max-w-2xl mx-auto">Strategic Growth Architect for founder-led SMEs across the UAE and GCC.</p>
+        <div className="relative z-10 mx-auto max-w-4xl text-center">
+          <p className="eyebrow mb-3 text-gold">About Muhammed Ajmal</p>
+          <h1 className="font-heading text-[length:var(--step-5)] font-extrabold leading-[1.02]">Business Operations &amp; Growth Consultant</h1>
+          <p className="mx-auto mt-5 max-w-2xl font-body text-base leading-relaxed text-ivory/70 md:text-lg">Dubai, United Arab Emirates</p>
         </div>
       </section>
 
-      <section className="py-16 md:py-20 px-6 bg-ivory relative overflow-hidden">
+      <section className="relative overflow-hidden bg-ivory px-6 py-16 md:py-24">
         <div className="graph-overlay" />
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row gap-12 md:gap-16 items-start relative z-10">
-          <div className="w-full md:w-2/5 flex-shrink-0">
-            <div className="w-full aspect-[4/5] bg-navy rounded-xl relative shadow-xl overflow-hidden flex items-end max-w-sm mx-auto md:max-w-none">
-              {/*
-                The source is square and the frame is 4:5, so object-cover scales to the
-                frame height and the overflow is purely horizontal, split evenly — the
-                face stays centred without an explicit object-position.
-              */}
-              <Image
-                src={AUTHOR_HEADSHOT.src}
-                alt={AUTHOR_HEADSHOT.alt}
-                fill
-                priority
-                sizes="(min-width: 768px) 40vw, (min-width: 432px) 24rem, 100vw"
-                className="object-cover"
-              />
-              <div className="absolute inset-0 border-4 border-gold/20 m-4 rounded-lg pointer-events-none" />
-              {/* z-10: `fill` is absolutely positioned, so a static caption would paint underneath it. */}
-              <div className="relative z-10 p-6 md:p-8 w-full bg-gradient-to-t from-navy via-navy/60 to-transparent">
-                <div className="font-heading font-bold text-ivory text-xl md:text-2xl">Muhammed Ajmal</div>
-                <div className="text-gold text-xs tracking-widest uppercase mt-1">Strategic Growth Architect · Dubai, UAE</div>
+        <div className="relative z-10 mx-auto grid max-w-7xl gap-12 md:grid-cols-[0.85fr_1.15fr] md:items-start md:gap-16">
+          <div className="relative mx-auto w-full max-w-md">
+            <div className="absolute -left-3 -top-3 h-24 w-24 border-l-2 border-t-2 border-gold" aria-hidden="true" />
+            <div className="relative aspect-[4/5] overflow-hidden rounded-3xl bg-navy shadow-2xl">
+              <Image src={AUTHOR_HEADSHOT.src} alt={AUTHOR_HEADSHOT.alt} fill priority sizes="(min-width: 768px) 36vw, 100vw" className="object-cover" />
+              <div className="absolute inset-x-0 bottom-0 bg-navy/85 p-5">
+                <p className="font-heading text-lg font-bold text-ivory">Muhammed Ajmal</p>
+                <p className="mt-1 font-body text-xs text-gold">Business Operations &amp; Growth Consultant</p>
               </div>
             </div>
           </div>
 
-          <div className="md:w-3/5">
-            <span className="text-gold-ink eyebrow mb-2 block">Who I Am</span>
-            <h2 className="text-2xl md:text-3xl font-heading font-extrabold text-navy mb-6">I built the system. My team implements the framework.</h2>
-            <p className="font-body text-navy/70 leading-relaxed mb-5 text-sm md:text-base">As a specialist in SME Strategic Management and Operational Excellence in the UAE and GCC, I help founders transition from exhausting daily operations to engineering genuine enterprise value. My practice focuses on engineering the growth infrastructure of a business — not just advising.</p>
-            <p className="font-body text-navy/70 leading-relaxed mb-6 text-sm md:text-base">My background spans strategic management, warehouse and supply chain operations, commercial services, project execution, and business growth initiatives across the UAE market — covering food and beverages, financial advisory, and marketing automation.</p>
-
-            <div className="border-l-4 border-gold pl-5 md:pl-6 mb-8">
-              <p className="font-heading text-base md:text-lg font-semibold italic text-navy/80">&ldquo;What gets you to AED 1 Million will actively prevent you from reaching AED 10 Million without the right architecture.&rdquo;</p>
+          <div>
+            <p className="eyebrow mb-3 text-teal-ink">Approach</p>
+            <h2 className="font-heading text-[length:var(--step-4)] font-extrabold leading-tight text-navy">Management knowledge, systems thinking, execution, and applied AI.</h2>
+            <div className="mt-6 space-y-5 font-body text-base leading-relaxed text-navy/70">
+              <p>Muhammed helps founder-led UAE SMEs move important operating responsibility into clear roles, usable systems, and visible management information.</p>
+              <p>The work is grounded in business management, systems thinking, and practical execution. Applied AI is used as an enabling capability—where it improves capacity, speed, or visibility—not as a product in itself.</p>
+              <p>The focus is to reduce founder dependency by improving decision speed, execution consistency, and operational visibility.</p>
             </div>
-
-            <h3 className="font-heading font-bold text-navy text-base md:text-lg mb-4">Professional Credentials</h3>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-8">
-              {credentials.map(c => (
-                <div key={c} className="flex items-start gap-3 bg-white p-3 rounded-lg shadow-sm border border-navy/5">
-                  <div className="w-2 h-2 bg-gold rounded-full mt-1.5 flex-shrink-0" />
-                  <span className="font-body text-xs font-medium text-navy/80 leading-snug">{c}</span>
-                </div>
-              ))}
-            </div>
-
-            <h3 className="font-heading font-bold text-navy text-base md:text-lg mb-4">Multilingual Business Communication</h3>
-            <div className="flex flex-wrap gap-2 mb-8">
-              {languages.map(lang => (
-                <span key={lang} className="bg-navy text-gold text-xs font-heading font-semibold px-3 py-1.5 rounded-full">{lang}</span>
-              ))}
-            </div>
-
-            <div className="bg-navy rounded-xl p-5 md:p-6">
-              <p className="text-gold eyebrow mb-3">Consulting Philosophy</p>
-              <p className="font-body text-ivory/80 text-sm leading-relaxed mb-3">Sustainable growth is not achieved through effort alone. It is achieved through the right strategy, supported by the appropriate systems, executed by the correct people, measured through the correct metrics, and continuously improved through disciplined accountability.</p>
-              <p className="font-body text-ivory/50 text-xs">This is not traditional consulting. It is the engineering of a business&apos;s growth infrastructure.</p>
-            </div>
+            <Link href="/diagnostic" className="mt-8 inline-flex min-h-12 items-center justify-center rounded-xl bg-gold px-6 py-3 font-heading text-sm font-bold text-navy transition-colors hover:bg-gold-bright">Take the Free Diagnostic →</Link>
           </div>
         </div>
       </section>
 
-      <section className="py-12 md:py-16 px-6 bg-ivory border-t border-navy/10 relative overflow-hidden">
+      <section className="bg-white px-6 py-16 md:py-24">
+        <div className="mx-auto max-w-6xl">
+          <div className="mx-auto max-w-2xl text-center">
+            <p className="eyebrow mb-3 text-gold-ink">Delivery principle</p>
+            <h2 className="font-heading text-[length:var(--step-4)] font-extrabold leading-tight text-navy">Simple · Practical · Sustainable</h2>
+          </div>
+          <div className="mt-10 grid gap-4 md:grid-cols-3">
+            {principles.map(([title, body], index) => (
+              <article key={title} className="rounded-2xl border border-navy/10 bg-ivory p-6 shadow-sm">
+                <span className="font-mono text-xs text-gold-ink">0{index + 1}</span>
+                <h3 className="mt-5 font-heading text-xl font-bold text-navy">{title}</h3>
+                <p className="mt-3 font-body text-sm leading-relaxed text-navy/65">{body}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="relative overflow-hidden bg-ivory px-6 py-16 md:py-24">
         <div className="graph-overlay" />
-        <div className="max-w-2xl mx-auto text-center relative z-10">
-          <h2 className="font-heading font-extrabold text-2xl md:text-3xl text-navy mb-4">Start with the diagnostic.</h2>
-          <p className="font-body text-navy/60 mb-8 text-sm md:text-base">Identify your primary growth constraint before our first conversation — so we start at the root cause, not the symptom.</p>
-          <Link href="/diagnostic" className="inline-flex items-center justify-center bg-gold text-navy font-heading font-bold py-4 px-10 rounded-xl text-base hover:bg-gold-bright transition-colors min-h-[52px] w-full sm:w-auto">
-            Free Business Constraint Diagnostic →
-          </Link>
+        <div className="relative z-10 mx-auto max-w-5xl">
+          <p className="eyebrow mb-3 text-teal-ink">Professional credentials</p>
+          <h2 className="font-heading text-[length:var(--step-3)] font-extrabold text-navy">Current learning and professional development</h2>
+          <ul className="mt-8 grid gap-3 md:grid-cols-2">
+            {credentials.map((credential) => <li key={credential} className="rounded-xl border border-navy/10 bg-white p-4 font-body text-sm leading-relaxed text-navy/70"><span className="mr-2 text-teal-ink" aria-hidden="true">✓</span>{credential}</li>)}
+          </ul>
         </div>
       </section>
     </>

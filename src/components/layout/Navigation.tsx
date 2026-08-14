@@ -1,127 +1,73 @@
-'use client';
-import { useState, useEffect } from 'react';
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { Menu, X } from 'lucide-react';
-import { cn } from '@/lib/utils';
+"use client";
+
+import { useEffect, useState } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { Menu, X } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 const navLinks = [
-  { href: '/#problem', label: 'The Founder Trap' },
-  { href: '/#solution', label: 'SGA Framework' },
-  { href: '/services', label: 'Services' },
-  { href: '/about', label: 'The Architect' },
-  { href: '/insights', label: 'Insights' },
-  { href: '/contact', label: 'Contact' },
+  { href: "/#founder-trap", label: "Founder Trap" },
+  { href: "/services", label: "How It Works" },
+  { href: "/insights", label: "Insights" },
+  { href: "/about", label: "About" },
+  { href: "/contact", label: "Contact" },
 ];
 
 export function Navigation() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
-  const isAdmin = pathname?.startsWith('/admin');
-  const isDiagnostic = pathname?.startsWith('/diagnostic');
-  const isResults = pathname?.startsWith('/results');
-
-  const [prevPathname, setPrevPathname] = useState(pathname);
-  if (pathname !== prevPathname) {
-    setPrevPathname(pathname);
-    setMobileOpen(false);
-  }
+  const isAdmin = pathname?.startsWith("/admin");
+  const isDiagnostic = pathname?.startsWith("/diagnostic");
+  const isResults = pathname?.startsWith("/results");
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 10);
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   if (isAdmin || isDiagnostic) return null;
 
   return (
-    <nav
-      className={cn(
-        'bg-navy/95 backdrop-blur-md text-ivory py-4 px-4 md:px-6 border-b border-gold/20 sticky top-0 z-50 transition-shadow duration-300',
-        scrolled && 'shadow-lg shadow-black/30'
-      )}
-    >
-      <div className="max-w-7xl mx-auto flex justify-between items-center">
-
-        {/* Logo — name always visible on all screen sizes, subtitle hidden on mobile */}
-        <Link href="/" className="flex items-center gap-3 hover:opacity-90 transition-opacity">
-          <div className="relative w-9 h-9 flex items-center justify-center border-2 border-ivory/20 rounded-sm flex-shrink-0">
-            <span className="font-heading font-extrabold text-lg tracking-tighter leading-none">
-              M<span className="text-gold">A</span>
-            </span>
-            <div className="absolute -right-1 -top-1 w-2 h-2 border-t-2 border-r-2 border-gold" />
+    <nav className={cn("sticky top-0 z-50 border-b border-gold/20 bg-navy/95 px-4 py-4 text-ivory backdrop-blur-md transition-shadow duration-300 md:px-6", scrolled && "shadow-lg shadow-black/30")}>
+      <div className="mx-auto flex max-w-7xl items-center justify-between">
+        <Link href="/" className="flex items-center gap-3 transition-opacity hover:opacity-90">
+          <div className="relative flex h-9 w-9 shrink-0 items-center justify-center rounded-sm border-2 border-ivory/20">
+            <span className="font-heading text-lg font-extrabold leading-none tracking-tighter">M<span className="text-gold">A</span></span>
+            <div className="absolute -right-1 -top-1 h-2 w-2 border-r-2 border-t-2 border-gold" />
           </div>
           <div>
-            <div className="font-heading font-bold tracking-widest text-xs leading-none uppercase">
-              Muhammed Ajmal
-            </div>
-            <div className="hidden sm:block font-body text-[9px] tracking-[0.25em] text-gold mt-0.5 uppercase">
-              Strategic Consulting
-            </div>
+            <p className="font-heading text-xs font-bold uppercase leading-none tracking-widest">Muhammed Ajmal</p>
+            <p className="mt-0.5 hidden font-body text-[9px] uppercase tracking-[0.2em] text-gold sm:block">Business Operations &amp; Growth</p>
           </div>
         </Link>
 
-        {/* Desktop nav links with underline hover animation */}
-        <div className="hidden lg:flex gap-6 text-sm font-body font-medium tracking-wide">
-          {navLinks.map(link => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className="relative group hover:text-gold transition-colors duration-200"
-            >
+        <div className="hidden gap-6 font-body text-sm font-medium tracking-wide lg:flex">
+          {navLinks.map((link) => (
+            <Link key={link.href} href={link.href} className="group relative transition-colors duration-200 hover:text-gold">
               {link.label}
-              <span className="absolute -bottom-1 left-0 w-0 h-px bg-gold group-hover:w-full transition-[width] duration-300" />
+              <span className="absolute -bottom-1 left-0 h-px w-0 bg-gold transition-[width] duration-300 group-hover:w-full" />
             </Link>
           ))}
         </div>
 
-        {/* Right side — CTA + hamburger */}
         <div className="flex items-center gap-3">
-          {!isResults && (
-            <Link
-              href="/diagnostic"
-              className="hidden sm:inline-flex items-center bg-gold text-navy font-heading font-bold py-2 px-4 rounded-xl hover:bg-gold-bright transition-colors text-sm min-h-[44px]"
-            >
-              Free Diagnostic
-            </Link>
-          )}
-          <button
-            onClick={() => setMobileOpen(!mobileOpen)}
-            className="lg:hidden tap-target inline-flex items-center justify-center text-ivory hover:text-gold transition-colors"
-            aria-label="Toggle menu"
-            aria-expanded={mobileOpen}
-          >
+          {!isResults && <Link href="/diagnostic" className="hidden min-h-[44px] items-center rounded-xl bg-gold px-4 py-2 font-heading text-sm font-bold text-navy transition-colors hover:bg-gold-bright sm:inline-flex">Free Diagnostic</Link>}
+          <button type="button" onClick={() => setMobileOpen((open) => !open)} className="tap-target inline-flex items-center justify-center text-ivory transition-colors hover:text-gold lg:hidden" aria-label="Toggle menu" aria-expanded={mobileOpen}>
             {mobileOpen ? <X size={22} /> : <Menu size={22} />}
           </button>
         </div>
       </div>
 
-      {/* Mobile menu — smooth animated open/close */}
-      <div
-        className={cn(
-          'lg:hidden border-t border-gold/20 mt-3 overflow-hidden transition-[max-height,opacity,padding] duration-300 ease-in-out',
-          mobileOpen ? 'max-h-[520px] opacity-100 pt-3 pb-2' : 'max-h-0 opacity-0'
-        )}
-      >
-        {navLinks.map(link => (
-          <Link
-            key={link.href}
-            href={link.href}
-            onClick={() => setMobileOpen(false)}
-            className="block py-3 px-2 text-sm font-body hover:text-gold transition-colors border-b border-ivory/5 last:border-0"
-          >
+      <div className={cn("overflow-hidden border-t border-gold/20 transition-[max-height,opacity,padding] duration-300 ease-in-out lg:hidden", mobileOpen ? "mt-3 max-h-[420px] pb-2 pt-3 opacity-100" : "max-h-0 opacity-0")}>
+        {navLinks.map((link) => (
+          <Link key={link.href} href={link.href} onClick={() => setMobileOpen(false)} className="block border-b border-ivory/5 px-2 py-3 font-body text-sm transition-colors hover:text-gold last:border-0">
             {link.label}
           </Link>
         ))}
-        <Link
-          href="/diagnostic"
-          onClick={() => setMobileOpen(false)}
-          className="block mt-3 bg-gold text-navy font-heading font-bold py-3 px-5 rounded-xl text-sm text-center hover:bg-gold-bright transition-colors"
-        >
-          Free Diagnostic →
-        </Link>
+        <Link href="/diagnostic" onClick={() => setMobileOpen(false)} className="mt-3 block rounded-xl bg-gold px-5 py-3 text-center font-heading text-sm font-bold text-navy transition-colors hover:bg-gold-bright">Take the Free Diagnostic →</Link>
       </div>
     </nav>
   );

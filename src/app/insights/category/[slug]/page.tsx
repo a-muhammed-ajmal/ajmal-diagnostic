@@ -84,7 +84,7 @@ export default async function CategoryPage({
               <p className="font-heading font-bold text-navy text-lg mb-2">No articles here yet.</p>
               <p className="font-body text-navy/60 text-sm mb-6">
                 Writing on {category.name.toLowerCase()} is on the way. In the meantime, the free
-                diagnostic is the fastest way to find your primary growth constraint.
+                diagnostic is a practical first view of where founder dependency may be appearing.
               </p>
               <Link
                 href="/diagnostic"

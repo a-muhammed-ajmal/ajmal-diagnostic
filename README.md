@@ -1,7 +1,7 @@
 # Muhammed Ajmal Consulting
 
 A B2B consulting website and business diagnostic tool. It generates leads via an
-interactive quiz, emails a personalised (AI-assisted) diagnostic report, and manages
+interactive quiz, emails a personalized (AI-assisted) diagnostic report, and manages
 prospects through a protected admin dashboard.
 
 ## Stack
@@ -48,7 +48,7 @@ shipping. Set that variable both locally and in the Vercel project environment.
 
 | Metric | Value |
 |---|---|
-| Tests | 36 (Jest) — 25.88% lines overall; `scoring.ts` and `calendly.ts` 100% covered |
+| Tests | 224 (Jest) — 61.07% lines overall; `scoring.ts` and `calendly.ts` 100% covered |
 | DB tables | 5 (RLS on all) |
 | Migrations | 2 (`20260723000001`–`20260723000002`) |
 | Routes | App Router (see `AGENTS.md` for the full page list) |

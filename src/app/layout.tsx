@@ -25,15 +25,15 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://www.muhammedajmal.com"),
   title: {
     default:
-      "Muhammed Ajmal Consulting | Strategic Growth Architect for Founder-Led SMEs",
+      "Muhammed Ajmal Consulting | Business Operations & Growth Consultant",
     template: "%s | Muhammed Ajmal Consulting",
   },
   description:
-    "Helping founder-led SMEs across the UAE and GCC build scalable, system-driven businesses through Strategic Growth Architecture. Free diagnostic identifies your primary growth constraint.",
+    "Business operations and growth consulting for founder-led UAE SMEs. Build systems, ownership, visibility, and consistent execution that reduce founder dependency.",
   openGraph: {
-    title: "Strategic Growth Architecture for Founder-Led SMEs | UAE & GCC",
+    title: "Build a business that grows beyond the founder | Muhammed Ajmal Consulting",
     description:
-      "Escape the Founder Trap. Engineer Scalable Growth. Free 4-minute diagnostic identifies your primary business constraint.",
+      "Business operations and growth consulting for founder-led UAE SMEs.",
     url: "https://www.muhammedajmal.com",
     siteName: SITE_NAME,
     type: "website",
