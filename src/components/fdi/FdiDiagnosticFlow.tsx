@@ -1,7 +1,6 @@
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useSearchParams } from 'next/navigation';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -37,7 +36,6 @@ async function responseJson<T extends ApiResponse>(response: Response): Promise<
 
 export function FdiDiagnosticFlow() {
   const router = useRouter();
-  const searchParams = useSearchParams();
   const [stage, setStage] = useState<Stage>('intro');
   const [session, setSession] = useState<Session | null>(null);
   const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -74,7 +72,7 @@ export function FdiDiagnosticFlow() {
       const response = await fetch('/api/fdi/sessions', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ testMode: searchParams.get('testMode') === 'true' }),
+        body: JSON.stringify({ testMode: new URLSearchParams(window.location.search).get('testMode') === 'true' }),
       });
       const data = await responseJson<StartResponse>(response);
       if (!response.ok || !data.success || !data.sessionId || !data.sessionToken) {
