@@ -33,6 +33,15 @@ check runs in `next.config.ts` before compilation starts, and again in `src/lib/
 as a second line of defence — this is deliberate, it prevents a broken booking link from
 shipping. Set that variable both locally and in the Vercel project environment.
 
+## Founder Dependency Index (hidden rollout)
+
+The Founder Dependency Index is a separate instrument from the live ten-question
+diagnostic. Its `/diagnostic/fdi`, `/results/fdi`, and `/api/fdi/*` routes remain hidden
+and return 404 until `NEXT_PUBLIC_FDI_ENABLED=true` is set for a build. Keep it `false`
+until the Phase 3 migration has been applied and private QA is complete. The consultant
+workspace is at `/admin/fdi`; test records are created only by an authenticated admin
+using its explicit Test Mode link.
+
 ## Scripts
 
 | Command | Purpose |

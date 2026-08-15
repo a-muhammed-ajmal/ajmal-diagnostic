@@ -17,7 +17,7 @@ import { bandFor } from './bands';
 import { FDI_1_0_CONFIG, FDI_1_0_QUESTIONS, resolveVersion } from './config';
 import { httpStatusForRejection } from './rejection';
 import { buildReport } from './report';
-import { evaluateQualification } from './qualification';
+import { evaluateQualification, type QualificationInput } from './qualification';
 import {
   answersAllScoring,
   answersForRaw,
@@ -30,6 +30,16 @@ const config = FDI_1_0_CONFIG;
 const questionSet = FDI_1_0_QUESTIONS;
 const VERSION = config.diagnosticVersion;
 const RAW_MAX = config.itemsPerComponent * config.itemScoreMax;
+const QUALIFIED_PRIMARY: QualificationInput = {
+  country: 'uae',
+  founderLed: true,
+  annualRevenue: 'aed_1m_to_10m',
+  employeeCount: 'employees_5_to_50',
+  operatingYears: 'years_3_or_more',
+  singleDecisionAuthority: true,
+  willingToShareOperationalInformation: true,
+  primarySector: 'real_estate_business_services',
+};
 
 function score(answers: FdiAnswers, version: string = VERSION) {
   return scoreFdi({ diagnosticVersion: version, answers }, config, questionSet);
@@ -240,7 +250,7 @@ describe('Test 9 — an unanswered question', () => {
     expect(outcome.ok).toBe(false);
     if (outcome.ok) throw new Error('unreachable');
     expect(outcome.reason.code).toBe('INCOMPLETE');
-    expect((outcome.reason as { missingQuestionIds: string[] }).missingQuestionIds).toHaveLength(
+    expect((outcome.reason as { missingQuestionIds: readonly string[] }).missingQuestionIds).toHaveLength(
       questionSet.questions.length,
     );
   });
@@ -351,11 +361,11 @@ describe('Test 13 — commercial qualification', () => {
 
     const unqualified = buildReport(result, config, {
       ...context,
-      qualification: { result: 'Outside current target profile', version: 'QC-1.0', reasons: [] },
+      qualification: evaluateQualification({ ...QUALIFIED_PRIMARY, country: 'other' }),
     });
     const qualified = buildReport(result, config, {
       ...context,
-      qualification: { result: 'Within current target profile', version: 'QC-1.0', reasons: [] },
+      qualification: evaluateQualification(QUALIFIED_PRIMARY),
     });
 
     expect(unqualified.index).toEqual(qualified.index);
@@ -366,8 +376,11 @@ describe('Test 13 — commercial qualification', () => {
     expect(unqualified.qualification).not.toEqual(qualified.qualification);
   });
 
-  it('ships unevaluated in FDI-1.0 rather than guessing a rule (open questions B, B′)', () => {
-    expect(evaluateQualification()).toEqual({ result: null, version: null, reasons: [] });
+  it('uses the approved deterministic qualification rule', () => {
+    expect(evaluateQualification(QUALIFIED_PRIMARY)).toMatchObject({
+      result: 'qualified_primary',
+      version: 'FDI-QF-1.0',
+    });
   });
 });
 
@@ -380,7 +393,7 @@ describe('Test 14 — AI unavailable', () => {
     const report = buildReport(result, config, {
       sessionId: 'session-1',
       completedAt: '2026-08-14T00:00:00.000Z',
-      qualification: evaluateQualification(),
+      qualification: evaluateQualification(QUALIFIED_PRIMARY),
       ai: null,
     });
 
@@ -402,7 +415,7 @@ describe('Test 14 — AI unavailable', () => {
     const base = {
       sessionId: 's',
       completedAt: '2026-08-14T00:00:00.000Z',
-      qualification: evaluateQualification(),
+      qualification: evaluateQualification(QUALIFIED_PRIMARY),
     };
     const without = buildReport(result, config, { ...base, ai: null });
     const with_ = buildReport(result, config, { ...base, ai: { summary: 'drafted prose' } });

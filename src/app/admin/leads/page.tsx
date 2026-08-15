@@ -25,6 +25,12 @@ export default async function AdminLeadsPage() {
           M<span className="text-gold">A</span> · Consultant Workspace
         </div>
         <div className="flex items-center gap-4">
+          <Link
+            href="/admin/fdi"
+            className="text-xs text-gold hover:text-gold-bright transition-colors"
+          >
+            FDI sessions
+          </Link>
           <span className="font-body text-xs text-ivory/50">
             {leads?.length || 0} leads
           </span>

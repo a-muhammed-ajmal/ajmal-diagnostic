@@ -5,7 +5,7 @@
 import { buildReport, renderPresentation } from './report';
 import { scoreFdi } from './score';
 import { FDI_1_0_CONFIG, FDI_1_0_QUESTIONS } from './config';
-import { evaluateQualification } from './qualification';
+import { evaluateQualification, type QualificationInput } from './qualification';
 import { deriveObservations } from './observations';
 import { answersForRaw } from './test-support';
 import type { FdiResult } from './types';
@@ -26,10 +26,21 @@ function scored(targets: Record<string, number>): FdiResult {
   return outcome.result;
 }
 
+const QUALIFICATION: QualificationInput = {
+  country: 'uae',
+  founderLed: true,
+  annualRevenue: 'aed_1m_to_10m',
+  employeeCount: 'employees_5_to_50',
+  operatingYears: 'years_3_or_more',
+  singleDecisionAuthority: true,
+  willingToShareOperationalInformation: true,
+  primarySector: 'real_estate_business_services',
+};
+
 const CONTEXT = {
   sessionId: 'session-abc',
   completedAt: '2026-08-14T09:30:00.000Z',
-  qualification: evaluateQualification(),
+  qualification: evaluateQualification(QUALIFICATION),
   ai: null,
 };
 
@@ -108,9 +119,13 @@ describe('report contract (§14)', () => {
     expect(report().completedAt).toBe(CONTEXT.completedAt);
   });
 
-  it('ships observations empty in FDI-1.0 (open question A)', () => {
-    expect(report().observations).toEqual([]);
-    expect(deriveObservations(scored({ DS: 1, EC: 1, OV: 1 }))).toEqual([]);
+  it('ships the approved deterministic observations', () => {
+    expect(report().observations).toEqual([
+      'Important operating decisions slow down when you are unavailable.',
+      'Important recurring work still depends materially on knowledge held by individuals rather than usable systems.',
+      'You still depend heavily on asking people to understand the current status of the business.',
+    ]);
+    expect(deriveObservations(scored({ DS: 1, EC: 1, OV: 1 }))).toHaveLength(3);
   });
 
   it('makes no magnitude claim or guarantee anywhere in its fixed copy', () => {
@@ -122,9 +137,9 @@ describe('report contract (§14)', () => {
 });
 
 describe('qualification is a sibling branch (§13)', () => {
-  it('is null and unversioned until the rule is specified', () => {
+  it('is carried separately without changing the FDI', () => {
     const r = buildReport(scored({ DS: 12, EC: 12, OV: 12 }), config, CONTEXT);
-    expect(r.qualification).toEqual({ result: null, version: null });
+    expect(r.qualification).toEqual({ result: 'qualified_primary', version: 'FDI-QF-1.0' });
     // §13's example: a maximum FDI is reported unchanged alongside qualification.
     expect(r.index.display).toBe(100);
     expect(r.index.band.key).toBe('very_high');
