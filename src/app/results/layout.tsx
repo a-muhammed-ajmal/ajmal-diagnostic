@@ -2,7 +2,7 @@ import { pageMetadata } from '@/lib/metadata';
 
 export const metadata = pageMetadata({
   title: 'Your Diagnostic Results',
-  description: 'Your personalised business constraint diagnosis.',
+  description: 'Your personalized business diagnostic result.',
   path: '/results',
   index: false, // Per-user results — not for indexing.
 });

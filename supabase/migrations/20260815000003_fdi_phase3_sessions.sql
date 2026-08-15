@@ -76,5 +76,7 @@ create index fdi_test_status_history_session_changed_idx
 
 alter table public.fdi_test_status_history enable row level security;
 
+revoke all privileges on table public.fdi_test_status_history from anon, authenticated;
+
 -- No anon/authenticated policies. Server-side use of the secret key bypasses
 -- RLS; the public browser never receives direct table access.

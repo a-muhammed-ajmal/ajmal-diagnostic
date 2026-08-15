@@ -5,8 +5,14 @@ import { generateAIActionPlan } from "@/lib/ai";
 import { Resend } from "resend";
 import { DiagnosticReportEmail } from "@/lib/email/templates/DiagnosticReport";
 import { CALENDLY_LINK } from "@/lib/env";
+import { requireResendConfig } from "@/lib/serverEnv";
 import { enforcePublicFormLimits } from "@/lib/rateLimit";
 import { z } from "zod";
+
+// Evaluated at module load, so a misconfigured deploy fails on the first request
+// with the exact reason in the logs rather than accepting submissions and quietly
+// failing to deliver. See src/lib/serverEnv.ts for the trade-off this represents.
+const RESEND_CONFIG = requireResendConfig();
 
 const submitSchema = z.object({
   leadData: z.object({
@@ -81,29 +87,46 @@ export async function POST(req: NextRequest) {
     if (dbError) throw dbError;
 
     try {
-      const aiPlan = await generateAIActionPlan(results, {
+      // generateAIActionPlan never throws: it returns fallback content on failure.
+      // `generated` is the only honest signal of whether the model produced this,
+      // so it is what gets persisted — recording `true` unconditionally is what
+      // previously marked canned fallback text as AI-generated on every lead.
+      const { plan, generated, error: aiError } = await generateAIActionPlan(results, {
         companyName: leadData.companyName,
         industry: leadData.industry || "Not specified",
         teamSize: leadData.teamSize || "Not specified",
         revenueRange: leadData.revenueRange || "Not specified",
       });
-      results.aiPlan = aiPlan;
+
+      if (!generated) {
+        console.error(
+          `AI plan fell back to deterministic content for lead ${lead.id}:`,
+          aiError,
+        );
+      }
+
+      results.aiPlan = plan;
       await supabase
         .from("diagnostic_leads")
         .update({
-          ai_plan_generated: true,
-          ai_30day_plan: JSON.stringify(aiPlan.thirtyDayPriorities),
-          ai_90day_plan: JSON.stringify(aiPlan.ninetyDayDirections),
-          ai_discussion_questions: JSON.stringify(aiPlan.discussionQuestions),
+          ai_plan_generated: generated,
+          ai_30day_plan: JSON.stringify(plan.thirtyDayPriorities),
+          ai_90day_plan: JSON.stringify(plan.ninetyDayDirections),
+          ai_discussion_questions: JSON.stringify(plan.discussionQuestions),
         })
         .eq("id", lead.id);
-    } catch (aiError) {
-      console.error("AI plan failed (non-blocking):", aiError);
+    } catch (persistError) {
+      console.error("Persisting the AI plan failed (non-blocking):", persistError);
     }
 
     try {
-      const { error: emailError } = await resend.emails.send({
-        from: `Muhammed Ajmal Consulting <${process.env.RESEND_FROM_EMAIL}>`,
+      // The Resend SDK reports API-level failures by RETURNING an error, not by
+      // throwing, so the catch below never sees them. Every rejection — invalid
+      // key, unverified sending domain, malformed recipient — must be logged
+      // here or it disappears entirely, which is exactly how two months of
+      // undelivered reports went unnoticed.
+      const { data, error: emailError } = await resend.emails.send({
+        from: `Muhammed Ajmal Consulting <${RESEND_CONFIG.fromEmail}>`,
         to: leadData.email,
         subject: `Your Business Constraint Diagnosis: ${results.primaryConstraintLabel} is your primary growth blocker`,
         react: DiagnosticReportEmail({
@@ -113,14 +136,28 @@ export async function POST(req: NextRequest) {
           calendlyLink: CALENDLY_LINK,
         }),
       });
-      if (!emailError) {
+
+      if (emailError) {
+        console.error(
+          `Resend rejected the diagnostic report for lead ${lead.id} ` +
+            `(from ${RESEND_CONFIG.fromEmail}):`,
+          emailError,
+        );
+      } else {
+        // email_sent is written only on a genuine accept, never on a rejection.
+        console.info(`Diagnostic report accepted by Resend for lead ${lead.id}`, {
+          messageId: data?.id,
+        });
         await supabase
           .from("diagnostic_leads")
           .update({ email_sent: true })
           .eq("id", lead.id);
       }
     } catch (emailError) {
-      console.error("Email failed (non-blocking):", emailError);
+      console.error(
+        `Email send threw for lead ${lead.id} (network or SDK failure):`,
+        emailError,
+      );
     }
 
     return NextResponse.json({ success: true, results, leadId: lead.id });

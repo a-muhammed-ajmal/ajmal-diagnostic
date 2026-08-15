@@ -134,7 +134,7 @@ export default async function LeadBriefingPage({
                 {typedLead.health_score ?? "—"}%
               </div>
               <div className="font-body text-navy/50 text-xs mb-1">
-                Business Health Score
+                Diagnostic Score
               </div>
               {typedLead.severity_label && (
                 <span

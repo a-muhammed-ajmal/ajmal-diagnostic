@@ -33,14 +33,14 @@ check runs in `next.config.ts` before compilation starts, and again in `src/lib/
 as a second line of defence — this is deliberate, it prevents a broken booking link from
 shipping. Set that variable both locally and in the Vercel project environment.
 
-## Founder Dependency Index (hidden rollout)
+## Founder Dependency Index
 
-The Founder Dependency Index is a separate instrument from the live ten-question
-diagnostic. Its `/diagnostic/fdi`, `/results/fdi`, and `/api/fdi/*` routes remain hidden
-and return 404 until `NEXT_PUBLIC_FDI_ENABLED=true` is set for a build. Keep it `false`
-until the Phase 3 migration has been applied and private QA is complete. The consultant
-workspace is at `/admin/fdi`; test records are created only by an authenticated admin
-using its explicit Test Mode link.
+The Founder Dependency Index is the public Free Diagnostic when
+`NEXT_PUBLIC_FDI_ENABLED=true` is set at build time (it remains `false` by default).
+The legacy ten-question diagnostic stays available only as a compatibility path while
+the flag is disabled. `/diagnostic/fdi` and `/results/fdi` remain noindex aliases for
+private result handling. The consultant workspace is at `/admin/fdi`; test records are
+created only by an authenticated admin using its explicit Test Mode link.
 
 ## Scripts
 
@@ -57,9 +57,9 @@ using its explicit Test Mode link.
 
 | Metric | Value |
 |---|---|
-| Tests | 224 (Jest) — 61.07% lines overall; `scoring.ts` and `calendly.ts` 100% covered |
-| DB tables | 5 (RLS on all) |
-| Migrations | 2 (`20260723000001`–`20260723000002`) |
+| Tests | Run `npm test` to verify the current suite |
+| DB tables | 8 (RLS on all) |
+| Migrations | 5 (`20260723000001`–`20260815000003`) |
 | Routes | App Router (see `AGENTS.md` for the full page list) |
 
 ## Project layout

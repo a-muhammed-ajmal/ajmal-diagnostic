@@ -20,7 +20,7 @@ export function FdiResults() {
   }, []);
 
   if (!report) {
-    return <main className="min-h-screen bg-ivory flex items-center justify-center px-5"><section className="max-w-lg text-center bg-white border border-navy/10 rounded-2xl p-8"><h1 className="font-heading font-extrabold text-navy text-2xl">Your result is not available in this browser.</h1><p className="font-body text-navy/60 mt-3">Complete the diagnostic again to view a new result.</p><Link href="/diagnostic/fdi" className="inline-block mt-6 bg-gold text-navy rounded-xl px-5 py-3 font-heading font-bold">Start diagnostic</Link></section></main>;
+    return <main className="min-h-screen bg-ivory flex items-center justify-center px-5"><section className="max-w-lg text-center bg-white border border-navy/10 rounded-2xl p-8"><h1 className="font-heading font-extrabold text-navy text-2xl">Your result is not available in this browser.</h1><p className="font-body text-navy/60 mt-3">Complete the diagnostic again to view a new result.</p><Link href="/diagnostic" className="inline-block mt-6 bg-gold text-navy rounded-xl px-5 py-3 font-heading font-bold">Start diagnostic</Link></section></main>;
   }
 
   const concentration = report.concentration.labels.join(' and ');

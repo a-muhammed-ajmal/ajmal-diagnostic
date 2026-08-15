@@ -1,9 +1,9 @@
 import { pageMetadata } from '@/lib/metadata';
 
 export const metadata = pageMetadata({
-  title: 'Free Business Diagnostic | Find Your Growth Constraint',
+  title: 'Founder Dependency Index | Free Business Diagnostic',
   absoluteTitle: true,
-  description: 'A free 4-minute diagnostic for founder-led SMEs. Answer 10 questions to identify your primary growth constraint and receive a personalised AI action plan by email.',
+  description: 'A free 12-question Founder Dependency Index for founder-led UAE SMEs. Review decision speed, execution consistency, and operational visibility.',
   path: '/diagnostic',
 });
 

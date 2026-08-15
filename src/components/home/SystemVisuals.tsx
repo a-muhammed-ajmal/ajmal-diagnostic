@@ -81,7 +81,7 @@ export function DependencyIndexPreview() {
         <div>
           <p className="eyebrow mb-3 text-teal">Founder Dependency Index</p>
           <h2 className="font-heading text-[length:var(--step-4)] font-extrabold leading-[1.05]">How dependent is the business on you?</h2>
-          <p className="mt-5 max-w-xl font-body text-base leading-relaxed text-ivory/70">The Founder Dependency Index is the next diagnostic release. It will measure where founder dependency concentrates across three observable operating areas.</p>
+          <p className="mt-5 max-w-xl font-body text-base leading-relaxed text-ivory/70">The Founder Dependency Index measures where founder dependency concentrates across three observable operating areas.</p>
           <div className="mt-6 rounded-2xl border border-gold/25 bg-gold/10 p-4">
             <p className="font-heading text-sm font-bold text-gold">Important diagnostic boundary</p>
             <p className="mt-1 font-body text-sm leading-relaxed text-ivory/70">A self-report can show where dependency appears. It does not establish root cause; an Audit verifies that with operational evidence.</p>

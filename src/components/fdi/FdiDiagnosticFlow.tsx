@@ -148,7 +148,7 @@ export function FdiDiagnosticFlow() {
       <main className="min-h-screen bg-navy text-ivory flex items-center px-5 py-16 relative overflow-hidden">
         <div className="graph-overlay-dark" />
         <section className="relative z-10 w-full max-w-3xl mx-auto text-center">
-          <p className="eyebrow text-gold mb-4">Private diagnostic preview</p>
+          <p className="eyebrow text-gold mb-4">Free business diagnostic</p>
           <h1 className="font-heading font-extrabold text-[length:var(--step-3)] leading-tight text-white">
             How dependent is your business on you?
           </h1>
@@ -190,7 +190,7 @@ export function FdiDiagnosticFlow() {
           <div>
             <p className="eyebrow text-gold-ink">Before the questions</p>
             <h1 className="font-heading font-extrabold text-navy text-2xl mt-2">A few details about the business</h1>
-            <p className="font-body text-sm text-navy/60 mt-2">These details are used for consultant-only commercial qualification. They never change your FDI result.</p>
+            <p className="font-body text-sm text-navy/60 mt-2">These details help us understand the business context. They never change your FDI result.</p>
             {session?.isTest && <p className="font-body text-xs text-gold-ink mt-3">This session is explicitly marked as a test record.</p>}
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">

@@ -4,6 +4,9 @@ import { ContactNotificationEmail } from "@/lib/email/templates/ContactNotificat
 import { enforcePublicFormLimits } from "@/lib/rateLimit";
 import { Resend } from "resend";
 import { z } from "zod";
+import { requireResendConfig } from "@/lib/serverEnv";
+
+const RESEND_CONFIG = requireResendConfig();
 
 const schema = z.object({
   name: z.string().min(2).max(100),
@@ -23,7 +26,7 @@ export async function POST(req: NextRequest) {
     if (limited) return limited;
 
     const supabase = createAdminClient();
-    const resend = new Resend(process.env.RESEND_API_KEY);
+    const resend = new Resend(RESEND_CONFIG.apiKey);
 
     await supabase.from("contact_enquiries").insert({
       name: data.name,
@@ -36,8 +39,8 @@ export async function POST(req: NextRequest) {
 
     // Rendered as React so every attacker-controlled value is escaped.
     const { error } = await resend.emails.send({
-      from: `Muhammed Ajmal Consulting <${process.env.RESEND_FROM_EMAIL}>`,
-      to: process.env.RESEND_FROM_EMAIL!,
+      from: `Muhammed Ajmal Consulting <${RESEND_CONFIG.fromEmail}>`,
+      to: RESEND_CONFIG.fromEmail,
       replyTo: data.email,
       subject: `New Enquiry: ${data.inquiryType} — ${data.companyName}`,
       react: ContactNotificationEmail(data),

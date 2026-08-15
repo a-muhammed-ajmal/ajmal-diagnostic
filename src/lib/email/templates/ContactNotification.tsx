@@ -116,7 +116,7 @@ export function ContactNotificationEmail({
 
           <Hr style={{ borderColor: "#E5E7EB", margin: "24px 0 16px" }} />
           <Text style={{ color: "#6B7280", fontSize: "11px", textAlign: "center" }}>
-            Muhammed Ajmal Consulting · Dubai, UAE · Strategic Growth Architecture
+            Muhammed Ajmal Consulting · Dubai, United Arab Emirates · Strategic Growth Architecture
           </Text>
         </Container>
       </Body>

@@ -23,5 +23,6 @@ describe('FDI Phase 3 session migration', () => {
     expect(migration).toContain('new_is_test');
     expect(migration).toContain('admin_identifier');
     expect(migration).toContain('enable row level security');
+    expect(migration).toContain('revoke all privileges on table public.fdi_test_status_history from anon, authenticated');
   });
 });

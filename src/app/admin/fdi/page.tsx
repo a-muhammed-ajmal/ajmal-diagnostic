@@ -32,7 +32,7 @@ export default async function AdminFdiPage() {
     <main className="min-h-screen bg-ivory">
       <nav className="bg-navy text-ivory px-6 py-4 flex items-center justify-between">
         <div className="flex items-center gap-4"><Link href="/admin/leads" className="text-xs text-ivory/50 hover:text-gold">← Legacy leads</Link><span className="font-heading font-bold text-sm">M<span className="text-gold">A</span> · FDI Consultant Workspace</span></div>
-        <div className="flex items-center gap-4"><Link href="/diagnostic/fdi?testMode=true" className="text-xs text-gold hover:text-gold-bright">Start Test Mode</Link><a href="/api/admin/logout" className="text-xs text-ivory/50 hover:text-gold">Sign Out</a></div>
+        <div className="flex items-center gap-4"><Link href="/diagnostic?testMode=true" className="text-xs text-gold hover:text-gold-bright">Start Test Mode</Link><a href="/api/admin/logout" className="text-xs text-ivory/50 hover:text-gold">Sign Out</a></div>
       </nav>
       <section className="max-w-7xl mx-auto px-4 py-8">
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4"><div><p className="eyebrow text-gold-ink">Founder Dependency Index</p><h1 className="font-heading font-extrabold text-navy text-2xl mt-2">FDI sessions</h1><p className="font-body text-sm text-navy/60 mt-2">Live and test records are separated. Qualification is consultant-only.</p></div></div>

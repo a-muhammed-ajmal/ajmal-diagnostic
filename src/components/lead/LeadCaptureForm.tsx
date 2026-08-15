@@ -43,8 +43,8 @@ export function LeadCaptureForm({ onSubmit, isLoading }: LeadCaptureFormProps) {
           Your results are ready.
         </h2>
         <p className="text-navy/70 font-body text-sm">
-          Enter your details to receive your personalised report and AI Growth
-          Action Plan.
+          Enter your details to receive your personalized report and AI-assisted
+          reflection plan.
         </p>
       </div>
 
@@ -152,11 +152,10 @@ export function LeadCaptureForm({ onSubmit, isLoading }: LeadCaptureFormProps) {
           <select {...register("revenueRange")}
             id="lead-revenueRange" className={inputClass}>
             <option value="">Select range...</option>
-            <option value="under-500k">Under AED 500K</option>
-            <option value="500k-2m">AED 500K – 2M</option>
-            <option value="2m-5m">AED 2M – 5M</option>
-            <option value="5m-15m">AED 5M – 15M</option>
-            <option value="over-15m">Over AED 15M</option>
+            <option value="under-1m">Under AED 1,000,000</option>
+            <option value="1m-5m">AED 1,000,000 – 5,000,000</option>
+            <option value="5m-10m">AED 5,000,000 – 10,000,000</option>
+            <option value="over-10m">Over AED 10,000,000</option>
           </select>
         </div>
 
@@ -175,7 +174,7 @@ export function LeadCaptureForm({ onSubmit, isLoading }: LeadCaptureFormProps) {
         </button>
 
         <p className="text-xs text-navy/40 text-center font-body">
-          No spam. Your data is used only to personalise your report.
+          No spam. Your data is used only to personalize your report.
         </p>
       </form>
     </div>

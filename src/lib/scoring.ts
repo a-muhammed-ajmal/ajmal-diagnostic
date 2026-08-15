@@ -67,7 +67,7 @@ export const DIMENSION_META: Record<DimensionKey, {
     description: "How predictable, systematized, and independently operating your revenue generation and lead pipeline are.",
     color: "#6B7280",
     constraintExplanation: "Your biggest constraint right now is your sales and growth engine. When revenue depends on your personal relationships, pipeline visibility is low, and lead generation is inconsistent, growth is unpredictable and vulnerable. Every month starts without clarity on where revenue will come from.",
-    secondaryExplanation: "Your sales and growth engine is a secondary constraint in your business. Revenue predictability has gaps that will limit scaling, but your primary bottleneck must be addressed first — it is likely making the sales problem worse by consuming time that should go toward growth.",
+    secondaryExplanation: "Your sales and growth engine has room to strengthen. Review how demand, pipeline information, and follow-up are currently managed alongside the other operating areas.",
     impactStatement: "Without a documented sales process and a lead-generation system, revenue swings month to month — every month starts without clarity on where the next deals will come from.",
     actionDirections: [
       "Map your current sales process end-to-end and identify where leads drop off or slow down",

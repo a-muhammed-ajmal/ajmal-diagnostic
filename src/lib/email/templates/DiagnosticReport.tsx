@@ -39,7 +39,7 @@ export function DiagnosticReportEmail({
   return (
     <Html>
       <Head />
-      <Preview>{`Your Business Health Score: ${results.healthScore}% (${results.severityLabel}) — Primary Constraint: ${results.primaryConstraintLabel}`}</Preview>
+      <Preview>{`Your diagnostic score: ${results.healthScore}% (${results.severityLabel}) — lowest-scoring area: ${results.primaryConstraintLabel}`}</Preview>
       <Body
         style={{ backgroundColor: "#FFFFFF", fontFamily: "Arial, sans-serif" }}
       >
@@ -61,12 +61,12 @@ export function DiagnosticReportEmail({
           <Heading
             style={{ color: "#1A1A2E", fontSize: "24px", margin: "0 0 4px" }}
           >
-            {firstName}, here is your business constraint diagnosis.
+            {firstName}, here is your diagnostic result.
           </Heading>
           <Text
             style={{ color: "#6B7280", fontSize: "14px", margin: "0 0 24px" }}
           >
-            Prepared for {companyName} · Strategic Growth Architecture
+            Prepared for {companyName} · Muhammed Ajmal Consulting
           </Text>
           <Hr style={{ borderColor: "#E5E7EB", margin: "0 0 24px" }} />
 
@@ -87,7 +87,7 @@ export function DiagnosticReportEmail({
                 margin: "0 0 8px",
               }}
             >
-              BUSINESS HEALTH SCORE
+              DIAGNOSTIC SCORE
             </Text>
             <Heading
               style={{
@@ -133,7 +133,7 @@ export function DiagnosticReportEmail({
                 margin: "0 0 8px",
               }}
             >
-              PRIMARY GROWTH CONSTRAINT
+              LOWEST-SCORING AREA
             </Text>
             <Heading
               style={{ color: "#ffffff", fontSize: "24px", margin: "0 0 12px" }}
@@ -148,7 +148,7 @@ export function DiagnosticReportEmail({
                 margin: 0,
               }}
             >
-              {primaryMeta.constraintExplanation}
+              {primaryMeta.description}
             </Text>
           </Section>
 
@@ -169,7 +169,7 @@ export function DiagnosticReportEmail({
                 margin: "0 0 8px",
               }}
             >
-              SECONDARY CONSTRAINT
+              NEXT LOWEST-SCORING AREA
             </Text>
             <Text
               style={{
@@ -189,7 +189,7 @@ export function DiagnosticReportEmail({
                 margin: 0,
               }}
             >
-              {secondaryMeta.secondaryExplanation}
+              {secondaryMeta.description}
             </Text>
           </Section>
 
@@ -201,7 +201,7 @@ export function DiagnosticReportEmail({
               lineHeight: "1.7",
             }}
           >
-            &ldquo;{primaryMeta.impactStatement}&rdquo;
+            This score compares self-reported answers across five operating areas. It can highlight patterns for further review, but it does not establish root cause.
           </Text>
           <Hr style={{ borderColor: "#E5E7EB", margin: "24px 0" }} />
 
@@ -222,9 +222,9 @@ export function DiagnosticReportEmail({
               >
                 {dim.label}: {dim.score}/6 ({dim.percentage}%)
                 {dim.key === results.primaryConstraint &&
-                  " ← Primary Constraint"}
+                  " ← Lowest score"}
                 {dim.key === results.secondaryConstraint &&
-                  " ← Secondary Constraint"}
+                  " ← Next score"}
               </Text>
             </Section>
           ))}
@@ -250,7 +250,7 @@ export function DiagnosticReportEmail({
                     margin: "0 0 8px",
                   }}
                 >
-                  AI-GENERATED: YOUR 30-DAY PRIORITY PLAN
+                  AI-ASSISTED: YOUR 30-DAY REFLECTION PLAN
                 </Text>
                 <Heading
                   style={{
@@ -293,7 +293,7 @@ export function DiagnosticReportEmail({
                     margin: "0 0 8px",
                   }}
                 >
-                  AI-GENERATED: 90-DAY DIRECTION
+                  AI-ASSISTED: 90-DAY DIRECTION
                 </Text>
                 <Heading
                   style={{
@@ -339,10 +339,9 @@ export function DiagnosticReportEmail({
               }}
             >
               <strong>An important distinction:</strong> This diagnostic
-              identifies your constraint category — not the root cause within
-              it. Understanding exactly why this constraint exists in your
-              specific business is what the paid diagnostic is designed to
-              uncover.
+              reflects self-reported answers and does not establish root
+              cause. An Audit is the evidence-led next step when you need to
+              verify why a pattern exists and identify the binding constraint.
             </Text>
           </Section>
 
@@ -360,7 +359,7 @@ export function DiagnosticReportEmail({
                 display: "inline-block",
               }}
             >
-              Book Your Free 30-Minute Consultation →
+              Discuss an Audit →
             </Button>
             <Text
               style={{ color: "#6B7280", fontSize: "12px", marginTop: "12px" }}
@@ -373,7 +372,7 @@ export function DiagnosticReportEmail({
           <Text
             style={{ color: "#6B7280", fontSize: "11px", textAlign: "center" }}
           >
-            Muhammed Ajmal Consulting · Dubai, UAE · Strategic Growth
+            Muhammed Ajmal Consulting · Dubai, United Arab Emirates · Strategic Growth
             Architecture
           </Text>
         </Container>
