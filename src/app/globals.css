@@ -390,3 +390,61 @@ h1, h2, h3, p { overflow-wrap: break-word; }
 .bg-primary * {
   color: var(--color-ivory) !important;
 }
+
+
+/* App-wide graph-grid language — mirrors the hero while preserving contrast. */
+body {
+  background-color: var(--color-ivory);
+  background-image:
+    linear-gradient(color-mix(in srgb, var(--color-navy) 4%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in srgb, var(--color-navy) 4%, transparent) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+.bg-ivory,
+.bg-white {
+  background-image:
+    linear-gradient(color-mix(in srgb, var(--color-navy) 4.5%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in srgb, var(--color-navy) 4.5%, transparent) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+.bg-navy:not(:has(.graph-overlay-dark)) {
+  background-image:
+    linear-gradient(color-mix(in srgb, var(--color-primary) 10%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in srgb, var(--color-primary) 10%, transparent) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+.bg-gold,
+.bg-orange,
+.bg-primary {
+  background-image:
+    linear-gradient(color-mix(in srgb, var(--color-navy) 7%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in srgb, var(--color-navy) 7%, transparent) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+@media (max-width: 640px) {
+  body,
+  .bg-ivory,
+  .bg-white,
+  .bg-navy:not(:has(.graph-overlay-dark)),
+  .bg-gold,
+  .bg-orange,
+  .bg-primary {
+    background-size: 32px 32px;
+  }
+}
+
+
+/* Accessible orange surfaces: darker orange preserves white-text readability. */
+:root {
+  --color-orange-contrast-surface: #B9380B;
+}
+
+.bg-gold,
+.bg-orange,
+.bg-primary {
+  background-color: var(--color-orange-contrast-surface) !important;
+}
