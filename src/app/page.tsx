@@ -42,7 +42,7 @@ export default function HomePage() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdScript(personAndServiceJsonLd()) }} />
 
-      <section className="relative overflow-hidden bg-navy px-6 py-16 text-ivory md:py-24">
+      <section className="relative flex min-h-[calc(100svh-4.5rem)] items-center overflow-hidden bg-navy px-6 py-10 text-ivory sm:py-12">
         <div className="graph-overlay-dark" />
         <div className="relative z-10 mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-[1fr_0.9fr] lg:gap-16">
           <div>
@@ -163,7 +163,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="relative overflow-hidden bg-navy px-6 py-16 text-ivory md:py-24">
+      <section className="relative flex min-h-[calc(100svh-4.5rem)] items-center overflow-hidden bg-navy px-6 py-10 text-ivory sm:py-12">
         <div className="graph-overlay-dark" />
         <div className="relative z-10 mx-auto max-w-3xl text-center">
           <p className="eyebrow mb-3 text-gold">Start with clarity</p>

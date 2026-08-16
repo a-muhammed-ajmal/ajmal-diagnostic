@@ -85,8 +85,8 @@
   --step-1:  clamp(1.063rem, 0.87rem + 0.81vw, 1.50rem);  /* 17.0 → 24.0px */
   --step-2:  clamp(1.156rem, 0.79rem + 1.56vw, 2.00rem);  /* 18.5 → 32.0px */
   --step-3:  clamp(1.250rem, 0.63rem + 2.63vw, 2.67rem);  /* 20.0 → 42.7px */
-  --step-4:  clamp(1.375rem, 0.43rem + 4.02vw, 3.55rem);  /* 22.0 → 56.8px  section h2 */
-  --step-5:  clamp(1.500rem, 0.10rem + 5.99vw, 4.74rem);  /* 24.0 → 75.8px  hero h1 */
+  --step-4:  clamp(1.65rem, 1.15rem + 1.85vw, 2.75rem);  /* 26px → 44px: compact shared section scale */
+  --step-5:  clamp(2.00rem, 1.40rem + 2.50vw, 3.50rem);  /* 32px → 56px: compact shared hero scale */
 
   /* Shadow tokens — charcoal-navy-tinted */
   --shadow-1: 0 1px 2px rgba(26,26,46,.06), 0 1px 1px rgba(26,26,46,.04);
@@ -377,3 +377,6 @@ html { scroll-behavior: smooth; }
     .reading-progress { display: block; }
   }
 }
+
+/* Small-screen copy safety: prevents long approved copy from causing horizontal overflow. */
+h1, h2, h3, p { overflow-wrap: break-word; }
