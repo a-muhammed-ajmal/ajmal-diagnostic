@@ -380,3 +380,13 @@ html { scroll-behavior: smooth; }
 
 /* Small-screen copy safety: prevents long approved copy from causing horizontal overflow. */
 h1, h2, h3, p { overflow-wrap: break-word; }
+
+/* High-contrast foreground for every orange/gold surface. */
+.bg-gold,
+.bg-orange,
+.bg-primary,
+.bg-gold *,
+.bg-orange *,
+.bg-primary * {
+  color: var(--color-ivory) !important;
+}
