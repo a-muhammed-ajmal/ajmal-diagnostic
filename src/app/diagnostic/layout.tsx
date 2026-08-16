@@ -1,9 +1,9 @@
 import { pageMetadata } from '@/lib/metadata';
 
 export const metadata = pageMetadata({
-  title: 'Founder Dependency Index | Free Business Diagnostic',
+  title: 'Business Health Check | Free Founder Dependency Index',
   absoluteTitle: true,
-  description: 'A free 12-question Founder Dependency Index for founder-led UAE SMEs. Review decision speed, execution consistency, and operational visibility.',
+  description: 'A free 12-question founder-dependency self-report for founder-led UAE SMEs. Receive your Founder Dependency Index across decision speed, execution consistency, and operational visibility.',
   path: '/diagnostic',
 });
 

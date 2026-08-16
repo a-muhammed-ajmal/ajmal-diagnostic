@@ -55,13 +55,13 @@ export default function AboutPage() {
 
           <div>
             <p className="eyebrow mb-3 text-teal-ink">Approach</p>
-            <h2 className="font-heading text-[length:var(--step-4)] font-extrabold leading-tight text-navy">Management knowledge, systems thinking, execution, and applied AI.</h2>
+            <h2 className="heading-reveal font-heading text-[length:var(--step-4)] font-extrabold leading-tight text-navy">Management knowledge, systems thinking, execution, and applied AI.</h2>
             <div className="mt-6 space-y-5 font-body text-base leading-relaxed text-navy/70">
               <p>Muhammed helps founder-led UAE SMEs move important operating responsibility into clear roles, usable systems, and visible management information.</p>
               <p>The work is grounded in business management, systems thinking, and practical execution. Applied AI is used as an enabling capability—where it improves capacity, speed, or visibility—not as a product in itself.</p>
               <p>The focus is to reduce founder dependency by improving decision speed, execution consistency, and operational visibility.</p>
             </div>
-            <Link href="/diagnostic" className="mt-8 inline-flex min-h-12 items-center justify-center rounded-xl bg-gold px-6 py-3 font-heading text-sm font-bold text-navy transition-colors hover:bg-gold-bright">Take the Free Diagnostic →</Link>
+            <Link href="/diagnostic" className="mt-8 inline-flex min-h-12 items-center justify-center rounded-xl bg-gold px-6 py-3 font-heading text-sm font-bold text-navy transition-colors hover:bg-gold-bright">Start the Business Health Check →</Link>
           </div>
         </div>
       </section>
@@ -70,7 +70,7 @@ export default function AboutPage() {
         <div className="mx-auto max-w-6xl">
           <div className="mx-auto max-w-2xl text-center">
             <p className="eyebrow mb-3 text-gold-ink">Delivery principle</p>
-            <h2 className="font-heading text-[length:var(--step-4)] font-extrabold leading-tight text-navy">Simple · Practical · Sustainable</h2>
+            <h2 className="heading-reveal font-heading text-[length:var(--step-4)] font-extrabold leading-tight text-navy">Simple · Practical · Sustainable</h2>
           </div>
           <div className="mt-10 grid gap-4 md:grid-cols-3">
             {principles.map(([title, body], index) => (

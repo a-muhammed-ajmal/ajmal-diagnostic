@@ -52,8 +52,16 @@ export default function RootLayout({
       className={cn(inter.variable, "h-full antialiased")}
     >
       <body className="min-h-full flex flex-col bg-ivory text-navy font-body">
+        {/* Keyboard-only escape past the nav. Off-screen until focused; the global
+            :focus-visible rule in globals.css supplies the outline. */}
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100] focus:rounded-xl focus:bg-gold focus:px-5 focus:py-3 focus:font-heading focus:text-sm focus:font-bold focus:text-navy"
+        >
+          Skip to content
+        </a>
         <Navigation />
-        <main className="flex-1">{children}</main>
+        <main id="main-content" className="flex-1">{children}</main>
         <Footer />
         <Analytics />
       </body>

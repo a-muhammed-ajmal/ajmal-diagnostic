@@ -5,7 +5,7 @@ import { pageMetadata } from "@/lib/metadata";
 
 export const metadata = pageMetadata({
   title: "Contact",
-  description: "Start with the Free Diagnostic or contact Muhammed Ajmal Consulting. Built for founder-led UAE SMEs with operating changes to make.",
+  description: "Start with the Business Health Check or contact Muhammed Ajmal Consulting. Built for founder-led UAE SMEs with operating changes to make.",
   path: "/contact",
 });
 
@@ -16,9 +16,9 @@ export default function ContactPage() {
         <div className="graph-overlay-dark" />
         <div className="relative z-10 mx-auto max-w-4xl text-center">
           <p className="eyebrow mb-3 text-gold">Get started</p>
-          <h1 className="font-heading text-[length:var(--step-5)] font-extrabold leading-[1.02]">Start with the Free Diagnostic.</h1>
-          <p className="mx-auto mt-5 max-w-2xl font-body text-base leading-relaxed text-ivory/70 md:text-lg">It is the practical first step for founders who want a clearer view of where the business still depends on them.</p>
-          <Link href="/diagnostic" className="mt-8 inline-flex min-h-[52px] items-center justify-center rounded-xl bg-gold px-8 py-4 font-heading text-base font-bold text-navy transition-colors hover:bg-gold-bright">Take the Free Diagnostic →</Link>
+          <h1 className="font-heading text-[length:var(--step-5)] font-extrabold leading-[1.02]">Start with the Business Health Check.</h1>
+          <p className="mx-auto mt-5 max-w-2xl font-body text-base leading-relaxed text-ivory/70 md:text-lg">It is the practical first step for founders who want a focused view of where daily operations may still depend on them.</p>
+          <Link href="/diagnostic" className="mt-8 inline-flex min-h-[52px] items-center justify-center rounded-xl bg-gold px-8 py-4 font-heading text-base font-bold text-navy transition-colors hover:bg-gold-bright">Start the Business Health Check →</Link>
           <p className="mx-auto mt-5 max-w-2xl font-body text-sm leading-relaxed text-ivory/50">This practice is built for founder-led UAE businesses with AED 1M–10M annual revenue, 5–50 employees, and operating changes the founder can approve.</p>
         </div>
       </section>
@@ -27,13 +27,13 @@ export default function ContactPage() {
         <div className="graph-overlay" />
         <div className="relative z-10 mx-auto grid max-w-7xl gap-10 md:gap-12 lg:grid-cols-2">
           <div>
-            <h2 className="font-heading text-2xl font-bold text-navy">Send an enquiry</h2>
+            <h2 className="heading-reveal font-heading text-2xl font-bold text-navy">Send an enquiry</h2>
             <p className="mt-2 font-body text-sm leading-relaxed text-navy/60">For a specific question or a scope you would like to discuss.</p>
             <div className="mt-6"><ContactForm /></div>
           </div>
           <div>
-            <h2 className="font-heading text-2xl font-bold text-navy">Book a conversation</h2>
-            <p className="mt-2 font-body text-sm leading-relaxed text-navy/60">If you have completed the diagnostic or need to discuss an operating challenge, choose a suitable time.</p>
+            <h2 className="heading-reveal font-heading text-2xl font-bold text-navy">Book a conversation</h2>
+            <p className="mt-2 font-body text-sm leading-relaxed text-navy/60">Come with a specific operating question, or your Founder Dependency Index result if you have completed the Business Health Check.</p>
             <div className="mt-6"><CalendlyWidget /></div>
           </div>
         </div>

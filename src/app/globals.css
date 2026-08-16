@@ -75,14 +75,18 @@
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-in:  cubic-bezier(0.5, 0, 0.75, 0);
 
-  /* Fluid type scale — min @360px, max @1240px */
-  --step--1: clamp(0.83rem, 0.78rem + 0.25vw, 0.94rem);
-  --step-0:  clamp(1.00rem, 0.93rem + 0.36vw, 1.13rem);
-  --step-1:  clamp(1.20rem, 1.07rem + 0.65vw, 1.50rem);
-  --step-2:  clamp(1.44rem, 1.21rem + 1.14vw, 2.00rem);
-  --step-3:  clamp(1.73rem, 1.36rem + 1.85vw, 2.67rem);
-  --step-4:  clamp(2.07rem, 1.49rem + 2.90vw, 3.55rem);
-  --step-5:  clamp(2.49rem, 1.59rem + 4.49vw, 4.74rem);
+  /* Fluid type scale — floors at 375px (iPhone SE/12/13/14 width), ceilings at 1240px.
+     Mobile floors are deliberately restrained: 24px is the largest type a phone ever
+     shows, so the ladder below it is compressed to keep h1 > h2 > h3 in order at that
+     width. Desktop ceilings are unchanged, so large screens still get the full display
+     scale and only the slope between the two ends changes. */
+  --step--1: clamp(0.844rem, 0.80rem + 0.18vw, 0.94rem);  /* 13.5 → 15.0px */
+  --step-0:  clamp(1.000rem, 0.94rem + 0.24vw, 1.13rem);  /* 16.0 → 18.1px  body */
+  --step-1:  clamp(1.063rem, 0.87rem + 0.81vw, 1.50rem);  /* 17.0 → 24.0px */
+  --step-2:  clamp(1.156rem, 0.79rem + 1.56vw, 2.00rem);  /* 18.5 → 32.0px */
+  --step-3:  clamp(1.250rem, 0.63rem + 2.63vw, 2.67rem);  /* 20.0 → 42.7px */
+  --step-4:  clamp(1.375rem, 0.43rem + 4.02vw, 3.55rem);  /* 22.0 → 56.8px  section h2 */
+  --step-5:  clamp(1.500rem, 0.10rem + 5.99vw, 4.74rem);  /* 24.0 → 75.8px  hero h1 */
 
   /* Shadow tokens — charcoal-navy-tinted */
   --shadow-1: 0 1px 2px rgba(26,26,46,.06), 0 1px 1px rgba(26,26,46,.04);
@@ -127,6 +131,14 @@ h1, h2, h3, h4, h5, h6 {
   text-wrap: balance;
 }
 p { text-wrap: pretty; }
+
+/* Display leading is set for the desktop ceiling, where 0.98–1.02 looks composed. At the
+   mobile floor the same ratio collides ascenders with the line above, so headings get a
+   little air back below the tablet breakpoint. */
+@media (max-width: 767px) {
+  h1, h2 { line-height: 1.15; }
+  h3, h4 { line-height: 1.25; }
+}
 :focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; }
 
 /* ── Brand utilities ─────────────────────────────────────────────────────── */

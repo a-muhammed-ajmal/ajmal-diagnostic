@@ -88,8 +88,8 @@ export default function ResultsPage() {
                 <div className="flex justify-between items-center mb-1 gap-2">
                   <span className="font-heading font-semibold text-sm text-navy flex items-center gap-1.5 flex-wrap">
                     {dim.label}
-                    {dim.key === results.primaryConstraint && <span className="text-[10px] bg-crimson/10 text-crimson px-2 py-0.5 rounded-full font-bold whitespace-nowrap">LOWEST SCORE</span>}
-                    {dim.key === results.secondaryConstraint && <span className="text-[10px] bg-navy/10 text-navy/60 px-2 py-0.5 rounded-full font-bold whitespace-nowrap">NEXT SCORE</span>}
+                    {dim.key === results.primaryConstraint && <span className="text-xs bg-crimson/10 text-crimson px-2 py-0.5 rounded-full font-bold whitespace-nowrap">LOWEST SCORE</span>}
+                    {dim.key === results.secondaryConstraint && <span className="text-xs bg-navy/10 text-navy/60 px-2 py-0.5 rounded-full font-bold whitespace-nowrap">NEXT SCORE</span>}
                   </span>
                   <span className="font-heading font-bold text-sm text-navy/60 flex-shrink-0">{dim.score}/6</span>
                 </div>

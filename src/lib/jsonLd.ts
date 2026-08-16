@@ -42,6 +42,54 @@ export function personAndServiceJsonLd() {
   };
 }
 
+/**
+ * The five-stage commercial path as a Service with an OfferCatalog. Used on /services.
+ *
+ * No price, no aggregateRating and no offer availability: fees are scoped only after the
+ * Audit (Anchor §6 "Sprint and Build"), so publishing any figure here would be a claim
+ * the practice cannot support.
+ */
+export function serviceJsonLd(stages: readonly { name: string; description: string }[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "@id": `${SITE_URL}/services#service`,
+    name: "Business operations and growth consulting",
+    serviceType: "Business operations and growth consulting",
+    description:
+      "A single evidence-led progression for founder-led UAE SMEs, from a free founder-dependency self-report through to an ongoing operating retainer.",
+    provider: { "@id": `${SITE_URL}#service` },
+    areaServed: ["United Arab Emirates"],
+    hasOfferCatalog: {
+      "@type": "OfferCatalog",
+      name: "Commercial path",
+      itemListElement: stages.map((stage, index) => ({
+        "@type": "ListItem",
+        position: index + 1,
+        item: {
+          "@type": "Service",
+          name: stage.name,
+          description: stage.description,
+        },
+      })),
+    },
+  };
+}
+
+/** FAQPage built from the published question and answer pairs. */
+export function faqJsonLd(faqs: readonly { question: string; answer: string }[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "@id": `${SITE_URL}/services#faq`,
+    mainEntity: faqs.map((faq) => ({
+      "@type": "Question",
+      name: faq.question,
+      acceptedAnswer: { "@type": "Answer", text: faq.answer },
+    })),
+  };
+}
+
 /** BlogPosting for an article. */
 export function articleJsonLd(article: Article) {
   const url = `${SITE_URL}/insights/${article.slug}`;

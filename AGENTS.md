@@ -23,8 +23,7 @@ A B2B consulting website and business diagnostic tool for Ajmal's consulting pra
 | AI | Anthropic SDK `@anthropic-ai/sdk` |
 | Email | Resend + `@react-email/components` |
 | Forms | `react-hook-form` + `zod` |
-| Animations | `framer-motion` |
-| Charts | `recharts` |
+| Animations | Native CSS only — `animation-timeline` scroll-driven effects in `globals.css`. No animation library. |
 | Icons | `lucide-react` |
 | Class merging | `clsx` + `tailwind-merge` |
 

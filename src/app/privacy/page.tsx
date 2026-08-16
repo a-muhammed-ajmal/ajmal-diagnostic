@@ -71,7 +71,7 @@ export default function PrivacyPage() {
         <div className="graph-overlay-dark" />
         <div className="max-w-3xl mx-auto relative z-10">
           <span className="text-gold font-heading font-bold tracking-widest text-sm uppercase mb-3 block">Legal</span>
-          <h1 className="text-3xl md:text-5xl font-heading font-extrabold mb-4">Privacy Policy</h1>
+          <h1 className="mb-4 font-heading text-[length:var(--step-5)] font-extrabold">Privacy Policy</h1>
           <p className="font-body text-ivory/60 text-sm">Last updated: {LAST_UPDATED}</p>
         </div>
       </section>

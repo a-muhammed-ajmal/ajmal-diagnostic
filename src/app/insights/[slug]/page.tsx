@@ -6,6 +6,7 @@ import { ArticleToc, type TocItem } from "@/components/insights/ArticleToc";
 import { articleBreadcrumbJsonLd, articleJsonLd, jsonLdScript } from "@/lib/jsonLd";
 import { AUTHOR_HEADSHOT, pageMetadata } from "@/lib/metadata";
 import { ARTICLES, getArticle, getReadingTime } from "@/lib/articles";
+import { formatDate } from "@/lib/utils";
 
 const sectionIds = {
   founderTrap: "founder-trap",
@@ -30,7 +31,7 @@ export default async function InsightArticlePage({ params }: { params: Promise<{
   const article = getArticle(slug);
   if (!article) notFound();
 
-  const published = new Date(article.publishedAt).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" });
+  const published = formatDate(article.publishedAt);
   const toc: TocItem[] = [
     { id: sectionIds.founderTrap, label: article.founderTrap.heading },
     { id: sectionIds.next, label: article.theFix.heading },
@@ -102,7 +103,7 @@ export default async function InsightArticlePage({ params }: { params: Promise<{
         <div className="relative z-10 mx-auto max-w-2xl text-center">
           <h2 className="font-heading text-[length:var(--step-3)] font-extrabold">{article.cta.heading}</h2>
           <p className="mt-4 font-body leading-relaxed text-ivory/70">{article.cta.body}</p>
-          <Link href="/diagnostic" className="mt-8 inline-flex min-h-[52px] items-center justify-center rounded-xl bg-gold px-8 py-4 font-heading text-base font-bold text-navy transition-colors hover:bg-gold-bright">Take the Free Diagnostic →</Link>
+          <Link href="/diagnostic" className="mt-8 inline-flex min-h-[52px] items-center justify-center rounded-xl bg-gold px-8 py-4 font-heading text-base font-bold text-navy transition-colors hover:bg-gold-bright">Start the Business Health Check →</Link>
         </div>
       </section>
     </article>
