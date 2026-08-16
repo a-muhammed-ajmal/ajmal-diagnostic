@@ -1,18 +1,9 @@
 import type { Metadata, Viewport } from "next";
-import { Inter } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import { Navigation } from "@/components/layout/Navigation";
 import { Footer } from "@/components/layout/Footer";
 import { SITE_NAME } from "@/lib/metadata";
-import { cn } from "@/lib/utils";
-
-const inter = Inter({
-  variable: "--font-inter",
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800"],
-  display: "swap",
-});
 
 export const viewport: Viewport = {
   width: "device-width",
@@ -49,14 +40,14 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={cn(inter.variable, "h-full antialiased")}
+      className="h-full antialiased"
     >
-      <body className="min-h-full flex flex-col bg-ivory text-navy font-body">
+      <body className="min-h-full flex flex-col bg-canvas text-ink font-body">
         {/* Keyboard-only escape past the nav. Off-screen until focused; the global
             :focus-visible rule in globals.css supplies the outline. */}
         <a
           href="#main-content"
-          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100] focus:rounded-xl focus:bg-gold focus:px-5 focus:py-3 focus:font-heading focus:text-sm focus:font-bold focus:text-navy"
+          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100] focus:rounded-md focus:bg-violet focus:px-5 focus:py-3 focus:font-heading focus:text-sm focus:font-semibold focus:text-white"
         >
           Skip to content
         </a>

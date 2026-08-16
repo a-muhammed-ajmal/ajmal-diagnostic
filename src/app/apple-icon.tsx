@@ -7,39 +7,22 @@ export default function AppleIcon() {
   return new ImageResponse(
     <div
       style={{
-        background: "#1A1A2E",
+        background: "#5B21B6",
         width: "100%",
         height: "100%",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        borderRadius: 24,
-        position: "relative",
+        borderRadius: 36,
       }}
     >
-      <div
-        style={{
-          position: "absolute",
-          top: 14,
-          right: 14,
-          width: 24,
-          height: 24,
-          borderTop: "4px solid #FF6535",
-          borderRight: "4px solid #FF6535",
-        }}
-      />
-      <div
-        style={{
-          fontSize: 80,
-          fontWeight: 900,
-          fontFamily: "sans-serif",
-          display: "flex",
-          letterSpacing: "-4px",
-        }}
-      >
-        <span style={{ color: "#FFFFFF" }}>M</span>
-        <span style={{ color: "#FF6535" }}>A</span>
-      </div>
+      <svg width="116" height="116" viewBox="0 0 48 48" fill="none">
+        <circle cx="24" cy="24" r="6" fill="white" />
+        <path d="M20 19 14 12a12 12 0 0 0-5 10M28 19 34 12a12 12 0 0 1 5 10M18 28 10 34a12 12 0 0 0 14 5M30 28 38 34a12 12 0 0 1-14 5" stroke="white" strokeWidth="3" strokeLinecap="round" />
+        <circle cx="9" cy="24" r="2.5" fill="white" />
+        <circle cx="39" cy="24" r="2.5" fill="white" />
+        <circle cx="24" cy="39" r="2.5" fill="white" />
+      </svg>
     </div>,
     { ...size },
   );
