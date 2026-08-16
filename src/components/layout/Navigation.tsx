@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/Button";
 
 const navLinks = [
   { href: "/#founder-trap", label: "Founder Trap" },
@@ -74,7 +75,7 @@ export function Navigation() {
         </div>
 
         <div className="flex items-center gap-3">
-          {!isResults && <Link href="/diagnostic" className="hidden min-h-[44px] items-center rounded-xl bg-gold px-4 py-2 font-heading text-sm font-bold text-navy transition-colors hover:bg-gold-bright sm:inline-flex">Start the Check</Link>}
+          {!isResults && <Button href="/diagnostic" className="hidden px-4 py-2 sm:inline-flex">Start the Check</Button>}
           <button type="button" onClick={() => setMobileOpen((open) => !open)} className="tap-target inline-flex items-center justify-center text-ivory transition-colors hover:text-gold lg:hidden" aria-label="Toggle menu" aria-expanded={mobileOpen}>
             {mobileOpen ? <X size={22} /> : <Menu size={22} />}
           </button>
@@ -87,7 +88,7 @@ export function Navigation() {
             {link.label}
           </Link>
         ))}
-        <Link href="/diagnostic" onClick={() => setMobileOpen(false)} className="mt-3 block rounded-xl bg-gold px-5 py-3 text-center font-heading text-sm font-bold text-navy transition-colors hover:bg-gold-bright">Start the Business Health Check →</Link>
+        <Button href="/diagnostic" className="mt-3 w-full" onClick={() => setMobileOpen(false)}>Start the Business Health Check →</Button>
       </div>
     </nav>
   );
