@@ -69,29 +69,31 @@ src/
 - **No raw hex in JSX**: all colors via CSS custom properties defined in `globals.css`
 
 ## Design System
-**Flat, compact, GitHub-inspired business interface** — Brand Violet is dominant and Teal is supporting, per the attached `/frontend-design` specification.
+**Soft white base with architectural graph-paper grid** — orange-accented executive aesthetic (per `/frontend-design`).
 
 ```css
 /* Brand tokens — defined in src/app/globals.css @theme block */
---color-violet:       #5B21B6      /* primary actions and selected emphasis */
---color-violet-deep:  #3B167A      /* hover / pressed state */
---color-ink:          #111827      /* primary text */
---color-canvas:       #F8FAFC      /* page background */
---color-surface:      #F1F5F9      /* secondary light surface */
---color-border:       #D0D7DE      /* structural borders */
---color-slate:        #475569      /* secondary text */
---color-teal:         #0F766E      /* supporting action and data highlight */
---color-teal-bright:  #0D9488      /* supporting emphasis */
---color-navy:         #0D1117      /* dark surface */
---color-dark-raised:  #161B22      /* dark raised surface */
---color-dark-border:  #30363D      /* dark boundary */
+--color-navy / --color-ink:    #1A1A2E      /* Charcoal-Navy — dark sections, strong text */
+--color-gold / --color-orange: #FF6535      /* Brand Orange — CTAs, accents, active states */
+--color-gold-bright:           #FF8159      /* brand orange hover / gradient end */
+--color-gold-ink:              #D6450F      /* dark orange for text on white (AA contrast) */
+--color-charcoal:              #1A1A2E      /* body text */
+--color-ivory:                 #F9FAFB      /* Soft White — primary background */
+--color-teal:                  #0D9488      /* AI Teal — growth, digital transformation */
+--color-slate:                 #6B7280      /* secondary text */
+--color-line:                  #E5E7EB      /* borders */
+--color-crimson:               #E11D48      /* error / emphasis */
+--color-emerald:               #10B981      /* success */
 ```
 
-**Fonts**: system Segoe UI stack everywhere. Do not load Google Fonts or bundle proprietary font files.
+**Fonts**: Inter only, everywhere — headings (`--font-heading`) and body (`--font-body`) both resolve to Inter. No Plus Jakarta Sans, no serif.
 
-**Surfaces**: use white, canvas, surface, dark surface, and dark raised backgrounds. Do not use gradients, graph-paper overlays, grain, glow effects, or glassmorphism as default treatments.
+**Background**: Soft White `#F9FAFB` with 40×40px graph-paper grid overlay using charcoal-navy at 3.5% opacity, subtle navy/teal/orange aurora radials.
 
-**Geometry**: 6px radius for controls and 8px radius for cards. Use 1px borders as a primary structural tool.
+**Utility classes** (already in globals.css):
+- `.gold-gradient-text` / `.orange-gradient-text` — gradient text `#FF6535 → #FF8159`
+- `.graph-overlay` — charcoal-navy grid on light sections
+- `.graph-overlay-dark` — brand orange grid on dark sections
 
 ## Pages
 | Route | Purpose |

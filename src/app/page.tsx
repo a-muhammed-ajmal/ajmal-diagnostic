@@ -2,6 +2,7 @@ import Link from "next/link";
 import {
   CommercialLadder,
   DependencyIndexPreview,
+  FounderSystemVisual,
   FounderTrapDiagram,
 } from "@/components/home/SystemVisuals";
 import { pageMetadata } from "@/lib/metadata";
@@ -55,8 +56,8 @@ export default function HomePage() {
               Muhammed Ajmal Consulting helps founder-led UAE SMEs build successful, scalable businesses by reducing founder dependency through better systems, clearer ownership, useful visibility, and consistent execution.
             </p>
             <div className="reveal mt-8 flex flex-col gap-3 sm:flex-row">
-              <Link href="/diagnostic" className="inline-flex min-h-11 items-center justify-center rounded-md bg-violet px-5 py-3 font-heading text-sm font-semibold text-white shadow-sm transition-colors hover:bg-violet-deep">
-                Start assessment <span aria-hidden="true">&nbsp;→</span>
+              <Link href="/diagnostic" className="inline-flex min-h-[52px] items-center justify-center rounded-xl bg-gold px-7 py-4 font-heading text-base font-bold text-navy shadow-lg transition-colors hover:bg-gold-bright">
+                Start the Business Health Check <span aria-hidden="true">&nbsp;→</span>
               </Link>
               <Link href="/services" className="inline-flex min-h-[52px] items-center justify-center rounded-xl border border-ivory/35 px-7 py-4 font-heading text-base font-bold text-ivory transition-colors hover:border-gold hover:text-gold">
                 See How It Works
@@ -64,18 +65,7 @@ export default function HomePage() {
             </div>
             <p className="reveal mt-4 font-body text-sm text-ivory/50">Free. Private. A focused founder-dependency self-report.</p>
           </div>
-          <aside className="rounded-lg border border-dark-border bg-dark-raised p-5" aria-label="Assessment scope">
-            <p className="font-heading text-sm font-semibold text-white">Assessment scope</p>
-            <p className="mt-2 text-sm leading-5 text-slate">A focused self-report that helps identify where founder dependency appears in day-to-day operations.</p>
-            <dl className="mt-5 divide-y divide-dark-border border-y border-dark-border">
-              {[["Decision speed", "Can work move without founder approval?"], ["Execution consistency", "Do recurring standards hold across the team?"], ["Operational visibility", "Can you see what is happening without chasing updates?"]].map(([term, detail]) => (
-                <div key={term} className="grid gap-1 py-3 sm:grid-cols-[0.8fr_1.2fr] sm:gap-4">
-                  <dt className="text-sm font-semibold text-white">{term}</dt>
-                  <dd className="text-sm leading-5 text-slate">{detail}</dd>
-                </div>
-              ))}
-            </dl>
-          </aside>
+          <FounderSystemVisual />
         </div>
       </section>
 
@@ -179,7 +169,7 @@ export default function HomePage() {
           <p className="eyebrow mb-3 text-gold">Start with clarity</p>
           <h2 className="heading-reveal font-heading text-[length:var(--step-4)] font-extrabold leading-tight">Find out where your business still depends on you.</h2>
           <p className="mx-auto mt-5 max-w-xl font-body text-base leading-relaxed text-ivory/70">Start with a free Business Health Check and receive your Founder Dependency Index across decision speed, execution consistency, and operational visibility.</p>
-          <Link href="/diagnostic" className="mt-8 inline-flex min-h-[52px] items-center justify-center rounded-xl bg-gold px-9 py-4 font-heading text-base font-bold text-navy shadow-lg transition-colors hover:bg-gold-bright">Start assessment <span aria-hidden="true">&nbsp;→</span></Link>
+          <Link href="/diagnostic" className="mt-8 inline-flex min-h-[52px] items-center justify-center rounded-xl bg-gold px-9 py-4 font-heading text-base font-bold text-navy shadow-lg transition-colors hover:bg-gold-bright">Start the Business Health Check <span aria-hidden="true">&nbsp;→</span></Link>
         </div>
       </section>
     </>

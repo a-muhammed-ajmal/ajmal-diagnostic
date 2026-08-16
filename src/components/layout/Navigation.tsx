@@ -6,7 +6,6 @@ import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/Button";
-import { ConnectedFoundationMark } from "@/components/brand/ConnectedFoundationMark";
 
 const navLinks = [
   { href: "/#founder-trap", label: "Founder Trap" },
@@ -45,17 +44,20 @@ export function Navigation() {
   if (isAdmin || isDiagnostic) return null;
 
   return (
-    <nav className={cn("sticky top-0 z-50 border-b border-dark-border bg-dark-surface px-4 py-2.5 text-ivory transition-shadow duration-300 md:px-6", scrolled && "shadow-sm shadow-black/20")}>
+    <nav className={cn("sticky top-0 z-50 border-b border-gold/20 bg-navy/95 px-4 py-4 text-ivory backdrop-blur-md transition-shadow duration-300 md:px-6", scrolled && "shadow-lg shadow-black/30")}>
       <div className="mx-auto flex max-w-7xl items-center justify-between">
-        <Link href="/" className="flex min-h-11 items-center gap-3 transition-opacity hover:opacity-90">
-          <ConnectedFoundationMark className="h-9 w-9 shrink-0 text-violet" />
+        <Link href="/" className="flex min-h-[44px] items-center gap-3 transition-opacity hover:opacity-90">
+          <div className="relative flex h-9 w-9 shrink-0 items-center justify-center rounded-sm border-2 border-ivory/20">
+            <span className="font-heading text-lg font-extrabold leading-none tracking-tighter">M<span className="text-gold">A</span></span>
+            <div className="absolute -right-1 -top-1 h-2 w-2 border-r-2 border-t-2 border-gold" />
+          </div>
           <div>
-            <p className="font-heading text-sm font-semibold leading-none">Muhammed Ajmal Consulting</p>
-            <p className="mt-1 hidden font-body text-xs text-slate sm:block">Business operations and growth</p>
+            <p className="font-heading text-xs font-bold uppercase leading-none tracking-widest">Muhammed Ajmal</p>
+            <p className="mt-0.5 hidden font-body text-xs uppercase tracking-[0.2em] text-gold sm:block">Business Operations &amp; Growth</p>
           </div>
         </Link>
 
-        <div className="hidden gap-5 font-body text-sm font-medium lg:flex">
+        <div className="hidden gap-6 font-body text-sm font-medium tracking-wide lg:flex">
           {navLinks.map((link) => {
             const isActive = isCurrent(pathname, link.href);
             return (
