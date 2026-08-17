@@ -77,13 +77,12 @@ export default function ServicesPage() {
             <p className="eyebrow mb-3 text-teal-ink">Why the order matters</p>
             <h2 className="heading-reveal font-heading text-[length:var(--step-3)] font-extrabold leading-tight text-navy">Self-report, then evidence, then root cause.</h2>
           </div>
-          <div className="grid gap-4 md:grid-cols-3">
+          <div className="flex flex-col divide-y divide-navy/10 border-t border-navy/10 md:flex-row md:divide-y-0 md:divide-x md:border-t-0">
             {evidenceLadder.map(([title, body], index) => (
-              <article key={title} className="card-interactive relative rounded-2xl border border-navy/10 bg-white p-6 shadow-sm hover:border-gold">
+              <article key={title} className="stage-reveal flex-1 py-6 md:px-6 md:py-0 first:md:pl-0 last:md:pr-0">
                 <span className="font-mono text-xs text-gold-ink">0{index + 1}</span>
-                <h3 className="mt-5 font-heading text-xl font-bold text-navy">{title}</h3>
+                <h3 className="mt-4 text-[length:var(--step-1)] font-heading font-bold text-navy">{title}</h3>
                 <p className="mt-3 font-body text-sm leading-relaxed text-navy/65">{body}</p>
-                {index < evidenceLadder.length - 1 && <span className="absolute -right-3 top-1/2 z-10 hidden h-6 w-6 -translate-y-1/2 items-center justify-center rounded-full border border-gold/30 bg-ivory text-gold-ink md:flex" aria-hidden="true">→</span>}
               </article>
             ))}
           </div>
@@ -102,9 +101,9 @@ export default function ServicesPage() {
             <p className="eyebrow mb-3 text-gold-ink">Common questions</p>
             <h2 className="heading-reveal font-heading text-[length:var(--step-4)] font-extrabold leading-tight text-navy">Before you start.</h2>
           </div>
-          <div className="space-y-3">
+          <div className="divide-y divide-navy/10 border-t border-navy/10">
             {faqs.map((faq) => (
-              <details key={faq.question} className="group rounded-2xl border border-navy/10 bg-ivory p-5 md:p-6 [&[open]]:border-gold/40">
+              <details key={faq.question} className="group py-5">
                 <summary className="flex min-h-[44px] cursor-pointer list-none items-center justify-between gap-4 font-heading text-base font-bold text-navy marker:content-none">
                   {faq.question}
                   <span className="shrink-0 font-mono text-lg text-gold-ink transition-transform duration-200 group-open:rotate-45" aria-hidden="true">+</span>

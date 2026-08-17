@@ -34,7 +34,7 @@ function ArticleCard({ article }: { article: Article }) {
   return (
     <Link
       href={`/insights/${article.slug}`}
-      className="card-interactive block rounded-xl border border-navy/10 bg-ivory p-5 shadow-sm hover:border-gold md:p-6"
+      className="card-interactive block rounded-xl border border-navy/10 bg-ivory p-5 hover:border-gold md:p-6"
     >
       <span className="font-heading text-xs font-bold uppercase tracking-widest text-gold-ink">{article.category}</span>
       <h2 className="mb-1.5 mt-1.5 font-heading text-lg font-bold text-navy">{article.title}</h2>

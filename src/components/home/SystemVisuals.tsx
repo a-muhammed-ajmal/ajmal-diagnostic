@@ -4,32 +4,24 @@ const architecture = ["Founder", "Team", "Systems", "Automation", "Data", "Scale
 
 export function FounderSystemVisual() {
   return (
-    <div className="relative overflow-hidden rounded-3xl border border-ivory/15 bg-ivory/5 p-5 shadow-2xl shadow-black/20 sm:p-7" role="img" aria-label="Strategic Growth Architecture: founder, team, systems, automation, data, and scale form a connected operating system.">
-      <div className="absolute inset-0 graph-overlay-dark opacity-40" aria-hidden="true" />
-      <div className="relative">
-        <div className="mb-6">
-          <p className="font-heading text-xs font-bold uppercase tracking-[0.2em] text-gold">Operating architecture</p>
-        </div>
-        <div className="grid grid-cols-[0.9fr_1.35fr] gap-4 sm:gap-6">
-          <div className="flex items-center">
-            <div className="w-full rounded-2xl border border-gold/60 bg-gold p-4 text-center shadow-lg shadow-gold/10">
-              <p className="font-heading text-sm font-extrabold text-navy">Founder</p>
-              <p className="mt-1 font-body text-xs leading-relaxed text-navy/70">Clear direction, not every decision.</p>
-            </div>
-          </div>
-          <div className="relative space-y-2 before:absolute before:-left-3 before:top-5 before:bottom-5 before:w-px before:bg-teal/50 sm:before:-left-4">
-            {architecture.slice(1).map((step, index) => (
-              <div key={step} className="group relative flex items-center gap-3 rounded-xl border border-ivory/15 bg-navy/50 px-3 py-2.5 transition-[border-color,transform] duration-200 hover:-translate-y-0.5 hover:border-teal/70">
-                <span className="relative z-10 -ml-5 flex h-3 w-3 shrink-0 rounded-full border-2 border-navy bg-teal shadow-lg sm:-ml-6" aria-hidden="true" />
-                <span className="font-mono text-xs text-ivory/40">0{index + 2}</span>
-                <span className="font-heading text-xs font-bold text-ivory">{step}</span>
-                <span className="ml-auto h-1.5 w-7 rounded-full bg-teal/50 transition-[width,background-color] duration-200 group-hover:w-11 group-hover:bg-teal" aria-hidden="true" />
-              </div>
-            ))}
-          </div>
-        </div>
-        <p className="mt-5 border-t border-ivory/10 pt-4 font-body text-xs leading-relaxed text-ivory/60">Move operational responsibility into visible systems, clear ownership, and useful information.</p>
+    <div className="reveal relative" role="img" aria-label="Strategic Growth Architecture: founder, team, systems, automation, data, and scale form a connected operating system.">
+      <p className="font-heading text-xs font-bold uppercase tracking-[0.2em] text-gold">Operating architecture</p>
+      <div className="mt-5 inline-block">
+        <p className="font-heading text-lg font-extrabold text-ivory">Founder</p>
+        <p className="mt-1 max-w-xs font-body text-xs leading-relaxed text-ivory/60">Clear direction, not every decision.</p>
+        <div className="mt-3 h-px w-16 bg-gold" aria-hidden="true" />
       </div>
+      <div className="relative mt-6 space-y-2 before:absolute before:-left-3 before:top-5 before:bottom-5 before:w-px before:bg-teal/50 sm:before:-left-4">
+        {architecture.slice(1).map((step, index) => (
+          <div key={step} className="group relative flex items-center gap-3 rounded-xl border border-ivory/15 bg-navy/50 px-3 py-2.5 transition-[border-color,transform] duration-200 hover:-translate-y-0.5 hover:border-teal/70">
+            <span className="relative z-10 -ml-5 flex h-3 w-3 shrink-0 rounded-full border-2 border-navy bg-teal shadow-lg sm:-ml-6" aria-hidden="true" />
+            <span className="font-mono text-xs text-ivory/40">0{index + 2}</span>
+            <span className="font-heading text-xs font-bold text-ivory">{step}</span>
+            <span className="ml-auto h-1.5 w-7 rounded-full bg-teal/50 transition-[transform,background-color] duration-200 origin-left group-hover:scale-x-150 group-hover:bg-teal" aria-hidden="true" />
+          </div>
+        ))}
+      </div>
+      <p className="mt-6 border-t border-ivory/10 pt-4 font-body text-xs leading-relaxed text-ivory/60">Move operational responsibility into visible systems, clear ownership, and useful information.</p>
     </div>
   );
 }
@@ -43,26 +35,29 @@ const trapSymptoms = [
 
 export function FounderTrapDiagram() {
   return (
-    <div className="grid gap-4 sm:grid-cols-2" aria-label="Four observable symptoms of the Founder Trap">
-      <div className="relative order-last flex min-h-48 items-center justify-center overflow-hidden rounded-3xl border border-crimson/20 bg-navy p-6 sm:order-none sm:col-span-2">
+    <div className="grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-center" aria-label="Four observable symptoms of the Founder Trap">
+      <div className="stage-reveal relative mx-auto flex aspect-square w-full max-w-72 items-center justify-center overflow-hidden rounded-full bg-navy p-6">
         <div className="absolute h-36 w-36 rounded-full border border-crimson/20" aria-hidden="true" />
         <div className="absolute h-24 w-24 rounded-full border border-crimson/35" aria-hidden="true" />
         <div className="relative z-10 rounded-full border border-gold/40 bg-gold px-6 py-5 text-center shadow-lg shadow-gold/10">
           <p className="font-heading text-sm font-extrabold text-navy">Founder</p>
           <p className="mt-1 font-body text-xs text-navy/70">The operating bottleneck</p>
         </div>
-        <p className="absolute bottom-5 max-w-xs px-5 text-center font-body text-xs leading-relaxed text-ivory/60">The Founder Trap is a pattern of observable dependency—not a judgment on the founder.</p>
       </div>
-      {trapSymptoms.map((symptom, index) => (
-        <div key={symptom.label} className="card-interactive rounded-2xl border border-navy/10 bg-white p-5 shadow-sm hover:border-crimson/50">
-          <div className="mb-4 flex items-center gap-3">
-            <span className="flex h-9 w-9 items-center justify-center rounded-full bg-crimson/10 font-mono text-xs font-bold text-crimson">0{index + 1}</span>
-            <span className="h-px flex-1 bg-crimson/20" aria-hidden="true" />
-          </div>
-          <h3 className="font-heading text-base font-bold text-navy">{symptom.label}</h3>
-          <p className="mt-2 font-body text-sm leading-relaxed text-navy/60">{symptom.detail}</p>
+      <div>
+        <p className="font-body text-sm leading-relaxed text-navy/60">The Founder Trap is a pattern of observable dependency—not a judgment on the founder.</p>
+        <div className="mt-6 divide-y divide-navy/10 border-t border-navy/10">
+          {trapSymptoms.map((symptom, index) => (
+            <div key={symptom.label} className="stage-reveal flex items-baseline gap-4 py-4">
+              <span className="font-mono text-xs text-crimson">0{index + 1}</span>
+              <div>
+                <h3 className="text-[length:var(--step-1)] font-heading font-bold text-navy">{symptom.label}</h3>
+                <p className="mt-1 font-body text-sm leading-relaxed text-navy/60">{symptom.detail}</p>
+              </div>
+            </div>
+          ))}
         </div>
-      ))}
+      </div>
     </div>
   );
 }
@@ -87,15 +82,13 @@ export function DependencyIndexPreview() {
           </div>
           <Link href="/diagnostic" className="mt-7 inline-flex min-h-12 items-center justify-center rounded-xl bg-gold px-6 py-3 font-heading text-sm font-bold text-navy transition-colors hover:bg-gold-bright">Start the Business Health Check <span aria-hidden="true">&nbsp;→</span></Link>
         </div>
-        <div className="grid gap-3 sm:grid-cols-3">
+        <div className="flex flex-col divide-y divide-ivory/10 border-t border-ivory/10 md:flex-row md:divide-y-0 md:divide-x md:border-t-0">
           {dependencyAreas.map((area) => (
-            <div key={area.title} className="relative flex min-h-64 flex-col overflow-hidden rounded-2xl border border-ivory/15 bg-ivory/5 p-5">
-              <div className="absolute -right-7 -top-8 h-28 w-28 rounded-full border-[18px] border-teal/20" aria-hidden="true" />
-              <p className="relative font-mono text-xs text-teal">{area.value}</p>
-              <div className="relative mt-12 h-px w-full bg-teal/30" aria-hidden="true" />
-              <h3 className="relative mt-6 font-heading text-lg font-bold">{area.title}</h3>
-              <p className="relative mt-3 font-body text-sm leading-relaxed text-ivory/65">{area.body}</p>
-              <p className="relative mt-auto pt-4 font-mono text-xs uppercase tracking-widest text-ivory/40">4 questions</p>
+            <div key={area.title} className="stage-reveal flex-1 py-6 md:px-6 md:py-0 first:md:pl-0 last:md:pr-0">
+              <p className="font-mono text-xs text-teal">{area.value}</p>
+              <h3 className="mt-3 text-[length:var(--step-1)] font-heading font-bold">{area.title}</h3>
+              <p className="mt-3 font-body text-sm leading-relaxed text-ivory/65">{area.body}</p>
+              <p className="mt-4 font-mono text-xs uppercase tracking-widest text-ivory/40">4 questions</p>
             </div>
           ))}
         </div>
