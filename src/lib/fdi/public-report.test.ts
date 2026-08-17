@@ -15,10 +15,8 @@ it('removes consultant-only qualification and AI from the founder payload', () =
     sessionId: 'session',
     completedAt: '2026-08-15T00:00:00.000Z',
     qualification: evaluateQualification({
-      country: 'uae', founderLed: true, annualRevenue: 'aed_1m_to_10m',
-      employeeCount: 'employees_5_to_50', operatingYears: 'years_3_or_more',
-      singleDecisionAuthority: true, willingToShareOperationalInformation: true,
-      primarySector: 'real_estate_business_services',
+      annualRevenue: 'aed_1m_to_10m', employeeCount: 'employees_5_to_50',
+      operatingYears: 'years_3_or_more', sector: 'real_estate_business_services',
     }),
     ai: { internalOnly: true },
   });

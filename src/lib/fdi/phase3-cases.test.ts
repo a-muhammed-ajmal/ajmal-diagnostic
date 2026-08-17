@@ -11,14 +11,10 @@ function score(raw: Record<string, number>) {
 }
 
 const qualifyingProfile = {
-  country: 'uae' as const,
-  founderLed: true,
   annualRevenue: 'aed_1m_to_10m' as const,
   employeeCount: 'employees_5_to_50' as const,
   operatingYears: 'years_3_or_more' as const,
-  singleDecisionAuthority: true,
-  willingToShareOperationalInformation: true,
-  primarySector: 'real_estate_business_services',
+  sector: 'real_estate_business_services',
 };
 
 describe('Phase 3 QA outcome examples', () => {
@@ -46,10 +42,16 @@ describe('Phase 3 QA outcome examples', () => {
     ]));
   });
 
-  it('unqualified: commercial disqualification leaves a valid FDI untouched', () => {
+  it('unqualified: an outside-profile business keeps a valid FDI untouched', () => {
     const outcome = score({ DS: 6, EC: 6, OV: 6 });
     expect(outcome).toMatchObject({ ok: true, result: { fdi: { display: 50 }, band: { key: 'high' } } });
-    expect(evaluateQualification({ ...qualifyingProfile, founderLed: false })).toMatchObject({ result: 'disqualified' });
+    expect(evaluateQualification({ ...qualifyingProfile, annualRevenue: 'over_10m' })).toMatchObject({ result: 'outside_target_profile' });
+  });
+
+  it('skipped details: no business details still produces the same valid FDI', () => {
+    const outcome = score({ DS: 6, EC: 6, OV: 6 });
+    expect(outcome).toMatchObject({ ok: true, result: { fdi: { display: 50 }, band: { key: 'high' } } });
+    expect(evaluateQualification({})).toMatchObject({ result: 'not_assessed' });
   });
 
   it('incomplete: eleven answers produce no FDI result', () => {

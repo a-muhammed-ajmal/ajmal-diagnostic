@@ -31,14 +31,10 @@ const questionSet = FDI_1_0_QUESTIONS;
 const VERSION = config.diagnosticVersion;
 const RAW_MAX = config.itemsPerComponent * config.itemScoreMax;
 const QUALIFIED_PRIMARY: QualificationInput = {
-  country: 'uae',
-  founderLed: true,
   annualRevenue: 'aed_1m_to_10m',
   employeeCount: 'employees_5_to_50',
   operatingYears: 'years_3_or_more',
-  singleDecisionAuthority: true,
-  willingToShareOperationalInformation: true,
-  primarySector: 'real_estate_business_services',
+  sector: 'real_estate_business_services',
 };
 
 function score(answers: FdiAnswers, version: string = VERSION) {
@@ -361,7 +357,7 @@ describe('Test 13 — commercial qualification', () => {
 
     const unqualified = buildReport(result, config, {
       ...context,
-      qualification: evaluateQualification({ ...QUALIFIED_PRIMARY, country: 'other' }),
+      qualification: evaluateQualification({ ...QUALIFIED_PRIMARY, annualRevenue: 'over_10m' }),
     });
     const qualified = buildReport(result, config, {
       ...context,
@@ -379,7 +375,7 @@ describe('Test 13 — commercial qualification', () => {
   it('uses the approved deterministic qualification rule', () => {
     expect(evaluateQualification(QUALIFIED_PRIMARY)).toMatchObject({
       result: 'qualified_primary',
-      version: 'FDI-QF-1.0',
+      version: 'FDI-QF-2.0',
     });
   });
 });

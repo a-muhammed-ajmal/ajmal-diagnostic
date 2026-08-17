@@ -28,7 +28,7 @@ export async function POST(request: NextRequest) {
     const limited = await enforcePublicFormLimits(request, 'fdi-submit', body.contact.email);
     if (limited) return limited;
 
-    const report = await completeFdiSession(body.sessionId, body.contact, body.completionMs);
+    const report = await completeFdiSession(body.sessionId, body.contact, body.completionMs, body.businessDetails);
     const founderReport = toFounderFdiReport(report);
     let emailSent = false;
     try {

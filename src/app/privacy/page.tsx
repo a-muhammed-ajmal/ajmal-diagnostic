@@ -29,11 +29,10 @@ const PRIVACY_EMAIL = 'privacy@muhammedajmal.com';
 const dataCollected: { item: string; detail: string }[] = [
   { item: 'Name', detail: 'To address you and personalise your diagnostic report.' },
   { item: 'Email address', detail: 'To send your report, respond to enquiries, and — if you opt in — send newsletters.' },
-  { item: 'Phone number', detail: 'Optional. Only if you provide it, so we can follow up on your enquiry.' },
+  { item: 'Mobile number', detail: 'To follow up on your enquiry or diagnostic result.' },
   { item: 'Company name', detail: 'To contextualise your diagnostic and any conversation that follows.' },
-  { item: 'Revenue band', detail: 'Optional. A range, not an exact figure, used to calibrate the report.' },
-  { item: 'Industry and team size', detail: 'Optional. Used only to make your report more relevant.' },
-  { item: 'Diagnostic answers', detail: 'Your responses to the 10 diagnostic questions, used to calculate your scores.' },
+  { item: 'Business details', detail: 'Optional. Sector, number of employees, revenue band (a range, not an exact figure), and how long the business has operated. Skipping them does not affect your result.' },
+  { item: 'Diagnostic answers', detail: 'Your responses to the diagnostic questions, used to calculate your scores.' },
 ];
 
 const processors: { name: string; role: string; location: string }[] = [

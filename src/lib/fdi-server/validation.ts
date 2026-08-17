@@ -5,39 +5,48 @@ export const fdiAnswerMapSchema = z.record(z.string().min(1), z.string().min(1))
   'At least one answer is required.',
 );
 
-const sectorSchema = z.string().trim().min(1).max(100);
+/**
+ * Sector options offered on the final screen. The three commercial primary
+ * sectors live in src/lib/fdi/qualification.ts; everything else here simply
+ * classifies as secondary. Adding an option never affects an FDI score.
+ */
+export const FDI_SECTOR_VALUES = [
+  'real_estate_business_services',
+  'trading_distribution',
+  'construction_contracting',
+  'professional_services',
+  'retail_ecommerce',
+  'hospitality_fnb',
+  'healthcare',
+  'manufacturing',
+  'technology',
+  'education',
+  'other',
+] as const;
 
-export const fdiQualificationPatchSchema = z.object({
-  country: z.enum(['uae', 'other']).optional(),
-  founderLed: z.boolean().optional(),
-  annualRevenue: z.enum(['under_1m', 'aed_1m_to_10m', 'over_10m']).optional(),
-  employeeCount: z.enum(['under_5', 'employees_5_to_50', 'over_50']).optional(),
-  operatingYears: z.enum(['under_3', 'years_3_or_more']).optional(),
-  singleDecisionAuthority: z.boolean().optional(),
-  willingToShareOperationalInformation: z.boolean().optional(),
-  primarySector: sectorSchema.optional(),
-  secondarySector: z.string().trim().max(100).optional(),
-  otherSector: z.string().trim().max(100).optional(),
+/**
+ * Every business detail is optional, so an untouched select must not fail
+ * validation. A native select submits '' when untouched; treat '' and null as
+ * "not answered" rather than as an invalid enum member.
+ */
+function optionalEnum<const T extends readonly [string, ...string[]]>(values: T) {
+  return z.enum(values).or(z.literal('')).nullish().transform((value) => value === '' || value === null ? undefined : value);
+}
+
+export const fdiBusinessDetailsSchema = z.object({
+  annualRevenue: optionalEnum(['under_1m', 'aed_1m_to_10m', 'over_10m']),
+  employeeCount: optionalEnum(['under_5', 'employees_5_to_50', 'over_50']),
+  operatingYears: optionalEnum(['under_3', 'years_3_or_more']),
+  sector: optionalEnum(FDI_SECTOR_VALUES),
+  sectorOther: z.string().trim().max(100).nullish().transform((value) => value === '' || value === null ? undefined : value),
 }).strict();
 
-export const fdiQualificationSchema = fdiQualificationPatchSchema.refine(
-  (value) =>
-    value.country !== undefined &&
-    value.founderLed !== undefined &&
-    value.annualRevenue !== undefined &&
-    value.employeeCount !== undefined &&
-    value.operatingYears !== undefined &&
-    value.singleDecisionAuthority !== undefined &&
-    value.willingToShareOperationalInformation !== undefined &&
-    value.primarySector !== undefined,
-  'All qualification responses are required before completion.',
-);
-
 export const fdiContactSchema = z.object({
-  name: z.string().trim().min(2).max(100),
-  email: z.string().trim().email().max(320),
-  companyName: z.string().trim().min(2).max(200),
-  phone: z.string().trim().max(50).optional(),
+  name: z.string().trim().min(2, 'Please enter your name').max(100),
+  email: z.string().trim().email('Please enter a valid email address').max(320),
+  companyName: z.string().trim().min(2, 'Please enter your company name').max(200),
+  phone: z.string().trim().min(7, 'Please enter your mobile number').max(50)
+    .regex(/^[+\d][\d\s()-]{6,}$/, 'Please enter a valid mobile number'),
 }).strict();
 
 export const fdiStartSchema = z.object({
@@ -47,10 +56,9 @@ export const fdiStartSchema = z.object({
 export const fdiPatchSchema = z.object({
   sessionToken: z.string().min(20).max(200),
   answers: fdiAnswerMapSchema.optional(),
-  qualification: fdiQualificationPatchSchema.optional(),
   completionMs: z.number().int().nonnegative().max(86_400_000).optional(),
 }).strict().refine(
-  (value) => value.answers !== undefined || value.qualification !== undefined || value.completionMs !== undefined,
+  (value) => value.answers !== undefined || value.completionMs !== undefined,
   'At least one progressive update is required.',
 );
 
@@ -58,6 +66,7 @@ export const fdiSubmitSchema = z.object({
   sessionId: z.string().uuid(),
   sessionToken: z.string().min(20).max(200),
   contact: fdiContactSchema,
+  businessDetails: fdiBusinessDetailsSchema.optional(),
   completionMs: z.number().int().nonnegative().max(86_400_000).optional(),
 }).strict();
 
@@ -66,6 +75,7 @@ export const fdiTestStatusSchema = z.object({
   reason: z.string().trim().min(3).max(500).optional(),
 }).strict();
 
-export type FdiQualificationPatch = z.infer<typeof fdiQualificationPatchSchema>;
-export type FdiQualificationValues = z.infer<typeof fdiQualificationSchema>;
+/** What the browser may send (untouched selects included) versus what the server acts on. */
+export type FdiBusinessDetailsInput = z.input<typeof fdiBusinessDetailsSchema>;
+export type FdiBusinessDetails = z.output<typeof fdiBusinessDetailsSchema>;
 export type FdiContact = z.infer<typeof fdiContactSchema>;

@@ -71,14 +71,15 @@ The commercial target profile is:
 
 The check remains a useful reflection tool for a founder outside that profile. Commercial qualification is recorded separately and never changes the FDI score or removes the founder's result.
 
+The table above is the commercial profile Ajmal sells to. It is not an intake questionnaire. The flow asks nothing before the questions, and afterwards asks only four **optional** business details: sector, number of employees, annual revenue, and how long the business has operated. Geography, founder-led status, decision authority, and willingness to share operational information are no longer asked at all; those judgements belong to the sales conversation. Qualification runs under `FDI-QF-2.0`, which classifies from whatever was shared and records `not_assessed` when nothing was.
+
 ## 4. The customer journey
 
 1. **Start the Business Health Check** - the founder sees the scope, time commitment, and privacy link.
-2. **Tell us about the business** - country, founder-led status, revenue band, team size, operating age, decision authority, willingness to share operational information, and sector.
-3. **Answer 12 behavioural questions** - four questions for each FDI component.
-4. **Share contact details** - required to complete the session and access the report flow.
-5. **Receive the Founder Dependency Index result** - a 0 to 100 index, band, component scores, reported behaviour findings, and the result limitation.
-6. **Choose the right next step** - the public next step is a Business Clarity Audit, which tests the reported patterns against operating evidence.
+2. **Answer 12 behavioural questions** - four questions for each FDI component. Nothing is asked before this point.
+3. **Share contact details** - name, company name, email address, and mobile number are required to complete the session and access the report flow. The same screen offers the four optional business details, which never block completion and never change the result.
+4. **Receive the Founder Dependency Index result** - a 0 to 100 index, band, component scores, reported behaviour findings, and the result limitation.
+5. **Choose the right next step** - the public next step is a Business Clarity Audit, which tests the reported patterns against operating evidence.
 
 The current implementation stores the founder-facing report in browser session storage for the results experience. The system also creates a server-side FDI session. Production deployment status and current live feature-flag status are not asserted in this document.
 
@@ -231,6 +232,8 @@ The official Business Health Check copy is for the FDI route only.
 - `src/lib/fdi/score.ts`
 - `src/lib/fdi/report.ts`
 - `src/lib/fdi/observations.ts`
+- `src/lib/fdi/qualification.ts`
+- `src/lib/fdi-server/business-details.ts`
 - `src/components/fdi/FdiDiagnosticFlow.tsx`
 - `src/components/fdi/FdiResults.tsx`
 - `src/components/home/SystemVisuals.tsx`
@@ -241,3 +244,4 @@ The official Business Health Check copy is for the FDI route only.
 | Version | Date | Change |
 |---|---|---|
 | v1.0 | August 15, 2026 | Established Business Health Check as the customer-facing free entry experience and retained Founder Dependency Index as the formal measurement and result. |
+| v1.0 | August 17, 2026 | Removed the mandatory pre-question details step. Business details are now four optional fields on the final screen (sector, employees, annual revenue, operating age); contact requires name, company name, email, and mobile number. Retired the geography, founder-led, decision-authority, and willingness-to-share questions along with the `disqualified` outcome, and replaced qualification `FDI-QF-1.0` with the missing-data-tolerant `FDI-QF-2.0`. FDI-1.0 questions, scoring, bands, and rounding are unchanged. |

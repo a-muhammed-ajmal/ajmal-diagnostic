@@ -57,7 +57,7 @@ created only by an authenticated admin using its explicit Test Mode link.
 
 | Metric | Value |
 |---|---|
-| Tests | 287 passing (21 suites), 53.77% statement coverage |
+| Tests | 298 passing (22 suites), 58.17% statement coverage |
 | DB tables | 8 (RLS on all) |
 | Migrations | 5 (`20260723000001`–`20260815000003`) |
 | Routes | App Router (see `AGENTS.md` for the full page list) |

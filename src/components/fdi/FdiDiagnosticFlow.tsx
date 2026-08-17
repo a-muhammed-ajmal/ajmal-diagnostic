@@ -3,13 +3,51 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { useForm, useWatch } from 'react-hook-form';
 import { FDI_1_0_QUESTIONS } from '@/lib/fdi/config';
 import type { FounderFdiReport } from '@/lib/fdi/public-report';
-import { fdiContactSchema, fdiQualificationSchema, type FdiContact, type FdiQualificationValues } from '@/lib/fdi-server/validation';
+import { fdiBusinessDetailsSchema, fdiContactSchema } from '@/lib/fdi-server/validation';
 import { cn } from '@/lib/utils';
+import type { z } from 'zod';
 
-type Stage = 'intro' | 'qualification' | 'questions' | 'contact' | 'submitting';
+type Stage = 'intro' | 'questions' | 'contact' | 'submitting';
+
+/** Contact is required; the business details below it never block the result. */
+const finalStepSchema = fdiContactSchema.extend(fdiBusinessDetailsSchema.shape);
+/** Fields hold what a native select can produce ('' when untouched); the resolver hands us the cleaned values. */
+type FinalStepFields = z.input<typeof finalStepSchema>;
+type FinalStepValues = z.output<typeof finalStepSchema>;
+
+const SECTOR_OPTIONS: readonly (readonly [string, string])[] = [
+  ['real_estate_business_services', 'Real Estate & Business Services'],
+  ['trading_distribution', 'Trading & Distribution'],
+  ['construction_contracting', 'Construction & Contracting'],
+  ['professional_services', 'Professional Services'],
+  ['retail_ecommerce', 'Retail & E-commerce'],
+  ['hospitality_fnb', 'Hospitality & F&B'],
+  ['healthcare', 'Healthcare'],
+  ['manufacturing', 'Manufacturing'],
+  ['technology', 'Technology'],
+  ['education', 'Education'],
+  ['other', 'Other'],
+];
+
+const REVENUE_OPTIONS: readonly (readonly [string, string])[] = [
+  ['under_1m', 'Under AED 1,000,000'],
+  ['aed_1m_to_10m', 'AED 1,000,000–10,000,000'],
+  ['over_10m', 'Over AED 10,000,000'],
+];
+
+const EMPLOYEE_OPTIONS: readonly (readonly [string, string])[] = [
+  ['under_5', 'Under 5'],
+  ['employees_5_to_50', '5–50'],
+  ['over_50', 'Over 50'],
+];
+
+const OPERATING_YEAR_OPTIONS: readonly (readonly [string, string])[] = [
+  ['under_3', 'Under 3 years'],
+  ['years_3_or_more', '3 years or more'],
+];
 
 type Session = { readonly id: string; readonly token: string; readonly isTest: boolean };
 type ApiResponse = { readonly success: boolean; readonly error?: string };
@@ -43,16 +81,15 @@ export function FdiDiagnosticFlow() {
   const [isWorking, setIsWorking] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [startedAt, setStartedAt] = useState<number | null>(null);
+  const [detailsOpen, setDetailsOpen] = useState(false);
   const question = FDI_1_0_QUESTIONS.questions[currentQuestion];
 
-  const qualificationForm = useForm<FdiQualificationValues>({
-    resolver: zodResolver(fdiQualificationSchema),
+  const finalForm = useForm<FinalStepFields, unknown, FinalStepValues>({
+    resolver: zodResolver(finalStepSchema),
     mode: 'onTouched',
   });
-  const contactForm = useForm<FdiContact>({
-    resolver: zodResolver(fdiContactSchema),
-    mode: 'onTouched',
-  });
+  /** Only the 'other' sector needs a free-text box. useWatch keeps this compiler-safe. */
+  const sector = useWatch({ control: finalForm.control, name: 'sector' });
 
   const saveProgress = async (payload: Record<string, unknown>) => {
     if (!session) throw new Error('The diagnostic session is missing. Start again to continue.');
@@ -80,26 +117,13 @@ export function FdiDiagnosticFlow() {
       }
       setSession({ id: data.sessionId, token: data.sessionToken, isTest: Boolean(data.isTest) });
       setStartedAt(Date.now());
-      setStage('qualification');
+      setStage('questions');
     } catch (cause) {
       setError(cause instanceof Error ? cause.message : 'Unable to start the diagnostic.');
     } finally {
       setIsWorking(false);
     }
   };
-
-  const proceedFromQualification = qualificationForm.handleSubmit(async (values) => {
-    setIsWorking(true);
-    setError(null);
-    try {
-      await saveProgress({ qualification: values });
-      setStage('questions');
-    } catch (cause) {
-      setError(cause instanceof Error ? cause.message : 'Unable to save qualification details.');
-    } finally {
-      setIsWorking(false);
-    }
-  });
 
   const handleAnswer = async (questionId: string, optionId: string) => {
     setAnswers((current) => ({ ...current, [questionId]: optionId }));
@@ -111,8 +135,9 @@ export function FdiDiagnosticFlow() {
     }
   };
 
-  const submit = contactForm.handleSubmit(async (contact) => {
+  const submit = finalForm.handleSubmit(async (values) => {
     if (!session) return;
+    const { name, email, companyName, phone, ...businessDetails } = values;
     setStage('submitting');
     setIsWorking(true);
     setError(null);
@@ -123,7 +148,8 @@ export function FdiDiagnosticFlow() {
         body: JSON.stringify({
           sessionId: session.id,
           sessionToken: session.token,
-          contact,
+          contact: { name, email, companyName, phone },
+          businessDetails,
           completionMs: completionMsFrom(startedAt),
         }),
       });
@@ -143,33 +169,34 @@ export function FdiDiagnosticFlow() {
 
   if (stage === 'intro') {
     return (
-      <div className="min-h-screen bg-navy text-ivory flex items-center px-5 py-16 relative overflow-hidden">
+      <div className="min-h-svh bg-navy text-ivory flex items-center px-5 py-8 sm:py-12 relative overflow-hidden">
         <div className="graph-overlay-dark" />
         <section className="relative z-10 w-full max-w-3xl mx-auto text-center">
-          <p className="eyebrow text-gold mb-4">Business Health Check</p>
-          <h1 className="font-heading font-extrabold text-[length:var(--step-3)] leading-tight text-white">
+          <p className="eyebrow text-gold mb-3">Business Health Check</p>
+          <h1 className="font-heading font-extrabold text-(length:--step-2) sm:text-(length:--step-3) leading-tight text-white">
             How much does your business still depend on you?
           </h1>
-          <p className="font-body text-ivory/75 max-w-2xl mx-auto mt-5 leading-relaxed">
+          <p className="font-body text-sm sm:text-base text-ivory/75 max-w-2xl mx-auto mt-3 leading-relaxed">
             Answer 12 questions about decision-making, execution, and operational visibility. You will receive your Founder Dependency Index and a clear next step.
           </p>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 max-w-2xl mx-auto mt-8 text-left">
+          {/* One bordered list on a phone, three cards from sm up — keeps this section inside a single mobile view. */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 sm:gap-2 max-w-2xl mx-auto mt-4 text-left rounded-xl border border-gold/25 sm:border-0 divide-y divide-gold/15 sm:divide-y-0 overflow-hidden">
             {[
               ['12 questions', 'Four questions across each operating component.'],
               ['Progress saved', 'You can leave before completion; an unfinished attempt receives no score or email.'],
               ['Self-report only', 'The result identifies reported patterns. It does not diagnose root causes.'],
             ].map(([title, body]) => (
-              <div key={title} className="border border-gold/25 bg-white/5 rounded-xl p-4">
-                <p className="font-heading font-bold text-gold text-sm">{title}</p>
-                <p className="font-body text-ivory/70 text-xs leading-relaxed mt-2">{body}</p>
+              <div key={title} className="bg-white/5 px-3 py-2 sm:rounded-xl sm:border sm:border-gold/25">
+                <p className="font-heading font-bold text-gold text-xs sm:text-sm">{title}</p>
+                <p className="font-body text-ivory/70 text-xs leading-snug sm:mt-1">{body}</p>
               </div>
             ))}
           </div>
-          {error && <p role="alert" className="mt-5 text-sm text-gold">{error}</p>}
-          <button onClick={start} disabled={isWorking} className="mt-8 bg-gold text-navy font-heading font-bold rounded-xl px-8 py-4 min-h-[52px] hover:bg-gold-bright disabled:opacity-50 transition-colors">
+          {error && <p role="alert" className="mt-4 text-sm text-gold">{error}</p>}
+          <button onClick={start} disabled={isWorking} className="mt-5 bg-gold text-navy font-heading font-bold rounded-xl px-8 py-3 min-h-12 hover:bg-gold-bright disabled:opacity-50 transition-colors">
             {isWorking ? 'Starting…' : 'Start the Business Health Check →'}
           </button>
-          <p className="font-body text-xs text-ivory/45 mt-4 max-w-xl mx-auto leading-relaxed">
+          <p className="font-body text-xs text-ivory/45 mt-3 max-w-xl mx-auto leading-snug">
             Free. Private. A focused founder-dependency self-report, not a full financial, tax, legal, or business-performance audit.
           </p>
         </section>
@@ -177,56 +204,48 @@ export function FdiDiagnosticFlow() {
     );
   }
 
-  if (stage === 'qualification') {
-    const fieldClass = 'w-full rounded-lg border border-navy/20 bg-white px-4 py-3 text-navy focus:outline-none focus:ring-2 focus:ring-gold min-h-[48px]';
-    const labelClass = 'block font-heading text-sm font-semibold text-navy mb-1';
-    const saveOnBlur = () => {
-      const values = qualificationForm.getValues();
-      void saveProgress({ qualification: Object.fromEntries(Object.entries(values).filter(([, value]) => value !== undefined && value !== '')) }).catch((cause) => setError(cause instanceof Error ? cause.message : 'Unable to save progress.'));
-    };
-    return (
-      <div className="min-h-screen bg-ivory px-4 py-10 relative overflow-hidden">
-        <div className="graph-overlay" />
-        <form onSubmit={proceedFromQualification} className="relative z-10 max-w-2xl mx-auto bg-white border border-navy/10 shadow-sm rounded-2xl p-6 md:p-8 space-y-5">
-          <div>
-            <p className="eyebrow text-gold-ink">Before the questions</p>
-            <h1 className="font-heading font-extrabold text-navy text-2xl mt-2">A few details about the business</h1>
-            <p className="font-body text-sm text-navy/60 mt-2">These details help us understand the business context. They never change your FDI result.</p>
-            {session?.isTest && <p className="font-body text-xs text-gold-ink mt-3">This session is explicitly marked as a test record.</p>}
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div><label className={labelClass} htmlFor="fdi-country">Is the business based in the UAE?</label><select id="fdi-country" className={fieldClass} {...qualificationForm.register('country', { onBlur: saveOnBlur })}><option value="">Select…</option><option value="uae">Yes</option><option value="other">No</option></select></div>
-            <div><label className={labelClass} htmlFor="fdi-founder-led">Is the business founder-led?</label><select id="fdi-founder-led" className={fieldClass} {...qualificationForm.register('founderLed', { setValueAs: (value) => value === '' ? undefined : value === 'yes', onBlur: saveOnBlur })}><option value="">Select…</option><option value="yes">Yes</option><option value="no">No</option></select></div>
-            <div><label className={labelClass} htmlFor="fdi-revenue">Annual revenue</label><select id="fdi-revenue" className={fieldClass} {...qualificationForm.register('annualRevenue', { onBlur: saveOnBlur })}><option value="">Select…</option><option value="under_1m">Under AED 1,000,000</option><option value="aed_1m_to_10m">AED 1,000,000–10,000,000</option><option value="over_10m">Over AED 10,000,000</option></select></div>
-            <div><label className={labelClass} htmlFor="fdi-employees">Number of employees</label><select id="fdi-employees" className={fieldClass} {...qualificationForm.register('employeeCount', { onBlur: saveOnBlur })}><option value="">Select…</option><option value="under_5">Under 5</option><option value="employees_5_to_50">5–50</option><option value="over_50">Over 50</option></select></div>
-            <div><label className={labelClass} htmlFor="fdi-years">How long has the business operated?</label><select id="fdi-years" className={fieldClass} {...qualificationForm.register('operatingYears', { onBlur: saveOnBlur })}><option value="">Select…</option><option value="under_3">Under 3 years</option><option value="years_3_or_more">3 years or more</option></select></div>
-            <div><label className={labelClass} htmlFor="fdi-authority">Can you personally approve operating changes?</label><select id="fdi-authority" className={fieldClass} {...qualificationForm.register('singleDecisionAuthority', { setValueAs: (value) => value === '' ? undefined : value === 'yes', onBlur: saveOnBlur })}><option value="">Select…</option><option value="yes">Yes</option><option value="no">No</option></select></div>
-            <div className="sm:col-span-2"><label className={labelClass} htmlFor="fdi-audit-info">Would you share relevant operational information for a Business Clarity Audit if appropriate?</label><select id="fdi-audit-info" className={fieldClass} {...qualificationForm.register('willingToShareOperationalInformation', { setValueAs: (value) => value === '' ? undefined : value === 'yes', onBlur: saveOnBlur })}><option value="">Select…</option><option value="yes">Yes</option><option value="no">No</option></select></div>
-            <div><label className={labelClass} htmlFor="fdi-primary-sector">Primary sector</label><select id="fdi-primary-sector" className={fieldClass} {...qualificationForm.register('primarySector', { onBlur: saveOnBlur })}><option value="">Select…</option><option value="real_estate_business_services">Real Estate and Business Services</option><option value="trading_distribution">Trading and Distribution</option><option value="construction_contracting">Construction and Contracting</option><option value="professional_services">Professional Services</option><option value="other">Other</option></select></div>
-            <div><label className={labelClass} htmlFor="fdi-secondary-sector">Secondary sector <span className="font-normal text-navy/40">(optional)</span></label><input id="fdi-secondary-sector" className={fieldClass} {...qualificationForm.register('secondarySector', { onBlur: saveOnBlur })} /></div>
-            <div className="sm:col-span-2"><label className={labelClass} htmlFor="fdi-other-sector">Other sector <span className="font-normal text-navy/40">(optional)</span></label><input id="fdi-other-sector" className={fieldClass} {...qualificationForm.register('otherSector', { onBlur: saveOnBlur })} /></div>
-          </div>
-          {error && <p role="alert" className="text-sm text-crimson">{error}</p>}
-          <button type="submit" disabled={isWorking} className="w-full bg-navy text-ivory rounded-xl min-h-[52px] py-3 font-heading font-bold hover:bg-navy/90 disabled:opacity-50 transition-colors">Continue to the 12 questions →</button>
-        </form>
-      </div>
-    );
-  }
-
   if (stage === 'contact' || stage === 'submitting') {
-    const inputClass = 'w-full rounded-lg border border-navy/20 bg-white px-4 py-3 text-navy focus:outline-none focus:ring-2 focus:ring-gold min-h-[48px]';
+    const fieldClass = 'w-full rounded-lg border border-navy/20 bg-white px-3.5 py-2.5 text-navy focus:outline-none focus:ring-2 focus:ring-gold min-h-11';
+    const labelClass = 'block font-heading font-semibold text-sm text-navy mb-1';
+    const errors = finalForm.formState.errors;
+    const fieldError = (message?: string) => message ? <p role="alert" className="font-body text-xs text-crimson mt-1">{message}</p> : null;
     return (
-      <div className="min-h-screen bg-ivory px-4 py-10 relative overflow-hidden">
+      <div className="min-h-svh bg-ivory px-4 py-5 sm:py-8 relative overflow-hidden">
         <div className="graph-overlay" />
-        <form onSubmit={submit} className="relative z-10 max-w-xl mx-auto bg-white border border-navy/10 shadow-sm rounded-2xl p-6 md:p-8 space-y-5">
-          <div><p className="eyebrow text-gold-ink">Your result is ready</p><h1 className="font-heading font-extrabold text-navy text-2xl mt-2">Where should we send it?</h1><p className="font-body text-sm text-navy/60 mt-2">Your result is also shown on the next page. We use these details only to deliver your report and to follow up about a Business Clarity Audit if you ask us to.</p></div>
-          <div><label className="block font-heading font-semibold text-sm text-navy mb-1" htmlFor="fdi-name">Name</label><input id="fdi-name" className={inputClass} autoComplete="name" {...contactForm.register('name')} /></div>
-          <div><label className="block font-heading font-semibold text-sm text-navy mb-1" htmlFor="fdi-email">Work email</label><input id="fdi-email" type="email" className={inputClass} autoComplete="email" {...contactForm.register('email')} /></div>
-          <div><label className="block font-heading font-semibold text-sm text-navy mb-1" htmlFor="fdi-company">Company</label><input id="fdi-company" className={inputClass} autoComplete="organization" {...contactForm.register('companyName')} /></div>
-          <div><label className="block font-heading font-semibold text-sm text-navy mb-1" htmlFor="fdi-phone">Phone <span className="font-normal text-navy/40">(optional)</span></label><input id="fdi-phone" type="tel" className={inputClass} autoComplete="tel" {...contactForm.register('phone')} /></div>
-          {error && <p role="alert" className="text-sm text-crimson">{error}</p>}
-          <button type="submit" disabled={isWorking} className="w-full bg-gold text-navy rounded-xl min-h-[52px] py-3 font-heading font-bold hover:bg-gold-bright disabled:opacity-50 transition-colors">{stage === 'submitting' ? 'Preparing your result…' : 'View my Founder Dependency Index →'}</button>
-          <p className="font-body text-xs text-navy/45 text-center">By continuing you agree to our <a href="/privacy" className="underline text-gold-ink">Privacy Policy</a>.</p>
+        <form onSubmit={submit} className="relative z-10 max-w-xl mx-auto bg-white border border-navy/10 shadow-sm rounded-2xl p-4 sm:p-6 space-y-3">
+          <div>
+            <p className="eyebrow text-gold-ink">Your result is ready</p>
+            <h1 className="font-heading font-extrabold text-navy text-lg sm:text-2xl mt-1">Where should we send it?</h1>
+            <p className="font-body text-xs sm:text-sm text-navy/60 mt-1 leading-snug">Your result also appears on the next page. We use these details only to send your report and to follow up if you ask us to.</p>
+          </div>
+          {/* Name and company pair up even on a phone so all four required fields stay in one view. */}
+          <div className="grid grid-cols-2 gap-2.5">
+            <div><label className={labelClass} htmlFor="fdi-name">Your name</label><input id="fdi-name" className={fieldClass} autoComplete="name" {...finalForm.register('name')} />{fieldError(errors.name?.message)}</div>
+            <div><label className={labelClass} htmlFor="fdi-company">Company name</label><input id="fdi-company" className={fieldClass} autoComplete="organization" {...finalForm.register('companyName')} />{fieldError(errors.companyName?.message)}</div>
+            <div className="col-span-2 sm:col-span-1"><label className={labelClass} htmlFor="fdi-email">Email address</label><input id="fdi-email" type="email" inputMode="email" className={fieldClass} autoComplete="email" {...finalForm.register('email')} />{fieldError(errors.email?.message)}</div>
+            <div className="col-span-2 sm:col-span-1"><label className={labelClass} htmlFor="fdi-phone">Mobile number</label><input id="fdi-phone" type="tel" inputMode="tel" className={fieldClass} autoComplete="tel" {...finalForm.register('phone')} />{fieldError(errors.phone?.message)}</div>
+          </div>
+
+          <div className="border-t border-navy/10 pt-3">
+            <button type="button" onClick={() => setDetailsOpen((open) => !open)} aria-expanded={detailsOpen} aria-controls="fdi-business-details" className="flex w-full items-center justify-between gap-3 min-h-11 text-left font-heading text-sm font-semibold text-navy hover:text-gold-ink transition-colors">
+              <span>Add business details <span className="font-normal text-navy/45">— optional</span></span>
+              <span aria-hidden="true" className="font-body text-lg text-gold-ink leading-none">{detailsOpen ? '−' : '+'}</span>
+            </button>
+            <div id="fdi-business-details" hidden={!detailsOpen}>
+              <p className="font-body text-xs text-navy/50 leading-snug">Skip these if you prefer. They help us tailor any follow-up and never change your result.</p>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-3">
+                <div><label className={labelClass} htmlFor="fdi-sector">Sector</label><select id="fdi-sector" className={fieldClass} {...finalForm.register('sector', { setValueAs: (value) => value === '' ? undefined : value })}><option value="">Select…</option>{SECTOR_OPTIONS.map(([value, label]) => <option key={value} value={value}>{label}</option>)}</select></div>
+                <div><label className={labelClass} htmlFor="fdi-employees">Number of employees</label><select id="fdi-employees" className={fieldClass} {...finalForm.register('employeeCount', { setValueAs: (value) => value === '' ? undefined : value })}><option value="">Select…</option>{EMPLOYEE_OPTIONS.map(([value, label]) => <option key={value} value={value}>{label}</option>)}</select></div>
+                <div><label className={labelClass} htmlFor="fdi-revenue">Annual revenue</label><select id="fdi-revenue" className={fieldClass} {...finalForm.register('annualRevenue', { setValueAs: (value) => value === '' ? undefined : value })}><option value="">Select…</option>{REVENUE_OPTIONS.map(([value, label]) => <option key={value} value={value}>{label}</option>)}</select></div>
+                <div><label className={labelClass} htmlFor="fdi-years">Years operating</label><select id="fdi-years" className={fieldClass} {...finalForm.register('operatingYears', { setValueAs: (value) => value === '' ? undefined : value })}><option value="">Select…</option>{OPERATING_YEAR_OPTIONS.map(([value, label]) => <option key={value} value={value}>{label}</option>)}</select></div>
+                {sector === 'other' && <div className="sm:col-span-2"><label className={labelClass} htmlFor="fdi-sector-other">Type your sector</label><input id="fdi-sector-other" className={fieldClass} {...finalForm.register('sectorOther')} />{fieldError(errors.sectorOther?.message)}</div>}
+              </div>
+            </div>
+          </div>
+
+          {error && <p role="alert" className="font-body text-sm text-crimson">{error}</p>}
+          <button type="submit" disabled={isWorking} className="w-full bg-gold text-navy rounded-xl min-h-12 py-3 font-heading font-bold hover:bg-gold-bright disabled:opacity-50 transition-colors">{stage === 'submitting' ? 'Preparing your result…' : 'View my Founder Dependency Index →'}</button>
+          <p className="font-body text-xs text-navy/45 text-center leading-snug">By continuing you agree to our <a href="/privacy" className="underline text-gold-ink">Privacy Policy</a>.{session?.isTest && <span className="text-gold-ink"> Marked as a test record.</span>}</p>
         </form>
       </div>
     );
@@ -236,24 +255,24 @@ export function FdiDiagnosticFlow() {
   const selected = answers[question.id];
   const progress = Math.round(((currentQuestion + 1) / FDI_1_0_QUESTIONS.questions.length) * 100);
   return (
-    <div className="min-h-screen bg-ivory px-4 py-10 flex items-center relative overflow-hidden">
+    <div className="min-h-svh bg-ivory px-4 py-5 sm:py-8 flex items-center relative overflow-hidden">
       <div className="graph-overlay" />
       <section className="relative z-10 w-full max-w-2xl mx-auto">
-        <div className="mb-6"><div className="flex justify-between font-body text-sm text-navy/60 mb-2"><span>{componentLabels[question.componentKey]}</span><span>Question {currentQuestion + 1} of 12</span></div><div className="h-2 rounded-full bg-line overflow-hidden"><div className="h-full rounded-full bg-gold transition-[width] duration-300" style={{ width: `${progress}%` }} /></div></div>
-        <div className="bg-white border border-navy/10 shadow-sm rounded-2xl p-6 md:p-8">
+        <div className="mb-3"><div className="flex justify-between font-body text-xs text-navy/60 mb-1.5"><span>{componentLabels[question.componentKey]}</span><span>Question {currentQuestion + 1} of 12</span></div><div className="h-1.5 rounded-full bg-line overflow-hidden"><div className="h-full rounded-full bg-gold transition-[width] duration-300" style={{ width: `${progress}%` }} /></div></div>
+        <div className="bg-white border border-navy/10 shadow-sm rounded-2xl p-4 sm:p-6">
           <p className="eyebrow text-gold-ink">{componentLabels[question.componentKey]}</p>
-          <h1 className="font-heading font-extrabold text-navy text-xl md:text-2xl leading-relaxed mt-3">{question.text}</h1>
-          <div className="space-y-3 mt-7">
+          <h1 className="font-heading font-extrabold text-navy text-base sm:text-xl leading-snug mt-1.5">{question.text}</h1>
+          <div className="space-y-2 mt-4">
             {question.options.map((option) => (
-              <button key={option.id} type="button" onClick={() => void handleAnswer(question.id, option.id)} className={cn('w-full min-h-[56px] rounded-xl border-2 text-left px-5 py-4 font-body transition-colors', selected === option.id ? 'border-navy bg-navy/5 text-navy font-medium' : 'border-line bg-white text-navy/80 hover:border-gold hover:bg-ivory')}>
+              <button key={option.id} type="button" onClick={() => void handleAnswer(question.id, option.id)} className={cn('w-full min-h-11 rounded-xl border-2 text-left px-4 py-2.5 font-body text-sm leading-snug transition-colors', selected === option.id ? 'border-navy bg-navy/5 text-navy font-medium' : 'border-line bg-white text-navy/80 hover:border-gold hover:bg-ivory')}>
                 {option.text}
               </button>
             ))}
           </div>
-          {error && <p role="alert" className="text-sm text-crimson mt-4">{error}</p>}
-          <div className="flex gap-3 mt-7">
-            {currentQuestion > 0 && <button type="button" onClick={() => setCurrentQuestion((value) => value - 1)} className="flex-1 min-h-[48px] rounded-xl border border-navy/20 text-navy font-heading font-semibold hover:bg-ivory">← Back</button>}
-            <button type="button" disabled={!selected} onClick={() => isLast ? setStage('contact') : setCurrentQuestion((value) => value + 1)} className="flex-1 min-h-[48px] rounded-xl bg-navy text-ivory font-heading font-bold hover:bg-navy/90 disabled:opacity-40">{isLast ? 'Continue →' : 'Next →'}</button>
+          {error && <p role="alert" className="text-sm text-crimson mt-3">{error}</p>}
+          <div className="flex gap-3 mt-4">
+            {currentQuestion > 0 && <button type="button" onClick={() => setCurrentQuestion((value) => value - 1)} className="flex-1 min-h-11 rounded-xl border border-navy/20 text-navy font-heading font-semibold text-sm hover:bg-ivory">← Back</button>}
+            <button type="button" disabled={!selected} onClick={() => isLast ? setStage('contact') : setCurrentQuestion((value) => value + 1)} className="flex-1 min-h-11 rounded-xl bg-navy text-ivory font-heading font-bold text-sm hover:bg-navy/90 disabled:opacity-40">{isLast ? 'Continue →' : 'Next →'}</button>
           </div>
         </div>
       </section>

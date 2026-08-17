@@ -27,14 +27,10 @@ function scored(targets: Record<string, number>): FdiResult {
 }
 
 const QUALIFICATION: QualificationInput = {
-  country: 'uae',
-  founderLed: true,
   annualRevenue: 'aed_1m_to_10m',
   employeeCount: 'employees_5_to_50',
   operatingYears: 'years_3_or_more',
-  singleDecisionAuthority: true,
-  willingToShareOperationalInformation: true,
-  primarySector: 'real_estate_business_services',
+  sector: 'real_estate_business_services',
 };
 
 const CONTEXT = {
@@ -139,7 +135,7 @@ describe('report contract (§14)', () => {
 describe('qualification is a sibling branch (§13)', () => {
   it('is carried separately without changing the FDI', () => {
     const r = buildReport(scored({ DS: 12, EC: 12, OV: 12 }), config, CONTEXT);
-    expect(r.qualification).toEqual({ result: 'qualified_primary', version: 'FDI-QF-1.0' });
+    expect(r.qualification).toEqual({ result: 'qualified_primary', version: 'FDI-QF-2.0' });
     // §13's example: a maximum FDI is reported unchanged alongside qualification.
     expect(r.index.display).toBe(100);
     expect(r.index.band.key).toBe('very_high');

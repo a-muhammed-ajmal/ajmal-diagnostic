@@ -1,25 +1,16 @@
 import { createAdminClient } from '@/lib/supabase/server';
 import { FDI_1_0_CONFIG, FDI_1_0_QUESTIONS } from '@/lib/fdi/config';
 import { buildReport } from '@/lib/fdi/report';
-import { evaluateQualification, type QualificationInput } from '@/lib/fdi/qualification';
+import { evaluateQualification } from '@/lib/fdi/qualification';
 import { scoreFdi } from '@/lib/fdi/score';
 import type { FdiReport, Question } from '@/lib/fdi/types';
-import type { FdiContact, FdiQualificationPatch } from './validation';
+import { businessDetailColumns, businessDetailsFromColumns, mergeBusinessDetails, type BusinessDetailRow } from './business-details';
+import type { FdiBusinessDetails, FdiContact } from './validation';
 
-type PersistedSession = {
+type PersistedSession = BusinessDetailRow & {
   id: string;
   status: 'in_progress' | 'completed';
   is_test: boolean;
-  q_country: string | null;
-  q_industry: string | null;
-  q_team_size: string | null;
-  q_revenue_range: string | null;
-  q_operating_years: string | null;
-  q_founder_decision_authority: string | null;
-  q_founder_led: boolean | null;
-  q_willing_to_share_operational_information: boolean | null;
-  q_secondary_sector: string | null;
-  q_other_sector: string | null;
 };
 
 type PersistedAnswer = {
@@ -39,53 +30,6 @@ function resolveAnswer(questionId: string, optionId: string) {
   const option = question.options.find((candidate) => candidate.id === optionId);
   if (!option) throw new FdiInputError(`Invalid option for ${questionId}`);
   return { question, option };
-}
-
-function qualificationPatchColumns(patch: FdiQualificationPatch): Record<string, string | boolean | null> {
-  const columns: Record<string, string | boolean | null> = {};
-  if (patch.country !== undefined) columns.q_country = patch.country;
-  if (patch.founderLed !== undefined) columns.q_founder_led = patch.founderLed;
-  if (patch.annualRevenue !== undefined) columns.q_revenue_range = patch.annualRevenue;
-  if (patch.employeeCount !== undefined) columns.q_team_size = patch.employeeCount;
-  if (patch.operatingYears !== undefined) columns.q_operating_years = patch.operatingYears;
-  if (patch.singleDecisionAuthority !== undefined) {
-    columns.q_founder_decision_authority = patch.singleDecisionAuthority ? 'yes' : 'no';
-  }
-  if (patch.willingToShareOperationalInformation !== undefined) {
-    columns.q_willing_to_share_operational_information = patch.willingToShareOperationalInformation;
-  }
-  if (patch.primarySector !== undefined) columns.q_industry = patch.primarySector;
-  if (patch.secondarySector !== undefined) columns.q_secondary_sector = patch.secondarySector || null;
-  if (patch.otherSector !== undefined) columns.q_other_sector = patch.otherSector || null;
-  return columns;
-}
-
-function qualificationFromSession(session: PersistedSession): QualificationInput {
-  if (
-    (session.q_country !== 'uae' && session.q_country !== 'other') ||
-    typeof session.q_founder_led !== 'boolean' ||
-    (session.q_revenue_range !== 'under_1m' && session.q_revenue_range !== 'aed_1m_to_10m' && session.q_revenue_range !== 'over_10m') ||
-    (session.q_team_size !== 'under_5' && session.q_team_size !== 'employees_5_to_50' && session.q_team_size !== 'over_50') ||
-    (session.q_operating_years !== 'under_3' && session.q_operating_years !== 'years_3_or_more') ||
-    (session.q_founder_decision_authority !== 'yes' && session.q_founder_decision_authority !== 'no') ||
-    typeof session.q_willing_to_share_operational_information !== 'boolean' ||
-    !session.q_industry
-  ) {
-    throw new FdiInputError('All qualification responses are required before completion.');
-  }
-
-  return {
-    country: session.q_country,
-    founderLed: session.q_founder_led,
-    annualRevenue: session.q_revenue_range,
-    employeeCount: session.q_team_size,
-    operatingYears: session.q_operating_years,
-    singleDecisionAuthority: session.q_founder_decision_authority === 'yes',
-    willingToShareOperationalInformation: session.q_willing_to_share_operational_information,
-    primarySector: session.q_industry,
-    secondarySector: session.q_secondary_sector ?? undefined,
-    otherSector: session.q_other_sector ?? undefined,
-  };
 }
 
 export async function startFdiSession(isTest: boolean): Promise<{ id: string }> {
@@ -110,7 +54,7 @@ export async function startFdiSession(isTest: boolean): Promise<{ id: string }> 
 
 export async function persistFdiProgress(
   sessionId: string,
-  update: { answers?: Record<string, string>; qualification?: FdiQualificationPatch; completionMs?: number },
+  update: { answers?: Record<string, string>; completionMs?: number },
 ): Promise<void> {
   const supabase = createAdminClient();
   const { data: session, error: sessionError } = await supabase
@@ -152,7 +96,6 @@ export async function persistFdiProgress(
   }
 
   const sessionUpdate: Record<string, unknown> = {};
-  if (update.qualification) Object.assign(sessionUpdate, qualificationPatchColumns(update.qualification));
   if (update.completionMs !== undefined) sessionUpdate.completion_ms = update.completionMs;
   if (Object.keys(sessionUpdate).length > 0) {
     const { error } = await supabase
@@ -181,6 +124,7 @@ export async function completeFdiSession(
   sessionId: string,
   contact: FdiContact,
   completionMs?: number,
+  businessDetails?: FdiBusinessDetails,
 ): Promise<FdiReport> {
   const supabase = createAdminClient();
   const { data: sessionData, error: sessionError } = await supabase
@@ -205,7 +149,10 @@ export async function completeFdiSession(
   );
   if (!scored.ok) throw new FdiInputError('All twelve FDI answers are required before completion.');
 
-  const qualification = evaluateQualification(qualificationFromSession(session));
+  // Business details are optional: whatever is missing stays missing, and the
+  // qualification outcome absorbs that rather than blocking completion.
+  const details = mergeBusinessDetails(businessDetailsFromColumns(session), businessDetails);
+  const qualification = evaluateQualification(details);
   const completedAt = new Date().toISOString();
   const report = buildReport(scored.result, FDI_1_0_CONFIG, {
     sessionId,
@@ -223,8 +170,9 @@ export async function completeFdiSession(
       completed_at: completedAt,
       name: contact.name,
       email: contact.email.toLowerCase(),
-      phone: contact.phone || null,
+      phone: contact.phone,
       company_name: contact.companyName,
+      ...businessDetailColumns(details),
       qualification_config_version: qualification.version,
       qualification_result: qualification.result,
       qualification_reasons: qualification.reasons,
