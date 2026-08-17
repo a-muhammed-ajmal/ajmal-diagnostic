@@ -155,6 +155,8 @@ Three shared primitives exist. **Use them instead of re-deriving the recipe inli
 - **`<SectionHeader>`** — same file. Takes `eyebrow` / `title` / `description`, with `align` and `tone`. It already picks `text-gold-ink` on light and `text-gold` on dark, so don't override the eyebrow colour.
 
 Reach for a raw `<button>` or a hand-rolled card only when a variant genuinely doesn't fit — and prefer adding a variant over duplicating the recipe.
+
+**Control heights.** `<Button>` is 44px (`min-h-11`), the accessibility floor, and is right for nav, forms, and in-page actions. Hero CTAs deliberately run larger and are still written inline at `min-h-[52px]` or `min-h-[56px]`; `min-h-[48px]` appears on admin and secondary forms. Those four heights are the whole ladder — reuse one, don't introduce a fifth.
 - **Input** — `border border-navy/20 rounded-lg px-4 py-3 focus:ring-2 focus:ring-gold bg-white`, with a real `<label>`. Placeholders are not labels.
 - **Section label** — `text-gold font-heading font-bold tracking-widest text-xs uppercase`.
 - **Focus** — `:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px }` is global. Never remove it without an equally visible replacement.
