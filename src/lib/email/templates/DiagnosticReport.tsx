@@ -30,9 +30,9 @@ export function DiagnosticReportEmail({
   const secondaryMeta = DIMENSION_META[results.secondaryConstraint];
   const firstName = name.split(" ")[0];
   const severityColors: Record<string, string> = {
-    Critical: "#E11D48",
+    Critical: "#B33B2C",
     Developing: "#F59E0B",
-    Progressing: "#10B981",
+    Progressing: "#5B7A45",
   };
   const severityColor = severityColors[results.severityLabel] || "#F59E0B";
 
@@ -48,7 +48,7 @@ export function DiagnosticReportEmail({
         >
           <Text
             style={{
-              color: "#FF6535",
+              color: "#C6752E",
               fontSize: "11px",
               fontWeight: "bold",
               letterSpacing: "3px",
@@ -59,12 +59,12 @@ export function DiagnosticReportEmail({
             MUHAMMED AJMAL CONSULTING
           </Text>
           <Heading
-            style={{ color: "#1A1A2E", fontSize: "24px", margin: "0 0 4px" }}
+            style={{ color: "#132A4A", fontSize: "24px", margin: "0 0 4px" }}
           >
             {firstName}, here is your diagnostic result.
           </Heading>
           <Text
-            style={{ color: "#6B7280", fontSize: "14px", margin: "0 0 24px" }}
+            style={{ color: "#7C7362", fontSize: "14px", margin: "0 0 24px" }}
           >
             Prepared for {companyName} · Muhammed Ajmal Consulting
           </Text>
@@ -72,7 +72,7 @@ export function DiagnosticReportEmail({
 
           <Section
             style={{
-              backgroundColor: "#1A1A2E",
+              backgroundColor: "#132A4A",
               borderRadius: "12px",
               padding: "24px",
               marginBottom: "16px",
@@ -80,7 +80,7 @@ export function DiagnosticReportEmail({
           >
             <Text
               style={{
-                color: "#FF6535",
+                color: "#C6752E",
                 fontSize: "10px",
                 fontWeight: "bold",
                 letterSpacing: "3px",
@@ -110,7 +110,7 @@ export function DiagnosticReportEmail({
               {results.severityLabel}
             </Text>
             <Text
-              style={{ color: "#F9FAFB", fontSize: "11px", margin: "8px 0 0" }}
+              style={{ color: "#F6F0E2", fontSize: "11px", margin: "8px 0 0" }}
             >
               Critical: 0–39% · Developing: 40–69% · Progressing: 70–100%
             </Text>
@@ -118,7 +118,7 @@ export function DiagnosticReportEmail({
 
           <Section
             style={{
-              backgroundColor: "#1A1A2E",
+              backgroundColor: "#132A4A",
               borderRadius: "12px",
               padding: "24px",
               marginBottom: "16px",
@@ -126,7 +126,7 @@ export function DiagnosticReportEmail({
           >
             <Text
               style={{
-                color: "#FF6535",
+                color: "#C6752E",
                 fontSize: "10px",
                 fontWeight: "bold",
                 letterSpacing: "2px",
@@ -142,7 +142,7 @@ export function DiagnosticReportEmail({
             </Heading>
             <Text
               style={{
-                color: "#F9FAFB",
+                color: "#F6F0E2",
                 fontSize: "14px",
                 lineHeight: "1.7",
                 margin: 0,
@@ -162,7 +162,7 @@ export function DiagnosticReportEmail({
           >
             <Text
               style={{
-                color: "#FF6535",
+                color: "#C6752E",
                 fontSize: "10px",
                 fontWeight: "bold",
                 letterSpacing: "2px",
@@ -183,7 +183,7 @@ export function DiagnosticReportEmail({
             </Text>
             <Text
               style={{
-                color: "#F9FAFB",
+                color: "#F6F0E2",
                 fontSize: "13px",
                 lineHeight: "1.6",
                 margin: 0,
@@ -195,7 +195,7 @@ export function DiagnosticReportEmail({
 
           <Text
             style={{
-              color: "#1A1A2E",
+              color: "#132A4A",
               fontSize: "14px",
               fontStyle: "italic",
               lineHeight: "1.7",
@@ -206,7 +206,7 @@ export function DiagnosticReportEmail({
           <Hr style={{ borderColor: "#E5E7EB", margin: "24px 0" }} />
 
           <Heading
-            style={{ color: "#1A1A2E", fontSize: "18px", margin: "0 0 16px" }}
+            style={{ color: "#132A4A", fontSize: "18px", margin: "0 0 16px" }}
           >
             Scores Across All 5 Dimensions
           </Heading>
@@ -216,7 +216,7 @@ export function DiagnosticReportEmail({
                 style={{
                   margin: "0 0 4px",
                   fontWeight: "bold",
-                  color: "#1A1A2E",
+                  color: "#132A4A",
                   fontSize: "13px",
                 }}
               >
@@ -243,7 +243,7 @@ export function DiagnosticReportEmail({
               >
                 <Text
                   style={{
-                    color: "#047857",
+                    color: "#3C5330",
                     fontSize: "10px",
                     fontWeight: "bold",
                     letterSpacing: "2px",
@@ -254,7 +254,7 @@ export function DiagnosticReportEmail({
                 </Text>
                 <Heading
                   style={{
-                    color: "#1A1A2E",
+                    color: "#132A4A",
                     fontSize: "16px",
                     margin: "0 0 12px",
                   }}
@@ -265,7 +265,7 @@ export function DiagnosticReportEmail({
                   <Text
                     key={i}
                     style={{
-                      color: "#1A1A2E",
+                      color: "#132A4A",
                       fontSize: "13px",
                       lineHeight: "1.6",
                       margin: "0 0 8px",
@@ -286,7 +286,7 @@ export function DiagnosticReportEmail({
               >
                 <Text
                   style={{
-                    color: "#0F766E",
+                    color: "#255A70",
                     fontSize: "10px",
                     fontWeight: "bold",
                     letterSpacing: "2px",
@@ -297,7 +297,7 @@ export function DiagnosticReportEmail({
                 </Text>
                 <Heading
                   style={{
-                    color: "#1A1A2E",
+                    color: "#132A4A",
                     fontSize: "16px",
                     margin: "0 0 12px",
                   }}
@@ -308,7 +308,7 @@ export function DiagnosticReportEmail({
                   <Text
                     key={i}
                     style={{
-                      color: "#1A1A2E",
+                      color: "#132A4A",
                       fontSize: "13px",
                       lineHeight: "1.6",
                       margin: "0 0 8px",
@@ -349,7 +349,7 @@ export function DiagnosticReportEmail({
             <Button
               href={calendlyLink}
               style={{
-                backgroundColor: "#1A1A2E",
+                backgroundColor: "#132A4A",
                 color: "#ffffff",
                 padding: "16px 32px",
                 borderRadius: "8px",
@@ -362,7 +362,7 @@ export function DiagnosticReportEmail({
               Discuss an Audit →
             </Button>
             <Text
-              style={{ color: "#6B7280", fontSize: "12px", marginTop: "12px" }}
+              style={{ color: "#7C7362", fontSize: "12px", marginTop: "12px" }}
             >
               With Muhammed Ajmal personally. No pitch. Just clarity.
             </Text>
@@ -370,7 +370,7 @@ export function DiagnosticReportEmail({
 
           <Hr style={{ borderColor: "#E5E7EB", margin: "0 0 16px" }} />
           <Text
-            style={{ color: "#6B7280", fontSize: "11px", textAlign: "center" }}
+            style={{ color: "#7C7362", fontSize: "11px", textAlign: "center" }}
           >
             Muhammed Ajmal Consulting · Dubai, United Arab Emirates · Strategic Growth
             Architecture

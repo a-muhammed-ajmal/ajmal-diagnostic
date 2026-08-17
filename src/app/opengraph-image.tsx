@@ -3,7 +3,7 @@ import { ImageResponse } from 'next/og';
 // Site-default Open Graph image. A per-article override lives alongside the article.
 // Literal hex is unavoidable here: ImageResponse is rendered by Satori, which cannot read
 // the CSS custom properties in globals.css. These values match the design tokens exactly
-// (--color-navy #1A1A2E, --color-gold #FF6535, --color-ivory #F9FAFB).
+// (--color-navy #132A4A, --color-gold #C6752E, --color-ivory #F6F0E2).
 
 export const alt = 'Muhammed Ajmal · Business Operations & Growth Consultant';
 export const size = { width: 1200, height: 630 };
@@ -19,7 +19,7 @@ export default function OpengraphImage() {
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'space-between',
-          background: '#1A1A2E',
+          background: '#132A4A',
           padding: '80px',
           fontFamily: 'sans-serif',
         }}
@@ -47,7 +47,7 @@ export default function OpengraphImage() {
               }}
             >
               <span style={{ color: '#FFFFFF' }}>M</span>
-              <span style={{ color: '#FF6535' }}>A</span>
+              <span style={{ color: '#C6752E' }}>A</span>
             </div>
             <div
               style={{
@@ -56,15 +56,15 @@ export default function OpengraphImage() {
                 right: -3,
                 width: 18,
                 height: 18,
-                borderTop: '4px solid #FF6535',
-                borderRight: '4px solid #FF6535',
+                borderTop: '4px solid #C6752E',
+                borderRight: '4px solid #C6752E',
               }}
             />
           </div>
           <span
             style={{
               marginLeft: 28,
-              color: '#F9FAFB',
+              color: '#F6F0E2',
               fontSize: 26,
               fontWeight: 700,
               letterSpacing: '4px',
@@ -91,8 +91,8 @@ export default function OpengraphImage() {
 
         {/* Footer */}
         <div style={{ display: 'flex', alignItems: 'center' }}>
-          <div style={{ width: 48, height: 4, background: '#FF6535', marginRight: 20 }} />
-          <span style={{ color: '#F9FAFB', fontSize: 24, fontWeight: 600 }}>
+          <div style={{ width: 48, height: 4, background: '#C6752E', marginRight: 20 }} />
+          <span style={{ color: '#F6F0E2', fontSize: 24, fontWeight: 600 }}>
             Business Operations & Growth Consultant · Dubai, UAE
           </span>
         </div>

@@ -13,7 +13,7 @@ export const DIMENSION_META: Record<DimensionKey, {
   strategic_clarity: {
     label: "Strategic Clarity",
     description: "The degree to which your business operates with a defined direction, documented priorities, and data-informed decision-making.",
-    color: "#FF6535",
+    color: "#C6752E",
     constraintExplanation: "Your biggest constraint right now is strategic clarity. Without a documented strategy and defined decision-making criteria, your team cannot execute consistently, priorities shift with whoever speaks loudest, and growth depends entirely on your personal judgment every single day. Every operational problem downstream is harder to solve when the direction at the top is ambiguous.",
     secondaryExplanation: "Strategic clarity is a secondary constraint in your business. While you have addressed more pressing bottlenecks, the absence of a fully documented strategic framework creates friction in decision-making and slows execution as you scale.",
     impactStatement: "Without a documented strategy, the same decisions get re-made again and again, and leadership time is spent settling questions a clear framework would have answered once.",
@@ -26,7 +26,7 @@ export const DIMENSION_META: Record<DimensionKey, {
   financial_visibility: {
     label: "Financial Visibility",
     description: "Your ability to see, understand, and act on financial data — margins, cash flow, and profitability — in real time.",
-    color: "#0D9488",
+    color: "#3E8FB0",
     constraintExplanation: "Your biggest constraint right now is financial visibility. Without clear margin data, rolling cash flow forecasts, and financial tracking by service line, you are navigating your business without instruments. Pricing decisions, hiring decisions, and growth investments all carry unnecessary risk when financial clarity is missing.",
     secondaryExplanation: "Financial visibility is a secondary constraint in your business. You have more urgent bottlenecks to address first, but gaps in your financial tracking are creating background risk — particularly in cash flow forecasting and service-line profitability.",
     impactStatement: "When margins and cash flow are not visible, a business can grow its revenue and still be caught out by a cash crisis — because the warning signs were in numbers no one was watching.",
@@ -39,7 +39,7 @@ export const DIMENSION_META: Record<DimensionKey, {
   operations: {
     label: "Operations & Execution",
     description: "How consistently, reliably, and independently your business delivers outcomes — without depending on specific individuals.",
-    color: "#1A1A2E",
+    color: "#132A4A",
     constraintExplanation: "Your biggest constraint right now is operational systems. Without documented processes, SOPs, and quality standards, your business cannot scale — every new hire starts from scratch, quality depends on who's involved, and your capacity to deliver is capped by the people currently in the building.",
     secondaryExplanation: "Operational systems are a secondary constraint in your business. While your primary bottleneck demands immediate attention, the absence of fully documented processes means your delivery quality is more variable than it should be — and will become a harder problem as you grow.",
     impactStatement: "When processes live in people's heads instead of on paper, capacity leaks into rework, re-explanation, and inconsistent quality — and the leak widens the moment you try to scale.",
@@ -52,7 +52,7 @@ export const DIMENSION_META: Record<DimensionKey, {
   people_leadership: {
     label: "People & Leadership",
     description: "How clearly defined, accountable, and independently capable your team is — and how much depends on you personally.",
-    color: "#FF8159",
+    color: "#E0964F",
     constraintExplanation: "Your biggest constraint right now is people and leadership infrastructure. When roles lack clear KPIs, performance is not formally tracked, and all issues escalate to you, the business can only grow as fast as you personally can handle. Your capacity becomes the ceiling of the entire organization.",
     secondaryExplanation: "People and leadership infrastructure is a secondary constraint in your business. Roles and performance systems need strengthening, but there is a more pressing bottleneck to address first. As that primary issue resolves, the leadership layer will become the next clear focus.",
     impactStatement: "When every issue escalates to the owner, the founder's day fills with operational decisions the team should own — and the business can only grow as fast as one person can absorb.",
@@ -65,7 +65,7 @@ export const DIMENSION_META: Record<DimensionKey, {
   sales_growth: {
     label: "Sales & Growth Engine",
     description: "How predictable, systematized, and independently operating your revenue generation and lead pipeline are.",
-    color: "#6B7280",
+    color: "#7C7362",
     constraintExplanation: "Your biggest constraint right now is your sales and growth engine. When revenue depends on your personal relationships, pipeline visibility is low, and lead generation is inconsistent, growth is unpredictable and vulnerable. Every month starts without clarity on where revenue will come from.",
     secondaryExplanation: "Your sales and growth engine has room to strengthen. Review how demand, pipeline information, and follow-up are currently managed alongside the other operating areas.",
     impactStatement: "Without a documented sales process and a lead-generation system, revenue swings month to month — every month starts without clarity on where the next deals will come from.",
