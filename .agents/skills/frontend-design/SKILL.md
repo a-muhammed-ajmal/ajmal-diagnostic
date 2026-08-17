@@ -142,14 +142,19 @@ Use these instead of rebuilding them:
 
 ## Component patterns
 
-- **Primary CTA** — there is no shared `Button` component; the recipe is applied inline. Canonical form:
+Three shared primitives exist. **Use them instead of re-deriving the recipe inline.**
+
+- **`<Button>`** — [src/components/ui/Button.tsx](../../../src/components/ui/Button.tsx). Variants `primary` (default) · `secondary` · `quiet` · `danger`, plus `fullWidth`. Renders a `next/link` when given `href`, a plain `<a target="_blank" rel="noreferrer">` when also given `external`, and a `<button>` otherwise. Focus ring, disabled state, and the 44px floor (`min-h-11`) are built in.
 
   ```tsx
-  className="inline-flex min-h-[52px] items-center justify-center rounded-xl bg-gold px-8 py-4 font-heading text-base font-bold text-navy transition-colors hover:bg-gold-bright"
+  <Button href="/diagnostic">Start the Check</Button>
+  <Button variant="secondary" onClick={reset}>Start over</Button>
   ```
 
-  44px is the accessibility floor; primary CTAs in this codebase sit at 52–56px.
-- **Card** — `bg-white rounded-2xl shadow-lg border border-navy/5 p-8`.
+- **`<Surface>`** — [src/components/ui/Surface.tsx](../../../src/components/ui/Surface.tsx). Card/section container; `tone` of `default` (white) · `muted` (ivory) · `dark` (navy), and `interactive` to add `.card-interactive`.
+- **`<SectionHeader>`** — same file. Takes `eyebrow` / `title` / `description`, with `align` and `tone`. It already picks `text-gold-ink` on light and `text-gold` on dark, so don't override the eyebrow colour.
+
+Reach for a raw `<button>` or a hand-rolled card only when a variant genuinely doesn't fit — and prefer adding a variant over duplicating the recipe.
 - **Input** — `border border-navy/20 rounded-lg px-4 py-3 focus:ring-2 focus:ring-gold bg-white`, with a real `<label>`. Placeholders are not labels.
 - **Section label** — `text-gold font-heading font-bold tracking-widest text-xs uppercase`.
 - **Focus** — `:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px }` is global. Never remove it without an equally visible replacement.

@@ -60,21 +60,22 @@ className={`base ${isActive ? 'bg-gold text-navy' : ''}`}
 
 ## Button Usage
 
-**There is no shared `Button` component in this repo** — the recipe is applied inline with Tailwind. Canonical primary CTA:
+Use the shared `<Button>` from [Button.tsx](../../../../src/components/ui/Button.tsx) — do not hand-roll the recipe.
 
-```tsx
-className="inline-flex min-h-[52px] items-center justify-center rounded-xl bg-gold px-8 py-4 font-heading text-base font-bold text-navy transition-colors hover:bg-gold-bright"
-```
+| Variant | Treatment | Use for |
+| --- | --- | --- |
+| `primary` (default) | `bg-gold text-navy`, hover `bg-gold-bright` | The one dominant action |
+| `secondary` | `border-navy text-navy`, hover fills navy | Supporting action on light |
+| `quiet` | `border-navy/15 bg-white`, hover orange border + `text-gold-ink` | Low-emphasis action |
+| `danger` | `bg-crimson text-white` | Destructive confirm |
 
-| Context | Treatment |
-| --- | --- |
-| Primary CTA | `bg-gold text-navy`, hover `bg-gold-bright`, `rounded-xl` |
-| Secondary action on light | Bordered, `border-line`, navy text |
-| Action on navy sections | Ghost / inverted, white text, visible border |
+It picks its element from its props — `href` gives a `next/link`, `href` + `external` gives `<a target="_blank" rel="noreferrer">`, neither gives a `<button>` (default `type="button"`). `fullWidth` spans the container.
 
-44px is the accessibility floor; primary CTAs here sit at 52–56px (`min-h-[52px]` / `min-h-[56px]`). Use `transition-colors` or an explicit property list — never `transition-all`.
+The base class already carries `min-h-11` (the 44px floor), `focus-visible` outline, `transition-colors`, and disabled styling. Don't re-add them, and never swap in `transition-all`.
 
-If you find yourself writing this recipe a fourth time, extracting a `Button` primitive is justified — but don't create one speculatively as part of an unrelated change.
+Pair it with `<Surface>` (`tone`: `default` | `muted` | `dark`, plus `interactive`) and `<SectionHeader>` (`eyebrow` / `title` / `description`, `align`, `tone`) from `Surface.tsx`. `SectionHeader` already resolves the eyebrow to `text-gold-ink` on light and `text-gold` on dark — leave that alone.
+
+If a genuinely new shape is needed, add a variant to `Button` rather than duplicating the recipe in a page.
 
 Every button and icon-only control must meet the `.tap-target` requirement (44×44px) and carry an accessible name.
 
