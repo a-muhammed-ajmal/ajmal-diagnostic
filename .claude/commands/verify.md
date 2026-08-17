@@ -1,9 +1,9 @@
 ---
 name: verify
-description: Run RISE's full quality gate — tests, coverage, build, lint — and summarise failures
+description: Run the full quality gate — tests, coverage, build, lint — and summarise failures
 ---
 
-# /verify — RISE Quality Gate
+# /verify — Quality Gate
 
 Run these steps in order. Stop and report on the first failure.
 

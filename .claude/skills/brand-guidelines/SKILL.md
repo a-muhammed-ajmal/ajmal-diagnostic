@@ -1,86 +1,76 @@
 ---
 name: brand-guidelines
-description: Applies RISE OS's official brand — orange accent, Inter-only type, charcoal-navy dark mode, graph-paper signature — to any artifact, document, or UI surface that should carry RISE's look-and-feel. Use when brand colors, style guidelines, visual formatting, or company design standards apply outside of full component implementation (e.g. one-off artifacts, marketing copy, presentations, README banners). For building actual app components, pages, or interfaces, use frontend-design instead — it owns the complete token system and implementation rules.
+description: Applies the Muhammed Ajmal Consulting brand — orange accent, Inter-only type, charcoal-navy, graph-paper signature — to any artifact, document, or surface that should carry the look without full component engineering. Use for one-off artifacts, marketing copy, presentations, diagrams, or README banners. For building actual app components, pages, or interfaces, use frontend-design instead — it owns the complete token system and implementation rules.
 ---
 
-# RISE OS Brand Guidelines
+# Brand Guidelines
 
-Quick-reference brand identity for anything that needs RISE's look without full component engineering. For building real UI (components, pages), defer to the `frontend-design` skill — it is the source of truth for tokens, accessibility, and implementation rules; this skill is a distilled subset of it.
+Quick-reference identity for anything that needs the brand look without full component engineering. For real UI (components, pages), defer to the `frontend-design` skill — it is the source of truth for tokens, accessibility, and implementation rules; this is a distilled subset.
 
 ---
 
 ## Identity in one line
 
-**Charcoal-navy + orange.** No black, no purple, no decorative gradients. A single typeface (Inter) carries all hierarchy through weight, not font-switching. A faint graph-paper grid is the recurring brand signature — it should read as "product OS," not "marketing site."
+**Charcoal-navy + orange.** No black, no purple, no decorative gradients. A single typeface (Inter) carries all hierarchy through weight, not font-switching. A faint graph-paper grid is the recurring brand signature.
 
 ---
 
 ## Color
 
-| Token             | Hex       | Use                                                  |
-|--------------------|-----------|-------------------------------------------------------|
-| `--brand`          | `#FF6535` | Primary accent — CTAs, active states, focus rings     |
-| `--brand-hover`     | `#FF8159` | Hover state / gradient end for orange elements        |
-| `--brand-text`      | `#D6450F` | Orange text on white (meets WCAG AA 4.5:1 — `#FF6535` fails on white) |
-| `--brand-tint`      | `#FFF0EB` | Badge / chip / tinted fill backgrounds                |
-| `--surface-dark`    | `#1A1A2E` | Dark sections — navy, never pure black                |
-| `--text-strong`     | `#1A1A2E` | Headings, primary text                                |
+| Token | Hex | Use |
+| --- | --- | --- |
+| `--color-gold` / `--color-orange` | `#FF6535` | Primary accent — CTAs, active states, focus rings |
+| `--color-gold-bright` | `#FF8159` | Hover state / gradient end for orange elements |
+| `--color-gold-ink` | `#D6450F` | Orange text on white (AA 4.5:1 — `#FF6535` fails on white) |
+| `--color-navy` / `--color-ink` | `#1A1A2E` | Headings, primary text, dark sections — navy, never pure black |
+| `--color-ivory` | `#F9FAFB` | Page background |
+| `--color-slate` | `#6B7280` | Secondary text |
+| `--color-line` | `#E5E7EB` | Borders, dividers |
+
+Note the naming quirk: `--color-gold` is **orange**. The brand moved from gold to orange and the token names were kept.
 
 Semantic status colors (not brand accents — use only for their meaning):
 
-| Status    | Hex       |
-|-----------|-----------|
-| Success   | `#10B981` |
-| Danger    | `#E11D48` |
-| Warning   | `#F59E0B` |
+| Status | Hex |
+| --- | --- |
+| Success | `#10B981` |
+| Danger | `#E11D48` |
+| Warning | `#F59E0B` |
 
-**Rule:** Orange is the *only* brand accent. Never introduce a second accent hue for emphasis — reach for weight, size, or the orange instead.
+**Rule:** Orange is the *only* brand accent. Teal (`#0D9488`) appears solely on growth / digital-transformation content. Never introduce a third accent hue for emphasis — reach for weight, size, or the orange instead.
 
 ## Typography
 
 - **Single typeface: Inter.** No exceptions — no serif, no secondary display font.
 - Hierarchy comes from **weight**, not font changes: 400 body → 500 medium emphasis → 600 section heads → 700 titles → 800 hero display.
-- **`font-bold` (700 as a Tailwind class) is banned in-app** — use the heading scale token instead. 800 is reserved for hero display only.
-- Tracking: `-0.02em` on anything ≥20px (tightens large type). Eyebrow labels go the other way: `+0.15em` uppercase.
-- No fluid `clamp()` scaling — use the fixed type scale.
+- Tracking: `-0.02em` on anything ≥20px. Eyebrow labels go the other way: `+0.15em` uppercase.
+- In-app, use the fluid `--step-N` scale (clamp-based). For static artifacts outside the app, fixed sizes are fine.
 
 ## Brand Signature: Graph-paper grid
 
-The one non-negotiable visual motif. Every section carries a faint grid:
-- Light sections → faint **navy** lines
-- Dark sections → faint **orange** lines
-- Cell size: 40×40px
+The one non-negotiable visual motif — a faint 40×40px grid:
 
-This is what makes an artifact read as "RISE" at a glance — a plain white or navy fill without it is off-brand.
+- Light surfaces → faint **navy** lines
+- Dark surfaces → faint **orange** lines
+
+A plain white or navy fill without it is off-brand. In the app this is already painted on `body`; only add it explicitly for artifacts and one-off surfaces.
 
 ## Motion character
 
 - Signature ease: `cubic-bezier(0.16, 1, 0.3, 1)` for brand slide-ins.
 - Entrances stagger in 0.08s increments.
-- Hover = subtle lift (`translateY(-1px)`) + shadow increase. Active = scale to `0.96–0.97`.
+- Hover = subtle lift (`translateY(-1px)`) + shadow increase.
 - Nothing longer than 400ms for UI interactions. Respect `prefers-reduced-motion`.
-- No AI-pulse / glow effects except the orange CTA shadow (`--shadow-brand`) — AI has no separate visual identity from the core brand.
-
-## Dark mode
-
-Opt-in, not default. Navy family throughout — **never pure black, never pure white text**:
-- Surfaces: `#0B1120` → `#151527` → `#1A1A2E` → `#232338` (elevation via lighter surface, not shadow)
-- Text: off-white `#E9EAF2`, not `#FFFFFF` (avoids glare)
-- Orange appears on hover/focus/active only — hairline neutral borders at rest
-- Graph-paper grid flips to orange automatically
+- No AI-pulse or glow effects — AI has no separate visual identity from the core brand.
 
 ## Do / Don't
 
 | Don't | Do |
-|---|---|
-| Any font other than Inter | `font-family: var(--font-sans)` always |
-| Hardcoded hex in code | CSS custom property token |
+| --- | --- |
+| Any font other than Inter | Inter always |
+| Hardcoded hex in app code | CSS custom property token |
 | A second accent color for "variety" | Orange only — vary weight/size instead |
-| Pure black dark mode | Navy family (`#1A1A2E` base) |
-| Pure white text on dark | Off-white (`#E9EAF2`) |
-| Decorative/rainbow gradients | Orange CTA glow + graph-paper only |
+| Pure black for dark surfaces | Navy `#1A1A2E` |
+| Decorative or rainbow gradients | Orange gradient text + graph-paper only |
 | Flat background with no texture | Graph-paper grid (40×40px) |
-
----
-
-For full implementation detail — component tokens, radii, shadows, layout breakpoints, accessibility requirements, and anti-patterns for actual code — see [`frontend-design`](../frontend-design/SKILL.md).
+| Orange text on white at `#FF6535` | `#D6450F` (`--color-gold-ink`) |

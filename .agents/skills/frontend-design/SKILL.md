@@ -1,352 +1,218 @@
 ---
 name: frontend-design
-version: 2.0.0
-description: Use this skill whenever building new UI components, pages, or interfaces. Defines the design token system, color rules, typography, motion, component patterns, accessibility requirements, and anti-patterns for all frontend work. Orange brand palette, Inter-only type.
+description: Builds and reviews UI for the Muhammed Ajmal Consulting site — Next.js 16 App Router, React 19, Tailwind v4, Supabase. Covers the orange/charcoal-navy token system, Inter-only typography, the graph-paper brand signature, component and form patterns, accessibility rules, and the anti-patterns this codebase rejects. Use when creating or editing any page, component, layout, or style; when writing Tailwind classes or editing globals.css; when asked to make an interface look better, less generic, or more polished; and when reviewing UI for brand, accessibility, or responsive correctness.
+metadata:
+  version: "3.0.0"
 ---
 
-# Frontend Design Skill
+# Frontend Design
 
-Single source of truth for all visual and implementation decisions. Apply before writing any component, page, or style. Every value is intentional — do not deviate without explicit instruction.
+The design system is already built. Your job is to **use the existing tokens**, not invent new ones. Every color, space, radius, and duration below is defined in [globals.css](../../../src/app/globals.css) inside `@theme {}`.
+
+Read that file when you need a value this page doesn't list.
+
+---
+
+## Gotchas — read these first
+
+These defy reasonable assumptions and are the mistakes most often made in this repo.
+
+- **`--color-gold` is orange (`#FF6535`), not gold.** The brand was renamed from muted gold to orange; the token names were kept for compatibility. `--color-gold`, `--color-orange`, and `--color-primary` are all the same orange. Never introduce `#C8A24A` or any actual gold.
+- **Orange text on white fails AA.** Use `--color-gold-ink` (`#D6450F`) for orange text; `--color-gold` is for *fills* only. Same pattern for `--color-teal-ink`, `--color-emerald-ink`, `--color-warning-ink`.
+- **The page background is already painted.** `body` carries the aurora radials, the 40×40px graph grid, and a 2% grain pseudo-element. Do not re-apply, override, or duplicate them on a section.
+- **The utility is `.graph-overlay`**, not `.graph-bg`. Use `.graph-overlay-dark` on navy sections.
+- **Tailwind v4 — there is no `tailwind.config.js`.** Custom tokens go in `@theme {}` in globals.css. Adding a config file will silently do nothing.
+- **`cn()` lives in [src/lib/utils.ts](../../../src/lib/utils.ts)**, not `lib/cn.ts`.
+- **`/results` is the diagnostic report page**, rendered client-side from `sessionStorage` after the quiz. It is not a case-studies or portfolio page.
+- **`createAdminClient()` uses the service-role key and bypasses RLS.** Route Handlers and Server Components only — never import it into a Client Component.
+- **No animation library.** Motion is native CSS only, including `animation-timeline` scroll-driven effects in globals.css.
+- **Fonts load via `next/font/google` in `layout.tsx`.** Never add a `<link>` tag for Inter.
 
 ---
 
 ## Stack
 
-| Concern       | Technology                                                                 |
-|---------------|----------------------------------------------------------------------------|
-| Framework     | Next.js 16 (App Router)                                                    |
-| UI runtime    | React 19                                                                   |
-| Styling       | Tailwind CSS v4 — all tokens in `@theme {}`, no config file                |
-| State         | Zustand v5 with `persist` middleware                                       |
-| Language      | TypeScript — strict mode, `any` is forbidden                               |
-| Icons         | lucide-react only — no hand-authored SVGs                                  |
-| Class merging | `cn()` = `twMerge(clsx(...inputs))`                                        |
-| Date handling | date-fns + date-fns-tz (timezone: Asia/Dubai, UTC+4, no DST)              |
+| Concern | Choice |
+| --- | --- |
+| Framework | Next.js 16.2.7 — App Router, React 19 |
+| Language | TypeScript 5, strict — `any` is forbidden |
+| Styling | Tailwind CSS v4 (`@import "tailwindcss"`, no config file) |
+| Data / auth | Supabase (`@supabase/supabase-js`, `@supabase/ssr`) |
+| Forms | `react-hook-form` + `zod` — no uncontrolled inputs |
+| Icons | `lucide-react` only |
+| Class merging | `cn()` = `twMerge(clsx(...))` from `src/lib/utils.ts` |
+| Motion | Native CSS only — no Framer Motion, no GSAP |
+
+Breakpoints in use: `sm` `md` `lg`. `md` (768px) carries most of the layout shift.
+
+Do not add a dependency without a functional reason. Prefer Server Components; keep `"use client"` boundaries small.
 
 ---
 
 ## Typography — Inter only
 
-**Single typeface: Inter** (loaded via `next/font/google`). No other font families — not Playfair, not Plus Jakarta Sans, not Lexend.
+Single typeface. `--font-heading`, `--font-body`, `--font-sans`, and `--font-display` all resolve to Inter. `--font-mono` is JetBrains Mono, for code and figures only.
 
-Font stack: `'Inter', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif`
-Base: `font-size: 14px; line-height: 1.5; -webkit-font-smoothing: antialiased`
+Never introduce Plus Jakarta Sans, Playfair, Lexend, or any serif.
 
-| Role                  | Size | Weight | Letter-spacing | Notes                              |
-|-----------------------|------|--------|----------------|------------------------------------|
-| Hero display          | 48px | 800    | −0.02em        | `font-extrabold tracking-tight`    |
-| Page title            | 20px | 700    | −0.02em        | `text-xl font-bold`                |
-| Card / section title  | 16px | 700    | −0.01em        | `text-base font-bold`              |
-| Section heading       | 14px | 600    | 0              | `text-sm font-semibold`            |
-| Body / task title     | 14px | 500    | 0              | `text-sm font-medium`              |
-| Meta / caption        | 12px | 400–500| 0              | `text-xs`                          |
-| Eyebrow label         | 11px | 700    | +0.15em        | uppercase, brand orange            |
-| Micro label / chip    | 11px | 600    | +0.05em        | `text-[11px] font-semibold`        |
-| Kanban column header  | 12px | 700    | +0.05em        | uppercase                          |
+Use the fluid clamp scale rather than raw font sizes:
 
----
+| Token | Range | Typical use |
+| --- | --- | --- |
+| `--step--1` | 0.83–0.94rem | Captions, metadata |
+| `--step-0` | 1–1.13rem | Body |
+| `--step-1` | 1.2–1.5rem | Lead paragraph, h4 |
+| `--step-2` | 1.44–2rem | h3 |
+| `--step-3` | 1.73–2.67rem | h2 |
+| `--step-4` | 2.07–3.55rem | h1 |
+| `--step-5` | 2.49–4.74rem | Hero display |
 
-## Color System
+`text-wrap: balance` on headings and `text-wrap: pretty` on paragraphs are already global — don't restate them. Inputs are pinned to 16px to stop iOS zoom.
 
-All colors live as CSS custom properties in `tokens.css`. **Never hardcode hex in JSX** — use the token.
-
-### Core Brand Palette
-
-| Token                  | Hex       | Role                                                   |
-|------------------------|-----------|--------------------------------------------------------|
-| `--brand`              | `#FF6535` | Primary CTA, active states, accents, focus rings       |
-| `--brand-hover`        | `#FF8159` | Hover / gradient end for orange elements               |
-| `--brand-text`         | `#D6450F` | Orange text on white (AA 4.5:1 contrast)               |
-| `--brand-tint`         | `#FFF0EB` | Badge/chip backgrounds, tinted fills                   |
-| `--surface-base`       | `#FFFFFF` | Page background                                        |
-| `--surface-paper`      | `#F9FAFB` | Alternating light sections                             |
-| `--surface-card`       | `#FFFFFF` | Cards, modals, inputs                                  |
-| `--surface-dark`       | `#1A1A2E` | Dark inverted sections                                 |
-| `--surface-footer`     | `#0B1120` | Footer                                                 |
-| `--text-strong`        | `#1A1A2E` | Primary headings / strong body text                    |
-| `--text-body`          | `navy/70` | Paragraph copy                                         |
-| `--text-muted`         | `navy/50` | Captions, disabled                                     |
-| `--text-on-dark`       | `#FFFFFF` | Text on navy sections                                  |
-| `--color-success`      | `#10B981` | Completed, done, positive                              |
-| `--color-danger`       | `#E11D48` | Error, blocked, delete                                 |
-| `--color-warning`      | `#F59E0B` | On hold, overdue                                       |
-| `--border-subtle`      | `navy/10` | Default card borders                                   |
-| `--border-focus`       | `#FF6535` | Focus rings                                            |
-
-### Priority Tokens — Do Not Change
-
-| Token        | Hex       | Priority   |
-|--------------|-----------|------------|
-| `--color-p1` | `#EF4444` | P1 Urgent  |
-| `--color-p2` | `#FF6535` | P2 High (brand orange) |
-| `--color-p3` | `#3B82F6` | P3 Medium  |
-| `--color-p4` | `#9CA3AF` | P4 Low     |
-
-Always read priority colors from `PRIORITY_CONFIG[task.priority]`:
-
-```ts
-export const PRIORITY_CONFIG: Record<Priority, { label: string; color: string; bgColor: string }> = {
-  P1: { label: 'P1', color: '#EF4444', bgColor: '#FEF2F2' },
-  P2: { label: 'P2', color: '#FF6535', bgColor: '#FFF0EB' },
-  P3: { label: 'P3', color: '#3B82F6', bgColor: '#EFF6FF' },
-  P4: { label: 'P4', color: '#9CA3AF', bgColor: '#F9FAFB' },
-};
-```
-
-### Status Colors
-
-| Status        | Color     | Token                |
-|---------------|-----------|----------------------|
-| `todo`        | `#6B6B6B` | `--color-slate`      |
-| `in_progress` | `#FF6535` | `--brand`            |
-| `blocked`     | `#E11D48` | `--color-danger`     |
-| `on_hold`     | `#F59E0B` | `--color-warning`    |
-| `done`        | `#10B981` | `--color-success`    |
-
-### Module Accent Tokens
-
-Each RISE module keeps its own identity as a **text/icon color + tint background pair**. Tints are for badges, chips, and icon containers; the solid color is for icons and labels only — never for button fills or CTAs (CTAs are always brand orange).
-
-| Module    | Token / tint                            | Text/icon | Tint bg   |
-|-----------|------------------------------------------|-----------|-----------|
-| Tasks     | `--mod-tasks` / `--mod-tasks-tint`       | `#2563EB` | `#EFF6FF` |
-| Finance   | `--mod-finance` / `--mod-finance-tint`   | `#059669` | `#ECFDF5` |
-| Wellness  | `--mod-wellness` / `--mod-wellness-tint` | `#BE123C` | `#FFF1F2` |
-| Goals     | `--mod-goals` / `--mod-goals-tint`       | `#7C3AED` | `#F5F3FF` |
-| Knowledge | `--mod-knowledge` / `--mod-knowledge-tint` | `#D97706` | `#FFFBEB` |
-| CRM       | `--mod-crm` / `--mod-crm-tint`           | `#0891B2` | `#ECFEFF` |
-
-**AI has no module token.** `mod-ai` is retired — AI surfaces inherit `--brand` and `--brand-tint` directly. AI chat bubbles, chips, and notices use the standard card treatment (white, `1.5px` visible border, `--shadow-card`) — no glassmorphism. The AI-active pulse is the orange `brand-pulse` keyframe built on `--shadow-brand`.
-
-### Dark Mode
-
-Dark mode is an opt-in theme (`.dark` on `<html>`, toggled in Settings, persisted to `localStorage['rise-theme']`). Light mode is the default. Rules:
-
-- **Navy family, never black**: base `#0B1120` → paper `#151527` → card `#1A1A2E` → popover `#232338`. Elevation comes from lighter surfaces, not shadows.
-- **Off-white text, never pure `#FFFFFF`** (glare): `--text-strong: #E9EAF2`, body/muted as alphas of it.
-- **Neutral hairline borders at rest** (`rgba(255,255,255,0.12)`); orange appears only on hover / focus / active emphasis — same semantics as light mode's navy-rest / orange-hover.
-- **Desaturated / lightened accents**: `--brand-text` lightens to `#FF8159`; module accents shift to their 400-series (`#60A5FA`, `#34D399`, `#FB7185`, `#A78BFA`, `#FBBF24`, `#22D3EE`) with 15%-alpha tints; destructive is `#F43F5E`. Brand fills stay `#FF6535` with white text.
-- Graph paper flips to the orange grid automatically (`.dark .graph-bg`).
+One `<h1>` per page. Don't skip heading levels.
 
 ---
 
-## Borders & Radii
+## Color tokens
 
-| Token             | Value  | Usage                                 |
-|-------------------|--------|---------------------------------------|
-| `--radius-sm`     | `4px`  | Buttons, chips                        |
-| `--radius-input`  | `8px`  | Form inputs                           |
-| `--radius-card`   | `12px` | Cards, task cards, progress bars      |
-| `--radius-panel`  | `16px` | Feature panels, modals, bottom sheets |
-| `--radius-full`   | `9999px` | Pills, badges, avatar dots          |
+Reference by Tailwind class (`bg-gold`, `text-navy`) or CSS var. **Never raw hex in JSX.**
 
----
+Two exceptions where hex is unavoidable because CSS custom properties aren't available: `icon.tsx` / `apple-icon.tsx` / `opengraph-image.tsx` (rendered through Satori / `ImageResponse`) and the email templates in `src/lib/email/templates/` (rendered outside the app's CSS). Values there must still match the tokens below.
 
-## Shadows
+| Token | Hex | Role |
+| --- | --- | --- |
+| `--color-navy` / `--color-ink` / `--color-charcoal` | `#1A1A2E` | Headings, body text, dark sections |
+| `--color-gold` / `--color-orange` / `--color-primary` | `#FF6535` | Primary CTA, accents, active states, focus |
+| `--color-gold-bright` | `#FF8159` | Orange hover, gradient end |
+| `--color-gold-ink` | `#D6450F` | Orange *text* on white (AA) |
+| `--color-ivory` / `--color-bg` | `#F9FAFB` | Page background |
+| `--color-surface` | `#FFFFFF` | Cards, inputs, modals |
+| `--color-teal` | `#0D9488` | Growth / digital-transformation accent |
+| `--color-teal-ink` | `#0F766E` | Teal text on white |
+| `--color-slate` / `--color-text-muted` | `#6B7280` | Secondary text |
+| `--color-line` / `--color-border` | `#E5E7EB` | Borders, dividers |
+| `--color-footer` | `#0B1120` | Footer only |
+| `--color-success` / `--color-emerald` | `#10B981` | Success |
+| `--color-warning` | `#F59E0B` | Warning (text: `--color-warning-ink`) |
+| `--color-danger` / `--color-crimson` | `#E11D48` | Error, destructive |
+| `--color-info` | `#3B82F6` | Informational |
 
-| Token             | Value                                       | Usage                    |
-|-------------------|---------------------------------------------|--------------------------|
-| `--shadow-card`   | `0 1px 3px rgba(26,26,46,0.08)`             | Resting cards            |
-| `--shadow-hover`  | `0 4px 16px rgba(26,26,46,0.12)`            | Cards on hover           |
-| `--shadow-popup`  | `0 8px 32px rgba(26,26,46,0.14)`            | Modals, sheets           |
-| `--shadow-brand`  | `0 4px 16px rgba(255,101,53,0.25)`          | Orange CTA glow          |
+Full neutral ramp: `--color-neutral-50` … `--color-neutral-950`.
 
-Standard hover lift for interactive cards:
-```css
-transition: border-color 150ms ease, box-shadow 150ms ease, transform 150ms ease;
-/* hover: */
-border-color: var(--brand);
-box-shadow: var(--shadow-hover);
-transform: translateY(-1px);
-```
+**Orange is the only brand accent.** Teal supports; it never competes. Orange means "primary action," not "error." Never communicate state through color alone — pair with an icon, label, weight, or border.
 
 ---
 
-## Motion
+## Space, radius, motion
 
-```css
---ease-spring:  cubic-bezier(0.34, 1.56, 0.64, 1);  /* entrances, confirmations */
---ease-smooth:  cubic-bezier(0.4, 0, 0.2, 1);         /* state changes */
---ease-out:     cubic-bezier(0.16, 1, 0.3, 1);        /* brand slide */
---ease-exit:    cubic-bezier(0.4, 0, 1, 1);            /* exits */
+```
+--space-1 .25rem  --space-2 .5rem   --space-3 .75rem  --space-4 1rem
+--space-5 1.5rem  --space-6 2rem    --space-7 3rem    --space-8 4rem   --space-9 6rem
 
---dur-instant:  80ms;
---dur-fast:     150ms;
---dur-normal:   250ms;
---dur-slow:     400ms;
---dur-enter:    350ms;
+--radius-1 .375rem   --radius-2 .625rem   --radius-3 1rem   --radius-pill 999px
+
+--dur-1 120ms  --dur-2 220ms  --dur-3 400ms  --dur-4 650ms
+--ease-out cubic-bezier(0.16, 1, 0.3, 1)   --ease-in cubic-bezier(0.5, 0, 0.75, 0)
 ```
 
-### slideUp
-```css
-@keyframes slideUp {
-  from { opacity: 0; transform: translateY(16px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-```
+Shadows: `--shadow-1` subtle · `--shadow-2` card · `--shadow-3` modal/hero — all navy-tinted.
 
-### fadeIn
-```css
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to   { opacity: 1; }
-}
-```
-
-Animate `transform` and `opacity` only — never layout-triggering properties.
+Animate `transform` and `opacity` only. Never `transition: all` — name the properties. The `prefers-reduced-motion: reduce` guard is already global.
 
 ---
 
-## Brand Signature: Graph-paper Background
+## Utility classes that exist
 
-White sections use a faint navy grid. Dark navy sections use an orange grid.
+Use these instead of rebuilding them:
 
-```css
-/* Light section */
-background-image:
-  linear-gradient(rgba(26,26,46,0.045) 1px, transparent 1px),
-  linear-gradient(90deg, rgba(26,26,46,0.045) 1px, transparent 1px);
-background-size: 40px 40px;
-
-/* Dark section */
-background-image:
-  linear-gradient(rgba(255,101,53,0.07) 1px, transparent 1px),
-  linear-gradient(90deg, rgba(255,101,53,0.07) 1px, transparent 1px);
-background-size: 40px 40px;
-```
+| Class | Effect |
+| --- | --- |
+| `.gold-gradient-text` / `.orange-gradient-text` | Gradient text `#FF6535 → #FF8159` |
+| `.graph-overlay` | Navy graph grid on light sections (absolute) |
+| `.graph-overlay-dark` | Orange graph grid on dark sections |
+| `.reveal` | Staggered entrance, 80ms apart |
+| `.eyebrow` | 11px bold uppercase orange section label |
+| `.tap-target` | `min-height/width: 44px` — every icon-only button |
+| `.card-interactive` | Card hover treatment |
+| `.stage-rail` / `.stage-item` / `.stage-marker` / `.stage-card` | Process/timeline composition |
+| `.article-longform` / `.article-toc` / `.reading-progress` | Insights article chrome |
+| `.animate-fade-in` | Opacity entrance |
 
 ---
 
-## Layout
+## Component patterns
 
-- **Content rail** — `max-width: 1280px; margin-inline: auto; padding-inline: 24px`
-- **Prose / forms** — `max-width: 768px`
-- **Sidebar** — `hidden md:flex`, fixed left rail, desktop only
-- **BottomNav** — `md:hidden`, fixed bottom, mobile only
-- **FAB** — `md:hidden`, `fixed bottom-20 right-4`, mobile only
-- Single breakpoint: `md` at 768px — no `sm`, `lg`, `xl`
-- Sections alternate `--surface-base` / `--surface-paper` ↔ `--surface-dark`
-- **Dashboard stat cards** — maximum **3 per line on mobile**, never 4-up (4 across reads congested). If more than 3 stats exist, the row scrolls horizontally with snap instead of shrinking the cards:
+- **Primary CTA** — there is no shared `Button` component; the recipe is applied inline. Canonical form:
 
-  ```html
-  <div class="grid grid-flow-col auto-cols-[calc((100%-1rem)/3)] gap-2 overflow-x-auto scrollbar-hide snap-x snap-mandatory md:grid-flow-row md:grid-cols-3 md:auto-cols-auto md:gap-3 md:overflow-visible">
-    <!-- each card: snap-start -->
-  </div>
+  ```tsx
+  className="inline-flex min-h-[52px] items-center justify-center rounded-xl bg-gold px-8 py-4 font-heading text-base font-bold text-navy transition-colors hover:bg-gold-bright"
   ```
 
-  Card anatomy stays compact: micro label → value (`text-lg` mobile / `text-metric` desktop, mono) → one context line or thin progress bar. No large icon chips inside stat cards.
+  44px is the accessibility floor; primary CTAs in this codebase sit at 52–56px.
+- **Card** — `bg-white rounded-2xl shadow-lg border border-navy/5 p-8`.
+- **Input** — `border border-navy/20 rounded-lg px-4 py-3 focus:ring-2 focus:ring-gold bg-white`, with a real `<label>`. Placeholders are not labels.
+- **Section label** — `text-gold font-heading font-bold tracking-widest text-xs uppercase`.
+- **Focus** — `:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px }` is global. Never remove it without an equally visible replacement.
+
+Components: PascalCase filenames, named exports, explicit prop interfaces. API routes: `route.ts` with named `GET`/`POST` exports.
+
+Create a component when the UI actually repeats or owns behaviour — not preemptively. Start concrete; abstract once the similarity is proven.
 
 ---
 
-## Custom Utility Classes
+## Content integrity
 
-| Class                 | Purpose                                               |
-|-----------------------|-------------------------------------------------------|
-| `.scrollbar-hide`     | Hide scrollbars on overflow containers                |
-| `.shadow-card`        | Resting card elevation                                |
-| `.shadow-hover`       | Hover elevation                                       |
-| `.shadow-popup`       | Sheet / modal elevation                               |
-| `.tap-target`         | `min-height: 44px; min-width: 44px` — all icon buttons|
-| `.slide-up`           | Sheet entrance animation                              |
-| `.fade-in`            | Overlay fade                                          |
-| `.checkmark-path`     | Checkbox checked stroke animation                     |
-| `.task-title-complete`| `line-through` + `--text-muted` for completed tasks   |
-| `.eyebrow`            | 11px bold uppercase orange label                      |
-| `.graph-bg`           | Light section graph-paper texture                     |
-| `.graph-bg-dark`      | Dark section orange graph-paper texture               |
-| `.stagger-1`–`.stagger-4` | Animation delay helpers (0.08s increments)       |
-| `.card`               | Canonical card recipe (bg, 1.5px border, radius, shadow, hover wipe) |
-| `.card-hover`         | Interactive-card hover treatment for `<Card>`: orange top wipe, lift, orange border |
-| `.tappable`           | `:active` scale(0.96) touch feedback                  |
-| `.ai-input-active`    | Orange `brand-pulse` glow while the assistant streams |
+Never invent testimonials, client names or logos, revenue figures, metrics, certifications, awards, partnerships, case-study results, customer counts, or geographic claims.
 
-Global focus ring — never remove:
-```css
-*:focus-visible {
-  outline: 2px solid var(--border-focus);
-  outline-offset: 2px;
-}
-```
+When a page needs evidence that hasn't been supplied, write `[TO CONFIRM]`. Do not write a realistic-looking placeholder that could be mistaken for a real business claim.
+
+Positioning is *AI-Powered Business Operating Systems for growing SMEs*; the narrative arc is **CHAOS → CONTROL → SCALE**. Lead with operational problems and measurable outcomes. Avoid "revolutionize," "unlock your potential," "next-generation," "seamless," "supercharge."
 
 ---
 
-## Implementation Rules
+## Anti-patterns
 
-### cn() — always use for conditional classes
-```tsx
-// Correct
-className={cn('base', condition && 'extra', variant === 'x' && 'active')}
-
-// Wrong
-className={`base ${condition ? 'extra' : ''}`}
-```
-
-### Dynamic colors — always inline style, never arbitrary Tailwind
-```tsx
-// Correct
-style={{ backgroundColor: color + '20' }}
-
-// Wrong
-className={`bg-[${color}]`}
-```
-
-### Hex alpha tint pattern
-```tsx
-style={{ backgroundColor: color + '20' }}  // ~12% opacity
-style={{ borderColor: color + '40' }}       // ~25% opacity
-```
+| Don't | Do |
+| --- | --- |
+| Dark-theme or dark-aurora backgrounds | Soft white base + graph grid |
+| Any font but Inter | `font-heading` / `font-body` |
+| Raw hex in JSX | Token classes (`text-navy`, `bg-gold`) |
+| New CSS custom properties for color | Existing tokens |
+| `<link>` for Google Fonts | `next/font/google` in `layout.tsx` |
+| `transition: all` | Named properties |
+| Fixed `px` font sizes | `--step-N` or Tailwind `text-*` |
+| Inline `style={{}}` for layout | Tailwind + `cn()` |
+| Muted gold `#C8A24A` | Brand orange `#FF6535` |
+| Template literals for class merging | `cn()` |
+| Icon button without `.tap-target` | Always `.tap-target` |
+| Glassmorphism, mesh gradients, glow orbs, AI sparkles, circuit motifs, fake dashboards, logo clouds | Flat structured surfaces with real content |
 
 ---
 
-## Accessibility — Required on Every Component
+## Before you finish
 
-- Semantic HTML: `<main>`, `<nav>`, `<section>`, `<article>` over bare `<div>`
-- ARIA labels on all icon-only interactive elements
-- Full keyboard navigability; never remove focus ring without replacement
-- Color contrast: 4.5:1 body text, 3.0:1 large text / UI elements
-- All inputs have a `<label>` or `aria-labelledby`
-- Decorative icons: `aria-hidden="true"`
-- Status messages use `aria-live` regions
-- All icon buttons have `.tap-target` (44×44px minimum)
-
----
-
-## Testing — Required on Every New File
-
-- Corresponding test file alongside every new component
-- Cover happy path, edge cases, error cases
-- `describe` / `it` blocks with clear descriptions
-- Minimum 80% coverage for all new code
+- [ ] No raw hex in JSX (outside the two documented exceptions)
+- [ ] Orange text uses `--color-gold-ink`, not `--color-gold`
+- [ ] One `<h1>`; heading levels not skipped
+- [ ] Icon-only buttons have `.tap-target` and an accessible name
+- [ ] Keyboard reaches every interactive element; focus ring visible
+- [ ] Contrast ≥ 4.5:1 body, ≥ 3:1 large text and UI
+- [ ] State is never signalled by color alone
+- [ ] No horizontal overflow at 320px; usable at 200% zoom
+- [ ] Loading, empty, and error states exist where the data can be absent
+- [ ] No invented business evidence; unknowns marked `[TO CONFIRM]`
+- [ ] No new dependency without a reason
 
 ---
 
-## Anti-Patterns
+## Deeper references — load only when the trigger applies
 
-| Wrong                                   | Right                                              |
-|-----------------------------------------|----------------------------------------------------|
-| Hardcoded hex in JSX                    | CSS var or `PRIORITY_CONFIG[p].color`              |
-| Any font other than Inter               | `font-family: var(--font-sans)` always             |
-| `text-gray-*` / `bg-gray-*`            | Semantic tokens: `--text-muted`, `--surface-paper` |
-| `any` TypeScript type                   | Correct type or proper generic                     |
-| Arbitrary Tailwind for dynamic color    | Inline `style={{}}`                                |
-| Template literals for class merging     | `cn()` always                                      |
-| Icon button without `.tap-target`       | Always add `.tap-target`                           |
-| `updateProject({ ...project, changes })`| `updateProject(id, { field: value })`              |
-| Glassmorphism on content cards          | Glass only on structural chrome (nav, modals)      |
+| Read | When |
+| --- | --- |
+| `references/accessibility.md` | Running an accessibility pass, or a review flags a11y |
+| `references/aesthetics.md` | Asked to make UI "look better," "less generic," or "more polished" |
+| `references/components.md` | Creating a new component file and unsure of the internal structure |
+| `references/mobile.md` | The task is specifically mobile layout, touch, or bottom-sheet behaviour |
+| `references/performance.md` | Addressing Core Web Vitals, bundle size, or layout shift |
 
----
-
-## Checklist — Before Every Component
-
-- [ ] All colors use CSS tokens — no hardcoded hex in JSX
-- [ ] Font is Inter only — `var(--font-sans)` on every element
-- [ ] `--brand` is `#FF6535` (orange), not purple or any other color
-- [ ] Priority colors read from `PRIORITY_CONFIG[priority]` only
-- [ ] `cn()` used for all conditional class merging
-- [ ] Dynamic colors use inline `style={{}}`
-- [ ] Icon buttons have `.tap-target` (44×44px)
-- [ ] Semantic HTML and ARIA labels present
-- [ ] Keyboard navigability confirmed
-- [ ] Responsive at < 768px and ≥ 768px
-- [ ] No `any` types — strict TypeScript enforced
-- [ ] Test file created with ≥ 80% coverage
+For an exact token declaration, read [globals.css](../../../src/app/globals.css) — it is the only source of truth.

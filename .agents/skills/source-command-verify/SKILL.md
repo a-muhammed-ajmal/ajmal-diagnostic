@@ -1,6 +1,6 @@
 ---
 name: "source-command-verify"
-description: "Run RISE's full quality gate — tests, coverage, build, lint — and summarise failures"
+description: "Run the full quality gate — tests, coverage, build, lint — and summarise failures"
 ---
 
 # source-command-verify
@@ -9,7 +9,7 @@ Use this skill when the user asks to run the migrated source command `verify`.
 
 ## Command Template
 
-# /verify — RISE Quality Gate
+# /verify — Quality Gate
 
 Run these steps in order. Stop and report on the first failure.
 

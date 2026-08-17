@@ -31,7 +31,7 @@ export default function AdminLoginPage() {
           <div className="font-heading font-extrabold text-navy text-2xl mb-1">
             M<span className="text-gold-ink">A</span>
           </div>
-          <p className="font-heading font-bold text-navy text-sm uppercase tracking-widest">Admin Access</p>
+          <h1 className="font-heading font-bold text-navy text-sm uppercase tracking-widest">Admin Access</h1>
         </div>
         <form onSubmit={handleLogin} className="space-y-4">
           <div>

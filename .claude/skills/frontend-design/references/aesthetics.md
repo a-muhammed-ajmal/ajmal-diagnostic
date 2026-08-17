@@ -1,35 +1,61 @@
-# RISE OS — Visual Aesthetics & Motion
+# Visual Aesthetics & Motion
+
+Read this when asked to make an interface "look better," "less generic," or "more polished."
 
 ## Typography
-- **Single typeface: Inter.** No exceptions — not Playfair Display, not Plus Jakarta Sans, not Lexend, not system-serif. Use `var(--font-sans)` on every element.
-- **Weight drives hierarchy**, not font changes. Use 400 (body), 500 (medium emphasis), 600 (section heads), 700 (titles), 800 (hero display).
-- **Tracking on display**: `letter-spacing: -0.02em` on anything 20px and above. Eyebrows go the other way: `+0.15em` uppercase.
-- **No fluid `clamp()` scaling** unless a specific breakpoint won't handle it — prefer the fixed type scale tokens.
+
+- **Single typeface: Inter.** No exceptions — not Playfair Display, not Plus Jakarta Sans, not Lexend, not system-serif. `--font-heading`, `--font-body`, `--font-sans`, and `--font-display` all resolve to Inter.
+- **Weight drives hierarchy**, not font changes. 400 body, 500 medium emphasis, 600 section heads, 700 titles, 800 hero display.
+- **Tracking on display**: `letter-spacing: -0.02em` on anything 20px and above. Eyebrows go the other way: `+0.15em` uppercase (the `.eyebrow` class already does this).
+- **Use the fluid `--step-N` scale** (`--step--1` through `--step-5`) rather than fixed pixel sizes. It is clamp-based and already tuned for this site.
 
 ## Color Aesthetic
-- **Orange is the only brand accent.** `--brand` (`#FF6535`) for fills, `--brand-hover` (`#FF8159`) on hover, `--brand-text` (`#D6450F`) for colored text on white.
+
+- **Orange is the only brand accent.** `--color-gold` (`#FF6535`) for fills, `--color-gold-bright` (`#FF8159`) on hover, `--color-gold-ink` (`#D6450F`) for colored text on white.
 - **Dark sections use navy** (`#1A1A2E`), not black. The brand is charcoal-navy + orange — not monochrome.
-- **No decorative gradients** except the orange CTA glow shadow (`--shadow-brand`) and the graph-paper overlay. No rainbow gradients, no purple, no AI pulse effects.
+- **Teal supports, never competes.** `--color-teal` marks growth and digital-transformation content only.
+- **No decorative gradients** beyond the sanctioned `.gold-gradient-text` / `.orange-gradient-text` and the graph-paper overlay. No rainbow gradients, no purple, no AI pulse effects, no mesh backgrounds.
 
 ## Brand Signature: Graph-paper Grid
-Apply on every section. Light sections: faint navy lines. Dark sections: faint orange lines. Cell size 40×40px. This is the aesthetic — it must be present.
+
+The 40×40px navy grid, the aurora radials, and the grain layer are **already painted on `body`** in `globals.css`. Do not re-declare them.
+
+Apply `.graph-overlay` only when a light section needs its own grid above the page background, and `.graph-overlay-dark` (orange grid) on navy sections. Both are absolutely positioned — the parent needs `position: relative`.
 
 ## Motion
-- **Signature easing**: `cubic-bezier(0.16, 1, 0.3, 1)` (`--ease-out`) for brand slide-ins.
-- **Stagger entrances**: 0.08s increments (`.stagger-1` through `.stagger-4`) for lists and card grids.
-- **Micro-interactions**: Every button and card hover includes a subtle "lift" (`translateY(-1px)`) and shadow increase. Active state scales to `0.96–0.97`.
-- **Glassmorphism**: Only for structural chrome (nav bar, modal overlays, bottom sheets). Never on content cards.
-- No animation longer than `--dur-slow` (400ms) for UI interactions. Respect `prefers-reduced-motion`.
+
+- **Signature easing**: `cubic-bezier(0.16, 1, 0.3, 1)` (`--ease-out`) — luxurious and considered, matching a premium consulting brand.
+- **Durations**: `--dur-1` 120ms · `--dur-2` 220ms · `--dur-3` 400ms · `--dur-4` 650ms. Keep interaction feedback at `--dur-1`/`--dur-2`.
+- **Staggered entrances**: use the existing `.reveal` class (translateY + fade, 80ms apart). Don't hand-roll stagger delays.
+- **Micro-interactions**: subtle lift (`translateY(-1px)`) plus shadow increase on card hover. Keep it restrained.
+- **Never `transition: all`** — name the properties: `transition: transform var(--dur-2) var(--ease-out), opacity var(--dur-2) var(--ease-out);`
+- Animate `transform` and `opacity` only. Respect `prefers-reduced-motion` (handled globally).
+- **No glassmorphism.** Flat, structured surfaces only — including nav and modals.
 
 ## Card Hover Pattern
+
 ```css
-/* On hover: orange top-bar wipes in from the left */
-.card::before {
-  content: ''; position: absolute; top: 0; left: 0;
-  width: 100%; height: 3px;
-  background: var(--brand);
-  transform: scaleX(0); transform-origin: left;
-  transition: transform 250ms var(--ease-out);
+.card-interactive {
+  transition: border-color var(--dur-2) var(--ease-out),
+              box-shadow var(--dur-2) var(--ease-out),
+              transform var(--dur-2) var(--ease-out);
 }
-.card:hover::before { transform: scaleX(1); }
+
+.card-interactive:hover {
+  border-color: var(--color-gold);
+  box-shadow: var(--shadow-2);
+  transform: translateY(-1px);
+}
 ```
+
+## When a Page Looks Generic
+
+Diagnose in this order before adding any decoration:
+
+1. **Hierarchy** — is there one clear focal point, or do five elements compete?
+2. **Type scale contrast** — generic pages use three sizes that are all too close. Widen the jump between display and body.
+3. **Density** — is the page padded into emptiness? Structured density reads as considered; large blank gaps read as unfinished.
+4. **One dominant action** — is the primary CTA unmistakable, with secondaries visibly subordinate?
+5. **Edges and rhythm** — consistent border treatment and a repeating spacing interval do more than any effect.
+
+Only after those are resolved should you reach for the brand signature (grid, gradient text, orange accent).
