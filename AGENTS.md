@@ -69,31 +69,31 @@ src/
 - **No raw hex in JSX**: all colors via CSS custom properties defined in `globals.css`
 
 ## Design System
-**Soft white base with architectural graph-paper grid** — orange-accented executive aesthetic (per `/frontend-design`).
+**"Cyanotype Blueprint"** — deep ink-blue + warm brass on vellum paper, with a graph-paper grid that reads as an actual technical blueprint rather than decoration. Bold serif display type against a technical sans/mono body (per `/frontend-design`). This superseded the earlier soft-white/orange-Inter identity — do not revert to it.
 
 ```css
 /* Brand tokens — defined in src/app/globals.css @theme block */
---color-navy / --color-ink:    #1A1A2E      /* Charcoal-Navy — dark sections, strong text */
---color-gold / --color-orange: #FF6535      /* Brand Orange — CTAs, accents, active states */
---color-gold-bright:           #FF8159      /* brand orange hover / gradient end */
---color-gold-ink:              #D6450F      /* dark orange for text on white (AA contrast) */
---color-charcoal:              #1A1A2E      /* body text */
---color-ivory:                 #F9FAFB      /* Soft White — primary background */
---color-teal:                  #0D9488      /* AI Teal — growth, digital transformation */
---color-slate:                 #6B7280      /* secondary text */
---color-line:                  #E5E7EB      /* borders */
---color-crimson:               #E11D48      /* error / emphasis */
---color-emerald:               #10B981      /* success */
+--color-navy / --color-ink:    #132A4A      /* Blueprint Ink — dark sections, strong text */
+--color-gold / --color-orange: #C6752E      /* Brass — CTAs, accents, active states */
+--color-gold-bright:           #E0964F      /* brass hover / gradient end */
+--color-gold-ink:              #8C4D1F      /* dark brass for text on white (AA contrast) */
+--color-charcoal:              #132A4A      /* body text */
+--color-ivory:                 #F6F0E2      /* Vellum — primary background */
+--color-teal:                  #3E8FB0      /* Blueprint Cyan — growth, digital transformation */
+--color-slate:                 #7C7362      /* secondary text */
+--color-line:                  #E3DBC7      /* borders */
+--color-crimson:               #B33B2C      /* error / emphasis */
+--color-emerald:               #5B7A45      /* success */
 ```
 
-**Fonts**: Inter only, everywhere — headings (`--font-heading`) and body (`--font-body`) both resolve to Inter. No Plus Jakarta Sans, no serif.
+**Fonts**: Fraunces (bold serif, `--font-heading`/`--font-display`) for all headings — distinctive, editorial, high-character. IBM Plex Sans (`--font-body`/`--font-sans`) for body copy. IBM Plex Mono (`--font-mono`) for numbers, labels, and technical/data annotations. No Inter, no Arial, no system-ui as a primary face — those are fallback-only.
 
-**Background**: Soft White `#F9FAFB` with 40×40px graph-paper grid overlay using charcoal-navy at 3.5% opacity, subtle navy/teal/orange aurora radials.
+**Background**: Vellum `#F6F0E2` with 40×40px blueprint grid overlay using ink-blue at 5% opacity (this grid is now a literal part of the concept, not just texture), subtle ink/cyan/brass aurora radials.
 
 **Utility classes** (already in globals.css):
-- `.gold-gradient-text` / `.orange-gradient-text` — gradient text `#FF6535 → #FF8159`
-- `.graph-overlay` — charcoal-navy grid on light sections
-- `.graph-overlay-dark` — brand orange grid on dark sections
+- `.gold-gradient-text` / `.orange-gradient-text` — gradient text `#C6752E → #E0964F`
+- `.graph-overlay` — ink-blue blueprint grid on light sections
+- `.graph-overlay-dark` — brass blueprint grid on dark sections
 
 ## Pages
 | Route | Purpose |

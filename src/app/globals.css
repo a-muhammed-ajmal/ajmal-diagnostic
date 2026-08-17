@@ -1,15 +1,15 @@
 @import "tailwindcss";
 
 @theme {
-  /* ── Brand primitives (Orange + Charcoal-Navy identity) ────────────────── */
-  --color-navy:        #1A1A2E;   /* Charcoal-Navy — dark sections, strong text */
-  --color-gold:        #FF6535;   /* Brand Orange — primary CTA, accents, active states */
-  --color-gold-bright: #FF8159;   /* Brand Orange hover / gradient end */
-  --color-charcoal:    #1A1A2E;   /* body text, precision */
-  --color-ivory:       #F9FAFB;   /* Soft White — primary digital background */
-  --color-teal:        #0D9488;   /* AI Teal — growth, digital transformation */
-  --color-crimson:     #E11D48;   /* error / emphasis */
-  --color-emerald:     #10B981;   /* success / positive */
+  /* ── Brand primitives (Cyanotype Blueprint identity — ink, brass, vellum) ── */
+  --color-navy:        #132A4A;   /* Blueprint Ink — dark sections, strong text */
+  --color-gold:        #C6752E;   /* Brass — primary CTA, accents, active states */
+  --color-gold-bright: #E0964F;   /* Brass hover / gradient end */
+  --color-charcoal:    #132A4A;   /* body text, precision */
+  --color-ivory:       #F6F0E2;   /* Vellum — primary digital background */
+  --color-teal:        #3E8FB0;   /* Blueprint Cyan — growth, digital transformation */
+  --color-crimson:     #B33B2C;   /* error / emphasis */
+  --color-emerald:     #5B7A45;   /* success / positive */
 
   /* Neutral scale — full primitive ladder */
   --color-neutral-50:  #f7f7f8;
@@ -25,39 +25,39 @@
   --color-neutral-950: #0b0b0f;
 
   /* Semantic aliases */
-  --color-ink:        #1A1A2E;
-  --color-orange:     #FF6535;     /* brand orange */
-  --color-gold-ink:   #D6450F;     /* dark orange for text on white (AA contrast) */
-  --color-teal-ink:    #0F766E;    /* teal for small text on white — 5.5:1 */
-  --color-emerald-ink: #047857;    /* emerald for small text on white — 5.5:1 */
-  --color-slate:      #6B7280;     /* secondary text */
-  --color-line:       #E5E7EB;     /* borders */
-  --color-footer:     #0B1120;     /* deepened charcoal-navy — footer background */
+  --color-ink:        #132A4A;
+  --color-orange:     #C6752E;     /* brand brass */
+  --color-gold-ink:   #8C4D1F;     /* dark brass for text on white (AA contrast) */
+  --color-teal-ink:    #255A70;    /* cyan for small text on white — 5.5:1 */
+  --color-emerald-ink: #3C5330;    /* emerald for small text on white — 5.5:1 */
+  --color-slate:      #7C7362;     /* secondary text */
+  --color-line:       #E3DBC7;     /* borders */
+  --color-footer:     #0A1F3B;     /* deepened blueprint ink — footer background */
 
   /* Semantic surface tokens */
-  --color-bg:           #F9FAFB;
+  --color-bg:           #F6F0E2;
   --color-surface:      #FFFFFF;
-  --color-border:       #E5E7EB;
-  --color-text:         #1A1A2E;
-  --color-text-muted:   #6B7280;
-  --color-text-subtle:  #84848f;
-  --color-primary:      #FF6535;
-  --color-on-primary:   #1A1A2E;
-  --color-focus:        #FF6535;
+  --color-border:       #E3DBC7;
+  --color-text:         #132A4A;
+  --color-text-muted:   #7C7362;
+  --color-text-subtle:  #9C9484;
+  --color-primary:      #C6752E;
+  --color-on-primary:   #132A4A;
+  --color-focus:        #C6752E;
 
   /* Status palette */
-  --color-success:    #10B981;
+  --color-success:    #5B7A45;
   --color-warning:    #F59E0B;
   --color-warning-ink: #92400E;  /* dark amber for AA text contrast on white */
-  --color-danger:     #E11D48;
-  --color-info:       #3B82F6;
+  --color-danger:     #B33B2C;
+  --color-info:       #3E8FB0;
 
-  /* Typography — Inter only */
-  --font-display:  var(--font-inter), "Inter", ui-sans-serif, system-ui, sans-serif;
-  --font-heading:  var(--font-inter), "Inter", ui-sans-serif, system-ui, sans-serif;
-  --font-sans:     var(--font-inter), "Inter", ui-sans-serif, system-ui, sans-serif;
-  --font-body:     var(--font-inter), "Inter", ui-sans-serif, system-ui, sans-serif;
-  --font-mono:     "JetBrains Mono", ui-monospace, monospace;
+  /* Typography — bold serif display, technical sans body, mono for data */
+  --font-display:  var(--font-fraunces), Georgia, "Times New Roman", serif;
+  --font-heading:  var(--font-fraunces), Georgia, "Times New Roman", serif;
+  --font-sans:     var(--font-plex-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-body:     var(--font-plex-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono:     var(--font-plex-mono), "IBM Plex Mono", ui-monospace, monospace;
 }
 
 /* ── Non-Tailwind tokens (space, radius, motion, type scale, shadows) ──── */
@@ -89,23 +89,23 @@
   --step-5:  clamp(2.00rem, 1.40rem + 2.50vw, 3.50rem);  /* 32px → 56px: compact shared hero scale */
 
   /* Shadow tokens — charcoal-navy-tinted */
-  --shadow-1: 0 1px 2px rgba(26,26,46,.06), 0 1px 1px rgba(26,26,46,.04);
-  --shadow-2: 0 4px 12px rgba(26,26,46,.08), 0 2px 4px rgba(26,26,46,.05);
-  --shadow-3: 0 18px 40px rgba(26,26,46,.14), 0 6px 12px rgba(26,26,46,.07);
+  --shadow-1: 0 1px 2px rgba(19,42,74,.06), 0 1px 1px rgba(19,42,74,.04);
+  --shadow-2: 0 4px 12px rgba(19,42,74,.08), 0 2px 4px rgba(19,42,74,.05);
+  --shadow-3: 0 18px 40px rgba(19,42,74,.14), 0 6px 12px rgba(19,42,74,.07);
 }
 
-/* ── Base: soft white with architectural grid + subtle orange aurora ────── */
+/* ── Base: vellum paper with blueprint grid + brass/cyan aurora ─────────── */
 body {
-  background-color: #F9FAFB;
+  background-color: #F6F0E2;
   background-image:
-    radial-gradient(65% 55% at 90% -10%, rgba(26,26,46,.06), transparent 70%),
-    radial-gradient(50% 40% at -5% 20%,  rgba(13,148,136,.04), transparent 65%),
-    radial-gradient(40% 30% at 55% 110%, rgba(255,101,53,.06), transparent 70%),
-    linear-gradient(rgba(26,26,46,.035) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(26,26,46,.035) 1px, transparent 1px);
+    radial-gradient(65% 55% at 90% -10%, rgba(19,42,74,.07), transparent 70%),
+    radial-gradient(50% 40% at -5% 20%,  rgba(62,143,176,.05), transparent 65%),
+    radial-gradient(40% 30% at 55% 110%, rgba(198,117,46,.07), transparent 70%),
+    linear-gradient(rgba(19,42,74,.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(19,42,74,.05) 1px, transparent 1px);
   background-size: auto, auto, auto, 40px 40px, 40px 40px;
   background-attachment: fixed, fixed, fixed, scroll, scroll;
-  color: #1A1A2E;
+  color: #132A4A;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
@@ -127,7 +127,7 @@ body::before {
 
 /* ── Typography defaults ─────────────────────────────────────────────────── */
 h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-inter), "Inter", ui-sans-serif, system-ui, sans-serif;
+  font-family: var(--font-fraunces), Georgia, "Times New Roman", serif;
   text-wrap: balance;
 }
 p { text-wrap: pretty; }
@@ -143,28 +143,28 @@ p { text-wrap: pretty; }
 
 /* ── Brand utilities ─────────────────────────────────────────────────────── */
 .gold-gradient-text, .orange-gradient-text {
-  background: linear-gradient(to right, #FF6535, #FF8159);
+  background: linear-gradient(to right, #C6752E, #E0964F);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
-/* Section grid overlays */
+/* Section grid overlays — the blueprint grid itself, not just decoration */
 .graph-overlay {
   position: absolute; inset: 0; pointer-events: none;
   background-image:
-    linear-gradient(#1A1A2E 1px, transparent 1px),
-    linear-gradient(90deg, #1A1A2E 1px, transparent 1px);
+    linear-gradient(#132A4A 1px, transparent 1px),
+    linear-gradient(90deg, #132A4A 1px, transparent 1px);
   background-size: 40px 40px;
-  opacity: 0.035;
+  opacity: 0.05;
 }
 .graph-overlay-dark {
   position: absolute; inset: 0; pointer-events: none;
   background-image:
-    linear-gradient(#FF6535 1px, transparent 1px),
-    linear-gradient(90deg, #FF6535 1px, transparent 1px);
+    linear-gradient(#E0964F 1px, transparent 1px),
+    linear-gradient(90deg, #E0964F 1px, transparent 1px);
   background-size: 40px 40px;
-  opacity: 0.07;
+  opacity: 0.09;
 }
 
 /* ── Component utilities ─────────────────────────────────────────────────── */
@@ -193,7 +193,7 @@ p { text-wrap: pretty; }
     transform    150ms var(--ease-out);
 }
 .card-interactive:hover {
-  box-shadow: 0 4px 16px rgba(26, 26, 46, 0.12);
+  box-shadow: 0 4px 16px rgba(19, 42, 74, 0.12);
   transform: translateY(-1px);
 }
 
@@ -280,7 +280,7 @@ html { scroll-behavior: smooth; }
     width: 2px;
     background: var(--color-line);
   }
-  .stage-card { border-left: 1px solid rgba(26, 26, 46, 0.1); }
+  .stage-card { border-left: 1px solid rgba(19, 42, 74, 0.1); }
   .stage-marker {
     display: flex;
     position: absolute;
@@ -438,9 +438,9 @@ body {
 }
 
 
-/* Accessible orange surfaces: darker orange preserves white-text readability. */
+/* Accessible brass surfaces: darker brass preserves white-text readability. */
 :root {
-  --color-orange-contrast-surface: #B9380B;
+  --color-orange-contrast-surface: #96541F;
 }
 
 .bg-gold,

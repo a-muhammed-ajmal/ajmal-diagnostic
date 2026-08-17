@@ -72,11 +72,11 @@ export default function AboutPage() {
             <p className="eyebrow mb-3 text-gold-ink">Delivery principle</p>
             <h2 className="heading-reveal font-heading text-[length:var(--step-4)] font-extrabold leading-tight text-navy">Simple · Practical · Sustainable</h2>
           </div>
-          <div className="mt-10 grid gap-4 md:grid-cols-3">
+          <div className="mt-10 flex flex-col divide-y divide-navy/10 border-t border-navy/10 md:flex-row md:divide-y-0 md:divide-x md:border-t-0">
             {principles.map(([title, body], index) => (
-              <article key={title} className="rounded-2xl border border-navy/10 bg-ivory p-6 shadow-sm">
+              <article key={title} className="stage-reveal flex-1 py-6 md:px-6 md:py-0 first:md:pl-0 last:md:pr-0">
                 <span className="font-mono text-xs text-gold-ink">0{index + 1}</span>
-                <h3 className="mt-5 font-heading text-xl font-bold text-navy">{title}</h3>
+                <h3 className="mt-4 text-[length:var(--step-1)] font-heading font-bold text-navy">{title}</h3>
                 <p className="mt-3 font-body text-sm leading-relaxed text-navy/65">{body}</p>
               </article>
             ))}
@@ -89,8 +89,12 @@ export default function AboutPage() {
         <div className="relative z-10 mx-auto max-w-5xl">
           <p className="eyebrow mb-3 text-teal-ink">Professional credentials</p>
           <h2 className="font-heading text-[length:var(--step-3)] font-extrabold text-navy">Current learning and professional development</h2>
-          <ul className="mt-8 grid gap-3 md:grid-cols-2">
-            {credentials.map((credential) => <li key={credential} className="rounded-xl border border-navy/10 bg-white p-4 font-body text-sm leading-relaxed text-navy/70"><span className="mr-2 text-teal-ink" aria-hidden="true">✓</span>{credential}</li>)}
+          <ul className="mt-8 max-w-2xl divide-y divide-navy/10 border-t border-navy/10">
+            {credentials.map((credential) => (
+              <li key={credential} className="stage-reveal flex items-start gap-3 py-4 font-body text-sm leading-relaxed text-navy/70">
+                <span className="mt-0.5 text-teal-ink" aria-hidden="true">✓</span>{credential}
+              </li>
+            ))}
           </ul>
         </div>
       </section>

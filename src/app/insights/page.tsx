@@ -15,7 +15,7 @@ function FeaturedCard({ article }: { article: Article }) {
   return (
     <Link
       href={`/insights/${article.slug}`}
-      className="card-interactive block rounded-xl border border-navy/10 bg-ivory p-6 shadow-sm hover:border-gold md:p-8"
+      className="card-interactive block rounded-xl border border-navy/10 bg-ivory p-6 hover:border-gold md:p-8"
     >
       <span className="font-heading text-xs font-bold uppercase tracking-widest text-gold-ink">{article.category}</span>
       <h2 className="mb-2 mt-2 font-heading text-xl font-extrabold text-navy md:text-2xl">{article.title}</h2>
@@ -30,7 +30,7 @@ function CompactCard({ article }: { article: Article }) {
   return (
     <Link
       href={`/insights/${article.slug}`}
-      className="card-interactive block rounded-xl border border-navy/10 bg-ivory p-5 shadow-sm hover:border-gold"
+      className="card-interactive block rounded-xl border border-navy/10 bg-ivory p-5 hover:border-gold"
     >
       <span className="font-heading text-xs font-bold uppercase tracking-widest text-gold-ink">{article.category}</span>
       <h3 className="mb-1.5 mt-1.5 font-heading text-base font-bold text-navy md:text-lg">{article.title}</h3>

@@ -7,7 +7,7 @@ export default function AppleIcon() {
   return new ImageResponse(
     <div
       style={{
-        background: "#1A1A2E",
+        background: "#132A4A",
         width: "100%",
         height: "100%",
         display: "flex",
@@ -24,8 +24,8 @@ export default function AppleIcon() {
           right: 14,
           width: 24,
           height: 24,
-          borderTop: "4px solid #FF6535",
-          borderRight: "4px solid #FF6535",
+          borderTop: "4px solid #C6752E",
+          borderRight: "4px solid #C6752E",
         }}
       />
       <div
@@ -38,7 +38,7 @@ export default function AppleIcon() {
         }}
       >
         <span style={{ color: "#FFFFFF" }}>M</span>
-        <span style={{ color: "#FF6535" }}>A</span>
+        <span style={{ color: "#C6752E" }}>A</span>
       </div>
     </div>,
     { ...size },
