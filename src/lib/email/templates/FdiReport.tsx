@@ -67,7 +67,7 @@ export function FdiReportEmail({ name, companyName, report, calendlyLink }: FdiR
               Severe component alert: {alerted.join(', ')}.
             </Text>
           )}
-          <Hr style={{ borderColor: '#E5E7EB', margin: '24px 0' }} />
+          <Hr style={{ borderColor: '#E3DBC7', margin: '24px 0' }} />
           <Heading style={{ color: '#132A4A', fontSize: '18px', margin: '0 0 12px' }}>
             What the answers indicate
           </Heading>

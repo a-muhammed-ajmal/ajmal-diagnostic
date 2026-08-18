@@ -23,9 +23,9 @@ const ALLOWED_HOSTS = new Set(["calendly.com", "www.calendly.com"]);
  * properties, so these are raw hex by necessity. Keep in sync with globals.css.
  */
 const POPUP_THEME = {
-  background_color: "F9FAFB", // --color-ivory
-  text_color: "1A1A2E", // --color-navy
-  primary_color: "FF6535", // --color-gold
+  background_color: "F6F0E2", // --color-ivory
+  text_color: "132A4A", // --color-navy
+  primary_color: "C6752E", // --color-gold
 } as const;
 
 const MISSING_MESSAGE =

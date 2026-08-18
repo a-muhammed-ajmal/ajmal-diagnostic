@@ -83,7 +83,7 @@ export function ContactNotificationEmail({
           <Text style={{ color: "#7C7362", fontSize: "14px", margin: "0 0 24px" }}>
             Submitted through the website contact form.
           </Text>
-          <Hr style={{ borderColor: "#E5E7EB", margin: "0 0 24px" }} />
+          <Hr style={{ borderColor: "#E3DBC7", margin: "0 0 24px" }} />
 
           <Field label="Name" value={name} />
           <Field label="Email" value={email} />
@@ -94,7 +94,7 @@ export function ContactNotificationEmail({
           <Section
             style={{
               backgroundColor: "#F6F0E2",
-              border: "1px solid #E5E7EB",
+              border: "1px solid #E3DBC7",
               borderRadius: "12px",
               padding: "20px",
               marginTop: "8px",
@@ -114,7 +114,7 @@ export function ContactNotificationEmail({
             </Text>
           </Section>
 
-          <Hr style={{ borderColor: "#E5E7EB", margin: "24px 0 16px" }} />
+          <Hr style={{ borderColor: "#E3DBC7", margin: "24px 0 16px" }} />
           <Text style={{ color: "#7C7362", fontSize: "11px", textAlign: "center" }}>
             Muhammed Ajmal Consulting · Dubai, United Arab Emirates · Strategic Growth Architecture
           </Text>

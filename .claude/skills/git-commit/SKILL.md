@@ -107,7 +107,7 @@ do not ask, do not wait for the user to say "push":
 git push origin <current-branch>
 ```
 
-Remote: https://github.com/a-muhammed-ajmal/rise
+Remote: https://github.com/a-muhammed-ajmal/consulting
 
 - If on a feature branch (`feat/*`, `fix/*`, etc.), push that branch.
 - **Never** push directly to `main` — CLAUDE.md prohibits it.

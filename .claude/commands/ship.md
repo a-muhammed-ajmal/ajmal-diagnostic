@@ -20,16 +20,17 @@ On failure:
   path, line number, and error message. Wait for user.
 
 ### 2. Test coverage
-This project has no test runner yet — deliberately deferred, not an oversight.
-First check whether a `test:coverage` script exists in package.json.
+Run: npm run test:coverage
+Capture the exact test count (e.g. "298 passed, 22 suites") and exact statement
+coverage % from the output — these go verbatim into the report and into
+README.md's Project stats table in step 4-6.
 
-- If it does NOT exist: skip this step. Record `0 tests, n/a coverage`.
-  Do NOT scaffold a test harness as part of a ship — standing up Jest/Vitest
-  is its own piece of work and needs the user's say-so.
-- If it DOES exist: run `npm run test:coverage` and capture the exact test
-  count and exact coverage % from the output.
+`jest.config.ts` holds `src/lib/fdi/score.ts`, `bands.ts`, and `rounding.ts` to
+100% coverage — a gap in one of those three files fails this step. There is no
+blanket global threshold; a drop in overall coverage outside those files does
+not fail the step, but flag it in the report.
 
-On failure (only applies when the script exists):
+On failure:
 - If the failure is a broken import, missing mock, or type mismatch
   the error explicitly describes: fix it and re-run.
 - If fixing requires understanding business logic or behaviour: stop.
@@ -44,17 +45,14 @@ On failure:
   Report the exact error. Wait for user.
 
 ### 4–6. Update project docs (conditional)
-These steps were written for a different repo layout. In THIS repo:
-- `spec.md` is a per-feature working template (no Current State Snapshot table)
-- `CLAUDE.md` is a single `@AGENTS.md` include (no Testing Standard bullet)
-- `README.md` is create-next-app boilerplate (no Project Stats table)
+This repo has no `spec.md` — skip that file, report `unchanged`. `CLAUDE.md` is
+a single `@AGENTS.md` include with no stats of its own — skip it too.
 
-For each of the three files, look for the named structure:
-- If the structure EXISTS: update only the named rows/bullet with the values
-  from step 2. Touch nothing else.
-- If it DOES NOT exist: leave the file untouched and report `unchanged`.
-  Do NOT invent the table or add stats sections — creating new doc structure
-  is a content change and needs the user's approval first.
+`README.md` DOES have a "Project stats" table (Tests / DB tables / Migrations /
+Routes). Update only the `Tests` row with the exact count and coverage % from
+step 2 — e.g. `298 passing (22 suites), 58.17% statement coverage`. Touch
+nothing else in the table unless the shipped work actually added a migration
+or a DB table, in which case update that row too with the real count.
 
 Architecture facts (stack, routes, tokens) live in `AGENTS.md`. If the shipped
 work changed those, flag it in the report for the user to approve — do not
@@ -66,26 +64,25 @@ If it is not, stop and report; never commit under a different identity.
 
 Run: git add -A
 Run: git commit -m "chore: ship — [count] tests, [coverage]% — [YYYY-MM-DD]"
-Use actual values. Use today's date. When no runner exists, that reads
-`0 tests, n/a coverage`.
+Use the actual test count and coverage % captured in step 2, and today's date.
 
 Add a short body describing what actually shipped, then the trailer
-`Co-Authored-By: Claude Opus 4.8 <noreply@anthropic.com>`.
+`Co-Authored-By: Claude <noreply@anthropic.com>`.
 
 ### 8. Push
-Run: git push https://github.com/a-muhammed-ajmal/consulting main
-User Email ID: ajmalconsults@gmail.com
-On any other failure: stop. Report the exact error and what the
-user must do to resolve it.
+Never push directly to `main` — push the current branch:
+Run: git push -u origin <current-branch>
+If the current branch IS `main`, stop and ask the user how they want to
+proceed rather than pushing to it — this repo ships through feature branches
+and pull requests, not direct commits to `main`.
+On failure: stop. Report the exact error and what the user must do to resolve it.
 
 ## Report
 Output only this at the end:
 
   Lint:       PASS / FAIL
-  Tests:      [count] passing, [coverage]% — PASS / FAIL / SKIPPED (no runner)
+  Tests:      [count] passing, [coverage]% — PASS / FAIL
   Build:      PASS / FAIL
-  spec.md:    updated / unchanged
-  CLAUDE.md:  updated / unchanged
   README.md:  updated / unchanged
   Commit:     [hash] [message]
   Push:       SUCCESS / FAILED
@@ -93,13 +90,13 @@ Output only this at the end:
   USER ACTION REQUIRED:
   If nothing: None.
 
-  If there are Supabase migration to run, list them like this:
+  If there are Supabase migrations to run, list them like this:
 
-  1. Go to Supabase Dashboard → SQL Editor
-     Run this SQL:
+  1. Go to Supabase Dashboard → SQL Editor, or run `supabase db push`
+     Run this SQL (from supabase/migrations/<new-file>.sql):
 
      ```sql
-     ALTER TABLE habits ADD COLUMN reminder_time TIME DEFAULT NULL;
+     -- full contents of the new migration file
      ```
 SQL block must be copy-pasteable exactly as shown.
 Never summarise or describe the SQL — always output the full statement.

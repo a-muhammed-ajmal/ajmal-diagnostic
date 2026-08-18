@@ -4,23 +4,23 @@ Read this when asked to make an interface "look better," "less generic," or "mor
 
 ## Typography
 
-- **Single typeface: Inter.** No exceptions — not Playfair Display, not Plus Jakarta Sans, not Lexend, not system-serif. `--font-heading`, `--font-body`, `--font-sans`, and `--font-display` all resolve to Inter.
-- **Weight drives hierarchy**, not font changes. 400 body, 500 medium emphasis, 600 section heads, 700 titles, 800 hero display.
+- **Two faces, distinct jobs.** `--font-heading` / `--font-display` resolve to **Fraunces** (bold serif, editorial character). `--font-body` / `--font-sans` resolve to **IBM Plex Sans**. `--font-mono` is IBM Plex Mono for numbers/data. No Inter, no Playfair Display, no Plus Jakarta Sans, no Lexend — those exist only as fallback stacks.
+- **Weight drives hierarchy within a face**, not font-swapping. 400 body, 500 medium emphasis, 600 section heads, 700 titles, 800 hero display.
 - **Tracking on display**: `letter-spacing: -0.02em` on anything 20px and above. Eyebrows go the other way: `+0.15em` uppercase (the `.eyebrow` class already does this).
 - **Use the fluid `--step-N` scale** (`--step--1` through `--step-5`) rather than fixed pixel sizes. It is clamp-based and already tuned for this site.
 
 ## Color Aesthetic
 
-- **Orange is the only brand accent.** `--color-gold` (`#FF6535`) for fills, `--color-gold-bright` (`#FF8159`) on hover, `--color-gold-ink` (`#D6450F`) for colored text on white.
-- **Dark sections use navy** (`#1A1A2E`), not black. The brand is charcoal-navy + orange — not monochrome.
+- **Brass is the only brand accent.** `--color-gold` (`#C6752E`) for fills, `--color-gold-bright` (`#E0964F`) on hover, `--color-gold-ink` (`#8C4D1F`) for colored text on white.
+- **Dark sections use ink-blue navy** (`#132A4A`), not black. The brand is "Cyanotype Blueprint" — deep ink-blue + warm brass on vellum — not monochrome.
 - **Teal supports, never competes.** `--color-teal` marks growth and digital-transformation content only.
-- **No decorative gradients** beyond the sanctioned `.gold-gradient-text` / `.orange-gradient-text` and the graph-paper overlay. No rainbow gradients, no purple, no AI pulse effects, no mesh backgrounds.
+- **No decorative gradients** beyond the sanctioned `.gold-gradient-text` / `.orange-gradient-text` and the blueprint-grid overlay. No rainbow gradients, no purple, no AI pulse effects, no mesh backgrounds.
 
-## Brand Signature: Graph-paper Grid
+## Brand Signature: Blueprint Grid
 
-The 40×40px navy grid, the aurora radials, and the grain layer are **already painted on `body`** in `globals.css`. Do not re-declare them.
+The 40×40px ink-blue grid, the aurora radials, and the grain layer are **already painted on `body`** in `globals.css` — this is a literal blueprint grid, part of the concept, not decoration. Do not re-declare them.
 
-Apply `.graph-overlay` only when a light section needs its own grid above the page background, and `.graph-overlay-dark` (orange grid) on navy sections. Both are absolutely positioned — the parent needs `position: relative`.
+Apply `.graph-overlay` only when a light section needs its own grid above the page background, and `.graph-overlay-dark` (brass grid) on navy sections. Both are absolutely positioned — the parent needs `position: relative`.
 
 ## Motion
 
