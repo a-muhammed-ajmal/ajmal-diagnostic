@@ -2,21 +2,23 @@
 
 ## Core Web Vitals
 
-- **LCP** < 2.5s — optimise the critical rendering path. Inter loads via `next/font/google`, which self-hosts and avoids FOUT.
+- **LCP** < 2.5s — optimise the critical rendering path. Fraunces, IBM Plex Sans, and IBM Plex Mono all load via `next/font/google`, which self-hosts and avoids FOUT.
 - **CLS** < 0.1 — always give images explicit `width`/`height`, and reserve space for content that arrives late.
 - **INP** < 200ms — the responsiveness metric that replaced FID. Avoid main-thread tasks over 50ms; break up heavy client work.
 
 ## Font Loading
 
-Inter is the only typeface, loaded once in `src/app/layout.tsx`:
+Three typefaces, all loaded once in `src/app/layout.tsx`:
 
 ```ts
-import { Inter } from 'next/font/google';
+import { Fraunces, IBM_Plex_Sans, IBM_Plex_Mono } from 'next/font/google';
 
-const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
+const fraunces = Fraunces({ variable: '--font-fraunces', ... });
+const plexSans = IBM_Plex_Sans({ variable: '--font-plex-sans', ... });
+const plexMono = IBM_Plex_Mono({ variable: '--font-plex-mono', ... });
 ```
 
-`--font-heading`, `--font-body`, `--font-sans`, and `--font-display` all resolve to `var(--font-inter)`. Never add a `<link>` to Google Fonts — `next/font` self-hosts and eliminates the round-trip.
+`--font-heading` / `--font-display` resolve to `var(--font-fraunces)`; `--font-body` / `--font-sans` resolve to `var(--font-plex-sans)`; `--font-mono` resolves to `var(--font-plex-mono)`. Never add a `<link>` to Google Fonts — `next/font` self-hosts and eliminates the round-trip. Three font families is more weight than one — keep subsets and weights on each `next/font` call as narrow as the design actually uses.
 
 ## Rendering
 

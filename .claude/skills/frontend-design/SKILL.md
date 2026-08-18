@@ -1,8 +1,8 @@
 ---
 name: frontend-design
-description: Builds and reviews UI for the Muhammed Ajmal Consulting site — Next.js 16 App Router, React 19, Tailwind v4, Supabase. Covers the orange/charcoal-navy token system, Inter-only typography, the graph-paper brand signature, component and form patterns, accessibility rules, and the anti-patterns this codebase rejects. Use when creating or editing any page, component, layout, or style; when writing Tailwind classes or editing globals.css; when asked to make an interface look better, less generic, or more polished; and when reviewing UI for brand, accessibility, or responsive correctness.
+description: Builds and reviews UI for the Muhammed Ajmal Consulting site — Next.js 16 App Router, React 19, Tailwind v4, Supabase. Covers the "Cyanotype Blueprint" ink/brass/vellum token system, Fraunces + IBM Plex typography, the blueprint-grid brand signature, component and form patterns, accessibility rules, and the anti-patterns this codebase rejects. Use when creating or editing any page, component, layout, or style; when writing Tailwind classes or editing globals.css; when asked to make an interface look better, less generic, or more polished; and when reviewing UI for brand, accessibility, or responsive correctness.
 metadata:
-  version: "3.0.0"
+  version: "4.0.0"
 ---
 
 # Frontend Design
@@ -17,16 +17,16 @@ Read that file when you need a value this page doesn't list.
 
 These defy reasonable assumptions and are the mistakes most often made in this repo.
 
-- **`--color-gold` is orange (`#FF6535`), not gold.** The brand was renamed from muted gold to orange; the token names were kept for compatibility. `--color-gold`, `--color-orange`, and `--color-primary` are all the same orange. Never introduce `#C8A24A` or any actual gold.
-- **Orange text on white fails AA.** Use `--color-gold-ink` (`#D6450F`) for orange text; `--color-gold` is for *fills* only. Same pattern for `--color-teal-ink`, `--color-emerald-ink`, `--color-warning-ink`.
-- **The page background is already painted.** `body` carries the aurora radials, the 40×40px graph grid, and a 2% grain pseudo-element. Do not re-apply, override, or duplicate them on a section.
+- **`--color-gold` is brass (`#C6752E`), not literal gold, and not the old brand orange.** The identity is "Cyanotype Blueprint" — deep ink-blue + warm brass on vellum paper. It superseded an earlier soft-white/orange-Inter identity; **never revert to `#FF6535` or Inter.** `--color-gold`, `--color-orange`, and `--color-primary` are all the same brass.
+- **Brass text on white fails AA.** Use `--color-gold-ink` (`#8C4D1F`) for brass text; `--color-gold` is for *fills* only. Same pattern for `--color-teal-ink`, `--color-emerald-ink`, `--color-warning-ink`.
+- **The page background is already painted.** `body` carries the aurora radials, the 40×40px blueprint grid, and a 2% grain pseudo-element. Do not re-apply, override, or duplicate them on a section.
 - **The utility is `.graph-overlay`**, not `.graph-bg`. Use `.graph-overlay-dark` on navy sections.
 - **Tailwind v4 — there is no `tailwind.config.js`.** Custom tokens go in `@theme {}` in globals.css. Adding a config file will silently do nothing.
 - **`cn()` lives in [src/lib/utils.ts](../../../src/lib/utils.ts)**, not `lib/cn.ts`.
 - **`/results` is the diagnostic report page**, rendered client-side from `sessionStorage` after the quiz. It is not a case-studies or portfolio page.
 - **`createAdminClient()` uses the service-role key and bypasses RLS.** Route Handlers and Server Components only — never import it into a Client Component.
 - **No animation library.** Motion is native CSS only, including `animation-timeline` scroll-driven effects in globals.css.
-- **Fonts load via `next/font/google` in `layout.tsx`.** Never add a `<link>` tag for Inter.
+- **Fonts load via `next/font/google` in `layout.tsx`.** Never add a `<link>` tag for Fraunces or IBM Plex.
 
 ---
 
@@ -49,11 +49,11 @@ Do not add a dependency without a functional reason. Prefer Server Components; k
 
 ---
 
-## Typography — Inter only
+## Typography — Fraunces + IBM Plex
 
-Single typeface. `--font-heading`, `--font-body`, `--font-sans`, and `--font-display` all resolve to Inter. `--font-mono` is JetBrains Mono, for code and figures only.
+Three faces, each with a distinct job. `--font-heading` / `--font-display` resolve to **Fraunces** (bold serif, editorial character — carries the brand's distinctiveness). `--font-body` / `--font-sans` resolve to **IBM Plex Sans**. `--font-mono` resolves to **IBM Plex Mono**, for code, numbers, stats, and technical/data annotations.
 
-Never introduce Plus Jakarta Sans, Playfair, Lexend, or any serif.
+Never introduce Inter, Arial, system-ui, or any other face as a primary typeface — they exist only as fallback stacks.
 
 Use the fluid clamp scale rather than raw font sizes:
 
@@ -64,7 +64,7 @@ Use the fluid clamp scale rather than raw font sizes:
 | `--step-1` | 1.2–1.5rem | Lead paragraph, h4 |
 | `--step-2` | 1.44–2rem | h3 |
 | `--step-3` | 1.73–2.67rem | h2 |
-| `--step-4` | 2.07–3.55rem | h1 |
+| `--step-4` | 2.07–3.55rem | h1, shared section scale |
 | `--step-5` | 2.49–4.74rem | Hero display |
 
 `text-wrap: balance` on headings and `text-wrap: pretty` on paragraphs are already global — don't restate them. Inputs are pinned to 16px to stop iOS zoom.
@@ -81,25 +81,25 @@ Two exceptions where hex is unavoidable because CSS custom properties aren't ava
 
 | Token | Hex | Role |
 | --- | --- | --- |
-| `--color-navy` / `--color-ink` / `--color-charcoal` | `#1A1A2E` | Headings, body text, dark sections |
-| `--color-gold` / `--color-orange` / `--color-primary` | `#FF6535` | Primary CTA, accents, active states, focus |
-| `--color-gold-bright` | `#FF8159` | Orange hover, gradient end |
-| `--color-gold-ink` | `#D6450F` | Orange *text* on white (AA) |
-| `--color-ivory` / `--color-bg` | `#F9FAFB` | Page background |
+| `--color-navy` / `--color-ink` / `--color-charcoal` | `#132A4A` | Blueprint Ink — headings, body text, dark sections |
+| `--color-gold` / `--color-orange` / `--color-primary` | `#C6752E` | Brass — primary CTA, accents, active states, focus |
+| `--color-gold-bright` | `#E0964F` | Brass hover / gradient end |
+| `--color-gold-ink` | `#8C4D1F` | Brass *text* on white (AA) |
+| `--color-ivory` / `--color-bg` | `#F6F0E2` | Vellum — page background |
 | `--color-surface` | `#FFFFFF` | Cards, inputs, modals |
-| `--color-teal` | `#0D9488` | Growth / digital-transformation accent |
-| `--color-teal-ink` | `#0F766E` | Teal text on white |
-| `--color-slate` / `--color-text-muted` | `#6B7280` | Secondary text |
-| `--color-line` / `--color-border` | `#E5E7EB` | Borders, dividers |
-| `--color-footer` | `#0B1120` | Footer only |
-| `--color-success` / `--color-emerald` | `#10B981` | Success |
-| `--color-warning` | `#F59E0B` | Warning (text: `--color-warning-ink`) |
-| `--color-danger` / `--color-crimson` | `#E11D48` | Error, destructive |
-| `--color-info` | `#3B82F6` | Informational |
+| `--color-teal` / `--color-info` | `#3E8FB0` | Blueprint Cyan — growth / digital-transformation accent |
+| `--color-teal-ink` | `#255A70` | Teal text on white (5.5:1) |
+| `--color-slate` / `--color-text-muted` | `#7C7362` | Secondary text |
+| `--color-line` / `--color-border` | `#E3DBC7` | Borders, dividers |
+| `--color-footer` | `#0A1F3B` | Footer background only (deepened ink) |
+| `--color-success` / `--color-emerald` | `#5B7A45` | Success |
+| `--color-emerald-ink` | `#3C5330` | Emerald text on white (5.5:1) |
+| `--color-warning` | `#F59E0B` | Warning (text: `--color-warning-ink` `#92400E`) |
+| `--color-danger` / `--color-crimson` | `#B33B2C` | Error, destructive |
 
 Full neutral ramp: `--color-neutral-50` … `--color-neutral-950`.
 
-**Orange is the only brand accent.** Teal supports; it never competes. Orange means "primary action," not "error." Never communicate state through color alone — pair with an icon, label, weight, or border.
+**Brass is the only brand accent.** Teal supports; it never competes. Brass means "primary action," not "error." Never communicate state through color alone — pair with an icon, label, weight, or border.
 
 ---
 
@@ -115,7 +115,7 @@ Full neutral ramp: `--color-neutral-50` … `--color-neutral-950`.
 --ease-out cubic-bezier(0.16, 1, 0.3, 1)   --ease-in cubic-bezier(0.5, 0, 0.75, 0)
 ```
 
-Shadows: `--shadow-1` subtle · `--shadow-2` card · `--shadow-3` modal/hero — all navy-tinted.
+Shadows: `--shadow-1` subtle · `--shadow-2` card · `--shadow-3` modal/hero — all ink-blue-tinted.
 
 Animate `transform` and `opacity` only. Never `transition: all` — name the properties. The `prefers-reduced-motion: reduce` guard is already global.
 
@@ -127,11 +127,11 @@ Use these instead of rebuilding them:
 
 | Class | Effect |
 | --- | --- |
-| `.gold-gradient-text` / `.orange-gradient-text` | Gradient text `#FF6535 → #FF8159` |
-| `.graph-overlay` | Navy graph grid on light sections (absolute) |
-| `.graph-overlay-dark` | Orange graph grid on dark sections |
+| `.gold-gradient-text` / `.orange-gradient-text` | Gradient text `#C6752E → #E0964F` |
+| `.graph-overlay` | Ink-blue blueprint grid on light sections (absolute) |
+| `.graph-overlay-dark` | Brass blueprint grid on dark sections |
 | `.reveal` | Staggered entrance, 80ms apart |
-| `.eyebrow` | 11px bold uppercase orange section label |
+| `.eyebrow` | 11px bold uppercase section label (color set per section — `text-gold-ink` on light, `text-gold` on dark) |
 | `.tap-target` | `min-height/width: 44px` — every icon-only button |
 | `.card-interactive` | Card hover treatment |
 | `.stage-rail` / `.stage-item` / `.stage-marker` / `.stage-card` | Process/timeline composition |
@@ -173,7 +173,7 @@ Never invent testimonials, client names or logos, revenue figures, metrics, cert
 
 When a page needs evidence that hasn't been supplied, write `[TO CONFIRM]`. Do not write a realistic-looking placeholder that could be mistaken for a real business claim.
 
-Positioning is *AI-Powered Business Operating Systems for growing SMEs*; the narrative arc is **CHAOS → CONTROL → SCALE**. Lead with operational problems and measurable outcomes. Avoid "revolutionize," "unlock your potential," "next-generation," "seamless," "supercharge."
+Voice: executive, analytical, practical — bold and distinctive, not generic. Avoid "revolutionize," "unlock your potential," "next-generation," "seamless," "supercharge."
 
 ---
 
@@ -181,15 +181,15 @@ Positioning is *AI-Powered Business Operating Systems for growing SMEs*; the nar
 
 | Don't | Do |
 | --- | --- |
-| Dark-theme or dark-aurora backgrounds | Soft white base + graph grid |
-| Any font but Inter | `font-heading` / `font-body` |
+| Soft-white / cool-gray backgrounds | Vellum base (`#F6F0E2`) + blueprint grid |
+| Any font but Fraunces/IBM Plex (Inter, Arial, Roboto, etc.) | `font-heading` (Fraunces) / `font-body` (IBM Plex Sans) |
 | Raw hex in JSX | Token classes (`text-navy`, `bg-gold`) |
 | New CSS custom properties for color | Existing tokens |
 | `<link>` for Google Fonts | `next/font/google` in `layout.tsx` |
 | `transition: all` | Named properties |
 | Fixed `px` font sizes | `--step-N` or Tailwind `text-*` |
 | Inline `style={{}}` for layout | Tailwind + `cn()` |
-| Muted gold `#C8A24A` | Brand orange `#FF6535` |
+| Original brand orange `#FF6535` or Inter | Brass `#C6752E` and Fraunces/Plex — the old identity is retired |
 | Template literals for class merging | `cn()` |
 | Icon button without `.tap-target` | Always `.tap-target` |
 | Glassmorphism, mesh gradients, glow orbs, AI sparkles, circuit motifs, fake dashboards, logo clouds | Flat structured surfaces with real content |
@@ -199,7 +199,7 @@ Positioning is *AI-Powered Business Operating Systems for growing SMEs*; the nar
 ## Before you finish
 
 - [ ] No raw hex in JSX (outside the two documented exceptions)
-- [ ] Orange text uses `--color-gold-ink`, not `--color-gold`
+- [ ] Brass text uses `--color-gold-ink`, not `--color-gold`
 - [ ] One `<h1>`; heading levels not skipped
 - [ ] Icon-only buttons have `.tap-target` and an accessible name
 - [ ] Keyboard reaches every interactive element; focus ring visible

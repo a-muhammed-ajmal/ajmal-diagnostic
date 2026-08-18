@@ -81,9 +81,9 @@ describe('resolveCalendlyLink — normalises valid values', () => {
 describe('calendlyPopupUrl', () => {
   it('applies all three brand theme params', () => {
     const params = new URL(calendlyPopupUrl(VALID)).searchParams;
-    expect(params.get('background_color')).toBe('F9FAFB');
-    expect(params.get('text_color')).toBe('1A1A2E');
-    expect(params.get('primary_color')).toBe('FF6535');
+    expect(params.get('background_color')).toBe('F6F0E2');
+    expect(params.get('text_color')).toBe('132A4A');
+    expect(params.get('primary_color')).toBe('C6752E');
   });
 
   it('keeps the booking path intact', () => {
@@ -95,11 +95,11 @@ describe('calendlyPopupUrl', () => {
     const url = calendlyPopupUrl(`${VALID}?month=2026-08`);
     expect(url.split('?')).toHaveLength(2);
     expect(new URL(url).searchParams.get('month')).toBe('2026-08');
-    expect(new URL(url).searchParams.get('primary_color')).toBe('FF6535');
+    expect(new URL(url).searchParams.get('primary_color')).toBe('C6752E');
   });
 
   it('overrides a pre-existing theme param rather than duplicating it', () => {
     const url = calendlyPopupUrl(`${VALID}?primary_color=000000`);
-    expect(new URL(url).searchParams.getAll('primary_color')).toEqual(['FF6535']);
+    expect(new URL(url).searchParams.getAll('primary_color')).toEqual(['C6752E']);
   });
 });

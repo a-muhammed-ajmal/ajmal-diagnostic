@@ -68,7 +68,7 @@ export function DiagnosticReportEmail({
           >
             Prepared for {companyName} · Muhammed Ajmal Consulting
           </Text>
-          <Hr style={{ borderColor: "#E5E7EB", margin: "0 0 24px" }} />
+          <Hr style={{ borderColor: "#E3DBC7", margin: "0 0 24px" }} />
 
           <Section
             style={{
@@ -203,7 +203,7 @@ export function DiagnosticReportEmail({
           >
             This score compares self-reported answers across five operating areas. It can highlight patterns for further review, but it does not establish root cause.
           </Text>
-          <Hr style={{ borderColor: "#E5E7EB", margin: "24px 0" }} />
+          <Hr style={{ borderColor: "#E3DBC7", margin: "24px 0" }} />
 
           <Heading
             style={{ color: "#132A4A", fontSize: "18px", margin: "0 0 16px" }}
@@ -228,7 +228,7 @@ export function DiagnosticReportEmail({
               </Text>
             </Section>
           ))}
-          <Hr style={{ borderColor: "#E5E7EB", margin: "24px 0" }} />
+          <Hr style={{ borderColor: "#E3DBC7", margin: "24px 0" }} />
 
           {results.aiPlan && (
             <>
@@ -368,7 +368,7 @@ export function DiagnosticReportEmail({
             </Text>
           </Section>
 
-          <Hr style={{ borderColor: "#E5E7EB", margin: "0 0 16px" }} />
+          <Hr style={{ borderColor: "#E3DBC7", margin: "0 0 16px" }} />
           <Text
             style={{ color: "#7C7362", fontSize: "11px", textAlign: "center" }}
           >
