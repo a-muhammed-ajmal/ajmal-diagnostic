@@ -6,7 +6,7 @@
 - **Named Exports**: Use `export function Component(…)` / `export const Component = …`. No default exports for components.
 - **PascalCase filenames** matching the component name.
 - **Class Merging**: Always use `cn()` from `src/lib/utils.ts` for conditional Tailwind classes.
-- **Font**: Every component inherits Inter from `body`. Never set a different `font-family` on any component.
+- **Font**: Every component inherits IBM Plex Sans from `body`, and headings resolve to Fraunces through the global `h1`–`h6` rule. Never set a different `font-family` on any component.
 - **Forms**: `react-hook-form` + a `zod` schema. No uncontrolled inputs.
 
 ## File Structure Pattern
@@ -43,7 +43,7 @@ Place a new component in the folder matching its feature. Create a new folder on
 <div style={{ color: 'var(--color-gold-ink)' }}>
 
 // Wrong — hardcoded hex
-<div style={{ color: '#D6450F' }}>
+<div style={{ color: '#8C4D1F' }}>
 ```
 
 Two exceptions where literal hex is unavoidable, because CSS custom properties are not available at render time: `icon.tsx` / `apple-icon.tsx` (Satori / `ImageResponse`) and the email templates in `src/lib/email/templates/`. Values there must still match the tokens.
@@ -66,7 +66,7 @@ Use the shared `<Button>` from [Button.tsx](../../../../src/components/ui/Button
 | --- | --- | --- |
 | `primary` (default) | `bg-gold text-navy`, hover `bg-gold-bright` | The one dominant action |
 | `secondary` | `border-navy text-navy`, hover fills navy | Supporting action on light |
-| `quiet` | `border-navy/15 bg-white`, hover orange border + `text-gold-ink` | Low-emphasis action |
+| `quiet` | `border-navy/15 bg-white`, hover brass border + `text-gold-ink` | Low-emphasis action |
 | `danger` | `bg-crimson text-white` | Destructive confirm |
 
 It picks its element from its props — `href` gives a `next/link`, `href` + `external` gives `<a target="_blank" rel="noreferrer">`, neither gives a `<button>` (default `type="button"`). `fullWidth` spans the container.

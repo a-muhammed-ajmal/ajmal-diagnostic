@@ -20,16 +20,13 @@ On failure:
   path, line number, and error message. Wait for user.
 
 ### 2. Test coverage
-This project has no test runner yet — deliberately deferred, not an oversight.
-First check whether a `test:coverage` script exists in package.json.
+Run: npm run test:coverage
 
-- If it does NOT exist: skip this step. Record `0 tests, n/a coverage`.
-  Do NOT scaffold a test harness as part of a ship — standing up Jest/Vitest
-  is its own piece of work and needs the user's say-so.
-- If it DOES exist: run `npm run test:coverage` and capture the exact test
-  count and exact coverage % from the output.
+Capture the exact test count and exact statement coverage % from the output.
+`jest.config.ts` fails the run itself if `src/lib/fdi/score.ts`, `bands.ts`, or
+`rounding.ts` drop below 100% coverage — there is no other enforced global floor.
 
-On failure (only applies when the script exists):
+On failure:
 - If the failure is a broken import, missing mock, or type mismatch
   the error explicitly describes: fix it and re-run.
 - If fixing requires understanding business logic or behaviour: stop.
@@ -43,18 +40,15 @@ On failure:
 - If it requires any assumption about intent or architecture: stop.
   Report the exact error. Wait for user.
 
-### 4–6. Update project docs (conditional)
-These steps were written for a different repo layout. In THIS repo:
-- `spec.md` is a per-feature working template (no Current State Snapshot table)
-- `CLAUDE.md` is a single `@AGENTS.md` include (no Testing Standard bullet)
-- `README.md` is create-next-app boilerplate (no Project Stats table)
+### 4–5. Update project docs (conditional)
+In THIS repo:
+- `README.md` has a "Project stats" table (Tests / DB tables / Migrations / Routes).
+  Update only the Tests row with the count/coverage from step 2. Touch nothing else.
+- `CLAUDE.md` is a single `@AGENTS.md` include plus its own Commands/FDI sections —
+  it has no test-count bullet to update; leave it as `unchanged` unless the shipped
+  work changed a command or the FDI architecture itself.
 
-For each of the three files, look for the named structure:
-- If the structure EXISTS: update only the named rows/bullet with the values
-  from step 2. Touch nothing else.
-- If it DOES NOT exist: leave the file untouched and report `unchanged`.
-  Do NOT invent the table or add stats sections — creating new doc structure
-  is a content change and needs the user's approval first.
+There is no `spec.md` in this repo — do not create one.
 
 Architecture facts (stack, routes, tokens) live in `AGENTS.md`. If the shipped
 work changed those, flag it in the report for the user to approve — do not
@@ -84,7 +78,6 @@ Output only this at the end:
   Lint:       PASS / FAIL
   Tests:      [count] passing, [coverage]% — PASS / FAIL / SKIPPED (no runner)
   Build:      PASS / FAIL
-  spec.md:    updated / unchanged
   CLAUDE.md:  updated / unchanged
   README.md:  updated / unchanged
   Commit:     [hash] [message]
@@ -99,7 +92,7 @@ Output only this at the end:
      Run this SQL:
 
      ```sql
-     ALTER TABLE habits ADD COLUMN reminder_time TIME DEFAULT NULL;
+     ALTER TABLE diagnostic_leads ADD COLUMN follow_up_at TIMESTAMPTZ DEFAULT NULL;
      ```
 SQL block must be copy-pasteable exactly as shown.
 Never summarise or describe the SQL — always output the full statement.

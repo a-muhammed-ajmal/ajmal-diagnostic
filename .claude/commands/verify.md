@@ -13,8 +13,13 @@ Run these steps in order. Stop and report on the first failure.
    ```bash
    npm run test:coverage
    ```
-   Success: all tests pass AND line coverage on `lib/**` ≥ 85%.
-   If coverage is below 85%, identify which files are uncovered and suggest which cases to add.
+   Success: all tests pass AND `src/lib/fdi/score.ts`, `bands.ts`, and `rounding.ts` stay at
+   100% statements/branches/functions/lines — this is enforced by `coverageThreshold` in
+   `jest.config.ts` and Jest itself fails the run if any of the three drop below it. There is
+   no other enforced global coverage floor; a drop elsewhere is worth flagging but is not a
+   hard failure.
+   If one of the three pinned files drops below 100%, identify the uncovered branch/line and
+   suggest which case to add.
 
 2. **Lint**
    ```bash
@@ -32,9 +37,9 @@ Run these steps in order. Stop and report on the first failure.
 ## Output format
 
 ```
-✅ Tests: 138 passed, 96.47% line coverage
+✅ Tests: [count] passed, fdi/score.ts, bands.ts, rounding.ts at 100%
 ✅ Lint: 0 errors, 0 warnings
-✅ Build: compiled successfully (17 routes)
+✅ Build: compiled successfully ([N] routes)
 
 Ready to commit.
 ```
