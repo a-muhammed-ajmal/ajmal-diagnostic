@@ -1,4 +1,4 @@
-import { resolveCalendlyLink, calendlyPopupUrl } from './calendly';
+import { resolveCalendlyLink, calendlyPopupUrl, POPUP_THEME } from './calendly';
 
 // resolveCalendlyLink is the guard that stands between a missing env var and a dead
 // booking button in production. calendlyPopupUrl exists because the old string
@@ -78,12 +78,32 @@ describe('resolveCalendlyLink — normalises valid values', () => {
   });
 });
 
+describe('POPUP_THEME', () => {
+  // The one place the brand hexes are pinned. Calendly cannot read our CSS custom
+  // properties, so these literals are the only copy of the palette outside globals.css
+  // — this test is what stops them silently surviving a rebrand, as the retired
+  // orange/soft-white values once did. Update alongside globals.css, never separately.
+  it('matches the current "Cyanotype Blueprint" tokens in globals.css', () => {
+    expect(POPUP_THEME).toEqual({
+      background_color: 'F6F0E2', // --color-ivory
+      text_color: '132A4A', // --color-navy
+      primary_color: 'C6752E', // --color-gold
+    });
+  });
+
+  it('carries no "#" — Calendly expects bare hex in the query string', () => {
+    for (const value of Object.values(POPUP_THEME)) {
+      expect(value).toMatch(/^[0-9A-F]{6}$/);
+    }
+  });
+});
+
 describe('calendlyPopupUrl', () => {
-  it('applies all three brand theme params', () => {
+  it('applies every theme param', () => {
     const params = new URL(calendlyPopupUrl(VALID)).searchParams;
-    expect(params.get('background_color')).toBe('F6F0E2');
-    expect(params.get('text_color')).toBe('132A4A');
-    expect(params.get('primary_color')).toBe('C6752E');
+    for (const [key, value] of Object.entries(POPUP_THEME)) {
+      expect(params.get(key)).toBe(value);
+    }
   });
 
   it('keeps the booking path intact', () => {
@@ -95,11 +115,13 @@ describe('calendlyPopupUrl', () => {
     const url = calendlyPopupUrl(`${VALID}?month=2026-08`);
     expect(url.split('?')).toHaveLength(2);
     expect(new URL(url).searchParams.get('month')).toBe('2026-08');
-    expect(new URL(url).searchParams.get('primary_color')).toBe('C6752E');
+    expect(new URL(url).searchParams.get('primary_color')).toBe(POPUP_THEME.primary_color);
   });
 
   it('overrides a pre-existing theme param rather than duplicating it', () => {
     const url = calendlyPopupUrl(`${VALID}?primary_color=000000`);
-    expect(new URL(url).searchParams.getAll('primary_color')).toEqual(['C6752E']);
+    expect(new URL(url).searchParams.getAll('primary_color')).toEqual([
+      POPUP_THEME.primary_color,
+    ]);
   });
 });
