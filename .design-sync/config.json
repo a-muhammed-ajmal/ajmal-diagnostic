@@ -1,0 +1,85 @@
+{
+  "projectId": "963fac96-928c-43ff-95da-389265a42950",
+  "shape": "package",
+  "pkg": "ajmal-diagnostic",
+  "globalName": "ConsultingDS",
+  "srcDir": "src",
+  "tsconfig": ".design-sync/tsconfig.sync.json",
+  "buildCmd": "node .design-sync/build-css.mjs",
+  "cssEntry": ".design-sync/.cache/ds-styles.css",
+  "extraFonts": [
+    ".design-sync/fonts/fonts-src.css"
+  ],
+  "componentSrcMap": {
+    "Button": "src/components/ui/Button.tsx",
+    "Section": "src/components/ui/Section.tsx",
+    "PageHero": "src/components/ui/PageHero.tsx",
+    "Surface": "src/components/ui/Surface.tsx",
+    "SectionHeader": "src/components/ui/Surface.tsx",
+    "Navigation": "src/components/layout/Navigation.tsx",
+    "Footer": "src/components/layout/Footer.tsx",
+    "QuestionCard": "src/components/quiz/QuestionCard.tsx",
+    "OptionButton": "src/components/quiz/OptionButton.tsx",
+    "ProgressBar": "src/components/quiz/ProgressBar.tsx",
+    "FdiResults": "src/components/fdi/FdiResults.tsx",
+    "GrowthFormulaRail": "src/components/home/Graphics.tsx",
+    "ArchitectureLadder": "src/components/home/Graphics.tsx",
+    "IndexBandMeter": "src/components/home/Graphics.tsx",
+    "FounderSystemVisual": "src/components/home/SystemVisuals.tsx",
+    "FounderTrapDiagram": "src/components/home/SystemVisuals.tsx",
+    "DependencyIndexPreview": "src/components/home/SystemVisuals.tsx",
+    "CommercialLadder": "src/components/home/SystemVisuals.tsx",
+    "ContactForm": "src/components/contact/ContactForm.tsx",
+    "LeadCaptureForm": "src/components/lead/LeadCaptureForm.tsx",
+    "NewsletterForm": "src/components/newsletter/NewsletterForm.tsx",
+    "ArticleToc": "src/components/insights/ArticleToc.tsx"
+  },
+  "entry": ".design-sync/ds-entry.ts",
+  "overrides": {
+    "PageHero": {
+      "cardMode": "column",
+      "viewport": "1280x900"
+    },
+    "Navigation": {
+      "cardMode": "column",
+      "viewport": "1280x420"
+    },
+    "Footer": {
+      "cardMode": "column",
+      "viewport": "1280x760"
+    },
+    "ArticleToc": {
+      "cardMode": "column",
+      "viewport": "1280x760"
+    },
+    "CommercialLadder": {
+      "cardMode": "column",
+      "viewport": "1280x1000"
+    },
+    "DependencyIndexPreview": {
+      "cardMode": "column",
+      "viewport": "1280x820"
+    },
+    "FounderTrapDiagram": {
+      "cardMode": "column",
+      "viewport": "1280x780"
+    },
+    "GrowthFormulaRail": {
+      "cardMode": "column",
+      "viewport": "1280x420"
+    },
+    "FdiResults": {
+      "cardMode": "column",
+      "viewport": "1280x1320"
+    },
+    "LeadCaptureForm": {
+      "cardMode": "column",
+      "viewport": "900x1100"
+    },
+    "ContactForm": {
+      "cardMode": "column",
+      "viewport": "900x1000"
+    }
+  },
+  "readmeHeader": ".design-sync/conventions.md"
+}
