@@ -73,7 +73,7 @@ export default async function InsightArticlePage({ params }: { params: Promise<{
                   <span className="stage-marker" aria-hidden="true">{stage.n}</span>
                   <div className="stage-card stage-reveal rounded-xl bg-white p-5 md:p-6">
                     <div className="flex gap-4">
-                      <span className="font-heading text-[length:var(--step-3)] font-extrabold leading-none text-brand-ink md:hidden">{stage.n}</span>
+                      <span className="font-heading text-[length:var(--step-0)] font-extrabold leading-none text-brand-ink md:hidden">{stage.n}</span>
                       <div>
                         <h3 className="font-heading text-[length:var(--step-0)] font-bold text-ink">{stage.name}</h3>
                         <p className="mt-2 font-body text-[length:var(--step-0)] leading-relaxed text-muted">{stage.body}</p>
