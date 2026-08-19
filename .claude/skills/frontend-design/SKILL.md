@@ -59,13 +59,15 @@ Use the fluid clamp scale rather than raw font sizes:
 
 | Token | Range | Typical use |
 | --- | --- | --- |
-| `--step--1` | 0.83–0.94rem | Captions, metadata |
-| `--step-0` | 1–1.13rem | Body |
-| `--step-1` | 1.2–1.5rem | Lead paragraph, h4 |
-| `--step-2` | 1.44–2rem | h3 |
-| `--step-3` | 1.73–2.67rem | h2 |
-| `--step-4` | 2.07–3.55rem | h1, shared section scale |
-| `--step-5` | 2.49–4.74rem | Hero display |
+| `--step--1` | 13.5 → 15.0px | Captions, metadata |
+| `--step-0` | 16.0 → 18.1px | Body |
+| `--step-1` | 17.0 → 24.0px | Lead paragraph, h4 |
+| `--step-2` | 18.5 → 32.0px | h3 |
+| `--step-3` | 20.0 → 42.7px | h2 |
+| `--step-4` | 26 → 44px | h1, shared section scale |
+| `--step-5` | 32 → 56px | Hero display |
+
+Floors are tuned for 375px and ceilings for 1240px. The mobile floors are deliberately compressed so `h1 > h2 > h3` stays in order at that width — do not "correct" them upward.
 
 `text-wrap: balance` on headings and `text-wrap: pretty` on paragraphs are already global — don't restate them. Inputs are pinned to 16px to stop iOS zoom.
 
@@ -131,9 +133,9 @@ Use these instead of rebuilding them:
 | `.graph-overlay` | Ink-blue blueprint grid on light sections (absolute) |
 | `.graph-overlay-dark` | Brass blueprint grid on dark sections |
 | `.reveal` | Staggered entrance, 80ms apart |
-| `.eyebrow` | 11px bold uppercase section label (color set per section — `text-gold-ink` on light, `text-gold` on dark) |
+| `.eyebrow` | 12px bold uppercase section label — shape only; it sets no colour, so pick `text-gold-ink` on light / `text-gold` on dark |
 | `.tap-target` | `min-height/width: 44px` — every icon-only button |
-| `.card-interactive` | Card hover treatment |
+| `.card-interactive` | Card hover lift + shadow — it sets no `border-color`, so the accent stays a per-card utility |
 | `.stage-rail` / `.stage-item` / `.stage-marker` / `.stage-card` | Process/timeline composition |
 | `.article-longform` / `.article-toc` / `.reading-progress` | Insights article chrome |
 | `.animate-fade-in` | Opacity entrance |

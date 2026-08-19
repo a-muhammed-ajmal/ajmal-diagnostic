@@ -1,6 +1,6 @@
 ---
 name: brand-guidelines
-description: Applies the Muhammed Ajmal Consulting brand — "Cyanotype Blueprint": ink-blue + warm brass on vellum, Fraunces + IBM Plex typography, blueprint-grid signature — to any artifact, document, or surface that should carry the look without full component engineering. Use for one-off artifacts, marketing copy, presentations, diagrams, or README banners. For building actual app components, pages, or interfaces, use frontend-design instead — it owns the complete token system and implementation rules.
+description: "Applies the Muhammed Ajmal Consulting brand — \"Cyanotype Blueprint\": ink-blue + warm brass on vellum, Fraunces + IBM Plex typography, blueprint-grid signature — to any artifact, document, or surface that should carry the look without full component engineering. Use for one-off artifacts, marketing copy, presentations, diagrams, or README banners. For building actual app components, pages, or interfaces, use frontend-design instead — it owns the complete token system and implementation rules."
 ---
 
 # Brand Guidelines

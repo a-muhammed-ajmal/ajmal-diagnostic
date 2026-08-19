@@ -6,7 +6,7 @@ Read this when asked to make an interface "look better," "less generic," or "mor
 
 - **Two faces, distinct jobs.** `--font-heading` / `--font-display` resolve to **Fraunces** (bold serif, editorial character). `--font-body` / `--font-sans` resolve to **IBM Plex Sans**. `--font-mono` is IBM Plex Mono for numbers/data. No Inter, no Playfair Display, no Plus Jakarta Sans, no Lexend — those exist only as fallback stacks.
 - **Weight drives hierarchy within a face**, not font-swapping. 400 body, 500 medium emphasis, 600 section heads, 700 titles, 800 hero display.
-- **Tracking on display**: `letter-spacing: -0.02em` on anything 20px and above. Eyebrows go the other way: `+0.15em` uppercase (the `.eyebrow` class already does this).
+- **Tracking on display**: `letter-spacing: -0.02em` on anything 20px and above. Eyebrows go the other way: `+0.1em` uppercase (the `.eyebrow` class already sets the shape — weight, size, tracking, uppercase — but no colour).
 - **Use the fluid `--step-N` scale** (`--step--1` through `--step-5`) rather than fixed pixel sizes. It is clamp-based and already tuned for this site.
 
 ## Color Aesthetic
@@ -34,16 +34,17 @@ Apply `.graph-overlay` only when a light section needs its own grid above the pa
 
 ## Card Hover Pattern
 
+`.card-interactive` already handles the transition and the lift. Note what it does **not** set: no `border-color` on hover, and the shadow is a literal rather than `--shadow-2`. The border accent is left to a Tailwind utility on each card so it can vary (brass by default, crimson on the Founder Trap cards).
+
 ```css
 .card-interactive {
-  transition: border-color var(--dur-2) var(--ease-out),
-              box-shadow var(--dur-2) var(--ease-out),
-              transform var(--dur-2) var(--ease-out);
+  transition:
+    border-color 150ms var(--ease-out),
+    box-shadow   150ms var(--ease-out),
+    transform    150ms var(--ease-out);
 }
-
 .card-interactive:hover {
-  border-color: var(--color-gold);
-  box-shadow: var(--shadow-2);
+  box-shadow: 0 4px 16px rgba(19, 42, 74, 0.12);
   transform: translateY(-1px);
 }
 ```
