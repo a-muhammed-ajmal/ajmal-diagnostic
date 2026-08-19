@@ -1,0 +1,30 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm run lint)",
+      "Bash(npm run build)",
+      "Bash(npm run test)",
+      "Bash(npm run test:coverage)",
+      "Bash(git config user.email)",
+      "mcp__claude_ai_Supabase__list_projects",
+      "mcp__Claude_Browser__preview_logs",
+      "mcp__Claude_Browser__get_page_text",
+      "mcp__claude_ai_claude-agent-skills__query_docs_filesystem_agent_skills"
+    ]
+  },
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node .claude/hooks/lint-edited-file.cjs",
+            "timeout": 30,
+            "statusMessage": "Linting edited file..."
+          }
+        ]
+      }
+    ]
+  }
+}
