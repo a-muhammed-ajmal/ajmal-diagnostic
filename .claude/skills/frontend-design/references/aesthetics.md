@@ -4,48 +4,50 @@ Read this when asked to make an interface "look better," "less generic," or "mor
 
 ## Typography
 
-- **Two faces, distinct jobs.** `--font-heading` / `--font-display` resolve to **Roboto Slab** (slab serif, carries the headings); `--font-body` / `--font-sans` / `--font-mono` resolve to **Lexend**, which is tuned for reading ease — the reason it holds up at 12px. `font-mono` only switches on tabular figures. No Inter, no Fraunces, no IBM Plex, no Figtree — those exist only as fallback stacks.
-- **Weight and size drive hierarchy**, not font-swapping. 400 body, 500 medium emphasis, 600 section heads, 700 titles, 800 hero display. Body is 12px and h1 stops at 24px, so the whole scale is compressed into one octave — hierarchy leans on weight, case and the slab/sans contrast rather than size.
-- **Tracking on display**: `letter-spacing: -0.02em` on anything 20px and above. Eyebrows go the other way: `+0.1em` uppercase (the `.eyebrow` class already sets the shape — weight, size, tracking, uppercase — but no colour).
-- **Use the fluid `--step-N` scale** (`--step--1` through `--step-5`) rather than fixed pixel sizes. It is clamp-based and already tuned for this site.
+- **Two faces, distinct jobs.** `--font-heading` / `--font-display` resolve to **Roboto Slab** (slab serif, carries every heading); `--font-body` / `--font-sans` / `--font-mono` resolve to **Figtree**, which carries body and all UI text including button and control labels. `font-mono` only switches on tabular figures. No Inter, no Lexend, no Fraunces, no IBM Plex — those exist only as retired identities or fallback stacks.
+- **Weight and size drive hierarchy**, not font-swapping. Headings run 600–800; body runs 300–400 with 500–600 for emphasis and labels.
+- **Tracking**: loose on large display titles, none below. Eyebrows go the other way: `+0.15em` uppercase (the `.eyebrow` class already sets weight, size, tracking and case — but no colour).
+- **Use the `--step-N` scale**, never a hardcoded pixel size. A `px` font-size escapes the mobile ceilings, which is the single most common way this design system gets broken.
+- The scale is **responsive with hard mobile ceilings**: below 768px no heading exceeds 24px and no body copy exceeds 14px; above it the scale opens to 48px h1 / 32px h2 / 16px body. That jump is where the hierarchy lives on desktop — do not flatten it.
 
 ## Color Aesthetic
 
-- **Blue is the only brand accent.** `--color-brand` (`#2563EB`) for fills, `--color-brand-hover` (`#1D4ED8`) on hover, `--color-brand-ink` (`#1E40AF`) for coloured text on white.
-- **There are no dark sections.** The brand is "Signal" — electric blue on a white canvas. Rhythm comes from alternating white and `--color-brand-tint` bands separated by hairline rules, not from dark slabs.
-- **Amber supports, never competes.** `--color-accent` is a fill for highlights, chips, and the final step of a progression — never the primary action, and never text.
-- **No decorative gradients** beyond the sanctioned `.brand-gradient-text` (display sizes only). No rainbow gradients, no purple, no AI pulse effects, no mesh backgrounds, and no texture or grid overlays — the canvas is deliberately flat.
+- **Electric blue is the primary.** `--color-brand` (`#0052FF`) for fills, `--color-brand-hover` (`#0039CC`) on hover, `--color-brand-ink` (`#0037A5`) for coloured text on white.
+- **Amber is the secondary, and it is a fill.** `--color-accent` (`#FFBF00`) is 1.65:1 on white. It may sit on dark slate (`--color-canvas-dark`), carry dark text on top of itself, or act as a border highlight — never as text on a light surface. For that, `--color-accent-ink` (`#B45309`).
+- **Slate grounds both.** `--color-ink` (`#0F172A`) for text, `--color-muted` (`#475569`) for secondary, `--color-line` (`#E2E8F0`) for borders, `--color-canvas-light` (`#F8FAFC`) for neutral bands.
+- **No purple, no rainbow gradients, no AI pulse effects, no mesh backgrounds.** The sanctioned gradient is `.brand-gradient-text` (electric-700 → electric-500); both ends clear 4.5:1, so unlike the old one it is safe at any size.
 
-## Brand Signature: Blueprint Grid
+## Depth: glass, orbs, and bands
 
-The 40×40px ink-blue grid, the aurora radials, and the grain layer are **already painted on `body`** in `globals.css` — this is a literal blueprint grid, part of the concept, not decoration. Do not re-declare them.
+Depth is welcome now, but it comes from three sanctioned devices, not from decoration:
 
-There is no grid overlay any more — `.graph-overlay` and `.graph-overlay-dark` were deleted along with the page grain and aurora radials. When a section needs separation, give it `bg-brand-tint` and `border-y border-line`.
+- **`.glass-panel`** — translucent white, `backdrop-filter: blur(12px)`, thin border. Use for a panel that floats over ambient colour. It degrades to an opaque card where `backdrop-filter` is unsupported, so text never becomes unreadable.
+- **`.orb` + `.orb-electric` / `.orb-amber`** — blurred radials at 20–30% opacity, sitting behind a hero. They need a positioned, `overflow-hidden` parent and `aria-hidden="true"`. Two is the budget for a section; more turns into soup.
+- **Banded rhythm** — alternate white, `bg-canvas-light`, and `bg-brand-tint`, separated by `border-y border-line`. Two adjacent white sections need a `border-t border-line` or they merge.
+
+## Layout
+
+- **Asymmetric grids.** A 7/5 or 8/4 split reads as designed; two equal halves read as a template. Break up rows of identical equal-width cards — vary span, or give one card prominence.
+- **One dominant action per view**, with secondaries visibly subordinate.
 
 ## Motion
 
-- **Signature easing**: `cubic-bezier(0.16, 1, 0.3, 1)` (`--ease-out`) — luxurious and considered, matching a premium consulting brand.
-- **Durations**: `--dur-1` 120ms · `--dur-2` 220ms · `--dur-3` 400ms · `--dur-4` 650ms. Keep interaction feedback at `--dur-1`/`--dur-2`.
-- **Staggered entrances**: use the existing `.reveal` class (translateY + fade, 80ms apart). Don't hand-roll stagger delays.
-- **Micro-interactions**: subtle lift (`translateY(-1px)`) plus shadow increase on card hover. Keep it restrained.
-- **Never `transition: all`** — name the properties: `transition: transform var(--dur-2) var(--ease-out), opacity var(--dur-2) var(--ease-out);`
-- Animate `transform` and `opacity` only. Respect `prefers-reduced-motion` (handled globally).
-- **No glassmorphism.** Flat, structured surfaces only — including nav and modals.
+- **Signature easing**: `cubic-bezier(0.16, 1, 0.3, 1)` (`--ease-out`).
+- **Durations**: `--dur-1` 120ms · `--dur-2` 200ms · `--dur-3` 400ms · `--dur-4` 650ms. Interaction feedback is `--dur-2` (200ms) — that is the mandated `transition-all duration-200`.
+- **Staggered entrances**: use the existing `.reveal` class (translateY + fade, 100ms apart). Don't hand-roll stagger delays.
+- **Hover micro-interactions are required on every CTA.** A static interface with no active/hover feedback is a defect. The house pattern is a 2px upward shift plus a glow step: `.hover-lift` (electric glow), `.hover-lift-amber` (amber glow), `.card-interactive` (lift + shadow + brand border).
+- Prefer animating `transform`, `opacity`, and colour. Respect `prefers-reduced-motion` (handled globally).
 
 ## Card Hover Pattern
 
-`.card-interactive` already handles the transition, the 2px lift, the `--shadow-2` step, and the blue hover border. Use it rather than rebuilding a hover.
+`.card-interactive` already handles the transition, the 2px lift, the `--shadow-2` step, and the electric hover border. Use it rather than rebuilding a hover.
 
 ```css
-.card-interactive {
-  transition:
-    border-color 150ms var(--ease-out),
-    box-shadow   150ms var(--ease-out),
-    transform    150ms var(--ease-out);
-}
+.card-interactive { transition: all var(--dur-2) var(--ease-out); }
 .card-interactive:hover {
+  border-color: var(--color-brand);
   box-shadow: var(--shadow-2);
-  transform: translateY(-1px);
+  transform: translateY(-2px);
 }
 ```
 
@@ -54,9 +56,10 @@ There is no grid overlay any more — `.graph-overlay` and `.graph-overlay-dark`
 Diagnose in this order before adding any decoration:
 
 1. **Hierarchy** — is there one clear focal point, or do five elements compete?
-2. **Type scale contrast** — generic pages use three sizes that are all too close. Widen the jump between display and body.
-3. **Density** — is the page padded into emptiness? Structured density reads as considered; large blank gaps read as unfinished.
-4. **One dominant action** — is the primary CTA unmistakable, with secondaries visibly subordinate?
-5. **Edges and rhythm** — consistent border treatment and a repeating spacing interval do more than any effect.
+2. **Type scale contrast** — generic pages use three sizes that are all too close. On desktop the scale spans 13px to 48px; use its ends.
+3. **Symmetry** — a page of equal-width cards in equal rows is the single strongest "template" signal. Break it.
+4. **Density** — is the page padded into emptiness? Structured density reads as considered; large blank gaps read as unfinished.
+5. **One dominant action** — is the primary CTA unmistakable, with secondaries visibly subordinate?
+6. **Edges and rhythm** — consistent border treatment and a repeating spacing interval do more than any effect.
 
-Only after those are resolved should you reach for the brand signature (grid, gradient text, orange accent).
+Only after those are resolved should you reach for the brand signature (glass, orbs, gradient text, amber accent).

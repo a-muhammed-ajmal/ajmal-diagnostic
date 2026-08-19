@@ -2,22 +2,22 @@
 
 ## Core Web Vitals
 
-- **LCP** < 2.5s — optimise the critical rendering path. Roboto Slab and Lexend both load via `next/font/google`, which self-hosts and avoids FOUT.
+- **LCP** < 2.5s — optimise the critical rendering path. Roboto Slab and Figtree both load via `next/font/google`, which self-hosts and avoids FOUT.
 - **CLS** < 0.1 — always give images explicit `width`/`height`, and reserve space for content that arrives late.
 - **INP** < 200ms — the responsiveness metric that replaced FID. Avoid main-thread tasks over 50ms; break up heavy client work.
 
 ## Font Loading
 
-Three typefaces, all loaded once in `src/app/layout.tsx`:
+Two typefaces, both loaded once in `src/app/layout.tsx`:
 
 ```ts
-import { Lexend, Roboto_Slab } from 'next/font/google';
+import { Figtree, Roboto_Slab } from 'next/font/google';
 
-const lexend = Lexend({ variable: '--font-lexend', subsets: ['latin'], weight: ['400','500','600','700'], display: 'swap' });
+const figtree = Figtree({ variable: '--font-figtree', subsets: ['latin'], weight: ['300','400','500','600','700'], display: 'swap' });
 const robotoSlab = Roboto_Slab({ variable: '--font-roboto-slab', subsets: ['latin'], weight: ['500','600','700','800'], display: 'swap' });
 ```
 
-`--font-heading` / `--font-display` resolve to `var(--font-roboto-slab)`; `--font-body` / `--font-sans` / `--font-mono` resolve to `var(--font-lexend)`. Never add a `<link>` to Google Fonts; `next/font` self-hosts and eliminates the round-trip. Two families is the whole budget — do not add a third, and keep the weight list on each call as narrow as the design actually uses.
+`--font-heading` / `--font-display` resolve to `var(--font-roboto-slab)`; `--font-body` / `--font-sans` / `--font-mono` resolve to `var(--font-figtree)`. Never add a `<link>` to Google Fonts and never a CSS `@import` — `next/font` self-hosts and eliminates the round-trip. Two families is the whole budget — do not add a third, and keep the weight list on each call as narrow as the design actually uses.
 
 ## Rendering
 
@@ -29,8 +29,9 @@ const robotoSlab = Roboto_Slab({ variable: '--font-roboto-slab', subsets: ['lati
 ## Optimization Rules
 
 - **Images**: `next/image` for all production images, WebP/AVIF, `loading="lazy"` off-screen, explicit dimensions.
-- **Animations**: `transform` and `opacity` only — never `width`, `height`, `top`, `left`, or any layout-triggering property.
-- **Transitions**: keep UI feedback at `--dur-1` (120ms) or `--dur-2` (220ms); nothing over `--dur-4` (650ms). `prefers-reduced-motion` is handled globally in `globals.css`.
+- **Animations**: `transform` and `opacity` only — never `width`, `height`, `top`, `left`, or any layout-triggering property. The `transition: all 200ms` on `.hover-lift` / `.card-interactive` is safe because only transform, shadow, border and colour change on those elements — do not extend it to something whose layout properties move.
+- **Transitions**: keep UI feedback at `--dur-1` (120ms) or `--dur-2` (200ms); nothing over `--dur-4` (650ms). `prefers-reduced-motion` is handled globally in `globals.css`.
+- **`backdrop-filter` is expensive.** `.glass-panel` is fine for a handful of panels; do not blanket a long list with it. Same for `.orb` — two blurred radials per section is the budget.
 - **Layout thrashing**: never read and write DOM style in the same loop; batch reads before writes.
 
 ## Bundle

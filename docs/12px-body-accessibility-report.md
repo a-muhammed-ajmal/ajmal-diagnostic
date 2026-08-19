@@ -1,6 +1,16 @@
 # Accessibility report — 12px body text
 
-**Decision:** body and paragraph text is capped at 12px across the site, per explicit brand direction (confirmed 2026-08-19 after reviewing a rendered 12 / 14 / 16px comparison).
+> **SUPERSEDED 2026-08-20.** The 12px flat body cap described below was retired
+> along with the "Signal" identity. The current design system is
+> **"Electric Blue & Amber"**: body is 14px below 768px and 16px at or above it,
+> h1 is capped at 24px on mobile and opens to 48px on desktop, and the body face
+> is Figtree rather than Lexend. See `.claude/skills/frontend-design/SKILL.md`.
+>
+> This document is kept as the record of the earlier decision and the
+> measurements taken against it. Do not treat it as current guidance — the
+> measured figures below describe the retired scale.
+
+**Decision (retired):** body and paragraph text is capped at 12px across the site, per explicit brand direction (confirmed 2026-08-19 after reviewing a rendered 12 / 14 / 16px comparison).
 
 This document records what that choice costs, so the trade-off stays visible rather than being rediscovered later as a bug. Everything here was measured against the built site, not estimated.
 

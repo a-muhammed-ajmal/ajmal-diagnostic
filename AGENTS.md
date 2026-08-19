@@ -69,33 +69,41 @@ src/
 - **No raw hex in JSX**: all colors via CSS custom properties defined in `globals.css`
 
 ## Design System
-**"Signal"** — electric blue on a white canvas, with warm amber as the single supporting accent. Roboto Slab headings over Lexend body, at a deliberately compact fixed type scale. Flat, well-lit surfaces: hairline borders and light shadows, no dark slabs, no paper texture, no grid overlay. This superseded the "Cyanotype Blueprint" ink/brass/vellum identity (which itself superseded a soft-white/orange-Inter one) — do not revert to either.
+**"Electric Blue & Amber"** — vibrant electric blue as the primary brand colour, warm amber as the secondary accent, grounded on slate neutrals. **Roboto Slab** headings over **Figtree** body, on a responsive type scale with hard mobile ceilings. This superseded "Signal" (`#2563EB` + Lexend, 12px flat body), which superseded the "Cyanotype Blueprint" ink/brass/vellum identity, which superseded a soft-white/orange-Inter one — do not revert to any of them.
 
 ```css
 /* Brand tokens — defined in src/app/globals.css @theme block */
---color-brand:       #2563EB   /* Electric Blue — CTAs, fills, focus (4.5:1 on white) */
---color-brand-hover: #1D4ED8   /* CTA hover */
---color-brand-ink:   #1E40AF   /* blue TEXT on white (8.6:1) */
---color-brand-tint:  #F5F8FF   /* pale wash — alternating section band */
---color-brand-soft:  #DBE7FE   /* icon tiles, chips */
---color-accent:      #F59E0B   /* Amber — FILL ONLY, never text (2.1:1) */
---color-accent-ink:  #B45309   /* amber text on white (5.0:1) */
---color-canvas:      #FFFFFF   /* page background */
---color-ink:         #16181D   /* headings and body text */
---color-muted:       #5B6273   /* secondary text (6.2:1) */
---color-line:        #E4E9F2   /* borders */
+--color-brand:        #0052FF   /* Electric Blue — CTAs, fills, focus (5.8:1 on white) */
+--color-brand-hover:  #0039CC   /* CTA hover (8.6:1) */
+--color-brand-ink:    #0037A5   /* blue TEXT on white (10.1:1) */
+--color-brand-tint:   #E6F0FF   /* light accent wash — alternating section band */
+--color-brand-soft:   #DBEAFE   /* icon tiles, chips */
+--color-accent:       #FFBF00   /* Amber — FILL ONLY, never text on light (1.65:1) */
+--color-accent-hover: #D49E00   /* amber fill hover */
+--color-accent-ink:   #B45309   /* amber text on light (5.0:1) */
+--color-canvas:       #FFFFFF   /* page background */
+--color-canvas-dark:  #0F172A   /* Slate 900 — the surface amber is allowed to sit on */
+--color-canvas-light: #F8FAFC   /* Slate 50 — neutral band */
+--color-ink:          #0F172A   /* headings and body text (17.9:1) */
+--color-muted:        #475569   /* secondary text (7.6:1) */
+--color-line:         #E2E8F0   /* borders (Slate 200) */
 --color-success / --color-warning / --color-danger  /* status, each with a -soft tint */
 ```
 
-**Fonts**: two faces, loaded via `next/font/google` in `layout.tsx`. **Roboto Slab** for headings (`--font-heading` / `--font-display`); **Lexend** for body and controls (`--font-body` / `--font-sans`). `--font-mono` resolves to Lexend and means tabular figures — there is no third face.
+The numbered palette (`electric-50…900`, `amber-50…700`, `canvas-dark/light/border`) is declared alongside these aliases, so `bg-electric-100` and `text-amber-700` are real utilities. Components should reach for the semantic alias first.
 
-**Type scale**: **fixed, not fluid** — every step is one value at every width. Body, buttons and form labels are **12px**; `--step--1` is the same 12px, so there is no tier beneath body. h1 is capped at **24px** and section titles at **21px** on desktop as well as mobile — nothing scales up. See the accessibility note in `/frontend-design`.
+**Fonts**: two faces, loaded via `next/font/google` in `layout.tsx`. **Roboto Slab** for headings (`--font-heading` / `--font-display`); **Figtree** for body and UI text (`--font-body` / `--font-sans`), including button and control labels. `--font-mono` resolves to Figtree and means tabular figures — there is no third face.
 
-**Background**: flat `#FFFFFF`. Section rhythm comes from alternating white and `--color-brand-tint` bands separated by `border-y border-line`. There is no grid overlay, no grain, and no aurora — all three were deleted.
+**Type scale**: **responsive, with strict mobile ceilings.** Below 768px, no heading (h1–h4) may exceed **24px** and no body copy may exceed **14px**; micro-copy and labels sit at 12px. At 768px and above the scale opens up — body 16px, h2 32px, h1 48px. Both tiers are declared once on `:root` in `globals.css`, so every `text-[length:var(--step-N)]` call site inherits them. `text-xs` is bound to `--step--1`, the micro-copy tier. `input`/`select`/`textarea` stay pinned at 16px at every width to stop iOS Safari zooming on focus.
+
+**Background**: flat `#FFFFFF`. Section rhythm comes from alternating white, `--color-canvas-light`, and `--color-brand-tint` bands separated by `border-y border-line`, plus optional `.orb` ambient radials in a positioned, overflow-hidden section.
 
 **Utility classes** (already in globals.css):
-- `.brand-gradient-text` — gradient text `#1E40AF → #3B82F6`, display sizes only (≥24px bold)
-- `.eyebrow` — 12px 800-weight uppercase section label; sets no colour
+- `.glass-panel` — glassmorphism: translucent white, backdrop blur, hairline border
+- `.orb` + `.orb-electric` / `.orb-amber` — ambient blurred background radials
+- `.hover-lift` — 2px lift + electric glow, 200ms
+- `.brand-gradient-text` — gradient text `#0037A5 → #0052FF`; both ends clear 4.5:1
+- `.eyebrow` — 800-weight uppercase section label at the micro-copy step; sets no colour
 - `.card-interactive` — hover lift 2px + `--shadow-2` + brand border
 - `.stage-rail` / `.stage-item` / `.stage-marker` / `.stage-card` — the commercial-ladder composition
 - `.reveal` / `.stage-reveal` / `.heading-reveal` — entrance and scroll-driven reveals

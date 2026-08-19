@@ -86,8 +86,8 @@ describe('POPUP_THEME', () => {
   it('matches the current brand tokens in globals.css', () => {
     expect(POPUP_THEME).toEqual({
       background_color: 'FFFFFF', // --color-canvas
-      text_color: '16181D', // --color-ink
-      primary_color: '2563EB', // --color-brand
+      text_color: '0F172A', // --color-ink
+      primary_color: '0052FF', // --color-brand
     });
   });
 

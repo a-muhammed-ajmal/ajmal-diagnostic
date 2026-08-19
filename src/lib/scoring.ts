@@ -13,7 +13,7 @@ export const DIMENSION_META: Record<DimensionKey, {
   strategic_clarity: {
     label: "Strategic Clarity",
     description: "The degree to which your business operates with a defined direction, documented priorities, and data-informed decision-making.",
-    color: "#2563EB",
+    color: "#0052FF",
     constraintExplanation: "Your biggest constraint right now is strategic clarity. Without a documented strategy and defined decision-making criteria, your team cannot execute consistently, priorities shift with whoever speaks loudest, and growth depends entirely on your personal judgment every single day. Every operational problem downstream is harder to solve when the direction at the top is ambiguous.",
     secondaryExplanation: "Strategic clarity is a secondary constraint in your business. While you have addressed more pressing bottlenecks, the absence of a fully documented strategic framework creates friction in decision-making and slows execution as you scale.",
     impactStatement: "Without a documented strategy, the same decisions get re-made again and again, and leadership time is spent settling questions a clear framework would have answered once.",
@@ -26,7 +26,7 @@ export const DIMENSION_META: Record<DimensionKey, {
   financial_visibility: {
     label: "Financial Visibility",
     description: "Your ability to see, understand, and act on financial data — margins, cash flow, and profitability — in real time.",
-    color: "#0E7490",
+    color: "#1E3A8A",
     constraintExplanation: "Your biggest constraint right now is financial visibility. Without clear margin data, rolling cash flow forecasts, and financial tracking by service line, you are navigating your business without instruments. Pricing decisions, hiring decisions, and growth investments all carry unnecessary risk when financial clarity is missing.",
     secondaryExplanation: "Financial visibility is a secondary constraint in your business. You have more urgent bottlenecks to address first, but gaps in your financial tracking are creating background risk — particularly in cash flow forecasting and service-line profitability.",
     impactStatement: "When margins and cash flow are not visible, a business can grow its revenue and still be caught out by a cash crisis — because the warning signs were in numbers no one was watching.",
@@ -39,7 +39,7 @@ export const DIMENSION_META: Record<DimensionKey, {
   operations: {
     label: "Operations & Execution",
     description: "How consistently, reliably, and independently your business delivers outcomes — without depending on specific individuals.",
-    color: "#1E40AF",
+    color: "#0037A5",
     constraintExplanation: "Your biggest constraint right now is operational systems. Without documented processes, SOPs, and quality standards, your business cannot scale — every new hire starts from scratch, quality depends on who's involved, and your capacity to deliver is capped by the people currently in the building.",
     secondaryExplanation: "Operational systems are a secondary constraint in your business. While your primary bottleneck demands immediate attention, the absence of fully documented processes means your delivery quality is more variable than it should be — and will become a harder problem as you grow.",
     impactStatement: "When processes live in people's heads instead of on paper, capacity leaks into rework, re-explanation, and inconsistent quality — and the leak widens the moment you try to scale.",
@@ -65,7 +65,7 @@ export const DIMENSION_META: Record<DimensionKey, {
   sales_growth: {
     label: "Sales & Growth Engine",
     description: "How predictable, systematized, and independently operating your revenue generation and lead pipeline are.",
-    color: "#5B6273",
+    color: "#475569",
     constraintExplanation: "Your biggest constraint right now is your sales and growth engine. When revenue depends on your personal relationships, pipeline visibility is low, and lead generation is inconsistent, growth is unpredictable and vulnerable. Every month starts without clarity on where revenue will come from.",
     secondaryExplanation: "Your sales and growth engine has room to strengthen. Review how demand, pipeline information, and follow-up are currently managed alongside the other operating areas.",
     impactStatement: "Without a documented sales process and a lead-generation system, revenue swings month to month — every month starts without clarity on where the next deals will come from.",

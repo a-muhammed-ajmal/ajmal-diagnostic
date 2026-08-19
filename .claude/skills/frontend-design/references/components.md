@@ -6,7 +6,7 @@
 - **Named Exports**: Use `export function Component(…)` / `export const Component = …`. No default exports for components.
 - **PascalCase filenames** matching the component name.
 - **Class Merging**: Always use `cn()` from `src/lib/utils.ts` for conditional Tailwind classes.
-- **Font**: Every component inherits Lexend for body and Roboto Slab for headings from the `body`/heading rules. Those two are the whole set — never set a different `font-family` on any component.
+- **Font**: Every component inherits Figtree for body and UI text and Roboto Slab for headings from the `body`/heading rules. Those two are the whole set — never set a different `font-family` on any component. Button and control labels are UI text, so they take `font-body` (Figtree), not the heading slab.
 - **Forms**: `react-hook-form` + a `zod` schema. No uncontrolled inputs.
 
 ## File Structure Pattern
@@ -43,10 +43,12 @@ Place a new component in the folder matching its feature. Create a new folder on
 <div style={{ color: 'var(--color-brand-ink)' }}>
 
 // Wrong — hardcoded hex
-<div style={{ color: '#1E40AF' }}>
+<div style={{ color: '#0037A5' }}>
 ```
 
-Two exceptions where literal hex is unavoidable, because CSS custom properties are not available at render time: `icon.tsx` / `apple-icon.tsx` (Satori / `ImageResponse`) and the email templates in `src/lib/email/templates/`. Values there must still match the tokens.
+Two exceptions where literal hex is unavoidable, because CSS custom properties are not available at render time: `icon.tsx` / `apple-icon.tsx` / `opengraph-image.tsx` (Satori / `ImageResponse`) and the email templates in `src/lib/email/templates/`. Values there must still match the tokens.
+
+One more rule with no exception: a hardcoded **font-size** is always wrong. It escapes the `--step-N` scale and therefore the mobile ceilings.
 
 ## Conditional Classes
 
@@ -64,16 +66,19 @@ Use the shared `<Button>` from [Button.tsx](../../../../src/components/ui/Button
 
 | Variant | Treatment | Use for |
 | --- | --- | --- |
-| `primary` (default) | `bg-brand text-white`, hover `bg-brand-hover` + lift | The one dominant action |
+| `primary` (default) | `bg-brand text-white`, hover `bg-brand-hover` + electric glow + lift | The one dominant action |
 | `secondary` | `border-brand text-brand-ink`, hover fills blue | Supporting action on light |
 | `quiet` | `border-line bg-white`, hover blue border + `text-brand-ink` | Low-emphasis action |
-| `danger` | `bg-crimson text-white` | Destructive confirm |
+| `accent` | `bg-accent text-canvas-dark`, hover `bg-accent-hover` + amber glow | Premium/secondary highlight CTA |
+| `danger` | `bg-danger text-white` | Destructive confirm |
+
+The `accent` variant pairs amber with **dark slate text**, never white — `#FFBF00` is 1.65:1 against white.
 
 It picks its element from its props — `href` gives a `next/link`, `href` + `external` gives `<a target="_blank" rel="noreferrer">`, neither gives a `<button>` (default `type="button"`). `fullWidth` spans the container.
 
-The base class already carries `min-h-11` (the 44px floor), `focus-visible` outline, `transition-colors`, and disabled styling. Don't re-add them, and never swap in `transition-all`.
+The base class already carries `min-h-11` (the 44px floor), `focus-visible` outline, `transition-all duration-200` with the mandated `-0.5` hover lift, and disabled styling. Don't re-add them.
 
-Pair it with `<Surface>` (`tone`: `default` | `muted` | `accent`, plus `interactive`) and `<SectionHeader>` (`eyebrow` / `title` / `description`, `align`) from `Surface.tsx`. There is no `dark` tone — the site has no dark surfaces.
+Pair it with `<Surface>` (`tone`: `default` | `muted` | `accent` | `glass`, plus `interactive`) and `<SectionHeader>` (`eyebrow` / `title` / `description`, `align`) from `Surface.tsx`. The `glass` tone is the glassmorphism panel and brings its own border and shadow.
 
 If a genuinely new shape is needed, add a variant to `Button` rather than duplicating the recipe in a page.
 

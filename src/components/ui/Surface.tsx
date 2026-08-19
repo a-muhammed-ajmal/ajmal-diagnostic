@@ -3,8 +3,9 @@ import { cn } from "@/lib/utils";
 
 type SurfaceProps = HTMLAttributes<HTMLElement> & {
   children: ReactNode;
-  /** `accent` replaced the old `dark` tone — the site has no dark slabs. */
-  tone?: "default" | "muted" | "accent";
+  /** `glass` is the glassmorphism panel — it carries its own border and shadow,
+   *  so it deliberately opts out of the shared `border` utility. */
+  tone?: "default" | "muted" | "accent" | "glass";
   interactive?: boolean;
 };
 
@@ -12,10 +13,12 @@ export function Surface({ children, tone = "default", interactive = false, class
   return (
     <section
       className={cn(
-        "rounded-2xl border p-6",
+        "rounded-2xl p-6",
+        tone !== "glass" && "border",
         tone === "default" && "border-line bg-white shadow-1",
         tone === "muted" && "border-line bg-brand-tint",
         tone === "accent" && "border-brand/30 bg-brand-soft text-ink",
+        tone === "glass" && "glass-panel",
         interactive && "card-interactive",
         className,
       )}

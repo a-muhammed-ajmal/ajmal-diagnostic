@@ -1,51 +1,99 @@
 @import "tailwindcss";
 
-@theme {
-  /* ── Brand — Electric Blue ─────────────────────────────────────────────── */
-  --color-brand:       #2563EB;   /* primary fills, CTAs, focus — 4.5:1 on white */
-  --color-brand-hover: #1D4ED8;   /* CTA hover — 6.3:1 */
-  --color-brand-ink:   #1E40AF;   /* blue TEXT on white — 8.6:1 */
-  --color-brand-tint:  #F5F8FF;   /* pale wash — alternating section band */
-  --color-brand-soft:  #DBE7FE;   /* icon tiles, chips, chart fills */
+/* ══════════════════════════════════════════════════════════════════════════
+   Electric Blue & Amber — see .claude/skills/frontend-design/SKILL.md
 
-  /* ── Accent — Amber. FILL ONLY; use accent-ink for text. ───────────────── */
-  --color-accent:      #F59E0B;   /* 2.1:1 on white — never text */
-  --color-accent-ink:  #B45309;   /* amber TEXT on white — 5.0:1 */
-  --color-accent-soft: #FEF3E2;
+   Tailwind v4 has no config file. Every --color-* / --font-* / --shadow-*
+   key declared in @theme generates the matching utility, so this block IS
+   the theme: --color-electric-500 gives bg-electric-500, text-electric-500,
+   border-electric-500, and so on.
+
+   Two layers on purpose. The numbered scales (electric-*, amber-*) are the
+   raw palette. The semantic aliases below them (brand, accent, ink, muted,
+   line) are what components actually reference, so a palette move is a
+   one-line edit here rather than a sweep through 200 files.
+   ══════════════════════════════════════════════════════════════════════════ */
+
+@theme {
+  /* ── Typography — Roboto Slab headings, Figtree body ───────────────────── */
+  /* Both families are supplied by next/font/google in layout.tsx, which
+     self-hosts them. Never add a <link> tag or a CSS @import for either. */
+  --font-heading: var(--font-roboto-slab), Georgia, "Times New Roman", serif;
+  --font-display: var(--font-roboto-slab), Georgia, "Times New Roman", serif;
+  --font-body:    var(--font-figtree), ui-sans-serif, system-ui, sans-serif;
+  --font-sans:    var(--font-figtree), ui-sans-serif, system-ui, sans-serif;
+  /* No third face: mono means tabular figures, set on .font-mono below. */
+  --font-mono:    var(--font-figtree), ui-sans-serif, system-ui, sans-serif;
+
+  /* ── Electric Blue scale ───────────────────────────────────────────────── */
+  --color-electric-50:  #EFF6FF;
+  --color-electric-100: #DBEAFE;
+  --color-electric-500: #0052FF;   /* Brand Primary — 5.8:1 on white */
+  --color-electric-600: #0046D5;
+  --color-electric-700: #0037A5;   /* 10.1:1 on white */
+  --color-electric-900: #1E3A8A;
+
+  /* ── Amber scale ───────────────────────────────────────────────────────── */
+  --color-amber-50:  #FFFBEB;
+  --color-amber-100: #FEF3C7;
+  --color-amber-500: #FFBF00;      /* Brand Secondary — 1.65:1 on white, FILL ONLY */
+  --color-amber-600: #D97706;
+  --color-amber-700: #B45309;      /* amber TEXT on light — 5.0:1 */
+
+  /* ── Slate grounding neutrals ──────────────────────────────────────────── */
+  --color-canvas-dark:   #0F172A;  /* Slate 900 */
+  --color-canvas-light:  #F8FAFC;  /* Slate 50 */
+  --color-canvas-border: #E2E8F0;  /* Slate 200 */
+
+  /* ── Semantic aliases ──────────────────────────────────────────────────── */
+  --color-brand:       #0052FF;    /* primary fills, CTAs, focus */
+  --color-brand-hover: #0039CC;    /* CTA hover — 8.6:1 on white */
+  --color-brand-ink:   #0037A5;    /* blue TEXT on white — 10.1:1 */
+  --color-brand-tint:  #E6F0FF;    /* light accent wash — alternating band */
+  --color-brand-soft:  #DBEAFE;    /* icon tiles, chips, chart fills */
+
+  /* Amber is FILL ONLY. #FFBF00 on white is 1.65:1 — it must sit on a dark
+     slate surface or act as a border highlight. For amber TEXT on a light
+     surface use --color-accent-ink. */
+  --color-accent:       #FFBF00;
+  --color-accent-hover: #D49E00;
+  --color-accent-ink:   #B45309;   /* 5.0:1 on white */
+  --color-accent-soft:  #FFF8E6;
 
   /* ── Surface + text ────────────────────────────────────────────────────── */
   --color-canvas:      #FFFFFF;
   --color-surface:     #FFFFFF;
-  --color-line:        #E4E9F2;
-  --color-line-strong: #CBD4E4;
-  --color-ink:         #16181D;   /* near-black — headings and body */
-  --color-muted:       #5B6273;   /* secondary text — 6.2:1, safe at 12px */
-
-  /* Body is 12px, so every string is WCAG "normal text" (4.5:1). There is no
-     legal tier below --color-muted; do not add one. */
+  --color-line:        #E2E8F0;    /* Slate 200 */
+  --color-line-strong: #CBD5E1;    /* Slate 300 */
+  --color-ink:         #0F172A;    /* Slate 900 — 17.9:1 on white */
+  --color-ink-soft:    #1E293B;    /* Slate 800 */
+  --color-muted:       #475569;    /* Slate 600 — 7.6:1, the lightest legal text */
 
   /* ── Status ────────────────────────────────────────────────────────────── */
   --color-success:      #0B6B43;
   --color-success-soft: #E7F6EE;
-  --color-warning:      #9A5B08;
-  --color-warning-soft: #FEF3E2;
+  --color-warning:      #9A5B08;   /* amber's accessible text partner */
+  --color-warning-soft: #FFF8E6;
   --color-danger:       #C0281D;
   --color-danger-soft:  #FDECEC;
 
-  --color-focus:        #2563EB;
+  --color-focus:        #0052FF;
 
-  /* ── Typography — Roboto Slab headings, Lexend body ──────────────── */
-  --font-heading: var(--font-roboto-slab), Georgia, "Times New Roman", serif;
-  --font-display: var(--font-roboto-slab), Georgia, "Times New Roman", serif;
-  --font-body:    var(--font-lexend), ui-sans-serif, system-ui, sans-serif;
-  --font-sans:    var(--font-lexend), ui-sans-serif, system-ui, sans-serif;
-  /* No third face: mono means tabular figures, set on .font-mono below. */
-  --font-mono:    var(--font-lexend), ui-sans-serif, system-ui, sans-serif;
+  /* ── Font sizes ────────────────────────────────────────────────────────── */
+  /* `text-xs` is the sanctioned micro-copy utility — badges, table cells, meta
+     lines, form errors, uppercase labels. Binding it to --step--1 keeps those
+     ~135 call sites on the responsive scale (12px mobile / 13px desktop)
+     instead of stranding them at a fixed 0.75rem once body grows to 16px. */
+  --text-xs: var(--step--1);
 
-  /* ── Elevation — soft and light; no glow, no heavy blur ────────────────── */
-  --shadow-1: 0 1px 2px rgba(16, 24, 40, .05);
-  --shadow-2: 0 4px 12px rgba(16, 24, 40, .07), 0 2px 4px rgba(16, 24, 40, .04);
-  --shadow-3: 0 10px 28px rgba(16, 24, 40, .10), 0 4px 8px rgba(16, 24, 40, .05);
+  /* ── Elevation ─────────────────────────────────────────────────────────── */
+  --shadow-1: 0 1px 2px rgba(15, 23, 42, .06);
+  --shadow-2: 0 4px 12px rgba(15, 23, 42, .08), 0 2px 4px rgba(15, 23, 42, .04);
+  --shadow-3: 0 10px 28px rgba(15, 23, 42, .12), 0 4px 8px rgba(15, 23, 42, .06);
+
+  /* Hover glow — the amber-to-electric alteration called for on CTA hover. */
+  --shadow-glow-electric: 0 8px 24px rgba(0, 82, 255, .22), 0 2px 6px rgba(0, 82, 255, .12);
+  --shadow-glow-amber:    0 8px 24px rgba(255, 191, 0, .28), 0 2px 6px rgba(212, 158, 0, .16);
 }
 
 /* ── Non-Tailwind tokens (space, radius, motion, type scale) ─────────────── */
@@ -56,30 +104,50 @@
 
   --radius-1: 0.5rem; --radius-2: 0.75rem; --radius-3: 1rem; --radius-pill: 999px;
 
-  --dur-1: 120ms; --dur-2: 220ms; --dur-3: 400ms; --dur-4: 650ms;
+  /* --dur-2 is 200ms to match the mandated `transition-all duration-200`. */
+  --dur-1: 120ms; --dur-2: 200ms; --dur-3: 400ms; --dur-4: 650ms;
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-in:  cubic-bezier(0.5, 0, 0.75, 0);
 
-  /* Type scale — fixed, not fluid. Brand direction caps h1 at 24px and section
-     titles at 21px at EVERY width, so nothing here clamps upward; a step is one
-     value on a phone and on a 27" display. Body, controls and labels are 12px,
-     which leaves no tier beneath body — --step--1 is the same 12px. */
-  --step--1: 0.75rem;     /* 12px — collapsed into body */
-  --step-0:  0.75rem;     /* 12px — BODY, buttons, form labels, captions */
-  --step-1:  0.875rem;    /* 14px — card titles, diagram labels, h5 */
-  --step-2:  1rem;        /* 16px — h4 */
-  --step-3:  1.125rem;    /* 18px — h3 */
-  --step-4:  1.3125rem;   /* 21px — h2 / section titles (hard cap) */
-  --step-5:  1.5rem;      /* 24px — h1 (hard cap) */
+  /* ── Type scale — MOBILE CEILINGS (< 768px) ────────────────────────────
+     The strict ceilings live here so every one of the ~240 call sites that
+     writes text-[length:var(--step-N)] inherits them for free:
+
+       • H1–H4 must not exceed 24px  → steps 2..5 top out at 24px
+       • body / list / descriptions  → --step-0 tops out at 14px
+       • UI micro-copy and labels    → --step--1 at 12px
+
+     Do not hardcode a px font-size anywhere; it escapes this constraint. */
+  --step--1: 0.75rem;     /* 12px — micro-copy, labels, eyebrows */
+  --step-0:  0.875rem;    /* 14px — BODY (mobile ceiling) */
+  --step-1:  1rem;        /* 16px — card titles, h5 */
+  --step-2:  1.125rem;    /* 18px — h4 */
+  --step-3:  1.25rem;     /* 20px — h3 */
+  --step-4:  1.375rem;    /* 22px — h2 / section titles */
+  --step-5:  1.5rem;      /* 24px — h1 (mobile ceiling) */
+}
+
+/* ≥ 768px — the tablet/desktop breakpoint the ceilings are defined against.
+   Above it the scale opens into a real display hierarchy. */
+@media (min-width: 768px) {
+  :root {
+    --step--1: 0.8125rem;  /* 13px */
+    --step-0:  1rem;       /* 16px — body */
+    --step-1:  1.125rem;   /* 18px */
+    --step-2:  1.25rem;    /* 20px — h4 */
+    --step-3:  1.5rem;     /* 24px — h3 */
+    --step-4:  2rem;       /* 32px — h2 / section titles */
+    --step-5:  3rem;       /* 48px — h1 */
+  }
 }
 
 /* ── Base ────────────────────────────────────────────────────────────────── */
 body {
-  font-family: var(--font-lexend), ui-sans-serif, system-ui, sans-serif;
+  font-family: var(--font-figtree), ui-sans-serif, system-ui, sans-serif;
   background-color: var(--color-canvas);
   color: var(--color-ink);
   font-size: var(--step-0);
-  line-height: 1.65;
+  line-height: 1.625;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
@@ -89,10 +157,11 @@ h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-roboto-slab), Georgia, "Times New Roman", serif;
   text-wrap: balance;
 }
-/* Roboto Slab is a slab serif and already sets wide; it needs far less optical
-   tightening than a geometric sans, and none at all below section-title size. */
-h1, h2 { letter-spacing: -0.01em; line-height: 1.2; }
-h3, h4 { letter-spacing: 0;       line-height: 1.3; }
+/* Roboto Slab sets wide. Large display titles get loose tracking; the smaller
+   steps need none. */
+h1 { letter-spacing: 0.005em; line-height: 1.15; }
+h2 { letter-spacing: 0.005em; line-height: 1.2; }
+h3, h4 { letter-spacing: 0; line-height: 1.3; }
 
 p { text-wrap: pretty; }
 h1, h2, h3, p { overflow-wrap: break-word; }
@@ -108,10 +177,10 @@ h1, h2, h3, p { overflow-wrap: break-word; }
 
 /* ── Brand utilities ─────────────────────────────────────────────────────── */
 
-/* Display-size text only. #3B82F6 clears 3:1 for large text but not 4.5:1,
-   so never apply this below 24px bold. */
+/* Electric-700 → electric-500. Both ends clear 4.5:1 on white (10.1:1 and
+   5.8:1), so unlike the previous gradient this one is safe at any size. */
 .brand-gradient-text {
-  background: linear-gradient(100deg, #1E40AF, #3B82F6);
+  background: linear-gradient(100deg, var(--color-electric-700), var(--color-electric-500));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -120,23 +189,59 @@ h1, h2, h3, p { overflow-wrap: break-word; }
 /* 44x44 minimum — every icon-only control */
 .tap-target { min-height: 44px; min-width: 44px; }
 
-/* Eyebrow label. Body is also 12px now, so the eyebrow distinguishes itself by
-   weight, tracking and case rather than size. Colour stays a per-use utility. */
+/* Eyebrow label — micro-copy tier. Distinguishes itself by weight, tracking
+   and case. Colour stays a per-use utility. */
 .eyebrow {
   font-weight: 800;
-  font-size: 0.75rem;
-  line-height: 1rem;
+  font-size: var(--step--1);
+  line-height: 1.4;
   letter-spacing: 0.15em;
   text-transform: uppercase;
 }
 
-/* Interactive card — soft lift, light shadow, accent border. */
-.card-interactive {
-  transition:
-    border-color 220ms var(--ease-out),
-    box-shadow   220ms var(--ease-out),
-    transform    220ms var(--ease-out);
+/* ── Glassmorphism ───────────────────────────────────────────────────────── */
+/* Thin border + backdrop blur, per the design spec. The spec's `border-white/20`
+   is invisible against a white canvas, so the hairline is carried by an inset
+   ring in the border token and the white edge sits on top of it as the
+   highlight — the frosted read survives on both plain white and the orbs. */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.70);
+  -webkit-backdrop-filter: blur(12px) saturate(140%);
+  backdrop-filter: blur(12px) saturate(140%);
+  border: 1px solid rgba(255, 255, 255, 0.20);
+  box-shadow:
+    inset 0 0 0 1px var(--color-canvas-border),
+    var(--shadow-2);
 }
+
+/* Fall back to an opaque card where backdrop-filter is unsupported, so the
+   panel never degrades into unreadable translucent text. */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .glass-panel { background: var(--color-canvas); }
+}
+
+/* ── Ambient background radials ──────────────────────────────────────────── */
+/* Decorative only — always pair with aria-hidden="true" and a positioned,
+   overflow-hidden parent. */
+.orb {
+  border-radius: var(--radius-pill);
+  filter: blur(64px);
+  pointer-events: none;
+}
+.orb-electric { background: var(--color-electric-100); opacity: 0.30; }
+.orb-amber    { background: var(--color-amber-100);    opacity: 0.20; }
+
+/* ── Hover micro-interactions ────────────────────────────────────────────── */
+/* The house interaction: a 2px lift plus a glow step, bound to 200ms. */
+.hover-lift { transition: all var(--dur-2) var(--ease-out); }
+.hover-lift:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-glow-electric);
+}
+.hover-lift-amber:hover { box-shadow: var(--shadow-glow-amber); }
+
+/* Interactive card — lift, shadow step, electric border. */
+.card-interactive { transition: all var(--dur-2) var(--ease-out); }
 .card-interactive:hover {
   border-color: var(--color-brand);
   box-shadow: var(--shadow-2);
@@ -144,16 +249,17 @@ h1, h2, h3, p { overflow-wrap: break-word; }
 }
 
 /* ── Staggered entrance animation ────────────────────────────────────────── */
+/* 100ms apart, matching the delay-100 / delay-200 rhythm in the spec. */
 .reveal {
   opacity: 0;
   transform: translateY(14px);
   animation: rise var(--dur-4) var(--ease-out) both;
 }
-.reveal:nth-child(1) { animation-delay: .05s }
-.reveal:nth-child(2) { animation-delay: .13s }
-.reveal:nth-child(3) { animation-delay: .21s }
-.reveal:nth-child(4) { animation-delay: .29s }
-.reveal:nth-child(5) { animation-delay: .37s }
+.reveal:nth-child(1) { animation-delay: 0s }
+.reveal:nth-child(2) { animation-delay: .1s }
+.reveal:nth-child(3) { animation-delay: .2s }
+.reveal:nth-child(4) { animation-delay: .3s }
+.reveal:nth-child(5) { animation-delay: .4s }
 
 @keyframes rise {
   to { opacity: 1; transform: none; }
@@ -168,8 +274,8 @@ h1, h2, h3, p { overflow-wrap: break-word; }
 
 /* ── Accessibility ───────────────────────────────────────────────────────── */
 /* Non-negotiable: below 16px iOS Safari zooms the viewport on field focus,
-   which breaks the diagnostic, lead capture and contact forms on mobile.
-   This is why inputs sit above the 12px body size. */
+   which breaks the diagnostic, lead capture and contact forms on mobile. On
+   mobile this puts 16px inputs next to 14px body copy — expected, not a bug. */
 input, select, textarea { font-size: 16px; }
 html { scroll-behavior: smooth; }
 
@@ -230,7 +336,7 @@ html { scroll-behavior: smooth; }
     border-radius: var(--radius-pill);
     align-items: center;
     justify-content: center;
-    background: #fff;
+    background: var(--color-canvas);
     border: 2px solid var(--color-line);
     color: var(--color-brand-ink);
     font-weight: 800;

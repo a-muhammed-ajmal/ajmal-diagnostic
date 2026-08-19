@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Lexend, Roboto_Slab } from "next/font/google";
+import { Figtree, Roboto_Slab } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import { Navigation } from "@/components/layout/Navigation";
@@ -7,10 +7,12 @@ import { Footer } from "@/components/layout/Footer";
 import { SITE_NAME } from "@/lib/metadata";
 import { cn } from "@/lib/utils";
 
-const lexend = Lexend({
-  variable: "--font-lexend",
+// Figtree carries body and UI text; the spec asks for light/regular weights for
+// prose, with 500–700 available for emphasis, labels and control text.
+const figtree = Figtree({
+  variable: "--font-figtree",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["300", "400", "500", "600", "700"],
   display: "swap",
 });
 
@@ -56,7 +58,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={cn(lexend.variable, robotoSlab.variable, "h-full antialiased")}
+      className={cn(figtree.variable, robotoSlab.variable, "h-full antialiased")}
     >
       <body className="min-h-full flex flex-col bg-canvas text-ink font-body">
         {/* Keyboard-only escape past the nav. Off-screen until focused; the global

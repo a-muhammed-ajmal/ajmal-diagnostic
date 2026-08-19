@@ -34,7 +34,7 @@ function CompactCard({ article }: { article: Article }) {
     >
       <span className="font-heading text-xs font-bold uppercase tracking-widest text-brand-ink">{article.category}</span>
       <h3 className="mb-1.5 mt-1.5 font-heading text-[length:var(--step-0)] font-bold text-ink">{article.title}</h3>
-      <p className="mb-2 font-body text-xs leading-relaxed text-muted">{article.excerpt}</p>
+      <p className="mb-2 font-body text-[length:var(--step-0)] leading-relaxed text-muted">{article.excerpt}</p>
       <p className="font-body text-xs text-muted">{formatDate(article.publishedAt)} · {getReadingTime(article)} min read</p>
     </Link>
   );
@@ -101,7 +101,7 @@ export default function InsightsPage() {
                 className="card-interactive block rounded-xl border border-line bg-brand-tint p-5 hover:border-brand"
               >
                 <h3 className="mb-2 font-heading text-[length:var(--step-0)] font-bold text-ink">{cat.name}</h3>
-                <p className="font-body text-xs leading-relaxed text-muted">{cat.desc}</p>
+                <p className="font-body text-[length:var(--step-0)] leading-relaxed text-muted">{cat.desc}</p>
               </Link>
             ))}
           </div>

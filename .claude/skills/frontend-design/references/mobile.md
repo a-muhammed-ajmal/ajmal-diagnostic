@@ -16,7 +16,9 @@
 ## Readability
 
 - **No horizontal scrolling** at 320px or 375px — test every layout.
-- **Body prose is 12px** (`--step-0`), by explicit brand direction. This overrides the usual 16px readability floor — it is a known, accepted trade-off, not an oversight, so do not "correct" it. Two consequences: there is no size tier below body, and every string needs 4.5:1 contrast because nothing counts as WCAG large text. `input`, `select`, and `textarea` stay pinned to 16px globally to prevent iOS zoom on focus — never override that, even for visual consistency with 12px labels.
+- **Strict mobile ceilings below 768px** — the core constraint of this design system. No heading (h1 through h4) may exceed **24px**; h1 sits in the 20–24px range. No body paragraph, list item, or form description may exceed **14px** (`--step-0`). UI micro-copy and labels sit at **12px** (`--step--1`, which `text-xs` is bound to). All of it is enforced once in the `--step-N` scale, so a hardcoded `px` font-size is the one way to break it — never write one.
+- Above 768px the scale opens up (body 16px, h1 48px). The ceilings are a mobile constraint, not a global cap.
+- `input`, `select`, and `textarea` stay pinned to 16px at every width to prevent iOS zoom on focus — never override that, even though it means 16px inputs beside 14px body copy on mobile.
 - Line length ~60–75 characters where the layout allows.
 - Prefer a single content column below `md`. Side-by-side content needs a real justification.
 
