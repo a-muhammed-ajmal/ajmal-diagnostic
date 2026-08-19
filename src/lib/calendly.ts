@@ -20,14 +20,14 @@ const ALLOWED_HOSTS = new Set(["calendly.com", "www.calendly.com"]);
 
 /**
  * Calendly reads its theme from the query string and cannot see our CSS custom
- * properties, so these are raw hex by necessity. Keep in sync with the "Cyanotype
- * Blueprint" tokens in globals.css. Exported so the tests assert against this one
- * definition instead of restating the brand hexes in a second place.
+ * properties, so these are raw hex by necessity. Keep in sync with the brand tokens
+ * in globals.css. Exported so the tests assert against this one definition instead
+ * of restating the brand hexes in a second place.
  */
 export const POPUP_THEME = {
-  background_color: "F6F0E2", // --color-ivory — vellum
-  text_color: "132A4A", // --color-navy — blueprint ink
-  primary_color: "C6752E", // --color-gold — brass
+  background_color: "FFFFFF", // --color-canvas
+  text_color: "16181D", // --color-ink
+  primary_color: "2563EB", // --color-brand — electric blue
 } as const;
 
 const MISSING_MESSAGE =

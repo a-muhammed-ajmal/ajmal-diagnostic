@@ -61,35 +61,33 @@ export default function ServicesPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdScript(serviceJsonLd(COMMERCIAL_STAGES.map((stage) => ({ name: stage.title, description: stage.detail })))) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdScript(faqJsonLd(faqs)) }} />
 
-      <section className="relative overflow-hidden bg-navy px-6 py-16 text-ivory md:py-20">
-        <div className="graph-overlay-dark" />
+      <section className="relative overflow-hidden bg-white px-6 py-16 text-ink md:py-20">
         <div className="relative z-10 mx-auto max-w-4xl text-center">
-          <p className="eyebrow mb-3 text-gold">How we work</p>
+          <p className="eyebrow mb-3 text-brand-ink">How we work</p>
           <h1 className="font-heading text-[length:var(--step-5)] font-extrabold leading-[1.02]">A practical path from dependency to a stronger operating system.</h1>
-          <p className="mx-auto mt-5 max-w-2xl font-body text-base leading-relaxed text-ivory/70 md:text-lg">The commercial progression is intentional. Each stage clarifies, verifies, or strengthens what comes next.</p>
+          <p className="mx-auto mt-5 max-w-2xl font-body text-[length:var(--step-0)] leading-relaxed text-muted">The commercial progression is intentional. Each stage clarifies, verifies, or strengthens what comes next.</p>
         </div>
       </section>
 
-      <section className="relative overflow-hidden bg-ivory px-6 py-16 md:py-24">
-        <div className="graph-overlay" />
+      <section className="relative overflow-hidden bg-brand-tint px-6 py-16 md:py-24">
         <div className="relative z-10 mx-auto max-w-5xl">
           <div className="mx-auto mb-10 max-w-2xl text-center">
-            <p className="eyebrow mb-3 text-teal-ink">Why the order matters</p>
-            <h2 className="heading-reveal font-heading text-[length:var(--step-3)] font-extrabold leading-tight text-navy">Self-report, then evidence, then root cause.</h2>
+            <p className="eyebrow mb-3 text-accent-ink">Why the order matters</p>
+            <h2 className="heading-reveal font-heading text-[length:var(--step-3)] font-extrabold leading-tight text-ink">Self-report, then evidence, then root cause.</h2>
           </div>
-          <div className="flex flex-col divide-y divide-navy/10 border-t border-navy/10 md:flex-row md:divide-y-0 md:divide-x md:border-t-0">
+          <div className="flex flex-col divide-y divide-line border-t border-line md:flex-row md:divide-y-0 md:divide-x md:border-t-0">
             {evidenceLadder.map(([title, body], index) => (
               <article key={title} className="stage-reveal flex-1 py-6 md:px-6 md:py-0 first:md:pl-0 last:md:pr-0">
-                <span className="font-mono text-xs text-gold-ink">0{index + 1}</span>
-                <h3 className="mt-4 text-[length:var(--step-1)] font-heading font-bold text-navy">{title}</h3>
-                <p className="mt-3 font-body text-sm leading-relaxed text-navy/65">{body}</p>
+                <span className="font-mono text-xs text-brand-ink">0{index + 1}</span>
+                <h3 className="mt-4 text-[length:var(--step-1)] font-heading font-bold text-ink">{title}</h3>
+                <p className="mt-3 font-body text-[length:var(--step-0)] leading-relaxed text-muted">{body}</p>
               </article>
             ))}
           </div>
 
           <div className="mt-16 text-center">
-            <p className="eyebrow mb-3 text-teal-ink">The engagement journey</p>
-            <h2 className="heading-reveal font-heading text-[length:var(--step-4)] font-extrabold leading-tight text-navy">Start where the evidence says to start.</h2>
+            <p className="eyebrow mb-3 text-accent-ink">The engagement journey</p>
+            <h2 className="heading-reveal font-heading text-[length:var(--step-4)] font-extrabold leading-tight text-ink">Start where the evidence says to start.</h2>
           </div>
           <CommercialLadder />
         </div>
@@ -98,29 +96,28 @@ export default function ServicesPage() {
       <section className="bg-white px-6 py-16 md:py-24">
         <div className="mx-auto max-w-3xl">
           <div className="mx-auto mb-10 max-w-2xl text-center">
-            <p className="eyebrow mb-3 text-gold-ink">Common questions</p>
-            <h2 className="heading-reveal font-heading text-[length:var(--step-4)] font-extrabold leading-tight text-navy">Before you start.</h2>
+            <p className="eyebrow mb-3 text-brand-ink">Common questions</p>
+            <h2 className="heading-reveal font-heading text-[length:var(--step-4)] font-extrabold leading-tight text-ink">Before you start.</h2>
           </div>
-          <div className="divide-y divide-navy/10 border-t border-navy/10">
+          <div className="divide-y divide-line border-t border-line">
             {faqs.map((faq) => (
               <details key={faq.question} className="group py-5">
-                <summary className="flex min-h-[44px] cursor-pointer list-none items-center justify-between gap-4 font-heading text-base font-bold text-navy marker:content-none">
+                <summary className="flex min-h-[44px] cursor-pointer list-none items-center justify-between gap-4 font-heading text-[length:var(--step-0)] font-bold text-ink marker:content-none">
                   {faq.question}
-                  <span className="shrink-0 font-mono text-lg text-gold-ink transition-transform duration-200 group-open:rotate-45" aria-hidden="true">+</span>
+                  <span className="shrink-0 font-mono text-[length:var(--step-0)] text-brand-ink transition-transform duration-200 group-open:rotate-45" aria-hidden="true">+</span>
                 </summary>
-                <p className="mt-4 font-body text-sm leading-relaxed text-navy/65">{faq.answer}</p>
+                <p className="mt-4 font-body text-[length:var(--step-0)] leading-relaxed text-muted">{faq.answer}</p>
               </details>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="relative overflow-hidden bg-navy px-6 py-16 text-ivory md:py-20">
-        <div className="graph-overlay-dark" />
-        <div className="relative z-10 mx-auto max-w-2xl text-center">
+      <section className="border-y border-line bg-brand-tint px-6 py-16 text-ink md:py-20">
+        <div className="mx-auto max-w-2xl text-center">
           <h2 className="heading-reveal font-heading text-[length:var(--step-3)] font-extrabold">Start with the Business Health Check.</h2>
-          <p className="mt-4 font-body text-base leading-relaxed text-ivory/70">It gives an initial, self-reported picture of where founder dependency may appear. A Business Clarity Audit is the evidence-led next step when verification is needed.</p>
-          <Link href="/diagnostic" className="mt-8 inline-flex min-h-[52px] items-center justify-center rounded-xl bg-gold px-8 py-4 font-heading text-base font-bold text-navy transition-colors hover:bg-gold-bright">Start the Business Health Check →</Link>
+          <p className="mt-4 font-body text-[length:var(--step-0)] leading-relaxed text-muted">It gives an initial, self-reported picture of where founder dependency may appear. A Business Clarity Audit is the evidence-led next step when verification is needed.</p>
+          <Link href="/diagnostic" className="mt-8 inline-flex min-h-[52px] items-center justify-center rounded-xl bg-brand px-8 py-4 font-heading text-[length:var(--step-0)] font-bold text-white transition-colors hover:bg-brand-hover">Start the Business Health Check →</Link>
         </div>
       </section>
     </>

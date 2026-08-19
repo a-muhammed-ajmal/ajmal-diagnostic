@@ -34,7 +34,9 @@ Review `git diff HEAD` (or staged changes) across these dimensions. Output a str
 ### 4. Project conventions
 
 - Raw hex color in JSX outside the two documented exceptions (`icon.tsx`/`apple-icon.tsx`/`opengraph-image.tsx` and `src/lib/email/templates/`)? See the `frontend-design` skill.
-- Any font other than Fraunces (`font-heading`)/IBM Plex Sans (`font-body`)/IBM Plex Mono (`font-mono`)?
+- Any font other than Figtree? (`font-heading`, `font-body`, and `font-mono` all resolve to it — a second family is a finding.)
+- Body prose (`<p>`, `<li>`) above 12px (`--step-0`), or text muted with opacity instead of `text-muted`?
+- `text-white` on anything other than a `bg-brand`/`bg-danger`/`bg-success`/`bg-ink` fill?
 - Forms built without `react-hook-form` + `zod` (uncontrolled inputs)?
 - Component files not PascalCase, or using a default export instead of a named one?
 - API routes not using the `route.ts` + named `GET`/`POST` convention?
@@ -51,7 +53,7 @@ Review `git diff HEAD` (or staged changes) across these dimensions. Output a str
 |---|----------|-----------|---------|-----------|-----|
 | 1 | 🔴 High | Security | Service-role key referenced in client component | foo.tsx:12 | Move to a Route Handler |
 | 2 | 🟡 Medium | Performance | N+1 query inside a loop | admin/leads/page.tsx:88 | Batch the query outside the loop |
-| 3 | 🟢 Low | Convention | Raw `#132A4A` in JSX instead of `text-navy` | services/page.tsx:40 | Use the Tailwind token class |
+| 3 | 🟢 Low | Convention | Raw `#2563EB` in JSX instead of `bg-brand` | services/page.tsx:40 | Use the Tailwind token class |
 
 Severity scale:
 - 🔴 **High** — must fix before merge (security, data loss, broken RLS, service-role key exposure)

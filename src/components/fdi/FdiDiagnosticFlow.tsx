@@ -169,34 +169,33 @@ export function FdiDiagnosticFlow() {
 
   if (stage === 'intro') {
     return (
-      <div className="min-h-svh bg-navy text-ivory flex items-center px-5 py-8 sm:py-12 relative overflow-hidden">
-        <div className="graph-overlay-dark" />
+      <div className="min-h-svh bg-white text-ink flex items-center px-5 py-8 sm:py-12 relative overflow-hidden">
         <section className="relative z-10 w-full max-w-3xl mx-auto text-center">
-          <p className="eyebrow text-gold mb-3">Business Health Check</p>
-          <h1 className="font-heading font-extrabold text-(length:--step-2) sm:text-(length:--step-3) leading-tight text-white">
+          <p className="eyebrow text-brand-ink mb-3">Business Health Check</p>
+          <h1 className="font-heading font-extrabold text-(length:--step-2) sm:text-(length:--step-3) leading-tight text-ink">
             How much does your business still depend on you?
           </h1>
-          <p className="font-body text-sm sm:text-base text-ivory/75 max-w-2xl mx-auto mt-3 leading-relaxed">
+          <p className="font-body text-[length:var(--step-0)] text-muted max-w-2xl mx-auto mt-3 leading-relaxed">
             Answer 12 questions about decision-making, execution, and operational visibility. You will receive your Founder Dependency Index and a clear next step.
           </p>
           {/* One bordered list on a phone, three cards from sm up — keeps this section inside a single mobile view. */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 sm:gap-2 max-w-2xl mx-auto mt-4 text-left rounded-xl border border-gold/25 sm:border-0 divide-y divide-gold/15 sm:divide-y-0 overflow-hidden">
+          <div className="grid grid-cols-1 sm:grid-cols-3 sm:gap-2 max-w-2xl mx-auto mt-4 text-left rounded-xl border border-brand/30 sm:border-0 divide-y divide-line sm:divide-y-0 overflow-hidden">
             {[
               ['12 questions', 'Four questions across each operating component.'],
               ['Progress saved', 'You can leave before completion; an unfinished attempt receives no score or email.'],
               ['Self-report only', 'The result identifies reported patterns. It does not diagnose root causes.'],
             ].map(([title, body]) => (
-              <div key={title} className="bg-white/5 px-3 py-2 sm:rounded-xl sm:border sm:border-gold/25">
-                <p className="font-heading font-bold text-gold text-xs sm:text-sm">{title}</p>
-                <p className="font-body text-ivory/70 text-xs leading-snug sm:mt-1">{body}</p>
+              <div key={title} className="bg-white/5 px-3 py-2 sm:rounded-xl sm:border sm:border-brand/30">
+                <p className="font-heading font-bold text-brand-ink text-xs">{title}</p>
+                <p className="font-body text-muted text-xs leading-snug sm:mt-1">{body}</p>
               </div>
             ))}
           </div>
-          {error && <p role="alert" className="mt-4 text-sm text-gold">{error}</p>}
-          <button onClick={start} disabled={isWorking} className="mt-5 bg-gold text-navy font-heading font-bold rounded-xl px-8 py-3 min-h-12 hover:bg-gold-bright disabled:opacity-50 transition-colors">
+          {error && <p role="alert" className="mt-4 text-[length:var(--step-0)] text-brand-ink">{error}</p>}
+          <button onClick={start} disabled={isWorking} className="mt-5 bg-brand text-white font-heading font-bold rounded-xl px-8 py-3 min-h-12 hover:bg-brand-hover disabled:opacity-50 transition-colors">
             {isWorking ? 'Starting…' : 'Start the Business Health Check →'}
           </button>
-          <p className="font-body text-xs text-ivory/45 mt-3 max-w-xl mx-auto leading-snug">
+          <p className="font-body text-xs text-muted mt-3 max-w-xl mx-auto leading-snug">
             Free. Private. A focused founder-dependency self-report, not a full financial, tax, legal, or business-performance audit.
           </p>
         </section>
@@ -205,18 +204,17 @@ export function FdiDiagnosticFlow() {
   }
 
   if (stage === 'contact' || stage === 'submitting') {
-    const fieldClass = 'w-full rounded-lg border border-navy/20 bg-white px-3.5 py-2.5 text-navy focus:outline-none focus:ring-2 focus:ring-gold min-h-11';
-    const labelClass = 'block font-heading font-semibold text-sm text-navy mb-1';
+    const fieldClass = 'w-full rounded-lg border border-line bg-white px-3.5 py-2.5 text-ink focus:outline-none focus:ring-2 focus:ring-brand min-h-11';
+    const labelClass = 'block font-heading font-semibold text-[length:var(--step-0)] text-ink mb-1';
     const errors = finalForm.formState.errors;
-    const fieldError = (message?: string) => message ? <p role="alert" className="font-body text-xs text-crimson mt-1">{message}</p> : null;
+    const fieldError = (message?: string) => message ? <p role="alert" className="font-body text-xs text-danger mt-1">{message}</p> : null;
     return (
-      <div className="min-h-svh bg-ivory px-4 py-5 sm:py-8 relative overflow-hidden">
-        <div className="graph-overlay" />
-        <form onSubmit={submit} className="relative z-10 max-w-xl mx-auto bg-white border border-navy/10 shadow-sm rounded-2xl p-4 sm:p-6 space-y-3">
+      <div className="min-h-svh bg-brand-tint px-4 py-5 sm:py-8 relative overflow-hidden">
+        <form onSubmit={submit} className="relative z-10 max-w-xl mx-auto bg-white border border-line shadow-1 rounded-2xl p-4 sm:p-6 space-y-3">
           <div>
-            <p className="eyebrow text-gold-ink">Your result is ready</p>
-            <h1 className="font-heading font-extrabold text-navy text-lg sm:text-2xl mt-1">Where should we send it?</h1>
-            <p className="font-body text-xs sm:text-sm text-navy/60 mt-1 leading-snug">Your result also appears on the next page. We use these details only to send your report and to follow up if you ask us to.</p>
+            <p className="eyebrow text-brand-ink">Your result is ready</p>
+            <h1 className="font-heading font-extrabold text-ink text-[length:var(--step-0)] mt-1">Where should we send it?</h1>
+            <p className="font-body text-xs text-muted mt-1 leading-snug">Your result also appears on the next page. We use these details only to send your report and to follow up if you ask us to.</p>
           </div>
           {/* Name and company pair up even on a phone so all four required fields stay in one view. */}
           <div className="grid grid-cols-2 gap-2.5">
@@ -226,13 +224,13 @@ export function FdiDiagnosticFlow() {
             <div className="col-span-2 sm:col-span-1"><label className={labelClass} htmlFor="fdi-phone">Mobile number</label><input id="fdi-phone" type="tel" inputMode="tel" className={fieldClass} autoComplete="tel" {...finalForm.register('phone')} />{fieldError(errors.phone?.message)}</div>
           </div>
 
-          <div className="border-t border-navy/10 pt-3">
-            <button type="button" onClick={() => setDetailsOpen((open) => !open)} aria-expanded={detailsOpen} aria-controls="fdi-business-details" className="flex w-full items-center justify-between gap-3 min-h-11 text-left font-heading text-sm font-semibold text-navy hover:text-gold-ink transition-colors">
-              <span>Add business details <span className="font-normal text-navy/45">— optional</span></span>
-              <span aria-hidden="true" className="font-body text-lg text-gold-ink leading-none">{detailsOpen ? '−' : '+'}</span>
+          <div className="border-t border-line pt-3">
+            <button type="button" onClick={() => setDetailsOpen((open) => !open)} aria-expanded={detailsOpen} aria-controls="fdi-business-details" className="flex w-full items-center justify-between gap-3 min-h-11 text-left font-heading text-[length:var(--step-0)] font-semibold text-ink hover:text-brand-ink transition-colors">
+              <span>Add business details <span className="font-normal text-muted">— optional</span></span>
+              <span aria-hidden="true" className="font-body text-[length:var(--step-0)] text-brand-ink leading-none">{detailsOpen ? '−' : '+'}</span>
             </button>
             <div id="fdi-business-details" hidden={!detailsOpen}>
-              <p className="font-body text-xs text-navy/50 leading-snug">Skip these if you prefer. They help us tailor any follow-up and never change your result.</p>
+              <p className="font-body text-xs text-muted leading-snug">Skip these if you prefer. They help us tailor any follow-up and never change your result.</p>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-3">
                 <div><label className={labelClass} htmlFor="fdi-sector">Sector</label><select id="fdi-sector" className={fieldClass} {...finalForm.register('sector', { setValueAs: (value) => value === '' ? undefined : value })}><option value="">Select…</option>{SECTOR_OPTIONS.map(([value, label]) => <option key={value} value={value}>{label}</option>)}</select></div>
                 <div><label className={labelClass} htmlFor="fdi-employees">Number of employees</label><select id="fdi-employees" className={fieldClass} {...finalForm.register('employeeCount', { setValueAs: (value) => value === '' ? undefined : value })}><option value="">Select…</option>{EMPLOYEE_OPTIONS.map(([value, label]) => <option key={value} value={value}>{label}</option>)}</select></div>
@@ -243,9 +241,9 @@ export function FdiDiagnosticFlow() {
             </div>
           </div>
 
-          {error && <p role="alert" className="font-body text-sm text-crimson">{error}</p>}
-          <button type="submit" disabled={isWorking} className="w-full bg-gold text-navy rounded-xl min-h-12 py-3 font-heading font-bold hover:bg-gold-bright disabled:opacity-50 transition-colors">{stage === 'submitting' ? 'Preparing your result…' : 'View my Founder Dependency Index →'}</button>
-          <p className="font-body text-xs text-navy/45 text-center leading-snug">By continuing you agree to our <a href="/privacy" className="underline text-gold-ink">Privacy Policy</a>.{session?.isTest && <span className="text-gold-ink"> Marked as a test record.</span>}</p>
+          {error && <p role="alert" className="font-body text-[length:var(--step-0)] text-danger">{error}</p>}
+          <button type="submit" disabled={isWorking} className="w-full bg-brand text-white rounded-xl min-h-12 py-3 font-heading font-bold hover:bg-brand-hover disabled:opacity-50 transition-colors">{stage === 'submitting' ? 'Preparing your result…' : 'View my Founder Dependency Index →'}</button>
+          <p className="font-body text-xs text-muted text-center leading-snug">By continuing you agree to our <a href="/privacy" className="underline text-brand-ink">Privacy Policy</a>.{session?.isTest && <span className="text-brand-ink"> Marked as a test record.</span>}</p>
         </form>
       </div>
     );
@@ -255,24 +253,23 @@ export function FdiDiagnosticFlow() {
   const selected = answers[question.id];
   const progress = Math.round(((currentQuestion + 1) / FDI_1_0_QUESTIONS.questions.length) * 100);
   return (
-    <div className="min-h-svh bg-ivory px-4 py-5 sm:py-8 flex items-center relative overflow-hidden">
-      <div className="graph-overlay" />
+    <div className="min-h-svh bg-brand-tint px-4 py-5 sm:py-8 flex items-center relative overflow-hidden">
       <section className="relative z-10 w-full max-w-2xl mx-auto">
-        <div className="mb-3"><div className="flex justify-between font-body text-xs text-navy/60 mb-1.5"><span>{componentLabels[question.componentKey]}</span><span>Question {currentQuestion + 1} of 12</span></div><div className="h-1.5 rounded-full bg-line overflow-hidden"><div className="h-full rounded-full bg-gold transition-[width] duration-300" style={{ width: `${progress}%` }} /></div></div>
-        <div className="bg-white border border-navy/10 shadow-sm rounded-2xl p-4 sm:p-6">
-          <p className="eyebrow text-gold-ink">{componentLabels[question.componentKey]}</p>
-          <h1 className="font-heading font-extrabold text-navy text-base sm:text-xl leading-snug mt-1.5">{question.text}</h1>
+        <div className="mb-3"><div className="flex justify-between font-body text-xs text-muted mb-1.5"><span>{componentLabels[question.componentKey]}</span><span>Question {currentQuestion + 1} of 12</span></div><div className="h-1.5 rounded-full bg-line overflow-hidden"><div className="h-full rounded-full bg-brand transition-[width] duration-300" style={{ width: `${progress}%` }} /></div></div>
+        <div className="bg-white border border-line shadow-1 rounded-2xl p-4 sm:p-6">
+          <p className="eyebrow text-brand-ink">{componentLabels[question.componentKey]}</p>
+          <h1 className="font-heading font-extrabold text-ink text-[length:var(--step-0)] leading-snug mt-1.5">{question.text}</h1>
           <div className="space-y-2 mt-4">
             {question.options.map((option) => (
-              <button key={option.id} type="button" onClick={() => void handleAnswer(question.id, option.id)} className={cn('w-full min-h-11 rounded-xl border-2 text-left px-4 py-2.5 font-body text-sm leading-snug transition-colors', selected === option.id ? 'border-navy bg-navy/5 text-navy font-medium' : 'border-line bg-white text-navy/80 hover:border-gold hover:bg-ivory')}>
+              <button key={option.id} type="button" aria-pressed={selected === option.id} onClick={() => void handleAnswer(question.id, option.id)} className={cn('w-full min-h-11 rounded-xl border-2 text-left px-4 py-2.5 font-body text-[length:var(--step-0)] leading-snug transition-colors', selected === option.id ? 'border-brand bg-brand-soft text-ink font-semibold' : 'border-line bg-white text-ink hover:border-brand hover:bg-brand-tint')}>
                 {option.text}
               </button>
             ))}
           </div>
-          {error && <p role="alert" className="text-sm text-crimson mt-3">{error}</p>}
+          {error && <p role="alert" className="text-[length:var(--step-0)] text-danger mt-3">{error}</p>}
           <div className="flex gap-3 mt-4">
-            {currentQuestion > 0 && <button type="button" onClick={() => setCurrentQuestion((value) => value - 1)} className="flex-1 min-h-11 rounded-xl border border-navy/20 text-navy font-heading font-semibold text-sm hover:bg-ivory">← Back</button>}
-            <button type="button" disabled={!selected} onClick={() => isLast ? setStage('contact') : setCurrentQuestion((value) => value + 1)} className="flex-1 min-h-11 rounded-xl bg-navy text-ivory font-heading font-bold text-sm hover:bg-navy/90 disabled:opacity-40">{isLast ? 'Continue →' : 'Next →'}</button>
+            {currentQuestion > 0 && <button type="button" onClick={() => setCurrentQuestion((value) => value - 1)} className="flex-1 min-h-11 rounded-xl border border-line text-ink font-heading font-semibold text-[length:var(--step-0)] hover:bg-brand-tint">← Back</button>}
+            <button type="button" disabled={!selected} onClick={() => isLast ? setStage('contact') : setCurrentQuestion((value) => value + 1)} className="flex-1 min-h-11 rounded-xl bg-brand text-white font-heading font-bold text-[length:var(--step-0)] hover:bg-brand-hover disabled:opacity-40">{isLast ? 'Continue →' : 'Next →'}</button>
           </div>
         </div>
       </section>

@@ -13,30 +13,30 @@ export default async function AdminLeadsPage() {
     .order("created_at", { ascending: false });
 
   const severityColors: Record<string, string> = {
-    Critical: "bg-crimson/10 text-crimson",
-    Developing: "bg-warning/10 text-warning-ink",
-    Progressing: "bg-emerald/10 text-emerald-ink",
+    Critical: "bg-danger-soft text-danger",
+    Developing: "bg-warning/10 text-warning",
+    Progressing: "bg-success-soft text-success",
   };
 
   return (
-    <div className="min-h-screen bg-ivory">
-      <nav className="bg-navy text-ivory px-6 py-4 flex justify-between items-center">
-        <div className="font-heading font-bold text-sm">
-          M<span className="text-gold">A</span> · Consultant Workspace
+    <div className="min-h-screen bg-brand-tint">
+      <nav className="border-b border-line bg-white text-ink px-6 py-4 flex justify-between items-center">
+        <div className="font-heading font-bold text-[length:var(--step-0)]">
+          M<span className="text-brand-ink">A</span> · Consultant Workspace
         </div>
         <div className="flex items-center gap-4">
           <Link
             href="/admin/fdi"
-            className="text-xs text-gold hover:text-gold-bright transition-colors"
+            className="text-xs text-brand-ink hover:text-brand transition-colors"
           >
             FDI sessions
           </Link>
-          <span className="font-body text-xs text-ivory/50">
+          <span className="font-body text-xs text-muted">
             {leads?.length || 0} leads
           </span>
           <a
             href="/api/admin/logout"
-            className="text-xs text-ivory/50 hover:text-gold transition-colors"
+            className="text-xs text-muted hover:text-brand-ink transition-colors"
           >
             Sign Out
           </a>
@@ -44,13 +44,13 @@ export default async function AdminLeadsPage() {
       </nav>
 
       <div className="max-w-7xl mx-auto px-4 py-8">
-        <h1 className="font-heading font-extrabold text-navy text-2xl mb-6">
+        <h1 className="font-heading font-extrabold text-ink text-[length:var(--step-3)] mb-6">
           All Leads
         </h1>
-        <div className="bg-white rounded-xl shadow-sm border border-navy/10 overflow-hidden">
+        <div className="bg-white rounded-xl shadow-1 border border-line overflow-hidden">
           <div className="overflow-x-auto">
-            <table className="w-full text-sm">
-              <thead className="bg-navy text-ivory">
+            <table className="w-full text-[length:var(--step-0)]">
+              <thead className="bg-white text-ink">
                 <tr>
                   {[
                     "Date",
@@ -74,13 +74,13 @@ export default async function AdminLeadsPage() {
                   ))}
                 </tr>
               </thead>
-              <tbody className="divide-y divide-navy/5">
+              <tbody className="divide-y divide-line">
                 {(leads as Lead[] | null)?.map((lead) => (
                   <tr
                     key={lead.id}
-                    className="hover:bg-ivory/50 transition-colors"
+                    className="hover:bg-brand-tint transition-colors"
                   >
-                    <td className="px-4 py-3 font-body text-xs text-navy/50 whitespace-nowrap">
+                    <td className="px-4 py-3 font-body text-xs text-muted whitespace-nowrap">
                       {new Date(lead.created_at).toLocaleDateString("en-AE", {
                         day: "numeric",
                         month: "short",
@@ -89,30 +89,30 @@ export default async function AdminLeadsPage() {
                     <td className="px-4 py-3">
                       <Link
                         href={`/admin/leads/${lead.id}`}
-                        className="font-heading font-semibold text-navy hover:text-gold-ink transition-colors whitespace-nowrap"
+                        className="font-heading font-semibold text-ink hover:text-brand-ink transition-colors whitespace-nowrap"
                       >
                         {lead.name}
                       </Link>
-                      <div className="font-body text-xs text-navy/40">
+                      <div className="font-body text-xs text-muted">
                         {lead.email}
                       </div>
                     </td>
-                    <td className="px-4 py-3 font-body text-xs text-navy whitespace-nowrap">
+                    <td className="px-4 py-3 font-body text-xs text-ink whitespace-nowrap">
                       {lead.company_name}
                     </td>
-                    <td className="px-4 py-3 font-body text-xs text-navy/60 whitespace-nowrap">
+                    <td className="px-4 py-3 font-body text-xs text-muted whitespace-nowrap">
                       {lead.industry || "—"}
                     </td>
-                    <td className="px-4 py-3 font-body text-xs text-navy/60 whitespace-nowrap">
+                    <td className="px-4 py-3 font-body text-xs text-muted whitespace-nowrap">
                       {lead.team_size || "—"}
                     </td>
-                    <td className="px-4 py-3 font-body text-xs text-navy/60 whitespace-nowrap">
+                    <td className="px-4 py-3 font-body text-xs text-muted whitespace-nowrap">
                       {lead.revenue_range}
                     </td>
                     <td className="px-4 py-3">
                       {lead.health_score !== null && (
                         <div>
-                          <div className="font-heading font-bold text-navy text-sm">
+                          <div className="font-heading font-bold text-ink text-[length:var(--step-0)]">
                             {lead.health_score}%
                           </div>
                           {lead.severity_label && (
@@ -125,26 +125,26 @@ export default async function AdminLeadsPage() {
                         </div>
                       )}
                     </td>
-                    <td className="px-4 py-3 font-body text-xs text-navy whitespace-nowrap">
+                    <td className="px-4 py-3 font-body text-xs text-ink whitespace-nowrap">
                       {lead.primary_constraint?.replace(/_/g, " ") || "—"}
                     </td>
                     <td className="px-4 py-3">
                       <span
-                        className={cn("text-[10px] font-bold px-2 py-0.5 rounded-full", lead.email_sent ? "bg-emerald/10 text-emerald-ink" : "bg-crimson/10 text-crimson")}
+                        className={cn("text-[10px] font-bold px-2 py-0.5 rounded-full", lead.email_sent ? "bg-success-soft text-success" : "bg-danger-soft text-danger")}
                       >
                         {lead.email_sent ? "✔ Sent" : "✗ Pending"}
                       </span>
                     </td>
                     <td className="px-4 py-3">
                       <span
-                        className={cn("text-[10px] font-bold px-2 py-0.5 rounded-full", lead.ai_plan_generated ? "bg-emerald/10 text-emerald-ink" : "bg-line text-slate")}
+                        className={cn("text-[10px] font-bold px-2 py-0.5 rounded-full", lead.ai_plan_generated ? "bg-success-soft text-success" : "bg-line text-muted")}
                       >
                         {lead.ai_plan_generated ? "✔ Ready" : "—"}
                       </span>
                     </td>
                     <td className="px-4 py-3">
                       <span
-                        className={cn("text-[10px] font-bold px-2 py-0.5 rounded-full", lead.booked_call ? "bg-emerald/10 text-emerald-ink" : "bg-line text-slate")}
+                        className={cn("text-[10px] font-bold px-2 py-0.5 rounded-full", lead.booked_call ? "bg-success-soft text-success" : "bg-line text-muted")}
                       >
                         {lead.booked_call ? "✔ Booked" : "—"}
                       </span>

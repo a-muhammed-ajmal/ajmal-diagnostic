@@ -1,20 +1,18 @@
 'use client';
 import { useId, useState } from 'react';
-import { cn } from '@/lib/utils';
+import { ArrowRight, CircleCheck } from 'lucide-react';
 
 /**
- * Rendered in two places with different ground colours: the /insights section (light)
- * and the site footer (dark). The supporting text and success card have to invert, so
- * tone is a prop rather than hardcoded navy.
+ * Rendered in two places — the /insights section and the site footer. Both now sit on
+ * light ground, so the old `tone` prop that inverted the copy for a dark footer is gone.
  *
  * The field id comes from useId() because both instances can appear on the same page —
  * a fixed id would duplicate and leave each <label htmlFor> pointing at the wrong input.
  */
-export function NewsletterForm({ tone = 'light' }: { tone?: 'light' | 'dark' }) {
+export function NewsletterForm() {
   const [email, setEmail] = useState('');
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const fieldId = useId();
-  const isDark = tone === 'dark';
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -31,9 +29,12 @@ export function NewsletterForm({ tone = 'light' }: { tone?: 'light' | 'dark' }) 
   };
 
   if (status === 'success') return (
-    <div className={cn('rounded-xl border p-6 text-center', isDark ? 'border-emerald/30 bg-emerald/10' : 'border-emerald/30 bg-emerald/10')}>
-      <p className={cn('mb-1 font-heading text-lg font-bold', isDark ? 'text-emerald' : 'text-emerald-ink')}>✔ You are subscribed.</p>
-      <p className={cn('font-body text-sm', isDark ? 'text-ivory/60' : 'text-navy/60')}>You will hear from us when there is something worth sending.</p>
+    <div className="rounded-xl border border-success/30 bg-success-soft p-6 text-center">
+      <p className="mb-1 flex items-center justify-center gap-2 font-heading text-[length:var(--step-0)] font-bold text-success">
+        <CircleCheck className="h-4 w-4" strokeWidth={2.25} aria-hidden="true" />
+        You are subscribed.
+      </p>
+      <p className="font-body text-[length:var(--step-0)] text-muted">You will hear from us when there is something worth sending.</p>
     </div>
   );
 
@@ -47,19 +48,20 @@ export function NewsletterForm({ tone = 'light' }: { tone?: 'light' | 'dark' }) 
         onChange={e => setEmail(e.target.value)}
         required
         placeholder="your@email.com"
-        className="min-w-0 flex-1 rounded-lg border border-navy/20 bg-white px-4 py-3 text-base text-navy focus:outline-none focus:ring-2 focus:ring-gold"
+        className="min-w-0 flex-1 rounded-lg border border-line bg-white px-4 py-3 text-ink transition-[border-color,box-shadow] duration-200 focus:outline-none focus:ring-2 focus:ring-brand"
       />
       <button
         type="submit"
         disabled={status === 'loading'}
-        className="min-h-[48px] whitespace-nowrap rounded-lg bg-gold px-6 py-3 font-heading font-bold text-navy transition-colors hover:bg-gold-bright disabled:opacity-50"
+        className="inline-flex min-h-[48px] items-center justify-center gap-2 whitespace-nowrap rounded-lg bg-brand px-6 py-3 font-heading text-sm font-bold text-white transition-[background-color,transform] duration-200 ease-out hover:-translate-y-px hover:bg-brand-hover disabled:pointer-events-none disabled:opacity-50"
       >
-        {status === 'loading' ? 'Subscribing...' : 'Subscribe →'}
+        {status === 'loading' ? 'Subscribing…' : 'Subscribe'}
+        {status !== 'loading' && <ArrowRight className="h-4 w-4" aria-hidden="true" />}
       </button>
-      {status === 'error' && <p role="alert" className={cn('mt-1 w-full text-xs', isDark ? 'text-gold' : 'text-crimson')}>Something went wrong. Try again.</p>}
-      <p className={cn('w-full font-body text-xs sm:basis-full', isDark ? 'text-ivory/45' : 'text-navy/50')}>
+      {status === 'error' && <p role="alert" className="mt-1 w-full text-xs text-danger">Something went wrong. Try again.</p>}
+      <p className="w-full font-body text-xs text-muted sm:basis-full">
         By subscribing you agree to our{' '}
-        <a href="/privacy" className={cn('underline transition-colors', isDark ? 'text-gold hover:text-gold-bright' : 'text-gold-ink hover:text-gold')}>Privacy Policy</a>.
+        <a href="/privacy" className="text-brand-ink underline transition-colors hover:text-brand">Privacy Policy</a>.
       </p>
     </form>
   );

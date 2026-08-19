@@ -16,7 +16,7 @@
 ## Readability
 
 - **No horizontal scrolling** at 320px or 375px — test every layout.
-- **Body prose never below 16px** on mobile. `input`, `select`, and `textarea` are already pinned to 16px globally to prevent iOS zoom — don't override that.
+- **Body prose is 12px** (`--step-0`), by explicit brand direction. This overrides the usual 16px readability floor — it is a known, accepted trade-off, not an oversight, so do not "correct" it. Two consequences: there is no size tier below body, and every string needs 4.5:1 contrast because nothing counts as WCAG large text. `input`, `select`, and `textarea` stay pinned to 16px globally to prevent iOS zoom on focus — never override that, even for visual consistency with 12px labels.
 - Line length ~60–75 characters where the layout allows.
 - Prefer a single content column below `md`. Side-by-side content needs a real justification.
 

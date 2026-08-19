@@ -3,7 +3,8 @@ import { ImageResponse } from 'next/og';
 // Site-default Open Graph image. A per-article override lives alongside the article.
 // Literal hex is unavoidable here: ImageResponse is rendered by Satori, which cannot read
 // the CSS custom properties in globals.css. These values match the design tokens exactly
-// (--color-navy #132A4A, --color-gold #C6752E, --color-ivory #F6F0E2).
+// (--color-brand #2563EB, --color-accent #F59E0B, --color-ink #16181D,
+//  --color-muted #5B6273, --color-brand-tint #F5F8FF).
 
 export const alt = 'Muhammed Ajmal · Business Operations & Growth Consultant';
 export const size = { width: 1200, height: 630 };
@@ -19,7 +20,7 @@ export default function OpengraphImage() {
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'space-between',
-          background: '#132A4A',
+          background: '#FFFFFF',
           padding: '80px',
           fontFamily: 'sans-serif',
         }}
@@ -34,8 +35,8 @@ export default function OpengraphImage() {
               justifyContent: 'center',
               width: 84,
               height: 84,
-              border: '3px solid rgba(249,250,251,0.2)',
-              borderRadius: 8,
+              background: '#2563EB',
+              borderRadius: 16,
             }}
           >
             <div
@@ -47,24 +48,24 @@ export default function OpengraphImage() {
               }}
             >
               <span style={{ color: '#FFFFFF' }}>M</span>
-              <span style={{ color: '#C6752E' }}>A</span>
+              <span style={{ color: '#F59E0B' }}>A</span>
             </div>
             <div
               style={{
                 position: 'absolute',
-                top: -3,
-                right: -3,
-                width: 18,
-                height: 18,
-                borderTop: '4px solid #C6752E',
-                borderRight: '4px solid #C6752E',
+                top: 8,
+                right: 8,
+                width: 16,
+                height: 16,
+                borderTop: '4px solid #F59E0B',
+                borderRight: '4px solid #F59E0B',
               }}
             />
           </div>
           <span
             style={{
               marginLeft: 28,
-              color: '#F6F0E2',
+              color: '#16181D',
               fontSize: 26,
               fontWeight: 700,
               letterSpacing: '4px',
@@ -79,11 +80,12 @@ export default function OpengraphImage() {
         <div
           style={{
             display: 'flex',
-            color: '#FFFFFF',
+            color: '#16181D',
             fontSize: 68,
             fontWeight: 800,
             lineHeight: 1.1,
             maxWidth: 900,
+            letterSpacing: '-2px',
           }}
         >
           Build a business that grows beyond the founder.
@@ -91,9 +93,9 @@ export default function OpengraphImage() {
 
         {/* Footer */}
         <div style={{ display: 'flex', alignItems: 'center' }}>
-          <div style={{ width: 48, height: 4, background: '#C6752E', marginRight: 20 }} />
-          <span style={{ color: '#F6F0E2', fontSize: 24, fontWeight: 600 }}>
-            Business Operations & Growth Consultant · Dubai, UAE
+          <div style={{ width: 48, height: 4, background: '#2563EB', marginRight: 20 }} />
+          <span style={{ color: '#5B6273', fontSize: 24, fontWeight: 600 }}>
+            Business Operations &amp; Growth Consultant · Dubai, UAE
           </span>
         </div>
       </div>

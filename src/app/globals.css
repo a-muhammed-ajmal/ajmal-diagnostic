@@ -1,200 +1,142 @@
 @import "tailwindcss";
 
 @theme {
-  /* ── Brand primitives (Cyanotype Blueprint identity — ink, brass, vellum) ── */
-  --color-navy:        #132A4A;   /* Blueprint Ink — dark sections, strong text */
-  --color-gold:        #C6752E;   /* Brass — primary CTA, accents, active states */
-  --color-gold-bright: #E0964F;   /* Brass hover / gradient end */
-  --color-charcoal:    #132A4A;   /* body text, precision */
-  --color-ivory:       #F6F0E2;   /* Vellum — primary digital background */
-  --color-teal:        #3E8FB0;   /* Blueprint Cyan — growth, digital transformation */
-  --color-crimson:     #B33B2C;   /* error / emphasis */
-  --color-emerald:     #5B7A45;   /* success / positive */
+  /* ── Brand — Electric Blue ─────────────────────────────────────────────── */
+  --color-brand:       #2563EB;   /* primary fills, CTAs, focus — 4.5:1 on white */
+  --color-brand-hover: #1D4ED8;   /* CTA hover — 6.3:1 */
+  --color-brand-ink:   #1E40AF;   /* blue TEXT on white — 8.6:1 */
+  --color-brand-tint:  #F5F8FF;   /* pale wash — alternating section band */
+  --color-brand-soft:  #DBE7FE;   /* icon tiles, chips, chart fills */
 
-  /* Neutral scale — full primitive ladder */
-  --color-neutral-50:  #f7f7f8;
-  --color-neutral-100: #ebebed;
-  --color-neutral-200: #d3d3d8;
-  --color-neutral-300: #b0b0b8;
-  --color-neutral-400: #84848f;
-  --color-neutral-500: #5d5d68;
-  --color-neutral-600: #44444d;
-  --color-neutral-700: #2f2f37;
-  --color-neutral-800: #1d1d24;
-  --color-neutral-900: #141419;
-  --color-neutral-950: #0b0b0f;
+  /* ── Accent — Amber. FILL ONLY; use accent-ink for text. ───────────────── */
+  --color-accent:      #F59E0B;   /* 2.1:1 on white — never text */
+  --color-accent-ink:  #B45309;   /* amber TEXT on white — 5.0:1 */
+  --color-accent-soft: #FEF3E2;
 
-  /* Semantic aliases */
-  --color-ink:        #132A4A;
-  --color-orange:     #C6752E;     /* brand brass */
-  --color-gold-ink:   #8C4D1F;     /* dark brass for text on white (AA contrast) */
-  --color-teal-ink:    #255A70;    /* cyan for small text on white — 5.5:1 */
-  --color-emerald-ink: #3C5330;    /* emerald for small text on white — 5.5:1 */
-  --color-slate:      #7C7362;     /* secondary text */
-  --color-line:       #E3DBC7;     /* borders */
-  --color-footer:     #0A1F3B;     /* deepened blueprint ink — footer background */
+  /* ── Surface + text ────────────────────────────────────────────────────── */
+  --color-canvas:      #FFFFFF;
+  --color-surface:     #FFFFFF;
+  --color-line:        #E4E9F2;
+  --color-line-strong: #CBD4E4;
+  --color-ink:         #16181D;   /* near-black — headings and body */
+  --color-muted:       #5B6273;   /* secondary text — 6.2:1, safe at 12px */
 
-  /* Semantic surface tokens */
-  --color-bg:           #F6F0E2;
-  --color-surface:      #FFFFFF;
-  --color-border:       #E3DBC7;
-  --color-text:         #132A4A;
-  --color-text-muted:   #7C7362;
-  --color-text-subtle:  #9C9484;
-  --color-primary:      #C6752E;
-  --color-on-primary:   #132A4A;
-  --color-focus:        #C6752E;
+  /* Body is 12px, so every string is WCAG "normal text" (4.5:1). There is no
+     legal tier below --color-muted; do not add one. */
 
-  /* Status palette */
-  --color-success:    #5B7A45;
-  --color-warning:    #F59E0B;
-  --color-warning-ink: #92400E;  /* dark amber for AA text contrast on white */
-  --color-danger:     #B33B2C;
-  --color-info:       #3E8FB0;
+  /* ── Status ────────────────────────────────────────────────────────────── */
+  --color-success:      #0B6B43;
+  --color-success-soft: #E7F6EE;
+  --color-warning:      #9A5B08;
+  --color-warning-soft: #FEF3E2;
+  --color-danger:       #C0281D;
+  --color-danger-soft:  #FDECEC;
 
-  /* Typography — bold serif display, technical sans body, mono for data */
-  --font-display:  var(--font-fraunces), Georgia, "Times New Roman", serif;
-  --font-heading:  var(--font-fraunces), Georgia, "Times New Roman", serif;
-  --font-sans:     var(--font-plex-sans), ui-sans-serif, system-ui, sans-serif;
-  --font-body:     var(--font-plex-sans), ui-sans-serif, system-ui, sans-serif;
-  --font-mono:     var(--font-plex-mono), "IBM Plex Mono", ui-monospace, monospace;
+  --color-focus:        #2563EB;
+
+  /* ── Typography — one face, several token names so markup stays stable ─── */
+  --font-heading: var(--font-figtree), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-figtree), ui-sans-serif, system-ui, sans-serif;
+  --font-body:    var(--font-figtree), ui-sans-serif, system-ui, sans-serif;
+  --font-sans:    var(--font-figtree), ui-sans-serif, system-ui, sans-serif;
+  --font-mono:    var(--font-figtree), ui-sans-serif, system-ui, sans-serif;
+
+  /* ── Elevation — soft and light; no glow, no heavy blur ────────────────── */
+  --shadow-1: 0 1px 2px rgba(16, 24, 40, .05);
+  --shadow-2: 0 4px 12px rgba(16, 24, 40, .07), 0 2px 4px rgba(16, 24, 40, .04);
+  --shadow-3: 0 10px 28px rgba(16, 24, 40, .10), 0 4px 8px rgba(16, 24, 40, .05);
 }
 
-/* ── Non-Tailwind tokens (space, radius, motion, type scale, shadows) ──── */
+/* ── Non-Tailwind tokens (space, radius, motion, type scale) ─────────────── */
 :root {
-  /* Space scale */
   --space-1: 0.25rem; --space-2: 0.5rem;  --space-3: 0.75rem;
   --space-4: 1rem;    --space-5: 1.5rem;  --space-6: 2rem;
   --space-7: 3rem;    --space-8: 4rem;    --space-9: 6rem;
 
-  /* Radius scale */
-  --radius-1: 0.375rem; --radius-2: 0.625rem; --radius-3: 1rem; --radius-pill: 999px;
+  --radius-1: 0.5rem; --radius-2: 0.75rem; --radius-3: 1rem; --radius-pill: 999px;
 
-  /* Motion — luxurious/considered (premium consulting) */
   --dur-1: 120ms; --dur-2: 220ms; --dur-3: 400ms; --dur-4: 650ms;
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-in:  cubic-bezier(0.5, 0, 0.75, 0);
 
-  /* Fluid type scale — floors at 375px (iPhone SE/12/13/14 width), ceilings at 1240px.
-     Mobile floors are deliberately restrained: 24px is the largest type a phone ever
-     shows, so the ladder below it is compressed to keep h1 > h2 > h3 in order at that
-     width. Desktop ceilings are unchanged, so large screens still get the full display
-     scale and only the slope between the two ends changes. */
-  --step--1: clamp(0.844rem, 0.80rem + 0.18vw, 0.94rem);  /* 13.5 → 15.0px */
-  --step-0:  clamp(1.000rem, 0.94rem + 0.24vw, 1.13rem);  /* 16.0 → 18.1px  body */
-  --step-1:  clamp(1.063rem, 0.87rem + 0.81vw, 1.50rem);  /* 17.0 → 24.0px */
-  --step-2:  clamp(1.156rem, 0.79rem + 1.56vw, 2.00rem);  /* 18.5 → 32.0px */
-  --step-3:  clamp(1.250rem, 0.63rem + 2.63vw, 2.67rem);  /* 20.0 → 42.7px */
-  --step-4:  clamp(1.65rem, 1.15rem + 1.85vw, 2.75rem);  /* 26px → 44px: compact shared section scale */
-  --step-5:  clamp(2.00rem, 1.40rem + 2.50vw, 3.50rem);  /* 32px → 56px: compact shared hero scale */
-
-  /* Shadow tokens — charcoal-navy-tinted */
-  --shadow-1: 0 1px 2px rgba(19,42,74,.06), 0 1px 1px rgba(19,42,74,.04);
-  --shadow-2: 0 4px 12px rgba(19,42,74,.08), 0 2px 4px rgba(19,42,74,.05);
-  --shadow-3: 0 18px 40px rgba(19,42,74,.14), 0 6px 12px rgba(19,42,74,.07);
+  /* Fluid type scale. Body is capped at 12px by brand direction, which leaves
+     no room for a caption tier — --step--1 collapses into body. Heading floors
+     are the mobile caps (h1 24px, h2 21px) and grow to the desktop ceiling. */
+  --step--1: 0.75rem;                                       /* 12px  — collapsed into body */
+  --step-0:  0.75rem;                                       /* 12px  — BODY */
+  --step-1:  clamp(0.875rem,  0.83rem + 0.19vw, 1rem);      /* 14 → 16px  h5 / lead-in */
+  --step-2:  clamp(1rem,      0.92rem + 0.35vw, 1.1875rem); /* 16 → 19px  h4 */
+  --step-3:  clamp(1.125rem,  0.96rem + 0.69vw, 1.5rem);    /* 18 → 24px  h3 */
+  --step-4:  clamp(1.3125rem, 1.02rem + 1.24vw, 2rem);      /* 21 → 32px  h2 */
+  --step-5:  clamp(1.5rem,    1.15rem + 1.48vw, 2.5rem);    /* 24 → 40px  h1 */
 }
 
-/* ── Base: vellum paper with blueprint grid + brass/cyan aurora ─────────── */
+/* ── Base ────────────────────────────────────────────────────────────────── */
 body {
-  background-color: #F6F0E2;
-  background-image:
-    radial-gradient(65% 55% at 90% -10%, rgba(19,42,74,.07), transparent 70%),
-    radial-gradient(50% 40% at -5% 20%,  rgba(62,143,176,.05), transparent 65%),
-    radial-gradient(40% 30% at 55% 110%, rgba(198,117,46,.07), transparent 70%),
-    linear-gradient(rgba(19,42,74,.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(19,42,74,.05) 1px, transparent 1px);
-  background-size: auto, auto, auto, 40px 40px, 40px 40px;
-  background-attachment: fixed, fixed, fixed, scroll, scroll;
-  color: #132A4A;
+  background-color: var(--color-canvas);
+  color: var(--color-ink);
+  font-size: var(--step-0);
+  line-height: 1.65;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
 
-/* Grain noise — kills the plasticky sheen */
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 0;
-  opacity: 0.02;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-}
-
-@media (max-width: 640px) {
-  body { background-size: auto, auto, auto, 28px 28px, 28px 28px; }
-}
-
 /* ── Typography defaults ─────────────────────────────────────────────────── */
 h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-fraunces), Georgia, "Times New Roman", serif;
+  font-family: var(--font-figtree), ui-sans-serif, system-ui, sans-serif;
   text-wrap: balance;
 }
-p { text-wrap: pretty; }
+/* Figtree is geometric; display sizes need the optical tightening. */
+h1, h2 { letter-spacing: -0.02em;  line-height: 1.15; }
+h3, h4 { letter-spacing: -0.015em; line-height: 1.25; }
 
-/* Display leading is set for the desktop ceiling, where 0.98–1.02 looks composed. At the
-   mobile floor the same ratio collides ascenders with the line above, so headings get a
-   little air back below the tablet breakpoint. */
-@media (max-width: 767px) {
-  h1, h2 { line-height: 1.15; }
-  h3, h4 { line-height: 1.25; }
-}
+p { text-wrap: pretty; }
+h1, h2, h3, p { overflow-wrap: break-word; }
+
+/* font-mono no longer changes family (one typeface site-wide), so it now means
+   "align these figures" — which is all it was ever used for here. Unlayered, so
+   it augments the Tailwind utility rather than fighting it. */
+.font-mono { font-variant-numeric: tabular-nums; letter-spacing: 0.02em; }
+
+::selection { background: var(--color-brand-soft); color: var(--color-ink); }
+
 :focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; }
 
 /* ── Brand utilities ─────────────────────────────────────────────────────── */
-.gold-gradient-text, .orange-gradient-text {
-  background: linear-gradient(to right, #C6752E, #E0964F);
+
+/* Display-size text only. #3B82F6 clears 3:1 for large text but not 4.5:1,
+   so never apply this below 24px bold. */
+.brand-gradient-text {
+  background: linear-gradient(100deg, #1E40AF, #3B82F6);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
-/* Section grid overlays — the blueprint grid itself, not just decoration */
-.graph-overlay {
-  position: absolute; inset: 0; pointer-events: none;
-  background-image:
-    linear-gradient(#132A4A 1px, transparent 1px),
-    linear-gradient(90deg, #132A4A 1px, transparent 1px);
-  background-size: 40px 40px;
-  opacity: 0.05;
-}
-.graph-overlay-dark {
-  position: absolute; inset: 0; pointer-events: none;
-  background-image:
-    linear-gradient(#E0964F 1px, transparent 1px),
-    linear-gradient(90deg, #E0964F 1px, transparent 1px);
-  background-size: 40px 40px;
-  opacity: 0.09;
-}
-
-/* ── Component utilities ─────────────────────────────────────────────────── */
-
-/* 44×44 minimum — every icon-only control */
+/* 44x44 minimum — every icon-only control */
 .tap-target { min-height: 44px; min-width: 44px; }
 
-/* Eyebrow label — section kickers above headings.
-   Shape only; colour stays a utility so it can vary with the section
-   (gold-ink on light, gold on navy, teal/emerald on the results callouts). */
+/* Eyebrow label. Body is also 12px now, so the eyebrow distinguishes itself by
+   weight, tracking and case rather than size. Colour stays a per-use utility. */
 .eyebrow {
-  font-weight: 700;
-  font-size: 0.75rem;      /* text-xs */
-  line-height: 1rem;       /* text-xs */
-  letter-spacing: 0.1em;   /* tracking-widest */
+  font-weight: 800;
+  font-size: 0.75rem;
+  line-height: 1rem;
+  letter-spacing: 0.15em;
   text-transform: uppercase;
 }
 
-/* Interactive card hover — lift + elevate.
-   Border colour stays a Tailwind utility on each card so the accent can vary
-   (gold by default, crimson on the Founder Trap cards). */
+/* Interactive card — soft lift, light shadow, accent border. */
 .card-interactive {
   transition:
-    border-color 150ms var(--ease-out),
-    box-shadow   150ms var(--ease-out),
-    transform    150ms var(--ease-out);
+    border-color 220ms var(--ease-out),
+    box-shadow   220ms var(--ease-out),
+    transform    220ms var(--ease-out);
 }
 .card-interactive:hover {
-  box-shadow: 0 4px 16px rgba(19, 42, 74, 0.12);
-  transform: translateY(-1px);
+  border-color: var(--color-brand);
+  box-shadow: var(--shadow-2);
+  transform: translateY(-2px);
 }
 
 /* ── Staggered entrance animation ────────────────────────────────────────── */
@@ -221,6 +163,9 @@ p { text-wrap: pretty; }
 .animate-fade-in { animation: fade-in 0.3s ease-out; }
 
 /* ── Accessibility ───────────────────────────────────────────────────────── */
+/* Non-negotiable: below 16px iOS Safari zooms the viewport on field focus,
+   which breaks the diagnostic, lead capture and contact forms on mobile.
+   This is why inputs sit above the 12px body size. */
 input, select, textarea { font-size: 16px; }
 html { scroll-behavior: smooth; }
 
@@ -234,14 +179,6 @@ html { scroll-behavior: smooth; }
   }
 }
 
-/* ══════════════════════════════════════════════════════════════════════════
-   Scroll-driven animations — native CSS only (animation-timeline).
-   Runs on the compositor, no main-thread cost, no JavaScript.
-   Every effect is doubly guarded: the browser must support animation-timeline
-   AND the user must not have asked for reduced motion. With both stripped, the
-   page is complete and readable — these are pure enhancements.
-   ══════════════════════════════════════════════════════════════════════════ */
-
 /* ── Long-form article typography (article template only) ─────────────────── */
 .article-longform {
   --measure: 68ch;
@@ -252,11 +189,8 @@ html { scroll-behavior: smooth; }
   max-width: var(--measure);
 }
 .article-longform > p {
-  font-size: 1.075rem;
-  line-height: 1.7;
-}
-@media (min-width: 768px) {
-  .article-longform > p { font-size: 1.15rem; }
+  font-size: var(--step-0);
+  line-height: 1.75;
 }
 
 /* ── Vertical stage rail ──────────────────────────────────────────────────── */
@@ -265,12 +199,11 @@ html { scroll-behavior: smooth; }
 .stage-item + .stage-item { margin-top: 1.5rem; }
 
 /* Mobile: the rail collapses to a simple left accent border on each card. */
-.stage-card { border-left: 3px solid var(--color-gold); }
+.stage-card { border-left: 3px solid var(--color-brand); }
 .stage-marker { display: none; }
 
 @media (min-width: 768px) {
   .stage-rail { position: relative; padding-left: 64px; }
-  /* The connecting line down the left of the five stages. */
   .stage-rail::before {
     content: "";
     position: absolute;
@@ -280,11 +213,13 @@ html { scroll-behavior: smooth; }
     width: 2px;
     background: var(--color-line);
   }
-  .stage-card { border-left: 1px solid rgba(19, 42, 74, 0.1); }
+  .stage-card { border-left: 1px solid var(--color-line); }
   .stage-marker {
     display: flex;
     position: absolute;
-    left: 0;
+    /* Pull back out of the rail's 64px padding so the marker centres on the
+       connector line at 21px, instead of landing on top of the card title. */
+    left: -64px;
     top: 18px;
     width: 44px;
     height: 44px;
@@ -293,7 +228,7 @@ html { scroll-behavior: smooth; }
     justify-content: center;
     background: #fff;
     border: 2px solid var(--color-line);
-    color: var(--color-gold-ink);
+    color: var(--color-brand-ink);
     font-weight: 800;
     z-index: 1;
   }
@@ -311,17 +246,23 @@ html { scroll-behavior: smooth; }
 }
 .article-toc a { transition: color 150ms var(--ease-out); }
 
+/* ══════════════════════════════════════════════════════════════════════════
+   Scroll-driven animations — native CSS only (animation-timeline).
+   Runs on the compositor, no main-thread cost, no JavaScript.
+   Doubly guarded: the browser must support animation-timeline AND the user
+   must not have asked for reduced motion. With both stripped the page is
+   complete and readable — these are pure enhancements.
+   ══════════════════════════════════════════════════════════════════════════ */
 @supports (animation-timeline: view()) {
   @media (prefers-reduced-motion: no-preference) {
 
-    /* 5.1 — Reading progress bar (article pages). */
     .reading-progress {
       position: fixed;
       top: 0;
       left: 0;
       height: 3px;
       width: 100%;
-      background: var(--color-gold);
+      background: var(--color-brand);
       transform: scaleX(0);
       transform-origin: 0 50%;
       z-index: 60;
@@ -330,7 +271,6 @@ html { scroll-behavior: smooth; }
     }
     @keyframes reading-progress-grow { to { transform: scaleX(1); } }
 
-    /* 5.2 — Stage reveal: fade + rise as each card enters view (max 12px). */
     .stage-reveal {
       animation: stage-reveal-in linear both;
       animation-timeline: view();
@@ -341,7 +281,6 @@ html { scroll-behavior: smooth; }
       to   { opacity: 1; transform: translateY(0); }
     }
 
-    /* 5.7 — Same restrained reveal on homepage section headings. */
     .heading-reveal {
       animation: stage-reveal-in linear both;
       animation-timeline: view();
@@ -349,8 +288,7 @@ html { scroll-behavior: smooth; }
     }
   }
 
-  /* 5.3 — On desktop, the marker fills with the accent colour as it passes
-     through the middle of the viewport. */
+  /* On desktop the marker fills with the accent as it crosses the viewport. */
   @media (prefers-reduced-motion: no-preference) and (min-width: 768px) {
     .stage-marker {
       animation: stage-marker-fill steps(1, end) both;
@@ -359,9 +297,9 @@ html { scroll-behavior: smooth; }
     }
     @keyframes stage-marker-fill {
       to {
-        background: var(--color-gold);
-        border-color: var(--color-gold);
-        color: var(--color-navy);
+        background: var(--color-brand);
+        border-color: var(--color-brand);
+        color: #fff;
       }
     }
   }
@@ -376,75 +314,4 @@ html { scroll-behavior: smooth; }
   @media (prefers-reduced-motion: no-preference) {
     .reading-progress { display: block; }
   }
-}
-
-/* Small-screen copy safety: prevents long approved copy from causing horizontal overflow. */
-h1, h2, h3, p { overflow-wrap: break-word; }
-
-/* High-contrast foreground for every orange/gold surface. */
-.bg-gold,
-.bg-orange,
-.bg-primary,
-.bg-gold *,
-.bg-orange *,
-.bg-primary * {
-  color: var(--color-ivory) !important;
-}
-
-
-/* App-wide graph-grid language — mirrors the hero while preserving contrast. */
-body {
-  background-color: var(--color-ivory);
-  background-image:
-    linear-gradient(color-mix(in srgb, var(--color-navy) 4%, transparent) 1px, transparent 1px),
-    linear-gradient(90deg, color-mix(in srgb, var(--color-navy) 4%, transparent) 1px, transparent 1px);
-  background-size: 40px 40px;
-}
-
-.bg-ivory,
-.bg-white {
-  background-image:
-    linear-gradient(color-mix(in srgb, var(--color-navy) 4.5%, transparent) 1px, transparent 1px),
-    linear-gradient(90deg, color-mix(in srgb, var(--color-navy) 4.5%, transparent) 1px, transparent 1px);
-  background-size: 40px 40px;
-}
-
-.bg-navy:not(:has(.graph-overlay-dark)) {
-  background-image:
-    linear-gradient(color-mix(in srgb, var(--color-primary) 10%, transparent) 1px, transparent 1px),
-    linear-gradient(90deg, color-mix(in srgb, var(--color-primary) 10%, transparent) 1px, transparent 1px);
-  background-size: 40px 40px;
-}
-
-.bg-gold,
-.bg-orange,
-.bg-primary {
-  background-image:
-    linear-gradient(color-mix(in srgb, var(--color-navy) 7%, transparent) 1px, transparent 1px),
-    linear-gradient(90deg, color-mix(in srgb, var(--color-navy) 7%, transparent) 1px, transparent 1px);
-  background-size: 40px 40px;
-}
-
-@media (max-width: 640px) {
-  body,
-  .bg-ivory,
-  .bg-white,
-  .bg-navy:not(:has(.graph-overlay-dark)),
-  .bg-gold,
-  .bg-orange,
-  .bg-primary {
-    background-size: 32px 32px;
-  }
-}
-
-
-/* Accessible brass surfaces: darker brass preserves white-text readability. */
-:root {
-  --color-orange-contrast-surface: #96541F;
-}
-
-.bg-gold,
-.bg-orange,
-.bg-primary {
-  background-color: var(--color-orange-contrast-surface) !important;
 }

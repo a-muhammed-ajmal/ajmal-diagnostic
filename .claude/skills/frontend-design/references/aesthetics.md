@@ -4,23 +4,23 @@ Read this when asked to make an interface "look better," "less generic," or "mor
 
 ## Typography
 
-- **Two faces, distinct jobs.** `--font-heading` / `--font-display` resolve to **Fraunces** (bold serif, editorial character). `--font-body` / `--font-sans` resolve to **IBM Plex Sans**. `--font-mono` is IBM Plex Mono for numbers/data. No Inter, no Playfair Display, no Plus Jakarta Sans, no Lexend — those exist only as fallback stacks.
-- **Weight drives hierarchy within a face**, not font-swapping. 400 body, 500 medium emphasis, 600 section heads, 700 titles, 800 hero display.
+- **One face, every job.** `--font-heading` / `--font-display` / `--font-body` / `--font-sans` / `--font-mono` all resolve to **Figtree**; `font-mono` only switches on tabular figures. No Inter, no Fraunces, no IBM Plex, no Playfair — those exist only as fallback stacks.
+- **Weight and size drive hierarchy**, not font-swapping. 400 body, 500 medium emphasis, 600 section heads, 700 titles, 800 hero display. Body is capped at 12px, so the gap between prose and headings does most of the work — lean on it.
 - **Tracking on display**: `letter-spacing: -0.02em` on anything 20px and above. Eyebrows go the other way: `+0.1em` uppercase (the `.eyebrow` class already sets the shape — weight, size, tracking, uppercase — but no colour).
 - **Use the fluid `--step-N` scale** (`--step--1` through `--step-5`) rather than fixed pixel sizes. It is clamp-based and already tuned for this site.
 
 ## Color Aesthetic
 
-- **Brass is the only brand accent.** `--color-gold` (`#C6752E`) for fills, `--color-gold-bright` (`#E0964F`) on hover, `--color-gold-ink` (`#8C4D1F`) for colored text on white.
-- **Dark sections use ink-blue navy** (`#132A4A`), not black. The brand is "Cyanotype Blueprint" — deep ink-blue + warm brass on vellum — not monochrome.
-- **Teal supports, never competes.** `--color-teal` marks growth and digital-transformation content only.
-- **No decorative gradients** beyond the sanctioned `.gold-gradient-text` / `.orange-gradient-text` and the blueprint-grid overlay. No rainbow gradients, no purple, no AI pulse effects, no mesh backgrounds.
+- **Blue is the only brand accent.** `--color-brand` (`#2563EB`) for fills, `--color-brand-hover` (`#1D4ED8`) on hover, `--color-brand-ink` (`#1E40AF`) for coloured text on white.
+- **There are no dark sections.** The brand is "Signal" — electric blue on a white canvas. Rhythm comes from alternating white and `--color-brand-tint` bands separated by hairline rules, not from dark slabs.
+- **Amber supports, never competes.** `--color-accent` is a fill for highlights, chips, and the final step of a progression — never the primary action, and never text.
+- **No decorative gradients** beyond the sanctioned `.brand-gradient-text` (display sizes only). No rainbow gradients, no purple, no AI pulse effects, no mesh backgrounds, and no texture or grid overlays — the canvas is deliberately flat.
 
 ## Brand Signature: Blueprint Grid
 
 The 40×40px ink-blue grid, the aurora radials, and the grain layer are **already painted on `body`** in `globals.css` — this is a literal blueprint grid, part of the concept, not decoration. Do not re-declare them.
 
-Apply `.graph-overlay` only when a light section needs its own grid above the page background, and `.graph-overlay-dark` (brass grid) on navy sections. Both are absolutely positioned — the parent needs `position: relative`.
+There is no grid overlay any more — `.graph-overlay` and `.graph-overlay-dark` were deleted along with the page grain and aurora radials. When a section needs separation, give it `bg-brand-tint` and `border-y border-line`.
 
 ## Motion
 
@@ -34,7 +34,7 @@ Apply `.graph-overlay` only when a light section needs its own grid above the pa
 
 ## Card Hover Pattern
 
-`.card-interactive` already handles the transition and the lift. Note what it does **not** set: no `border-color` on hover, and the shadow is a literal rather than `--shadow-2`. The border accent is left to a Tailwind utility on each card so it can vary (brass by default, crimson on the Founder Trap cards).
+`.card-interactive` already handles the transition, the 2px lift, the `--shadow-2` step, and the blue hover border. Use it rather than rebuilding a hover.
 
 ```css
 .card-interactive {
@@ -44,7 +44,7 @@ Apply `.graph-overlay` only when a light section needs its own grid above the pa
     transform    150ms var(--ease-out);
 }
 .card-interactive:hover {
-  box-shadow: 0 4px 16px rgba(19, 42, 74, 0.12);
+  box-shadow: var(--shadow-2);
   transform: translateY(-1px);
 }
 ```

@@ -69,31 +69,36 @@ src/
 - **No raw hex in JSX**: all colors via CSS custom properties defined in `globals.css`
 
 ## Design System
-**"Cyanotype Blueprint"** — deep ink-blue + warm brass on vellum paper, with a graph-paper grid that reads as an actual technical blueprint rather than decoration. Bold serif display type against a technical sans/mono body (per `/frontend-design`). This superseded the earlier soft-white/orange-Inter identity — do not revert to it.
+**"Signal"** — electric blue on a white canvas, with warm amber as the single supporting accent. Figtree throughout, at a deliberately compact type scale. Flat, well-lit surfaces: hairline borders and light shadows, no dark slabs, no paper texture, no grid overlay. This superseded the "Cyanotype Blueprint" ink/brass/vellum identity (which itself superseded a soft-white/orange-Inter one) — do not revert to either.
 
 ```css
 /* Brand tokens — defined in src/app/globals.css @theme block */
---color-navy / --color-ink:    #132A4A      /* Blueprint Ink — dark sections, strong text */
---color-gold / --color-orange: #C6752E      /* Brass — CTAs, accents, active states */
---color-gold-bright:           #E0964F      /* brass hover / gradient end */
---color-gold-ink:              #8C4D1F      /* dark brass for text on white (AA contrast) */
---color-charcoal:              #132A4A      /* body text */
---color-ivory:                 #F6F0E2      /* Vellum — primary background */
---color-teal:                  #3E8FB0      /* Blueprint Cyan — growth, digital transformation */
---color-slate:                 #7C7362      /* secondary text */
---color-line:                  #E3DBC7      /* borders */
---color-crimson:               #B33B2C      /* error / emphasis */
---color-emerald:               #5B7A45      /* success */
+--color-brand:       #2563EB   /* Electric Blue — CTAs, fills, focus (4.5:1 on white) */
+--color-brand-hover: #1D4ED8   /* CTA hover */
+--color-brand-ink:   #1E40AF   /* blue TEXT on white (8.6:1) */
+--color-brand-tint:  #F5F8FF   /* pale wash — alternating section band */
+--color-brand-soft:  #DBE7FE   /* icon tiles, chips */
+--color-accent:      #F59E0B   /* Amber — FILL ONLY, never text (2.1:1) */
+--color-accent-ink:  #B45309   /* amber text on white (5.0:1) */
+--color-canvas:      #FFFFFF   /* page background */
+--color-ink:         #16181D   /* headings and body text */
+--color-muted:       #5B6273   /* secondary text (6.2:1) */
+--color-line:        #E4E9F2   /* borders */
+--color-success / --color-warning / --color-danger  /* status, each with a -soft tint */
 ```
 
-**Fonts**: Fraunces (bold serif, `--font-heading`/`--font-display`) for all headings — distinctive, editorial, high-character. IBM Plex Sans (`--font-body`/`--font-sans`) for body copy. IBM Plex Mono (`--font-mono`) for numbers, labels, and technical/data annotations. No Inter, no Arial, no system-ui as a primary face — those are fallback-only.
+**Fonts**: Figtree only (`--font-heading` / `--font-body` / `--font-mono` all resolve to it), loaded via `next/font/google` in `layout.tsx`. `font-mono` no longer changes family — it now means tabular figures. No second typeface.
 
-**Background**: Vellum `#F6F0E2` with 40×40px blueprint grid overlay using ink-blue at 5% opacity (this grid is now a literal part of the concept, not just texture), subtle ink/cyan/brass aurora radials.
+**Type scale**: body is capped at **12px** by brand direction, so `--step--1` and `--step-0` are both `0.75rem` and there is no caption tier below body. Heading floors are the mobile caps — h1 24px (`--step-5`), h2 21px (`--step-4`) — growing to 40px / 32px on desktop. See the accessibility note in `/frontend-design`.
+
+**Background**: flat `#FFFFFF`. Section rhythm comes from alternating white and `--color-brand-tint` bands separated by `border-y border-line`. There is no grid overlay, no grain, and no aurora — all three were deleted.
 
 **Utility classes** (already in globals.css):
-- `.gold-gradient-text` / `.orange-gradient-text` — gradient text `#C6752E → #E0964F`
-- `.graph-overlay` — ink-blue blueprint grid on light sections
-- `.graph-overlay-dark` — brass blueprint grid on dark sections
+- `.brand-gradient-text` — gradient text `#1E40AF → #3B82F6`, display sizes only (≥24px bold)
+- `.eyebrow` — 12px 800-weight uppercase section label; sets no colour
+- `.card-interactive` — hover lift 2px + `--shadow-2` + brand border
+- `.stage-rail` / `.stage-item` / `.stage-marker` / `.stage-card` — the commercial-ladder composition
+- `.reveal` / `.stage-reveal` / `.heading-reveal` — entrance and scroll-driven reveals
 
 ## Pages
 | Route | Purpose |

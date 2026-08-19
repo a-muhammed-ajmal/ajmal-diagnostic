@@ -21,8 +21,8 @@ export function ContactForm() {
     resolver: zodResolver(contactSchema),
   });
 
-  const inputClass = "w-full border border-navy/20 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-gold bg-white text-navy text-base";
-  const labelClass = "block text-sm font-heading font-semibold text-navy mb-1";
+  const inputClass = "w-full border border-line rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-brand bg-white text-ink text-[length:var(--step-0)]";
+  const labelClass = "block text-[length:var(--step-0)] font-heading font-semibold text-ink mb-1";
 
   const onSubmit = async (data: ContactFormData) => {
     setError('');
@@ -38,10 +38,10 @@ export function ContactForm() {
   };
 
   if (submitted) return (
-    <div className="bg-emerald/10 border border-emerald/30 rounded-2xl p-8 text-center">
-      <div className="text-emerald-ink text-3xl mb-3">✔</div>
-      <h3 className="font-heading font-bold text-navy text-xl mb-2">Enquiry Received</h3>
-      <p className="font-body text-navy/70 text-sm">You will receive a response within 24 hours.</p>
+    <div className="bg-success-soft border border-success/30 rounded-2xl p-8 text-center">
+      <div className="text-success text-[length:var(--step-4)] mb-3">✔</div>
+      <h3 className="font-heading font-bold text-ink text-[length:var(--step-2)] mb-2">Enquiry Received</h3>
+      <p className="font-body text-muted text-[length:var(--step-0)]">You will receive a response within 24 hours.</p>
     </div>
   );
 
@@ -50,24 +50,24 @@ export function ContactForm() {
       <div>
         <label htmlFor="name" className={labelClass}>Full Name</label>
         <input {...register('name')} id="name" className={inputClass} placeholder="First and last name" />
-        {errors.name && <p role="alert" className="text-crimson text-xs mt-1">Please enter your name</p>}
+        {errors.name && <p role="alert" className="text-danger text-xs mt-1">Please enter your name</p>}
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
           <label htmlFor="email" className={labelClass}>Business Email</label>
           <input {...register('email')} id="email" type="email" className={inputClass} placeholder="you@company.com" />
-          {errors.email && <p role="alert" className="text-crimson text-xs mt-1">Valid email required</p>}
+          {errors.email && <p role="alert" className="text-danger text-xs mt-1">Valid email required</p>}
         </div>
         <div>
           <label htmlFor="phone" className={labelClass}>Phone Number</label>
           <input {...register('phone')} id="phone" type="tel" className={inputClass} placeholder="+971 50 000 0000" />
-          {errors.phone && <p role="alert" className="text-crimson text-xs mt-1">Phone number required</p>}
+          {errors.phone && <p role="alert" className="text-danger text-xs mt-1">Phone number required</p>}
         </div>
       </div>
       <div>
         <label htmlFor="companyName" className={labelClass}>Company Name</label>
         <input {...register('companyName')} id="companyName" className={inputClass} placeholder="Your business name" />
-        {errors.companyName && <p role="alert" className="text-crimson text-xs mt-1">Company name required</p>}
+        {errors.companyName && <p role="alert" className="text-danger text-xs mt-1">Company name required</p>}
       </div>
       <div>
         <label htmlFor="inquiryType" className={labelClass}>Inquiry Type</label>
@@ -81,22 +81,22 @@ export function ContactForm() {
           <option value="ai-automation">AI &amp; Automation Advisory</option>
           <option value="general">General Enquiry</option>
         </select>
-        {errors.inquiryType && <p role="alert" className="text-crimson text-xs mt-1">Please select an inquiry type</p>}
+        {errors.inquiryType && <p role="alert" className="text-danger text-xs mt-1">Please select an inquiry type</p>}
       </div>
       <div>
         <label htmlFor="message" className={labelClass}>Message</label>
         <textarea {...register('message')} id="message" rows={4} className={inputClass} placeholder="Brief description of your situation and what you are looking to address..." />
-        {errors.message && <p role="alert" className="text-crimson text-xs mt-1">Please provide a brief message (min 20 characters)</p>}
+        {errors.message && <p role="alert" className="text-danger text-xs mt-1">Please provide a brief message (min 20 characters)</p>}
       </div>
-      {error && <p role="alert" className="text-crimson text-sm">{error}</p>}
-      <p className="text-xs text-navy/50 font-body">
+      {error && <p role="alert" className="text-danger text-[length:var(--step-0)]">{error}</p>}
+      <p className="text-xs text-muted font-body">
         By sending this enquiry you agree to our{' '}
-        <a href="/privacy" className="text-gold-ink underline hover:text-gold transition-colors">Privacy Policy</a>.
+        <a href="/privacy" className="text-brand-ink underline hover:text-brand-ink transition-colors">Privacy Policy</a>.
       </p>
       <button
         type="submit"
         disabled={isSubmitting}
-        className="w-full bg-navy text-ivory font-heading font-bold py-4 rounded-xl hover:bg-navy/90 transition-colors disabled:opacity-50 min-h-[52px]"
+        className="w-full bg-brand text-white font-heading font-bold py-4 rounded-xl hover:bg-brand-hover transition-colors disabled:opacity-50 min-h-[52px]"
       >
         {isSubmitting ? 'Sending...' : 'Send Enquiry →'}
       </button>

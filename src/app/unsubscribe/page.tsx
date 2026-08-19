@@ -31,21 +31,20 @@ export default async function UnsubscribePage({
   const message = messages[status ?? ''] ?? messages.invalid;
 
   return (
-    <section className="min-h-[60vh] bg-ivory flex items-center justify-center px-6 py-16 relative overflow-hidden">
-      <div className="graph-overlay" />
-      <div className="max-w-md w-full text-center relative z-10 bg-white border border-navy/10 rounded-2xl shadow-sm p-8">
-        <h1 className="font-heading font-extrabold text-2xl text-navy mb-3">{message.heading}</h1>
-        <p className="font-body text-navy/70 text-sm leading-relaxed mb-6">{message.body}</p>
+    <section className="min-h-[60vh] bg-brand-tint flex items-center justify-center px-6 py-16 relative overflow-hidden">
+      <div className="max-w-md w-full text-center relative z-10 bg-white border border-line rounded-2xl shadow-1 p-8">
+        <h1 className="font-heading font-extrabold text-[length:var(--step-3)] text-ink mb-3">{message.heading}</h1>
+        <p className="font-body text-muted text-[length:var(--step-0)] leading-relaxed mb-6">{message.body}</p>
         <div className="flex flex-col sm:flex-row gap-3 justify-center">
           <Link
             href="/"
-            className="inline-flex items-center justify-center bg-navy text-ivory font-heading font-bold py-3 px-6 rounded-xl text-sm hover:bg-navy/90 transition-colors min-h-[44px]"
+            className="inline-flex items-center justify-center bg-brand text-white font-heading font-bold py-3 px-6 rounded-xl text-[length:var(--step-0)] hover:bg-brand-hover transition-colors min-h-[44px]"
           >
             Back to home
           </Link>
           <Link
             href="/contact"
-            className="inline-flex items-center justify-center border border-navy/20 text-navy font-heading font-bold py-3 px-6 rounded-xl text-sm hover:bg-ivory transition-colors min-h-[44px]"
+            className="inline-flex items-center justify-center border border-line text-ink font-heading font-bold py-3 px-6 rounded-xl text-[length:var(--step-0)] hover:bg-brand-tint transition-colors min-h-[44px]"
           >
             Contact us
           </Link>

@@ -41,10 +41,10 @@ export function ArticleToc({ items }: { items: TocItem[] }) {
 
   return (
     <nav className="article-toc w-56 flex-shrink-0" aria-label="On this page">
-      <p className="font-heading font-bold text-navy/40 text-xs uppercase tracking-widest mb-3">
+      <p className="font-heading font-bold text-muted text-xs uppercase tracking-widest mb-3">
         On this page
       </p>
-      <ul className="space-y-2 border-l border-navy/10">
+      <ul className="space-y-2 border-l border-line">
         {items.map((item) => {
           const isActive = item.id === activeId;
           return (
@@ -53,8 +53,8 @@ export function ArticleToc({ items }: { items: TocItem[] }) {
                 href={`#${item.id}`}
                 className={
                   isActive
-                    ? 'block border-l-2 border-gold pl-3 font-body text-sm text-navy font-semibold'
-                    : 'block border-l-2 border-transparent pl-3 font-body text-sm text-navy/50 hover:text-navy'
+                    ? 'block border-l-2 border-brand pl-3 font-body text-[length:var(--step-0)] text-ink font-semibold'
+                    : 'block border-l-2 border-transparent pl-3 font-body text-[length:var(--step-0)] text-muted hover:text-ink'
                 }
                 aria-current={isActive ? 'true' : undefined}
               >

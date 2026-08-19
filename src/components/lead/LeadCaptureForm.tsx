@@ -30,19 +30,19 @@ export function LeadCaptureForm({ onSubmit, isLoading }: LeadCaptureFormProps) {
   });
 
   const inputClass =
-    "w-full border border-navy/20 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-gold bg-white text-navy placeholder-navy/40 text-base";
-  const labelClass = "block text-sm font-heading font-semibold text-navy mb-1";
+    "w-full border border-line rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-brand bg-white text-ink placeholder-muted text-[length:var(--step-0)]";
+  const labelClass = "block text-[length:var(--step-0)] font-heading font-semibold text-ink mb-1";
 
   return (
-    <div className="max-w-md mx-auto bg-white rounded-2xl shadow-lg p-8 border border-navy/5">
+    <div className="max-w-md mx-auto bg-white rounded-2xl shadow-1 p-8 border border-line">
       <div className="text-center mb-6">
-        <p className="text-gold-ink eyebrow mb-2">
+        <p className="text-brand-ink eyebrow mb-2">
           Diagnostic Complete
         </p>
-        <h2 className="text-2xl font-heading font-bold text-navy mb-2">
+        <h2 className="text-[length:var(--step-3)] font-heading font-bold text-ink mb-2">
           Your results are ready.
         </h2>
-        <p className="text-navy/70 font-body text-sm">
+        <p className="text-muted font-body text-[length:var(--step-0)]">
           Enter your details to receive your personalized report and AI-assisted
           reflection plan.
         </p>
@@ -58,7 +58,7 @@ export function LeadCaptureForm({ onSubmit, isLoading }: LeadCaptureFormProps) {
             placeholder="First and last name"
           />
           {errors.name && (
-            <p role="alert" className="text-crimson text-xs mt-1">{errors.name.message}</p>
+            <p role="alert" className="text-danger text-xs mt-1">{errors.name.message}</p>
           )}
         </div>
 
@@ -72,7 +72,7 @@ export function LeadCaptureForm({ onSubmit, isLoading }: LeadCaptureFormProps) {
             placeholder="you@company.com"
           />
           {errors.email && (
-            <p role="alert" className="text-crimson text-xs mt-1">{errors.email.message}</p>
+            <p role="alert" className="text-danger text-xs mt-1">{errors.email.message}</p>
           )}
         </div>
 
@@ -85,7 +85,7 @@ export function LeadCaptureForm({ onSubmit, isLoading }: LeadCaptureFormProps) {
             placeholder="Your business name"
           />
           {errors.companyName && (
-            <p role="alert" className="text-crimson text-xs mt-1">
+            <p role="alert" className="text-danger text-xs mt-1">
               {errors.companyName.message}
             </p>
           )}
@@ -94,7 +94,7 @@ export function LeadCaptureForm({ onSubmit, isLoading }: LeadCaptureFormProps) {
         <div>
           <label htmlFor="lead-phone" className={labelClass}>
             Phone Number{" "}
-            <span className="text-navy/30 font-normal text-xs">(optional)</span>
+            <span className="text-muted font-normal text-xs">(optional)</span>
           </label>
           <input
             {...register("phone")}
@@ -108,7 +108,7 @@ export function LeadCaptureForm({ onSubmit, isLoading }: LeadCaptureFormProps) {
         <div>
           <label htmlFor="lead-industry" className={labelClass}>
             Industry{" "}
-            <span className="text-navy/30 font-normal text-xs">(optional)</span>
+            <span className="text-muted font-normal text-xs">(optional)</span>
           </label>
           <select {...register("industry")}
             id="lead-industry" className={inputClass}>
@@ -131,7 +131,7 @@ export function LeadCaptureForm({ onSubmit, isLoading }: LeadCaptureFormProps) {
         <div>
           <label htmlFor="lead-teamSize" className={labelClass}>
             Team Size{" "}
-            <span className="text-navy/30 font-normal text-xs">(optional)</span>
+            <span className="text-muted font-normal text-xs">(optional)</span>
           </label>
           <select {...register("teamSize")}
             id="lead-teamSize" className={inputClass}>
@@ -147,7 +147,7 @@ export function LeadCaptureForm({ onSubmit, isLoading }: LeadCaptureFormProps) {
         <div>
           <label htmlFor="lead-revenueRange" className={labelClass}>
             Annual Revenue{" "}
-            <span className="text-navy/30 font-normal text-xs">(optional)</span>
+            <span className="text-muted font-normal text-xs">(optional)</span>
           </label>
           <select {...register("revenueRange")}
             id="lead-revenueRange" className={inputClass}>
@@ -159,21 +159,21 @@ export function LeadCaptureForm({ onSubmit, isLoading }: LeadCaptureFormProps) {
           </select>
         </div>
 
-        <p className="text-xs text-navy/50 text-center font-body">
+        <p className="text-xs text-muted text-center font-body">
           By continuing you agree to our{" "}
-          <a href="/privacy" className="text-gold-ink underline hover:text-gold transition-colors">Privacy Policy</a>.
+          <a href="/privacy" className="text-brand-ink underline hover:text-brand-ink transition-colors">Privacy Policy</a>.
           Your report is generated with AI.
         </p>
 
         <button
           type="submit"
           disabled={isLoading}
-          className="w-full bg-gold text-navy font-heading font-bold py-4 rounded-xl transition-colors hover:bg-gold-bright disabled:opacity-50 min-h-[52px] shadow-lg"
+          className="w-full bg-brand text-white font-heading font-bold py-4 rounded-xl transition-colors hover:bg-brand-hover disabled:opacity-50 min-h-[52px] shadow-1"
         >
           {isLoading ? "Generating your report..." : "View My Diagnosis →"}
         </button>
 
-        <p className="text-xs text-navy/40 text-center font-body">
+        <p className="text-xs text-muted text-center font-body">
           No spam. Your data is used only to personalize your report.
         </p>
       </form>

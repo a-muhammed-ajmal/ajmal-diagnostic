@@ -35,15 +35,15 @@ export function CalendlyWidget() {
         strategy="lazyOnload"
       />
 
-      <div className="bg-white border border-navy/10 rounded-xl p-6 md:p-8 shadow-sm">
+      <div className="bg-white border border-line rounded-xl p-6 md:p-8 shadow-1">
         <button
           type="button"
           onClick={openPopup}
-          className="w-full inline-flex items-center justify-center bg-gold text-navy font-heading font-bold py-4 px-8 rounded-xl text-base hover:bg-gold-bright transition-colors shadow-lg min-h-[52px]"
+          className="w-full inline-flex items-center justify-center bg-brand text-white font-heading font-bold py-4 px-8 rounded-xl text-[length:var(--step-0)] hover:bg-brand-hover transition-colors shadow-1 min-h-[52px]"
         >
           Book a Free 30-Minute Consultation →
         </button>
-        <p className="font-body text-xs text-navy/40 text-center mt-3">
+        <p className="font-body text-xs text-muted text-center mt-3">
           Opens a scheduling window. Takes about a minute.
         </p>
       </div>

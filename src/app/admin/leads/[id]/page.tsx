@@ -77,28 +77,28 @@ export default async function LeadBriefingPage({
   }
 
   const severityColors: Record<string, string> = {
-    Critical: "bg-crimson/10 text-crimson border-crimson/20",
-    Developing: "bg-warning/10 text-warning-ink border-warning/20",
-    Progressing: "bg-emerald/10 text-emerald-ink border-emerald/20",
+    Critical: "bg-danger-soft text-danger border-danger/30",
+    Developing: "bg-warning/10 text-warning border-warning/20",
+    Progressing: "bg-success-soft text-success border-success/30",
   };
 
   return (
-    <div className="min-h-screen bg-ivory">
-      <nav className="bg-navy text-ivory px-6 py-4 flex justify-between items-center">
+    <div className="min-h-screen bg-brand-tint">
+      <nav className="border-b border-line bg-white text-ink px-6 py-4 flex justify-between items-center">
         <div className="flex items-center gap-4">
           <Link
             href="/admin/leads"
-            className="text-xs text-ivory/50 hover:text-gold transition-colors"
+            className="text-xs text-muted hover:text-brand-ink transition-colors"
           >
             ← All Leads
           </Link>
-          <div className="font-heading font-bold text-sm">
-            M<span className="text-gold">A</span> · Pre-Call Briefing
+          <div className="font-heading font-bold text-[length:var(--step-0)]">
+            M<span className="text-brand-ink">A</span> · Pre-Call Briefing
           </div>
         </div>
         <a
           href="/api/admin/logout"
-          className="text-xs text-ivory/50 hover:text-gold transition-colors"
+          className="text-xs text-muted hover:text-brand-ink transition-colors"
         >
           Sign Out
         </a>
@@ -106,34 +106,34 @@ export default async function LeadBriefingPage({
 
       <div className="max-w-5xl mx-auto px-4 py-8 space-y-6">
         {/* Header Card */}
-        <div className="bg-white rounded-xl shadow-sm border border-navy/10 p-6">
+        <div className="bg-white rounded-xl shadow-1 border border-line p-6">
           <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
             <div>
-              <h1 className="font-heading font-extrabold text-navy text-2xl">
+              <h1 className="font-heading font-extrabold text-ink text-[length:var(--step-3)]">
                 {typedLead.name}
               </h1>
-              <div className="font-body text-navy/60 text-sm mt-1">
+              <div className="font-body text-muted text-[length:var(--step-0)] mt-1">
                 {typedLead.company_name}
               </div>
               <div className="flex flex-wrap gap-2 mt-3">
                 <a
                   href={`mailto:${typedLead.email}`}
-                  className="font-body text-xs text-gold-ink hover:underline"
+                  className="font-body text-xs text-brand-ink hover:underline"
                 >
                   {typedLead.email}
                 </a>
                 {typedLead.phone && (
-                  <span className="font-body text-xs text-navy/50">
+                  <span className="font-body text-xs text-muted">
                     {typedLead.phone}
                   </span>
                 )}
               </div>
             </div>
             <div className="text-right flex-shrink-0">
-              <div className="font-heading font-extrabold text-navy text-4xl">
+              <div className="font-heading font-extrabold text-ink text-[length:var(--step-4)]">
                 {typedLead.health_score ?? "—"}%
               </div>
-              <div className="font-body text-navy/50 text-xs mb-1">
+              <div className="font-body text-muted text-xs mb-1">
                 Diagnostic Score
               </div>
               {typedLead.severity_label && (
@@ -146,36 +146,36 @@ export default async function LeadBriefingPage({
             </div>
           </div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-6 pt-6 border-t border-navy/10">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-6 pt-6 border-t border-line">
             <div>
-              <div className="text-[10px] font-heading uppercase tracking-wider text-navy/40 mb-1">
+              <div className="text-[10px] font-heading uppercase tracking-wider text-muted mb-1">
                 Industry
               </div>
-              <div className="font-body text-sm text-navy">
+              <div className="font-body text-[length:var(--step-0)] text-ink">
                 {typedLead.industry || "—"}
               </div>
             </div>
             <div>
-              <div className="text-[10px] font-heading uppercase tracking-wider text-navy/40 mb-1">
+              <div className="text-[10px] font-heading uppercase tracking-wider text-muted mb-1">
                 Team Size
               </div>
-              <div className="font-body text-sm text-navy">
+              <div className="font-body text-[length:var(--step-0)] text-ink">
                 {typedLead.team_size || "—"}
               </div>
             </div>
             <div>
-              <div className="text-[10px] font-heading uppercase tracking-wider text-navy/40 mb-1">
+              <div className="text-[10px] font-heading uppercase tracking-wider text-muted mb-1">
                 Revenue
               </div>
-              <div className="font-body text-sm text-navy">
+              <div className="font-body text-[length:var(--step-0)] text-ink">
                 {typedLead.revenue_range}
               </div>
             </div>
             <div>
-              <div className="text-[10px] font-heading uppercase tracking-wider text-navy/40 mb-1">
+              <div className="text-[10px] font-heading uppercase tracking-wider text-muted mb-1">
                 Submitted
               </div>
-              <div className="font-body text-sm text-navy">
+              <div className="font-body text-[length:var(--step-0)] text-ink">
                 {new Date(typedLead.created_at).toLocaleDateString("en-AE", {
                   day: "numeric",
                   month: "long",
@@ -187,8 +187,8 @@ export default async function LeadBriefingPage({
         </div>
 
         {/* Dimension Scores */}
-        <div className="bg-white rounded-xl shadow-sm border border-navy/10 p-6">
-          <h2 className="font-heading font-bold text-navy text-lg mb-4">
+        <div className="bg-white rounded-xl shadow-1 border border-line p-6">
+          <h2 className="font-heading font-bold text-ink text-[length:var(--step-0)] mb-4">
             Dimension Scores
           </h2>
           <div className="space-y-3">
@@ -196,25 +196,25 @@ export default async function LeadBriefingPage({
               <div key={d.key}>
                 <div className="flex justify-between items-center mb-1">
                   <div className="flex items-center gap-2">
-                    <span className="font-body text-sm text-navy">
+                    <span className="font-body text-[length:var(--step-0)] text-ink">
                       {d.label}
                     </span>
                     {d.isPrimary && (
-                      <span className="text-[10px] font-bold bg-crimson/10 text-crimson px-2 py-0.5 rounded-full">
+                      <span className="text-[10px] font-bold bg-danger-soft text-danger px-2 py-0.5 rounded-full">
                         PRIMARY
                       </span>
                     )}
                     {d.isSecondary && (
-                      <span className="text-[10px] font-bold bg-gold/10 text-gold-ink px-2 py-0.5 rounded-full">
+                      <span className="text-[10px] font-bold bg-brand-soft text-brand-ink px-2 py-0.5 rounded-full">
                         SECONDARY
                       </span>
                     )}
                   </div>
-                  <span className="font-heading font-bold text-navy text-sm">
+                  <span className="font-heading font-bold text-ink text-[length:var(--step-0)]">
                     {d.score}/6
                   </span>
                 </div>
-                <div className="h-2 bg-navy/10 rounded-full overflow-hidden">
+                <div className="h-2 bg-brand-tint rounded-full overflow-hidden">
                   <div
                     className="h-full rounded-full transition-[width]"
                     style={{
@@ -231,22 +231,22 @@ export default async function LeadBriefingPage({
             ))}
           </div>
 
-          <div className="mt-4 pt-4 border-t border-navy/10 grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="mt-4 pt-4 border-t border-line grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <div className="text-[10px] font-heading uppercase tracking-wider text-navy/40 mb-1">
+              <div className="text-[10px] font-heading uppercase tracking-wider text-muted mb-1">
                 Primary Constraint
               </div>
-              <div className="font-body text-sm text-navy font-semibold">
+              <div className="font-body text-[length:var(--step-0)] text-ink font-semibold">
                 {typedLead.primary_constraint
                   ? toTitleCase(typedLead.primary_constraint)
                   : "—"}
               </div>
             </div>
             <div>
-              <div className="text-[10px] font-heading uppercase tracking-wider text-navy/40 mb-1">
+              <div className="text-[10px] font-heading uppercase tracking-wider text-muted mb-1">
                 Secondary Constraint
               </div>
-              <div className="font-body text-sm text-navy">
+              <div className="font-body text-[length:var(--step-0)] text-ink">
                 {typedLead.secondary_constraint
                   ? toTitleCase(typedLead.secondary_constraint)
                   : "—"}
@@ -257,23 +257,23 @@ export default async function LeadBriefingPage({
 
         {/* AI Action Plan */}
         {(thirtyDay.length > 0 || ninetyDay.length > 0) && (
-          <div className="bg-white rounded-xl shadow-sm border border-navy/10 p-6">
-            <h2 className="font-heading font-bold text-navy text-lg mb-4">
+          <div className="bg-white rounded-xl shadow-1 border border-line p-6">
+            <h2 className="font-heading font-bold text-ink text-[length:var(--step-0)] mb-4">
               AI-Generated Action Plan
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {thirtyDay.length > 0 && (
                 <div>
-                  <h3 className="font-heading font-semibold text-navy text-sm uppercase tracking-wider mb-3">
+                  <h3 className="font-heading font-semibold text-ink text-[length:var(--step-0)] uppercase tracking-wider mb-3">
                     30-Day Priorities
                   </h3>
                   <ol className="space-y-2">
                     {thirtyDay.map((item, i) => (
                       <li key={i} className="flex gap-3">
-                        <span className="flex-shrink-0 w-5 h-5 rounded-full bg-crimson/10 text-crimson text-[10px] font-bold flex items-center justify-center mt-0.5">
+                        <span className="flex-shrink-0 w-5 h-5 rounded-full bg-danger-soft text-danger text-[10px] font-bold flex items-center justify-center mt-0.5">
                           {i + 1}
                         </span>
-                        <span className="font-body text-sm text-navy/80">
+                        <span className="font-body text-[length:var(--step-0)] text-ink">
                           {item}
                         </span>
                       </li>
@@ -283,16 +283,16 @@ export default async function LeadBriefingPage({
               )}
               {ninetyDay.length > 0 && (
                 <div>
-                  <h3 className="font-heading font-semibold text-navy text-sm uppercase tracking-wider mb-3">
+                  <h3 className="font-heading font-semibold text-ink text-[length:var(--step-0)] uppercase tracking-wider mb-3">
                     90-Day Directions
                   </h3>
                   <ol className="space-y-2">
                     {ninetyDay.map((item, i) => (
                       <li key={i} className="flex gap-3">
-                        <span className="flex-shrink-0 w-5 h-5 rounded-full bg-navy/10 text-navy text-[10px] font-bold flex items-center justify-center mt-0.5">
+                        <span className="flex-shrink-0 w-5 h-5 rounded-full bg-brand-tint text-ink text-[10px] font-bold flex items-center justify-center mt-0.5">
                           {i + 1}
                         </span>
-                        <span className="font-body text-sm text-navy/80">
+                        <span className="font-body text-[length:var(--step-0)] text-ink">
                           {item}
                         </span>
                       </li>
@@ -306,17 +306,17 @@ export default async function LeadBriefingPage({
 
         {/* Discussion Questions */}
         {discussionQuestions.length > 0 && (
-          <div className="bg-navy rounded-xl p-6">
-            <h2 className="font-heading font-bold text-ivory text-lg mb-4">
+          <div className="bg-white rounded-xl p-6">
+            <h2 className="font-heading font-bold text-ink text-[length:var(--step-0)] mb-4">
               Discovery Questions for the Call
             </h2>
             <ol className="space-y-3">
               {discussionQuestions.map((q, i) => (
                 <li key={i} className="flex gap-3">
-                  <span className="flex-shrink-0 w-6 h-6 rounded-full bg-gold/20 text-gold text-xs font-bold flex items-center justify-center mt-0.5">
+                  <span className="flex-shrink-0 w-6 h-6 rounded-full bg-brand-soft text-brand-ink text-xs font-bold flex items-center justify-center mt-0.5">
                     {i + 1}
                   </span>
-                  <span className="font-body text-ivory/80 text-sm">{q}</span>
+                  <span className="font-body text-muted text-[length:var(--step-0)]">{q}</span>
                 </li>
               ))}
             </ol>
@@ -324,8 +324,8 @@ export default async function LeadBriefingPage({
         )}
 
         {/* Status Flags */}
-        <div className="bg-white rounded-xl shadow-sm border border-navy/10 p-6">
-          <h2 className="font-heading font-bold text-navy text-lg mb-4">
+        <div className="bg-white rounded-xl shadow-1 border border-line p-6">
+          <h2 className="font-heading font-bold text-ink text-[length:var(--step-0)] mb-4">
             Lead Status
           </h2>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
@@ -340,11 +340,11 @@ export default async function LeadBriefingPage({
             ].map((flag) => (
               <div key={flag.label} className="text-center">
                 <div
-                  className={cn("text-2xl font-bold mb-1", flag.value ? "text-emerald-ink" : "text-navy/20")}
+                  className={cn("text-[length:var(--step-3)] font-bold mb-1", flag.value ? "text-success" : "text-muted")}
                 >
                   {flag.value ? "✔" : "○"}
                 </div>
-                <div className="font-heading text-xs text-navy/50 uppercase tracking-wider">
+                <div className="font-heading text-xs text-muted uppercase tracking-wider">
                   {flag.label}
                 </div>
               </div>

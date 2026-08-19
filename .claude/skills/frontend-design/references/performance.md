@@ -2,7 +2,7 @@
 
 ## Core Web Vitals
 
-- **LCP** < 2.5s — optimise the critical rendering path. Fraunces, IBM Plex Sans, and IBM Plex Mono all load via `next/font/google`, which self-hosts and avoids FOUT.
+- **LCP** < 2.5s — optimise the critical rendering path. Figtree loads via `next/font/google`, which self-hosts and avoids FOUT.
 - **CLS** < 0.1 — always give images explicit `width`/`height`, and reserve space for content that arrives late.
 - **INP** < 200ms — the responsiveness metric that replaced FID. Avoid main-thread tasks over 50ms; break up heavy client work.
 
@@ -11,14 +11,12 @@
 Three typefaces, all loaded once in `src/app/layout.tsx`:
 
 ```ts
-import { Fraunces, IBM_Plex_Sans, IBM_Plex_Mono } from 'next/font/google';
+import { Figtree } from 'next/font/google';
 
-const fraunces = Fraunces({ variable: '--font-fraunces', ... });
-const plexSans = IBM_Plex_Sans({ variable: '--font-plex-sans', ... });
-const plexMono = IBM_Plex_Mono({ variable: '--font-plex-mono', ... });
+const figtree = Figtree({ variable: '--font-figtree', subsets: ['latin'], weight: ['400','500','600','700','800'], display: 'swap' });
 ```
 
-`--font-heading` / `--font-display` resolve to `var(--font-fraunces)`; `--font-body` / `--font-sans` resolve to `var(--font-plex-sans)`; `--font-mono` resolves to `var(--font-plex-mono)`. Never add a `<link>` to Google Fonts — `next/font` self-hosts and eliminates the round-trip. Three font families is more weight than one — keep subsets and weights on each `next/font` call as narrow as the design actually uses.
+Every font token — `--font-heading`, `--font-display`, `--font-body`, `--font-sans`, `--font-mono` — resolves to `var(--font-figtree)`. Never add a `<link>` to Google Fonts; `next/font` self-hosts and eliminates the round-trip. One family is the whole budget — do not add a second, and keep the weight list as narrow as the design actually uses.
 
 ## Rendering
 

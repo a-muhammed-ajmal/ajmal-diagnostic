@@ -6,7 +6,7 @@
 - **Named Exports**: Use `export function Component(…)` / `export const Component = …`. No default exports for components.
 - **PascalCase filenames** matching the component name.
 - **Class Merging**: Always use `cn()` from `src/lib/utils.ts` for conditional Tailwind classes.
-- **Font**: Every component inherits Fraunces (headings) / IBM Plex Sans (body) from `body`/heading rules. Never set a different `font-family` on any component.
+- **Font**: Every component inherits Figtree from the `body`/heading rules. There is no second typeface — never set a different `font-family` on any component.
 - **Forms**: `react-hook-form` + a `zod` schema. No uncontrolled inputs.
 
 ## File Structure Pattern
@@ -37,13 +37,13 @@ Place a new component in the folder matching its feature. Create a new folder on
 
 ```tsx
 // Correct — Tailwind token classes
-<div className="text-navy bg-ivory border-line">
+<div className="text-ink bg-brand-tint border-line">
 
 // Also correct — CSS custom property where no utility exists
-<div style={{ color: 'var(--color-gold-ink)' }}>
+<div style={{ color: 'var(--color-brand-ink)' }}>
 
 // Wrong — hardcoded hex
-<div style={{ color: '#8C4D1F' }}>
+<div style={{ color: '#1E40AF' }}>
 ```
 
 Two exceptions where literal hex is unavoidable, because CSS custom properties are not available at render time: `icon.tsx` / `apple-icon.tsx` (Satori / `ImageResponse`) and the email templates in `src/lib/email/templates/`. Values there must still match the tokens.
@@ -52,10 +52,10 @@ Two exceptions where literal hex is unavoidable, because CSS custom properties a
 
 ```tsx
 // Correct
-className={cn('base', isActive && 'bg-gold text-navy', variant === 'ghost' && 'border-0')}
+className={cn('base', isActive && 'bg-brand text-white', variant === 'ghost' && 'border-0')}
 
 // Wrong
-className={`base ${isActive ? 'bg-gold text-navy' : ''}`}
+className={`base ${isActive ? 'bg-brand text-white' : ''}`}
 ```
 
 ## Button Usage
@@ -64,16 +64,16 @@ Use the shared `<Button>` from [Button.tsx](../../../../src/components/ui/Button
 
 | Variant | Treatment | Use for |
 | --- | --- | --- |
-| `primary` (default) | `bg-gold text-navy`, hover `bg-gold-bright` | The one dominant action |
-| `secondary` | `border-navy text-navy`, hover fills navy | Supporting action on light |
-| `quiet` | `border-navy/15 bg-white`, hover orange border + `text-gold-ink` | Low-emphasis action |
+| `primary` (default) | `bg-brand text-white`, hover `bg-brand-hover` + lift | The one dominant action |
+| `secondary` | `border-brand text-brand-ink`, hover fills blue | Supporting action on light |
+| `quiet` | `border-line bg-white`, hover blue border + `text-brand-ink` | Low-emphasis action |
 | `danger` | `bg-crimson text-white` | Destructive confirm |
 
 It picks its element from its props — `href` gives a `next/link`, `href` + `external` gives `<a target="_blank" rel="noreferrer">`, neither gives a `<button>` (default `type="button"`). `fullWidth` spans the container.
 
 The base class already carries `min-h-11` (the 44px floor), `focus-visible` outline, `transition-colors`, and disabled styling. Don't re-add them, and never swap in `transition-all`.
 
-Pair it with `<Surface>` (`tone`: `default` | `muted` | `dark`, plus `interactive`) and `<SectionHeader>` (`eyebrow` / `title` / `description`, `align`, `tone`) from `Surface.tsx`. `SectionHeader` already resolves the eyebrow to `text-gold-ink` on light and `text-gold` on dark — leave that alone.
+Pair it with `<Surface>` (`tone`: `default` | `muted` | `accent`, plus `interactive`) and `<SectionHeader>` (`eyebrow` / `title` / `description`, `align`) from `Surface.tsx`. There is no `dark` tone — the site has no dark surfaces.
 
 If a genuinely new shape is needed, add a variant to `Button` rather than duplicating the recipe in a page.
 

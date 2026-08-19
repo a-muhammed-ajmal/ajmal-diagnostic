@@ -28,7 +28,7 @@ export interface ContactNotificationEmailProps {
 }
 
 const labelStyle = {
-  color: "#7C7362",
+  color: "#5B6273",
   fontSize: "11px",
   fontWeight: "bold" as const,
   letterSpacing: "2px",
@@ -37,7 +37,7 @@ const labelStyle = {
 };
 
 const valueStyle = {
-  color: "#132A4A",
+  color: "#16181D",
   fontSize: "15px",
   margin: "0 0 16px",
 };
@@ -67,7 +67,7 @@ export function ContactNotificationEmail({
         <Container style={{ maxWidth: "600px", margin: "0 auto", padding: "40px 20px" }}>
           <Text
             style={{
-              color: "#C6752E",
+              color: "#1E40AF",
               fontSize: "11px",
               fontWeight: "bold",
               letterSpacing: "3px",
@@ -77,13 +77,13 @@ export function ContactNotificationEmail({
           >
             MUHAMMED AJMAL CONSULTING
           </Text>
-          <Heading style={{ color: "#132A4A", fontSize: "22px", margin: "0 0 4px" }}>
+          <Heading style={{ color: "#16181D", fontSize: "22px", margin: "0 0 4px" }}>
             New contact enquiry
           </Heading>
-          <Text style={{ color: "#7C7362", fontSize: "14px", margin: "0 0 24px" }}>
+          <Text style={{ color: "#5B6273", fontSize: "14px", margin: "0 0 24px" }}>
             Submitted through the website contact form.
           </Text>
-          <Hr style={{ borderColor: "#E3DBC7", margin: "0 0 24px" }} />
+          <Hr style={{ borderColor: "#E4E9F2", margin: "0 0 24px" }} />
 
           <Field label="Name" value={name} />
           <Field label="Email" value={email} />
@@ -93,8 +93,8 @@ export function ContactNotificationEmail({
 
           <Section
             style={{
-              backgroundColor: "#F6F0E2",
-              border: "1px solid #E3DBC7",
+              backgroundColor: "#F5F8FF",
+              border: "1px solid #E4E9F2",
               borderRadius: "12px",
               padding: "20px",
               marginTop: "8px",
@@ -103,7 +103,7 @@ export function ContactNotificationEmail({
             <Text style={labelStyle}>Message</Text>
             <Text
               style={{
-                color: "#132A4A",
+                color: "#16181D",
                 fontSize: "14px",
                 lineHeight: "1.7",
                 margin: 0,
@@ -114,8 +114,8 @@ export function ContactNotificationEmail({
             </Text>
           </Section>
 
-          <Hr style={{ borderColor: "#E3DBC7", margin: "24px 0 16px" }} />
-          <Text style={{ color: "#7C7362", fontSize: "11px", textAlign: "center" }}>
+          <Hr style={{ borderColor: "#E4E9F2", margin: "24px 0 16px" }} />
+          <Text style={{ color: "#5B6273", fontSize: "11px", textAlign: "center" }}>
             Muhammed Ajmal Consulting · Dubai, United Arab Emirates · Strategic Growth Architecture
           </Text>
         </Container>

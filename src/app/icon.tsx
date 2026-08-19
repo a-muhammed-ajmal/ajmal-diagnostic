@@ -1,5 +1,9 @@
 import { ImageResponse } from "next/og";
 
+// Literal hex is unavoidable here: ImageResponse is rendered by Satori, which cannot
+// read the CSS custom properties in globals.css. These match the design tokens
+// (--color-brand #2563EB, --color-accent #F59E0B).
+
 export const size = { width: 32, height: 32 };
 export const contentType = "image/png";
 
@@ -7,7 +11,7 @@ export default function Icon() {
   return new ImageResponse(
     <div
       style={{
-        background: "#132A4A",
+        background: "#2563EB",
         width: "100%",
         height: "100%",
         display: "flex",
@@ -23,8 +27,8 @@ export default function Icon() {
           right: 2,
           width: 7,
           height: 7,
-          borderTop: "2px solid #C6752E",
-          borderRight: "2px solid #C6752E",
+          borderTop: "2px solid #F59E0B",
+          borderRight: "2px solid #F59E0B",
         }}
       />
       <div
@@ -37,7 +41,7 @@ export default function Icon() {
         }}
       >
         <span style={{ color: "#FFFFFF" }}>M</span>
-        <span style={{ color: "#C6752E" }}>A</span>
+        <span style={{ color: "#F59E0B" }}>A</span>
       </div>
     </div>,
     { ...size },

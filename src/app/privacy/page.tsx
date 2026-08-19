@@ -57,7 +57,7 @@ const rights: string[] = [
 function Section({ heading, children }: { heading: string; children: React.ReactNode }) {
   return (
     <section className="space-y-3">
-      <h2 className="font-heading font-extrabold text-xl md:text-2xl text-navy pt-2">{heading}</h2>
+      <h2 className="font-heading font-extrabold text-[length:var(--step-2)] text-ink pt-2">{heading}</h2>
       {children}
     </section>
   );
@@ -66,21 +66,19 @@ function Section({ heading, children }: { heading: string; children: React.React
 export default function PrivacyPage() {
   return (
     <>
-      <section className="bg-navy text-ivory py-16 md:py-20 px-6 relative overflow-hidden">
-        <div className="graph-overlay-dark" />
+      <section className="bg-white text-ink py-16 md:py-20 px-6 relative overflow-hidden">
         <div className="max-w-3xl mx-auto relative z-10">
-          <span className="text-gold font-heading font-bold tracking-widest text-sm uppercase mb-3 block">Legal</span>
+          <span className="text-brand-ink font-heading font-bold tracking-widest text-[length:var(--step-0)] uppercase mb-3 block">Legal</span>
           <h1 className="mb-4 font-heading text-[length:var(--step-5)] font-extrabold">Privacy Policy</h1>
-          <p className="font-body text-ivory/60 text-sm">Last updated: {LAST_UPDATED}</p>
+          <p className="font-body text-muted text-[length:var(--step-0)]">Last updated: {LAST_UPDATED}</p>
         </div>
       </section>
 
-      <section className="py-12 md:py-16 px-6 bg-ivory relative overflow-hidden">
-        <div className="graph-overlay" />
-        <div className="max-w-3xl mx-auto relative z-10 space-y-8 font-body text-navy/80 leading-relaxed">
+      <section className="py-12 md:py-16 px-6 bg-brand-tint relative overflow-hidden">
+        <div className="max-w-3xl mx-auto relative z-10 space-y-8 font-body text-ink leading-relaxed">
 
-          <div className="bg-white border-l-4 border-gold rounded-r-lg p-5 shadow-sm">
-            <p className="text-sm text-navy/70">
+          <div className="bg-white border-l-4 border-brand rounded-r-lg p-5 shadow-1">
+            <p className="text-[length:var(--step-0)] text-muted">
               This policy explains how Muhammed Ajmal Consulting (&ldquo;we&rdquo;, &ldquo;us&rdquo;) handles your
               personal data. It is aligned to the UAE Personal Data Protection Law — Federal Decree-Law
               No. 45 of 2021 — and its Executive Regulation, Cabinet Decision No. 33 of 2024.
@@ -92,8 +90,8 @@ export default function PrivacyPage() {
             <ul className="space-y-2">
               {dataCollected.map((d) => (
                 <li key={d.item} className="flex gap-3">
-                  <span className="text-gold-ink font-bold mt-0.5 flex-shrink-0">•</span>
-                  <span><strong className="text-navy">{d.item}.</strong> {d.detail}</span>
+                  <span className="text-brand-ink font-bold mt-0.5 flex-shrink-0">•</span>
+                  <span><strong className="text-ink">{d.item}.</strong> {d.detail}</span>
                 </li>
               ))}
             </ul>
@@ -109,7 +107,7 @@ export default function PrivacyPage() {
 
           <Section heading="Our lawful basis">
             <p>
-              For the diagnostic and the newsletter, our basis is your <strong className="text-navy">consent</strong>,
+              For the diagnostic and the newsletter, our basis is your <strong className="text-ink">consent</strong>,
               given when you submit your details. For contact enquiries, we process your data to take the
               steps you have asked us to take — namely, to respond to you. You can withdraw consent at
               any time using the contact details below.
@@ -129,10 +127,10 @@ export default function PrivacyPage() {
             <p>We rely on a small number of trusted service providers to run this service:</p>
             <div className="space-y-2">
               {processors.map((p) => (
-                <div key={p.name} className="bg-white border border-navy/10 rounded-lg p-4">
-                  <p className="font-heading font-bold text-navy text-sm">{p.name}</p>
-                  <p className="text-sm text-navy/70">{p.role}</p>
-                  <p className="text-xs text-navy/50 mt-1">{p.location}</p>
+                <div key={p.name} className="bg-white border border-line rounded-lg p-4">
+                  <p className="font-heading font-bold text-ink text-[length:var(--step-0)]">{p.name}</p>
+                  <p className="text-[length:var(--step-0)] text-muted">{p.role}</p>
+                  <p className="text-xs text-muted mt-1">{p.location}</p>
                 </div>
               ))}
             </div>
@@ -161,7 +159,7 @@ export default function PrivacyPage() {
             <ul className="space-y-2">
               {rights.map((r) => (
                 <li key={r} className="flex gap-3">
-                  <span className="text-gold-ink font-bold mt-0.5 flex-shrink-0">•</span>
+                  <span className="text-brand-ink font-bold mt-0.5 flex-shrink-0">•</span>
                   <span>{r}</span>
                 </li>
               ))}
@@ -172,11 +170,11 @@ export default function PrivacyPage() {
             <p>
               To exercise any of these rights — including access, correction, deletion, or objecting to AI
               processing — email us at{' '}
-              <a href={`mailto:${PRIVACY_EMAIL}`} className="text-gold-ink underline hover:text-gold transition-colors">
+              <a href={`mailto:${PRIVACY_EMAIL}`} className="text-brand-ink underline hover:text-brand-ink transition-colors">
                 {PRIVACY_EMAIL}
               </a>{' '}
               or use the{' '}
-              <Link href="/contact" className="text-gold-ink underline hover:text-gold transition-colors">
+              <Link href="/contact" className="text-brand-ink underline hover:text-brand-ink transition-colors">
                 contact form
               </Link>
               . If you subscribed to the newsletter, every email also contains a one-click unsubscribe link.

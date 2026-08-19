@@ -83,11 +83,11 @@ describe('POPUP_THEME', () => {
   // properties, so these literals are the only copy of the palette outside globals.css
   // — this test is what stops them silently surviving a rebrand, as the retired
   // orange/soft-white values once did. Update alongside globals.css, never separately.
-  it('matches the current "Cyanotype Blueprint" tokens in globals.css', () => {
+  it('matches the current brand tokens in globals.css', () => {
     expect(POPUP_THEME).toEqual({
-      background_color: 'F6F0E2', // --color-ivory
-      text_color: '132A4A', // --color-navy
-      primary_color: 'C6752E', // --color-gold
+      background_color: 'FFFFFF', // --color-canvas
+      text_color: '16181D', // --color-ink
+      primary_color: '2563EB', // --color-brand
     });
   });
 

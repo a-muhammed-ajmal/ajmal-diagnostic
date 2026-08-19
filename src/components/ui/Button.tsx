@@ -27,14 +27,22 @@ type NativeButtonProps = ButtonBaseProps & {
 type ButtonProps = LinkButtonProps | NativeButtonProps;
 
 const variantClasses: Record<ButtonVariant, string> = {
-  primary: "bg-gold text-navy hover:bg-gold-bright",
-  secondary: "border border-navy text-navy hover:bg-navy hover:text-ivory",
-  quiet: "border border-navy/15 bg-white text-navy hover:border-gold hover:text-gold-ink",
-  danger: "bg-crimson text-white hover:bg-crimson/90",
+  primary: "bg-brand text-white shadow-1 hover:bg-brand-hover hover:shadow-2",
+  secondary: "border border-brand text-white hover:bg-brand hover:text-white",
+  quiet: "border border-line bg-white text-ink hover:border-brand hover:text-brand-ink",
+  danger: "bg-danger text-white hover:bg-danger/90",
 };
 
+/* 44px is the accessibility floor and the standard control height for nav,
+   forms and in-page actions. The hover lift is transform-only so it stays on
+   the compositor; the global prefers-reduced-motion guard neutralises it. */
 const baseClasses =
-  "inline-flex min-h-11 items-center justify-center gap-2 rounded-xl px-5 py-3 font-heading text-sm font-bold leading-5 transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50";
+  "inline-flex min-h-11 items-center justify-center gap-2 rounded-xl px-5 py-3" +
+  "font-heading text-[length:var(--step-0)] font-bold leading-5" +
+  "transition-[background-color,border-color,color,box-shadow,transform] duration-200 ease-out" +
+  "hover:-translate-y-px" +
+  "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus" +
+  "disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50";
 
 export function Button({
   children,

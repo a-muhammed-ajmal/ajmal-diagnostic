@@ -1,10 +1,12 @@
 import Link from "next/link";
+import { ArrowRight, CircleCheck, Compass, Cpu, Settings2, Users } from "lucide-react";
 import {
   CommercialLadder,
   DependencyIndexPreview,
   FounderSystemVisual,
   FounderTrapDiagram,
 } from "@/components/home/SystemVisuals";
+import { ArchitectureLadder, GrowthFormulaRail, IndexBandMeter } from "@/components/home/Graphics";
 import { pageMetadata } from "@/lib/metadata";
 import { jsonLdScript, personAndServiceJsonLd } from "@/lib/jsonLd";
 
@@ -17,15 +19,11 @@ export const metadata = pageMetadata({
   path: "/",
 });
 
-const GROWTH_FORMULA = ["Vision", "Strategy", "Systems", "People", "Execution", "Accountability"];
-
-const ARCHITECTURE_LAYERS = ["Founder", "Team", "Systems", "Automation", "Data", "Scale"];
-
 const scopeAreas = [
-  ["Strategy", "Direction, priorities, positioning, and growth choices."],
-  ["Systems", "Processes, SOPs, management rhythm, KPIs, and structure."],
-  ["People", "Roles, ownership, decision rights, accountability, and capability."],
-  ["Applied AI", "Automation and AI where they improve capacity, speed, or visibility."],
+  { title: "Strategy", body: "Direction, priorities, positioning, and growth choices.", Icon: Compass },
+  { title: "Systems", body: "Processes, SOPs, management rhythm, KPIs, and structure.", Icon: Settings2 },
+  { title: "People", body: "Roles, ownership, decision rights, accountability, and capability.", Icon: Users },
+  { title: "Applied AI", body: "Automation and AI where they improve capacity, speed, or visibility.", Icon: Cpu },
 ];
 
 const qualification = [
@@ -42,51 +40,49 @@ export default function HomePage() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdScript(personAndServiceJsonLd()) }} />
 
-      <section className="relative flex min-h-[calc(100svh-4.5rem)] items-center overflow-hidden bg-navy px-6 py-10 text-ivory sm:py-12">
-        <div className="graph-overlay-dark" />
-        <div className="relative z-10 mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-[1fr_0.9fr] lg:gap-16">
+      <section className="bg-white px-6 py-16 text-ink md:py-24">
+        <div className="mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-[1fr_0.9fr] lg:gap-16">
           <div>
-            <span className="reveal mb-4 block font-heading text-xs font-bold uppercase tracking-widest text-gold md:text-sm">
+            <span className="reveal eyebrow mb-4 block text-brand-ink">
               Business Operations &amp; Growth Consultant · Dubai, UAE
             </span>
-            <h1 className="reveal font-heading text-[length:var(--step-5)] font-extrabold leading-[0.98]">
-              Build a business that <span className="orange-gradient-text">grows beyond the founder.</span>
+            <h1 className="reveal font-heading text-[length:var(--step-5)] font-extrabold">
+              Build a business that <span className="brand-gradient-text">grows beyond the founder.</span>
             </h1>
-            <p className="reveal mt-6 max-w-xl font-body text-base leading-relaxed text-ivory/80 md:text-lg">
+            <p className="reveal mt-6 max-w-xl font-body text-[length:var(--step-0)] leading-relaxed text-muted">
               Muhammed Ajmal Consulting helps founder-led UAE SMEs build successful, scalable businesses by reducing founder dependency through better systems, clearer ownership, useful visibility, and consistent execution.
             </p>
             <div className="reveal mt-8 flex flex-col gap-3 sm:flex-row">
-              <Link href="/diagnostic" className="inline-flex min-h-[52px] items-center justify-center rounded-xl bg-gold px-7 py-4 font-heading text-base font-bold text-navy shadow-lg transition-colors hover:bg-gold-bright">
-                Start the Business Health Check <span aria-hidden="true">&nbsp;→</span>
+              <Link
+                href="/diagnostic"
+                className="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl bg-brand px-7 py-3 font-heading text-sm font-bold text-white shadow-1 transition-[background-color,box-shadow,transform] duration-200 ease-out hover:-translate-y-px hover:bg-brand-hover hover:shadow-2"
+              >
+                Start the Business Health Check
+                <ArrowRight className="h-4 w-4" aria-hidden="true" />
               </Link>
-              <Link href="/services" className="inline-flex min-h-[52px] items-center justify-center rounded-xl border border-ivory/35 px-7 py-4 font-heading text-base font-bold text-ivory transition-colors hover:border-gold hover:text-gold">
+              <Link
+                href="/services"
+                className="inline-flex min-h-11 items-center justify-center rounded-xl border border-line-strong px-7 py-3 font-heading text-sm font-bold text-ink transition-[border-color,color,transform] duration-200 ease-out hover:-translate-y-px hover:border-brand hover:text-brand-ink"
+              >
                 See How It Works
               </Link>
             </div>
-            <p className="reveal mt-4 font-body text-sm text-ivory/50">Free. Private. A focused founder-dependency self-report.</p>
+            <p className="reveal mt-4 font-body text-xs text-muted">Free. Private. A focused founder-dependency self-report.</p>
           </div>
           <FounderSystemVisual />
         </div>
       </section>
 
-      <section className="bg-gold px-6 py-5" aria-label="Growth Formula">
-        <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-center gap-x-3 gap-y-1 font-heading text-xs font-bold text-navy md:text-sm">
-          {GROWTH_FORMULA.map((step, index) => (
-            <span key={step} className="flex items-center gap-3">
-              <span>{step}</span>
-              {index < GROWTH_FORMULA.length - 1 && <span className="text-navy/45" aria-hidden="true">→</span>}
-            </span>
-          ))}
-        </div>
+      <section className="border-y border-line bg-brand-tint px-6 py-10" aria-label="Growth Formula">
+        <GrowthFormulaRail />
       </section>
 
-      <section id="founder-trap" className="relative overflow-hidden bg-ivory px-6 py-16 md:py-24">
-        <div className="graph-overlay" />
-        <div className="relative z-10 mx-auto max-w-6xl">
+      <section id="founder-trap" className="bg-white px-6 py-16 md:py-24">
+        <div className="mx-auto max-w-6xl">
           <div className="mx-auto mb-10 max-w-2xl text-center md:mb-14">
-            <p className="eyebrow mb-3 text-crimson">The Founder Trap</p>
-            <h2 className="heading-reveal font-heading text-[length:var(--step-4)] font-extrabold leading-tight text-navy">When growth still depends on one person.</h2>
-            <p className="mt-4 font-body text-base leading-relaxed text-navy/65">The pattern is visible in how decisions move, where knowledge sits, how the team responds to change, and whether work is done consistently.</p>
+            <p className="eyebrow mb-3 text-danger">The Founder Trap</p>
+            <h2 className="heading-reveal font-heading text-[length:var(--step-4)] font-extrabold text-ink">When growth still depends on one person.</h2>
+            <p className="mt-4 font-body text-[length:var(--step-0)] leading-relaxed text-muted">The pattern is visible in how decisions move, where knowledge sits, how the team responds to change, and whether work is done consistently.</p>
           </div>
           <FounderTrapDiagram />
         </div>
@@ -94,75 +90,76 @@ export default function HomePage() {
 
       <DependencyIndexPreview />
 
-      <section id="how-it-works" className="relative overflow-hidden bg-white px-6 py-16 md:py-24">
-        <div className="graph-overlay" />
-        <div className="relative z-10 mx-auto max-w-5xl">
+      <section id="how-it-works" className="bg-white px-6 py-16 md:py-24">
+        <div className="mx-auto max-w-5xl">
           <div className="mx-auto max-w-2xl text-center">
-            <p className="eyebrow mb-3 text-gold-ink">How we work</p>
-            <h2 className="heading-reveal font-heading text-[length:var(--step-4)] font-extrabold leading-tight text-navy">One commercial journey. Each stage leads to the next.</h2>
-            <p className="mt-4 font-body text-base leading-relaxed text-navy/65">The right next step depends on what evidence shows—not on choosing from a menu of disconnected services.</p>
+            <p className="eyebrow mb-3 text-brand-ink">How we work</p>
+            <h2 className="heading-reveal font-heading text-[length:var(--step-4)] font-extrabold text-ink">One commercial journey. Each stage leads to the next.</h2>
+            <p className="mt-4 font-body text-[length:var(--step-0)] leading-relaxed text-muted">The right next step depends on what evidence shows—not on choosing from a menu of disconnected services.</p>
           </div>
           <CommercialLadder />
-          <div className="mt-10 text-center"><Link href="/services" className="inline-flex min-h-12 items-center justify-center rounded-xl border border-navy px-7 py-3 font-heading text-sm font-bold text-navy transition-colors hover:bg-navy hover:text-ivory">See the full journey <span aria-hidden="true">&nbsp;→</span></Link></div>
+          <div className="mt-10 text-center">
+            <Link
+              href="/services"
+              className="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl border border-line-strong px-7 py-3 font-heading text-sm font-bold text-ink transition-[border-color,background-color,color,transform] duration-200 ease-out hover:-translate-y-px hover:border-brand hover:bg-brand hover:text-white"
+            >
+              See the full journey
+              <ArrowRight className="h-4 w-4" aria-hidden="true" />
+            </Link>
+          </div>
         </div>
       </section>
 
-      <section className="bg-ivory px-6 py-16 md:py-24">
+      <section className="border-y border-line bg-brand-tint px-6 py-16 md:py-24">
         <div className="mx-auto max-w-6xl">
           <div className="mx-auto max-w-2xl text-center">
-            <p className="eyebrow mb-3 text-teal-ink">Operating scope</p>
-            <h2 className="heading-reveal font-heading text-[length:var(--step-4)] font-extrabold leading-tight text-navy">The areas of work that make an operating system work.</h2>
-            <p className="mt-4 font-body text-base leading-relaxed text-navy/65">These are areas of work, not another framework.</p>
+            <p className="eyebrow mb-3 text-accent-ink">Operating scope</p>
+            <h2 className="heading-reveal font-heading text-[length:var(--step-4)] font-extrabold text-ink">The areas of work that make an operating system work.</h2>
+            <p className="mt-4 font-body text-[length:var(--step-0)] leading-relaxed text-muted">These are areas of work, not another framework.</p>
           </div>
-          <div className="mx-auto mt-10 max-w-3xl divide-y divide-navy/10 border-t border-navy/10">
-            {scopeAreas.map(([title, body], index) => (
-              <article key={title} className="stage-reveal flex flex-col gap-1 py-5 sm:flex-row sm:items-baseline sm:gap-8">
-                <div className="flex shrink-0 items-baseline gap-3 sm:w-40">
-                  <span className="font-mono text-xs text-teal-ink">0{index + 1}</span>
-                  <h3 className="text-[length:var(--step-1)] font-heading font-bold text-navy">{title}</h3>
+          <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {scopeAreas.map(({ title, body, Icon }, index) => (
+              <article key={title} className="stage-reveal card-interactive rounded-2xl border border-line bg-white p-5">
+                <div className="flex items-center justify-between">
+                  <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-brand-soft" aria-hidden="true">
+                    <Icon className="h-5 w-5 text-brand-ink" strokeWidth={2.25} />
+                  </span>
+                  <span className="font-mono text-xs text-accent-ink">0{index + 1}</span>
                 </div>
-                <p className="font-body text-sm leading-relaxed text-navy/60">{body}</p>
+                <h3 className="mt-4 text-[length:var(--step-1)] font-heading font-bold text-ink">{title}</h3>
+                <p className="mt-2 font-body text-[length:var(--step-0)] leading-relaxed text-muted">{body}</p>
               </article>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="relative overflow-hidden bg-white px-6 py-16 md:py-24">
-        <div className="graph-overlay" />
-        <div className="relative z-10 mx-auto max-w-6xl">
+      <section className="bg-white px-6 py-16 md:py-24">
+        <div className="mx-auto max-w-6xl">
           <div className="mx-auto max-w-2xl text-center">
-            <p className="eyebrow mb-3 text-gold-ink">Strategic Growth Architecture</p>
-            <h2 className="heading-reveal font-heading text-[length:var(--step-4)] font-extrabold leading-tight text-navy">A system that shifts responsibility out of the founder&apos;s head.</h2>
+            <p className="eyebrow mb-3 text-brand-ink">Strategic Growth Architecture</p>
+            <h2 className="heading-reveal font-heading text-[length:var(--step-4)] font-extrabold text-ink">A system that shifts responsibility out of the founder&apos;s head.</h2>
           </div>
-          <div className="mt-10 flex flex-wrap items-baseline justify-center gap-x-3 gap-y-4">
-            {ARCHITECTURE_LAYERS.map((layer, index) => (
-              <span key={layer} className="flex items-baseline gap-3">
-                <span className="flex items-baseline gap-2">
-                  <span className="font-mono text-xs text-gold-ink">0{index + 1}</span>
-                  <span className="text-[length:var(--step-1)] font-heading font-bold text-navy">{layer}</span>
-                </span>
-                {index < ARCHITECTURE_LAYERS.length - 1 && <span className="text-navy/30" aria-hidden="true">→</span>}
-              </span>
-            ))}
+          <div className="mt-12">
+            <ArchitectureLadder />
           </div>
-          <p className="mx-auto mt-7 max-w-2xl text-center font-body text-sm leading-relaxed text-navy/60">The architecture is progressive: each layer gives the next one a stronger foundation.</p>
+          <p className="mx-auto mt-8 max-w-2xl text-center font-body text-[length:var(--step-0)] leading-relaxed text-muted">The architecture is progressive: each layer gives the next one a stronger foundation.</p>
         </div>
       </section>
 
-      <section className="relative overflow-hidden bg-ivory px-6 py-16 md:py-24">
-        <div className="graph-overlay" />
-        <div className="relative z-10 mx-auto max-w-6xl">
+      <section className="border-y border-line bg-brand-tint px-6 py-16 md:py-24">
+        <div className="mx-auto max-w-6xl">
           <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
             <div>
-              <p className="eyebrow mb-3 text-teal-ink">Built for</p>
-              <h2 className="heading-reveal font-heading text-[length:var(--step-3)] font-extrabold leading-tight text-navy">Founder-led UAE SMEs ready to make operating changes.</h2>
-              <p className="mt-4 font-body text-sm leading-relaxed text-navy/65">Primary sectors include real estate and business services, trading and distribution, and construction and contracting.</p>
+              <p className="eyebrow mb-3 text-accent-ink">Built for</p>
+              <h2 className="heading-reveal font-heading text-[length:var(--step-3)] font-extrabold text-ink">Founder-led UAE SMEs ready to make operating changes.</h2>
+              <p className="mt-4 font-body text-[length:var(--step-0)] leading-relaxed text-muted">Primary sectors include real estate and business services, trading and distribution, and construction and contracting.</p>
             </div>
-            <ul className="divide-y divide-navy/10 border-t border-navy/10 lg:border-t-0">
+            <ul className="grid gap-3 rounded-2xl border border-line bg-white p-5 sm:grid-cols-2">
               {qualification.map((item) => (
-                <li key={item} className="stage-reveal flex items-start gap-3 py-3 font-body text-sm text-navy/80">
-                  <span className="mt-0.5 text-teal-ink" aria-hidden="true">✓</span>{item}
+                <li key={item} className="stage-reveal flex items-start gap-2.5 font-body text-[length:var(--step-0)] text-ink">
+                  <CircleCheck className="mt-px h-4 w-4 shrink-0 text-brand" strokeWidth={2.25} aria-hidden="true" />
+                  {item}
                 </li>
               ))}
             </ul>
@@ -170,13 +167,21 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="relative flex min-h-[calc(100svh-4.5rem)] items-center overflow-hidden bg-navy px-6 py-10 text-ivory sm:py-12">
-        <div className="graph-overlay-dark" />
-        <div className="relative z-10 mx-auto max-w-3xl text-center">
-          <p className="eyebrow mb-3 text-gold">Start with clarity</p>
-          <h2 className="heading-reveal font-heading text-[length:var(--step-4)] font-extrabold leading-tight">Find out where your business still depends on you.</h2>
-          <p className="mx-auto mt-5 max-w-xl font-body text-base leading-relaxed text-ivory/70">Start with a free Business Health Check and receive your Founder Dependency Index across decision speed, execution consistency, and operational visibility.</p>
-          <Link href="/diagnostic" className="mt-8 inline-flex min-h-[52px] items-center justify-center rounded-xl bg-gold px-9 py-4 font-heading text-base font-bold text-navy shadow-lg transition-colors hover:bg-gold-bright">Start the Business Health Check <span aria-hidden="true">&nbsp;→</span></Link>
+      <section className="bg-white px-6 py-16 md:py-24">
+        <div className="mx-auto grid max-w-5xl items-center gap-10 lg:grid-cols-[1.1fr_0.9fr]">
+          <div className="text-center lg:text-left">
+            <p className="eyebrow mb-3 text-brand-ink">Start with clarity</p>
+            <h2 className="heading-reveal font-heading text-[length:var(--step-4)] font-extrabold text-ink">Find out where your business still depends on you.</h2>
+            <p className="mx-auto mt-5 max-w-xl font-body text-[length:var(--step-0)] leading-relaxed text-muted lg:mx-0">Start with a free Business Health Check and receive your Founder Dependency Index across decision speed, execution consistency, and operational visibility.</p>
+            <Link
+              href="/diagnostic"
+              className="mt-8 inline-flex min-h-11 items-center justify-center gap-2 rounded-xl bg-brand px-7 py-3 font-heading text-sm font-bold text-white shadow-1 transition-[background-color,box-shadow,transform] duration-200 ease-out hover:-translate-y-px hover:bg-brand-hover hover:shadow-2"
+            >
+              Start the Business Health Check
+              <ArrowRight className="h-4 w-4" aria-hidden="true" />
+            </Link>
+          </div>
+          <IndexBandMeter />
         </div>
       </section>
     </>

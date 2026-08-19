@@ -15,13 +15,13 @@ function FeaturedCard({ article }: { article: Article }) {
   return (
     <Link
       href={`/insights/${article.slug}`}
-      className="card-interactive block rounded-xl border border-navy/10 bg-ivory p-6 hover:border-gold md:p-8"
+      className="card-interactive block rounded-xl border border-line bg-brand-tint p-6 hover:border-brand md:p-8"
     >
-      <span className="font-heading text-xs font-bold uppercase tracking-widest text-gold-ink">{article.category}</span>
-      <h2 className="mb-2 mt-2 font-heading text-xl font-extrabold text-navy md:text-2xl">{article.title}</h2>
-      <p className="mb-3 font-body text-sm leading-relaxed text-navy/60">{article.excerpt}</p>
-      <p className="mb-3 font-body text-xs text-navy/40">{formatDate(article.publishedAt)} · {getReadingTime(article)} min read</p>
-      <span className="font-heading text-sm font-bold text-gold-ink">Read the article &rarr;</span>
+      <span className="font-heading text-xs font-bold uppercase tracking-widest text-brand-ink">{article.category}</span>
+      <h2 className="mb-2 mt-2 font-heading text-[length:var(--step-2)] font-extrabold text-ink">{article.title}</h2>
+      <p className="mb-3 font-body text-[length:var(--step-0)] leading-relaxed text-muted">{article.excerpt}</p>
+      <p className="mb-3 font-body text-xs text-muted">{formatDate(article.publishedAt)} · {getReadingTime(article)} min read</p>
+      <span className="font-heading text-[length:var(--step-0)] font-bold text-brand-ink">Read the article &rarr;</span>
     </Link>
   );
 }
@@ -30,12 +30,12 @@ function CompactCard({ article }: { article: Article }) {
   return (
     <Link
       href={`/insights/${article.slug}`}
-      className="card-interactive block rounded-xl border border-navy/10 bg-ivory p-5 hover:border-gold"
+      className="card-interactive block rounded-xl border border-line bg-brand-tint p-5 hover:border-brand"
     >
-      <span className="font-heading text-xs font-bold uppercase tracking-widest text-gold-ink">{article.category}</span>
-      <h3 className="mb-1.5 mt-1.5 font-heading text-base font-bold text-navy md:text-lg">{article.title}</h3>
-      <p className="mb-2 font-body text-xs leading-relaxed text-navy/60">{article.excerpt}</p>
-      <p className="font-body text-xs text-navy/40">{formatDate(article.publishedAt)} · {getReadingTime(article)} min read</p>
+      <span className="font-heading text-xs font-bold uppercase tracking-widest text-brand-ink">{article.category}</span>
+      <h3 className="mb-1.5 mt-1.5 font-heading text-[length:var(--step-0)] font-bold text-ink">{article.title}</h3>
+      <p className="mb-2 font-body text-xs leading-relaxed text-muted">{article.excerpt}</p>
+      <p className="font-body text-xs text-muted">{formatDate(article.publishedAt)} · {getReadingTime(article)} min read</p>
     </Link>
   );
 }
@@ -56,19 +56,17 @@ export default function InsightsPage() {
 
   return (
     <>
-      <section className="bg-navy text-ivory py-16 md:py-20 px-6 relative overflow-hidden">
-        <div className="graph-overlay-dark" />
+      <section className="border-b border-line bg-white text-ink py-16 md:py-20 px-6">
         <div className="relative z-10 mx-auto max-w-4xl text-center">
-          <p className="eyebrow mb-3 text-gold">Practical thinking</p>
+          <p className="eyebrow mb-3 text-brand-ink">Practical thinking</p>
           <h1 className="mb-5 font-heading text-[length:var(--step-5)] font-extrabold">Insights</h1>
-          <p className="mx-auto max-w-2xl font-body text-base text-ivory/70 md:text-lg">Practical insight on founder dependency, stronger operating systems, and applied AI for founder-led UAE SMEs.</p>
+          <p className="mx-auto max-w-2xl font-body text-[length:var(--step-0)] text-muted">Practical insight on founder dependency, stronger operating systems, and applied AI for founder-led UAE SMEs.</p>
         </div>
       </section>
 
       <section className="py-12 md:py-16 px-6 bg-white relative overflow-hidden">
-        <div className="graph-overlay" />
         <div className="relative z-10 mx-auto max-w-4xl">
-          <p className="eyebrow mb-6 text-center text-navy">Latest</p>
+          <p className="eyebrow mb-6 text-center text-ink">Latest</p>
 
           {featured && <FeaturedCard article={featured} />}
 
@@ -82,30 +80,28 @@ export default function InsightsPage() {
         </div>
       </section>
 
-      <section className="py-12 md:py-16 px-6 bg-ivory border-y border-navy/10 relative overflow-hidden">
-        <div className="graph-overlay" />
+      <section className="py-12 md:py-16 px-6 bg-brand-tint border-y border-line relative overflow-hidden">
         <div className="relative z-10 mx-auto max-w-xl text-center">
-          <h2 className="heading-reveal mb-3 font-heading text-2xl font-extrabold text-navy">Get insights delivered</h2>
-          <p className="mb-6 font-body text-sm text-navy/60">Practical operating insight for founder-led UAE SMEs. Delivered when there is something worth sending.</p>
+          <h2 className="heading-reveal mb-3 font-heading text-[length:var(--step-3)] font-extrabold text-ink">Get insights delivered</h2>
+          <p className="mb-6 font-body text-[length:var(--step-0)] text-muted">Practical operating insight for founder-led UAE SMEs. Delivered when there is something worth sending.</p>
           <NewsletterForm />
-          <p className="mt-4 font-body text-xs text-navy/50">No spam. Unsubscribe anytime.</p>
+          <p className="mt-4 font-body text-xs text-muted">No spam. Unsubscribe anytime.</p>
         </div>
       </section>
 
       {populatedCategories.length > 1 && (
       <section className="py-12 md:py-16 px-6 bg-white relative overflow-hidden">
-        <div className="graph-overlay" />
         <div className="relative z-10 mx-auto max-w-4xl">
-          <p className="eyebrow mb-6 text-center text-navy">Browse by topic</p>
+          <p className="eyebrow mb-6 text-center text-ink">Browse by topic</p>
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
             {populatedCategories.map(cat => (
               <Link
                 key={cat.slug}
                 href={`/insights/category/${cat.slug}`}
-                className="card-interactive block rounded-xl border border-navy/10 bg-ivory p-5 hover:border-gold"
+                className="card-interactive block rounded-xl border border-line bg-brand-tint p-5 hover:border-brand"
               >
-                <h3 className="mb-2 font-heading text-sm font-bold text-navy">{cat.name}</h3>
-                <p className="font-body text-xs leading-relaxed text-navy/60">{cat.desc}</p>
+                <h3 className="mb-2 font-heading text-[length:var(--step-0)] font-bold text-ink">{cat.name}</h3>
+                <p className="font-body text-xs leading-relaxed text-muted">{cat.desc}</p>
               </Link>
             ))}
           </div>
