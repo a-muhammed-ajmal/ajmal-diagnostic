@@ -1,8 +1,19 @@
 'use client';
 
-import Link from 'next/link';
 import { useEffect, useState } from 'react';
+import { ArrowRight } from 'lucide-react';
+import { Button } from '@/components/ui/Button';
 import type { FounderFdiReport } from '@/lib/fdi/public-report';
+
+/** Ambient radials. Decorative, and always inside a clipping parent. */
+function Orbs() {
+  return (
+    <div className="pointer-events-none absolute inset-0" aria-hidden="true">
+      <div className="orb orb-electric absolute -right-32 -top-40 h-[28rem] w-[28rem]" />
+      <div className="orb orb-amber absolute -bottom-40 -left-32 h-96 w-96" />
+    </div>
+  );
+}
 
 export function FdiResults() {
   const [report, setReport] = useState<FounderFdiReport | null>(null);
@@ -20,18 +31,116 @@ export function FdiResults() {
   }, []);
 
   if (!report) {
-    return <div className="min-h-screen bg-brand-tint flex items-center justify-center px-5"><section className="max-w-lg text-center bg-white border border-line rounded-2xl p-8"><h1 className="font-heading font-extrabold text-ink text-[length:var(--step-3)]">Your result is not available in this browser.</h1><p className="font-body text-muted mt-3">Complete the Business Health Check again to view a new result.</p><Link href="/diagnostic" className="inline-block mt-6 bg-brand text-white rounded-xl px-5 py-3 min-h-[48px] font-heading font-bold">Start the Business Health Check</Link></section></div>;
+    return (
+      <div className="relative flex min-h-screen items-center justify-center overflow-hidden bg-canvas-light px-5">
+        <Orbs />
+        <section className="glass-panel relative z-10 max-w-lg rounded-2xl p-8">
+          <h1 className="font-heading text-[length:var(--step-4)] font-extrabold text-ink">
+            Your result is not available in this browser.
+          </h1>
+          <p className="mt-3 font-body text-[length:var(--step-0)] leading-relaxed text-muted">
+            Complete the Business Health Check again to view a new result.
+          </p>
+          <div className="mt-6">
+            <Button href="/diagnostic">
+              Start the Business Health Check
+              <ArrowRight className="h-4 w-4" aria-hidden="true" />
+            </Button>
+          </div>
+        </section>
+      </div>
+    );
   }
 
   const concentration = report.concentration.labels.join(' and ');
-  const alerts = report.alerts.flatMap((tier) => tier.components.map((component) => component.label));
+  const alerts = report.alerts.flatMap((tier) =>
+    tier.components.map((component) => component.label),
+  );
+
   return (
-    <div className="min-h-screen bg-brand-tint px-4 py-10 relative overflow-hidden"><section className="relative z-10 max-w-4xl mx-auto space-y-5"><header className="bg-white text-ink border border-line shadow-2 rounded-2xl p-7 md:p-10"><p className="eyebrow text-brand-ink">Founder Dependency Index</p><h1 className="font-heading font-extrabold text-ink text-[length:var(--step-5)] mt-3">{report.index.display} <span className="text-muted text-[length:var(--step-3)]">/ {report.index.scaleMax}</span></h1><p className="font-heading font-bold text-brand-ink text-[length:var(--step-0)] mt-2">{report.index.band.label}</p><p className="font-body text-muted leading-relaxed mt-5 max-w-2xl">This result describes self-reported operating patterns. It is not a diagnosis of root cause.</p></header>
-      <section className="bg-white border border-line rounded-2xl p-6 md:p-8"><h2 className="font-heading font-extrabold text-ink text-[length:var(--step-2)]">Component scores</h2><div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-5">{report.components.map((component) => <div key={component.key} className="border border-line rounded-xl p-4"><p className="font-heading text-[length:var(--step-0)] text-muted">{component.label}</p><p className="font-heading font-extrabold text-ink text-[length:var(--step-3)] mt-2">{component.display}<span className="text-[length:var(--step-0)] text-muted"> / 100</span></p></div>)}</div><p className="font-body text-[length:var(--step-0)] text-muted mt-6">Dependency appears most concentrated in <strong>{concentration}</strong>.</p>{alerts.length > 0 && <p className="font-body text-[length:var(--step-0)] text-brand-ink mt-2">Severe component alert: {alerts.join(', ')}.</p>}</section>
-      <section className="bg-white border border-line rounded-2xl p-6 md:p-8"><h2 className="font-heading font-extrabold text-ink text-[length:var(--step-2)]">What the answers indicate</h2><ul className="mt-5 space-y-3">{report.observations.map((finding) => <li key={finding} className="font-body text-ink leading-relaxed pl-5 relative before:content-[''] before:absolute before:left-0 before:top-2 before:w-2 before:h-2 before:rounded-full before:bg-brand">{finding}</li>)}</ul></section>
-      {/* The next-step href comes from the frozen FDI-1.0 config; only the public label
-          is applied here, because that config is hash-locked and must not be edited. */}
-      <section className="border border-line rounded-2xl bg-white p-6 md:p-8"><h2 className="font-heading font-extrabold text-ink text-[length:var(--step-2)]">Next step: Business Clarity Audit</h2><p className="font-body text-muted leading-relaxed mt-3">A Business Clarity Audit tests these self-reported patterns against operating evidence — records, workflows, dashboards, decision samples, and SOPs — and identifies where closer investigation is useful.</p><a href={report.nextStep.href} className="inline-block mt-5 bg-brand text-white rounded-xl px-5 py-3 min-h-[48px] font-heading font-bold hover:bg-brand-hover">Discuss a Business Clarity Audit →</a><p className="font-body text-xs italic text-muted leading-relaxed mt-6">{report.limitation}</p></section>
-    </section></div>
+    <div className="relative min-h-screen overflow-hidden bg-canvas-light px-4 py-10 md:py-14">
+      <Orbs />
+      <section className="relative z-10 mx-auto max-w-4xl space-y-5">
+
+        {/* The index itself, on the page's one glass panel. */}
+        <header className="glass-panel rounded-2xl p-7 md:p-10">
+          <p className="eyebrow text-brand-ink">Founder Dependency Index</p>
+          <h1 className="mt-3 font-heading text-[length:var(--step-5)] font-extrabold text-ink">
+            {report.index.display}
+            <span className="font-heading text-[length:var(--step-3)] text-muted"> / {report.index.scaleMax}</span>
+          </h1>
+          <p className="mt-2 font-heading text-[length:var(--step-1)] font-bold text-brand-ink">
+            {report.index.band.label}
+          </p>
+          <p className="mt-5 max-w-2xl font-body text-[length:var(--step-0)] leading-relaxed text-muted">
+            This result describes self-reported operating patterns. It is not a diagnosis of root cause.
+          </p>
+        </header>
+
+        <section className="rounded-2xl border border-line bg-white p-6 shadow-1 md:p-8">
+          <h2 className="font-heading text-[length:var(--step-3)] font-extrabold text-ink">Component scores</h2>
+          <dl className="mt-5 grid grid-cols-1 gap-4 md:grid-cols-3">
+            {report.components.map((component) => (
+              <div key={component.key} className="card-interactive rounded-xl border border-line bg-canvas-light p-4">
+                <dt className="font-heading text-[length:var(--step-0)] text-muted">{component.label}</dt>
+                <dd className="mt-2 font-heading text-[length:var(--step-3)] font-extrabold text-ink">
+                  {component.display}
+                  <span className="font-heading text-[length:var(--step-0)] text-muted"> / 100</span>
+                </dd>
+              </div>
+            ))}
+          </dl>
+          <p className="mt-6 font-body text-[length:var(--step-0)] leading-relaxed text-muted">
+            Dependency appears most concentrated in <strong className="text-ink">{concentration}</strong>.
+          </p>
+          {alerts.length > 0 && (
+            <p className="mt-3 rounded-xl border-l-4 border-accent bg-accent-soft px-4 py-3 font-body text-[length:var(--step-0)] leading-relaxed text-accent-ink">
+              <strong>Severe component alert:</strong> {alerts.join(', ')}.
+            </p>
+          )}
+        </section>
+
+        <section className="rounded-2xl border border-line bg-white p-6 shadow-1 md:p-8">
+          <h2 className="font-heading text-[length:var(--step-3)] font-extrabold text-ink">
+            What the answers indicate
+          </h2>
+          <ul className="mt-5 space-y-3">
+            {report.observations.map((finding) => (
+              <li
+                key={finding}
+                className="relative pl-5 font-body text-[length:var(--step-0)] leading-relaxed text-ink before:absolute before:left-0 before:top-2 before:h-2 before:w-2 before:rounded-full before:bg-brand before:content-['']"
+              >
+                {finding}
+              </li>
+            ))}
+          </ul>
+        </section>
+
+        {/* The next-step href comes from the frozen FDI-1.0 config; only the public label
+            is applied here, because that config is hash-locked and must not be edited. */}
+        <section className="relative overflow-hidden rounded-2xl bg-canvas-dark p-6 md:p-8">
+          <div className="pointer-events-none absolute inset-0" aria-hidden="true">
+            <div className="orb orb-amber absolute -right-16 -top-24 h-64 w-64 opacity-25" />
+          </div>
+          <div className="relative z-10">
+            <h2 className="font-heading text-[length:var(--step-3)] font-extrabold text-white">
+              Next step: Business Clarity Audit
+            </h2>
+            <p className="mt-3 max-w-2xl font-body text-[length:var(--step-0)] leading-relaxed text-muted-invert">
+              A Business Clarity Audit tests these self-reported patterns against operating evidence — records, workflows, dashboards, decision samples, and SOPs — and identifies where closer investigation is useful.
+            </p>
+            <div className="mt-6">
+              <Button href={report.nextStep.href} variant="accent">
+                Discuss a Business Clarity Audit
+                <ArrowRight className="h-4 w-4" aria-hidden="true" />
+              </Button>
+            </div>
+            <p className="mt-6 font-body text-xs italic leading-relaxed text-muted-invert">
+              {report.limitation}
+            </p>
+          </div>
+        </section>
+      </section>
+    </div>
   );
 }
