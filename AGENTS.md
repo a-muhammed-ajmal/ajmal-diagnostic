@@ -37,6 +37,7 @@ src/
     diagnostic/     # Quiz flow
     page.tsx        # Home
   components/
+    ui/             # Section, PageHero, Button, Surface + SectionHeader
     layout/         # Navigation, Footer
     quiz/           # QuestionCard, OptionButton, ProgressBar
     contact/        # ContactForm, CalendlyWidget
@@ -86,6 +87,7 @@ src/
 --color-canvas-light: #F8FAFC   /* Slate 50 — neutral band */
 --color-ink:          #0F172A   /* headings and body text (17.9:1) */
 --color-muted:        #475569   /* secondary text (7.6:1) */
+--color-muted-invert: #CBD5E1   /* secondary text ON a canvas-dark band (12:1) */
 --color-line:         #E2E8F0   /* borders (Slate 200) */
 --color-success / --color-warning / --color-danger  /* status, each with a -soft tint */
 ```
@@ -97,6 +99,8 @@ The numbered palette (`electric-50…900`, `amber-50…700`, `canvas-dark/light/
 **Type scale**: **responsive, with strict mobile ceilings.** Below 768px, no heading (h1–h4) may exceed **24px** and no body copy may exceed **14px**; micro-copy and labels sit at 12px. At 768px and above the scale opens up — body 16px, h2 32px, h1 48px. Both tiers are declared once on `:root` in `globals.css`, so every `text-[length:var(--step-N)]` call site inherits them. `text-xs` is bound to `--step--1`, the micro-copy tier. `input`/`select`/`textarea` stay pinned at 16px at every width to stop iOS Safari zooming on focus.
 
 **Background**: flat `#FFFFFF`. Section rhythm comes from alternating white, `--color-canvas-light`, and `--color-brand-tint` bands separated by `border-y border-line`, plus optional `.orb` ambient radials in a positioned, overflow-hidden section.
+
+**Layout primitives**: `<Section>` (band tone/width/orbs) and `<PageHero>` (asymmetric page opener) in `src/components/ui/`. Every page section is a `<Section>`; every page opener is a `<PageHero>`. Neither offers a centred-hero variant — asymmetry is the house layout. `<Button>` gains an `accent` variant (amber fill, dark text) and `<Surface>` a `glass` tone.
 
 **Utility classes** (already in globals.css):
 - `.glass-panel` — glassmorphism: translucent white, backdrop blur, hairline border

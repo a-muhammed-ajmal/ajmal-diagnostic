@@ -1,6 +1,10 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
+import { ArrowLeft, ArrowRight } from 'lucide-react';
+import { Button } from '@/components/ui/Button';
+import { PageHero } from '@/components/ui/PageHero';
+import { Section } from '@/components/ui/Section';
 import {
   CATEGORIES,
   getArticlesByCategory,
@@ -34,12 +38,12 @@ function ArticleCard({ article }: { article: Article }) {
   return (
     <Link
       href={`/insights/${article.slug}`}
-      className="card-interactive block rounded-xl border border-line bg-brand-tint p-5 hover:border-brand md:p-6"
+      className="card-interactive flex h-full flex-col rounded-2xl border border-line bg-white p-5 shadow-1 md:p-6"
     >
-      <span className="font-heading text-xs font-bold uppercase tracking-widest text-brand-ink">{article.category}</span>
-      <h2 className="mb-1.5 mt-1.5 font-heading text-[length:var(--step-0)] font-bold text-ink">{article.title}</h2>
-      <p className="mb-2 font-body text-[length:var(--step-0)] leading-relaxed text-muted">{article.excerpt}</p>
-      <p className="font-body text-xs text-muted">{formatDate(article.publishedAt)} · {getReadingTime(article)} min read</p>
+      <span className="inline-flex w-fit rounded-full bg-brand-soft px-3 py-1 font-heading text-xs font-bold uppercase tracking-widest text-brand-ink">{article.category}</span>
+      <h2 className="mb-2 mt-3 font-heading text-[length:var(--step-1)] font-bold text-ink">{article.title}</h2>
+      <p className="mb-3 font-body text-[length:var(--step-0)] leading-relaxed text-muted">{article.excerpt}</p>
+      <p className="mt-auto font-body text-xs text-muted">{formatDate(article.publishedAt)} · {getReadingTime(article)} min read</p>
     </Link>
   );
 }
@@ -57,40 +61,41 @@ export default async function CategoryPage({
 
   return (
     <>
-      <section className="bg-white text-ink py-16 md:py-20 px-6 relative overflow-hidden">
-        <div className="max-w-4xl mx-auto text-center relative z-10">
-          <Link href="/insights" className="text-brand-ink font-heading font-bold text-xs uppercase tracking-widest mb-4 inline-block">&larr; All Insights</Link>
-          <span className="text-brand-ink font-heading font-bold tracking-widest text-[length:var(--step-0)] uppercase mb-3 block">Category</span>
-          <h1 className="mb-5 font-heading text-[length:var(--step-5)] font-extrabold">{category.name}</h1>
-          <p className="font-body text-muted text-[length:var(--step-0)] max-w-2xl mx-auto">{category.desc}</p>
-        </div>
-      </section>
+      <PageHero
+        eyebrow="Category"
+        title={category.name}
+        lead={category.desc}
+        accent="amber"
+        actions={
+          <Button href="/insights" variant="quiet">
+            <ArrowLeft className="h-4 w-4" aria-hidden="true" />
+            All Insights
+          </Button>
+        }
+      />
 
-      <section className="py-12 md:py-16 px-6 bg-white relative overflow-hidden">
-        <div className="max-w-4xl mx-auto relative z-10">
-          {articles.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {articles.map((a) => (
-                <ArticleCard key={a.slug} article={a} />
-              ))}
-            </div>
-          ) : (
-            <div className="mx-auto max-w-md py-8 text-center">
-              <p className="mb-2 font-heading text-[length:var(--step-0)] font-bold text-ink">Nothing published here yet.</p>
-              <p className="mb-6 font-body text-[length:var(--step-0)] text-muted">
-                In the meantime, the Business Health Check is a practical first view of where
-                founder dependency may be appearing.
-              </p>
-              <Link
-                href="/diagnostic"
-                className="inline-flex min-h-[48px] items-center justify-center rounded-xl bg-brand px-8 py-3 font-heading text-[length:var(--step-0)] font-bold text-white transition-colors hover:bg-brand-hover"
-              >
-                Start the Business Health Check &rarr;
-              </Link>
-            </div>
-          )}
-        </div>
-      </section>
+      <Section tone="light" width="narrow">
+        {articles.length > 0 ? (
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+            {articles.map((a) => (
+              <ArticleCard key={a.slug} article={a} />
+            ))}
+          </div>
+        ) : (
+          <div className="glass-panel mx-auto max-w-md rounded-2xl p-8">
+            <p className="mb-2 font-heading text-[length:var(--step-1)] font-bold text-ink">Nothing published here yet.</p>
+            <p className="mb-6 font-body text-[length:var(--step-0)] leading-relaxed text-muted">
+              In the meantime, the Business Health Check is a practical first view of where
+              founder dependency may be appearing.
+            </p>
+            <Button href="/diagnostic">
+              Start the Business Health Check
+              <ArrowRight className="h-4 w-4" aria-hidden="true" />
+            </Button>
+          </div>
+        )}
+      </Section>
+
     </>
   );
 }

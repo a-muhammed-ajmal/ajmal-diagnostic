@@ -11,9 +11,9 @@ export function ProgressBar({ current, total }: ProgressBarProps) {
         <span>Question {current} of {total}</span>
         <span>{percentage}% complete</span>
       </div>
-      <div className="w-full bg-line rounded-full h-2">
+      <div className="h-2 w-full rounded-full bg-line">
         <div
-          className="bg-brand h-2 rounded-full transition-[width] duration-500"
+          className="h-2 rounded-full bg-gradient-to-r from-electric-700 to-electric-500 transition-[width] duration-500"
           style={{ width: `${percentage}%` }}
         />
       </div>

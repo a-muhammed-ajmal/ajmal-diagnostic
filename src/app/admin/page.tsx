@@ -25,11 +25,17 @@ export default function AdminLoginPage() {
   };
 
   return (
-    <div className="min-h-screen bg-brand-tint flex items-center justify-center px-4">
-      <div className="bg-white rounded-2xl shadow-3 p-10 w-full max-w-sm">
-        <div className="text-center mb-8">
-          <div className="font-heading font-extrabold text-ink text-[length:var(--step-3)] mb-1">
-            M<span className="text-brand-ink">A</span>
+    <div className="relative flex min-h-screen items-center justify-center overflow-hidden bg-canvas-light px-4">
+      <div className="pointer-events-none absolute inset-0" aria-hidden="true">
+        <div className="orb orb-electric absolute -right-32 -top-40 h-96 w-96" />
+        <div className="orb orb-amber absolute -bottom-40 -left-32 h-80 w-80" />
+      </div>
+      <div className="glass-panel relative z-10 w-full max-w-sm rounded-2xl p-10">
+        <div className="mb-8 text-center">
+          <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-xl bg-brand shadow-1">
+            <span className="font-heading text-[length:var(--step-1)] font-extrabold leading-none tracking-tighter text-white">
+              M<span className="text-accent">A</span>
+            </span>
           </div>
           <h1 className="font-heading font-bold text-ink text-[length:var(--step-0)] uppercase tracking-widest">Admin Access</h1>
         </div>

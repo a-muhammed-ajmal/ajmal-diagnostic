@@ -68,6 +68,10 @@
   --color-ink:         #0F172A;    /* Slate 900 — 17.9:1 on white */
   --color-ink-soft:    #1E293B;    /* Slate 800 */
   --color-muted:       #475569;    /* Slate 600 — 7.6:1, the lightest legal text */
+  /* Secondary text ON a canvas-dark band (Slate 300, 12.0:1 against #0F172A).
+     Dark bands are where amber is allowed to live, and they need an inverse
+     partner for --color-muted — never mute inverted text with opacity. */
+  --color-muted-invert: #CBD5E1;
 
   /* ── Status ────────────────────────────────────────────────────────────── */
   --color-success:      #0B6B43;

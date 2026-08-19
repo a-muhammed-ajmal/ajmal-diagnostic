@@ -14,6 +14,7 @@
  *   - The "Last updated" date is refreshed whenever the policy changes.
  */
 import Link from 'next/link';
+import { PageHero } from '@/components/ui/PageHero';
 import { pageMetadata } from '@/lib/metadata';
 
 export const metadata = pageMetadata({
@@ -66,15 +67,13 @@ function Section({ heading, children }: { heading: string; children: React.React
 export default function PrivacyPage() {
   return (
     <>
-      <section className="bg-white text-ink py-16 md:py-20 px-6 relative overflow-hidden">
-        <div className="max-w-3xl mx-auto relative z-10">
-          <span className="text-brand-ink font-heading font-bold tracking-widest text-[length:var(--step-0)] uppercase mb-3 block">Legal</span>
-          <h1 className="mb-4 font-heading text-[length:var(--step-5)] font-extrabold">Privacy Policy</h1>
-          <p className="font-body text-muted text-[length:var(--step-0)]">Last updated: {LAST_UPDATED}</p>
-        </div>
-      </section>
+      <PageHero
+        eyebrow="Legal"
+        title="Privacy Policy"
+        lead={`Last updated: ${LAST_UPDATED}`}
+      />
 
-      <section className="py-12 md:py-16 px-6 bg-brand-tint relative overflow-hidden">
+      <section className="relative overflow-hidden border-y border-line bg-canvas-light px-6 py-12 md:py-16">
         <div className="max-w-3xl mx-auto relative z-10 space-y-8 font-body text-ink leading-relaxed">
 
           <div className="bg-white border-l-4 border-brand rounded-r-lg p-5 shadow-1">

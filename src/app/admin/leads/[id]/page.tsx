@@ -83,7 +83,7 @@ export default async function LeadBriefingPage({
   };
 
   return (
-    <div className="min-h-screen bg-brand-tint">
+    <div className="min-h-screen bg-canvas-light">
       <nav className="border-b border-line bg-white text-ink px-6 py-4 flex justify-between items-center">
         <div className="flex items-center gap-4">
           <Link

@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import Link from 'next/link';
+import { Button } from '@/components/ui/Button';
 
 export const metadata: Metadata = {
   title: 'Unsubscribe',
@@ -31,23 +31,17 @@ export default async function UnsubscribePage({
   const message = messages[status ?? ''] ?? messages.invalid;
 
   return (
-    <section className="min-h-[60vh] bg-brand-tint flex items-center justify-center px-6 py-16 relative overflow-hidden">
-      <div className="max-w-md w-full text-center relative z-10 bg-white border border-line rounded-2xl shadow-1 p-8">
-        <h1 className="font-heading font-extrabold text-[length:var(--step-3)] text-ink mb-3">{message.heading}</h1>
-        <p className="font-body text-muted text-[length:var(--step-0)] leading-relaxed mb-6">{message.body}</p>
-        <div className="flex flex-col sm:flex-row gap-3 justify-center">
-          <Link
-            href="/"
-            className="inline-flex items-center justify-center bg-brand text-white font-heading font-bold py-3 px-6 rounded-xl text-[length:var(--step-0)] hover:bg-brand-hover transition-colors min-h-[44px]"
-          >
-            Back to home
-          </Link>
-          <Link
-            href="/contact"
-            className="inline-flex items-center justify-center border border-line text-ink font-heading font-bold py-3 px-6 rounded-xl text-[length:var(--step-0)] hover:bg-brand-tint transition-colors min-h-[44px]"
-          >
-            Contact us
-          </Link>
+    <section className="relative flex min-h-[70vh] items-center justify-center overflow-hidden bg-canvas-light px-6 py-16">
+      <div className="pointer-events-none absolute inset-0" aria-hidden="true">
+        <div className="orb orb-electric absolute -right-32 -top-40 h-[28rem] w-[28rem]" />
+        <div className="orb orb-amber absolute -bottom-40 -left-32 h-96 w-96" />
+      </div>
+      <div className="glass-panel relative z-10 w-full max-w-md rounded-2xl p-8">
+        <h1 className="mb-3 font-heading text-[length:var(--step-4)] font-extrabold text-ink">{message.heading}</h1>
+        <p className="mb-7 font-body text-[length:var(--step-0)] leading-relaxed text-muted">{message.body}</p>
+        <div className="flex flex-col gap-3 sm:flex-row">
+          <Button href="/">Back to home</Button>
+          <Button href="/contact" variant="quiet">Contact us</Button>
         </div>
       </div>
     </section>

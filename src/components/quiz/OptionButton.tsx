@@ -14,11 +14,11 @@ export function OptionButton({ optionId, text, selected, onSelect }: OptionButto
       aria-pressed={selected}
       onClick={() => onSelect(optionId)}
       className={cn(
-        'w-full text-left px-5 py-4 rounded-xl border-2 font-body',
-        'transition-[border-color,background-color,color,transform] duration-200 ease-out',
+        'w-full min-h-[52px] text-left px-5 py-4 rounded-xl border-2 font-body',
+        'transition-all duration-200 ease-out',
         selected
-          ? 'border-brand bg-brand-soft text-ink font-semibold'
-          : 'border-line bg-white text-ink hover:-translate-y-px hover:border-brand hover:bg-brand-tint'
+          ? 'border-brand bg-brand-soft text-ink font-semibold shadow-1'
+          : 'border-line bg-white text-ink hover:-translate-y-0.5 hover:border-brand hover:bg-brand-tint hover:shadow-1'
       )}
     >
       <span className="flex items-start gap-3">

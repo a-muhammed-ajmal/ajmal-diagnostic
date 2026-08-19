@@ -10,8 +10,19 @@ import { LeadCaptureForm } from '@/components/lead/LeadCaptureForm';
 import { FdiDiagnosticFlow } from '@/components/fdi/FdiDiagnosticFlow';
 import { isFdiEnabled } from '@/lib/featureFlags';
 import { LeadData } from '@/types';
+import { ArrowRight, Check } from 'lucide-react';
+import { Button } from '@/components/ui/Button';
+import { Section } from '@/components/ui/Section';
 
 type Stage = 'intro' | 'quiz' | 'lead-capture' | 'submitting';
+
+/** What the emailed report actually contains. Shown in the hero panel. */
+const DELIVERABLES = [
+  'Your diagnostic score',
+  'Five operating dimensions compared',
+  'AI-assisted 30-day and 90-day reflection plan',
+  'Full report delivered to your inbox',
+];
 
 type SubmitResponse = {
   success: boolean;
@@ -138,108 +149,109 @@ export default function DiagnosticPage() {
       <div className="bg-white">
 
         {/* ── HERO ────────────────────────────────────────────────── */}
-        <section className="min-h-[100svh] flex flex-col items-center justify-center px-5 py-16 md:px-8 md:py-24 text-center relative overflow-hidden">
-          <div className="relative z-10 w-full">
-            <span className="inline-block bg-brand-soft border border-brand/30 text-brand-ink text-xs font-heading font-bold tracking-widest uppercase px-4 py-2 rounded-full mb-6">
-              Free · 4 Minutes · 10 Questions
-            </span>
-            <h1 className="font-heading font-extrabold text-[length:var(--step-3)] text-ink leading-tight mb-5 max-w-3xl mx-auto">
-              Does your business run on you —<br />
-              or do you run your business?
-            </h1>
-            <p className="font-body text-muted text-[length:var(--step-0)] leading-relaxed mb-8 max-w-md mx-auto">
-              Answer 10 questions for a self-reported view of how your business runs today.
-              You will receive a diagnostic score and an AI-assisted reflection plan by email.
-            </p>
-            <div className="w-full max-w-xs mx-auto mb-8 text-left space-y-3">
-              {[
-                'Your diagnostic score',
-                'Five operating dimensions compared',
-                'AI-assisted 30-day and 90-day reflection plan',
-                'Full report delivered to your inbox',
-              ].map((item) => (
-                <div key={item} className="flex items-start gap-3">
-                  <span className="flex-shrink-0 w-5 h-5 rounded-full bg-success-soft text-success text-xs font-bold flex items-center justify-center mt-0.5">✔</span>
-                  <span className="font-body text-[length:var(--step-0)] text-muted leading-snug">{item}</span>
-                </div>
-              ))}
+        <Section width="wide" orbs className="py-16 md:py-24">
+          <div className="grid items-center gap-12 lg:grid-cols-12 lg:gap-16">
+            <div className="lg:col-span-7">
+              <span className="mb-6 inline-block rounded-full bg-brand-soft px-4 py-2 font-heading text-xs font-bold uppercase tracking-widest text-brand-ink">
+                Free · 4 Minutes · 10 Questions
+              </span>
+              <h1 className="mb-5 font-heading text-[length:var(--step-5)] font-extrabold leading-tight text-ink">
+                Does your business run on you — or do you run your business?
+              </h1>
+              <p className="mb-8 max-w-xl font-body text-[length:var(--step-0)] leading-relaxed text-muted">
+                Answer 10 questions for a self-reported view of how your business runs today.
+                You will receive a diagnostic score and an AI-assisted reflection plan by email.
+              </p>
+              <Button onClick={startQuiz}>
+                Start the Free Diagnostic
+                <ArrowRight className="h-4 w-4" aria-hidden="true" />
+              </Button>
+              <p className="mt-3 font-body text-xs text-muted">
+                No account needed · No spam · Takes 4 minutes
+              </p>
             </div>
-            <button
-              onClick={startQuiz}
-              className="w-full max-w-xs mx-auto block bg-brand text-white font-heading font-bold py-4 px-8 rounded-xl text-[length:var(--step-0)] min-h-[56px] hover:bg-brand-hover active:scale-95 transition-[background-color,transform] duration-200 shadow-1"
-            >
-              Start the Free Diagnostic →
-            </button>
-            <p className="font-body text-xs text-muted mt-3">
-              No account needed · No spam · Takes 4 minutes
-            </p>
+
+            {/* What arrives in the inbox, as the hero's glass panel. */}
+            <div className="lg:col-span-5">
+              <div className="glass-panel rounded-2xl p-6 md:p-7">
+                <p className="eyebrow mb-4 text-accent-ink">What you receive</p>
+                <ul className="space-y-3.5">
+                  {DELIVERABLES.map((item) => (
+                    <li key={item} className="flex items-start gap-3">
+                      <span className="mt-0.5 flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full bg-success-soft" aria-hidden="true">
+                        <Check className="h-3 w-3 text-success" strokeWidth={3} />
+                      </span>
+                      <span className="font-body text-[length:var(--step-0)] leading-snug text-ink">{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
           </div>
-        </section>
+        </Section>
 
         {/* ── STATS BAR ───────────────────────────────────────────── */}
-        <section className="bg-brand-tint py-8 px-5 border-b border-line relative overflow-hidden">
-          <div className="flex flex-wrap justify-center gap-8 md:gap-16 relative z-10">
+        <Section tone="tint" width="narrow" compact>
+          <dl className="flex flex-wrap justify-center gap-10 md:gap-20">
             {[
               { n: '10', l: 'Questions' },
               { n: '5', l: 'Operating Dimensions' },
               { n: '4 min', l: 'To Your Results' },
             ].map((s) => (
               <div key={s.l} className="text-center">
-                <div className="font-heading font-bold text-[length:var(--step-3)] text-ink">{s.n}</div>
-                <div className="font-body text-xs text-muted uppercase tracking-widest mt-1">{s.l}</div>
+                <dt className="font-heading text-[length:var(--step-4)] font-extrabold text-brand">{s.n}</dt>
+                <dd className="mt-1 font-body text-xs uppercase tracking-widest text-muted">{s.l}</dd>
               </div>
             ))}
-          </div>
-        </section>
+          </dl>
+        </Section>
 
         {/* ── HOW IT WORKS ────────────────────────────────────────── */}
-        <section className="bg-brand-tint py-14 px-5 relative overflow-hidden">
-          <div className="max-w-3xl mx-auto relative z-10">
-            <p className="text-center text-brand-ink eyebrow mb-3">How It Works</p>
-            <h2 className="text-center font-heading font-extrabold text-ink text-[length:var(--step-3)] mb-10">
-              Three steps. Four minutes.
-            </h2>
-            <div className="flex flex-col md:flex-row items-start md:items-center justify-center gap-0 md:gap-4">
-              {[
-                { n: '01', title: 'Answer 10 Questions', body: 'Each question takes 30 seconds. No trick questions — just honest answers about how your business runs today.' },
-                { n: '02', title: 'See Your Result', body: 'Compare your answers across five operating dimensions and identify the areas worth examining further.' },
-                { n: '03', title: 'Receive Your AI-Assisted Reflection Plan', body: 'Receive practical starting points generated from your scores. The diagnostic does not establish root cause.' },
-              ].map((step, i) => (
-                <div key={step.n} className="flex md:flex-col items-start md:items-center gap-4 md:gap-0 md:text-center max-w-xs w-full mb-8 md:mb-0 md:flex-1">
-                  <div className="flex-shrink-0 w-10 h-10 rounded-full bg-brand text-white font-heading font-bold flex items-center justify-center text-[length:var(--step-0)] md:mb-4">
-                    {step.n}
-                  </div>
-                  <div>
-                    <h3 className="font-heading font-bold text-ink text-[length:var(--step-0)] mb-1">{step.title}</h3>
-                    <p className="font-body text-[length:var(--step-0)] text-muted leading-relaxed">{step.body}</p>
-                  </div>
-                  {i < 2 && <span className="hidden md:block text-brand/30 text-[length:var(--step-3)] mx-2 self-center">→</span>}
+        <Section width="narrow">
+          <p className="eyebrow mb-3 text-brand-ink">How It Works</p>
+          <h2 className="mb-10 font-heading text-[length:var(--step-4)] font-extrabold text-ink">
+            Three steps. Four minutes.
+          </h2>
+          <ol className="stage-rail">
+            {[
+              { n: '01', title: 'Answer 10 Questions', body: 'Each question takes 30 seconds. No trick questions — just honest answers about how your business runs today.' },
+              { n: '02', title: 'See Your Result', body: 'Compare your answers across five operating dimensions and identify the areas worth examining further.' },
+              { n: '03', title: 'Receive Your AI-Assisted Reflection Plan', body: 'Receive practical starting points generated from your scores. The diagnostic does not establish root cause.' },
+            ].map((step) => (
+              <li key={step.n} className="stage-item">
+                <span className="stage-marker" aria-hidden="true">{step.n}</span>
+                <div className="stage-card stage-reveal card-interactive rounded-2xl border border-line bg-white p-5 shadow-1 md:p-6">
+                  <p className="font-mono text-xs text-brand-ink md:hidden">{step.n}</p>
+                  <h3 className="mt-1 font-heading text-[length:var(--step-1)] font-bold text-ink md:mt-0">{step.title}</h3>
+                  <p className="mt-2 font-body text-[length:var(--step-0)] leading-relaxed text-muted">{step.body}</p>
                 </div>
-              ))}
-            </div>
-          </div>
-        </section>
+              </li>
+            ))}
+          </ol>
+        </Section>
 
         {/* ── BOTTOM CTA ──────────────────────────────────────────── */}
-        <section className="bg-white py-16 px-5 text-center relative overflow-hidden">
-          <div className="relative z-10">
-            <h2 className="font-heading font-extrabold text-ink text-[length:var(--step-3)] mb-3">
-              Ready to examine how your business runs?
-            </h2>
-            <p className="font-body text-[length:var(--step-0)] text-muted mb-8 max-w-sm mx-auto leading-relaxed">
-              It is free, takes four minutes, and gives you a practical view of your current self-reported operating patterns.
-            </p>
-            <button
-              onClick={startQuiz}
-              className="w-full max-w-xs mx-auto block bg-brand text-white font-heading font-bold py-4 px-8 rounded-xl text-[length:var(--step-0)] min-h-[56px] hover:bg-brand-hover active:scale-95 transition-[background-color,transform] duration-200 shadow-1"
-            >
-              Start the Free Diagnostic →
-            </button>
-            <p className="font-body text-xs text-muted mt-3">
-              No account needed · No spam · Takes 4 minutes
-            </p>
+        <Section tone="dark" width="wide" orbs>
+          <div className="grid gap-10 lg:grid-cols-12 lg:items-center lg:gap-16">
+            <div className="lg:col-span-7">
+              <h2 className="mb-3 font-heading text-[length:var(--step-4)] font-extrabold text-white">
+                Ready to examine how your business runs?
+              </h2>
+              <p className="max-w-xl font-body text-[length:var(--step-0)] leading-relaxed text-muted-invert">
+                It is free, takes four minutes, and gives you a practical view of your current self-reported operating patterns.
+              </p>
+            </div>
+            <div className="lg:col-span-5 lg:justify-self-end">
+              <Button onClick={startQuiz} variant="accent">
+                Start the Free Diagnostic
+                <ArrowRight className="h-4 w-4" aria-hidden="true" />
+              </Button>
+              <p className="mt-3 font-body text-xs text-muted-invert">
+                No account needed · No spam · Takes 4 minutes
+              </p>
+            </div>
           </div>
-        </section>
+        </Section>
 
       </div>
     );
@@ -247,8 +259,12 @@ export default function DiagnosticPage() {
 
   if (stage === 'lead-capture' || stage === 'submitting') {
     return (
-      <div className="min-h-screen bg-brand-tint flex items-center justify-center p-4 relative overflow-hidden">
-        <div className="w-full relative z-10">
+      <div className="relative flex min-h-screen items-center justify-center overflow-hidden bg-canvas-light p-4">
+        <div className="pointer-events-none absolute inset-0" aria-hidden="true">
+          <div className="orb orb-electric absolute -right-32 -top-40 h-96 w-96" />
+          <div className="orb orb-amber absolute -bottom-40 -left-32 h-80 w-80" />
+        </div>
+        <div className="relative z-10 w-full">
           <h1 className="sr-only">Business diagnostic — your results are ready</h1>
           <div className="max-w-md mx-auto mb-4">
             <button
@@ -270,13 +286,17 @@ export default function DiagnosticPage() {
   }
 
   return (
-    <div className="min-h-screen bg-brand-tint flex items-center justify-center p-4 relative overflow-hidden">
-      <div className="w-full max-w-2xl relative z-10">
+    <div className="relative flex min-h-screen items-center justify-center overflow-hidden bg-canvas-light p-4">
+      <div className="pointer-events-none absolute inset-0" aria-hidden="true">
+        <div className="orb orb-electric absolute -right-32 -top-40 h-96 w-96" />
+        <div className="orb orb-amber absolute -bottom-40 -left-32 h-80 w-80" />
+      </div>
+      <div className="relative z-10 w-full max-w-2xl">
         <h1 className="sr-only">Business diagnostic — question {currentQuestion + 1} of {QUESTIONS.length}</h1>
         <div className="mb-8">
           <ProgressBar current={currentQuestion + 1} total={QUESTIONS.length} />
         </div>
-        <div className="bg-white rounded-2xl shadow-1 border border-line p-8">
+        <div className="glass-panel rounded-2xl p-6 md:p-8">
           <QuestionCard
             question={question}
             selectedAnswer={selectedAnswer}
@@ -287,7 +307,7 @@ export default function DiagnosticPage() {
             {currentQuestion > 0 && (
               <button
                 onClick={handleBack}
-                className="flex-1 border border-line text-ink py-3 rounded-xl font-heading font-semibold hover:bg-brand-tint transition-colors min-h-[48px]"
+                className="min-h-[48px] flex-1 rounded-xl border border-line bg-white py-3 font-body text-[length:var(--step-0)] font-semibold text-ink transition-all duration-200 ease-out hover:-translate-y-0.5 hover:border-brand hover:text-brand-ink"
               >
                 ← Back
               </button>
@@ -295,7 +315,7 @@ export default function DiagnosticPage() {
             {selectedAnswer && (
               <button
                 onClick={handleNext}
-                className="flex-1 bg-brand text-white py-3 rounded-xl font-heading font-bold hover:bg-brand-hover transition-colors min-h-[48px]"
+                className="min-h-[48px] flex-1 rounded-xl bg-brand py-3 font-body text-[length:var(--step-0)] font-semibold text-white shadow-1 transition-all duration-200 ease-out hover:-translate-y-0.5 hover:bg-brand-hover hover:shadow-glow-electric"
               >
                 {isLastQuestion ? 'See My Results →' : 'Next →'}
               </button>

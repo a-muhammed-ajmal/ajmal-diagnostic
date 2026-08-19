@@ -2,7 +2,10 @@ import Image from "next/image";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 import { ArticleToc, type TocItem } from "@/components/insights/ArticleToc";
+import { Button } from "@/components/ui/Button";
+import { Section } from "@/components/ui/Section";
 import { articleBreadcrumbJsonLd, articleJsonLd, jsonLdScript } from "@/lib/jsonLd";
 import { AUTHOR_HEADSHOT, pageMetadata } from "@/lib/metadata";
 import { ARTICLES, getArticle, getReadingTime } from "@/lib/articles";
@@ -45,16 +48,17 @@ export default async function InsightArticlePage({ params }: { params: Promise<{
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdScript(articleJsonLd(article)) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdScript(articleBreadcrumbJsonLd(article)) }} />
 
-      <section className="relative overflow-hidden bg-white px-6 py-16 text-ink md:py-20">
-        <div className="relative z-10 mx-auto max-w-3xl">
-          <Link href="/insights" className="mb-4 inline-block font-heading text-xs font-bold uppercase tracking-widest text-brand-ink">← Insights</Link>
-          <p className="eyebrow mb-3 text-brand-ink">{article.category}</p>
-          <h1 className="font-heading text-[length:var(--step-5)] font-extrabold leading-[1.02]">{article.title}</h1>
-          <p className="mt-5 font-body text-[length:var(--step-0)] text-muted">By {article.author.name} · {article.author.role} · {published} · {getReadingTime(article)} min read</p>
-        </div>
-      </section>
+      <Section width="prose" orbs>
+        <Link href="/insights" className="mb-5 inline-flex items-center gap-2 font-heading text-xs font-bold uppercase tracking-widest text-brand-ink transition-colors hover:text-brand">
+          <ArrowLeft className="h-3.5 w-3.5" aria-hidden="true" />
+          Insights
+        </Link>
+        <p className="eyebrow mb-3 text-accent-ink">{article.category}</p>
+        <h1 className="font-heading text-[length:var(--step-5)] font-extrabold leading-tight">{article.title}</h1>
+        <p className="mt-5 font-body text-[length:var(--step-0)] text-muted">By {article.author.name} · {article.author.role} · {published} · {getReadingTime(article)} min read</p>
+      </Section>
 
-      <section className="relative overflow-hidden bg-brand-tint px-6 py-12 md:py-16">
+      <section className="relative overflow-hidden border-y border-line bg-canvas-light px-6 py-12 md:py-16">
         <div className="relative z-10 mx-auto flex max-w-6xl gap-12 lg:items-start">
           <div className="article-longform min-w-0 flex-1 space-y-5">
             {article.intro.map((paragraph) => <p key={paragraph} className="font-body text-[length:var(--step-0)] leading-relaxed text-ink">{paragraph}</p>)}
@@ -87,7 +91,7 @@ export default async function InsightArticlePage({ params }: { params: Promise<{
 
             {article.whereToStart && <><h2 id={sectionIds.start} className="scroll-mt-24 pt-4 font-heading text-[length:var(--step-3)] font-extrabold text-ink">{article.whereToStart.heading}</h2>{article.whereToStart.body.map((paragraph) => <p key={paragraph} className="font-body text-[length:var(--step-0)] leading-relaxed text-ink">{paragraph}</p>)}</>}
 
-            <div className="mt-7 flex flex-col gap-5 rounded-2xl border border-line bg-white p-6 sm:flex-row">
+            <div className="glass-panel mt-7 flex flex-col gap-5 rounded-2xl p-6 sm:flex-row">
               <Image src={AUTHOR_HEADSHOT.src} alt="" width={64} height={64} className="h-16 w-16 rounded-lg object-cover" />
               <div><p className="font-heading font-bold text-ink">{article.author.name}</p><p className="mt-1 font-body text-xs uppercase tracking-widest text-brand-ink">{article.author.role}</p>{article.author.bioParagraphs.map((paragraph) => <p key={paragraph} className="mt-2 font-body text-[length:var(--step-0)] leading-relaxed text-muted">{paragraph}</p>)}</div>
             </div>
@@ -96,13 +100,20 @@ export default async function InsightArticlePage({ params }: { params: Promise<{
         </div>
       </section>
 
-      <section className="relative overflow-hidden bg-white px-6 py-16 text-ink md:py-20">
-        <div className="relative z-10 mx-auto max-w-2xl text-center">
-          <h2 className="font-heading text-[length:var(--step-3)] font-extrabold">{article.cta.heading}</h2>
-          <p className="mt-4 font-body leading-relaxed text-muted">{article.cta.body}</p>
-          <Link href="/diagnostic" className="mt-8 inline-flex min-h-[52px] items-center justify-center rounded-xl bg-brand px-8 py-4 font-heading text-[length:var(--step-0)] font-bold text-white transition-colors hover:bg-brand-hover">Start the Business Health Check →</Link>
+      <Section tone="dark" width="wide" orbs>
+        <div className="grid gap-10 lg:grid-cols-12 lg:items-center lg:gap-16">
+          <div className="lg:col-span-7">
+            <h2 className="font-heading text-[length:var(--step-4)] font-extrabold text-white">{article.cta.heading}</h2>
+            <p className="mt-4 max-w-xl font-body text-[length:var(--step-0)] leading-relaxed text-muted-invert">{article.cta.body}</p>
+          </div>
+          <div className="lg:col-span-5 lg:justify-self-end">
+            <Button href="/diagnostic" variant="accent">
+              Start the Business Health Check
+              <ArrowRight className="h-4 w-4" aria-hidden="true" />
+            </Button>
+          </div>
         </div>
-      </section>
+      </Section>
     </article>
   );
 }

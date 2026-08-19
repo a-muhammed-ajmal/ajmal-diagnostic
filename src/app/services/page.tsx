@@ -1,5 +1,9 @@
-import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 import { CommercialLadder, COMMERCIAL_STAGES } from "@/components/home/SystemVisuals";
+import { Button } from "@/components/ui/Button";
+import { PageHero } from "@/components/ui/PageHero";
+import { Section } from "@/components/ui/Section";
+import { SectionHeader } from "@/components/ui/Surface";
 import { pageMetadata } from "@/lib/metadata";
 import { faqJsonLd, jsonLdScript, serviceJsonLd } from "@/lib/jsonLd";
 
@@ -61,65 +65,95 @@ export default function ServicesPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdScript(serviceJsonLd(COMMERCIAL_STAGES.map((stage) => ({ name: stage.title, description: stage.detail })))) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdScript(faqJsonLd(faqs)) }} />
 
-      <section className="relative overflow-hidden bg-white px-6 py-16 text-ink md:py-20">
-        <div className="relative z-10 mx-auto max-w-4xl text-center">
-          <p className="eyebrow mb-3 text-brand-ink">How we work</p>
-          <h1 className="font-heading text-[length:var(--step-5)] font-extrabold leading-[1.02]">A practical path from dependency to a stronger operating system.</h1>
-          <p className="mx-auto mt-5 max-w-2xl font-body text-[length:var(--step-0)] leading-relaxed text-muted">The commercial progression is intentional. Each stage clarifies, verifies, or strengthens what comes next.</p>
-        </div>
-      </section>
+      <PageHero
+        eyebrow="How we work"
+        title="A practical path from dependency to a stronger operating system."
+        lead="The commercial progression is intentional. Each stage clarifies, verifies, or strengthens what comes next."
+        actions={
+          <Button href="/diagnostic">
+            Start the Business Health Check
+            <ArrowRight className="h-4 w-4" aria-hidden="true" />
+          </Button>
+        }
+      />
 
-      <section className="relative overflow-hidden bg-brand-tint px-6 py-16 md:py-24">
-        <div className="relative z-10 mx-auto max-w-5xl">
-          <div className="mx-auto mb-10 max-w-2xl text-center">
+      <Section tone="tint" width="wide" orbs>
+        <div className="grid gap-12 lg:grid-cols-12 lg:items-start lg:gap-16">
+          <div className="lg:col-span-5">
             <p className="eyebrow mb-3 text-accent-ink">Why the order matters</p>
-            <h2 className="heading-reveal font-heading text-[length:var(--step-3)] font-extrabold leading-tight text-ink">Self-report, then evidence, then root cause.</h2>
+            <h2 className="heading-reveal font-heading text-[length:var(--step-4)] font-extrabold leading-tight text-ink">
+              Self-report, then evidence, then root cause.
+            </h2>
           </div>
-          <div className="flex flex-col divide-y divide-line border-t border-line md:flex-row md:divide-y-0 md:divide-x md:border-t-0">
+          <ol className="lg:col-span-7">
             {evidenceLadder.map(([title, body], index) => (
-              <article key={title} className="stage-reveal flex-1 py-6 md:px-6 md:py-0 first:md:pl-0 last:md:pr-0">
-                <span className="font-mono text-xs text-brand-ink">0{index + 1}</span>
-                <h3 className="mt-4 text-[length:var(--step-1)] font-heading font-bold text-ink">{title}</h3>
-                <p className="mt-3 font-body text-[length:var(--step-0)] leading-relaxed text-muted">{body}</p>
-              </article>
+              <li
+                key={title}
+                className="stage-reveal card-interactive mb-3 rounded-2xl border border-line bg-white p-5 last:mb-0"
+              >
+                <div className="flex items-baseline justify-between gap-3">
+                  <h3 className="font-heading text-[length:var(--step-1)] font-bold text-ink">{title}</h3>
+                  <span className="font-mono text-xs text-accent-ink">0{index + 1}</span>
+                </div>
+                <p className="mt-2 font-body text-[length:var(--step-0)] leading-relaxed text-muted">{body}</p>
+              </li>
             ))}
-          </div>
-
-          <div className="mt-16 text-center">
-            <p className="eyebrow mb-3 text-accent-ink">The engagement journey</p>
-            <h2 className="heading-reveal font-heading text-[length:var(--step-4)] font-extrabold leading-tight text-ink">Start where the evidence says to start.</h2>
-          </div>
-          <CommercialLadder />
+          </ol>
         </div>
-      </section>
+      </Section>
 
-      <section className="bg-white px-6 py-16 md:py-24">
-        <div className="mx-auto max-w-3xl">
-          <div className="mx-auto mb-10 max-w-2xl text-center">
-            <p className="eyebrow mb-3 text-brand-ink">Common questions</p>
-            <h2 className="heading-reveal font-heading text-[length:var(--step-4)] font-extrabold leading-tight text-ink">Before you start.</h2>
+      <Section width="narrow" tone="light">
+        <SectionHeader
+          eyebrow="The engagement journey"
+          accent="amber"
+          title="Start where the evidence says to start."
+        />
+        <CommercialLadder />
+      </Section>
+
+      <Section width="prose">
+        <SectionHeader eyebrow="Common questions" title="Before you start." />
+        <div className="mt-10 grid gap-3">
+          {faqs.map((faq) => (
+            <details
+              key={faq.question}
+              className="group rounded-2xl border border-line bg-white px-5 shadow-1 transition-all duration-200 open:shadow-2 hover:border-brand"
+            >
+              <summary className="flex min-h-[52px] cursor-pointer list-none items-center justify-between gap-4 py-4 font-heading text-[length:var(--step-0)] font-bold text-ink marker:content-none">
+                {faq.question}
+                <span
+                  className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-brand-soft font-mono text-[length:var(--step-0)] text-brand-ink transition-transform duration-200 group-open:rotate-45"
+                  aria-hidden="true"
+                >
+                  +
+                </span>
+              </summary>
+              <p className="pb-5 font-body text-[length:var(--step-0)] leading-relaxed text-muted">{faq.answer}</p>
+            </details>
+          ))}
+        </div>
+      </Section>
+
+      <Section tone="dark" width="wide" orbs>
+        <div className="grid gap-10 lg:grid-cols-12 lg:items-center lg:gap-16">
+          <div className="lg:col-span-7">
+            <p className="eyebrow mb-3 text-accent">Start here</p>
+            <h2 className="heading-reveal font-heading text-[length:var(--step-4)] font-extrabold text-white">
+              Start with the Business Health Check.
+            </h2>
+            <p className="mt-4 max-w-xl font-body text-[length:var(--step-0)] leading-relaxed text-muted-invert">
+              It gives an initial, self-reported picture of where founder dependency may appear. A Business Clarity Audit is the evidence-led next step when verification is needed.
+            </p>
           </div>
-          <div className="divide-y divide-line border-t border-line">
-            {faqs.map((faq) => (
-              <details key={faq.question} className="group py-5">
-                <summary className="flex min-h-[44px] cursor-pointer list-none items-center justify-between gap-4 font-heading text-[length:var(--step-0)] font-bold text-ink marker:content-none">
-                  {faq.question}
-                  <span className="shrink-0 font-mono text-[length:var(--step-0)] text-brand-ink transition-transform duration-200 group-open:rotate-45" aria-hidden="true">+</span>
-                </summary>
-                <p className="mt-4 font-body text-[length:var(--step-0)] leading-relaxed text-muted">{faq.answer}</p>
-              </details>
-            ))}
+          <div className="lg:col-span-5 lg:justify-self-end">
+            <Button href="/diagnostic" variant="accent">
+              Start the Business Health Check
+              <ArrowRight className="h-4 w-4" aria-hidden="true" />
+            </Button>
           </div>
         </div>
-      </section>
+      </Section>
 
-      <section className="border-y border-line bg-brand-tint px-6 py-16 text-ink md:py-20">
-        <div className="mx-auto max-w-2xl text-center">
-          <h2 className="heading-reveal font-heading text-[length:var(--step-3)] font-extrabold">Start with the Business Health Check.</h2>
-          <p className="mt-4 font-body text-[length:var(--step-0)] leading-relaxed text-muted">It gives an initial, self-reported picture of where founder dependency may appear. A Business Clarity Audit is the evidence-led next step when verification is needed.</p>
-          <Link href="/diagnostic" className="mt-8 inline-flex min-h-[52px] items-center justify-center rounded-xl bg-brand px-8 py-4 font-heading text-[length:var(--step-0)] font-bold text-white transition-colors hover:bg-brand-hover">Start the Business Health Check →</Link>
-        </div>
-      </section>
     </>
   );
 }

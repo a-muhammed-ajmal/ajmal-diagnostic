@@ -19,7 +19,7 @@ export default async function AdminLeadsPage() {
   };
 
   return (
-    <div className="min-h-screen bg-brand-tint">
+    <div className="min-h-screen bg-canvas-light">
       <nav className="border-b border-line bg-white text-ink px-6 py-4 flex justify-between items-center">
         <div className="font-heading font-bold text-[length:var(--step-0)]">
           M<span className="text-brand-ink">A</span> · Consultant Workspace

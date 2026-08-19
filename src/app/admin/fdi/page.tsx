@@ -29,7 +29,7 @@ export default async function AdminFdiPage() {
   const testSessions = sessions.filter((session) => session.is_test);
 
   return (
-    <div className="min-h-screen bg-brand-tint">
+    <div className="min-h-screen bg-canvas-light">
       <nav className="border-b border-line bg-white text-ink px-6 py-4 flex items-center justify-between">
         <div className="flex items-center gap-4"><Link href="/admin/leads" className="text-xs text-muted hover:text-brand-ink">← Legacy leads</Link><span className="font-heading font-bold text-[length:var(--step-0)]">M<span className="text-brand-ink">A</span> · FDI Consultant Workspace</span></div>
         <div className="flex items-center gap-4"><Link href="/diagnostic?testMode=true" className="text-xs text-brand-ink hover:text-brand">Start Test Mode</Link><a href="/api/admin/logout" className="text-xs text-muted hover:text-brand-ink">Sign Out</a></div>

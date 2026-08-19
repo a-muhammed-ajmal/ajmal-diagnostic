@@ -33,6 +33,7 @@ Quick-reference identity for anything that needs the brand look without full com
 | `--color-canvas-light` | `#F8FAFC` | Slate 50 — neutral band |
 | `--color-ink` | `#0F172A` | Headings and body text (17.9:1) |
 | `--color-muted` | `#475569` | Secondary text (7.6:1) — the lightest legal text colour |
+| `--color-muted-invert` | `#CBD5E1` | Secondary text on a dark slate band (12:1) |
 | `--color-line` | `#E2E8F0` | Borders, dividers (Slate 200) |
 
 The full numbered palette is also available: `electric-50` `#EFF6FF` · `electric-100` `#DBEAFE` · `electric-500` `#0052FF` · `electric-600` `#0046D5` · `electric-700` `#0037A5` · `electric-900` `#1E3A8A`; `amber-50` `#FFFBEB` · `amber-100` `#FEF3C7` · `amber-500` `#FFBF00` · `amber-600` `#D97706` · `amber-700` `#B45309`.

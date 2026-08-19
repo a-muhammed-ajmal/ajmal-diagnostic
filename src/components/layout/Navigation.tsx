@@ -44,12 +44,12 @@ export function Navigation() {
   if (isAdmin || isDiagnostic) return null;
 
   return (
-    <nav className={cn("sticky top-0 z-50 border-b border-brand/30 bg-white/95 px-4 py-4 text-ink backdrop-blur-md transition-shadow duration-300 md:px-6", scrolled && "shadow-1 shadow-black/30")}>
+    <nav className={cn("sticky top-0 z-50 border-b border-line bg-white/80 px-4 py-3 text-ink backdrop-blur-md backdrop-saturate-150 transition-all duration-200 md:px-6", scrolled && "border-line-strong shadow-2")}>
       <div className="mx-auto flex max-w-7xl items-center justify-between">
         <Link href="/" className="flex min-h-[44px] items-center gap-3 transition-opacity hover:opacity-90">
-          <div className="relative flex h-9 w-9 shrink-0 items-center justify-center rounded-sm border-2 border-line">
-            <span className="font-heading text-[length:var(--step-0)] font-extrabold leading-none tracking-tighter">M<span className="text-brand-ink">A</span></span>
-            <div className="absolute -right-1 -top-1 h-2 w-2 border-r-2 border-t-2 border-brand" />
+          <div className="relative flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-brand shadow-1">
+            <span className="font-heading text-[length:var(--step-0)] font-extrabold leading-none tracking-tighter text-white">M<span className="text-accent">A</span></span>
+            <span className="absolute -right-1 -top-1 h-2.5 w-2.5 rounded-full bg-accent" aria-hidden="true" />
           </div>
           <div>
             <p className="font-heading text-xs font-bold uppercase leading-none tracking-widest">Muhammed Ajmal</p>
@@ -68,7 +68,7 @@ export function Navigation() {
                 className={cn("group relative transition-colors duration-200 hover:text-brand-ink", isActive && "text-brand-ink")}
               >
                 {link.label}
-                <span className={cn("absolute -bottom-1 left-0 h-px bg-brand transition-[width] duration-300 group-hover:w-full", isActive ? "w-full" : "w-0")} />
+                <span className={cn("absolute -bottom-1.5 left-0 h-0.5 rounded-full bg-brand transition-[width] duration-200 group-hover:w-full", isActive ? "w-full" : "w-0")} />
               </Link>
             );
           })}

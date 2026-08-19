@@ -124,6 +124,10 @@ This repo is **Next.js 16 + Tailwind CSS v4**. Two consequences shape how the pa
 
 Reach for the semantic alias (`bg-brand`, `text-ink`, `border-line`) in components; reach for the numbered scale (`bg-electric-100`, `text-amber-700`) when you need a specific rung the aliases do not name.
 
+**On a `tone="dark"` band**, the text tokens invert: headings take `text-white`, secondary copy takes `text-muted-invert` (`#CBD5E1`, 12:1 on slate 900), and the eyebrow takes `text-accent` — amber's one legitimate home as a text colour, at 10.8:1. `text-muted` and `text-ink` must never appear on a dark band; they land around 2.4:1. A white card sitting *on* a dark band keeps its normal light-ground tokens.
+
+Dark bands are a closing-CTA device, not a section type to reach for freely — roughly one per page.
+
 ### Responsive Type Scale
 
 The ceilings in §2C are enforced once, in the `--step-N` scale, so every call site inherits them. The steps live on `:root` and are re-declared at the 768px breakpoint. Components reference `text-[length:var(--step-N)]` and never hardcode a pixel size.
@@ -267,7 +271,10 @@ Space, radius, and motion tokens:
 
 ### Shared Primitives
 
-Three exist in `src/components/ui/`. Use them instead of re-deriving the recipe.
+Five exist in `src/components/ui/`. Use them instead of re-deriving the recipe.
+
+- **`<Section>`** — the full-bleed page band every section is built from. `tone` of `white` · `light` (slate band) · `tint` (electric band) · `dark` (slate 900); `width` of `prose` · `narrow` · `default` · `wide`; `orbs` to add the ambient radials; `compact` for utility bands; `divided` when a white band follows another white band. It owns the padding, the banding, the clipping, and the orb placement — do not hand-roll `px-6 py-16 md:py-24` on a new section.
+- **`<PageHero>`** — the page opener. Takes `eyebrow` / `title` / `lead` / `actions` / `note` / `aside`, plus `tone` and `accent`. Deliberately asymmetric: 7/5 with an `aside`, 8-of-12 without. **It offers no centred variant on purpose** — a centred hero on every page is what made this site read as one template.
 
 - **`<Button>`** — variants `primary` (electric fill) · `secondary` · `quiet` · `accent` (amber fill, dark text) · `danger`, plus `fullWidth`. Renders a `next/link` for `href`, a plain `<a target="_blank" rel="noreferrer">` for `href` + `external`, and a `<button>` otherwise. Focus ring, disabled state, the 200ms hover lift with glow, and the 44px floor (`min-h-11`) are built in.
 

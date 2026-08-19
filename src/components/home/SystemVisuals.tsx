@@ -1,4 +1,3 @@
-import Link from "next/link";
 import {
   ArrowRight,
   Clock,
@@ -8,13 +7,17 @@ import {
   ShieldAlert,
   Users,
 } from "lucide-react";
+import { Button } from "@/components/ui/Button";
+import { Section } from "@/components/ui/Section";
 
 const architecture = ["Founder", "Team", "Systems", "Automation", "Data", "Scale"];
 
 export function FounderSystemVisual() {
   return (
+    /* Glass rather than a flat card: it sits over the hero's ambient orbs, which
+       is the one place the frosted treatment has something to frost. */
     <div
-      className="reveal relative rounded-2xl border border-line bg-white p-6 shadow-2"
+      className="reveal glass-panel hover-lift relative rounded-2xl p-6"
       role="img"
       aria-label="Strategic Growth Architecture: founder, team, systems, automation, data, and scale form a connected operating system."
     >
@@ -59,16 +62,18 @@ const trapSymptoms = [
 
 export function FounderTrapDiagram() {
   return (
-    <div className="grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-center" aria-label="Four observable symptoms of the Founder Trap">
-      <div className="stage-reveal relative mx-auto flex aspect-square w-full max-w-72 items-center justify-center rounded-full border border-line bg-white p-6">
-        <div className="absolute h-52 w-52 rounded-full border border-dashed border-danger/30" aria-hidden="true" />
-        <div className="absolute h-36 w-36 rounded-full border border-dashed border-danger/30" aria-hidden="true" />
-        <div className="relative z-10 rounded-full bg-brand px-6 py-5 text-center shadow-2">
-          <span className="block font-heading text-[length:var(--step-1)] font-extrabold text-white">Founder</span>
-          <p className="mt-1 font-body text-xs text-white/80">The operating bottleneck</p>
+    <div className="grid gap-10 lg:grid-cols-12 lg:items-center lg:gap-14" aria-label="Four observable symptoms of the Founder Trap">
+      <div className="lg:col-span-5">
+        <div className="stage-reveal relative mx-auto flex aspect-square w-full max-w-72 items-center justify-center rounded-full border border-line bg-canvas-light p-6">
+          <div className="absolute h-52 w-52 rounded-full border border-dashed border-danger/30" aria-hidden="true" />
+          <div className="absolute h-36 w-36 rounded-full border border-dashed border-danger/30" aria-hidden="true" />
+          <div className="relative z-10 rounded-full bg-brand px-6 py-5 text-center shadow-glow-electric">
+            <span className="block font-heading text-[length:var(--step-1)] font-extrabold text-white">Founder</span>
+            <p className="mt-1 font-body text-xs text-white">The operating bottleneck</p>
+          </div>
         </div>
       </div>
-      <div>
+      <div className="lg:col-span-7">
         <p className="font-body text-[length:var(--step-0)] leading-relaxed text-muted">
           The Founder Trap is a pattern of observable dependency—not a judgment on the founder.
         </p>
@@ -99,43 +104,48 @@ const dependencyAreas = [
 
 export function DependencyIndexPreview() {
   return (
-    <section id="dependency-index" className="border-y border-line bg-brand-tint px-6 py-16 text-ink md:py-24">
-      <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:items-center">
-        <div>
+    <Section id="dependency-index" tone="tint" width="wide" orbs>
+      <div className="grid gap-12 lg:grid-cols-12 lg:items-start lg:gap-16">
+        <div className="lg:col-span-5">
           <p className="eyebrow mb-3 text-accent-ink">Business Health Check</p>
-          <h2 className="font-heading text-[length:var(--step-4)] font-extrabold">How much does your business still depend on you?</h2>
-          <p className="mt-5 max-w-xl font-body text-[length:var(--step-0)] leading-relaxed text-muted">
+          <h2 className="heading-reveal font-heading text-[length:var(--step-4)] font-extrabold text-ink">How much does your business still depend on you?</h2>
+          <p className="mt-5 font-body text-[length:var(--step-0)] leading-relaxed text-muted">
             Answer 12 questions and receive your Founder Dependency Index across three observable operating areas.
           </p>
-          <div className="mt-6 rounded-2xl border border-brand/30 bg-brand-soft p-4">
+          <div className="mt-6 rounded-2xl border-l-4 border-brand bg-white p-5 shadow-1">
             <h3 className="font-heading text-[length:var(--step-1)] font-bold text-brand-ink">Important diagnostic boundary</h3>
-            <p className="mt-1 font-body text-[length:var(--step-0)] leading-relaxed text-ink">
+            <p className="mt-1.5 font-body text-[length:var(--step-0)] leading-relaxed text-ink">
               This is a focused founder-dependency self-report, not a full financial, tax, legal, or business-performance audit. It shows where dependency appears; a Business Clarity Audit tests why, against operating evidence.
             </p>
           </div>
-          <Link
-            href="/diagnostic"
-            className="mt-7 inline-flex min-h-11 items-center justify-center gap-2 rounded-xl bg-brand px-6 py-3 font-heading text-[length:var(--step-0)] font-bold text-white shadow-1 transition-[background-color,box-shadow,transform] duration-200 ease-out hover:-translate-y-px hover:bg-brand-hover hover:shadow-2"
-          >
-            Start the Business Health Check
-            <ArrowRight className="h-4 w-4" aria-hidden="true" />
-          </Link>
+          <div className="mt-7">
+            <Button href="/diagnostic">
+              Start the Business Health Check
+              <ArrowRight className="h-4 w-4" aria-hidden="true" />
+            </Button>
+          </div>
         </div>
-        <div className="grid gap-4 sm:grid-cols-3">
+        {/* Stacked rather than three equal columns: each area gets its own row so
+            the numeral, title and question count line up down the page. */}
+        <ol className="lg:col-span-7">
           {dependencyAreas.map(({ title, body, value, Icon }) => (
-            <div key={title} className="stage-reveal card-interactive rounded-2xl border border-line bg-white p-5">
-              <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-brand-soft" aria-hidden="true">
-                <Icon className="h-5 w-5 text-brand-ink" strokeWidth={2.25} />
+            <li key={title} className="stage-reveal card-interactive mb-4 flex gap-5 rounded-2xl border border-line bg-white p-5 last:mb-0 sm:p-6">
+              <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-brand-soft" aria-hidden="true">
+                <Icon className="h-6 w-6 text-brand-ink" strokeWidth={2.25} />
               </span>
-              <p className="mt-4 font-mono text-xs text-accent-ink">{value}</p>
-              <h3 className="mt-1 text-[length:var(--step-1)] font-heading font-bold">{title}</h3>
-              <p className="mt-2 font-body text-[length:var(--step-0)] leading-relaxed text-muted">{body}</p>
-              <p className="mt-4 font-mono text-xs uppercase tracking-widest text-muted">4 questions</p>
-            </div>
+              <div className="min-w-0 flex-1">
+                <div className="flex items-baseline justify-between gap-3">
+                  <h3 className="font-heading text-[length:var(--step-1)] font-bold text-ink">{title}</h3>
+                  <span className="font-mono text-xs text-accent-ink">{value}</span>
+                </div>
+                <p className="mt-2 font-body text-[length:var(--step-0)] leading-relaxed text-muted">{body}</p>
+                <p className="mt-3 font-mono text-xs uppercase tracking-widest text-muted">4 questions</p>
+              </div>
+            </li>
           ))}
-        </div>
+        </ol>
       </div>
-    </section>
+    </Section>
   );
 }
 
