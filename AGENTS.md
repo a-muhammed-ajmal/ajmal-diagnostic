@@ -69,7 +69,7 @@ src/
 - **No raw hex in JSX**: all colors via CSS custom properties defined in `globals.css`
 
 ## Design System
-**"Signal"** — electric blue on a white canvas, with warm amber as the single supporting accent. Figtree throughout, at a deliberately compact type scale. Flat, well-lit surfaces: hairline borders and light shadows, no dark slabs, no paper texture, no grid overlay. This superseded the "Cyanotype Blueprint" ink/brass/vellum identity (which itself superseded a soft-white/orange-Inter one) — do not revert to either.
+**"Signal"** — electric blue on a white canvas, with warm amber as the single supporting accent. Roboto Slab headings over Lexend body, at a deliberately compact fixed type scale. Flat, well-lit surfaces: hairline borders and light shadows, no dark slabs, no paper texture, no grid overlay. This superseded the "Cyanotype Blueprint" ink/brass/vellum identity (which itself superseded a soft-white/orange-Inter one) — do not revert to either.
 
 ```css
 /* Brand tokens — defined in src/app/globals.css @theme block */
@@ -87,9 +87,9 @@ src/
 --color-success / --color-warning / --color-danger  /* status, each with a -soft tint */
 ```
 
-**Fonts**: Figtree only (`--font-heading` / `--font-body` / `--font-mono` all resolve to it), loaded via `next/font/google` in `layout.tsx`. `font-mono` no longer changes family — it now means tabular figures. No second typeface.
+**Fonts**: two faces, loaded via `next/font/google` in `layout.tsx`. **Roboto Slab** for headings (`--font-heading` / `--font-display`); **Lexend** for body and controls (`--font-body` / `--font-sans`). `--font-mono` resolves to Lexend and means tabular figures — there is no third face.
 
-**Type scale**: body is capped at **12px** by brand direction, so `--step--1` and `--step-0` are both `0.75rem` and there is no caption tier below body. Heading floors are the mobile caps — h1 24px (`--step-5`), h2 21px (`--step-4`) — growing to 40px / 32px on desktop. See the accessibility note in `/frontend-design`.
+**Type scale**: **fixed, not fluid** — every step is one value at every width. Body, buttons and form labels are **12px**; `--step--1` is the same 12px, so there is no tier beneath body. h1 is capped at **24px** and section titles at **21px** on desktop as well as mobile — nothing scales up. See the accessibility note in `/frontend-design`.
 
 **Background**: flat `#FFFFFF`. Section rhythm comes from alternating white and `--color-brand-tint` bands separated by `border-y border-line`. There is no grid overlay, no grain, and no aurora — all three were deleted.
 

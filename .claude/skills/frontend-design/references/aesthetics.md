@@ -4,8 +4,8 @@ Read this when asked to make an interface "look better," "less generic," or "mor
 
 ## Typography
 
-- **One face, every job.** `--font-heading` / `--font-display` / `--font-body` / `--font-sans` / `--font-mono` all resolve to **Figtree**; `font-mono` only switches on tabular figures. No Inter, no Fraunces, no IBM Plex, no Playfair — those exist only as fallback stacks.
-- **Weight and size drive hierarchy**, not font-swapping. 400 body, 500 medium emphasis, 600 section heads, 700 titles, 800 hero display. Body is capped at 12px, so the gap between prose and headings does most of the work — lean on it.
+- **Two faces, distinct jobs.** `--font-heading` / `--font-display` resolve to **Roboto Slab** (slab serif, carries the headings); `--font-body` / `--font-sans` / `--font-mono` resolve to **Lexend**, which is tuned for reading ease — the reason it holds up at 12px. `font-mono` only switches on tabular figures. No Inter, no Fraunces, no IBM Plex, no Figtree — those exist only as fallback stacks.
+- **Weight and size drive hierarchy**, not font-swapping. 400 body, 500 medium emphasis, 600 section heads, 700 titles, 800 hero display. Body is 12px and h1 stops at 24px, so the whole scale is compressed into one octave — hierarchy leans on weight, case and the slab/sans contrast rather than size.
 - **Tracking on display**: `letter-spacing: -0.02em` on anything 20px and above. Eyebrows go the other way: `+0.1em` uppercase (the `.eyebrow` class already sets the shape — weight, size, tracking, uppercase — but no colour).
 - **Use the fluid `--step-N` scale** (`--step--1` through `--step-5`) rather than fixed pixel sizes. It is clamp-based and already tuned for this site.
 

@@ -34,8 +34,8 @@ Review `git diff HEAD` (or staged changes) across these dimensions. Output a str
 ### 4. Project conventions
 
 - Raw hex color in JSX outside the two documented exceptions (`icon.tsx`/`apple-icon.tsx`/`opengraph-image.tsx` and `src/lib/email/templates/`)? See the `frontend-design` skill.
-- Any font other than Figtree? (`font-heading`, `font-body`, and `font-mono` all resolve to it — a second family is a finding.)
-- Body prose (`<p>`, `<li>`) above 12px (`--step-0`), or text muted with opacity instead of `text-muted`?
+- Any font other than Roboto Slab (`font-heading`) or Lexend (`font-body`, `font-mono`)? A third family is a finding.
+- Body prose (`<p>`, `<li>`) or control/label text above 12px (`--step-0`), h1 above 24px, or a section title above 21px — at any width? Text muted with opacity instead of `text-muted`?
 - `text-white` on anything other than a `bg-brand`/`bg-danger`/`bg-success`/`bg-ink` fill?
 - Forms built without `react-hook-form` + `zod` (uncontrolled inputs)?
 - Component files not PascalCase, or using a default export instead of a named one?

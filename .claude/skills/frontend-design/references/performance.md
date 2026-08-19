@@ -2,7 +2,7 @@
 
 ## Core Web Vitals
 
-- **LCP** < 2.5s — optimise the critical rendering path. Figtree loads via `next/font/google`, which self-hosts and avoids FOUT.
+- **LCP** < 2.5s — optimise the critical rendering path. Roboto Slab and Lexend both load via `next/font/google`, which self-hosts and avoids FOUT.
 - **CLS** < 0.1 — always give images explicit `width`/`height`, and reserve space for content that arrives late.
 - **INP** < 200ms — the responsiveness metric that replaced FID. Avoid main-thread tasks over 50ms; break up heavy client work.
 
@@ -11,12 +11,13 @@
 Three typefaces, all loaded once in `src/app/layout.tsx`:
 
 ```ts
-import { Figtree } from 'next/font/google';
+import { Lexend, Roboto_Slab } from 'next/font/google';
 
-const figtree = Figtree({ variable: '--font-figtree', subsets: ['latin'], weight: ['400','500','600','700','800'], display: 'swap' });
+const lexend = Lexend({ variable: '--font-lexend', subsets: ['latin'], weight: ['400','500','600','700'], display: 'swap' });
+const robotoSlab = Roboto_Slab({ variable: '--font-roboto-slab', subsets: ['latin'], weight: ['500','600','700','800'], display: 'swap' });
 ```
 
-Every font token — `--font-heading`, `--font-display`, `--font-body`, `--font-sans`, `--font-mono` — resolves to `var(--font-figtree)`. Never add a `<link>` to Google Fonts; `next/font` self-hosts and eliminates the round-trip. One family is the whole budget — do not add a second, and keep the weight list as narrow as the design actually uses.
+`--font-heading` / `--font-display` resolve to `var(--font-roboto-slab)`; `--font-body` / `--font-sans` / `--font-mono` resolve to `var(--font-lexend)`. Never add a `<link>` to Google Fonts; `next/font` self-hosts and eliminates the round-trip. Two families is the whole budget — do not add a third, and keep the weight list on each call as narrow as the design actually uses.
 
 ## Rendering
 

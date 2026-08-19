@@ -53,7 +53,7 @@ export function NewsletterForm() {
       <button
         type="submit"
         disabled={status === 'loading'}
-        className="inline-flex min-h-[48px] items-center justify-center gap-2 whitespace-nowrap rounded-lg bg-brand px-6 py-3 font-heading text-sm font-bold text-white transition-[background-color,transform] duration-200 ease-out hover:-translate-y-px hover:bg-brand-hover disabled:pointer-events-none disabled:opacity-50"
+        className="inline-flex min-h-[48px] items-center justify-center gap-2 whitespace-nowrap rounded-lg bg-brand px-6 py-3 font-heading text-[length:var(--step-0)] font-bold text-white transition-[background-color,transform] duration-200 ease-out hover:-translate-y-px hover:bg-brand-hover disabled:pointer-events-none disabled:opacity-50"
       >
         {status === 'loading' ? 'Subscribing…' : 'Subscribe'}
         {status !== 'loading' && <ArrowRight className="h-4 w-4" aria-hidden="true" />}

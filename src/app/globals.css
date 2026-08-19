@@ -34,12 +34,13 @@
 
   --color-focus:        #2563EB;
 
-  /* ── Typography — one face, several token names so markup stays stable ─── */
-  --font-heading: var(--font-figtree), ui-sans-serif, system-ui, sans-serif;
-  --font-display: var(--font-figtree), ui-sans-serif, system-ui, sans-serif;
-  --font-body:    var(--font-figtree), ui-sans-serif, system-ui, sans-serif;
-  --font-sans:    var(--font-figtree), ui-sans-serif, system-ui, sans-serif;
-  --font-mono:    var(--font-figtree), ui-sans-serif, system-ui, sans-serif;
+  /* ── Typography — Roboto Slab headings, Lexend body ──────────────── */
+  --font-heading: var(--font-roboto-slab), Georgia, "Times New Roman", serif;
+  --font-display: var(--font-roboto-slab), Georgia, "Times New Roman", serif;
+  --font-body:    var(--font-lexend), ui-sans-serif, system-ui, sans-serif;
+  --font-sans:    var(--font-lexend), ui-sans-serif, system-ui, sans-serif;
+  /* No third face: mono means tabular figures, set on .font-mono below. */
+  --font-mono:    var(--font-lexend), ui-sans-serif, system-ui, sans-serif;
 
   /* ── Elevation — soft and light; no glow, no heavy blur ────────────────── */
   --shadow-1: 0 1px 2px rgba(16, 24, 40, .05);
@@ -59,20 +60,22 @@
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-in:  cubic-bezier(0.5, 0, 0.75, 0);
 
-  /* Fluid type scale. Body is capped at 12px by brand direction, which leaves
-     no room for a caption tier — --step--1 collapses into body. Heading floors
-     are the mobile caps (h1 24px, h2 21px) and grow to the desktop ceiling. */
-  --step--1: 0.75rem;                                       /* 12px  — collapsed into body */
-  --step-0:  0.75rem;                                       /* 12px  — BODY */
-  --step-1:  clamp(0.875rem,  0.83rem + 0.19vw, 1rem);      /* 14 → 16px  h5 / lead-in */
-  --step-2:  clamp(1rem,      0.92rem + 0.35vw, 1.1875rem); /* 16 → 19px  h4 */
-  --step-3:  clamp(1.125rem,  0.96rem + 0.69vw, 1.5rem);    /* 18 → 24px  h3 */
-  --step-4:  clamp(1.3125rem, 1.02rem + 1.24vw, 2rem);      /* 21 → 32px  h2 */
-  --step-5:  clamp(1.5rem,    1.15rem + 1.48vw, 2.5rem);    /* 24 → 40px  h1 */
+  /* Type scale — fixed, not fluid. Brand direction caps h1 at 24px and section
+     titles at 21px at EVERY width, so nothing here clamps upward; a step is one
+     value on a phone and on a 27" display. Body, controls and labels are 12px,
+     which leaves no tier beneath body — --step--1 is the same 12px. */
+  --step--1: 0.75rem;     /* 12px — collapsed into body */
+  --step-0:  0.75rem;     /* 12px — BODY, buttons, form labels, captions */
+  --step-1:  0.875rem;    /* 14px — card titles, diagram labels, h5 */
+  --step-2:  1rem;        /* 16px — h4 */
+  --step-3:  1.125rem;    /* 18px — h3 */
+  --step-4:  1.3125rem;   /* 21px — h2 / section titles (hard cap) */
+  --step-5:  1.5rem;      /* 24px — h1 (hard cap) */
 }
 
 /* ── Base ────────────────────────────────────────────────────────────────── */
 body {
+  font-family: var(--font-lexend), ui-sans-serif, system-ui, sans-serif;
   background-color: var(--color-canvas);
   color: var(--color-ink);
   font-size: var(--step-0);
@@ -83,18 +86,19 @@ body {
 
 /* ── Typography defaults ─────────────────────────────────────────────────── */
 h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-figtree), ui-sans-serif, system-ui, sans-serif;
+  font-family: var(--font-roboto-slab), Georgia, "Times New Roman", serif;
   text-wrap: balance;
 }
-/* Figtree is geometric; display sizes need the optical tightening. */
-h1, h2 { letter-spacing: -0.02em;  line-height: 1.15; }
-h3, h4 { letter-spacing: -0.015em; line-height: 1.25; }
+/* Roboto Slab is a slab serif and already sets wide; it needs far less optical
+   tightening than a geometric sans, and none at all below section-title size. */
+h1, h2 { letter-spacing: -0.01em; line-height: 1.2; }
+h3, h4 { letter-spacing: 0;       line-height: 1.3; }
 
 p { text-wrap: pretty; }
 h1, h2, h3, p { overflow-wrap: break-word; }
 
-/* font-mono no longer changes family (one typeface site-wide), so it now means
-   "align these figures" — which is all it was ever used for here. Unlayered, so
+/* There is no third typeface: font-mono resolves to the body face and means
+   "align these figures", which is all it was ever used for here. Unlayered, so
    it augments the Tailwind utility rather than fighting it. */
 .font-mono { font-variant-numeric: tabular-nums; letter-spacing: 0.02em; }
 

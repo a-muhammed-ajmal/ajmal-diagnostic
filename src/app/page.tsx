@@ -55,14 +55,14 @@ export default function HomePage() {
             <div className="reveal mt-8 flex flex-col gap-3 sm:flex-row">
               <Link
                 href="/diagnostic"
-                className="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl bg-brand px-7 py-3 font-heading text-sm font-bold text-white shadow-1 transition-[background-color,box-shadow,transform] duration-200 ease-out hover:-translate-y-px hover:bg-brand-hover hover:shadow-2"
+                className="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl bg-brand px-7 py-3 font-heading text-[length:var(--step-0)] font-bold text-white shadow-1 transition-[background-color,box-shadow,transform] duration-200 ease-out hover:-translate-y-px hover:bg-brand-hover hover:shadow-2"
               >
                 Start the Business Health Check
                 <ArrowRight className="h-4 w-4" aria-hidden="true" />
               </Link>
               <Link
                 href="/services"
-                className="inline-flex min-h-11 items-center justify-center rounded-xl border border-line-strong px-7 py-3 font-heading text-sm font-bold text-ink transition-[border-color,color,transform] duration-200 ease-out hover:-translate-y-px hover:border-brand hover:text-brand-ink"
+                className="inline-flex min-h-11 items-center justify-center rounded-xl border border-line-strong px-7 py-3 font-heading text-[length:var(--step-0)] font-bold text-ink transition-[border-color,color,transform] duration-200 ease-out hover:-translate-y-px hover:border-brand hover:text-brand-ink"
               >
                 See How It Works
               </Link>
@@ -101,7 +101,7 @@ export default function HomePage() {
           <div className="mt-10 text-center">
             <Link
               href="/services"
-              className="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl border border-line-strong px-7 py-3 font-heading text-sm font-bold text-ink transition-[border-color,background-color,color,transform] duration-200 ease-out hover:-translate-y-px hover:border-brand hover:bg-brand hover:text-white"
+              className="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl border border-line-strong px-7 py-3 font-heading text-[length:var(--step-0)] font-bold text-ink transition-[border-color,background-color,color,transform] duration-200 ease-out hover:-translate-y-px hover:border-brand hover:bg-brand hover:text-white"
             >
               See the full journey
               <ArrowRight className="h-4 w-4" aria-hidden="true" />
@@ -175,7 +175,7 @@ export default function HomePage() {
             <p className="mx-auto mt-5 max-w-xl font-body text-[length:var(--step-0)] leading-relaxed text-muted lg:mx-0">Start with a free Business Health Check and receive your Founder Dependency Index across decision speed, execution consistency, and operational visibility.</p>
             <Link
               href="/diagnostic"
-              className="mt-8 inline-flex min-h-11 items-center justify-center gap-2 rounded-xl bg-brand px-7 py-3 font-heading text-sm font-bold text-white shadow-1 transition-[background-color,box-shadow,transform] duration-200 ease-out hover:-translate-y-px hover:bg-brand-hover hover:shadow-2"
+              className="mt-8 inline-flex min-h-11 items-center justify-center gap-2 rounded-xl bg-brand px-7 py-3 font-heading text-[length:var(--step-0)] font-bold text-white shadow-1 transition-[background-color,box-shadow,transform] duration-200 ease-out hover:-translate-y-px hover:bg-brand-hover hover:shadow-2"
             >
               Start the Business Health Check
               <ArrowRight className="h-4 w-4" aria-hidden="true" />

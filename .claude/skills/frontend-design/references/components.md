@@ -6,7 +6,7 @@
 - **Named Exports**: Use `export function Component(…)` / `export const Component = …`. No default exports for components.
 - **PascalCase filenames** matching the component name.
 - **Class Merging**: Always use `cn()` from `src/lib/utils.ts` for conditional Tailwind classes.
-- **Font**: Every component inherits Figtree from the `body`/heading rules. There is no second typeface — never set a different `font-family` on any component.
+- **Font**: Every component inherits Lexend for body and Roboto Slab for headings from the `body`/heading rules. Those two are the whole set — never set a different `font-family` on any component.
 - **Forms**: `react-hook-form` + a `zod` schema. No uncontrolled inputs.
 
 ## File Structure Pattern

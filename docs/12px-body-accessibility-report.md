@@ -13,12 +13,13 @@ Measured across `/`, `/about`, `/services`, `/contact`, `/insights`, `/insights/
 | Check | Result |
 | --- | --- |
 | Text contrast (WCAG 1.4.3, AA) | **0 failures** — every string ≥ 4.5:1 |
-| h1 at 375px | **24px** — exactly the specified cap |
-| h2 at 375px | **21px** — exactly the specified cap |
+| h1, all widths (320–1920px) | **24px** — exactly the specified cap, never scales up |
+| Section titles, all widths | **21px** — exactly the specified cap |
 | Prose (`<p>`, `<li>`) | **12px everywhere** — no element exceeds the cap |
+| Control text (buttons, nav, labels) | **12px everywhere** |
 | Horizontal overflow at 320px | **None**, on any page |
 | Focus ring | Global `:focus-visible`, 2px `--color-focus`, never removed |
-| Tap targets | 44px floor retained on all controls |
+| Tap targets | 44px floor retained on all controls — held by height and padding, not type size |
 | State signalling | Never colour-alone — selected options carry a filled radio and `aria-pressed` |
 
 ---

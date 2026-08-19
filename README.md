@@ -8,7 +8,7 @@ prospects through a protected admin dashboard.
 
 - **Next.js 16** (App Router, React 19) · TypeScript (strict)
 - **Tailwind CSS v4** — tokens live in `src/app/globals.css` (`@theme`), no `tailwind.config.js`
-- **Design system** — "Signal": electric blue `#2563EB` on white, amber `#F59E0B` support accent, Figtree throughout, body capped at 12px
+- **Design system** — "Signal": electric blue `#2563EB` on white, amber `#F59E0B` support accent, Roboto Slab headings + Lexend body, h1 capped at 24px and body at 12px
 - **Supabase** (`@supabase/supabase-js`) — Postgres + cookie-based admin auth
 - **Anthropic** (`@anthropic-ai/sdk`) — generates the action plan
 - **Resend** + `@react-email/components` — transactional email

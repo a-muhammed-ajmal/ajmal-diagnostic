@@ -115,7 +115,7 @@ export function DependencyIndexPreview() {
           </div>
           <Link
             href="/diagnostic"
-            className="mt-7 inline-flex min-h-11 items-center justify-center gap-2 rounded-xl bg-brand px-6 py-3 font-heading text-sm font-bold text-white shadow-1 transition-[background-color,box-shadow,transform] duration-200 ease-out hover:-translate-y-px hover:bg-brand-hover hover:shadow-2"
+            className="mt-7 inline-flex min-h-11 items-center justify-center gap-2 rounded-xl bg-brand px-6 py-3 font-heading text-[length:var(--step-0)] font-bold text-white shadow-1 transition-[background-color,box-shadow,transform] duration-200 ease-out hover:-translate-y-px hover:bg-brand-hover hover:shadow-2"
           >
             Start the Business Health Check
             <ArrowRight className="h-4 w-4" aria-hidden="true" />

@@ -16,13 +16,13 @@ These defy reasonable assumptions and are the mistakes most often made in this r
 - **`--color-accent` (amber `#F59E0B`) is fill-only** — 2.1:1 on white. For amber *text* use `--color-accent-ink` (`#B45309`). Same pattern as `--color-brand` vs `--color-brand-ink`.
 - **There are no dark sections.** The site is white and `--color-brand-tint` bands only. `text-white` is correct *only* on a `bg-brand` / `bg-danger` / `bg-success` / `bg-ink` fill. Anywhere else it is invisible.
 - **The page background is flat white.** There is no grid overlay, no grain, no aurora. `.graph-overlay` and `.graph-overlay-dark` were deleted — don't reintroduce them.
-- **One typeface: Figtree.** `--font-heading`, `--font-body`, and `--font-mono` all resolve to it. `font-mono` now only means `tabular-nums`; it does not change family.
+- **Two typefaces, and only two.** `--font-heading` / `--font-display` are **Roboto Slab**; `--font-body` / `--font-sans` / `--font-mono` are **Lexend**. `font-mono` only means `tabular-nums`; it does not change family.
 - **Tailwind v4 — there is no `tailwind.config.js`.** Custom tokens go in `@theme {}` in globals.css. Adding a config file will silently do nothing.
 - **`cn()` lives in [src/lib/utils.ts](../../../src/lib/utils.ts)**, not `lib/cn.ts`.
 - **`/results` is the diagnostic report page**, rendered client-side from `sessionStorage` after the quiz. It is not a case-studies or portfolio page.
 - **`createAdminClient()` uses the service-role key and bypasses RLS.** Route Handlers and Server Components only — never import it into a Client Component.
 - **No animation library.** Motion is native CSS only, including `animation-timeline` scroll-driven effects in globals.css.
-- **Fonts load via `next/font/google` in `layout.tsx`.** Never add a `<link>` tag for Figtree.
+- **Fonts load via `next/font/google` in `layout.tsx`.** Never add a `<link>` tag for Roboto Slab or Lexend.
 - **If the dev server shows the wrong colours, delete `.next`.** Turbopack caches the compiled stylesheet and will happily serve a stale palette after a token change.
 
 ---
@@ -46,27 +46,27 @@ Do not add a dependency without a functional reason. Prefer Server Components; k
 
 ---
 
-## Typography — Figtree
+## Typography — Roboto Slab + Lexend
 
-One face, three token names so markup stays stable: `--font-heading` / `--font-display`, `--font-body` / `--font-sans`, and `--font-mono` all resolve to **Figtree**. Never introduce a second typeface.
+Two faces, each with one job. `--font-heading` / `--font-display` resolve to **Roboto Slab** — a slab serif that carries every heading. `--font-body` / `--font-sans` / `--font-mono` resolve to **Lexend**, which is drawn for reading ease and is the reason 12px prose stays workable. Never introduce a third typeface.
 
-Figtree is geometric, so display sizes need optical tightening — globals.css already applies `letter-spacing: -0.02em` to `h1`/`h2` and `-0.015em` to `h3`/`h4`. Don't restate it.
+Roboto Slab sets wide and needs far less optical tightening than a geometric sans: globals.css applies `-0.01em` to `h1`/`h2` and none below that. Don't restate it.
 
-Use the fluid clamp scale rather than raw font sizes:
+**The scale is fixed, not fluid.** Brand direction caps h1 at 24px and section titles at 21px at *every* width, so no step clamps upward — a heading is the same size on a phone and on a 27" display:
 
-| Token | Range | Typical use |
+| Token | Size | Typical use |
 | --- | --- | --- |
 | `--step--1` | 12px flat | Collapsed into body — no tier below |
 | `--step-0` | 12px flat | **Body, captions, labels, everything prose** |
-| `--step-1` | 14 → 16px | Card titles, diagram labels, h5 |
-| `--step-2` | 16 → 19px | h4 |
-| `--step-3` | 18 → 24px | h3 |
-| `--step-4` | 21 → 32px | h2 |
-| `--step-5` | 24 → 40px | h1 |
+| `--step-1` | 14px flat | Card titles, diagram labels, h5 |
+| `--step-2` | 16px flat | h4 |
+| `--step-3` | 18px flat | h3 |
+| `--step-4` | 21px flat | h2 / section titles — **hard cap** |
+| `--step-5` | 24px flat | h1 — **hard cap** |
 
-The heading floors **are** the mobile caps: h1 must not exceed 24px and sub-headings must not exceed 21px at 375px. Verify with a real measurement, not by eye.
+These are caps, not floors: h1 must never exceed 24px and a section title never 21px, on any screen. Verify with a real measurement at both 375px and 1920px, not by eye.
 
-Control labels (buttons, nav links) sit at `text-sm` (14px) — they are UI chrome, not prose, and shrinking them to 12px hurts the 44px target. Prose is `--step-0`.
+Control labels — buttons, nav links, form labels — are also `--step-0` (12px). The 44px touch target is preserved through `min-h-11` and padding, never through type size. Form *inputs* remain the one exception at 16px.
 
 `text-wrap: balance` on headings and `text-wrap: pretty` on paragraphs are already global — don't restate them.
 
@@ -208,8 +208,9 @@ Voice: executive, analytical, practical — bold and distinctive, not generic. A
 | Cream, vellum, or tinted page backgrounds | Flat white canvas + `bg-brand-tint` bands |
 | Dark navy/ink section slabs | Light sections; contrast from fills and borders |
 | Blueprint grid, grain, aurora radials | Nothing — the canvas is flat |
-| Any font but Figtree (Inter, Fraunces, IBM Plex, Arial) | `font-heading` / `font-body` — both Figtree |
-| Body prose above 12px | `--step-0` |
+| A third font family (Inter, Fraunces, IBM Plex, Figtree, Arial) | `font-heading` (Roboto Slab) / `font-body` (Lexend) |
+| Body, button or label text above 12px | `--step-0` |
+| h1 above 24px or a section title above 21px, at any width | `--step-5` / `--step-4` — they are fixed, not fluid |
 | A caption size below body | There isn't one — captions are 12px too |
 | Muting text with opacity (`text-ink/60`) | `text-muted` |
 | Amber as text | `text-accent-ink` |
@@ -230,8 +231,8 @@ Voice: executive, analytical, practical — bold and distinctive, not generic. A
 ## Before you finish
 
 - [ ] No raw hex in JSX (outside the two documented exceptions)
-- [ ] Every `<p>` and `<li>` is at `--step-0` (12px)
-- [ ] h1 ≤ 24px and h2 ≤ 21px measured at 375px
+- [ ] Every `<p>`, `<li>`, button label and form label is at `--step-0` (12px)
+- [ ] h1 ≤ 24px and h2 ≤ 21px measured at 375px **and 1920px** — the scale is fixed, nothing scales up
 - [ ] Amber text uses `--color-accent-ink`; blue text uses `--color-brand-ink`
 - [ ] `text-white` appears only alongside a dark fill
 - [ ] One `<h1>`; heading levels not skipped

@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Figtree } from "next/font/google";
+import { Lexend, Roboto_Slab } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import { Navigation } from "@/components/layout/Navigation";
@@ -7,10 +7,17 @@ import { Footer } from "@/components/layout/Footer";
 import { SITE_NAME } from "@/lib/metadata";
 import { cn } from "@/lib/utils";
 
-const figtree = Figtree({
-  variable: "--font-figtree",
+const lexend = Lexend({
+  variable: "--font-lexend",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800"],
+  weight: ["400", "500", "600", "700"],
+  display: "swap",
+});
+
+const robotoSlab = Roboto_Slab({
+  variable: "--font-roboto-slab",
+  subsets: ["latin"],
+  weight: ["500", "600", "700", "800"],
   display: "swap",
 });
 
@@ -49,14 +56,14 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={cn(figtree.variable, "h-full antialiased")}
+      className={cn(lexend.variable, robotoSlab.variable, "h-full antialiased")}
     >
       <body className="min-h-full flex flex-col bg-canvas text-ink font-body">
         {/* Keyboard-only escape past the nav. Off-screen until focused; the global
             :focus-visible rule in globals.css supplies the outline. */}
         <a
           href="#main-content"
-          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100] focus:rounded-xl focus:bg-brand focus:px-5 focus:py-3 focus:font-heading focus:text-sm focus:font-bold focus:text-white"
+          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100] focus:rounded-xl focus:bg-brand focus:px-5 focus:py-3 focus:font-heading focus:text-[length:var(--step-0)] focus:font-bold focus:text-white"
         >
           Skip to content
         </a>
