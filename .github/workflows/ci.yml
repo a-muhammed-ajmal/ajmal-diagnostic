@@ -1,0 +1,65 @@
+name: CI
+
+on:
+  push:
+    branches: ['**']
+  pull_request:
+    branches: [main]
+
+jobs:
+  quality:
+    name: Lint · Tests · Build
+    runs-on: ubuntu-latest
+    env:
+      # next.config.ts aborts the build when this is missing or malformed, so CI
+      # supplies a syntactically valid placeholder rather than a real booking link.
+      NEXT_PUBLIC_CALENDLY_LINK: https://calendly.com/ci-placeholder/intro
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Tests + coverage
+        run: npm run test:coverage
+
+      - name: Build
+        run: npm run build
+
+  type-scale:
+    name: Type-scale audit (mobile ceilings)
+    runs-on: ubuntu-latest
+    env:
+      NEXT_PUBLIC_CALENDLY_LINK: https://calendly.com/ci-placeholder/intro
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - run: npm ci
+
+      # playwright-core drives a browser that is already on the machine rather
+      # than downloading one. GitHub's ubuntu runners ship Chromium at this path.
+      - name: Locate Chromium
+        run: |
+          CHROME="$(command -v chromium-browser || command -v chromium || command -v google-chrome || true)"
+          if [ -z "$CHROME" ]; then
+            sudo apt-get update && sudo apt-get install -y chromium-browser
+            CHROME="$(command -v chromium-browser)"
+          fi
+          echo "CHROME_PATH=$CHROME" >> "$GITHUB_ENV"
+
+      # Measures the rendered pages at 375 / 320 / 1920px and fails if any
+      # heading exceeds 24px or any p/li/label exceeds 14px below 768px.
+      - name: Audit rendered type scale
+        run: npm run audit:type

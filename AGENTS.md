@@ -26,6 +26,7 @@ A B2B consulting website and business diagnostic tool for Ajmal's consulting pra
 | Animations | Native CSS only — `animation-timeline` scroll-driven effects in `globals.css`. No animation library. |
 | Icons | `lucide-react` |
 | Class merging | `clsx` + `tailwind-merge` |
+| Design audit | `playwright-core` (dev only) — drives an installed Chrome for `npm run audit:type` |
 
 ## Architecture
 ```
@@ -95,6 +96,10 @@ src/
 The numbered palette (`electric-50…900`, `amber-50…700`, `canvas-dark/light/border`) is declared alongside these aliases, so `bg-electric-100` and `text-amber-700` are real utilities. Components should reach for the semantic alias first.
 
 **Fonts**: two faces, loaded via `next/font/google` in `layout.tsx`. **Roboto Slab** for headings (`--font-heading` / `--font-display`); **Figtree** for body and UI text (`--font-body` / `--font-sans`), including button and control labels. `--font-mono` resolves to Figtree and means tabular figures — there is no third face.
+
+The ceilings below are enforced by `npm run audit:type`, which measures the rendered
+pages in a real browser rather than trusting the CSS — font sizes are inherited, so this
+is the one design rule that code review cannot verify. It runs in CI and in `/ship`.
 
 **Type scale**: **responsive, with strict mobile ceilings.** Below 768px, no heading (h1–h4) may exceed **24px** and no body copy may exceed **14px**; micro-copy and labels sit at 12px. At 768px and above the scale opens up — body 16px, h2 32px, h1 48px. Both tiers are declared once on `:root` in `globals.css`, so every `text-[length:var(--step-N)]` call site inherits them. `text-xs` is bound to `--step--1`, the micro-copy tier. `input`/`select`/`textarea` stay pinned at 16px at every width to stop iOS Safari zooming on focus.
 

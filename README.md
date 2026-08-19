@@ -53,6 +53,7 @@ created only by an authenticated admin using its explicit Test Mode link.
 | `npm run lint` | ESLint |
 | `npm test` | Jest test suite |
 | `npm run test:coverage` | Jest with coverage |
+| `npm run audit:type` | Renders every route in a real browser and asserts the design system's mobile type ceilings (h1–h4 ≤ 24px, prose ≤ 14px below 768px, no overflow at 320px). Needs Chrome or Edge installed. |
 
 ## Project stats
 

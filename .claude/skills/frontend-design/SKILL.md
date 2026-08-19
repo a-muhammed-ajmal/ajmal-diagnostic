@@ -326,6 +326,7 @@ Before pushing any frontend updates or declaring a UI layout complete, verify ag
 - [ ] **CSS Variable Pairing:** Are the typography structures mapped precisely to `var(--font-heading)` and `var(--font-body)`?
 - [ ] **Mobile Heading Check:** Verify by measurement that no H1, H2, H3, or H4 exceeds `24px` when screen width drops under `768px`.
 - [ ] **Mobile Body Check:** Validate that all paragraph copy resolves to `14px` or less on mobile viewports.
+- [ ] Both of the above are asserted by **`npm run audit:type`** — it drives a real browser over every route at 375 / 320 / 1920px. Run it rather than eyeballing: font sizes are inherited, so a `<p>` handed a card-title step, or a span inside a heading, is invisible to code review. It also fails on horizontal overflow at 320px.
 - [ ] **Electric Blue Hex Verification:** Verify primary actions are styled using the specific hex `#0052FF`.
 - [ ] **Amber Color Contrast Check:** Ensure Amber `#FFBF00` is strictly paired with high-contrast, dark slate components to satisfy WCAG AA; amber text on a light surface uses `#B45309`.
 - [ ] **Transition Verification:** Ensure hover and translate movements are bound by `transition-all duration-200`.

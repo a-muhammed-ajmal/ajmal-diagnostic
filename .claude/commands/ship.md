@@ -44,6 +44,25 @@ On failure:
 - If it requires any assumption about intent or architecture: stop.
   Report the exact error. Wait for user.
 
+### 3b. Rendered type-scale audit
+Run: npm run audit:type
+
+Asserts the design system's mobile ceilings against the rendered pages — no h1–h4
+above 24px and no `<p>`/`<li>`/`<label>` above 14px below 768px, no overflow at
+320px. It builds and starts its own server on PORT (default 3000); make sure nothing
+else is bound to it.
+
+On failure:
+- The report names the route, element, measured size and text. If the fix is a
+  hardcoded size or a wrong `--step-N` for the element's role: fix it and re-run.
+- If a heading is only oversized because it is the wrong element for the job (a
+  `<p>` acting as a heading, or vice versa), fix the semantics rather than the size.
+- If it needs a judgement call about the design intent: stop and report.
+
+The ADVISORY list does not fail the step — `--step-1` is correct for logotypes and
+diagram labels. Skipping this step because "only styling changed" is exactly when
+it catches things; size inheritance means CSS review cannot substitute for it.
+
 ### 4–6. Update project docs (conditional)
 This repo has no `spec.md` — skip that file, report `unchanged`. `CLAUDE.md` is
 a single `@AGENTS.md` include with no stats of its own — skip it too.
@@ -83,6 +102,7 @@ Output only this at the end:
   Lint:       PASS / FAIL
   Tests:      [count] passing, [coverage]% — PASS / FAIL
   Build:      PASS / FAIL
+  Type scale: [n] routes, ceilings hold — PASS / FAIL
   README.md:  updated / unchanged
   Commit:     [hash] [message]
   Push:       SUCCESS / FAILED
