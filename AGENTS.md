@@ -56,7 +56,7 @@ src/
     jsonLd.ts       # Structured-data builders
     rateLimit.ts    # IP + email rate limiting
     readingTime.ts  # Read-time from word count
-    env.ts          # Build-time-validated public env (Calendly, site URL)
+    env.ts          # Public env (required Calendly, optional WhatsApp, site URL)
     adminAuth.ts    # Admin session helpers
   types/
     index.ts        # Shared TypeScript types
@@ -138,3 +138,4 @@ is the one design rule that code review cannot verify. It runs in CI and in `/sh
 - Supabase: `createAdminClient()` uses the service-role key (bypasses RLS) — use only in Route Handlers, never client-side
 - Email templates are React components rendered via `@react-email/render` before sending through Resend
 - Admin auth is cookie-based (not Supabase Auth) — see `src/lib/adminAuth.ts`
+- `NEXT_PUBLIC_WHATSAPP_NUMBER` is optional and public by design. When set to the business E.164 number, it exposes a prefilled Business Clarity Audit WhatsApp link; omit it to hide the secondary message route.
