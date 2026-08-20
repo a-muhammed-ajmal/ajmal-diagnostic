@@ -7,6 +7,7 @@ import {
   Text,
   Section,
   Hr,
+  Link,
   Button,
   Preview,
 } from "@react-email/components";
@@ -18,6 +19,7 @@ interface DiagnosticReportEmailProps {
   companyName: string;
   results: DiagnosticResult;
   calendlyLink: string;
+  whatsappLink?: string | null;
 }
 
 export function DiagnosticReportEmail({
@@ -25,6 +27,7 @@ export function DiagnosticReportEmail({
   companyName,
   results,
   calendlyLink,
+  whatsappLink,
 }: DiagnosticReportEmailProps) {
   const primaryMeta = DIMENSION_META[results.primaryConstraint];
   const secondaryMeta = DIMENSION_META[results.secondaryConstraint];
@@ -366,6 +369,15 @@ export function DiagnosticReportEmail({
             >
               With Muhammed Ajmal personally. No pitch. Just clarity.
             </Text>
+            {whatsappLink && (
+              <Text style={{ color: "#475569", fontSize: "12px", marginTop: "12px" }}>
+                Prefer to ask a question first?{" "}
+                <Link href={whatsappLink} style={{ color: "#0037A5", fontWeight: "bold" }}>
+                  Message on WhatsApp
+                </Link>
+                .
+              </Text>
+            )}
           </Section>
 
           <Hr style={{ borderColor: "#E2E8F0", margin: "0 0 16px" }} />

@@ -15,17 +15,21 @@ describe("DiagnosticReportEmail", () => {
     const answers: Record<number, string> = {};
     for (const question of QUESTIONS) answers[question.id] = question.options[0].id;
     const calendlyLink = "https://calendly.com/ajmalconsults/free-business-clarity-consultation";
+    const whatsappLink = "https://wa.me/971501234567?text=Business%20Clarity%20Audit";
     const html = renderToStaticMarkup(
       DiagnosticReportEmail({
         name: "Ajmal Test",
         companyName: "Test Co",
         results: calculateResults(answers),
         calendlyLink,
+        whatsappLink,
       }),
     );
 
     expect(html).toContain("Discuss a Business Clarity Audit");
     expect(html).toContain(calendlyLink);
+    expect(html).toContain("Message on WhatsApp");
+    expect(html).toContain(whatsappLink);
     expect(html).not.toContain("Discuss an Audit");
   });
 });

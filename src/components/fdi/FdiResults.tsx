@@ -1,8 +1,10 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, MessageCircle } from 'lucide-react';
+import { track } from '@vercel/analytics';
 import { Button } from '@/components/ui/Button';
+import { CALENDLY_LINK, WHATSAPP_AUDIT_LINK } from '@/lib/env';
 import type { FounderFdiReport } from '@/lib/fdi/public-report';
 
 /** Ambient radials. Decorative, and always inside a clipping parent. */
@@ -116,8 +118,9 @@ export function FdiResults() {
           </ul>
         </section>
 
-        {/* The next-step href comes from the frozen FDI-1.0 config; only the public label
-            is applied here, because that config is hash-locked and must not be edited. */}
+        {/* FDI-1.0 records its frozen audit label and internal next-step metadata. The
+            public conversion action intentionally uses the validated booking URL so
+            completing the Check never loops a qualified founder back to the start. */}
         <section className="relative overflow-hidden rounded-2xl bg-canvas-dark p-6 md:p-8">
           <div className="pointer-events-none absolute inset-0" aria-hidden="true">
             <div className="orb orb-amber absolute -right-16 -top-24 h-64 w-64 opacity-25" />
@@ -129,11 +132,28 @@ export function FdiResults() {
             <p className="mt-3 max-w-2xl font-body text-[length:var(--step-0)] leading-relaxed text-muted-invert">
               A Business Clarity Audit tests these self-reported patterns against operating evidence — records, workflows, dashboards, decision samples, and SOPs — and identifies where closer investigation is useful.
             </p>
-            <div className="mt-6">
-              <Button href={report.nextStep.href} variant="accent">
+            <div className="mt-6 flex flex-wrap gap-3">
+              <Button
+                href={CALENDLY_LINK}
+                external
+                variant="accent"
+                onClick={() => track('calendly_click', { from: 'fdi_results' })}
+              >
                 Discuss a Business Clarity Audit
                 <ArrowRight className="h-4 w-4" aria-hidden="true" />
               </Button>
+              {WHATSAPP_AUDIT_LINK && (
+                <Button
+                  href={WHATSAPP_AUDIT_LINK}
+                  external
+                  variant="secondary"
+                  className="border-white/40 text-white hover:border-white hover:bg-white hover:text-ink"
+                  onClick={() => track('whatsapp_click', { from: 'fdi_results' })}
+                >
+                  Message on WhatsApp
+                  <MessageCircle className="h-4 w-4" aria-hidden="true" />
+                </Button>
+              )}
             </div>
             <p className="mt-6 font-body text-xs italic leading-relaxed text-muted-invert">
               {report.limitation}

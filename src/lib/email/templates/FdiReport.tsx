@@ -6,6 +6,7 @@ import {
   Heading,
   Html,
   Hr,
+  Link,
   Preview,
   Section,
   Text,
@@ -17,10 +18,11 @@ interface FdiReportEmailProps {
   readonly companyName: string;
   readonly report: FounderFdiReport;
   readonly calendlyLink: string;
+  readonly whatsappLink?: string | null;
 }
 
 /** Deterministic FDI delivery. It deliberately contains no AI or qualification language. */
-export function FdiReportEmail({ name, companyName, report, calendlyLink }: FdiReportEmailProps) {
+export function FdiReportEmail({ name, companyName, report, calendlyLink, whatsappLink }: FdiReportEmailProps) {
   const firstName = name.split(' ')[0];
   const concentration = report.concentration.labels.join(' and ');
   const alerted = report.alerts.flatMap((tier) => tier.components.map((component) => component.label));
@@ -82,6 +84,15 @@ export function FdiReportEmail({ name, companyName, report, calendlyLink }: FdiR
           <Button href={calendlyLink} style={{ backgroundColor: '#0052FF', borderRadius: '8px', color: '#FFFFFF', fontSize: '14px', fontWeight: 'bold', padding: '12px 18px', textDecoration: 'none' }}>
             Discuss a Business Clarity Audit
           </Button>
+          {whatsappLink && (
+            <Text style={{ color: '#475569', fontSize: '12px', margin: '16px 0 0' }}>
+              Prefer to ask a question first?{' '}
+              <Link href={whatsappLink} style={{ color: '#0037A5', fontWeight: 'bold' }}>
+                Message on WhatsApp
+              </Link>
+              .
+            </Text>
+          )}
         </Container>
       </Body>
     </Html>

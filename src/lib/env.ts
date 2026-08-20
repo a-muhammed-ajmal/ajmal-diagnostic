@@ -16,6 +16,7 @@
  */
 
 import { resolveCalendlyLink } from "./calendly";
+import { resolveWhatsAppAuditLink } from "./whatsapp";
 
 /**
  * The practice's Calendly booking URL. Guaranteed to be a valid https://calendly.com URL
@@ -27,6 +28,14 @@ import { resolveCalendlyLink } from "./calendly";
  */
 export const CALENDLY_LINK = resolveCalendlyLink(
   process.env.NEXT_PUBLIC_CALENDLY_LINK,
+);
+
+/**
+ * Optional direct-message route for people who want to ask a question before
+ * booking. It is omitted from the UI until the business WhatsApp number is configured.
+ */
+export const WHATSAPP_AUDIT_LINK = resolveWhatsAppAuditLink(
+  process.env.NEXT_PUBLIC_WHATSAPP_NUMBER,
 );
 
 /** Canonical public origin, used for metadata, sitemap and absolute links. */

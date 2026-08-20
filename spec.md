@@ -8,8 +8,8 @@ Muhammed Ajmal Consulting is a B2B consulting website for founder-led UAE SMEs. 
 
 - `/diagnostic` serves the Founder Dependency Index (FDI) Business Health Check when `NEXT_PUBLIC_FDI_ENABLED=true`; it asks 12 questions across decision speed, execution consistency, and operational visibility.
 - Completing the FDI captures contact details, stores the result, delivers a report email, and shows the personalised result at `/results/fdi`.
-- The FDI result’s “Discuss a Business Clarity Audit” CTA routes to `/contact`.
-- The FDI and legacy report emails, and the legacy result page, use the same approved CTA label and retain their existing Calendly destinations.
+- The FDI and legacy results use the approved “Discuss a Business Clarity Audit” CTA as a direct Calendly booking link. A completed check must not return a qualified visitor to `/contact` or restart the check.
+- The FDI and legacy report emails use the same approved CTA label and direct Calendly destination. When `NEXT_PUBLIC_WHATSAPP_NUMBER` is configured with the business E.164 number, both emails offer a secondary WhatsApp message link with an Audit enquiry prefilled.
 - `/contact` provides both an enquiry form and a Calendly booking control. Booking opens Calendly; it does not create a booking within the website.
 
 ## Product Requirements and Invariants
@@ -18,10 +18,12 @@ Muhammed Ajmal Consulting is a B2B consulting website for founder-led UAE SMEs. 
 - FDI scoring and report generation are deterministic; the email report contains no AI or qualification language.
 - Test Mode requires authenticated admin access and marks the FDI session as a test record.
 - Public form handling, database access, and email delivery occur server-side. Browser code must not use Supabase service-role credentials.
+- Calendly is the primary post-check conversion route. WhatsApp is an optional secondary question-first route and must be omitted when no business WhatsApp number is configured.
 - Website text—including headings, body copy, eyebrows, buttons, controls, and numeric text—uses Plus Jakarta Sans. Existing type sizes, weights, spacing, and layout remain unchanged.
 
 ## Acceptance Criteria
 
-- A completed Business Health Check produces a result and report email with the approved Business Clarity Audit CTA.
+- A completed Business Health Check produces a result and report email with the approved Business Clarity Audit CTA, linked directly to Calendly rather than `/contact`.
+- When the business WhatsApp number is configured, the result and report email expose a working, prefilled WhatsApp Audit-enquiry link.
 - The contact page presents a working Calendly control and enquiry form.
 - The website maintains its responsive type-scale, mobile overflow, and global font-family checks through `npm run audit:type`.

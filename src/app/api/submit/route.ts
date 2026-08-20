@@ -4,7 +4,7 @@ import { calculateResults } from "@/lib/scoring";
 import { generateAIActionPlan } from "@/lib/ai";
 import { Resend } from "resend";
 import { DiagnosticReportEmail } from "@/lib/email/templates/DiagnosticReport";
-import { CALENDLY_LINK } from "@/lib/env";
+import { CALENDLY_LINK, WHATSAPP_AUDIT_LINK } from "@/lib/env";
 import { requireResendConfig } from "@/lib/serverEnv";
 import { enforcePublicFormLimits } from "@/lib/rateLimit";
 import { z } from "zod";
@@ -134,6 +134,7 @@ export async function POST(req: NextRequest) {
           companyName: leadData.companyName,
           results,
           calendlyLink: CALENDLY_LINK,
+          whatsappLink: WHATSAPP_AUDIT_LINK,
         }),
       });
 

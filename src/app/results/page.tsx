@@ -1,11 +1,11 @@
 'use client';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, MessageCircle } from 'lucide-react';
 import { DiagnosticResult, LeadData } from '@/types';
 import { track } from '@vercel/analytics';
 import { DIMENSION_META } from '@/lib/scoring';
-import { CALENDLY_LINK } from '@/lib/env';
+import { CALENDLY_LINK, WHATSAPP_AUDIT_LINK } from '@/lib/env';
 import { Button } from '@/components/ui/Button';
 import { cn } from '@/lib/utils';
 
@@ -169,15 +169,29 @@ export default function ResultsPage() {
             <p className="mb-6 max-w-xl font-body text-[length:var(--step-0)] leading-relaxed text-muted-invert">
               An Audit reviews operating evidence to verify why dependency appears and identify the binding constraint to address.
             </p>
-            <Button
-              href={CALENDLY_LINK}
-              external
-              variant="accent"
-              onClick={() => track('calendly_click', { from: 'results' })}
-            >
-              Discuss a Business Clarity Audit
-              <ArrowRight className="h-4 w-4" aria-hidden="true" />
-            </Button>
+            <div className="flex flex-wrap gap-3">
+              <Button
+                href={CALENDLY_LINK}
+                external
+                variant="accent"
+                onClick={() => track('calendly_click', { from: 'results' })}
+              >
+                Discuss a Business Clarity Audit
+                <ArrowRight className="h-4 w-4" aria-hidden="true" />
+              </Button>
+              {WHATSAPP_AUDIT_LINK && (
+                <Button
+                  href={WHATSAPP_AUDIT_LINK}
+                  external
+                  variant="secondary"
+                  className="border-white/40 text-white hover:border-white hover:bg-white hover:text-ink"
+                  onClick={() => track('whatsapp_click', { from: 'results' })}
+                >
+                  Message on WhatsApp
+                  <MessageCircle className="h-4 w-4" aria-hidden="true" />
+                </Button>
+              )}
+            </div>
             <p className="mt-3 font-body text-xs text-muted-invert">With Muhammed Ajmal · Dubai, United Arab Emirates</p>
           </div>
         </section>

@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { Resend } from 'resend';
 import { FdiReportEmail } from '@/lib/email/templates/FdiReport';
-import { CALENDLY_LINK } from '@/lib/env';
+import { CALENDLY_LINK, WHATSAPP_AUDIT_LINK } from '@/lib/env';
 import { isFdiEnabled } from '@/lib/featureFlags';
 import { completeFdiSession, FdiInputError, FdiSessionConflictError } from '@/lib/fdi-server/persistence';
 import { toFounderFdiReport } from '@/lib/fdi/public-report';
@@ -42,6 +42,7 @@ export async function POST(request: NextRequest) {
           companyName: body.contact.companyName,
           report: founderReport,
           calendlyLink: CALENDLY_LINK,
+          whatsappLink: WHATSAPP_AUDIT_LINK,
         }),
       });
       if (error) {

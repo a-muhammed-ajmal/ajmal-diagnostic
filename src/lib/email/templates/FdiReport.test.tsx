@@ -21,14 +21,17 @@ const report: FounderFdiReport = {
 };
 
 it('renders only deterministic founder content', () => {
+  const whatsappLink = 'https://wa.me/971501234567?text=Business%20Clarity%20Audit';
   const html = renderToStaticMarkup(FdiReportEmail({
-    name: 'Ajmal Test', companyName: 'Test Co', report, calendlyLink: report.nextStep.href,
+    name: 'Ajmal Test', companyName: 'Test Co', report, calendlyLink: report.nextStep.href, whatsappLink,
   }));
 
   expect(html).toContain('Founder Dependency Index');
   expect(html).toContain('Work regularly waits for decisions that depend on you.');
   expect(html).toContain('Discuss a Business Clarity Audit');
   expect(html).toContain(report.nextStep.href);
+  expect(html).toContain('Message on WhatsApp');
+  expect(html).toContain(whatsappLink);
   expect(html).not.toContain('Discuss an Audit');
   expect(html).not.toContain('qualified_primary');
   expect(html).not.toContain('AI-generated');
