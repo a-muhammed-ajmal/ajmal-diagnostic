@@ -80,7 +80,7 @@ export function FdiReportEmail({ name, companyName, report, calendlyLink }: FdiR
             {report.limitation}
           </Text>
           <Button href={calendlyLink} style={{ backgroundColor: '#0052FF', borderRadius: '8px', color: '#FFFFFF', fontSize: '14px', fontWeight: 'bold', padding: '12px 18px', textDecoration: 'none' }}>
-            Discuss an Audit
+            Discuss a Business Clarity Audit
           </Button>
         </Container>
       </Body>

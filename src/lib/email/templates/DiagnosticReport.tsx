@@ -359,7 +359,7 @@ export function DiagnosticReportEmail({
                 display: "inline-block",
               }}
             >
-              Discuss an Audit →
+              Discuss a Business Clarity Audit →
             </Button>
             <Text
               style={{ color: "#475569", fontSize: "12px", marginTop: "12px" }}

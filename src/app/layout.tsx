@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Figtree, Roboto_Slab } from "next/font/google";
+import { Plus_Jakarta_Sans } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import { Navigation } from "@/components/layout/Navigation";
@@ -7,19 +7,12 @@ import { Footer } from "@/components/layout/Footer";
 import { SITE_NAME } from "@/lib/metadata";
 import { cn } from "@/lib/utils";
 
-// Figtree carries body and UI text; the spec asks for light/regular weights for
-// prose, with 500–700 available for emphasis, labels and control text.
-const figtree = Figtree({
-  variable: "--font-figtree",
+// One family carries headings, body, UI, and numeric text. The complete
+// existing weight range keeps every current utility weight available.
+const plusJakartaSans = Plus_Jakarta_Sans({
+  variable: "--font-plus-jakarta-sans",
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
-  display: "swap",
-});
-
-const robotoSlab = Roboto_Slab({
-  variable: "--font-roboto-slab",
-  subsets: ["latin"],
-  weight: ["500", "600", "700", "800"],
+  weight: ["300", "400", "500", "600", "700", "800"],
   display: "swap",
 });
 
@@ -58,7 +51,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={cn(figtree.variable, robotoSlab.variable, "h-full antialiased")}
+      className={cn(plusJakartaSans.variable, "h-full antialiased")}
     >
       <body className="min-h-full flex flex-col bg-canvas text-ink font-body">
         {/* Keyboard-only escape past the nav. Off-screen until focused; the global

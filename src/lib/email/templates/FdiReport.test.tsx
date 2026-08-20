@@ -27,6 +27,9 @@ it('renders only deterministic founder content', () => {
 
   expect(html).toContain('Founder Dependency Index');
   expect(html).toContain('Work regularly waits for decisions that depend on you.');
+  expect(html).toContain('Discuss a Business Clarity Audit');
+  expect(html).toContain(report.nextStep.href);
+  expect(html).not.toContain('Discuss an Audit');
   expect(html).not.toContain('qualified_primary');
   expect(html).not.toContain('AI-generated');
 });

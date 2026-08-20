@@ -8,7 +8,7 @@ prospects through a protected admin dashboard.
 
 - **Next.js 16** (App Router, React 19) · TypeScript (strict)
 - **Tailwind CSS v4** — tokens live in `src/app/globals.css` (`@theme`), no `tailwind.config.js`
-- **Design system** — "Electric Blue & Amber": electric blue `#0052FF` on white, amber `#FFBF00` fill-only accent, slate neutrals, Roboto Slab headings + Figtree body, responsive scale with hard mobile ceilings (h1 ≤ 24px, body ≤ 14px below 768px)
+- **Design system** — "Electric Blue & Amber": electric blue `#0052FF` on white, amber `#FFBF00` fill-only accent, slate neutrals, Plus Jakarta Sans across headings and UI, responsive scale with hard mobile ceilings (h1 ≤ 24px, body ≤ 14px below 768px)
 - **Supabase** (`@supabase/supabase-js`) — Postgres + cookie-based admin auth
 - **Anthropic** (`@anthropic-ai/sdk`) — generates the action plan
 - **Resend** + `@react-email/components` — transactional email
@@ -53,13 +53,13 @@ created only by an authenticated admin using its explicit Test Mode link.
 | `npm run lint` | ESLint |
 | `npm test` | Jest test suite |
 | `npm run test:coverage` | Jest with coverage |
-| `npm run audit:type` | Renders every route in a real browser and asserts the design system's mobile type ceilings (h1–h4 ≤ 24px, prose ≤ 14px below 768px, no overflow at 320px). Needs Chrome or Edge installed. |
+| `npm run audit:type` | Renders every route in a real browser and asserts Plus Jakarta Sans, the mobile type ceilings (h1–h4 ≤ 24px, prose ≤ 14px below 768px), and no overflow at 320px. Needs Chrome or Edge installed. |
 
 ## Project stats
 
 | Metric | Value |
 |---|---|
-| Tests | 300 passing (22 suites), 58.23% statement coverage |
+| Tests | 301 passing (22 suites), 58.23% statement coverage |
 | DB tables | 8 (RLS on all) |
 | Migrations | 5 (`20260723000001`–`20260815000003`) |
 | Routes | App Router (see `AGENTS.md` for the full page list) |

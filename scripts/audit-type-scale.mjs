@@ -7,6 +7,9 @@
  * span can pick up a parent's font-size. All three have happened here. So this
  * drives a real browser and reads `getComputedStyle`.
  *
+ * Asserted on every route:
+ *   - visible content and form controls resolve to Plus Jakarta Sans
+ *
  * Asserted, below 768px:
  *   - every visible h1..h4 is <= 24px
  *   - every visible <p>, <li> and <label> is <= 14px
@@ -58,6 +61,7 @@ const ROUTES = [
 
 /** Text-bearing elements. Buttons and links are UI text and share the body ceiling. */
 const TEXT_SEL = 'p, li, button, label, a, span, dd, dt, summary, blockquote, td, th';
+const FONT_SEL = `${TEXT_SEL}, input, select, textarea`;
 
 const CHROME_CANDIDATES = [
   process.env.CHROME_PATH,
@@ -117,7 +121,7 @@ function run(cmd, args, env) {
  * element that owns no text node of its own would otherwise report a
  * descendant's size as its own.
  */
-function measureInPage(TEXT_SEL) {
+function measureInPage({ textSelector, fontSelector }) {
   const visible = (el) => {
     const r = el.getBoundingClientRect();
     if (r.width === 0 && r.height === 0) return false;
@@ -141,19 +145,40 @@ function measureInPage(TEXT_SEL) {
 
   const prose = [];
   const other = [];
-  for (const el of document.querySelectorAll(TEXT_SEL)) {
+  for (const el of document.querySelectorAll(textSelector)) {
     if (!visible(el) || !ownsText(el)) continue;
     if (el.closest('h1, h2, h3, h4, h5, h6')) continue;
     (el.matches('p, li, label') ? prose : other).push(info(el));
   }
 
   const desc = (a) => a.sort((x, y) => y.px - x.px);
+  const rootStyles = getComputedStyle(document.documentElement);
+  const bodyFont = getComputedStyle(document.body).fontFamily;
+  const primaryFont = rootStyles
+    .getPropertyValue('--font-plus-jakarta-sans')
+    .split(',')[0]
+    .trim()
+    .replace(/^['"]|['"]$/g, '');
+  const fontMismatches = [];
+  for (const el of document.querySelectorAll(fontSelector)) {
+    const isControl = el.matches('input, select, textarea');
+    if (!visible(el) || (!isControl && !ownsText(el))) continue;
+    const actualFont = getComputedStyle(el).fontFamily;
+    if (actualFont !== bodyFont) {
+      fontMismatches.push({
+        tag: el.tagName.toLowerCase(),
+        text: (el.textContent || el.getAttribute('aria-label') || el.getAttribute('placeholder') || '').trim().slice(0, 56),
+        actualFont,
+      });
+    }
+  }
   return {
     headings: desc(headings),
     prose: desc(prose),
     other: desc(other),
     scrollW: document.documentElement.scrollWidth,
     clientW: document.documentElement.clientWidth,
+    font: { primary: primaryFont, body: bodyFont, mismatches: fontMismatches },
   };
 }
 
@@ -204,15 +229,22 @@ async function main() {
   for (const route of ROUTES) {
     await page.setViewportSize({ width: 375, height: 800 });
     await page.goto(BASE + route, { waitUntil: 'networkidle' });
-    const mobile = await page.evaluate(measureInPage, TEXT_SEL);
+    const mobile = await page.evaluate(measureInPage, { textSelector: TEXT_SEL, fontSelector: FONT_SEL });
 
     await page.setViewportSize({ width: 320, height: 800 });
     await page.waitForTimeout(120);
-    const narrow = await page.evaluate(measureInPage, TEXT_SEL);
+    const narrow = await page.evaluate(measureInPage, { textSelector: TEXT_SEL, fontSelector: FONT_SEL });
 
     await page.setViewportSize({ width: 1920, height: 1080 });
     await page.waitForTimeout(120);
-    const desktop = await page.evaluate(measureInPage, TEXT_SEL);
+    const desktop = await page.evaluate(measureInPage, { textSelector: TEXT_SEL, fontSelector: FONT_SEL });
+
+    if (!mobile.font.primary.includes('Plus Jakarta Sans') || !mobile.font.body.includes('Plus Jakarta Sans')) {
+      failures.push(`${route} does not expose the Plus Jakarta Sans font variable.`);
+    }
+    for (const mismatch of mobile.font.mismatches) {
+      failures.push(`${route} <${mismatch.tag}> resolves "${mismatch.text}" to ${mismatch.actualFont} instead of the global Plus Jakarta Sans font.`);
+    }
 
     for (const h of mobile.headings.filter((x) => x.px > HEADING_CEILING)) {
       failures.push(`${route} @375  <${h.tag}> ${h.px}px > ${HEADING_CEILING}px — "${h.text}"`);

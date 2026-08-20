@@ -42,7 +42,7 @@ const variantClasses: Record<ButtonVariant, string> = {
    its trailing spaces to a codemod and silently produced `py-3font-heading`.
    44px (min-h-11) is the accessibility floor and the standard control height;
    the label rides the --step-0 scale (14px mobile / 16px desktop) while padding
-   keeps the target. Buttons are UI text, so they take Figtree (`font-body`),
+   keeps the target. Buttons are UI text, so they take Plus Jakarta Sans (`font-body`),
    not the heading slab. `transition-all duration-200` and the -0.5 lift are the
    mandated micro-interaction; the global prefers-reduced-motion guard
    neutralises the movement. */

@@ -71,7 +71,7 @@ src/
 - **No raw hex in JSX**: all colors via CSS custom properties defined in `globals.css`
 
 ## Design System
-**"Electric Blue & Amber"** — vibrant electric blue as the primary brand colour, warm amber as the secondary accent, grounded on slate neutrals. **Roboto Slab** headings over **Figtree** body, on a responsive type scale with hard mobile ceilings. This superseded "Signal" (`#2563EB` + Lexend, 12px flat body), which superseded the "Cyanotype Blueprint" ink/brass/vellum identity, which superseded a soft-white/orange-Inter one — do not revert to any of them.
+**"Electric Blue & Amber"** — vibrant electric blue as the primary brand colour, warm amber as the secondary accent, grounded on slate neutrals. **Plus Jakarta Sans** across headings, body, controls, and numeric text, on a responsive type scale with hard mobile ceilings. This superseded "Signal" (`#2563EB` + Lexend, 12px flat body), which superseded the "Cyanotype Blueprint" ink/brass/vellum identity, which superseded a soft-white/orange-Inter one — do not revert to any of them.
 
 ```css
 /* Brand tokens — defined in src/app/globals.css @theme block */
@@ -95,7 +95,7 @@ src/
 
 The numbered palette (`electric-50…900`, `amber-50…700`, `canvas-dark/light/border`) is declared alongside these aliases, so `bg-electric-100` and `text-amber-700` are real utilities. Components should reach for the semantic alias first.
 
-**Fonts**: two faces, loaded via `next/font/google` in `layout.tsx`. **Roboto Slab** for headings (`--font-heading` / `--font-display`); **Figtree** for body and UI text (`--font-body` / `--font-sans`), including button and control labels. `--font-mono` resolves to Figtree and means tabular figures — there is no third face.
+**Fonts**: one face, loaded via `next/font/google` in `layout.tsx`. **Plus Jakarta Sans** supplies headings (`--font-heading` / `--font-display`), body and UI text (`--font-body` / `--font-sans`), buttons, controls, and numeric text. `--font-mono` resolves to the same face and means tabular figures — do not add another typeface.
 
 The ceilings below are enforced by `npm run audit:type`, which measures the rendered
 pages in a real browser rather than trusting the CSS — font sizes are inherited, so this

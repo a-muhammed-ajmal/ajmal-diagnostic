@@ -175,7 +175,7 @@ export default function ResultsPage() {
               variant="accent"
               onClick={() => track('calendly_click', { from: 'results' })}
             >
-              Discuss an Audit
+              Discuss a Business Clarity Audit
               <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </Button>
             <p className="mt-3 font-body text-xs text-muted-invert">With Muhammed Ajmal · Dubai, United Arab Emirates</p>

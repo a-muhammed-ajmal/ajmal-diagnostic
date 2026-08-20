@@ -1,6 +1,6 @@
 ---
 name: frontend-design
-description: Exposes design instructions for Electric Blue & Amber frontend rendering, utilizing Roboto Slab and Figtree typography with strict mobile font-size ceilings.
+description: Exposes design instructions for Electric Blue & Amber frontend rendering, utilizing Plus Jakarta Sans typography with strict mobile font-size ceilings.
 version: 2.0.0
 tags: [frontend, design-system, css, tailwind, typography]
 triggers:
@@ -14,7 +14,7 @@ triggers:
 
 # Frontend Design Skill
 
-This skill governs the visual design and layout of frontend web interfaces to prevent generic "AI slop" (such as Inter font paired with purple gradients and rounded cards). It establishes a distinct, professional identity using an **Electric Blue & Amber** color system, customized typography pairing (**Roboto Slab & Figtree**), and strict responsive typography constraints to optimize mobile viewports.
+This skill governs the visual design and layout of frontend web interfaces to prevent generic "AI slop" (such as Inter font paired with purple gradients and rounded cards). It establishes a distinct, professional identity using an **Electric Blue & Amber** color system, **Plus Jakarta Sans** typography, and strict responsive typography constraints to optimize mobile viewports.
 
 ## 1. Purpose
 
@@ -24,14 +24,12 @@ This skill activates automatically whenever the agent is tasked with creating, m
 
 Each user interface produced under this skill must adhere to the following four structural columns:
 
-### A. Typography & Font Pairing
+### A. Typography
 
 A professional interface utilizes typography to create contrast, personality, and immediate semantic structure.
 
-- **Headings & Display Text:** **Roboto Slab** (fallback to `Georgia` and `serif`).
-  - *Styling:* Semi-bold (`font-semibold`) to Bold (`font-bold`) weight with loose letter-spacing for large titles.
-- **Body & UI Text:** **Figtree** (fallback to standard system `sans-serif` fonts for interface elements).
-  - *Styling:* Light (`font-light`) or Regular (`font-normal`) weight, with a line-height of `1.5` to `1.625` (`leading-relaxed`) to ensure optimal readability.
+- **All Web Text:** **Plus Jakarta Sans** (fallback to standard system `sans-serif` fonts), including headings, display text, body copy, eyebrows, buttons, controls, and numeric text.
+  - *Styling:* Preserve the existing utility weight, tracking, and line-height choices for each role.
 
 ### B. Color System (Electric Blue & Amber Theme)
 
@@ -73,7 +71,7 @@ To prevent horizontal overflow, cluttered viewports, and poor readability on sma
 This repo is **Next.js 16 + Tailwind CSS v4**. Two consequences shape how the patterns below are realised, and getting either wrong fails silently:
 
 - **There is no `tailwind.config.js`.** Tailwind v4 reads its theme from `@theme {}` inside [globals.css](../../../src/app/globals.css). Adding a config file has no effect at all. Every `--color-*` key declared there generates the matching utility — `--color-electric-500` gives you `bg-electric-500`, `text-electric-500`, `border-electric-500`.
-- **Fonts load through `next/font/google` in [layout.tsx](../../../src/app/layout.tsx)**, never a `<link>` tag or a CSS `@import`. `next/font` self-hosts the files, eliminating the round-trip and the FOUT. It exposes each family as a CSS variable (`--font-figtree`, `--font-roboto-slab`) that the `@theme` block maps onto `--font-body` and `--font-heading`.
+- **Fonts load through `next/font/google` in [layout.tsx](../../../src/app/layout.tsx)**, never a `<link>` tag or a CSS `@import`. `next/font` self-hosts the files, eliminating the round-trip and the FOUT. It exposes Plus Jakarta Sans as `--font-plus-jakarta-sans`, which the `@theme` block maps onto every semantic font token.
 
 ### Theme Layout (`src/app/globals.css`)
 
@@ -81,11 +79,11 @@ This repo is **Next.js 16 + Tailwind CSS v4**. Two consequences shape how the pa
 @import "tailwindcss";
 
 @theme {
-  /* Fonts — supplied by next/font/google in layout.tsx */
-  --font-heading: var(--font-roboto-slab), Georgia, serif;
-  --font-display: var(--font-roboto-slab), Georgia, serif;
-  --font-body:    var(--font-figtree), ui-sans-serif, system-ui, sans-serif;
-  --font-sans:    var(--font-figtree), ui-sans-serif, system-ui, sans-serif;
+  /* Font — supplied by next/font/google in layout.tsx */
+  --font-heading: var(--font-plus-jakarta-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-plus-jakarta-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-body:    var(--font-plus-jakarta-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-sans:    var(--font-plus-jakarta-sans), ui-sans-serif, system-ui, sans-serif;
 
   /* Electric Blue scale */
   --color-electric-50:  #EFF6FF;
@@ -303,7 +301,7 @@ Avoid the following implementation traps:
 - ❌ **Static Rigidity:** Avoid delivering static interfaces devoid of active/hover interactions. All CTA triggers should feature micro-interactions.
 - ❌ **Raw hex in JSX:** Use token classes. Two exceptions, where CSS custom properties genuinely are not available at render time: `icon.tsx` / `apple-icon.tsx` / `opengraph-image.tsx` (rendered through Satori / `ImageResponse`) and the email templates in `src/lib/email/templates/` (rendered outside the app's CSS). Values there must still match the tokens.
 - ❌ **A `tailwind.config.js`:** Tailwind v4 ignores it entirely. Tokens go in `@theme {}`.
-- ❌ **A third typeface.** Roboto Slab and Figtree are the whole budget. `font-mono` means `tabular-nums`, not a family change.
+- ❌ **An additional typeface.** Plus Jakarta Sans is the whole web-font budget. `font-mono` means `tabular-nums`, not a family change.
 - ❌ **Muting text with opacity** (`text-ink/60`). Use `text-muted` (`#475569`, 7.6:1).
 
 ---
@@ -322,7 +320,7 @@ Voice: executive, analytical, practical — bold and distinctive, not generic. A
 
 Before pushing any frontend updates or declaring a UI layout complete, verify against this strict checklist:
 
-- [ ] **Font Ingestion:** Are Roboto Slab and Figtree loaded via `next/font/google` in `layout.tsx` — with no `<link>` tag and no CSS `@import` for either?
+- [ ] **Font Ingestion:** Is Plus Jakarta Sans loaded via `next/font/google` in `layout.tsx` — with no `<link>` tag or CSS `@import`?
 - [ ] **CSS Variable Pairing:** Are the typography structures mapped precisely to `var(--font-heading)` and `var(--font-body)`?
 - [ ] **Mobile Heading Check:** Verify by measurement that no H1, H2, H3, or H4 exceeds `24px` when screen width drops under `768px`.
 - [ ] **Mobile Body Check:** Validate that all paragraph copy resolves to `14px` or less on mobile viewports.
