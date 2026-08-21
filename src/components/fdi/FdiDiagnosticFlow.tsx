@@ -158,7 +158,7 @@ export function FdiDiagnosticFlow() {
         throw new Error(data.error ?? 'Unable to complete the diagnostic.');
       }
       sessionStorage.setItem('fdiFounderReport', JSON.stringify(data.report));
-      router.push('/results/fdi');
+      router.push('/results');
     } catch (cause) {
       setError(cause instanceof Error ? cause.message : 'Unable to complete the diagnostic.');
       setStage('contact');

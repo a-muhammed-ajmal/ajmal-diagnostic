@@ -11,4 +11,9 @@ describe('FDI-1.1 intro requirements', () => {
     expect(source).toContain('href="/privacy"');
     expect(source).toContain("value.sector !== 'other' || Boolean(value.sectorOther)");
   });
+
+  it('takes a completed check directly to the canonical result route', () => {
+    expect(source).toContain("router.push('/results')");
+    expect(source).not.toContain("router.push('/results/fdi')");
+  });
 });

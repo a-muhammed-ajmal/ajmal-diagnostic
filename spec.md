@@ -8,6 +8,7 @@ Muhammed Ajmal Consulting is a B2B consulting website for founder-led UAE SMEs. 
 
 - `/diagnostic` is the canonical Founder Dependency Index (FDI) Business Health Check. New sessions use the PDF-aligned `FDI-1.1`, `FDI-QS-1.1`, and `FDI-QF-2.1` versions (12 questions across decision speed, execution consistency, and operational visibility); historic `FDI-1.0` sessions retain their stamped instrument and qualification versions.
 - Completing the FDI captures contact details, stores the result, delivers a report email, and shows the personalised result at `/results`. `/diagnostic/fdi` and `/results/fdi` permanently redirect to these canonical routes.
+- The completed browser flow navigates directly to `/results`; redirect aliases are retained only for historic inbound links. The public homepage must not publish score-like meters or unsupported FDI band names and ranges.
 - The FDI result uses the approved “Discuss a Business Clarity Audit” CTA as a direct Calendly booking link. A completed check must not return a founder to `/contact` or restart the check.
 - The FDI report email uses the same approved CTA label and direct Calendly destination. When `NEXT_PUBLIC_WHATSAPP_NUMBER` is configured with the business E.164 number, it offers a secondary WhatsApp message link with an Audit enquiry prefilled.
 - `/contact` provides both an enquiry form and a Calendly booking control. Booking opens Calendly; it does not create a booking within the website.

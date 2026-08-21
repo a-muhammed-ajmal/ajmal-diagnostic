@@ -65,37 +65,3 @@ export function ArchitectureLadder() {
     </ol>
   );
 }
-
-/* The three severity bands are the product's own defined ranges — the same
-   ones the emailed report prints. Nothing here is an invented figure. */
-const INDEX_BANDS = [
-  { label: "Critical", range: "0–39", bar: "bg-danger", tint: "bg-danger-soft", text: "text-danger" },
-  { label: "Developing", range: "40–69", bar: "bg-accent", tint: "bg-accent-soft", text: "text-accent-ink" },
-  { label: "Progressing", range: "70–100", bar: "bg-success", tint: "bg-success-soft", text: "text-success" },
-];
-
-export function IndexBandMeter() {
-  return (
-    <div className="mx-auto max-w-md rounded-2xl border border-line bg-white p-5 text-left shadow-1">
-      <p className="font-heading text-xs font-bold uppercase tracking-[0.15em] text-brand-ink">
-        Founder Dependency Index
-      </p>
-      <div className="mt-4 flex gap-1.5" aria-hidden="true">
-        {INDEX_BANDS.map((band) => (
-          <span key={band.label} className={`h-2 flex-1 rounded-full ${band.bar}`} />
-        ))}
-      </div>
-      <dl className="mt-4 grid grid-cols-3 gap-2">
-        {INDEX_BANDS.map((band) => (
-          <div key={band.label} className={`rounded-lg px-2 py-2 text-center ${band.tint}`}>
-            <dt className={`font-heading text-xs font-bold ${band.text}`}>{band.label}</dt>
-            <dd className="mt-0.5 font-mono text-xs text-muted">{band.range}</dd>
-          </div>
-        ))}
-      </dl>
-      <p className="mt-4 font-body text-xs leading-relaxed text-muted">
-        Your result lands in one of three bands across decision speed, execution consistency, and operational visibility.
-      </p>
-    </div>
-  );
-}

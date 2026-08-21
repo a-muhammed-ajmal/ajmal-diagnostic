@@ -21,6 +21,13 @@ describe('canonical Business Health Check routes', () => {
     expect(resultsAlias).toContain("permanentRedirect('/results')");
   });
 
+  it('keeps the aliases as noindex redirects rather than public destinations', () => {
+    expect(source('src', 'app', 'diagnostic', 'fdi', 'layout.tsx')).toContain("path: '/diagnostic/fdi'");
+    expect(source('src', 'app', 'diagnostic', 'fdi', 'layout.tsx')).toContain('index: false');
+    expect(source('src', 'app', 'results', 'fdi', 'layout.tsx')).toContain("path: '/results/fdi'");
+    expect(source('src', 'app', 'results', 'fdi', 'layout.tsx')).toContain('index: false');
+  });
+
   it('does not retain a public feature-flag fallback or legacy public submit route', () => {
     for (const path of [
       ['src', 'app', 'diagnostic', 'page.tsx'],

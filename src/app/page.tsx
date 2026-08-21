@@ -5,7 +5,7 @@ import {
   FounderSystemVisual,
   FounderTrapDiagram,
 } from "@/components/home/SystemVisuals";
-import { ArchitectureLadder, GrowthFormulaRail, IndexBandMeter } from "@/components/home/Graphics";
+import { ArchitectureLadder, GrowthFormulaRail } from "@/components/home/Graphics";
 import { Button } from "@/components/ui/Button";
 import { PageHero } from "@/components/ui/PageHero";
 import { Section } from "@/components/ui/Section";
@@ -194,9 +194,6 @@ export default function HomePage() {
                 <ArrowRight className="h-4 w-4" aria-hidden="true" />
               </Button>
             </div>
-          </div>
-          <div className="lg:col-span-5">
-            <IndexBandMeter />
           </div>
         </div>
       </Section>

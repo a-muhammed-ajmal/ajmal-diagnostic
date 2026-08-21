@@ -75,7 +75,7 @@ export function Navigation() {
         </div>
 
         <div className="flex items-center gap-3">
-          {!isResults && <Button href="/diagnostic" className="hidden px-4 py-2 sm:inline-flex">Start the Check</Button>}
+          {!isResults && <Button href="/diagnostic" className="hidden px-4 py-2 sm:inline-flex">Start the Business Health Check →</Button>}
           <button type="button" onClick={() => setMobileOpen((open) => !open)} className="tap-target inline-flex items-center justify-center text-ink transition-colors hover:text-brand-ink lg:hidden" aria-label="Toggle menu" aria-expanded={mobileOpen}>
             {mobileOpen ? <X size={22} /> : <Menu size={22} />}
           </button>
