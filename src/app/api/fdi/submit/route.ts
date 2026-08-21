@@ -2,7 +2,6 @@ import { NextRequest, NextResponse } from 'next/server';
 import { Resend } from 'resend';
 import { FdiReportEmail } from '@/lib/email/templates/FdiReport';
 import { CALENDLY_LINK, WHATSAPP_AUDIT_LINK } from '@/lib/env';
-import { isFdiEnabled } from '@/lib/featureFlags';
 import { completeFdiSession, FdiInputError, FdiSessionConflictError } from '@/lib/fdi-server/persistence';
 import { toFounderFdiReport } from '@/lib/fdi/public-report';
 import { hasValidFdiSessionToken } from '@/lib/fdi-server/session-token';
@@ -18,8 +17,6 @@ export const maxDuration = 30;
 const RESEND_CONFIG = requireResendConfig();
 
 export async function POST(request: NextRequest) {
-  if (!isFdiEnabled()) return new NextResponse(null, { status: 404 });
-
   try {
     const body = fdiSubmitSchema.parse(await request.json());
     if (!hasValidFdiSessionToken(body.sessionId, body.sessionToken)) {

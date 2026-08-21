@@ -4,8 +4,8 @@ import { createAdminClient } from "@/lib/supabase/server";
 /**
  * Rate limiting for the public API routes.
  *
- * Every POST to /api/submit costs one Anthropic call plus one Resend send, so an
- * unbounded endpoint is a direct bill. The counter lives in the Supabase `rate_limits`
+ * Every public report submission can trigger a Resend send, so an unbounded endpoint is
+ * a direct bill. The counter lives in the Supabase `rate_limits`
  * table (see supabase/migrations) rather than in process memory: Vercel functions are
  * per-instance and cold-start frequently, so an in-memory Map would reset constantly and
  * would not span instances.

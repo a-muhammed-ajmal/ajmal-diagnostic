@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getAdminAuthContext } from '@/lib/adminAuth';
-import { isFdiEnabled } from '@/lib/featureFlags';
 import { startFdiSession } from '@/lib/fdi-server/persistence';
 import { issueFdiSessionToken } from '@/lib/fdi-server/session-token';
 import { fdiStartSchema } from '@/lib/fdi-server/validation';
@@ -10,8 +9,6 @@ import { z } from 'zod';
 export const dynamic = 'force-dynamic';
 
 export async function POST(request: NextRequest) {
-  if (!isFdiEnabled()) return new NextResponse(null, { status: 404 });
-
   try {
     const body = fdiStartSchema.parse(await request.json());
     const limited = await enforcePublicFormLimits(request, 'fdi-start');

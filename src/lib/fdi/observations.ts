@@ -1,5 +1,5 @@
 /**
- * Deterministic founder-facing findings approved for FDI-1.0 Phase 3.
+ * Deterministic founder-facing findings approved for the FDI-1.1 Business Health Check.
  *
  * Every scored question contributes one candidate. These findings describe only
  * reported behaviour. They never determine a root cause, binding constraint,

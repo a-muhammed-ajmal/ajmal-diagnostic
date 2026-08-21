@@ -210,6 +210,10 @@ describe('FDI-1.0 question set', () => {
 });
 
 describe('FDI-1.1 approved Business Health Check wording', () => {
+  // FDI-1.1 is the active instrument. Its approved wording must be just as
+  // immutable as FDI-1.0; any future change requires a newly registered version.
+  const CONFIG_DIGEST = '4438c56db3a1d1049f4617131703d6a18050daf61ac1206488eb4343a810d577';
+  const QUESTIONS_DIGEST = '1e8a7a56697a0e02a0a7eab807da73bdcf4934cc4edf7ea107f24473bca474af';
   const expectedCopy = {
     DS1: ['When an important decision needs to be made, and you are not available, what usually happens?', 'The responsible person makes the decision', 'Most decisions continue, but some wait for me', 'Many important decisions wait until I am available', 'Important decisions usually stop until I decide'],
     DS2: ['How much can your team decide without asking for your approval?', 'The team handles regular decisions without me', 'Most regular decisions are handled without me', 'The team handles smaller decisions, but many still need my approval', 'I approve most important decisions'],
@@ -233,6 +237,11 @@ describe('FDI-1.1 approved Business Health Check wording', () => {
     expect(validateVersion(FDI_1_1_CONFIG, FDI_1_1_QUESTIONS)).toEqual([]);
     expect(Object.isFrozen(FDI_1_1_CONFIG)).toBe(true);
     expect(Object.isFrozen(FDI_1_1_QUESTIONS.questions)).toBe(true);
+  });
+
+  it('cannot be changed without registering a new version', () => {
+    expect(digest(FDI_1_1_CONFIG)).toBe(CONFIG_DIGEST);
+    expect(digest(FDI_1_1_QUESTIONS)).toBe(QUESTIONS_DIGEST);
   });
 
   it('contains the PDF-approved wording and ordered response scale exactly', () => {

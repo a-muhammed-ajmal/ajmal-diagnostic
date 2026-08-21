@@ -24,7 +24,7 @@ export const metadata = pageMetadata({
   path: '/privacy',
 });
 
-const LAST_UPDATED = '23 July 2026';
+const LAST_UPDATED = '21 August 2026';
 const PRIVACY_EMAIL = 'privacy@muhammedajmal.com';
 
 const dataCollected: { item: string; detail: string }[] = [
@@ -33,12 +33,11 @@ const dataCollected: { item: string; detail: string }[] = [
   { item: 'Mobile number', detail: 'To follow up on your enquiry or diagnostic result.' },
   { item: 'Company name', detail: 'To contextualise your diagnostic and any conversation that follows.' },
   { item: 'Business details', detail: 'Optional. Sector, number of employees, revenue band (a range, not an exact figure), and how long the business has operated. Skipping them does not affect your result.' },
-  { item: 'Diagnostic answers', detail: 'Your responses to the diagnostic questions, used to calculate your scores.' },
+  { item: 'Business Health Check answers', detail: 'Your responses to the 12 self-report questions, used only to calculate your Founder Dependency Index and deterministic findings.' },
 ];
 
 const processors: { name: string; role: string; location: string }[] = [
   { name: 'Supabase', role: 'Database hosting — stores your submissions.', location: 'Servers outside the UAE' },
-  { name: 'Anthropic', role: 'AI processing — generates your personalized reflection plan.', location: 'Servers outside the UAE' },
   { name: 'Resend', role: 'Email delivery — sends your report and our replies.', location: 'Servers outside the UAE' },
   { name: 'Vercel', role: 'Website hosting and infrastructure.', location: 'Servers outside the UAE' },
   { name: 'Calendly', role: 'Consultation scheduling, if you choose to book a call.', location: 'Servers outside the UAE' },
@@ -51,7 +50,6 @@ const rights: string[] = [
   'Request erasure of your data.',
   'Restrict or stop the processing of your data.',
   'Request your data in a structured, portable format.',
-  'Object to automated processing, including the AI generation of your report.',
   'Withdraw consent at any time, without affecting processing already carried out.',
 ];
 
@@ -113,15 +111,6 @@ export default function PrivacyPage() {
             </p>
           </Section>
 
-          <Section heading="AI processing">
-            <p>
-              Your diagnostic report is generated with the help of artificial intelligence. Your scores and
-              the business context you provide are sent to Anthropic&apos;s Claude model to produce a
-              personalized reflection plan. This is automated processing. You have the right to object to it —
-              if you would prefer a report prepared without AI, contact us and we will arrange it.
-            </p>
-          </Section>
-
           <Section heading="Third parties who process your data">
             <p>We rely on a small number of trusted service providers to run this service:</p>
             <div className="space-y-2">
@@ -167,8 +156,7 @@ export default function PrivacyPage() {
 
           <Section heading="How to exercise your rights">
             <p>
-              To exercise any of these rights — including access, correction, deletion, or objecting to AI
-              processing — email us at{' '}
+              To exercise any of these rights — including access, correction, or deletion — email us at{' '}
               <a href={`mailto:${PRIVACY_EMAIL}`} className="text-brand-ink underline hover:text-brand-ink transition-colors">
                 {PRIVACY_EMAIL}
               </a>{' '}

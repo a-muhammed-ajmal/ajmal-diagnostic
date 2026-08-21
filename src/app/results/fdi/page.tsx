@@ -1,8 +1,6 @@
-import { notFound } from 'next/navigation';
-import { FdiResults } from '@/components/fdi/FdiResults';
-import { isFdiEnabled } from '@/lib/featureFlags';
+import { permanentRedirect } from 'next/navigation';
 
-export default function FdiResultsPage() {
-  if (!isFdiEnabled()) notFound();
-  return <FdiResults />;
+/** Historic FDI alias; the browser-private result lives at /results. */
+export default function FdiResultsAliasPage() {
+  permanentRedirect('/results');
 }

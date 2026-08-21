@@ -1,8 +1,6 @@
-import { notFound } from 'next/navigation';
-import { FdiDiagnosticFlow } from '@/components/fdi/FdiDiagnosticFlow';
-import { isFdiEnabled } from '@/lib/featureFlags';
+import { permanentRedirect } from 'next/navigation';
 
-export default function FdiDiagnosticPage() {
-  if (!isFdiEnabled()) notFound();
-  return <FdiDiagnosticFlow />;
+/** Historic FDI alias; the public Business Health Check lives at /diagnostic. */
+export default function FdiDiagnosticAliasPage() {
+  permanentRedirect('/diagnostic');
 }

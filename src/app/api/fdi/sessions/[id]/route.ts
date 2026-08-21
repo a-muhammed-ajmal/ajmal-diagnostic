@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { isFdiEnabled } from '@/lib/featureFlags';
 import { FdiInputError, FdiSessionConflictError, persistFdiProgress } from '@/lib/fdi-server/persistence';
 import { hasValidFdiSessionToken } from '@/lib/fdi-server/session-token';
 import { fdiPatchSchema } from '@/lib/fdi-server/validation';
@@ -8,8 +7,6 @@ import { z } from 'zod';
 export const dynamic = 'force-dynamic';
 
 export async function PATCH(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
-  if (!isFdiEnabled()) return new NextResponse(null, { status: 404 });
-
   try {
     const { id } = await params;
     const body = fdiPatchSchema.parse(await request.json());

@@ -88,7 +88,7 @@ export function evaluateQualification(
 
   // Nothing was shared, so there is nothing to classify against. This is a
   // normal outcome, not a failure: the founder still receives the full result.
-  if (missingReasons.length === 4) return freezeOutcome(version, 'not_assessed', ['business_details_not_provided']);
+  if (missingReasons.length === 4) return freezeOutcome(version, 'not_assessed', missingReasons);
 
   if (outsideProfileReasons.length > 0) {
     return freezeOutcome(version, 'outside_target_profile', [...outsideProfileReasons, ...missingReasons]);

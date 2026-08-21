@@ -118,9 +118,8 @@ export function FdiResults() {
           </ul>
         </section>
 
-        {/* FDI-1.0 records its frozen audit label and internal next-step metadata. The
-            public conversion action intentionally uses the validated booking URL so
-            completing the Check never loops a qualified founder back to the start. */}
+        {/* The public conversion action uses the validated booking URL so completing
+            the Check never loops a founder back to the start. */}
         <section className="relative overflow-hidden rounded-2xl bg-canvas-dark p-6 md:p-8">
           <div className="pointer-events-none absolute inset-0" aria-hidden="true">
             <div className="orb orb-amber absolute -right-16 -top-24 h-64 w-64 opacity-25" />

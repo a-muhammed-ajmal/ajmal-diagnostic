@@ -42,7 +42,12 @@ describe('FDI qualification', () => {
     expect(evaluateQualification({})).toMatchObject({
       result: 'not_assessed',
       version: 'FDI-QF-2.0',
-      reasons: ['business_details_not_provided'],
+      reasons: [
+        'revenue_not_provided',
+        'team_size_not_provided',
+        'operating_age_not_provided',
+        'sector_not_provided',
+      ],
     });
     expect(evaluateQualification({ sectorOther: '' })).toMatchObject({ result: 'not_assessed' });
   });

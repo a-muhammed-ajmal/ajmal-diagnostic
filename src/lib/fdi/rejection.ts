@@ -2,7 +2,7 @@
  * Transport mapping for §12 reject conditions.
  *
  * Every reject condition is a BAD REQUEST, not a server fault. This matters:
- * the legacy /api/submit route calls `schema.parse()` inside one catch-all and
+ * an earlier public diagnostic route called `schema.parse()` inside one catch-all and
  * returns 500 for a malformed body, so a validation failure is indistinguishable
  * from an outage in logs and shows the user "Something went wrong. Please try
  * again." for an input they could fix. The FDI route must not repeat that.

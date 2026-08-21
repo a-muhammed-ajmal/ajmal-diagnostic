@@ -41,8 +41,8 @@ export function proxy(req: NextRequest) {
     } else if (req.method !== 'GET' && req.method !== 'HEAD') {
       // A state-changing request with no Origin header is not a browser form submission —
       // it is a script. Browsers always send Origin on cross-origin and same-origin POSTs.
-      // Previously these were waved through, which let a plain curl reach the paid
-      // Anthropic and Resend calls behind /api/submit.
+      // Previously these were waved through, which let a plain curl reach the
+      // Resend delivery path behind the public diagnostic API.
       return NextResponse.json(
         { success: false, error: 'Forbidden: Missing Origin' },
         { status: 403 }
