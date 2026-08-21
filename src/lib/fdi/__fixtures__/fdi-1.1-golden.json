@@ -1,0 +1,49 @@
+{
+  "diagnosticVersion": "FDI-1.1",
+  "cases": [
+    {
+      "label": "lowest",
+      "targets": { "DS": 0, "EC": 0, "OV": 0 },
+      "expected": {
+        "fdi": { "unrounded": 0, "display": 0 },
+        "bandKey": "low",
+        "componentRaws": [0, 0, 0],
+        "alertKeys": [],
+        "concentrationKeys": ["DS", "EC", "OV"]
+      }
+    },
+    {
+      "label": "moderate boundary with a severe component",
+      "targets": { "DS": 9, "EC": 0, "OV": 0 },
+      "expected": {
+        "fdi": { "unrounded": 25, "display": 25 },
+        "bandKey": "moderate",
+        "componentRaws": [9, 0, 0],
+        "alertKeys": ["DS"],
+        "concentrationKeys": ["DS"]
+      }
+    },
+    {
+      "label": "high evenly distributed",
+      "targets": { "DS": 6, "EC": 6, "OV": 6 },
+      "expected": {
+        "fdi": { "unrounded": 50, "display": 50 },
+        "bandKey": "high",
+        "componentRaws": [6, 6, 6],
+        "alertKeys": [],
+        "concentrationKeys": ["DS", "EC", "OV"]
+      }
+    },
+    {
+      "label": "highest",
+      "targets": { "DS": 12, "EC": 12, "OV": 12 },
+      "expected": {
+        "fdi": { "unrounded": 100, "display": 100 },
+        "bandKey": "very_high",
+        "componentRaws": [12, 12, 12],
+        "alertKeys": ["DS", "EC", "OV"],
+        "concentrationKeys": ["DS", "EC", "OV"]
+      }
+    }
+  ]
+}

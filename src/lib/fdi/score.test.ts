@@ -323,7 +323,8 @@ describe('Test 12 — diagnostic version mismatch', () => {
   });
 
   it('never falls back to the current version for an unknown one', () => {
-    expect(resolveVersion('FDI-1.1')).toBeUndefined();
+    expect(resolveVersion('FDI-1.2')).toBeUndefined();
+    expect(resolveVersion('FDI-1.1')).toBeDefined();
     expect(resolveVersion('FDI-1.0')).toBeDefined();
   });
 

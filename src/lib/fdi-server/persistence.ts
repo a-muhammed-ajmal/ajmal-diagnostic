@@ -1,16 +1,20 @@
 import { createAdminClient } from '@/lib/supabase/server';
-import { FDI_1_0_CONFIG, FDI_1_0_QUESTIONS } from '@/lib/fdi/config';
+import { CURRENT_FDI_VERSION, resolveVersion, type ResolvedVersion } from '@/lib/fdi/config';
 import { buildReport } from '@/lib/fdi/report';
 import { evaluateQualification } from '@/lib/fdi/qualification';
 import { scoreFdi } from '@/lib/fdi/score';
-import type { FdiReport, Question } from '@/lib/fdi/types';
+import type { FdiReport } from '@/lib/fdi/types';
 import { businessDetailColumns, businessDetailsFromColumns, mergeBusinessDetails, type BusinessDetailRow } from './business-details';
-import type { FdiBusinessDetails, FdiContact } from './validation';
+import { parseFdiBusinessDetailsForVersion, type FdiBusinessDetails, type FdiContact } from './validation';
 
 type PersistedSession = BusinessDetailRow & {
   id: string;
   status: 'in_progress' | 'completed';
   is_test: boolean;
+  diagnostic_version: string;
+  question_set_version: string;
+  scoring_model_version: string;
+  band_config_version: string;
 };
 
 type PersistedAnswer = {
@@ -22,10 +26,31 @@ type PersistedAnswer = {
 export class FdiInputError extends Error {}
 export class FdiSessionConflictError extends Error {}
 
-const questionsById = new Map<string, Question>(FDI_1_0_QUESTIONS.questions.map((question) => [question.id, question]));
+/**
+ * Resolves the exact instrument recorded on a session. This is intentionally
+ * exported for regression tests: completion must never fall back to the
+ * current instrument when a founder began an earlier version.
+ */
+export function resolveFdiSessionVersion(session: Pick<
+  PersistedSession,
+  'diagnostic_version' | 'question_set_version' | 'scoring_model_version' | 'band_config_version'
+>): ResolvedVersion {
+  const resolved = resolveVersion(session.diagnostic_version);
+  if (!resolved) throw new FdiInputError(`Unknown FDI diagnostic version: ${session.diagnostic_version}`);
 
-function resolveAnswer(questionId: string, optionId: string) {
-  const question = questionsById.get(questionId);
+  const { config } = resolved;
+  if (
+    session.question_set_version !== config.questionSetVersion
+    || session.scoring_model_version !== config.scoringModelVersion
+    || session.band_config_version !== config.bandConfigVersion
+  ) {
+    throw new FdiInputError(`FDI session ${session.diagnostic_version} has inconsistent version stamps.`);
+  }
+  return resolved;
+}
+
+function resolveAnswer(questionSet: ResolvedVersion['questionSet'], questionId: string, optionId: string) {
+  const question = questionSet.questions.find((candidate) => candidate.id === questionId);
   if (!question) throw new FdiInputError(`Unknown FDI question: ${questionId}`);
   const option = question.options.find((candidate) => candidate.id === optionId);
   if (!option) throw new FdiInputError(`Invalid option for ${questionId}`);
@@ -34,15 +59,16 @@ function resolveAnswer(questionId: string, optionId: string) {
 
 export async function startFdiSession(isTest: boolean): Promise<{ id: string }> {
   const supabase = createAdminClient();
+  const { config } = CURRENT_FDI_VERSION;
   const { data, error } = await supabase
     .from('fdi_sessions')
     .insert({
       status: 'in_progress',
-      instrument: FDI_1_0_CONFIG.instrument,
-      diagnostic_version: FDI_1_0_CONFIG.diagnosticVersion,
-      question_set_version: FDI_1_0_CONFIG.questionSetVersion,
-      scoring_model_version: FDI_1_0_CONFIG.scoringModelVersion,
-      band_config_version: FDI_1_0_CONFIG.bandConfigVersion,
+      instrument: config.instrument,
+      diagnostic_version: config.diagnosticVersion,
+      question_set_version: config.questionSetVersion,
+      scoring_model_version: config.scoringModelVersion,
+      band_config_version: config.bandConfigVersion,
       is_test: isTest,
     })
     .select('id')
@@ -59,15 +85,21 @@ export async function persistFdiProgress(
   const supabase = createAdminClient();
   const { data: session, error: sessionError } = await supabase
     .from('fdi_sessions')
-    .select('id,status')
+    .select('id,status,diagnostic_version,question_set_version,scoring_model_version,band_config_version')
     .eq('id', sessionId)
     .single();
   if (sessionError || !session) throw new FdiInputError('FDI session was not found.');
-  if (session.status !== 'in_progress') throw new FdiSessionConflictError('This FDI session is already complete.');
+  const persisted = session as Pick<PersistedSession, 'id' | 'status' | 'diagnostic_version' | 'question_set_version' | 'scoring_model_version' | 'band_config_version'>;
+  if (persisted.status !== 'in_progress') throw new FdiSessionConflictError('This FDI session is already complete.');
+  const version = resolveFdiSessionVersion(persisted);
 
   if (update.answers) {
-    const resolved = Object.entries(update.answers).map(([questionId, optionId]) => ({ questionId, optionId, ...resolveAnswer(questionId, optionId) }));
-    const questionIds = resolved.map((answer) => answer.questionId);
+    const resolvedAnswers = Object.entries(update.answers).map(([questionId, optionId]) => ({
+      questionId,
+      optionId,
+      ...resolveAnswer(version.questionSet, questionId, optionId),
+    }));
+    const questionIds = resolvedAnswers.map((answer) => answer.questionId);
     const { data: existingRows, error: existingError } = await supabase
       .from('fdi_answers')
       .select('question_id,option_id,change_count')
@@ -76,7 +108,7 @@ export async function persistFdiProgress(
     if (existingError) throw existingError;
     const existing = new Map((existingRows ?? []).map((row) => [row.question_id, row as PersistedAnswer]));
     const now = new Date().toISOString();
-    const rows = resolved
+    const rows = resolvedAnswers
       .filter(({ questionId, optionId }) => existing.get(questionId)?.option_id !== optionId)
       .map(({ question, option, questionId }) => ({
         session_id: sessionId,
@@ -135,6 +167,7 @@ export async function completeFdiSession(
   if (sessionError || !sessionData) throw new FdiInputError('FDI session was not found.');
   const session = sessionData as PersistedSession & { completion_ms: number | null };
   if (session.status !== 'in_progress') throw new FdiSessionConflictError('This FDI session is already complete.');
+  const version = resolveFdiSessionVersion(session);
 
   const { data: answerRows, error: answerError } = await supabase
     .from('fdi_answers')
@@ -143,18 +176,21 @@ export async function completeFdiSession(
   if (answerError) throw answerError;
   const answers = Object.fromEntries((answerRows ?? []).map((row) => [row.question_id, row.option_id]));
   const scored = scoreFdi(
-    { diagnosticVersion: FDI_1_0_CONFIG.diagnosticVersion, answers },
-    FDI_1_0_CONFIG,
-    FDI_1_0_QUESTIONS,
+    { diagnosticVersion: version.config.diagnosticVersion, answers },
+    version.config,
+    version.questionSet,
   );
   if (!scored.ok) throw new FdiInputError('All twelve FDI answers are required before completion.');
 
   // Business details are optional: whatever is missing stays missing, and the
   // qualification outcome absorbs that rather than blocking completion.
-  const details = mergeBusinessDetails(businessDetailsFromColumns(session), businessDetails);
-  const qualification = evaluateQualification(details);
+  const submittedDetails = businessDetails === undefined
+    ? undefined
+    : parseFdiBusinessDetailsForVersion(businessDetails, version.config.diagnosticVersion);
+  const details = mergeBusinessDetails(businessDetailsFromColumns(session), submittedDetails);
+  const qualification = evaluateQualification(details, version.qualificationConfigVersion);
   const completedAt = new Date().toISOString();
-  const report = buildReport(scored.result, FDI_1_0_CONFIG, {
+  const report = buildReport(scored.result, version.config, {
     sessionId,
     completedAt,
     qualification,

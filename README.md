@@ -1,8 +1,8 @@
 # Muhammed Ajmal Consulting
 
-A B2B consulting website and business diagnostic tool. It generates leads via an
-interactive quiz, emails a personalized (AI-assisted) diagnostic report, and manages
-prospects through a protected admin dashboard.
+A B2B consulting website and business diagnostic tool. It includes a legacy
+AI-assisted diagnostic and the deterministic Business Health Check / Founder
+Dependency Index flow, then manages prospects through a protected admin dashboard.
 
 ## Stack
 
@@ -10,7 +10,7 @@ prospects through a protected admin dashboard.
 - **Tailwind CSS v4** — tokens live in `src/app/globals.css` (`@theme`), no `tailwind.config.js`
 - **Design system** — "Electric Blue & Amber": electric blue `#0052FF` on white, amber `#FFBF00` fill-only accent, slate neutrals, Plus Jakarta Sans across headings and UI, responsive scale with hard mobile ceilings (h1 ≤ 24px, body ≤ 14px below 768px)
 - **Supabase** (`@supabase/supabase-js`) — Postgres + cookie-based admin auth
-- **Anthropic** (`@anthropic-ai/sdk`) — generates the action plan
+- **Anthropic** (`@anthropic-ai/sdk`) — legacy diagnostic action plan only; never used by FDI
 - **Resend** + `@react-email/components` — transactional email
 - **react-hook-form** + **zod** — forms and validation
 - **Vercel Analytics** — funnel tracking
@@ -36,12 +36,13 @@ shipping. Set that variable both locally and in the Vercel project environment.
 
 ## Founder Dependency Index
 
-The Founder Dependency Index is the public Free Diagnostic when
-`NEXT_PUBLIC_FDI_ENABLED=true` is set at build time (it remains `false` by default).
-The legacy ten-question diagnostic stays available only as a compatibility path while
-the flag is disabled. `/diagnostic/fdi` and `/results/fdi` remain noindex aliases for
-private result handling. The consultant workspace is at `/admin/fdi`; test records are
-created only by an authenticated admin using its explicit Test Mode link.
+With `NEXT_PUBLIC_FDI_ENABLED=true`, `/diagnostic` serves the public Business Health
+Check and returns the deterministic Founder Dependency Index. New sessions use
+`FDI-1.1`; FDI-1.0 remains resolvable for historic records and is never silently
+rescored. The legacy ten-question diagnostic stays active only while the flag is
+disabled. `/diagnostic/fdi` and `/results/fdi` remain noindex aliases for private
+handling. The consultant workspace is at `/admin/fdi`; test records are created only
+by an authenticated admin using its explicit Test Mode link.
 
 ## Scripts
 
@@ -59,7 +60,7 @@ created only by an authenticated admin using its explicit Test Mode link.
 
 | Metric | Value |
 |---|---|
-| Tests | 304 passing (23 suites), 58.52% statement coverage |
+| Tests | 323 passing (26 suites), 60.16% statement coverage |
 | DB tables | 8 (RLS on all) |
 | Migrations | 5 (`20260723000001`–`20260815000003`) |
 | Routes | App Router (see `AGENTS.md` for the full page list) |

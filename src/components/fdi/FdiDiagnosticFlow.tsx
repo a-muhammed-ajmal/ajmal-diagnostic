@@ -4,7 +4,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { useForm, useWatch } from 'react-hook-form';
-import { FDI_1_0_QUESTIONS } from '@/lib/fdi/config';
+import { CURRENT_FDI_QUESTION_SET } from '@/lib/fdi/config';
 import type { FounderFdiReport } from '@/lib/fdi/public-report';
 import { fdiBusinessDetailsSchema, fdiContactSchema } from '@/lib/fdi-server/validation';
 import { cn } from '@/lib/utils';
@@ -13,7 +13,10 @@ import type { z } from 'zod';
 type Stage = 'intro' | 'questions' | 'contact' | 'submitting';
 
 /** Contact is required; the business details below it never block the result. */
-const finalStepSchema = fdiContactSchema.extend(fdiBusinessDetailsSchema.shape);
+const finalStepSchema = fdiContactSchema.extend(fdiBusinessDetailsSchema.shape).refine(
+  (value) => value.sector !== 'other' || Boolean(value.sectorOther),
+  { path: ['sectorOther'], message: 'Please describe your sector' },
+);
 /** Fields hold what a native select can produce ('' when untouched); the resolver hands us the cleaned values. */
 type FinalStepFields = z.input<typeof finalStepSchema>;
 type FinalStepValues = z.output<typeof finalStepSchema>;
@@ -25,10 +28,7 @@ const SECTOR_OPTIONS: readonly (readonly [string, string])[] = [
   ['professional_services', 'Professional Services'],
   ['retail_ecommerce', 'Retail & E-commerce'],
   ['hospitality_fnb', 'Hospitality & F&B'],
-  ['healthcare', 'Healthcare'],
   ['manufacturing', 'Manufacturing'],
-  ['technology', 'Technology'],
-  ['education', 'Education'],
   ['other', 'Other'],
 ];
 
@@ -82,7 +82,7 @@ export function FdiDiagnosticFlow() {
   const [error, setError] = useState<string | null>(null);
   const [startedAt, setStartedAt] = useState<number | null>(null);
   const [detailsOpen, setDetailsOpen] = useState(false);
-  const question = FDI_1_0_QUESTIONS.questions[currentQuestion];
+  const question = CURRENT_FDI_QUESTION_SET.questions[currentQuestion];
 
   const finalForm = useForm<FinalStepFields, unknown, FinalStepValues>({
     resolver: zodResolver(finalStepSchema),
@@ -180,6 +180,9 @@ export function FdiDiagnosticFlow() {
             How much does your business still depend on you?
           </h1>
           <p className="font-body text-[length:var(--step-0)] text-muted max-w-2xl mx-auto mt-3 leading-relaxed">
+            A free check of how much day-to-day operations still rely on you.
+          </p>
+          <p className="font-body text-[length:var(--step-0)] text-muted max-w-2xl mx-auto mt-2 leading-relaxed">
             Answer 12 questions about decision-making, execution, and operational visibility. You will receive your Founder Dependency Index and a clear next step.
           </p>
           {/* One bordered list on a phone, three cards from sm up — keeps this section inside a single mobile view. */}
@@ -200,7 +203,10 @@ export function FdiDiagnosticFlow() {
             {isWorking ? 'Starting…' : 'Start the Business Health Check →'}
           </button>
           <p className="font-body text-xs text-muted mt-3 max-w-xl mx-auto leading-snug">
-            Free. Private. A focused founder-dependency self-report, not a full financial, tax, legal, or business-performance audit.
+            This is a focused founder-dependency self-report, not a full financial, tax, legal, or business-performance audit.
+          </p>
+          <p className="font-body text-xs text-muted mt-2">
+            <a href="/privacy" className="underline text-brand-ink hover:text-brand">Privacy Policy</a>
           </p>
         </section>
       </div>
@@ -257,9 +263,9 @@ export function FdiDiagnosticFlow() {
     );
   }
 
-  const isLast = currentQuestion === FDI_1_0_QUESTIONS.questions.length - 1;
+  const isLast = currentQuestion === CURRENT_FDI_QUESTION_SET.questions.length - 1;
   const selected = answers[question.id];
-  const progress = Math.round(((currentQuestion + 1) / FDI_1_0_QUESTIONS.questions.length) * 100);
+  const progress = Math.round(((currentQuestion + 1) / CURRENT_FDI_QUESTION_SET.questions.length) * 100);
   return (
     <div className="relative flex min-h-svh items-center overflow-hidden bg-canvas-light px-4 py-5 sm:py-8">
         <div className="pointer-events-none absolute inset-0" aria-hidden="true">

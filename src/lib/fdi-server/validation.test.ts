@@ -1,4 +1,9 @@
-import { fdiBusinessDetailsSchema, fdiContactSchema, fdiSubmitSchema } from './validation';
+import {
+  fdiBusinessDetailsSchema,
+  fdiContactSchema,
+  fdiSubmitSchema,
+  parseFdiBusinessDetailsForVersion,
+} from './validation';
 
 const contact = {
   name: 'Ajmal Test',
@@ -41,6 +46,19 @@ describe('FDI server validation', () => {
     expect(fdiBusinessDetailsSchema.safeParse({ sector: 'space_tourism' }).success).toBe(false);
     expect(fdiBusinessDetailsSchema.safeParse({ sectorOther: 'x'.repeat(101) }).success).toBe(false);
     expect(fdiBusinessDetailsSchema.safeParse({ country: 'uae' }).success).toBe(false);
+  });
+
+  it('uses the FDI-1.1 sector list and requires free text for Other', () => {
+    for (const sector of ['healthcare', 'technology', 'education']) {
+      expect(fdiBusinessDetailsSchema.safeParse({ sector }).success).toBe(false);
+    }
+    expect(fdiBusinessDetailsSchema.safeParse({ sector: 'other' }).success).toBe(false);
+    expect(fdiBusinessDetailsSchema.safeParse({ sector: 'other', sectorOther: 'Marine services' }).success).toBe(true);
+  });
+
+  it('keeps the historic sector taxonomy valid only for FDI-1.0 sessions', () => {
+    expect(parseFdiBusinessDetailsForVersion({ sector: 'healthcare' }, 'FDI-1.0')).toMatchObject({ sector: 'healthcare' });
+    expect(() => parseFdiBusinessDetailsForVersion({ sector: 'healthcare' }, 'FDI-1.1')).toThrow();
   });
 
   it('requires a session capability and complete contact details at final submission', () => {

@@ -36,12 +36,9 @@ export function FdiReportEmail({ name, companyName, report, calendlyLink, whatsa
           <Text style={{ color: '#0037A5', fontSize: '11px', fontWeight: 'bold', letterSpacing: '3px', margin: '0 0 8px' }}>
             MUHAMMED AJMAL CONSULTING
           </Text>
-          <Heading style={{ color: '#0F172A', fontSize: '24px', margin: '0 0 4px' }}>
-            {firstName}, your Founder Dependency Index
+          <Heading style={{ color: '#0F172A', fontSize: '24px', margin: '0 0 24px' }}>
+            {firstName}, your Founder Dependency Index · Prepared for {companyName}
           </Heading>
-          <Text style={{ color: '#475569', fontSize: '14px', margin: '0 0 24px' }}>
-            Prepared for {companyName}
-          </Text>
           <Section style={{ backgroundColor: '#E6F0FF', borderRadius: '12px', padding: '24px', marginBottom: '16px' }}>
             <Text style={{ color: '#0037A5', fontSize: '10px', fontWeight: 'bold', letterSpacing: '2px', margin: '0 0 8px' }}>
               FOUNDER DEPENDENCY INDEX
@@ -82,7 +79,7 @@ export function FdiReportEmail({ name, companyName, report, calendlyLink, whatsa
             {report.limitation}
           </Text>
           <Button href={calendlyLink} style={{ backgroundColor: '#0052FF', borderRadius: '8px', color: '#FFFFFF', fontSize: '14px', fontWeight: 'bold', padding: '12px 18px', textDecoration: 'none' }}>
-            Discuss a Business Clarity Audit
+            Discuss a Business Clarity Audit →
           </Button>
           {whatsappLink && (
             <Text style={{ color: '#475569', fontSize: '12px', margin: '16px 0 0' }}>

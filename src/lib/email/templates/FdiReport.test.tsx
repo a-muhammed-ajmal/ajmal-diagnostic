@@ -6,7 +6,7 @@ const report: FounderFdiReport = {
   instrument: 'FDI',
   sessionId: 'session',
   completedAt: '2026-08-15T00:00:00.000Z',
-  versions: { instrument: 'FDI', diagnostic: 'FDI-1.0', questionSet: 'FDI-QS-1.0', scoringModel: 'FDI-SM-1.0', bandConfig: 'FDI-BC-1.0' },
+  versions: { instrument: 'FDI', diagnostic: 'FDI-1.1', questionSet: 'FDI-QS-1.1', scoringModel: 'FDI-SM-1.0', bandConfig: 'FDI-BC-1.0' },
   index: { unrounded: 50, display: 50, scaleMax: 100, band: { key: 'high', label: 'High Founder Dependency', displayRange: '50–74' }, presentation: 'Founder Dependency Index: 50 / 100 — High Founder Dependency' },
   components: [
     { key: 'DS', label: 'Decision Speed', raw: 6, rawMax: 12, unrounded: 50, display: 50, alert: false },
@@ -28,7 +28,8 @@ it('renders only deterministic founder content', () => {
 
   expect(html).toContain('Founder Dependency Index');
   expect(html).toContain('Work regularly waits for decisions that depend on you.');
-  expect(html).toContain('Discuss a Business Clarity Audit');
+  expect(html).toContain('Ajmal, your Founder Dependency Index · Prepared for Test Co');
+  expect(html).toContain('Discuss a Business Clarity Audit →');
   expect(html).toContain(report.nextStep.href);
   expect(html).toContain('Message on WhatsApp');
   expect(html).toContain(whatsappLink);

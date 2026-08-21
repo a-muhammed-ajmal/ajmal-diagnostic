@@ -12,7 +12,14 @@
  * for a confirmed one.
  */
 
+/** Preserved for FDI-1.0 sessions. */
 export const FDI_QUALIFICATION_CONFIG_VERSION = 'FDI-QF-2.0';
+/** Business Health Check FDI-1.1 taxonomy. */
+export const FDI_QUALIFICATION_CONFIG_VERSION_2_1 = 'FDI-QF-2.1';
+
+export type QualificationConfigVersion =
+  | typeof FDI_QUALIFICATION_CONFIG_VERSION
+  | typeof FDI_QUALIFICATION_CONFIG_VERSION_2_1;
 
 export const FDI_PRIMARY_SECTORS = Object.freeze([
   'real_estate_business_services',
@@ -38,21 +45,33 @@ export interface QualificationInput {
 
 export interface QualificationOutcome {
   readonly result: QualificationStatus;
-  readonly version: typeof FDI_QUALIFICATION_CONFIG_VERSION;
+  readonly version: QualificationConfigVersion;
   readonly reasons: readonly string[];
 }
 
 const PRIMARY_SECTOR_SET = new Set<string>(FDI_PRIMARY_SECTORS);
 
-function freezeOutcome(result: QualificationStatus, reasons: readonly string[]): QualificationOutcome {
+function freezeOutcome(
+  version: QualificationConfigVersion,
+  result: QualificationStatus,
+  reasons: readonly string[],
+): QualificationOutcome {
   return Object.freeze({
     result,
-    version: FDI_QUALIFICATION_CONFIG_VERSION,
+    version,
     reasons: Object.freeze([...reasons]),
   });
 }
 
-export function evaluateQualification(input: QualificationInput): QualificationOutcome {
+/**
+ * Qualification is deliberately separate from scoring. Callers pass the
+ * session's registry-resolved version so a historic FDI-1.0 record keeps its
+ * original FDI-QF-2.0 stamp while FDI-1.1 receives FDI-QF-2.1.
+ */
+export function evaluateQualification(
+  input: QualificationInput,
+  version: QualificationConfigVersion = FDI_QUALIFICATION_CONFIG_VERSION,
+): QualificationOutcome {
   const outsideProfileReasons: string[] = [];
   const missingReasons: string[] = [];
 
@@ -69,13 +88,13 @@ export function evaluateQualification(input: QualificationInput): QualificationO
 
   // Nothing was shared, so there is nothing to classify against. This is a
   // normal outcome, not a failure: the founder still receives the full result.
-  if (missingReasons.length === 4) return freezeOutcome('not_assessed', ['business_details_not_provided']);
+  if (missingReasons.length === 4) return freezeOutcome(version, 'not_assessed', ['business_details_not_provided']);
 
   if (outsideProfileReasons.length > 0) {
-    return freezeOutcome('outside_target_profile', [...outsideProfileReasons, ...missingReasons]);
+    return freezeOutcome(version, 'outside_target_profile', [...outsideProfileReasons, ...missingReasons]);
   }
 
   return input.sector !== undefined && PRIMARY_SECTOR_SET.has(input.sector)
-    ? freezeOutcome('qualified_primary', missingReasons)
-    : freezeOutcome('qualified_secondary', missingReasons);
+    ? freezeOutcome(version, 'qualified_primary', missingReasons)
+    : freezeOutcome(version, 'qualified_secondary', missingReasons);
 }

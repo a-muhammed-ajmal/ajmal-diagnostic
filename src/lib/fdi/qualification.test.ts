@@ -19,6 +19,14 @@ describe('FDI qualification', () => {
     });
   });
 
+  it('stamps the active FDI-1.1 taxonomy with FDI-QF-2.1', () => {
+    expect(evaluateQualification(qualifyingInput, 'FDI-QF-2.1')).toMatchObject({
+      result: 'qualified_primary',
+      version: 'FDI-QF-2.1',
+      reasons: [],
+    });
+  });
+
   it('classifies an otherwise-qualified non-primary sector as secondary', () => {
     expect(evaluateQualification({ ...qualifyingInput, sector: 'professional_services' }))
       .toMatchObject({ result: 'qualified_secondary', reasons: [] });

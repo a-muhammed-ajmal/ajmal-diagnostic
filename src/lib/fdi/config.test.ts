@@ -8,7 +8,15 @@
 
 import { createHash } from 'node:crypto';
 
-import { FDI_1_0_CONFIG, FDI_1_0_QUESTIONS, resolveVersion, knownDiagnosticVersions, CURRENT_DIAGNOSTIC_VERSION } from './config';
+import {
+  FDI_1_0_CONFIG,
+  FDI_1_0_QUESTIONS,
+  FDI_1_1_CONFIG,
+  FDI_1_1_QUESTIONS,
+  resolveVersion,
+  knownDiagnosticVersions,
+  CURRENT_DIAGNOSTIC_VERSION,
+} from './config';
 import { validateVersion } from './integrity';
 
 const config = FDI_1_0_CONFIG;
@@ -201,19 +209,63 @@ describe('FDI-1.0 question set', () => {
   });
 });
 
+describe('FDI-1.1 approved Business Health Check wording', () => {
+  const expectedCopy = {
+    DS1: ['When an important decision needs to be made, and you are not available, what usually happens?', 'The responsible person makes the decision', 'Most decisions continue, but some wait for me', 'Many important decisions wait until I am available', 'Important decisions usually stop until I decide'],
+    DS2: ['How much can your team decide without asking for your approval?', 'The team handles regular decisions without me', 'Most regular decisions are handled without me', 'The team handles smaller decisions, but many still need my approval', 'I approve most important decisions'],
+    DS3: ['If work needs your decision, how long does it usually wait?', 'It usually does not wait because someone else can decide', 'A few hours', 'Until later that day or the next working day', 'More than one working day or until I am available'],
+    DS4: ['How often does your team ask you to make decisions they could make themselves?', 'Rarely', 'Sometimes', 'Often', 'Almost every day'],
+    EC1: ['For important work that happens regularly, how well is the process written down for the team?', 'Important processes are written down, easy to find, and used', 'Most important processes are written down, with some gaps', "Some are written down, but much still depends on people's knowledge", 'Most important work depends on what a few key people or I know'],
+    EC2: ['When different team members do the same work, how similar are the results?', 'The results consistently meet the same standard', 'Results are usually consistent, with some differences', 'Quality changes noticeably depending on who does the work', 'Good results depend heavily on certain people or my involvement'],
+    EC3: ['How often does completed work need to be corrected or done again?', 'Rarely', 'Sometimes', 'Often', 'Rework and correction are a normal part of our work'],
+    EC4: ['When you are not personally supervising the work, what usually happens?', 'Quality and speed stay about the same', 'Some issues appear, but work generally continues normally', 'Quality or speed becomes noticeably worse', 'Serious delays or quality problems occur'],
+    OV1: ['Can you see what is happening in the business without asking your team for updates?', 'Yes — the information I need is already available', 'Mostly — I sometimes need to ask', 'Only partly — I regularly need to ask for updates', 'No — asking people is the main way I know what is happening'],
+    OV2: ['How up to date is the information you use to manage the business?', 'It is up to date when I need it', 'It is usually up to date, with some delays', 'It is often out of date', 'I regularly do not have reliable, current information'],
+    OV3: ['How do you usually find out about an important problem in the business?', 'Our reports or systems show the problem early', 'The team reports it through the normal process', 'Someone tells me after it has already affected the work', 'I find out myself, from a customer, or when it becomes urgent'],
+    OV4: ['How often do you have to chase your team for updates, numbers, or explanations?', 'Rarely — the information is usually available', 'Sometimes', 'Often', 'Chasing updates is a regular part of my day'],
+  } as const;
+
+  it('is a frozen, structurally valid new instrument', () => {
+    expect(FDI_1_1_CONFIG.diagnosticVersion).toBe('FDI-1.1');
+    expect(FDI_1_1_CONFIG.questionSetVersion).toBe('FDI-QS-1.1');
+    expect(FDI_1_1_CONFIG.scoringModelVersion).toBe('FDI-SM-1.0');
+    expect(FDI_1_1_CONFIG.bandConfigVersion).toBe('FDI-BC-1.0');
+    expect(validateVersion(FDI_1_1_CONFIG, FDI_1_1_QUESTIONS)).toEqual([]);
+    expect(Object.isFrozen(FDI_1_1_CONFIG)).toBe(true);
+    expect(Object.isFrozen(FDI_1_1_QUESTIONS.questions)).toBe(true);
+  });
+
+  it('contains the PDF-approved wording and ordered response scale exactly', () => {
+    for (const question of FDI_1_1_QUESTIONS.questions) {
+      const expected = expectedCopy[question.id as keyof typeof expectedCopy];
+      expect(expected).toBeDefined();
+      expect([question.text, ...question.options.map((option) => option.text)]).toEqual(expected);
+      expect(question.options.map((option) => option.score)).toEqual([0, 1, 2, 3]);
+    }
+  });
+});
+
 // ─────────────────────────────────────────────────────────────────────────────
 // REGISTRY
 // ─────────────────────────────────────────────────────────────────────────────
 describe('version registry (§18)', () => {
-  it('serves FDI-1.0 as the current version', () => {
-    expect(CURRENT_DIAGNOSTIC_VERSION).toBe('FDI-1.0');
-    expect(knownDiagnosticVersions()).toEqual(['FDI-1.0']);
+  it('serves FDI-1.1 while retaining FDI-1.0', () => {
+    expect(CURRENT_DIAGNOSTIC_VERSION).toBe('FDI-1.1');
+    expect(knownDiagnosticVersions()).toEqual(['FDI-1.0', 'FDI-1.1']);
   });
 
   it('resolves a historic version to its own config, not the latest', () => {
     const resolved = resolveVersion('FDI-1.0');
     expect(resolved?.config.diagnosticVersion).toBe('FDI-1.0');
     expect(resolved?.questionSet.questionSetVersion).toBe(config.questionSetVersion);
+    expect(resolved?.qualificationConfigVersion).toBe('FDI-QF-2.0');
+  });
+
+  it('resolves the active wording and qualification versions together', () => {
+    const resolved = resolveVersion('FDI-1.1');
+    expect(resolved?.config).toBe(FDI_1_1_CONFIG);
+    expect(resolved?.questionSet).toBe(FDI_1_1_QUESTIONS);
+    expect(resolved?.qualificationConfigVersion).toBe('FDI-QF-2.1');
   });
 
   it('returns undefined for an unknown version', () => {

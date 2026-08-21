@@ -9,7 +9,7 @@
  */
 
 import type { QualificationInput } from '@/lib/fdi/qualification';
-import { FDI_SECTOR_VALUES, type FdiBusinessDetails } from './validation';
+import { ALL_FDI_SECTOR_VALUES, type FdiBusinessDetails } from './validation';
 
 /** Column set written for these details. Legacy QF-1.0 columns are never written again. */
 export type BusinessDetailColumns = {
@@ -55,7 +55,7 @@ export function businessDetailsFromColumns(row: BusinessDetailRow): Qualificatio
     annualRevenue: member(REVENUE_VALUES, row.q_revenue_range),
     employeeCount: member(TEAM_SIZE_VALUES, row.q_team_size),
     operatingYears: member(OPERATING_YEAR_VALUES, row.q_operating_years),
-    sector: member(FDI_SECTOR_VALUES, row.q_industry),
+    sector: member(ALL_FDI_SECTOR_VALUES, row.q_industry),
     sectorOther: row.q_other_sector ?? undefined,
   };
 }
@@ -69,7 +69,7 @@ export function mergeBusinessDetails(
     annualRevenue: submitted?.annualRevenue ?? stored.annualRevenue,
     employeeCount: submitted?.employeeCount ?? stored.employeeCount,
     operatingYears: submitted?.operatingYears ?? stored.operatingYears,
-    sector: member(FDI_SECTOR_VALUES, submitted?.sector ?? stored.sector ?? null),
+    sector: member(ALL_FDI_SECTOR_VALUES, submitted?.sector ?? stored.sector ?? null),
     sectorOther: submitted?.sectorOther ?? stored.sectorOther,
   };
   return merged;
