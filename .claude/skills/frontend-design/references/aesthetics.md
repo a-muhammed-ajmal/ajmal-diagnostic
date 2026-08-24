@@ -4,7 +4,7 @@ Read this when asked to make an interface "look better," "less generic," or "mor
 
 ## Typography
 
-- **Two faces, distinct jobs.** `--font-heading` / `--font-display` resolve to **Roboto Slab** (slab serif, carries every heading); `--font-body` / `--font-sans` / `--font-mono` resolve to **Figtree**, which carries body and all UI text including button and control labels. `font-mono` only switches on tabular figures. No Inter, no Lexend, no Fraunces, no IBM Plex — those exist only as retired identities or fallback stacks.
+- **One face, every job.** `--font-heading` / `--font-display` / `--font-body` / `--font-sans` / `--font-mono` all resolve to **Plus Jakarta Sans**, which carries headings, body, and all UI text including button and control labels. `font-mono` only switches on tabular figures. No Inter, no Fraunces, no IBM Plex — those exist only as retired identities or fallback stacks.
 - **Weight and size drive hierarchy**, not font-swapping. Headings run 600–800; body runs 300–400 with 500–600 for emphasis and labels.
 - **Tracking**: loose on large display titles, none below. Eyebrows go the other way: `+0.15em` uppercase (the `.eyebrow` class already sets weight, size, tracking and case — but no colour).
 - **Use the `--step-N` scale**, never a hardcoded pixel size. A `px` font-size escapes the mobile ceilings, which is the single most common way this design system gets broken.

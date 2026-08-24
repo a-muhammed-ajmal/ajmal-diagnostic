@@ -1,94 +1,112 @@
 # Muhammed Ajmal Consulting
 
-A B2B consulting website and business diagnostic tool. Its public diagnostic is the
-deterministic Business Health Check / Founder Dependency Index flow, with prospects
-managed through a protected admin dashboard.
+The public website and Business Health Check for a business operations and
+growth consulting practice serving founder-led UAE SMEs, based in Dubai.
+
+The site's commercial journey is a free founder-dependency self-report that
+returns a **Founder Dependency Index** out of 100 across three operating
+areas, then routes qualified visitors to a Business Clarity Audit
+conversation. Scoring, findings, and the report email are deterministic —
+no model sits between an answer and a result.
+
+---
+
+## Governance
+
+Product behaviour is governed by four documents. Cross-reference them by
+**Document ID**, never by filename. The register is closed at four — new
+governing content is added to an existing document, never to a new one.
+
+| ID | File | Governs |
+| :---- | :---- | :---- |
+| ANCHOR | `docs/ANCHOR.md` | Positioning, clients, sectors, commercial path, the four frameworks, claims. **Locked — never edit.** |
+| PRODUCT | `docs/PRODUCT.md` | Business Health Check, the instrument, Business Clarity Audit |
+| WEB | `docs/WEBSITE.md` | Public routes, navigation, pages, publishing |
+| DESIGN | `.claude/skills/frontend-design/SKILL.md` | Colors, typography, components, accessibility |
+
+Engineering rules live in `AGENTS.md`. `CLAUDE.md` is a pointer file.
+`.claude/commands/ship.md` is the release procedure. `AGENT-RULES.md` is
+how an agent works with all of the above.
+
+`src/lib/website-specification.test.ts` scans the whole governance surface
+on every CI run and fails on prohibited language.
+
+---
 
 ## Stack
 
-- **Next.js 16** (App Router, React 19) · TypeScript (strict)
-- **Tailwind CSS v4** — tokens live in `src/app/globals.css` (`@theme`), no `tailwind.config.js`
-- **Design system** — "Electric Blue & Amber": electric blue `#0052FF` on white, amber `#FFBF00` fill-only accent, slate neutrals, Plus Jakarta Sans across headings and UI, responsive scale with hard mobile ceilings (h1 ≤ 24px, body ≤ 14px below 768px)
-- **Supabase** (`@supabase/supabase-js`) — Postgres + cookie-based admin auth
-- **Resend** + `@react-email/components` — transactional email
-- **react-hook-form** + **zod** — forms and validation
-- **Vercel Analytics** — funnel tracking
+| Layer | Choice |
+| :---- | :---- |
+| Framework | Next.js 16.2.7 — App Router, React 19 |
+| Language | TypeScript 5, strict |
+| Styling | Tailwind CSS v4 — no config file; theme lives in `@theme {}` inside `globals.css` |
+| Database / Auth | Supabase (`@supabase/supabase-js`, `@supabase/ssr`) |
+| Email | Resend + `@react-email/components` |
+| Forms | `react-hook-form` + `zod` |
+| Icons | `lucide-react` |
+| Motion | Native CSS only — no animation library |
+| Design audit | `playwright-core`, driving an installed Chrome |
 
-## Getting started
+Typography is a single face, Plus Jakarta Sans, loaded through
+`next/font/google`. Mobile ceilings are strict: below 768px no heading
+exceeds 24px and no body copy exceeds 14px. The one approved exception is
+article body on `/insights/[slug]`, which opens to 16px — see DESIGN §1.
+
+---
+
+## Setup
 
 ```bash
-npm install
-npm run dev   # http://localhost:3000
+npm ci
 ```
 
-Copy `.env.example` to `.env.local` and fill in the values (from Supabase, Resend,
-and your Calendly link):
+Copy `.env.example` to `.env.local` and fill it in. The Calendly URL is
+required; the WhatsApp number is optional and hides the secondary message
+route when omitted.
 
 ```bash
-cp .env.example .env.local
+npm run dev
 ```
 
-The build **fails loudly** if `NEXT_PUBLIC_CALENDLY_LINK` is missing or malformed. The
-check runs in `next.config.ts` before compilation starts, and again in `src/lib/env.ts`
-as a second line of defence — this is deliberate, it prevents a broken booking link from
-shipping. Set that variable both locally and in the Vercel project environment.
+---
 
-## Founder Dependency Index
+## Validation
 
-`/diagnostic` serves the public Business Health Check and `/results` shows its private,
-browser-stored result. New sessions use `FDI-1.1`, `FDI-QS-1.1`, and `FDI-QF-2.1`;
-FDI-1.0 remains resolvable for historic records and is never silently rescored.
-`/diagnostic/fdi` and `/results/fdi` permanently redirect to the canonical routes. The
-consultant workspace is at `/admin/fdi`; test records are created only by an
-authenticated admin using its explicit Test Mode link.
+Run all four before shipping. `/ship` runs them in this order.
 
-## Scripts
-
-| Command | Purpose |
-|---|---|
-| `npm run dev` | Start the dev server |
-| `npm run build` | Production build |
-| `npm run start` | Serve the production build |
+| Command | Checks |
+| :---- | :---- |
 | `npm run lint` | ESLint |
-| `npm test` | Jest test suite |
-| `npm run test:coverage` | Jest with coverage |
-| `npm run audit:type` | Renders every route in a real browser and asserts Plus Jakarta Sans, the mobile type ceilings (h1–h4 ≤ 24px, prose ≤ 14px below 768px), and no overflow at 320px. Needs Chrome or Edge installed. |
+| `npm run test:coverage` | Jest with coverage. The FDI scoring engine, band logic, and rounding are held at 100% |
+| `npm run build` | Production build |
+| `npm run audit:type` | Drives a real browser over every route at 375 / 320 / 1920px and asserts the rendered type ceilings, the font family, and no horizontal overflow at 320px |
+
+`audit:type` is the only check that can catch an inherited font size, so run
+it rather than reading the CSS.
+
+---
 
 ## Project stats
 
-| Metric | Value |
-|---|---|
-| Tests | 333 passing (29 suites), 61.53% statement coverage |
-| DB tables | 8 (RLS on all) |
-| Migrations | 5 (`20260723000001`–`20260815000003`) |
-| Routes | App Router (see `AGENTS.md` for the full page list) |
+| Metric | Count |
+| :---- | :---- |
+| Tests | 337 passing (29 suites), 61.53% statement coverage |
+| DB tables | 8 |
+| Migrations | 5 |
+| Routes | 18 page routes, 9 API route handlers |
 
-## Project layout
+---
 
-```
-src/
-  app/            # Routes (App Router). api/ holds route handlers.
-  components/     # Feature components (quiz, contact, lead, newsletter, insights, layout)
-  lib/            # scoring, ai, email templates, articles registry, metadata, rate limiting, env
-  types/          # Shared TypeScript types
-supabase/
-  migrations/     # SQL schema + RLS policies
-```
+## The instrument
 
-## Database
+`FDI-1.1` is the sole active version for new sessions, with question set
+`FDI-QS-1.1` and qualification configuration `FDI-QF-2.1`. Every session
+stamps five version keys and resolves through the versions stamped on it.
 
-Schema and Row-Level-Security policies live in `supabase/migrations/`. Every table has
-RLS enabled with **no permissive policies** — all access flows through server-side route
-handlers using the service-role key. The browser can read and write nothing directly.
-Apply migrations with the Supabase CLI (`supabase db push`) or by running the SQL in the
-Supabase SQL editor in filename order.
+`FDI-1.0` is historic-only and remains resolvable. Six completed sessions
+carry that stamp and were delivered by email. Its configuration, question
+set, golden fixture, and reproducibility test are kept in
+`src/lib/fdi/` and must never be migrated, rescored, or deleted — a
+committed golden fixture fails CI if any stored score would change.
 
-## Content
-
-Articles are defined in `src/lib/articles.ts`. Adding an entry there makes it appear in
-the insights index, its category page, the sitemap, and its own route automatically.
-
-## Conventions
-
-See `AGENTS.md` for the full project constitution: coding standards, the design system,
-and the security constraints around the service-role key, admin auth, and email rendering.
+Full definitions in PRODUCT.

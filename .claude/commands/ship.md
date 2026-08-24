@@ -30,7 +30,7 @@ Run: `npm run audit:type`. Capture the exact route count. On failure, fix only e
 
 **5–8. Update project docs (conditional)**
 
-* **`spec.md`:** If the shipped work changes product behaviour, requirements, features, edge cases, or acceptance criteria, update `spec.md` accordingly. Otherwise leave it unchanged.
+* **PRODUCT (`docs/PRODUCT.md`) and WEB (`docs/WEBSITE.md`):** If the shipped work changes product behaviour, requirements, features, edge cases, or acceptance criteria, update the owning document — by Document ID, never by filename. Otherwise leave both unchanged.
 * **`CLAUDE.md`:** Keep Claude Code project instructions current. Update it when the shipped work changes the instructions or validation workflow.
 * **`AGENTS.md`:** If shipped work changes architecture facts, stack, routes, tokens, or development patterns, flag it for user approval — do not edit unprompted.
 * **`README.md`:** Update the "Project stats" table (Tests / DB tables / Migrations / Routes). Update only the Tests row with the exact count and coverage % from step 2 — e.g., `298 passing (22 suites), 58.17% statement coverage`. Touch nothing else in the table unless the shipped work actually added a migration or a DB table, in which case update that row too with the real count.
