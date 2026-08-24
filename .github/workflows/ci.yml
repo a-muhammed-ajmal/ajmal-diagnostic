@@ -14,6 +14,11 @@ jobs:
       # next.config.ts aborts the build when this is missing or malformed, so CI
       # supplies a syntactically valid placeholder rather than a real booking link.
       NEXT_PUBLIC_CALENDLY_LINK: https://calendly.com/ci-placeholder/intro
+      # requireResendConfig() runs at module scope in the API routes, so page-data
+      # collection throws without these. The from-address must sit on a domain in
+      # RESEND_VERIFIED_DOMAINS (serverEnv.ts) or validation rejects it.
+      RESEND_API_KEY: re_ci_placeholder_not_a_real_key
+      RESEND_FROM_EMAIL: ci@muhammedajmal.com
     steps:
       - uses: actions/checkout@v4
 
@@ -38,6 +43,11 @@ jobs:
     runs-on: ubuntu-latest
     env:
       NEXT_PUBLIC_CALENDLY_LINK: https://calendly.com/ci-placeholder/intro
+      # requireResendConfig() runs at module scope in the API routes, so page-data
+      # collection throws without these. The from-address must sit on a domain in
+      # RESEND_VERIFIED_DOMAINS (serverEnv.ts) or validation rejects it.
+      RESEND_API_KEY: re_ci_placeholder_not_a_real_key
+      RESEND_FROM_EMAIL: ci@muhammedajmal.com
     steps:
       - uses: actions/checkout@v4
 
