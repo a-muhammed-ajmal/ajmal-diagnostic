@@ -188,9 +188,9 @@ export function FdiDiagnosticFlow() {
           {/* One bordered list on a phone, three cards from sm up — keeps this section inside a single mobile view. */}
           <div className="grid grid-cols-1 sm:grid-cols-3 sm:gap-2 max-w-2xl mx-auto mt-4 text-left rounded-xl border border-brand/30 sm:border-0 divide-y divide-line sm:divide-y-0 overflow-hidden">
             {[
-              ['12 questions', 'Four questions across each operating component.'],
-              ['Progress saved', 'You can leave before completion; an unfinished attempt receives no score or email.'],
-              ['Self-report only', 'The result identifies reported patterns. It does not diagnose root causes.'],
+              ['12 questions', 'Four questions across each operating component'],
+              ['Progress saved', 'You can leave before completion; an unfinished attempt receives no score or email'],
+              ['Self-report only', 'The result identifies reported patterns. It does not diagnose root causes'],
             ].map(([title, body]) => (
               <div key={title} className="bg-white/5 px-3 py-2 sm:rounded-xl sm:border sm:border-brand/30">
                 <p className="font-heading font-bold text-brand-ink text-xs">{title}</p>
@@ -257,7 +257,7 @@ export function FdiDiagnosticFlow() {
 
           {error && <p role="alert" className="font-body text-[length:var(--step-0)] text-danger">{error}</p>}
           <button type="submit" disabled={isWorking} className="min-h-12 w-full rounded-xl bg-brand py-3 font-body text-[length:var(--step-0)] font-semibold text-white shadow-1 transition-all duration-200 ease-out hover:-translate-y-0.5 hover:bg-brand-hover hover:shadow-glow-electric disabled:pointer-events-none disabled:opacity-50">{stage === 'submitting' ? 'Preparing your result…' : 'View my Founder Dependency Index →'}</button>
-          <p className="font-body text-xs text-muted text-center leading-snug">By continuing you agree to our <a href="/privacy" className="underline text-brand-ink">Privacy Policy</a>.{session?.isTest && <span className="text-brand-ink"> Marked as a test record.</span>}</p>
+          <p className="font-body text-xs text-muted text-center leading-snug">By continuing, you agree to our <a href="/privacy" className="underline text-brand-ink">Privacy Policy</a>.{session?.isTest && <span className="text-brand-ink"> Marked as a test record.</span>}</p>
         </form>
       </div>
     );

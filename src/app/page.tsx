@@ -50,7 +50,7 @@ export default function HomePage() {
             Build a business that <span className="brand-gradient-text">grows beyond the founder.</span>
           </>
         }
-        lead="Muhammed Ajmal Consulting helps founder-led UAE SMEs build successful, scalable businesses by reducing founder dependency through better systems, clearer ownership, useful visibility, and consistent execution."
+        lead="Muhammed Ajmal Consulting helps founder-led UAE SMEs build successful, scalable businesses by reducing founder dependency through stronger systems, clearer ownership, useful visibility, and consistent execution."
         actions={
           <>
             <Button href="/diagnostic">

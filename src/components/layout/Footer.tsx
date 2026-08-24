@@ -55,10 +55,11 @@ export function Footer() {
                 Muhammed Ajmal Consulting
               </p>
             </div>
+            {/* WEB §5 fixes this descriptor word for word, including the location
+                clause. It is one sentence, not a descriptor plus a city line. */}
             <p className="mt-4 max-w-xs font-body text-[length:var(--step-0)] leading-relaxed text-muted">
-              Business operations and growth consulting for founder-led UAE SMEs.
+              Business Operations & Growth Consulting for founder-led UAE SMEs, based in Dubai, United Arab Emirates.
             </p>
-            <p className="mt-4 font-body text-xs text-muted">Dubai, United Arab Emirates</p>
           </div>
 
           <div className="md:col-span-3">

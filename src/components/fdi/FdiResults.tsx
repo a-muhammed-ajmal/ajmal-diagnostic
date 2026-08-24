@@ -125,6 +125,12 @@ export function FdiResults() {
             <div className="orb orb-amber absolute -right-16 -top-24 h-64 w-64 opacity-25" />
           </div>
           <div className="relative z-10">
+            {/* PRODUCT §A10 orders the limitation between the findings and the next
+                step, and the report email does the same. It qualifies the result the
+                founder just read, so it has to precede the offer, not trail it. */}
+            <p className="mb-6 font-body text-xs italic leading-relaxed text-muted-invert">
+              {report.limitation}
+            </p>
             <h2 className="font-heading text-[length:var(--step-3)] font-extrabold text-white">
               Next step: Business Clarity Audit
             </h2>
@@ -154,9 +160,6 @@ export function FdiResults() {
                 </Button>
               )}
             </div>
-            <p className="mt-6 font-body text-xs italic leading-relaxed text-muted-invert">
-              {report.limitation}
-            </p>
           </div>
         </section>
       </section>
