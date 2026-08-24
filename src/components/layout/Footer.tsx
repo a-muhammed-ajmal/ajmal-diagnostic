@@ -84,6 +84,9 @@ export function Footer() {
             <p className="mb-3 font-heading text-xs font-semibold uppercase tracking-widest text-brand-ink">Start here</p>
             <Button href="/diagnostic">
               Start the Business Health Check
+              {/* WEB §5 fixes the label including the arrow. The icon is decorative,
+                  so the glyph is restated here for the accessible name only. */}
+              <span className="sr-only"> →</span>
               <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </Button>
             <p className="mt-3 font-body text-xs text-muted">
