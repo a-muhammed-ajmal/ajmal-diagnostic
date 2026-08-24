@@ -49,8 +49,10 @@ src/
     supabase/       # server.ts (createAdminClient) + client.ts (createBrowserClient)
     ai.ts           # Anthropic client
     email/templates/# React Email templates (DiagnosticReport, ContactNotification)
-    scoring.ts      # Quiz scoring logic
-    questions.ts    # Quiz question data
+    fdi/            # ACTIVE instrument — config, questions, scoring, bands, findings
+    scoring.ts      # RETIRED (ten-question diagnostic). Survives only for
+                    #   DIMENSION_META in the admin historic-lead view
+    questions.ts    # RETIRED (ten-question diagnostic). No importer remains
     articles.ts     # Insights content registry (source of truth for articles)
     metadata.ts     # Per-page metadata helper
     jsonLd.ts       # Structured-data builders
@@ -71,51 +73,22 @@ src/
 - **No raw hex in JSX**: all colors via CSS custom properties defined in `globals.css`
 
 ## Design System
-**"Electric Blue & Amber"** — vibrant electric blue as the primary brand colour, warm amber as the secondary accent, grounded on slate neutrals. **Plus Jakarta Sans** across headings, body, controls, and numeric text, on a responsive type scale with hard mobile ceilings. This superseded "Signal" (`#2563EB` + Lexend, 12px flat body), which superseded the "Cyanotype Blueprint" ink/brass/vellum identity, which superseded a soft-white/orange-Inter one — do not revert to any of them.
+DESIGN (`.claude/skills/frontend-design/SKILL.md`) is the single specification for colors,
+typography, spacing, components, and accessibility. `src/app/globals.css` is the
+implementation truth; DESIGN documents it. This file does not restate token values, the
+type scale, or the utility class list — duplication is what let three wrong font names
+survive months of review.
 
-```css
-/* Brand tokens — defined in src/app/globals.css @theme block */
---color-brand:        #0052FF   /* Electric Blue — CTAs, fills, focus (5.8:1 on white) */
---color-brand-hover:  #0039CC   /* CTA hover (8.6:1) */
---color-brand-ink:    #0037A5   /* blue TEXT on white (10.1:1) */
---color-brand-tint:   #E6F0FF   /* light accent wash — alternating section band */
---color-brand-soft:   #DBEAFE   /* icon tiles, chips */
---color-accent:       #FFBF00   /* Amber — FILL ONLY, never text on light (1.65:1) */
---color-accent-hover: #D49E00   /* amber fill hover */
---color-accent-ink:   #B45309   /* amber text on light (5.0:1) */
---color-canvas:       #FFFFFF   /* page background */
---color-canvas-dark:  #0F172A   /* Slate 900 — the surface amber is allowed to sit on */
---color-canvas-light: #F8FAFC   /* Slate 50 — neutral band */
---color-ink:          #0F172A   /* headings and body text (17.9:1) */
---color-muted:        #475569   /* secondary text (7.6:1) */
---color-muted-invert: #CBD5E1   /* secondary text ON a canvas-dark band (12:1) */
---color-line:         #E2E8F0   /* borders (Slate 200) */
---color-success / --color-warning / --color-danger  /* status, each with a -soft tint */
-```
+**"Electric Blue & Amber"** — vibrant electric blue on slate neutrals with a fill-only
+amber accent, one typeface across headings, body, controls, and numeric text, on a
+responsive type scale with hard mobile ceilings.
 
-The numbered palette (`electric-50…900`, `amber-50…700`, `canvas-dark/light/border`) is declared alongside these aliases, so `bg-electric-100` and `text-amber-700` are real utilities. Components should reach for the semantic alias first.
+Do not revert to any previous visual identity. Several were retired deliberately. DESIGN
+is the only current specification.
 
-**Fonts**: one face, loaded via `next/font/google` in `layout.tsx`. **Plus Jakarta Sans** supplies headings (`--font-heading` / `--font-display`), body and UI text (`--font-body` / `--font-sans`), buttons, controls, and numeric text. `--font-mono` resolves to the same face and means tabular figures — do not add another typeface.
-
-The ceilings below are enforced by `npm run audit:type`, which measures the rendered
+The mobile ceilings are enforced by `npm run audit:type`, which measures the rendered
 pages in a real browser rather than trusting the CSS — font sizes are inherited, so this
 is the one design rule that code review cannot verify. It runs in CI and in `/ship`.
-
-**Type scale**: **responsive, with strict mobile ceilings.** Below 768px, no heading (h1–h4) may exceed **24px** and no body copy may exceed **14px**; micro-copy and labels sit at 12px. At 768px and above the scale opens up — body 16px, h2 32px, h1 48px. Both tiers are declared once on `:root` in `globals.css`, so every `text-[length:var(--step-N)]` call site inherits them. `text-xs` is bound to `--step--1`, the micro-copy tier. `input`/`select`/`textarea` stay pinned at 16px at every width to stop iOS Safari zooming on focus.
-
-**Background**: flat `#FFFFFF`. Section rhythm comes from alternating white, `--color-canvas-light`, and `--color-brand-tint` bands separated by `border-y border-line`, plus optional `.orb` ambient radials in a positioned, overflow-hidden section.
-
-**Layout primitives**: `<Section>` (band tone/width/orbs) and `<PageHero>` (asymmetric page opener) in `src/components/ui/`. Every page section is a `<Section>`; every page opener is a `<PageHero>`. Neither offers a centred-hero variant — asymmetry is the house layout. `<Button>` gains an `accent` variant (amber fill, dark text) and `<Surface>` a `glass` tone.
-
-**Utility classes** (already in globals.css):
-- `.glass-panel` — glassmorphism: translucent white, backdrop blur, hairline border
-- `.orb` + `.orb-electric` / `.orb-amber` — ambient blurred background radials
-- `.hover-lift` — 2px lift + electric glow, 200ms
-- `.brand-gradient-text` — gradient text `#0037A5 → #0052FF`; both ends clear 4.5:1
-- `.eyebrow` — 800-weight uppercase section label at the micro-copy step; sets no colour
-- `.card-interactive` — hover lift 2px + `--shadow-2` + brand border
-- `.stage-rail` / `.stage-item` / `.stage-marker` / `.stage-card` — the commercial-ladder composition
-- `.reveal` / `.stage-reveal` / `.heading-reveal` — entrance and scroll-driven reveals
 
 ## Pages
 | Route | Purpose |
@@ -139,3 +112,30 @@ is the one design rule that code review cannot verify. It runs in CI and in `/sh
 - Email templates are React components rendered via `@react-email/render` before sending through Resend
 - Admin auth is cookie-based (not Supabase Auth) — see `src/lib/adminAuth.ts`
 - `NEXT_PUBLIC_WHATSAPP_NUMBER` is optional and public by design. When set to the business E.164 number, it exposes a prefilled Business Clarity Audit WhatsApp link; omit it to hide the secondary message route.
+
+## Rule Zero — verify, never assume
+
+This rule outranks every other instruction, in this file or any other.
+
+- Check whether a file exists. Do not assume it does.
+- Read a file before editing it. Do not assume its contents.
+- Diff a file before replacing it. Do not assume it matches.
+- Run a command. Do not assume its result.
+
+Anything said in any earlier message, in this conversation or any other,
+is a claim to verify, not a fact to rely on. A file discussed before may
+since have been edited, moved, or deleted. Verify before every action,
+not once per session.
+
+An instruction to move, edit, or delete a file that no longer exists is
+NOT an error. Report "already absent" and continue.
+
+Given a list of paths, verify every one before acting on any of them.
+
+A task is complete only when you ran it and saw the output. Paste real
+command output. Never summarize a run you did not perform. If you cannot
+verify something, report "unverified" and stop. Absence of evidence is
+not evidence.
+
+Before deleting or overwriting any file, print enough of its contents
+that the user can see what is being removed.

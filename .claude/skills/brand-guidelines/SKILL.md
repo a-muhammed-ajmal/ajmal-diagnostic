@@ -1,6 +1,6 @@
 ---
 name: brand-guidelines
-description: "Applies the Muhammed Ajmal Consulting brand — \"Electric Blue & Amber\": vibrant electric blue with a fill-only amber accent on slate neutrals, Roboto Slab + Figtree typography, responsive type scale with strict mobile ceilings — to any artifact, document, or surface that should carry the look without full component engineering. Use for one-off artifacts, marketing copy, presentations, diagrams, or README banners. For building actual app components, pages, or interfaces, use frontend-design instead — it owns the complete token system and implementation rules."
+description: "Applies the Muhammed Ajmal Consulting brand — \"Electric Blue & Amber\": vibrant electric blue with a fill-only amber accent on slate neutrals, Plus Jakarta Sans typography, responsive type scale with strict mobile ceilings — to any artifact, document, or surface that should carry the look without full component engineering. Use for one-off artifacts, marketing copy, presentations, diagrams, or README banners. For building actual app components, pages, or interfaces, use frontend-design instead — it owns the complete token system and implementation rules."
 ---
 
 # Brand Guidelines
@@ -11,7 +11,7 @@ Quick-reference identity for anything that needs the brand look without full com
 
 ## Identity in one line
 
-**"Electric Blue & Amber" — vibrant electric blue as the primary brand colour, warm amber as the secondary accent, grounded on slate neutrals.** High-intensity technology balanced by premium warmth. Roboto Slab carries the headings; Figtree carries body and UI text on a responsive scale with hard mobile ceilings. This superseded "Signal" (`#2563EB` + Lexend at a flat 12px), which superseded the "Cyanotype Blueprint" ink/brass/vellum identity, which superseded a soft-white/orange-Inter one — do not revert to any of them.
+**"Electric Blue & Amber" — vibrant electric blue as the primary brand colour, warm amber as the secondary accent, grounded on slate neutrals.** High-intensity technology balanced by premium warmth. Plus Jakarta Sans carries headings, body, and UI text on a responsive scale with hard mobile ceilings. Do not revert to any previous visual identity. Several were retired deliberately. DESIGN is the only current specification.
 
 ---
 
@@ -50,7 +50,7 @@ Semantic status colors (not brand accents — use only for their meaning). Each 
 
 ## Typography
 
-- **Roboto Slab for headings, Figtree for everything else.** In the app, `--font-heading` / `--font-display` resolve to Roboto Slab; `--font-body` / `--font-sans` / `--font-mono` resolve to Figtree, where `font-mono` means tabular figures rather than a family change. There is no third face — never fall back to Inter or a system sans for headings.
+- **Plus Jakarta Sans for everything.** In the app, `--font-heading` / `--font-display` / `--font-body` / `--font-sans` / `--font-mono` all resolve to Plus Jakarta Sans, where `font-mono` means tabular figures rather than a family change. There is no second face — never fall back to Inter or a system sans for headings.
 - Headings run semibold to bold (600–800), with loose tracking on large display titles. Body runs light to regular (300–400) at `line-height: 1.5–1.625`.
 - Eyebrow labels go the other way: `+0.15em` uppercase at 800 weight, at the 12px micro-copy tier.
 - **Strict mobile ceilings below 768px.** No heading (h1 through h4) may exceed **24px**; h1 sits in the 20–24px range. No body paragraph, list item, or form description may exceed **14px**. UI micro-copy and labels sit at **12px**.
@@ -82,7 +82,7 @@ An earlier version of this brand mandated a 40×40px blueprint grid on every sur
 
 | Don't | Do |
 | --- | --- |
-| A third font family, or Inter / a system sans as headings | Roboto Slab for headings, Figtree for everything else |
+| A second font family, or Inter / a system sans as headings | Plus Jakarta Sans for headings, body, and UI text alike |
 | Hardcoded hex in app code | CSS custom property token |
 | A third accent color for "variety" | Blue primary, amber secondary — vary weight/size otherwise |
 | Amber `#FFBF00` as text on white or light grey (1.65:1) | `#B45309` (`--color-accent-ink`), or amber fill under dark slate text |
@@ -93,4 +93,4 @@ An earlier version of this brand mandated a 40×40px blueprint grid on every sur
 | A hardcoded `px` font-size | `--step-N`, so the mobile ceiling applies automatically |
 | Muting text with opacity | `--color-muted` |
 | Rows of identical equal-width cards | An asymmetric split with a clear focal point |
-| Brass `#C6752E`, vellum `#F6F0E2`, Fraunces, IBM Plex, or Lexend | Electric blue `#0052FF` with Roboto Slab + Figtree — those identities are retired |
+| Brass `#C6752E`, vellum `#F6F0E2`, Fraunces, or IBM Plex | Electric blue `#0052FF` with Plus Jakarta Sans — those identities are retired |

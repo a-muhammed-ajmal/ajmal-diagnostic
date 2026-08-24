@@ -12,7 +12,8 @@
  *
  * Asserted, below 768px:
  *   - every visible h1..h4 is <= 24px
- *   - every visible <p>, <li> and <label> is <= 14px
+ *   - every visible <p>, <li> and <label> is <= 14px, except inside
+ *     .article-longform, the one approved exception, which is <= 16px
  *   - no horizontal overflow at 320px
  *
  * Recorded but not asserted:
@@ -37,6 +38,11 @@ import process from 'node:process';
 
 const HEADING_CEILING = 24;
 const BODY_CEILING = 14;
+// The one approved exception: long-form article body on /insights/[slug].
+// Declared in DESIGN §1 and WEB §8, implemented as the .article-longform rule in
+// globals.css. Nothing else may claim it — the flag is set from a .article-longform
+// ancestor, so a <p> anywhere else still meets BODY_CEILING.
+const ARTICLE_BODY_CEILING = 16;
 const PORT = Number(process.env.PORT ?? 3000);
 const EXTERNAL_BASE = process.env.BASE_URL ?? null;
 const BASE = EXTERNAL_BASE ?? `http://localhost:${PORT}`;
@@ -136,6 +142,7 @@ function measureInPage({ textSelector, fontSelector }) {
     px: parseFloat(getComputedStyle(el).fontSize),
     tag: el.tagName.toLowerCase(),
     text: (el.textContent || '').trim().slice(0, 56),
+    longform: !!el.closest('.article-longform'),
   });
 
   const headings = [];
@@ -249,8 +256,10 @@ async function main() {
     for (const h of mobile.headings.filter((x) => x.px > HEADING_CEILING)) {
       failures.push(`${route} @375  <${h.tag}> ${h.px}px > ${HEADING_CEILING}px — "${h.text}"`);
     }
-    for (const b of mobile.prose.filter((x) => x.px > BODY_CEILING)) {
-      failures.push(`${route} @375  <${b.tag}> ${b.px}px > ${BODY_CEILING}px — "${b.text}"`);
+    for (const b of mobile.prose) {
+      const ceiling = b.longform ? ARTICLE_BODY_CEILING : BODY_CEILING;
+      if (b.px <= ceiling) continue;
+      failures.push(`${route} @375  <${b.tag}> ${b.px}px > ${ceiling}px — "${b.text}"`);
     }
     for (const a of mobile.other.filter((x) => x.px > BODY_CEILING)) {
       advisories.push(`${route} @375  <${a.tag}> ${a.px}px — "${a.text}"`);
@@ -297,7 +306,8 @@ async function main() {
 
   console.log(
     `\n✅ ${ROUTES.length} routes — every heading ≤ ${HEADING_CEILING}px and every ` +
-      `<p>/<li>/<label> ≤ ${BODY_CEILING}px below 768px; no overflow at 320px.`,
+      `<p>/<li>/<label> ≤ ${BODY_CEILING}px below 768px ` +
+      `(≤ ${ARTICLE_BODY_CEILING}px inside .article-longform); no overflow at 320px.`,
   );
 }
 

@@ -305,6 +305,13 @@ html { scroll-behavior: smooth; }
   line-height: 1.75;
 }
 
+@media (max-width: 767px) {
+  .article-longform > p,
+  .article-longform li {
+    font-size: 1rem; /* 16px — approved exception, WEB §8 */
+  }
+}
+
 /* ── Vertical stage rail ──────────────────────────────────────────────────── */
 .stage-rail { list-style: none; margin: 0; padding: 0; }
 .stage-item { position: relative; }

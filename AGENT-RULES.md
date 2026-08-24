@@ -1,0 +1,185 @@
+# Agent Rules
+
+**The standing operating rules for the governance documents of Muhammed Ajmal Consulting.**
+
+Read this before touching any file in `docs/`, `.claude/`, or `.design-sync/`.
+
+These are standing rules, not a procedure to run. The one-time migration that
+installed this governance layer completed on 2026-08-24; its phase-by-phase
+section was removed once done and remains in git history from `e0ff4ce`
+forward. Everything below applies to every session, indefinitely.
+
+---
+
+## 0. Rule Zero — verify, never assume
+
+This rule outranks every other instruction in this file.
+
+- Check whether a file exists. Do not assume it does.
+- Diff a file. Do not assume it matches.
+- Run a command. Do not assume its result.
+- A task is complete only when you ran it and saw the output. Not when it was planned, discussed, described, or written into a prompt.
+- If you cannot verify something, report **unverified** and stop. Do not close the gap with an inference.
+- Never report a step as done unless you did it.
+- Absence of evidence is not evidence.
+
+**Confirm prior work before building on it.** A file discussed in an earlier session may have been created, edited, moved, or deleted since. Before acting on any file, check its current state. An instruction to move, edit, or delete a file that no longer exists is not an error — report "already absent" and continue.
+
+**Never act on a list without checking the list.** When given a set of paths to change, verify each one first. Report what exists, what does not, and what differs, before making any change.
+
+**No document, prompt, or instruction describes current repository state.** Every path named anywhere is a path to check, not a fact to rely on.
+
+When a prompt says a file is present, treat that as a claim to verify. When a prompt says a step has run, verify it. When something cannot be verified, say so and stop rather than proceeding on a guess.
+
+If a phase depends on a previous phase, confirm the previous phase actually completed before starting. Do not infer it from the fact that it was requested.
+
+---
+
+## 1. The four documents
+
+| ID | File | Governs |
+| :---- | :---- | :---- |
+| ANCHOR | `docs/ANCHOR.md` | Positioning, clients, sectors, commercial path, the four frameworks, claims |
+| PRODUCT | `docs/PRODUCT.md` | Business Health Check, the instrument, Business Clarity Audit |
+| WEB | `docs/WEBSITE.md` | Public routes, navigation, pages, publishing |
+| DESIGN | `.claude/skills/frontend-design/SKILL.md` | Colors, typography, components, accessibility |
+
+Cross-reference by Document ID. Never by filename.
+
+The register is closed at four. New governing content is added to an existing document, never to a new one.
+
+---
+
+## 1b. The engineering layer
+
+Four more files govern engineering, not product. They are not part of the closed register and must not duplicate it.
+
+| File | Keeps | Must not contain |
+| :---- | :---- | :---- |
+| `AGENTS.md` | Tech stack, architecture map, coding standards, key constraints, validation commands | Design tokens, type scale, utility class list, FDI rules, page purposes |
+| `CLAUDE.md` | A short pointer to `AGENTS.md` and to the four documents by Document ID | Anything substantive |
+| `.claude/commands/ship.md` | Release procedure | Product behavior |
+| `spec.md` | **Deleted 2026-08-24.** Its content is in PRODUCT and WEB. Do not recreate it. | — |
+
+Where an engineering file describes product behavior, it points to the Document ID instead. Duplication is what allowed three wrong font names and one prohibited phrase to survive months of review.
+
+**Two defects in `AGENTS.md` were fixed on 2026-08-24. Neither may return:**
+
+- The architecture map must label `lib/scoring.ts` and `lib/questions.ts` as **retired** — both belong to the ten-question diagnostic. Verified: `scoring.ts` survives only for `DIMENSION_META` in the admin historic-lead view, and nothing imports `questions.ts` at all. `lib/fdi/` is the active path.
+- The Design System section must stay a pointer to DESIGN plus a one-line identity statement. It must never again reproduce the token table, the type scale, or the utility class list.
+
+---
+
+## 2. Authority order
+
+When two sources disagree, the higher one wins:
+
+1. Explicit owner direction for the current release
+2. ANCHOR
+3. WEB
+4. PRODUCT
+5. DESIGN
+6. The deployed codebase
+
+Two standing exceptions where the codebase is truth and the document is corrected to match it:
+
+- `globals.css` for design token values
+- The active instrument configuration for question wording, option wording, scores, and findings
+
+---
+
+## 3. ANCHOR is locked
+
+No agent may edit, reformat, reorder, summarize, or delete any part of `docs/ANCHOR.md`. Reading and citing it is always permitted.
+
+An edit requires all four of these:
+
+1. The user names the file explicitly. Not "the docs," not "the governance layer."
+2. The user states the exact change, section by section.
+3. The agent quotes the current text back before changing it.
+4. The user confirms after seeing that quote.
+
+**A request to "align the documents," "fix inconsistencies," or "update everything" is never authorization to change ANCHOR.** Where another file disagrees with it, the other file is what changes.
+
+Finding that the code, the site, or another document contradicts ANCHOR is not grounds for an edit. It is grounds for changing the code, the site, or the other document.
+
+---
+
+## 4. The other three
+
+PRODUCT, WEB, and DESIGN are editable, with three conditions:
+
+- Name the document and the section before editing.
+- State what changes and why.
+- Never edit one to resolve a conflict with ANCHOR. ANCHOR wins.
+
+Three blocks inside these documents are frozen and reproduced word for word:
+
+- The limitation paragraph in PRODUCT §A10
+- The four band definitions, wherever they appear
+- The mandatory scope line in PRODUCT §A1
+
+---
+
+## 5. What an agent must never do
+
+- **Never invent a Founder Dependency Index band, range, or label.** The only four are in PRODUCT §A6. A high index is the adverse result; band names never read as praise.
+- **Never render a sample score, filled meter, or demo reading.** A plausible number is an invented metric.
+- **Never write `%` near the index.** It is a value out of 100.
+- **Never edit, migrate, rescore, or delete a historic instrument version or its sessions.** Six completed FDI-1.0 sessions exist and were emailed.
+- **Never infer live data from migrations, fixtures, or test files.** Counts come from live rows or they do not exist.
+- **Never use a credential from `.env.local` to open an outbound connection** without explicit authorization for that specific call.
+- **Never resolve a documentation conflict silently.** Report it and stop.
+
+---
+
+## 6. On finding a conflict
+
+1. Stop. Do not edit.
+2. Report: which two sources, the exact text of each, and file paths with line numbers.
+3. State which one the authority order in §2 makes correct.
+4. Wait for a decision.
+
+This applies even when the correct answer looks obvious.
+
+---
+
+## 7. Settled — do not re-open
+
+Four items were open when this layer was installed. All four closed on 2026-08-24, with evidence.
+
+**PRODUCT §A4 — verified byte-identical.** All 12 question prompts and all 48 options, text and score alike, match `src/lib/fdi/questions/fdi-questions-1.1.ts` exactly. The five em dashes in OV1-A, OV1-B, OV1-C, OV1-D and OV4-A are U+2014, and the apostrophe in EC1-C `people's` is U+0027, not U+2019. Nothing differed; the document needed no correction. Re-verify after any paste into that section — an editor with autocorrect enabled will silently break both.
+
+**PRODUCT §A8 — verified byte-identical.** All 24 findings statements, 12 high-dependency and 12 low-dependency, match the `RULES` table in `src/lib/fdi/observations.ts` exactly.
+
+**DESIGN §1 — filled.** The audit exception now records `scripts/audit-type-scale.mjs` and the three lines changed there.
+
+**The unverified release check — it exists, and it passes.** `src/lib/fdi/config.test.ts`, describe block *FDI-1.1 approved Business Health Check wording*, asserts the exact text of every question and every option and locks both the config and the question set behind SHA-256 digests. Run 2026-08-24: 337 tests across 29 suites, all passing.
+
+---
+
+## 8. The guard
+
+`src/lib/website-specification.test.ts` scans the governance surface on every CI run and fails on prohibited language. The build once scanned only part of the layer, which is why prohibited language survived in a document for weeks.
+
+**Scope.** Every file under `docs/` and `.claude/`; `CLAUDE.md` and `AGENTS.md` at the repository root; and `.design-sync/` filtered to `.md`, `.mjs`, `.css`, and `.tsx`. Binary `.woff2` faces are excluded — a font file cannot be proof-read. Generated and vendored trees are skipped: `node_modules`, `.cache`, `learnings`, `.next`, `coverage`. 91 files as of 2026-08-24.
+
+**Fails on:**
+
+- `predictable growth`
+- `Critical 0-39`, `Developing 40-69`, `Progressing 70-100` — hyphen and en-dash forms both
+- `Figtree`, `Lexend`, `Segoe UI`, `Roboto Slab`
+- `Strategic Growth Architect` where not followed by `ure`
+- `%` within 40 characters of `Founder Dependency Index`
+
+**Two exemptions. Both narrow, both load-bearing, both verified to be no wider than they need to be.**
+
+1. **Prohibition statements.** A line that quotes a banned term inside straight double quotes *and* declares it prohibited is the rule, not a breach of it. ANCHOR §12 reads `"Predictable growth" is prohibited language.` and ANCHOR is a locked file — without this exemption the guard would fail on a document no agent is permitted to edit. Exactly two files rely on it: `docs/ANCHOR.md` and `docs/PRODUCT.md`. A retired typeface reintroduced in ordinary prose still fails.
+
+2. **The font pipeline.** `.design-sync/fetch-fonts.mjs`, `.design-sync/build-css.mjs`, and `.design-sync/fonts/fonts-src.css` are exempt from the typeface rule, and from that rule only. They must name the faces they download and bind; renaming one without re-downloading the `.woff2` files silently breaks the bundle. Those three are the exact set that would otherwise fail.
+
+**The `AGENTS.md` do-not-revert line — resolved.** It was reworded to name no font, so no by-name line exemption is needed. It now reads: *"Do not revert to any previous visual identity. Several were retired deliberately. DESIGN is the only current specification."*
+
+---
+
+END OF AGENT RULES

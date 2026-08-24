@@ -1,6 +1,6 @@
 # Building with this design system
 
-**Electric Blue & Amber** — Roboto Slab headings over Figtree body, on slate neutrals.
+**Electric Blue & Amber** — Plus Jakarta Sans throughout, on slate neutrals.
 
 ## Setup: none
 
@@ -11,7 +11,7 @@ const { Button, Section, SectionHeader, PageHero } = window.ConsultingDS;
 ```
 
 Load `styles.css` — it `@import`s the compiled component CSS and the self-hosted
-Roboto Slab / Figtree faces. Nothing else is required. Components that link
+font faces. Nothing else is required. Components that link
 internally (`Button` with `href`, `Navigation`, `Footer`) render plain `<a>`
 elements here, so no router is needed.
 
@@ -49,9 +49,9 @@ body `text-muted-invert`, eyebrow `text-accent`. `text-ink` and `text-muted` are
 unreadable there. Note `SectionHeader` hardcodes the light-ground tokens, so on a
 dark band write the heading markup directly instead of using it.
 
-**Type** — `font-heading` (Roboto Slab) for headings, `font-body` (Figtree) for
-everything else including button labels. `font-mono` means tabular figures, not a
-third family. Sizes come only from the scale:
+**Type** — `font-heading` for headings, `font-body` for everything else including
+button labels; both resolve to Plus Jakarta Sans. `font-mono` means tabular
+figures, not a second family. Sizes come only from the scale:
 `text-[length:var(--step-N)]`, N in `-1,0,1,2,3,4,5`.
 
 **Never hardcode a font size.** The scale enforces hard mobile ceilings —
@@ -116,6 +116,9 @@ const { Section, SectionHeader, Surface, Button } = window.ConsultingDS;
 ## Content integrity
 
 Never invent metrics, testimonials, client names, or case-study results. The
-Founder Dependency Index bands are Critical 0–39, Developing 40–69,
-Progressing 70–100 — use those real values, or show a scale with no reading.
+Founder Dependency Index bands are Low Founder Dependency 0–24, Moderate
+Founder Dependency 25–49, High Founder Dependency 50–74, and Very High Founder
+Dependency 75–100. Always the full band name, never a standalone Low, Moderate
+or High. A high index is the adverse result. Show a scale with no reading —
+never a sample score or a filled meter.
 Where evidence is missing, write `[TO CONFIRM]`.
