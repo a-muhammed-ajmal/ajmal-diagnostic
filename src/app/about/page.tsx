@@ -1,6 +1,9 @@
 import Image from "next/image";
 import { ArrowRight, Check } from "lucide-react";
+import { Accordion } from "@/components/ui/Accordion";
 import { Button } from "@/components/ui/Button";
+import { CTABand } from "@/components/ui/CTABand";
+import { StageRail } from "@/components/ui/StageRail";
 import { PageHero } from "@/components/ui/PageHero";
 import { Section } from "@/components/ui/Section";
 import { SectionHeader } from "@/components/ui/Surface";
@@ -28,6 +31,32 @@ const principles = [
   ["Simple", "Use operating structures people can understand and apply."],
   ["Practical", "Prioritize changes that fit the reality of the business."],
   ["Sustainable", "Build systems the team can maintain after implementation."],
+];
+
+/* ANCHOR §5 — core capability. Each is common alone; the combination inside a
+   live UAE SME is not. */
+const howIWork = [
+  { marker: "01", title: "Business management", body: "Judgment about strategy, people, money, operations." },
+  { marker: "02", title: "Systems thinking", body: "The business as connected parts, not isolated problems." },
+  { marker: "03", title: "Execution", body: "The engagement ends with a working system, not a document." },
+  { marker: "04", title: "Applied AI", body: "Automation added after the process is understood." },
+];
+
+/* Governed boundary statements. Nothing here introduces a claim the practice
+   has not already committed to. */
+const boundaries = [
+  {
+    question: "Do you cover motivation and mindset?",
+    answer: "No. The work is structural: systems, ownership, decision rights, visibility, and consistent execution.",
+  },
+  {
+    question: "Can you just set up the AI automation?",
+    answer: "Only after the process is defined. Applied AI is added once the underlying work is understood, so it improves capacity, speed, or visibility rather than automating a process that is not yet working.",
+  },
+  {
+    question: "Does an engagement end with a report?",
+    answer: "No. The engagement ends with a working system, not a document.",
+  },
 ];
 
 /** Descending stagger, so the three principles read as a step rather than a row.
@@ -73,6 +102,12 @@ export default function AboutPage() {
           </Button>
         }
         aside={<Headshot />}
+        signals={principles.map(([title, body]) => (
+          <div key={title}>
+            <h2 className="font-heading text-[length:var(--step-1)] font-bold text-ink">{title}</h2>
+            <p className="mt-1 font-body text-[length:var(--step--1)] leading-relaxed text-muted">{body}</p>
+          </div>
+        ))}
       />
 
       <Section tone="tint" width="wide" orbs>
@@ -115,6 +150,11 @@ export default function AboutPage() {
         </ol>
       </Section>
 
+      <Section tone="tint" width="narrow" orbs>
+        <SectionHeader eyebrow="How I work" title="Four capabilities, applied in order." />
+        <StageRail className="mt-12" stages={howIWork} />
+      </Section>
+
       <Section tone="light" width="wide">
         <div className="grid gap-10 lg:grid-cols-12 lg:gap-16">
           <div className="lg:col-span-5">
@@ -138,6 +178,26 @@ export default function AboutPage() {
           </ul>
         </div>
       </Section>
+
+      <Section width="narrow" divided>
+        <SectionHeader eyebrow="Boundaries" title="What this work is, and what it is not." />
+        <Accordion className="mt-10" items={boundaries.map(({ question, answer }) => ({ question, answer }))} />
+      </Section>
+
+      <CTABand
+        eyebrow="Start with clarity"
+        title="See where your business still depends on you."
+        body="The Business Health Check is a free founder-dependency self-report returning your Founder Dependency Index."
+        actions={
+          <Button href="/diagnostic" variant="accent">
+            Start the Business Health Check
+            {/* WEB §5 fixes the label including the arrow. The icon is decorative,
+                so the glyph is restated here for the accessible name only. */}
+            <span className="sr-only"> →</span>
+            <ArrowRight className="h-4 w-4" aria-hidden="true" />
+          </Button>
+        }
+      />
     </>
   );
 }
