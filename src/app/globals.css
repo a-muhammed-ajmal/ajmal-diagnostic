@@ -309,6 +309,66 @@ h1, h2, h3, p { overflow-wrap: break-word; }
 
 @keyframes marquee-slide { to { transform: translateX(-50%); } }
 
+/* ── Orb drift ───────────────────────────────────────────────────────────── */
+/* [DESIGN CHANGE] register item 2 — orbs were static. Transform only, so this
+   stays on the compositor. Guarded explicitly as well as by the global
+   reduced-motion block, because an infinite ambient loop is the one thing a
+   motion-sensitive reader most wants stopped. */
+@media (prefers-reduced-motion: no-preference) {
+  .orb-drift      { animation: orb-drift 22s ease-in-out infinite alternate; }
+  .orb-drift-slow { animation-duration: 18s; }
+}
+@keyframes orb-drift {
+  to { transform: translate3d(18px, -14px, 0) scale(1.06); }
+}
+
+/* ── CTA shine sweep ─────────────────────────────────────────────────────── */
+/* [DESIGN CHANGE] register item 3. One instance per viewport, primary CTA only.
+   The sheen is derived from --color-canvas rather than written as a new literal. */
+.cta-shine { position: relative; overflow: hidden; }
+@media (prefers-reduced-motion: no-preference) {
+  .cta-shine::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 38%;
+    background: linear-gradient(
+      100deg,
+      transparent 0%,
+      color-mix(in srgb, var(--color-canvas) 38%, transparent) 50%,
+      transparent 100%
+    );
+    transform: translateX(-110%);
+    animation: cta-shine 3.4s ease-in-out infinite;
+    pointer-events: none;
+  }
+}
+@keyframes cta-shine { to { transform: translateX(110%); } }
+
+/* ── Stage rail, horizontal variant ──────────────────────────────────────── */
+/* [DESIGN CHANGE] register item 7 — a presentation variant over the same data,
+   Home only. The vertical rail stays the default everywhere else. */
+@media (min-width: 768px) {
+  .stage-rail-snap {
+    display: flex;
+    gap: var(--space-5);
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding-left: 0;
+    scroll-padding-left: var(--space-4);
+  }
+  .stage-rail-snap::before { content: none; }
+  .stage-rail-snap .stage-item {
+    flex: 0 0 clamp(260px, 30%, 340px);
+    scroll-snap-align: start;
+    margin-top: 0;
+  }
+  .stage-rail-snap .stage-marker { display: none; }
+  .stage-rail-snap .stage-card { border-left: 3px solid var(--color-brand); }
+}
+
 /* ── Hover micro-interactions ────────────────────────────────────────────── */
 /* The house interaction: a 2px lift plus a glow step, bound to 200ms. */
 .hover-lift { transition: all var(--dur-2) var(--ease-out); }

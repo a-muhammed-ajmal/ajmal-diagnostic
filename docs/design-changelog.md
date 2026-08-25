@@ -69,3 +69,20 @@
              already lives in FdiDiagnosticFlow.tsx, whose copy is asserted
              directly from PRODUCT by site-copy.test.ts; a competing component
              would fork governed copy. It is restyled in place instead.
+2026-08-26 — [DESIGN CHANGE] register items 2, 3 and 7.
+             Item 2, orb drift: orbs were static. .orb-drift / .orb-drift-slow
+             translate <=18px and scale <=1.06 over 22s / 18s, alternating.
+             Transform only, so it stays on the compositor. Guarded by its own
+             prefers-reduced-motion block as well as the global one.
+             Item 3, CTA shine: .cta-shine sweeps a 38%-wide highlight across a
+             primary CTA over 3.4s. One instance per viewport, primary only —
+             the Home hero. The sheen is color-mix over --color-canvas, not a
+             new literal.
+             Item 7, horizontal stage rail: .stage-rail-snap is a presentation
+             variant over the same data at >=768px, Home only. StageRail gains
+             an opt-in `snap` prop defaulting false; the vertical rail stays the
+             default on Services and About.
+             Register item 8, a dedicated tint-surface border token, is NOT
+             needed and will not ship. Tinted surfaces use --color-line on
+             --color-brand-tint, which reads correctly; the prototypes' #CCE0FF
+             was never a token and no surface required it.

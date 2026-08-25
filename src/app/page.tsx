@@ -103,7 +103,7 @@ export default function HomePage() {
         lead="Muhammed Ajmal Consulting helps founder-led UAE SMEs build successful, scalable businesses by reducing founder dependency through stronger systems, clearer ownership, useful visibility, and consistent execution."
         actions={
           <>
-            <Button href="/diagnostic">
+            <Button href="/diagnostic" className="cta-shine">
               Start the Business Health Check
               {/* WEB §5 fixes the label including the arrow. The icon is decorative,
                   so the glyph is restated here for the accessible name only. */}
@@ -176,7 +176,7 @@ export default function HomePage() {
           title="One commercial journey. Each stage leads to the next."
           description="The right next step depends on what evidence shows—not on choosing from a menu of disconnected services."
         />
-        <StageRail className="mt-12" stages={commercialPath} />
+        <StageRail className="mt-12" stages={commercialPath} snap />
         <div className="mt-10">
           <Button href="/services" variant="secondary">
             See the full journey

@@ -87,13 +87,13 @@ function Orbs({ tone }: { tone: SectionTone }) {
     <div className="pointer-events-none absolute inset-0" aria-hidden="true">
       <div
         className={cn(
-          "orb orb-electric absolute -right-32 -top-40 h-[28rem] w-[28rem]",
+          "orb orb-drift orb-electric absolute -right-32 -top-40 h-[28rem] w-[28rem]",
           tone === "dark" && "opacity-20",
         )}
       />
       <div
         className={cn(
-          "orb orb-amber absolute -bottom-40 -left-32 h-96 w-96",
+          "orb orb-drift orb-drift-slow orb-amber absolute -bottom-40 -left-32 h-96 w-96",
           tone === "dark" && "opacity-25",
         )}
       />

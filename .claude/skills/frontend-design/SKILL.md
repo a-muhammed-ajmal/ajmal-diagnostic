@@ -173,6 +173,9 @@ Use these rather than rebuilding the recipe inline. All declared in `globals.css
 | `.stage-rail` / `.stage-item` / `.stage-marker` / `.stage-card` | Process and timeline composition |
 | `.article-longform` / `.article-toc` / `.reading-progress` | Insights article chrome |
 | `.marquee` / `.marquee-track` | Looping chip track — the set is rendered twice and translated -50% so the loop has no seam. 8% edge mask; pauses on hover. Duplicate set must carry `aria-hidden` |
+| `.orb-drift` / `.orb-drift-slow` | Ambient orb movement. Transform only, guarded explicitly as well as globally — an infinite loop is what a motion-sensitive reader most wants stopped |
+| `.cta-shine` | Sweeping highlight on a primary CTA. **One instance per viewport, primary only.** Sheen derives from `--color-canvas` |
+| `.stage-rail-snap` | Horizontal scroll-snap presentation of `.stage-rail`, ≥768px. **Home only** — the vertical rail stays the default everywhere else |
 | `.spoke-arc` / `.spoke-ring` | Hero-only decorative figure — eight rotating spokes masked to an annulus, plus a dashed counter-rotating ring. Colours derive from `--color-brand` via `color-mix`. Ambient loops (46s / 28s) sit outside the `--dur-*` interaction scale on purpose |
 
 Shadows are real utilities: `shadow-1` hairline, `shadow-2` card, `shadow-3` modal, plus `shadow-glow-electric` and `shadow-glow-amber`. Use those names, not `shadow-lg`.

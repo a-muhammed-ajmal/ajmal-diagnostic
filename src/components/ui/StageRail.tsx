@@ -17,9 +17,18 @@ export type Stage = {
   body: ReactNode;
 };
 
-export function StageRail({ stages, className }: { stages: Stage[]; className?: string }) {
+export function StageRail({
+  stages,
+  className,
+  snap = false,
+}: {
+  stages: Stage[];
+  className?: string;
+  /** Horizontal scroll-snap presentation over the same data. Home only. */
+  snap?: boolean;
+}) {
   return (
-    <ol className={cn("stage-rail", className)}>
+    <ol className={cn("stage-rail", snap && "stage-rail-snap", className)}>
       {stages.map((stage, index) => (
         <li key={index} className="stage-item">
           <span className="stage-marker font-mono" aria-hidden="true">
