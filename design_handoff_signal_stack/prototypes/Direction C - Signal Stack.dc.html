@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<style>
+  body{margin:0;background:#F8FAFC;color:#0F172A;font-family:'Plus Jakarta Sans',system-ui,sans-serif;-webkit-font-smoothing:antialiased;text-wrap:pretty}
+  a{color:#0037A5;text-decoration:none}a:hover{color:#0052FF}
+  @keyframes c-rise{from{opacity:0;transform:translate3d(0,22px,0)}to{opacity:1;transform:none}}
+  @keyframes c-orb{0%,100%{transform:translate3d(0,0,0) scale(1)}50%{transform:translate3d(0,-26px,0) scale(1.08)}}
+  @keyframes c-sweep{0%{transform:translateX(-110%)}100%{transform:translateX(110%)}}
+  @keyframes c-marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+  @keyframes c-blink{0%,100%{opacity:.3}50%{opacity:1}}
+  @keyframes c-spin{to{transform:rotate(360deg)}}
+  .c-rev{animation:c-rise .65s cubic-bezier(.16,1,.3,1) both}
+  @supports (animation-timeline: view()){.c-rev{animation-timeline:view();animation-range:entry 2% cover 26%;animation-duration:1ms}}
+</style>
+</helmet>
+
+<div>
+  <div style="position:sticky;top:0;z-index:9;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 32px;background:#0F172A;color:#fff">
+    <span style="font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase">Direction C · Signal Stack</span>
+    <span style="font-size:12px;color:#CBD5E1">Banner hero · tinted-header cards · expressive motion (orbs, shine, marquee) · tint-heavy banding</span>
+  </div>
+
+  <!-- BANNER HERO -->
+  <div style="position:relative;overflow:hidden;background:#E6F0FF;border-bottom:1px solid #CCE0FF">
+    <div style="position:absolute;top:-200px;left:-80px;width:520px;height:520px;border-radius:999px;background:radial-gradient(circle,rgba(0,82,255,.22),transparent 66%);filter:blur(18px);animation:c-orb 16s ease-in-out infinite"></div>
+    <div style="position:absolute;bottom:-240px;right:-60px;width:480px;height:480px;border-radius:999px;background:radial-gradient(circle,rgba(255,191,0,.28),transparent 66%);filter:blur(22px);animation:c-orb 21s ease-in-out infinite reverse"></div>
+    <div style="position:absolute;top:-120px;right:-90px;width:560px;height:560px;border-radius:999px;opacity:.6;background:conic-gradient(from 0deg,rgba(0,82,255,.22) 0 5%,transparent 5% 12.5%,rgba(0,82,255,.22) 12.5% 17.5%,transparent 17.5% 25%,rgba(0,82,255,.22) 25% 30%,transparent 30% 37.5%,rgba(0,82,255,.22) 37.5% 42.5%,transparent 42.5% 50%,rgba(0,82,255,.22) 50% 55%,transparent 55% 62.5%,rgba(0,82,255,.22) 62.5% 67.5%,transparent 67.5% 75%,rgba(0,82,255,.22) 75% 80%,transparent 80% 87.5%,rgba(0,82,255,.22) 87.5% 92.5%,transparent 92.5% 100%);mask:radial-gradient(circle,transparent 62%,#000 64%,#000 96%,transparent 97%);-webkit-mask:radial-gradient(circle,transparent 62%,#000 64%,#000 96%,transparent 97%);animation:c-spin 46s linear infinite;pointer-events:none"></div>
+    <div style="position:absolute;top:40px;right:70px;width:280px;height:280px;border-radius:999px;border:1px dashed rgba(0,82,255,.28);animation:c-spin 28s linear infinite reverse;pointer-events:none"></div>
+    <div style="position:relative;max-width:1120px;margin:0 auto;padding:88px 32px 64px;text-align:left">
+      <div style="max-width:60ch;animation:c-rise .6s cubic-bezier(.16,1,.3,1) both">
+        <span style="display:inline-flex;align-items:center;gap:9px;font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#0037A5"><span style="height:7px;width:7px;border-radius:999px;background:#FFBF00;animation:c-blink 2.4s ease-in-out infinite"></span>Business Operations &amp; Growth · Dubai, UAE</span>
+        <h1 style="margin:16px 0 18px;font-size:52px;line-height:1.03;font-weight:800;letter-spacing:-.035em">Build a business that grows <span style="background:linear-gradient(90deg,#0037A5,#0052FF);-webkit-background-clip:text;background-clip:text;color:transparent">beyond the founder.</span></h1>
+        <p style="margin:0 0 28px;font-size:18px;line-height:1.65;color:#475569;max-width:54ch">Reduce founder dependency through stronger systems, clearer ownership, useful visibility, and consistent execution.</p>
+        <div style="display:flex;gap:12px;flex-wrap:wrap">
+          <a href="#" style="position:relative;overflow:hidden;display:inline-flex;align-items:center;gap:9px;height:52px;padding:0 26px;border-radius:14px;background:#0052FF;color:#fff;font-size:15px;font-weight:700;box-shadow:0 16px 34px -12px rgba(0,82,255,.75);transition:all 200ms cubic-bezier(.16,1,.3,1)" style-hover="background:#0039CC;transform:translateY(-2px);color:#fff" style-after="content:'';position:absolute;top:0;bottom:0;width:38%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.3),transparent);animation:c-sweep 3.4s ease-in-out infinite">Start the Business Health Check →</a>
+          <a href="#" style="display:inline-flex;align-items:center;height:52px;padding:0 24px;border-radius:14px;background:rgba(255,255,255,.7);backdrop-filter:blur(8px);border:1px solid #CCE0FF;color:#0F172A;font-size:15px;font-weight:600;transition:all 200ms cubic-bezier(.16,1,.3,1)" style-hover="background:#fff;transform:translateY(-2px);color:#0037A5">See How It Works</a>
+        </div>
+      </div>
+      <div style="position:relative;margin-top:44px;display:grid;grid-template-columns:repeat(3,1fr);gap:16px">
+        <sc-for list="{{ areas }}" as="a" hint-placeholder-count="3">
+          <div style="{{ a.style }}">
+            <div style="font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#0037A5">{{ a.tag }}</div>
+            <div style="font-size:17px;font-weight:700;margin-top:8px">{{ a.title }}</div>
+            <div style="font-size:13px;line-height:1.6;color:#475569;margin-top:5px">{{ a.body }}</div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </div>
+
+  <!-- MARQUEE -->
+  <div style="background:#fff;border-bottom:1px solid #E2E8F0;padding:22px 0;overflow:hidden">
+    <div style="mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)">
+      <div style="display:flex;width:max-content;animation:c-marquee 30s linear infinite" style-hover="animation-play-state:paused">
+        <sc-for list="{{ patterns }}" as="p" hint-placeholder-count="8">
+          <span style="flex:0 0 auto;margin:0 7px;padding:9px 16px;border-radius:999px;background:#F8FAFC;border:1px solid #E2E8F0;font-size:13px;font-weight:600;color:#475569;white-space:nowrap;transition:all 200ms cubic-bezier(.16,1,.3,1)" style-hover="border-color:#0052FF;color:#0037A5;background:#E6F0FF">{{ p }}</span>
+        </sc-for>
+      </div>
+    </div>
+  </div>
+
+  <!-- TINTED-HEADER CARDS -->
+  <div style="max-width:1120px;margin:0 auto;padding:76px 32px">
+    <span style="font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#0037A5">The Founder Trap</span>
+    <h2 style="margin:12px 0 30px;font-size:32px;line-height:1.16;font-weight:800;letter-spacing:-.025em;max-width:24ch">When growth still depends on one person.</h2>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:20px">
+      <sc-for list="{{ traps }}" as="t" hint-placeholder-count="4">
+        <div class="c-rev" style="{{ t.wrap }}" style-hover="transform:translateY(-6px);box-shadow:0 26px 54px -22px rgba(15,23,42,.32),0 4px 10px rgba(15,23,42,.06);border-color:#CCE0FF">
+          <div style="display:flex;align-items:center;gap:10px;padding:14px 20px;background:#E6F0FF;border-bottom:1px solid #CCE0FF">
+            <span style="height:26px;width:26px;border-radius:8px;background:#0052FF;color:#fff;display:grid;place-items:center;font-size:11px;font-weight:800;transition:transform 240ms cubic-bezier(.34,1.56,.64,1)" style-hover="transform:scale(1.06) rotate(-3deg)">{{ t.n }}</span>
+            <span style="font-size:15px;font-weight:700">{{ t.title }}</span>
+          </div>
+          <div style="padding:18px 20px;font-size:14px;line-height:1.65;color:#475569">{{ t.body }}</div>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+
+  <!-- TINT BAND -->
+  <div style="background:#E6F0FF;border-top:1px solid #CCE0FF;border-bottom:1px solid #CCE0FF">
+    <div style="max-width:1120px;margin:0 auto;padding:76px 32px">
+      <span style="font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#0037A5">How we work</span>
+      <h2 style="margin:12px 0 30px;font-size:30px;line-height:1.16;font-weight:800;letter-spacing:-.025em;max-width:28ch">One commercial journey. Each stage leads to the next.</h2>
+      <div style="display:flex;gap:16px;overflow-x:auto;padding-bottom:8px">
+        <sc-for list="{{ stages }}" as="s" hint-placeholder-count="5">
+          <div style="{{ s.wrap }}" style-hover="transform:translateY(-6px);box-shadow:0 26px 54px -22px rgba(15,23,42,.35)">
+            <span style="height:30px;width:30px;border-radius:999px;background:#0052FF;color:#fff;display:grid;place-items:center;font-size:12px;font-weight:800;box-shadow:0 10px 20px -10px rgba(0,82,255,.8)">{{ s.n }}</span>
+            <div style="font-size:16px;font-weight:700;line-height:1.3;margin-top:14px">{{ s.title }}</div>
+            <div style="font-size:13px;line-height:1.6;color:#475569;margin-top:6px">{{ s.body }}</div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECOND DARK BAND -->
+  <div style="position:relative;overflow:hidden;background:#0F172A">
+    <div style="position:absolute;top:-150px;left:14%;width:480px;height:480px;border-radius:999px;background:radial-gradient(circle,rgba(0,82,255,.42),transparent 64%);filter:blur(14px);animation:c-orb 20s ease-in-out infinite"></div>
+    <div style="position:absolute;bottom:-190px;right:8%;width:420px;height:420px;border-radius:999px;background:radial-gradient(circle,rgba(255,191,0,.24),transparent 64%);filter:blur(18px);animation:c-orb 25s ease-in-out infinite reverse"></div>
+    <div style="position:relative;max-width:1120px;margin:0 auto;padding:80px 32px;display:grid;grid-template-columns:7fr 5fr;gap:48px;align-items:center">
+      <div>
+        <span style="font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#FFBF00">Start with clarity</span>
+        <h2 style="margin:12px 0 14px;color:#fff;font-size:36px;line-height:1.12;font-weight:800;letter-spacing:-.03em;max-width:22ch">Find out where your business still depends on you.</h2>
+        <p style="margin:0 0 26px;font-size:16px;line-height:1.7;color:#CBD5E1;max-width:48ch">Free. Private. A focused founder-dependency self-report.</p>
+        <a href="#" style="position:relative;overflow:hidden;display:inline-flex;align-items:center;gap:9px;height:52px;padding:0 26px;border-radius:14px;background:#0052FF;color:#fff;font-size:15px;font-weight:700;box-shadow:0 18px 40px -14px rgba(0,82,255,.9);transition:all 200ms cubic-bezier(.16,1,.3,1)" style-hover="background:#0039CC;transform:translateY(-2px);color:#fff" style-after="content:'';position:absolute;top:0;bottom:0;width:38%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.3),transparent);animation:c-sweep 3.4s ease-in-out infinite">Start the Business Health Check →</a>
+      </div>
+      <div style="border-radius:18px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.2);backdrop-filter:blur(12px);padding:24px">
+        <span style="font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#FFBF00">Founder Dependency Index</span>
+        <div style="margin:14px 0 8px;height:10px;border-radius:999px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.22)"></div>
+        <div style="display:flex;justify-content:space-between;font-size:11px;font-weight:700;color:#CBD5E1"><span>0</span><span>50</span><span>100</span></div>
+        <div style="margin-top:14px;font-size:12px;line-height:1.6;color:#94A3B8">Empty scale — no sample reading is ever shown.</div>
+      </div>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1240}}">
+class Component extends DCLogic {
+  renderVals(){
+    const p = ['Approval bottlenecks', 'Knowledge trapped in people', 'Firefighting', 'Inconsistent execution', 'Reporting rebuilt monthly', 'Escalations to the founder', 'No second signer', 'Hiring blocked on review'];
+    return {
+      areas: [
+        { tag: 'Area 01', title: 'Decision speed', body: 'Whether decisions continue when you are unavailable.' },
+        { tag: 'Area 02', title: 'Execution consistency', body: 'Whether recurring work reaches a standard unsupervised.' },
+        { tag: 'Area 03', title: 'Operational visibility', body: 'Whether you can see what is happening without chasing.' }
+      ].map(a => ({ ...a, style: 'padding:20px;border-radius:16px;background:rgba(255,255,255,.72);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.9);box-shadow:0 18px 40px -26px rgba(15,23,42,.35)' })),
+      patterns: p.concat(p),
+      traps: [
+        { n: '01', title: 'Approval bottlenecks', body: 'Work waits for a founder decision.' },
+        { n: '02', title: 'Knowledge in people', body: 'Critical know-how is not accessible.' },
+        { n: '03', title: 'Firefighting', body: 'Urgent issues replace planned work.' },
+        { n: '04', title: 'Inconsistent execution', body: 'Standards change by person or day.' }
+      ].map((t, i) => ({
+        ...t,
+        wrap: `border-radius:16px;overflow:hidden;background:#fff;border:1px solid #E2E8F0;box-shadow:0 14px 34px -24px rgba(15,23,42,.35);animation-delay:${i * .07}s;transition:transform 200ms cubic-bezier(.16,1,.3,1),box-shadow 200ms cubic-bezier(.16,1,.3,1)`
+      })),
+      stages: [
+        { n: '01', title: 'Business Health Check', body: 'Free self-report; returns the index.' },
+        { n: '02', title: 'Business Clarity Audit', body: 'Tests the picture against evidence.' },
+        { n: '03', title: 'Improvement Sprint', body: 'One verified priority.' },
+        { n: '04', title: 'Business System Build', body: 'Installs the operating structure.' },
+        { n: '05', title: 'Growth Partner Retainer', body: 'Maintains the standard as you grow.' }
+      ].map(s => ({ ...s, wrap: 'flex:0 0 250px;padding:22px;border-radius:16px;background:#fff;border:1px solid #CCE0FF;box-shadow:0 14px 34px -26px rgba(15,23,42,.4);transition:transform 240ms cubic-bezier(.16,1,.3,1),box-shadow 240ms cubic-bezier(.16,1,.3,1)' }))
+    };
+  }
+}
+</script>
+</body>
+</html>

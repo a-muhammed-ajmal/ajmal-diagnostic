@@ -78,6 +78,15 @@ Two aliases exist and return HTTP 308:
 
 Alias layouts are noindex. They are not alternate public pages. Public components link to the canonical route directly.
 
+One fallback exists and is not a route:
+
+| Fallback | Serves |
+| :---- | :---- |
+| `not-found.tsx` | Any unmatched path — HTTP 404 |
+| `error.tsx` | An unhandled render error in a public route segment — HTTP 500 |
+
+The fallback is noindex, absent from the sitemap, and absent from navigation. It is not a landing surface: it carries no offer, no lead capture, and no claim. It returns the visitor to a registered route.
+
 The public site exposes no `/api/submit` route, no feature-flag fallback, and no AI-generated report path. Protected administrative access to stored lead data remains available.
 
 ---
@@ -184,6 +193,12 @@ Article metadata, dates, author identity, categories, summaries, read times, and
 Privacy content describes the actual data collected, deterministic diagnostic use, processors, cross-border processing, retention, contact channel, and rights. Review it whenever processors, retention, consent, or data practices change.
 
 The unsubscribe route is factual, handles valid, invalid, and error states, and is noindex.
+
+### Not found and error fallback
+
+Factual and brief. States that the page does not exist, offers Home and the Business Health Check as the two ways forward, and may list registered routes as likely destinations. The error boundary states that something failed and offers a retry.
+
+Neither surface invents a reason, apologises at length, captures an email, or presents an offer. Both use the standard page shell so a visitor who lands there is still on the site.
 
 ### Administration — `/admin`
 

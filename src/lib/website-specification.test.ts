@@ -201,6 +201,19 @@ describe('WEB — the public website specification', () => {
     expect(website).toContain('| `/results/fdi` | `/results` |');
   });
 
+  it('registers the 404/500 fallback below the register, not as a route', () => {
+    expect(website).toContain('One fallback exists and is not a route:');
+    expect(website).toContain('| `not-found.tsx` | Any unmatched path — HTTP 404 |');
+    expect(website).toContain(
+      '| `error.tsx` | An unhandled render error in a public route segment — HTTP 500 |',
+    );
+    // Not a landing surface: noindex, no offer, no capture.
+    expect(website).toContain(
+      'The fallback is noindex, absent from the sitemap, and absent from navigation.',
+    );
+    expect(website).toContain('it carries no offer, no lead capture, and no claim');
+  });
+
   it('fixes the two approved call-to-action labels', () => {
     expect(website).toContain('Start the Business Health Check →');
     expect(website).toContain('Discuss a Business Clarity Audit');
