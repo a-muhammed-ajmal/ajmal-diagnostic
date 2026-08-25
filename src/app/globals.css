@@ -294,6 +294,9 @@ h1, h2, h3, p { overflow-wrap: break-word; }
    set carries aria-hidden at the call site. Ambient duration again sits outside
    the --dur-* interaction scale; the global reduced-motion block stops it. */
 .marquee {
+  /* The track is width:max-content and therefore always wider than the
+     viewport — without this the page scrolls sideways on mobile. */
+  overflow: hidden;
   -webkit-mask: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
   mask: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
 }

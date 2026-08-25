@@ -1,15 +1,18 @@
-import { ArrowRight, CircleCheck, Compass, Cpu, Settings2, Users } from "lucide-react";
-import {
-  CommercialLadder,
-  DependencyIndexPreview,
-  FounderSystemVisual,
-  FounderTrapDiagram,
-} from "@/components/home/SystemVisuals";
+import { ArrowRight, CircleCheck, Clock, Compass, Cpu, Eye, GitBranch, Repeat, Settings2, ShieldAlert, Users } from "lucide-react";
+import { DependencyIndexPreview, FounderSystemVisual } from "@/components/home/SystemVisuals";
 import { ArchitectureLadder, GrowthFormulaRail } from "@/components/home/Graphics";
+import { Accordion } from "@/components/ui/Accordion";
 import { Button } from "@/components/ui/Button";
+import { CardGrid, CardGridItem } from "@/components/ui/CardGrid";
+import { CTABand } from "@/components/ui/CTABand";
+import { IconTile } from "@/components/ui/IconTile";
 import { PageHero } from "@/components/ui/PageHero";
 import { Section } from "@/components/ui/Section";
-import { SectionHeader } from "@/components/ui/Surface";
+import { StageRail } from "@/components/ui/StageRail";
+import { StickyCTABar } from "@/components/ui/StickyCTABar";
+import { Surface, SectionHeader } from "@/components/ui/Surface";
+import { TrustMarquee } from "@/components/ui/TrustMarquee";
+import { IndexScale } from "@/components/fdi/IndexScale";
 import { pageMetadata } from "@/lib/metadata";
 import { jsonLdScript, personAndServiceJsonLd } from "@/lib/jsonLd";
 
@@ -22,11 +25,37 @@ export const metadata = pageMetadata({
   path: "/",
 });
 
+/* ANCHOR §6. Four areas — not six. "Data" and "Accountability" are not operating
+   scope areas; Accountability is a step in the Growth Formula (ANCHOR §10.3). */
 const scopeAreas = [
   { title: "Strategy", body: "Direction, priorities, positioning, and growth choices.", Icon: Compass },
   { title: "Systems", body: "Processes, SOPs, management rhythm, KPIs, and structure.", Icon: Settings2 },
   { title: "People", body: "Roles, ownership, decision rights, accountability, and capability.", Icon: Users },
   { title: "Applied AI", body: "Automation and AI where they improve capacity, speed, or visibility.", Icon: Cpu },
+];
+
+/* ANCHOR §10.1 — the four observable symptoms, verbatim. */
+const trapSymptoms = [
+  { label: "Approval bottlenecks", detail: "Work waits for a founder decision.", Icon: Clock },
+  { label: "Knowledge trapped in people", detail: "Critical know-how is not accessible.", Icon: GitBranch },
+  { label: "Firefighting", detail: "Urgent issues replace planned work.", Icon: ShieldAlert },
+  { label: "Inconsistent execution", detail: "Standards change by person or day.", Icon: Repeat },
+];
+
+/* ANCHOR §10.2 — the three components the index is built from. */
+const indexComponents = [
+  { title: "Decision Speed", body: "Do decisions and work continue when the founder is unavailable?", Icon: Clock },
+  { title: "Execution Consistency", body: "Does recurring work reach a consistent standard without founder supervision?", Icon: Users },
+  { title: "Operational Visibility", body: "Can the founder see what is happening without chasing updates?", Icon: Eye },
+];
+
+/* WEB §6 — the public commercial path, in order. */
+const commercialPath = [
+  { marker: "01", title: "Business Health Check", body: "A free founder-dependency self-report returning the Founder Dependency Index." },
+  { marker: "02", title: "Business Clarity Audit", body: "An operating audit testing reported patterns against operating evidence." },
+  { marker: "03", title: "Focused Improvement Sprint", body: "A tightly scoped improvement addressing the binding constraint." },
+  { marker: "04", title: "Business System Build", body: "The broader operating-system build where evidence supports it." },
+  { marker: "05", title: "Growth Partner Retainer", body: "Ongoing operating support once foundations are in place." },
 ];
 
 const qualification = [
@@ -38,6 +67,26 @@ const qualification = [
   "Growth still depends heavily on the founder",
 ];
 
+/* Every answer below is a governed boundary statement, not marketing FAQ.
+   Sources: PRODUCT (the self-report boundary) and WEB §6 (the audit boundary). */
+const boundaries = [
+  {
+    question: "Is the Business Health Check an audit?",
+    answer:
+      "This is a focused founder-dependency self-report, not a full financial, tax, legal, or business-performance audit. It shows where dependency appears; a Business Clarity Audit tests why, against operating evidence.",
+  },
+  {
+    question: "Is the Business Clarity Audit a statutory audit?",
+    answer:
+      "The Business Clarity Audit is not a statutory, financial, tax, compliance, or legal audit. It examines operating evidence: records, workflows, dashboards, decision samples, SOPs, roles, and rework.",
+  },
+  {
+    question: "What does the Founder Dependency Index tell me?",
+    answer:
+      "It shows where dependency appears. Only the Business Clarity Audit may claim to identify the binding constraint. A high index is the adverse result, and it is an index out of 100 — never a percentage.",
+  },
+];
+
 export default function HomePage() {
   return (
     <>
@@ -45,6 +94,7 @@ export default function HomePage() {
 
       <PageHero
         eyebrow="Business Operations & Growth Consultant · Dubai, UAE"
+        spokeArc
         title={
           <>
             Build a business that <span className="brand-gradient-text">grows beyond the founder.</span>
@@ -67,33 +117,66 @@ export default function HomePage() {
         }
         note="Free. Private. A focused founder-dependency self-report."
         aside={<FounderSystemVisual />}
+        signals={indexComponents.map(({ title, body, Icon }) => (
+          <div key={title}>
+            <IconTile size="sm" className="mb-3">
+              <Icon className="h-3.5 w-3.5" aria-hidden="true" />
+            </IconTile>
+            <h2 className="font-heading text-[length:var(--step-1)] font-bold text-ink">{title}</h2>
+            <p className="mt-1 font-body text-[length:var(--step--1)] leading-relaxed text-muted">{body}</p>
+          </div>
+        ))}
       />
+
+      <TrustMarquee items={trapSymptoms.map((symptom) => symptom.label)} />
 
       <Section tone="tint" width="wide" compact aria-label="Growth Formula">
         <GrowthFormulaRail />
       </Section>
 
-      <Section id="founder-trap" width="default">
+      {/* ANCHOR §10.1. The Founder Trap is a pattern of observable dependency —
+          not a judgment on the founder. */}
+      <Section id="founder-trap" width="wide">
         <SectionHeader
           eyebrow="The Founder Trap"
           accent="danger"
           title="When growth still depends on one person."
           description="The pattern is visible in how decisions move, where knowledge sits, how the team responds to change, and whether work is done consistently."
         />
-        <div className="mt-12">
-          <FounderTrapDiagram />
-        </div>
+        <CardGrid className="mt-12" columns={4} scrollReveal>
+          {trapSymptoms.map(({ label, detail, Icon }, index) => (
+            <CardGridItem key={label} scrollReveal>
+              <Surface
+                interactive
+                className="h-full"
+                header={
+                  <>
+                    <IconTile variant="numeral" size="md">
+                      {String(index + 1).padStart(2, "0")}
+                    </IconTile>
+                    <h3 className="font-heading text-[length:var(--step-1)] font-bold text-ink">{label}</h3>
+                  </>
+                }
+              >
+                <p className="flex items-start gap-2.5 font-body text-[length:var(--step-0)] leading-relaxed text-muted">
+                  <Icon className="mt-0.5 h-4 w-4 shrink-0 text-brand" strokeWidth={2.25} aria-hidden="true" />
+                  {detail}
+                </p>
+              </Surface>
+            </CardGridItem>
+          ))}
+        </CardGrid>
       </Section>
 
       <DependencyIndexPreview />
 
-      <Section id="how-it-works" width="narrow">
+      <Section id="how-it-works" tone="tint" width="narrow" orbs>
         <SectionHeader
           eyebrow="How we work"
           title="One commercial journey. Each stage leads to the next."
           description="The right next step depends on what evidence shows—not on choosing from a menu of disconnected services."
         />
-        <CommercialLadder />
+        <StageRail className="mt-12" stages={commercialPath} />
         <div className="mt-10">
           <Button href="/services" variant="secondary">
             See the full journey
@@ -105,7 +188,7 @@ export default function HomePage() {
       {/* Operating scope. An asymmetric 5/7 split with the four areas stacked as a
           divided list rather than four equal cards — the equal-card row is the
           strongest "template" signal on a marketing page. */}
-      <Section tone="tint" width="wide" orbs>
+      <Section width="wide" orbs>
         <div className="grid gap-12 lg:grid-cols-12 lg:items-start lg:gap-16">
           <div className="lg:col-span-5">
             <p className="eyebrow mb-3">Operating scope</p>
@@ -122,12 +205,9 @@ export default function HomePage() {
                 key={title}
                 className="stage-reveal card-interactive mb-3 flex gap-4 rounded-2xl border border-line bg-white p-5 last:mb-0"
               >
-                <span
-                  className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-brand-soft"
-                  aria-hidden="true"
-                >
-                  <Icon className="h-5 w-5 text-brand-ink" strokeWidth={2.25} />
-                </span>
+                <IconTile size="lg">
+                  <Icon className="h-5 w-5" strokeWidth={2.25} aria-hidden="true" />
+                </IconTile>
                 <div className="min-w-0 flex-1">
                   <div className="flex items-baseline justify-between gap-3">
                     <h3 className="font-heading text-[length:var(--step-1)] font-bold text-ink">{title}</h3>
@@ -141,10 +221,10 @@ export default function HomePage() {
         </div>
       </Section>
 
-      <Section width="default">
+      <Section tone="light" width="default" divided>
         <SectionHeader
           eyebrow="Strategic Growth Architecture"
-          title="A system that shifts responsibility out of the founder's head."
+          title="A system that shifts responsibility out of the founder&rsquo;s head."
         />
         <div className="mt-12">
           <ArchitectureLadder />
@@ -152,6 +232,29 @@ export default function HomePage() {
         <p className="mt-8 max-w-2xl font-body text-[length:var(--step-0)] leading-relaxed text-muted">
           The architecture is progressive: each layer gives the next one a stronger foundation.
         </p>
+      </Section>
+
+      {/* Proof band. The scale renders EMPTY here — a filled meter on a marketing
+          page would be an invented metric (DESIGN §7). */}
+      <Section tone="dark" width="wide" orbs>
+        <div className="grid gap-10 lg:grid-cols-12 lg:items-center lg:gap-16">
+          <div className="lg:col-span-7">
+            <p className="eyebrow mb-3">The measurement</p>
+            <h2 className="heading-reveal font-heading text-[length:var(--step-4)] font-extrabold text-white">
+              Founder dependency, as a number you can act on.
+            </h2>
+            <p className="mt-4 max-w-xl font-body text-[length:var(--step-0)] leading-relaxed text-muted-invert">
+              The Founder Dependency Index converts the pattern into an index out of 100 across three
+              observable components. A high index is the adverse result.
+            </p>
+          </div>
+          <div className="lg:col-span-5">
+            <Surface tone="glass">
+              <p className="eyebrow mb-4">Founder Dependency Index</p>
+              <IndexScale />
+            </Surface>
+          </div>
+        </div>
       </Section>
 
       <Section tone="light" width="wide">
@@ -179,30 +282,31 @@ export default function HomePage() {
         </div>
       </Section>
 
-      {/* Closing CTA on the one dark band in the site. Slate is the only surface
-          the amber accent is allowed to sit on, so the band earns its keep. */}
-      <Section tone="dark" width="wide" orbs>
-        <div className="grid gap-12 lg:grid-cols-12 lg:items-center lg:gap-16">
-          <div className="lg:col-span-7">
-            <p className="eyebrow mb-3">Start with clarity</p>
-            <h2 className="heading-reveal font-heading text-[length:var(--step-4)] font-extrabold text-white">
-              Find out where your business still depends on you.
-            </h2>
-            <p className="mt-5 max-w-xl font-body text-[length:var(--step-0)] leading-relaxed text-muted-invert">
-              Start with a free Business Health Check and receive your Founder Dependency Index across decision speed, execution consistency, and operational visibility.
-            </p>
-            <div className="mt-8">
-              <Button href="/diagnostic" variant="accent">
-                Start the Business Health Check
-                {/* WEB §5 fixes the label including the arrow. The icon is decorative,
-                    so the glyph is restated here for the accessible name only. */}
-                <span className="sr-only"> →</span>
-                <ArrowRight className="h-4 w-4" aria-hidden="true" />
-              </Button>
-            </div>
-          </div>
-        </div>
+      <Section width="narrow" divided>
+        <SectionHeader eyebrow="Boundaries" title="What this is, and what it is not." />
+        <Accordion className="mt-10" items={boundaries.map(({ question, answer }) => ({ question, answer }))} />
       </Section>
+
+      <CTABand
+        eyebrow="Start with clarity"
+        title="Find out where your business still depends on you."
+        body="Start with a free Business Health Check and receive your Founder Dependency Index across decision speed, execution consistency, and operational visibility."
+        actions={
+          <Button href="/diagnostic" variant="accent">
+            Start the Business Health Check
+            {/* WEB §5 fixes the label including the arrow. The icon is decorative,
+                so the glyph is restated here for the accessible name only. */}
+            <span className="sr-only"> →</span>
+            <ArrowRight className="h-4 w-4" aria-hidden="true" />
+          </Button>
+        }
+      />
+
+      <StickyCTABar
+        label="Find out where your business still depends on you."
+        href="/diagnostic"
+        meta="Free · Private · 12 questions"
+      />
     </>
   );
 }

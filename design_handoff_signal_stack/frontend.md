@@ -303,7 +303,9 @@ Services and Insights article.
 Circular 44px `.tap-target` arrow buttons and pill dots — active dot widens `6px → 22px`.
 Keyboard: arrow keys when focused; `aria-live="polite"` position announcement. Never auto-advances.
 
-**`QuestionStepper`** — the diagnostic engine. Behaviour is governed by **PRODUCT**; this covers
+**`QuestionStepper` → restyle `src/components/fdi/FdiDiagnosticFlow.tsx` in place. Do not create a new
+component.** Its copy is asserted directly from PRODUCT by `src/lib/site-copy.test.ts`, so a second
+component would fork governed copy. The diagnostic engine. Behaviour is governed by **PRODUCT**; this covers
 presentation only. Header row `Question n of 12` + area label; 4px `.brand-gradient-text` gradient
 progress fill animating `width` over `--dur-3`; question at `--step-3`; options as a real
 `role="radiogroup"` with `<input type="radio">` — selected row gets `--color-brand-tint` fill,
@@ -349,8 +351,10 @@ Order is fixed. Each route is a stack of the composites above — no bespoke sec
 
 ### 3.1 Home — `src/app/page.tsx`, `src/components/home/`
 `PageHero` (signal row = the three operating areas) → `TrustMarquee` (pattern chips) →
-**The Founder Trap** `CardGrid` 4-up → `StageRail` on `--color-brand-tint` → operating-scope 6-up tile
-grid (Strategy, Systems, People, Applied AI, Data, Accountability — confirm names against ANCHOR) →
+**The Founder Trap** `CardGrid` 4-up → `StageRail` on `--color-brand-tint` → operating-scope **4**-up
+tile grid (Strategy, Systems, People, Applied AI) — **ANCHOR §6 has exactly four areas. "Data" and
+"Accountability" are not among them; Accountability is a step in the Growth Formula, ANCHOR §10.3.
+ANCHOR is locked, so the earlier 6-up in this line was wrong.** →
 dark proof band with `GlassPanel` (empty `IndexScale`) → `Accordion` → `CTABand` → `Footer`.
 `StickyCTABar` after the hero.
 
