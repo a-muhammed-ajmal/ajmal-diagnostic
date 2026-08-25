@@ -53,7 +53,7 @@ export default async function InsightArticlePage({ params }: { params: Promise<{
           <ArrowLeft className="h-3.5 w-3.5" aria-hidden="true" />
           Insights
         </Link>
-        <p className="eyebrow mb-3 text-accent-ink">{article.category}</p>
+        <p className="eyebrow mb-3">{article.category}</p>
         <h1 className="font-heading text-[length:var(--step-5)] font-extrabold leading-tight">{article.title}</h1>
         <p className="mt-5 font-body text-[length:var(--step-0)] text-muted">By {article.author.name} · {article.author.role} · {published} · {getReadingTime(article)} min read</p>
       </Section>

@@ -236,7 +236,7 @@ export default async function LeadBriefingPage({
               <div className="text-[10px] font-heading uppercase tracking-wider text-muted mb-1">
                 Primary Constraint
               </div>
-              <div className="font-body text-[length:var(--step-0)] text-ink font-semibold">
+              <div className="font-body text-[length:var(--step-0)] text-ink font-medium">
                 {typedLead.primary_constraint
                   ? toTitleCase(typedLead.primary_constraint)
                   : "—"}

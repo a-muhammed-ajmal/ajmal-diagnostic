@@ -108,7 +108,7 @@ export default function HomePage() {
       <Section tone="tint" width="wide" orbs>
         <div className="grid gap-12 lg:grid-cols-12 lg:items-start lg:gap-16">
           <div className="lg:col-span-5">
-            <p className="eyebrow mb-3 text-accent-ink">Operating scope</p>
+            <p className="eyebrow mb-3">Operating scope</p>
             <h2 className="heading-reveal font-heading text-[length:var(--step-4)] font-extrabold text-ink">
               The areas of work that make an operating system work.
             </h2>
@@ -157,7 +157,7 @@ export default function HomePage() {
       <Section tone="light" width="wide">
         <div className="grid gap-10 lg:grid-cols-12 lg:items-center lg:gap-16">
           <div className="lg:col-span-5">
-            <p className="eyebrow mb-3 text-accent-ink">Built for</p>
+            <p className="eyebrow mb-3">Built for</p>
             <h2 className="heading-reveal font-heading text-[length:var(--step-4)] font-extrabold text-ink">
               Founder-led UAE SMEs ready to make operating changes.
             </h2>
@@ -184,7 +184,7 @@ export default function HomePage() {
       <Section tone="dark" width="wide" orbs>
         <div className="grid gap-12 lg:grid-cols-12 lg:items-center lg:gap-16">
           <div className="lg:col-span-7">
-            <p className="eyebrow mb-3 text-accent">Start with clarity</p>
+            <p className="eyebrow mb-3">Start with clarity</p>
             <h2 className="heading-reveal font-heading text-[length:var(--step-4)] font-extrabold text-white">
               Find out where your business still depends on you.
             </h2>

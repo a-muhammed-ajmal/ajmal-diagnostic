@@ -199,7 +199,7 @@ This document does not repeat hex values, font sizes, or token names. Where a pa
 
 Two site-level requirements sit above any component choice:
 
-- Plus Jakarta Sans is the entire web-font budget.
+- Plus Jakarta Sans and Lexend are the entire web-font budget — Plus Jakarta Sans for headings and display, Lexend for body, UI, and small text. No third face.
 - Every page maintains one `h1`, semantic heading order, visible keyboard focus, 44px minimum icon-control targets, no horizontal overflow at 320px, usability at 200% zoom, reduced-motion support, accessible error states, and 4.5:1 text contrast.
 
 ---

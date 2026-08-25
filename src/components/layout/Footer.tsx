@@ -32,7 +32,7 @@ export function Footer() {
         {/* Newsletter leads the footer — it is the one conversion left on the page. */}
         <div className="grid gap-8 rounded-2xl border border-line bg-white p-6 shadow-1 md:grid-cols-12 md:items-center md:p-8">
           <div className="md:col-span-5">
-            <p className="eyebrow mb-2 text-accent-ink">Newsletter</p>
+            <p className="eyebrow mb-2">Newsletter</p>
             <h2 className="font-heading text-[length:var(--step-1)] font-bold text-ink">Practical operating insight</h2>
             <p className="mt-2 font-body text-[length:var(--step-0)] leading-relaxed text-muted">
               For founder-led UAE SMEs. Sent when there is something worth sending.

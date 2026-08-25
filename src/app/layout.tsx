@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Plus_Jakarta_Sans } from "next/font/google";
+import { Lexend } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import { Navigation } from "@/components/layout/Navigation";
@@ -7,12 +8,23 @@ import { Footer } from "@/components/layout/Footer";
 import { SITE_NAME } from "@/lib/metadata";
 import { cn } from "@/lib/utils";
 
-// One family carries headings, body, UI, and numeric text. The complete
-// existing weight range keeps every current utility weight available.
+// Two families. Plus Jakarta Sans carries headings and display type; the
+// complete existing weight range keeps every current utility weight available.
 const plusJakartaSans = Plus_Jakarta_Sans({
   variable: "--font-plus-jakarta-sans",
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700", "800"],
+  display: "swap",
+});
+
+// Lexend carries body, UI, and small text. It reads visually heavier than Plus
+// Jakarta Sans at the same weight, so body text is capped at 500 — see DESIGN.
+// Only 400 and 500 are loaded: nothing body-role may exceed 500, so heavier
+// cuts would be downloaded on every page and never drawn.
+const lexend = Lexend({
+  subsets: ["latin"],
+  weight: ["400", "500"],
+  variable: "--font-lexend",
   display: "swap",
 });
 
@@ -51,7 +63,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={cn(plusJakartaSans.variable, "h-full antialiased")}
+      className={cn(plusJakartaSans.variable, lexend.variable, "h-full antialiased")}
     >
       <body className="min-h-full flex flex-col bg-canvas text-ink font-body">
         {/* Keyboard-only escape past the nav. Off-screen until focused; the global

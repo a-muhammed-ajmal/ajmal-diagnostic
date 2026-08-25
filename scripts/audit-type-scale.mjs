@@ -8,7 +8,9 @@
  * drives a real browser and reads `getComputedStyle`.
  *
  * Asserted on every route:
- *   - visible content and form controls resolve to Plus Jakarta Sans
+ *   - headings, display type and `font-mono` resolve to Plus Jakarta Sans
+ *   - all other visible content and form controls resolve to Lexend
+ *   - no Lexend-rendered text exceeds font-weight 500
  *
  * Asserted, below 768px:
  *   - every visible h1..h4 is <= 24px
@@ -69,6 +71,13 @@ const ROUTES = [
 const TEXT_SEL = 'p, li, button, label, a, span, dd, dt, summary, blockquote, td, th';
 const FONT_SEL = `${TEXT_SEL}, input, select, textarea`;
 
+/** Headings and display type keep Plus Jakarta Sans; everything else is Lexend. */
+const HEADING_SEL = 'h1, h2, h3, h4, h5, h6, .font-heading, .font-display';
+/** `font-mono` means tabular figures, so it stays on Plus Jakarta Sans. */
+const MONO_SEL = '.font-mono';
+/** Lexend reads heavier at the same weight, so body text stops at 500. */
+const BODY_WEIGHT_CEILING = 500;
+
 const CHROME_CANDIDATES = [
   process.env.CHROME_PATH,
   'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe',
@@ -127,7 +136,7 @@ function run(cmd, args, env) {
  * element that owns no text node of its own would otherwise report a
  * descendant's size as its own.
  */
-function measureInPage({ textSelector, fontSelector }) {
+function measureInPage({ textSelector, fontSelector, headingSelector, monoSelector, bodyWeightCeiling }) {
   const visible = (el) => {
     const r = el.getBoundingClientRect();
     if (r.width === 0 && r.height === 0) return false;
@@ -160,23 +169,46 @@ function measureInPage({ textSelector, fontSelector }) {
 
   const desc = (a) => a.sort((x, y) => y.px - x.px);
   const rootStyles = getComputedStyle(document.documentElement);
+  const firstFamily = (stack) => stack.split(',')[0].trim().replace(/^['"]|['"]$/g, '');
+  const varFamily = (prop) => firstFamily(rootStyles.getPropertyValue(prop));
+
+  const headingFace = varFamily('--font-plus-jakarta-sans');
+  const bodyFace = varFamily('--font-lexend');
   const bodyFont = getComputedStyle(document.body).fontFamily;
-  const primaryFont = rootStyles
-    .getPropertyValue('--font-plus-jakarta-sans')
-    .split(',')[0]
-    .trim()
-    .replace(/^['"]|['"]$/g, '');
+
   const fontMismatches = [];
+  const weightViolations = [];
   for (const el of document.querySelectorAll(fontSelector)) {
     const isControl = el.matches('input, select, textarea');
     if (!visible(el) || (!isControl && !ownsText(el))) continue;
-    const actualFont = getComputedStyle(el).fontFamily;
-    if (actualFont !== bodyFont) {
+    const cs = getComputedStyle(el);
+
+    // Three roles, not one face. `font-mono` deliberately keeps Plus Jakarta
+    // Sans — it means tabular figures, not a family change — so it is checked
+    // against the heading face rather than reported as a body mismatch.
+    const isMono = !!el.closest(monoSelector);
+    const isHeading = !isMono && (el.matches(headingSelector) || !!el.closest(headingSelector));
+    const role = isMono ? 'mono' : isHeading ? 'heading' : 'body';
+    const expected = role === 'body' ? bodyFace : headingFace;
+
+    const label = (el.textContent || el.getAttribute('aria-label') || el.getAttribute('placeholder') || '').trim().slice(0, 56);
+    if (firstFamily(cs.fontFamily) !== expected) {
       fontMismatches.push({
         tag: el.tagName.toLowerCase(),
-        text: (el.textContent || el.getAttribute('aria-label') || el.getAttribute('placeholder') || '').trim().slice(0, 56),
-        actualFont,
+        text: label,
+        actualFont: cs.fontFamily,
+        expected,
+        role,
       });
+    }
+
+    // Lexend reads heavier than Plus Jakarta Sans at the same weight, so body
+    // text is capped. Heading weights are untouched by this rule.
+    if (role === 'body') {
+      const weight = parseInt(cs.fontWeight, 10);
+      if (Number.isFinite(weight) && weight > bodyWeightCeiling) {
+        weightViolations.push({ tag: el.tagName.toLowerCase(), text: label, weight });
+      }
     }
   }
   return {
@@ -185,7 +217,13 @@ function measureInPage({ textSelector, fontSelector }) {
     other: desc(other),
     scrollW: document.documentElement.scrollWidth,
     clientW: document.documentElement.clientWidth,
-    font: { primary: primaryFont, body: bodyFont, mismatches: fontMismatches },
+    font: {
+      heading: headingFace,
+      bodyFace,
+      body: bodyFont,
+      mismatches: fontMismatches,
+      weights: weightViolations,
+    },
   };
 }
 
@@ -236,21 +274,39 @@ async function main() {
   for (const route of ROUTES) {
     await page.setViewportSize({ width: 375, height: 800 });
     await page.goto(BASE + route, { waitUntil: 'networkidle' });
-    const mobile = await page.evaluate(measureInPage, { textSelector: TEXT_SEL, fontSelector: FONT_SEL });
+    const mobile = await page.evaluate(measureInPage, { textSelector: TEXT_SEL, fontSelector: FONT_SEL, headingSelector: HEADING_SEL, monoSelector: MONO_SEL, bodyWeightCeiling: BODY_WEIGHT_CEILING });
 
     await page.setViewportSize({ width: 320, height: 800 });
     await page.waitForTimeout(120);
-    const narrow = await page.evaluate(measureInPage, { textSelector: TEXT_SEL, fontSelector: FONT_SEL });
+    const narrow = await page.evaluate(measureInPage, { textSelector: TEXT_SEL, fontSelector: FONT_SEL, headingSelector: HEADING_SEL, monoSelector: MONO_SEL, bodyWeightCeiling: BODY_WEIGHT_CEILING });
 
     await page.setViewportSize({ width: 1920, height: 1080 });
     await page.waitForTimeout(120);
-    const desktop = await page.evaluate(measureInPage, { textSelector: TEXT_SEL, fontSelector: FONT_SEL });
+    const desktop = await page.evaluate(measureInPage, { textSelector: TEXT_SEL, fontSelector: FONT_SEL, headingSelector: HEADING_SEL, monoSelector: MONO_SEL, bodyWeightCeiling: BODY_WEIGHT_CEILING });
 
-    if (!mobile.font.primary.includes('Plus Jakarta Sans') || !mobile.font.body.includes('Plus Jakarta Sans')) {
+    if (!mobile.font.heading.includes('Plus Jakarta Sans')) {
       failures.push(`${route} does not expose the Plus Jakarta Sans font variable.`);
     }
+    if (!mobile.font.bodyFace.includes('Lexend')) {
+      failures.push(`${route} does not expose the Lexend font variable.`);
+    }
+    if (!mobile.font.body.includes('Lexend')) {
+      failures.push(`${route} body does not resolve to Lexend — got ${mobile.font.body}.`);
+    }
     for (const mismatch of mobile.font.mismatches) {
-      failures.push(`${route} <${mismatch.tag}> resolves "${mismatch.text}" to ${mismatch.actualFont} instead of the global Plus Jakarta Sans font.`);
+      failures.push(`${route} <${mismatch.tag}> resolves "${mismatch.text}" to ${mismatch.actualFont} instead of ${mismatch.expected} (${mismatch.role} role).`);
+    }
+    for (const w of mobile.font.weights) {
+      failures.push(`${route} @375  <${w.tag}> renders Lexend at weight ${w.weight} > ${BODY_WEIGHT_CEILING} — "${w.text}"`);
+    }
+
+    // Desktop-only elements (the stage rail markers, the sticky ToC) never
+    // render at 375px, so the face and weight rules are checked there too.
+    for (const mismatch of desktop.font.mismatches) {
+      failures.push(`${route} @1920 <${mismatch.tag}> resolves "${mismatch.text}" to ${mismatch.actualFont} instead of ${mismatch.expected} (${mismatch.role} role).`);
+    }
+    for (const w of desktop.font.weights) {
+      failures.push(`${route} @1920 <${w.tag}> renders Lexend at weight ${w.weight} > ${BODY_WEIGHT_CEILING} — "${w.text}"`);
     }
 
     for (const h of mobile.headings.filter((x) => x.px > HEADING_CEILING)) {

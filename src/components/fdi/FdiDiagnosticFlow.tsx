@@ -199,7 +199,7 @@ export function FdiDiagnosticFlow() {
             ))}
           </div>
           {error && <p role="alert" className="mt-4 text-[length:var(--step-0)] text-danger">{error}</p>}
-          <button onClick={start} disabled={isWorking} className="mt-5 min-h-12 rounded-xl bg-brand px-8 py-3 font-body text-[length:var(--step-0)] font-semibold text-white shadow-1 transition-all duration-200 ease-out hover:-translate-y-0.5 hover:bg-brand-hover hover:shadow-glow-electric disabled:pointer-events-none disabled:opacity-50">
+          <button onClick={start} disabled={isWorking} className="mt-5 min-h-12 rounded-xl bg-brand px-8 py-3 font-body text-[length:var(--step-0)] font-medium text-white shadow-1 transition-all duration-200 ease-out hover:-translate-y-0.5 hover:bg-brand-hover hover:shadow-glow-electric disabled:pointer-events-none disabled:opacity-50">
             {isWorking ? 'Starting…' : 'Start the Business Health Check →'}
           </button>
           <p className="font-body text-xs text-muted mt-3 max-w-xl mx-auto leading-snug">
@@ -256,7 +256,7 @@ export function FdiDiagnosticFlow() {
           </div>
 
           {error && <p role="alert" className="font-body text-[length:var(--step-0)] text-danger">{error}</p>}
-          <button type="submit" disabled={isWorking} className="min-h-12 w-full rounded-xl bg-brand py-3 font-body text-[length:var(--step-0)] font-semibold text-white shadow-1 transition-all duration-200 ease-out hover:-translate-y-0.5 hover:bg-brand-hover hover:shadow-glow-electric disabled:pointer-events-none disabled:opacity-50">{stage === 'submitting' ? 'Preparing your result…' : 'View my Founder Dependency Index →'}</button>
+          <button type="submit" disabled={isWorking} className="min-h-12 w-full rounded-xl bg-brand py-3 font-body text-[length:var(--step-0)] font-medium text-white shadow-1 transition-all duration-200 ease-out hover:-translate-y-0.5 hover:bg-brand-hover hover:shadow-glow-electric disabled:pointer-events-none disabled:opacity-50">{stage === 'submitting' ? 'Preparing your result…' : 'View my Founder Dependency Index →'}</button>
           <p className="font-body text-xs text-muted text-center leading-snug">By continuing, you agree to our <a href="/privacy" className="underline text-brand-ink">Privacy Policy</a>.{session?.isTest && <span className="text-brand-ink"> Marked as a test record.</span>}</p>
         </form>
       </div>
@@ -279,15 +279,15 @@ export function FdiDiagnosticFlow() {
           <h1 className="mt-1.5 font-heading text-[length:var(--step-1)] font-extrabold leading-snug text-ink">{question.text}</h1>
           <div className="space-y-2 mt-4">
             {question.options.map((option) => (
-              <button key={option.id} type="button" aria-pressed={selected === option.id} onClick={() => void handleAnswer(question.id, option.id)} className={cn('w-full min-h-11 rounded-xl border-2 text-left px-4 py-2.5 font-body text-[length:var(--step-0)] leading-snug transition-all duration-200 ease-out', selected === option.id ? 'border-brand bg-brand-soft text-ink font-semibold shadow-1' : 'border-line bg-white text-ink hover:-translate-y-0.5 hover:border-brand hover:bg-brand-tint hover:shadow-1')}>
+              <button key={option.id} type="button" aria-pressed={selected === option.id} onClick={() => void handleAnswer(question.id, option.id)} className={cn('w-full min-h-11 rounded-xl border-2 text-left px-4 py-2.5 font-body text-[length:var(--step-0)] leading-snug transition-all duration-200 ease-out', selected === option.id ? 'border-brand bg-brand-soft text-ink font-medium shadow-1' : 'border-line bg-white text-ink hover:-translate-y-0.5 hover:border-brand hover:bg-brand-tint hover:shadow-1')}>
                 {option.text}
               </button>
             ))}
           </div>
           {error && <p role="alert" className="text-[length:var(--step-0)] text-danger mt-3">{error}</p>}
           <div className="flex gap-3 mt-4">
-            {currentQuestion > 0 && <button type="button" onClick={() => setCurrentQuestion((value) => value - 1)} className="min-h-11 flex-1 rounded-xl border border-line bg-white font-body text-[length:var(--step-0)] font-semibold text-ink transition-all duration-200 ease-out hover:-translate-y-0.5 hover:border-brand hover:text-brand-ink">← Back</button>}
-            <button type="button" disabled={!selected} onClick={() => isLast ? setStage('contact') : setCurrentQuestion((value) => value + 1)} className="min-h-11 flex-1 rounded-xl bg-brand font-body text-[length:var(--step-0)] font-semibold text-white shadow-1 transition-all duration-200 ease-out hover:-translate-y-0.5 hover:bg-brand-hover hover:shadow-glow-electric disabled:pointer-events-none disabled:opacity-40">{isLast ? 'Continue →' : 'Next →'}</button>
+            {currentQuestion > 0 && <button type="button" onClick={() => setCurrentQuestion((value) => value - 1)} className="min-h-11 flex-1 rounded-xl border border-line bg-white font-body text-[length:var(--step-0)] font-medium text-ink transition-all duration-200 ease-out hover:-translate-y-0.5 hover:border-brand hover:text-brand-ink">← Back</button>}
+            <button type="button" disabled={!selected} onClick={() => isLast ? setStage('contact') : setCurrentQuestion((value) => value + 1)} className="min-h-11 flex-1 rounded-xl bg-brand font-body text-[length:var(--step-0)] font-medium text-white shadow-1 transition-all duration-200 ease-out hover:-translate-y-0.5 hover:bg-brand-hover hover:shadow-glow-electric disabled:pointer-events-none disabled:opacity-40">{isLast ? 'Continue →' : 'Next →'}</button>
           </div>
         </div>
       </section>

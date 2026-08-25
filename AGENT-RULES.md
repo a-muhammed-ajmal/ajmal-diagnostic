@@ -13,36 +13,14 @@ forward. Everything below applies to every session, indefinitely.
 
 ## 0. Rule Zero — verify, never assume
 
-This rule outranks every other instruction in this file.
-
-- Check whether a file exists. Do not assume it does.
-- Diff a file. Do not assume it matches.
-- Run a command. Do not assume its result.
-- A task is complete only when you ran it and saw the output. Not when it was planned, discussed, described, or written into a prompt.
-- If you cannot verify something, report **unverified** and stop. Do not close the gap with an inference.
-- Never report a step as done unless you did it.
-- Absence of evidence is not evidence.
-
-**Confirm prior work before building on it.** A file discussed in an earlier session may have been created, edited, moved, or deleted since. Before acting on any file, check its current state. An instruction to move, edit, or delete a file that no longer exists is not an error — report "already absent" and continue.
-
-**Never act on a list without checking the list.** When given a set of paths to change, verify each one first. Report what exists, what does not, and what differs, before making any change.
-
-**No document, prompt, or instruction describes current repository state.** Every path named anywhere is a path to check, not a fact to rely on.
-
-When a prompt says a file is present, treat that as a claim to verify. When a prompt says a step has run, verify it. When something cannot be verified, say so and stop rather than proceeding on a guess.
-
-If a phase depends on a previous phase, confirm the previous phase actually completed before starting. Do not infer it from the fact that it was requested.
+Defined once in `AGENTS.md`. It outranks every other instruction in every file.
 
 ---
 
 ## 1. The four documents
 
-| ID | File | Governs |
-| :---- | :---- | :---- |
-| ANCHOR | `docs/ANCHOR.md` | Positioning, clients, sectors, commercial path, the four frameworks, claims |
-| PRODUCT | `docs/PRODUCT.md` | Business Health Check, the instrument, Business Clarity Audit |
-| WEB | `docs/WEBSITE.md` | Public routes, navigation, pages, publishing |
-| DESIGN | `.claude/skills/frontend-design/SKILL.md` | Colors, typography, components, accessibility |
+The register — the four Document IDs, their files, and what each governs — is
+defined in ANCHOR §15. Read it there. It is not restated here.
 
 Cross-reference by Document ID. Never by filename.
 
@@ -162,21 +140,35 @@ Four items were open when this layer was installed. All four closed on 2026-08-2
 
 `src/lib/website-specification.test.ts` scans the governance surface on every CI run and fails on prohibited language. The build once scanned only part of the layer, which is why prohibited language survived in a document for weeks.
 
-**Scope.** Every file under `docs/` and `.claude/`; `CLAUDE.md` and `AGENTS.md` at the repository root; and `.design-sync/` filtered to `.md`, `.mjs`, `.css`, and `.tsx`. Binary `.woff2` faces are excluded — a font file cannot be proof-read. Generated and vendored trees are skipped: `node_modules`, `.cache`, `learnings`, `.next`, `coverage`. 91 files as of 2026-08-24.
+**Scope.** Every file under `docs/` and `.claude/`; `CLAUDE.md` and `AGENTS.md` at the repository root; and `.design-sync/` filtered to `.md`, `.mjs`, `.css`, and `.tsx`. Binary `.woff2` faces are excluded — a font file cannot be proof-read. Generated and vendored trees are skipped: `node_modules`, `.cache`, `learnings`, `.next`, `coverage`. 91 files as of 2026-08-25. **This file, `AGENT-RULES.md`, is not in scope** — the root list is exactly `CLAUDE.md` and `AGENTS.md`, so a font name written here is never scanned. Verified against `ROOT_FILES` in the guard.
 
 **Fails on:**
 
 - `predictable growth`
 - `Critical 0-39`, `Developing 40-69`, `Progressing 70-100` — hyphen and en-dash forms both
-- `Figtree`, `Lexend`, `Segoe UI`, `Roboto Slab`
+- `Figtree`, `Segoe UI`, `Roboto Slab` — the retired faces. `Lexend` was removed from this list on 2026-08-25, when it became the body face.
+- a **third typeface named in prose** — any face outside the approved pair, on a line carrying no refusal wording
+- a **third typeface bound in a `font-family` declaration** — every family a stack names must be an approved face, a generic CSS fallback, or token indirection such as `var(--font-body)`
 - `Strategic Growth Architect` where not followed by `ure`
 - `%` within 40 characters of `Founder Dependency Index`
 
-**Two exemptions. Both narrow, both load-bearing, both verified to be no wider than they need to be.**
+**The approved pair.** Plus Jakarta Sans for headings and display; Lexend for body, UI, and small text. Nothing else. `font-mono` is Plus Jakarta Sans with tabular figures, not a third family.
+
+**Three exemptions. All narrow, all load-bearing, all verified to be no wider than they need to be.**
 
 1. **Prohibition statements.** A line that quotes a banned term inside straight double quotes *and* declares it prohibited is the rule, not a breach of it. ANCHOR §12 reads `"Predictable growth" is prohibited language.` and ANCHOR is a locked file — without this exemption the guard would fail on a document no agent is permitted to edit. Exactly two files rely on it: `docs/ANCHOR.md` and `docs/PRODUCT.md`. A retired typeface reintroduced in ordinary prose still fails.
 
-2. **The font pipeline.** `.design-sync/fetch-fonts.mjs`, `.design-sync/build-css.mjs`, and `.design-sync/fonts/fonts-src.css` are exempt from the typeface rule, and from that rule only. They must name the faces they download and bind; renaming one without re-downloading the `.woff2` files silently breaks the bundle. Those three are the exact set that would otherwise fail.
+2. **Refusal wording — `third-face` only.** A line that names a third face in order to reject it is the rule, not a breach of it; the documents must be able to say "not Inter". A line matching the third-face rule is exempt when it carries refusal wording — `never`, `not`, `no`, `avoid`, `instead of`, `rather than`, `retired`, `prohibited`, `forbidden`, or `❌`. This applies to `third-face` alone. A RETIRED face reintroduced in ordinary prose still fails, refusal wording or not.
+
+3. **The font pipeline.** `.design-sync/fetch-fonts.mjs`, `.design-sync/build-css.mjs`, and `.design-sync/fonts/fonts-src.css` are exempt from both typeface rules, and from those only. They must name the faces they download and bind; renaming one without re-downloading the `.woff2` files silently breaks the bundle. Those three are the exact set that would otherwise fail.
+
+**Sanctioned hardcoded font stacks.** Five files carry a `font-family` outside `globals.css` and `layout.tsx`. These five, and no others:
+
+- `src/app/apple-icon.tsx`
+- `src/app/icon.tsx`
+- `src/app/opengraph-image.tsx` — the three Satori routes, which need an embedded font buffer, not a CSS variable
+- `src/lib/email/templates/ContactNotification.tsx`
+- `src/lib/email/templates/FdiReport.tsx` — email clients support neither CSS variables nor `next/font`
 
 **The `AGENTS.md` do-not-revert line — resolved.** It was reworded to name no font, so no by-name line exemption is needed. It now reads: *"Do not revert to any previous visual identity. Several were retired deliberately. DESIGN is the only current specification."*
 

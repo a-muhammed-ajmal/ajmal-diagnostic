@@ -47,10 +47,12 @@ on every CI run and fails on prohibited language.
 | Motion | Native CSS only — no animation library |
 | Design audit | `playwright-core`, driving an installed Chrome |
 
-Typography is a single face, Plus Jakarta Sans, loaded through
-`next/font/google`. Mobile ceilings are strict: below 768px no heading
-exceeds 24px and no body copy exceeds 14px. The one approved exception is
-article body on `/insights/[slug]`, which opens to 16px — see DESIGN §1.
+Typography is a two-face pairing loaded through `next/font/google`:
+Plus Jakarta Sans for headings and display, Lexend for body, UI, and
+small text, with body-role weight capped at 500. Mobile ceilings are
+strict: below 768px no heading exceeds 24px and no body copy exceeds
+14px. The one approved exception is article body on `/insights/[slug]`,
+which opens to 16px — see DESIGN §1.
 
 ---
 

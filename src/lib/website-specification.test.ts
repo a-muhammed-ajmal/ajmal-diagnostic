@@ -97,8 +97,17 @@ const RULES: readonly Rule[] = [
   },
   {
     id: 'typeface',
-    label: 'retired typeface — Plus Jakarta Sans is the whole web-font budget',
-    pattern: /Figtree|Lexend|Segoe UI|Roboto Slab/,
+    label:
+      'retired typeface — the pairing is Plus Jakarta Sans for headings and ' +
+      'display, Lexend for body, UI, and small text',
+    pattern: /Figtree|Segoe UI|Roboto Slab/,
+  },
+  {
+    id: 'third-face',
+    // Narrowing the retired list above must not become an open door. The
+    // pairing is closed at two, so a third family named in prose fails here.
+    label: 'a third typeface — the pairing is closed at Plus Jakarta Sans and Lexend',
+    pattern: /\b(?:Inter|Roboto(?! Slab)|Open Sans|Montserrat|Poppins|Nunito|Raleway|Work Sans|DM Sans|Manrope|Rubik|Karla|Mulish|Heebo|Source Sans|Noto Sans|Helvetica|Georgia|Times New Roman|Verdana|Tahoma|Courier New)\b/,
   },
   {
     id: 'framework',
@@ -123,6 +132,40 @@ const FONT_PIPELINE = new Set([
   '.design-sync/fonts/fonts-src.css',
 ]);
 
+/** Both typeface rules answer to the pipeline exemption, and only they do. */
+const TYPEFACE_RULES = new Set(['typeface', 'third-face']);
+
+/** The two faces the pairing allows, lower-cased for comparison. */
+const APPROVED_FACES = new Set(['plus jakarta sans', 'lexend']);
+
+/** Generic CSS keywords a stack may fall back to — never a third face. */
+const GENERIC_FALLBACKS = new Set([
+  'ui-sans-serif', 'system-ui', 'sans-serif', 'ui-serif', 'serif',
+  'ui-monospace', 'monospace', 'cursive', 'fantasy', 'ui-rounded',
+  'emoji', 'math', 'fangsong', 'inherit', 'initial', 'unset', 'revert',
+]);
+
+/**
+ * The prose rule catches a third face by name. This catches one by binding:
+ * every family a `font-family:` declaration names must be an approved face, a
+ * generic fallback, or token indirection such as `var(--font-body)`.
+ */
+function bindingViolations(rel: string, lines: readonly string[]): string[] {
+  const out: string[] = [];
+  lines.forEach((line, index) => {
+    const decl = /font-family:\s*([^;{}]+)/i.exec(line);
+    if (!decl) return;
+    for (const raw of decl[1].split(',')) {
+      const name = raw.trim().replace(/^['"]|['"]$/g, '');
+      const key = name.toLowerCase();
+      if (!key || key.startsWith('var(') || key.startsWith('--')) continue;
+      if (APPROVED_FACES.has(key) || GENERIC_FALLBACKS.has(key)) continue;
+      out.push(`${rel}:${index + 1} — a third typeface bound in a font stack — "${name}"`);
+    }
+  });
+  return out;
+}
+
 /**
  * A line that quotes a banned term and declares it banned is the rule itself,
  * not a violation of it. ANCHOR is a locked file stating `"Predictable growth"
@@ -137,20 +180,37 @@ function isProhibitionStatement(line: string, matched: string): boolean {
   return line.includes(`"${matched}"`) && /prohibited/i.test(line);
 }
 
+/**
+ * The third-face rule is broader than the retired-typeface rule: it names
+ * families the documents legitimately discuss in order to reject them. A line
+ * that names a third face while refusing it is the rule, not a breach of it.
+ *
+ * This applies to `third-face` only. A RETIRED face reintroduced in ordinary
+ * prose still fails, negation or not — that rule keeps its narrow
+ * quoted-and-declared-prohibited exemption.
+ */
+const REFUSAL = /(?:never|not|no|avoid|instead of|rather than|retired|prohibited|forbidden|❌)/i;
+
+function isRefusalStatement(line: string): boolean {
+  return REFUSAL.test(line);
+}
+
 function scan(): string[] {
   const violations: string[] = [];
   for (const file of governanceFiles()) {
     const rel = repoPath(file);
     const lines = readFileSync(file, 'utf8').split(/\r?\n/);
     for (const rule of RULES) {
-      if (rule.id === 'typeface' && FONT_PIPELINE.has(rel)) continue;
+      if (TYPEFACE_RULES.has(rule.id) && FONT_PIPELINE.has(rel)) continue;
       lines.forEach((line, index) => {
         const hit = rule.pattern.exec(line);
         if (!hit) return;
         if (isProhibitionStatement(line, hit[0])) return;
+        if (rule.id === 'third-face' && isRefusalStatement(line)) return;
         violations.push(`${rel}:${index + 1} — ${rule.label} — "${hit[0]}"`);
       });
     }
+    if (!FONT_PIPELINE.has(rel)) violations.push(...bindingViolations(rel, lines));
   }
   return violations;
 }

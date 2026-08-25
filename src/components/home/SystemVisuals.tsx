@@ -107,7 +107,7 @@ export function DependencyIndexPreview() {
     <Section id="dependency-index" tone="tint" width="wide" orbs>
       <div className="grid gap-12 lg:grid-cols-12 lg:items-start lg:gap-16">
         <div className="lg:col-span-5">
-          <p className="eyebrow mb-3 text-accent-ink">Business Health Check</p>
+          <p className="eyebrow mb-3">Business Health Check</p>
           <h2 className="heading-reveal font-heading text-[length:var(--step-4)] font-extrabold text-ink">How much does your business still depend on you?</h2>
           <p className="mt-5 font-body text-[length:var(--step-0)] leading-relaxed text-muted">
             Answer 12 questions and receive your Founder Dependency Index across three observable operating areas.

@@ -78,7 +78,7 @@ export default function AboutPage() {
       <Section tone="tint" width="wide" orbs>
         <div className="grid gap-12 lg:grid-cols-12 lg:items-start lg:gap-16">
           <div className="lg:col-span-5">
-            <p className="eyebrow mb-3 text-accent-ink">Approach</p>
+            <p className="eyebrow mb-3">Approach</p>
             <h2 className="heading-reveal font-heading text-[length:var(--step-4)] font-extrabold leading-tight text-ink">
               Management knowledge, systems thinking, execution, and applied AI.
             </h2>
@@ -118,7 +118,7 @@ export default function AboutPage() {
       <Section tone="light" width="wide">
         <div className="grid gap-10 lg:grid-cols-12 lg:gap-16">
           <div className="lg:col-span-5">
-            <p className="eyebrow mb-3 text-accent-ink">Professional credentials</p>
+            <p className="eyebrow mb-3">Professional credentials</p>
             <h2 className="heading-reveal font-heading text-[length:var(--step-4)] font-extrabold text-ink">
               Current learning and professional development
             </h2>

@@ -53,7 +53,7 @@ export function ArticleToc({ items }: { items: TocItem[] }) {
                 href={`#${item.id}`}
                 className={
                   isActive
-                    ? 'block border-l-2 border-brand pl-3 font-body text-[length:var(--step-0)] text-ink font-semibold'
+                    ? 'block border-l-2 border-brand pl-3 font-body text-[length:var(--step-0)] text-ink font-medium'
                     : 'block border-l-2 border-transparent pl-3 font-body text-[length:var(--step-0)] text-muted hover:text-ink'
                 }
                 aria-current={isActive ? 'true' : undefined}

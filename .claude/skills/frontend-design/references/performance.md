@@ -2,21 +2,23 @@
 
 ## Core Web Vitals
 
-- **LCP** < 2.5s — optimise the critical rendering path. Plus Jakarta Sans loads via `next/font/google`, which self-hosts and avoids FOUT.
+- **LCP** < 2.5s — optimise the critical rendering path. Plus Jakarta Sans and Lexend load via `next/font/google`, which self-hosts and avoids FOUT.
 - **CLS** < 0.1 — always give images explicit `width`/`height`, and reserve space for content that arrives late.
 - **INP** < 200ms — the responsiveness metric that replaced FID. Avoid main-thread tasks over 50ms; break up heavy client work.
 
 ## Font Loading
 
-One typeface, loaded once in `src/app/layout.tsx`:
+Two typefaces, loaded once in `src/app/layout.tsx`:
 
 ```ts
 import { Plus_Jakarta_Sans } from 'next/font/google';
+import { Lexend } from 'next/font/google';
 
 const plusJakartaSans = Plus_Jakarta_Sans({ variable: '--font-plus-jakarta-sans', subsets: ['latin'], weight: ['300','400','500','600','700','800'], display: 'swap' });
+const lexend = Lexend({ subsets: ['latin'], weight: ['400','500'], variable: '--font-lexend', display: 'swap' });
 ```
 
-`--font-heading`, `--font-display`, `--font-body`, `--font-sans`, and `--font-mono` all resolve to `var(--font-plus-jakarta-sans)`. Never add a `<link>` to Google Fonts and never a CSS `@import` — `next/font` self-hosts and eliminates the round-trip. One family is the whole budget — do not add a second, and keep the weight list as narrow as the design actually uses.
+`--font-heading`, `--font-display`, and `--font-mono` resolve to `var(--font-plus-jakarta-sans)`; `--font-body` and `--font-sans` resolve to `var(--font-lexend)`. Never add a `<link>` to Google Fonts and never a CSS `@import` — `next/font` self-hosts and eliminates the round-trip. Two families are the whole budget — do not add a third, and keep each weight list as narrow as the design actually uses. Lexend loads 400 and 500 only, because no body-role text may exceed 500.
 
 ## Rendering
 

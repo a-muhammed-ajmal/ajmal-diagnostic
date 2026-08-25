@@ -29,7 +29,8 @@ export function Surface({ children, tone = "default", interactive = false, class
   );
 }
 
-/** Eyebrow colour. The eyebrow class sets shape only, never colour. */
+/** Eyebrow colour override. `.eyebrow` defaults to accent-ink on light
+ *  surfaces and accent on dark bands; these win over that default. */
 type SectionAccent = "brand" | "amber" | "danger";
 
 const accentClasses: Record<SectionAccent, string> = {

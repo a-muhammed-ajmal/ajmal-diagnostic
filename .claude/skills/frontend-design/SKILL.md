@@ -1,6 +1,6 @@
 ---
 name: frontend-design
-description: Design system for muhammedajmal.com — Electric Blue & Amber on slate, Plus Jakarta Sans, strict mobile type ceilings, Next.js 16 and Tailwind v4.
+description: Design system for muhammedajmal.com — Electric Blue & Amber on slate, Plus Jakarta Sans for headings and Lexend for body, strict mobile type ceilings, Next.js 16 and Tailwind v4.
 version: 1.0.0
 tags: [frontend, design-system, css, tailwind, typography]
 triggers:
@@ -26,7 +26,11 @@ The purpose is a distinct, professional identity — not generic AI output, whic
 
 ## 1. Typography
 
-**Plus Jakarta Sans is the entire web-font budget.** Headings, display, body, eyebrows, buttons, controls, numeric text. No second typeface. `font-mono` means tabular figures, not a family change.
+**Two faces, three roles.** Plus Jakarta Sans carries headings, display type, and `font-mono`. Lexend carries body copy, UI, controls, form text, small text, and numeric body text. There is no third face. `font-mono` means tabular figures, not a family change.
+
+No Lexend-rendered text exceeds weight 500. Above 500 the loaded Lexend set renders faux-bold, and display weight is Plus Jakarta Sans's job.
+
+Both load through `next/font/google` in `layout.tsx`, never a `<link>` tag or a CSS `@import`. They expose `--font-plus-jakarta-sans` and `--font-lexend`; the `@theme` block maps `--font-heading` and `--font-display` onto the first, `--font-body` and `--font-sans` onto the second.
 
 It loads through `next/font/google` in `layout.tsx`, never a `<link>` tag or a CSS `@import`. It exposes `--font-plus-jakarta-sans`, which the `@theme` block maps onto every semantic font token.
 
@@ -131,7 +135,7 @@ Amber's legitimate homes are fills on dark surfaces, borders, and eyebrow text o
 
 ### Dark bands
 
-On `tone="dark"`, text tokens invert. Headings take `text-white`, secondary copy takes `text-muted-invert`, the eyebrow takes `text-accent` — amber's one legitimate home as a text color.
+On `tone="dark"`, text tokens invert. Headings take `text-white`, secondary copy takes `text-muted-invert`, and the eyebrow resolves to `accent` on its own — `.eyebrow` inside `.bg-canvas-dark` takes amber without a per-use class. That is amber's one legitimate home as a text color.
 
 `text-muted` and `text-ink` must never appear on a dark band. They land around 2.4:1.
 
@@ -162,7 +166,7 @@ Use these rather than rebuilding the recipe inline. All declared in `globals.css
 | `.reveal` | Staggered entrance, 100ms apart |
 | `.stage-reveal` / `.heading-reveal` | Scroll-driven reveal |
 | `.brand-gradient-text` | Gradient, electric-700 to electric-500 |
-| `.eyebrow` | Uppercase 800-weight label — shape only, sets no color |
+| `.eyebrow` | Uppercase 500-weight label, no letter spacing — sets accent color: `accent-ink` on light, `accent` on dark bands |
 | `.tap-target` | 44px minimum — every icon-only control |
 | `.stage-rail` / `.stage-item` / `.stage-marker` / `.stage-card` | Process and timeline composition |
 | `.article-longform` / `.article-toc` / `.reading-progress` | Insights article chrome |
@@ -218,7 +222,9 @@ Control heights: `<Button>` is 44px. `min-h-[48px]` and `min-h-[52px]` appear on
 
 ## 6. Anti-patterns
 
-❌ **A second typeface.** Plus Jakarta Sans is the whole budget.
+❌ **A third typeface.** The pairing is closed at two: Plus Jakarta Sans for headings and display, Lexend for body and UI. Not Inter, not a system sans, not a display face for one section.
+
+❌ **Lexend above weight 500.** It renders faux-bold at the loaded weights and reads as a heading. Display weight belongs to Plus Jakarta Sans — reach for `var(--font-heading)` instead.
 
 ❌ **AI-slop defaults.** Inter as a heading face. Soft purple gradients behind generic floating cards.
 
@@ -274,8 +280,9 @@ Executive, analytical, practical. Bold and distinctive, not generic. Avoid "revo
 
 Before declaring any frontend work complete:
 
-- [ ] Plus Jakarta Sans loads via `next/font/google` in `layout.tsx` — no `<link>`, no `@import`.
-- [ ] Typography maps to `var(--font-heading)` and `var(--font-body)`.
+- [ ] Plus Jakarta Sans and Lexend both load via `next/font/google` in `layout.tsx` — no `<link>`, no `@import`.
+- [ ] Headings and display map to `var(--font-heading)`; body, UI, and small text map to `var(--font-body)`. No third family in any `font-family` declaration.
+- [ ] No body-role text above weight 500. `npm run audit:type` asserts this per element.
 - [ ] `npm run audit:type` passes. It drives a real browser over every route at 375 / 320 / 1920px, asserts the heading and body ceilings, and fails on horizontal overflow at 320px. Run it rather than eyeballing — font sizes are inherited, so a `<p>` handed a card-title step is invisible to code review.
 - [ ] Primary actions use `#0052FF`.
 - [ ] No `text-amber-600` and no `#FFBF00` text on a light surface.

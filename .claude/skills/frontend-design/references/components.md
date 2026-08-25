@@ -6,7 +6,7 @@
 - **Named Exports**: Use `export function Component(…)` / `export const Component = …`. No default exports for components.
 - **PascalCase filenames** matching the component name.
 - **Class Merging**: Always use `cn()` from `src/lib/utils.ts` for conditional Tailwind classes.
-- **Font**: Every component inherits Plus Jakarta Sans for headings, body, and UI text from the `body`/heading rules. That one face is the whole set — never set a different `font-family` on any component. Button and control labels are UI text, so they take `font-body`.
+- **Font**: Plus Jakarta Sans for headings and display; Lexend for body, UI, and small text. No third face, and nothing in Lexend above weight 500. Every component inherits both from the `body`/heading rules — never set a different `font-family` on any component. Button and control labels are UI text, so they take `font-body`.
 - **Forms**: `react-hook-form` + a `zod` schema. No uncontrolled inputs.
 
 ## File Structure Pattern

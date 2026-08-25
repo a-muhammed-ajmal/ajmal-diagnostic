@@ -130,7 +130,7 @@ export default function InsightsPage() {
       <Section tone="tint" width="wide" orbs>
         <div className="grid gap-10 lg:grid-cols-12 lg:items-center lg:gap-16">
           <div className="lg:col-span-6">
-            <p className="eyebrow mb-3 text-accent-ink">Newsletter</p>
+            <p className="eyebrow mb-3">Newsletter</p>
             <h2 className="heading-reveal font-heading text-[length:var(--step-4)] font-extrabold text-ink">
               Get insights delivered
             </h2>

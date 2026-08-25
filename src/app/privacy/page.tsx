@@ -87,7 +87,7 @@ export default function PrivacyPage() {
             <ul className="space-y-2">
               {dataCollected.map((d) => (
                 <li key={d.item} className="flex gap-3">
-                  <span className="text-brand-ink font-bold mt-0.5 flex-shrink-0">•</span>
+                  <span className="text-brand-ink font-medium mt-0.5 flex-shrink-0">•</span>
                   <span><strong className="text-ink">{d.item}.</strong> {d.detail}</span>
                 </li>
               ))}
@@ -147,7 +147,7 @@ export default function PrivacyPage() {
             <ul className="space-y-2">
               {rights.map((r) => (
                 <li key={r} className="flex gap-3">
-                  <span className="text-brand-ink font-bold mt-0.5 flex-shrink-0">•</span>
+                  <span className="text-brand-ink font-medium mt-0.5 flex-shrink-0">•</span>
                   <span>{r}</span>
                 </li>
               ))}

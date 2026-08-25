@@ -15,14 +15,17 @@
    ══════════════════════════════════════════════════════════════════════════ */
 
 @theme {
-  /* ── Typography — Plus Jakarta Sans everywhere ────────────────────────── */
-  /* The single family is supplied by next/font/google in layout.tsx and
-     self-hosted. Never add a <link> tag or CSS @import for it. */
+  /* ── Typography — a two-face pairing ──────────────────────────────────── */
+  /* Both families are supplied by next/font/google in layout.tsx and
+     self-hosted. Never add a <link> tag or CSS @import for either.
+     Headings and display type take Plus Jakarta Sans; body, UI, and small
+     text take Lexend, capped at weight 500 — see DESIGN. */
   --font-heading: var(--font-plus-jakarta-sans), ui-sans-serif, system-ui, sans-serif;
   --font-display: var(--font-plus-jakarta-sans), ui-sans-serif, system-ui, sans-serif;
-  --font-body:    var(--font-plus-jakarta-sans), ui-sans-serif, system-ui, sans-serif;
-  --font-sans:    var(--font-plus-jakarta-sans), ui-sans-serif, system-ui, sans-serif;
-  /* Mono means tabular figures, not a different typeface. */
+  --font-body:    var(--font-lexend), ui-sans-serif, system-ui, sans-serif;
+  --font-sans:    var(--font-lexend), ui-sans-serif, system-ui, sans-serif;
+  /* Mono means tabular figures, not a different typeface. It stays on Plus
+     Jakarta Sans so numeral rendering is unchanged by the Lexend move. */
   --font-mono:    var(--font-plus-jakarta-sans), ui-sans-serif, system-ui, sans-serif;
 
   /* ── Electric Blue scale ───────────────────────────────────────────────── */
@@ -191,14 +194,25 @@ h1, h2, h3, p { overflow-wrap: break-word; }
 /* 44x44 minimum — every icon-only control */
 .tap-target { min-height: 44px; min-width: 44px; }
 
-/* Eyebrow label — micro-copy tier. Distinguishes itself by weight, tracking
-   and case. Colour stays a per-use utility. */
+/* Eyebrow label — micro-copy tier. Case and colour carry it now: the Lexend
+   body cap holds the weight at 500, and the tracking is gone. */
 .eyebrow {
-  font-weight: 800;
+  font-family: var(--font-body);
+  font-weight: 500;
   font-size: var(--step--1);
   line-height: 1.4;
-  letter-spacing: 0.15em;
   text-transform: uppercase;
+}
+
+/* Colour is a default, not a lock. It sits in @layer base so a deliberate
+   per-use `text-*` utility still wins — unlayered here would beat every
+   utility, because unlayered CSS outranks every @layer.
+   `<Section tone="dark">` exposes no semantic hook; it emits `bg-canvas-dark`,
+   so that is the class the dark-band rule targets. Amber (#FFBF00) is 1.65:1
+   on white and may never be text on a light surface — accent-ink is 5.0:1. */
+@layer base {
+  .eyebrow { color: var(--color-accent-ink); }
+  .bg-canvas-dark .eyebrow { color: var(--color-accent); }
 }
 
 /* ── Glassmorphism ───────────────────────────────────────────────────────── */
@@ -348,7 +362,7 @@ html { scroll-behavior: smooth; }
     background: var(--color-canvas);
     border: 2px solid var(--color-line);
     color: var(--color-brand-ink);
-    font-weight: 800;
+    font-weight: 500;
     z-index: 1;
   }
 }

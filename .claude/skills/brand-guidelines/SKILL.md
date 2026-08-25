@@ -1,6 +1,6 @@
 ---
 name: brand-guidelines
-description: "Applies the Muhammed Ajmal Consulting brand — \"Electric Blue & Amber\": vibrant electric blue with a fill-only amber accent on slate neutrals, Plus Jakarta Sans typography, responsive type scale with strict mobile ceilings — to any artifact, document, or surface that should carry the look without full component engineering. Use for one-off artifacts, marketing copy, presentations, diagrams, or README banners. For building actual app components, pages, or interfaces, use frontend-design instead — it owns the complete token system and implementation rules."
+description: "Applies the Muhammed Ajmal Consulting brand — \"Electric Blue & Amber\": vibrant electric blue with a fill-only amber accent on slate neutrals, Plus Jakarta Sans headings paired with Lexend body text, responsive type scale with strict mobile ceilings — to any artifact, document, or surface that should carry the look without full component engineering. Use for one-off artifacts, marketing copy, presentations, diagrams, or README banners. For building actual app components, pages, or interfaces, use frontend-design instead — it owns the complete token system and implementation rules."
 ---
 
 # Brand Guidelines
@@ -50,9 +50,9 @@ Semantic status colors (not brand accents — use only for their meaning). Each 
 
 ## Typography
 
-- **Plus Jakarta Sans for everything.** In the app, `--font-heading` / `--font-display` / `--font-body` / `--font-sans` / `--font-mono` all resolve to Plus Jakarta Sans, where `font-mono` means tabular figures rather than a family change. There is no second face — never fall back to Inter or a system sans for headings.
-- Headings run semibold to bold (600–800), with loose tracking on large display titles. Body runs light to regular (300–400) at `line-height: 1.5–1.625`.
-- Eyebrow labels go the other way: `+0.15em` uppercase at 800 weight, at the 12px micro-copy tier.
+- **Plus Jakarta Sans for headings and display; Lexend for body, UI, and small text.** No third face, and nothing in Lexend above weight 500. In the app, `--font-heading` / `--font-display` / `--font-mono` resolve to Plus Jakarta Sans and `--font-body` / `--font-sans` resolve to Lexend, where `font-mono` means tabular figures rather than a family change — never fall back to Inter or a system sans for headings.
+- Headings run semibold to bold (600–800) in Plus Jakarta Sans, with loose tracking on large display titles. Body runs regular to medium (400–500) in Lexend at `line-height: 1.5–1.625`. 500 is the body ceiling — nothing in Lexend goes above it.
+- Eyebrow labels are uppercase at 500 weight with no letter spacing, at the 12px micro-copy tier. They set their own colour: `accent-ink` on light surfaces, `accent` on dark bands.
 - **Strict mobile ceilings below 768px.** No heading (h1 through h4) may exceed **24px**; h1 sits in the 20–24px range. No body paragraph, list item, or form description may exceed **14px**. UI micro-copy and labels sit at **12px**.
 - **Above 768px the scale opens up** — body 16px, h3 24px, h2 32px, h1 48px. The ceilings are a mobile constraint, not a global cap.
 - Form *inputs* are pinned at 16px at every width, because below that iOS Safari zooms the page on focus. On mobile that means 16px inputs beside 14px body copy — expected, not a bug.
@@ -82,7 +82,7 @@ An earlier version of this brand mandated a 40×40px blueprint grid on every sur
 
 | Don't | Do |
 | --- | --- |
-| A second font family, or Inter / a system sans as headings | Plus Jakarta Sans for headings, body, and UI text alike |
+| ❌ A third font family — Inter, or a system sans as headings | ✅ Plus Jakarta Sans for headings and display; Lexend for body, UI, and small text |
 | Hardcoded hex in app code | CSS custom property token |
 | A third accent color for "variety" | Blue primary, amber secondary — vary weight/size otherwise |
 | Amber `#FFBF00` as text on white or light grey (1.65:1) | `#B45309` (`--color-accent-ink`), or amber fill under dark slate text |

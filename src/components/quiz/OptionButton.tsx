@@ -17,7 +17,7 @@ export function OptionButton({ optionId, text, selected, onSelect }: OptionButto
         'w-full min-h-[52px] text-left px-5 py-4 rounded-xl border-2 font-body',
         'transition-all duration-200 ease-out',
         selected
-          ? 'border-brand bg-brand-soft text-ink font-semibold shadow-1'
+          ? 'border-brand bg-brand-soft text-ink font-medium shadow-1'
           : 'border-line bg-white text-ink hover:-translate-y-0.5 hover:border-brand hover:bg-brand-tint hover:shadow-1'
       )}
     >

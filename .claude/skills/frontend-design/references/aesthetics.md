@@ -4,9 +4,9 @@ Read this when asked to make an interface "look better," "less generic," or "mor
 
 ## Typography
 
-- **One face, every job.** `--font-heading` / `--font-display` / `--font-body` / `--font-sans` / `--font-mono` all resolve to **Plus Jakarta Sans**, which carries headings, body, and all UI text including button and control labels. `font-mono` only switches on tabular figures. No Inter, no Fraunces, no IBM Plex — those exist only as retired identities or fallback stacks.
+- **Two faces, three roles.** Plus Jakarta Sans for headings and display; Lexend for body, UI, and small text. No third face, and nothing in Lexend above weight 500. `--font-heading` / `--font-display` / `--font-mono` resolve to **Plus Jakarta Sans**; `--font-body` / `--font-sans` resolve to **Lexend**, which carries body copy and all UI text including button and control labels. `font-mono` only switches on tabular figures. No Inter, no Fraunces, no IBM Plex — those exist only as retired identities or fallback stacks.
 - **Weight and size drive hierarchy**, not font-swapping. Headings run 600–800; body runs 300–400 with 500–600 for emphasis and labels.
-- **Tracking**: loose on large display titles, none below. Eyebrows go the other way: `+0.15em` uppercase (the `.eyebrow` class already sets weight, size, tracking and case — but no colour).
+- **Tracking**: loose on large display titles, none below — eyebrows included, which carry no letter spacing. The `.eyebrow` class sets weight (500), size, case, and colour: `accent-ink` on light surfaces, `accent` on dark bands.
 - **Use the `--step-N` scale**, never a hardcoded pixel size. A `px` font-size escapes the mobile ceilings, which is the single most common way this design system gets broken.
 - The scale is **responsive with hard mobile ceilings**: below 768px no heading exceeds 24px and no body copy exceeds 14px; above it the scale opens to 48px h1 / 32px h2 / 16px body. That jump is where the hierarchy lives on desktop — do not flatten it.
 

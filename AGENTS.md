@@ -80,8 +80,9 @@ type scale, or the utility class list — duplication is what let three wrong fo
 survive months of review.
 
 **"Electric Blue & Amber"** — vibrant electric blue on slate neutrals with a fill-only
-amber accent, one typeface across headings, body, controls, and numeric text, on a
-responsive type scale with hard mobile ceilings.
+amber accent, two typefaces — Plus Jakarta Sans for headings and display, Lexend for
+body, controls, and numeric text — on a responsive type scale with hard mobile
+ceilings.
 
 Do not revert to any previous visual identity. Several were retired deliberately. DESIGN
 is the only current specification.
@@ -91,20 +92,7 @@ pages in a real browser rather than trusting the CSS — font sizes are inherite
 is the one design rule that code review cannot verify. It runs in CI and in `/ship`.
 
 ## Pages
-| Route | Purpose |
-|---|---|
-| `/` | Home / hero |
-| `/about` | About Ajmal |
-| `/services` | Services overview |
-| `/diagnostic` | Interactive business quiz |
-| `/results` | Diagnostic output — the personalised report shown after the quiz (client-rendered from sessionStorage; not a case-studies page) |
-| `/contact` | Contact form + Calendly |
-| `/insights` | Articles index |
-| `/insights/[slug]` | Individual article |
-| `/insights/category/[slug]` | Category-filtered article listing |
-| `/privacy` | Privacy policy (PDPL-aligned) |
-| `/unsubscribe` | Newsletter unsubscribe confirmation |
-| `/admin` | Lead management dashboard (protected) |
+Route list and page purposes are governed by WEB. Do not restate them here.
 
 ## Key Constraints
 - Tailwind v4 has **no config file** — custom tokens go in `globals.css` inside `@theme {}`

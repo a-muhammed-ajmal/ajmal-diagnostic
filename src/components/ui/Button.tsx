@@ -42,12 +42,12 @@ const variantClasses: Record<ButtonVariant, string> = {
    its trailing spaces to a codemod and silently produced `py-3font-heading`.
    44px (min-h-11) is the accessibility floor and the standard control height;
    the label rides the --step-0 scale (14px mobile / 16px desktop) while padding
-   keeps the target. Buttons are UI text, so they take Plus Jakarta Sans (`font-body`),
-   not the heading slab. `transition-all duration-200` and the -0.5 lift are the
+   keeps the target. Buttons are UI text, so they take Lexend (`font-body`),
+   not the heading face, and sit at weight 500 — the Lexend body ceiling. `transition-all duration-200` and the -0.5 lift are the
    mandated micro-interaction; the global prefers-reduced-motion guard
    neutralises the movement. */
 const baseClasses =
-  "inline-flex min-h-11 items-center justify-center gap-2 rounded-xl px-5 py-3 font-body text-[length:var(--step-0)] font-semibold leading-tight transition-all duration-200 ease-out hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50";
+  "inline-flex min-h-11 items-center justify-center gap-2 rounded-xl px-5 py-3 font-body text-[length:var(--step-0)] font-medium leading-tight transition-all duration-200 ease-out hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50";
 
 export function Button({
   children,
