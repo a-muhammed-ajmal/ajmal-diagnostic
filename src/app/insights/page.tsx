@@ -1,9 +1,13 @@
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 import { NewsletterForm } from '@/components/newsletter/NewsletterForm';
+import { Button } from '@/components/ui/Button';
+import { CardGrid, CardGridItem } from '@/components/ui/CardGrid';
+import { Chip } from '@/components/ui/Chip';
+import { CTABand } from '@/components/ui/CTABand';
 import { PageHero } from '@/components/ui/PageHero';
 import { Section } from '@/components/ui/Section';
-import { SectionHeader } from '@/components/ui/Surface';
+import { Surface, SectionHeader } from '@/components/ui/Surface';
 import { pageMetadata } from '@/lib/metadata';
 import { formatDate } from '@/lib/utils';
 import { ARTICLES, CATEGORIES, getReadingTime, type Article } from '@/lib/articles';
@@ -24,14 +28,6 @@ function ArticleMeta({ article }: { article: Article }) {
   );
 }
 
-function CategoryTag({ children }: { children: string }) {
-  return (
-    <span className="inline-flex rounded-full bg-brand-soft px-3 py-1 font-heading text-xs font-bold uppercase tracking-widest text-brand-ink">
-      {children}
-    </span>
-  );
-}
-
 function FeaturedCard({ article }: { article: Article }) {
   return (
     <Link
@@ -40,7 +36,7 @@ function FeaturedCard({ article }: { article: Article }) {
     >
       <div className="grid gap-6 md:grid-cols-12 md:items-center">
         <div className="md:col-span-8">
-          <CategoryTag>{article.category}</CategoryTag>
+          <Chip>{article.category}</Chip>
           <h2 className="mb-3 mt-4 font-heading text-[length:var(--step-3)] font-extrabold text-ink">{article.title}</h2>
           <p className="mb-3 font-body text-[length:var(--step-0)] leading-relaxed text-muted">{article.excerpt}</p>
           <ArticleMeta article={article} />
@@ -56,18 +52,23 @@ function FeaturedCard({ article }: { article: Article }) {
   );
 }
 
-function CompactCard({ article }: { article: Article }) {
+/** Tinted-header card: category strip above, title and dek on white below. */
+function ArticleCard({ article }: { article: Article }) {
   return (
-    <Link
-      href={`/insights/${article.slug}`}
-      className="card-interactive flex h-full flex-col rounded-2xl border border-line bg-white p-5 shadow-1"
-    >
-      <CategoryTag>{article.category}</CategoryTag>
-      <h3 className="mb-2 mt-3 font-heading text-[length:var(--step-1)] font-bold text-ink">{article.title}</h3>
-      <p className="mb-3 font-body text-[length:var(--step-0)] leading-relaxed text-muted">{article.excerpt}</p>
-      <div className="mt-auto">
+    <Link href={`/insights/${article.slug}`} className="block h-full">
+      <Surface
+        interactive
+        className="h-full"
+        header={
+          <span className="font-body text-[length:var(--step--1)] font-medium uppercase text-brand-ink">
+            {article.category}
+          </span>
+        }
+      >
+        <h3 className="font-heading text-[length:var(--step-1)] font-bold text-ink">{article.title}</h3>
+        <p className="mb-3 mt-2 font-body text-[length:var(--step-0)] leading-relaxed text-muted">{article.excerpt}</p>
         <ArticleMeta article={article} />
-      </div>
+      </Surface>
     </Link>
   );
 }
@@ -94,34 +95,57 @@ export default function InsightsPage() {
         lead="Practical insight on founder dependency, stronger operating systems, and applied AI for founder-led UAE SMEs."
       />
 
-      <Section width="narrow" tone="light">
+      {/*
+        Filter row. Links rather than client-side filters: each category already
+        has a real route at /insights/category/[slug], so filtering here would
+        duplicate a page that is in WEB §4's register.
+      */}
+      {populatedCategories.length > 1 && (
+        <Section tone="light" width="narrow" compact aria-label="Browse by topic">
+          <nav className="flex flex-wrap gap-2" aria-label="Article categories">
+            <Chip href="/insights" active>
+              All
+            </Chip>
+            {populatedCategories.map((cat) => (
+              <Chip key={cat.slug} href={`/insights/category/${cat.slug}`}>
+                {cat.name}
+              </Chip>
+            ))}
+          </nav>
+        </Section>
+      )}
+
+      <Section width="narrow">
         <SectionHeader eyebrow="Latest" title="The most recent writing." />
         <div className="mt-10">{featured && <FeaturedCard article={featured} />}</div>
 
         {rest.length > 0 && (
-          <div className="mt-4 grid grid-cols-1 gap-4 md:grid-cols-2">
-            {rest.map((a) => (
-              <CompactCard key={a.slug} article={a} />
+          <CardGrid className="mt-6" columns={3} scrollReveal>
+            {rest.map((article) => (
+              <CardGridItem key={article.slug} scrollReveal>
+                <ArticleCard article={article} />
+              </CardGridItem>
             ))}
-          </div>
+          </CardGrid>
         )}
       </Section>
 
       {populatedCategories.length > 1 && (
-        <Section width="narrow">
+        <Section width="narrow" tone="light">
           <SectionHeader eyebrow="Browse by topic" accent="amber" title="Start from a theme." />
-          <div className="mt-10 grid grid-cols-1 gap-4 md:grid-cols-2">
+          <CardGrid className="mt-10" columns={2} scrollReveal>
             {populatedCategories.map((cat) => (
-              <Link
-                key={cat.slug}
-                href={`/insights/category/${cat.slug}`}
-                className="card-interactive block rounded-2xl border border-line bg-white p-5 shadow-1"
-              >
-                <h3 className="mb-2 font-heading text-[length:var(--step-1)] font-bold text-ink">{cat.name}</h3>
-                <p className="font-body text-[length:var(--step-0)] leading-relaxed text-muted">{cat.desc}</p>
-              </Link>
+              <CardGridItem key={cat.slug} scrollReveal>
+                <Link
+                  href={`/insights/category/${cat.slug}`}
+                  className="card-interactive block h-full rounded-2xl border border-line bg-white p-5 shadow-1"
+                >
+                  <h3 className="mb-2 font-heading text-[length:var(--step-1)] font-bold text-ink">{cat.name}</h3>
+                  <p className="font-body text-[length:var(--step-0)] leading-relaxed text-muted">{cat.desc}</p>
+                </Link>
+              </CardGridItem>
             ))}
-          </div>
+          </CardGrid>
         </Section>
       )}
 
@@ -144,6 +168,21 @@ export default function InsightsPage() {
           </div>
         </div>
       </Section>
+
+      <CTABand
+        eyebrow="Start with clarity"
+        title="Reading is a start. Measuring is better."
+        body="The Business Health Check returns your Founder Dependency Index across decision speed, execution consistency, and operational visibility."
+        actions={
+          <Button href="/diagnostic" variant="accent">
+            Start the Business Health Check
+            {/* WEB §5 fixes the label including the arrow. The icon is decorative,
+                so the glyph is restated here for the accessible name only. */}
+            <span className="sr-only"> →</span>
+            <ArrowRight className="h-4 w-4" aria-hidden="true" />
+          </Button>
+        }
+      />
     </>
   );
 }
