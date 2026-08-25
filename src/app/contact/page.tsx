@@ -2,6 +2,9 @@ import { ArrowRight } from "lucide-react";
 import { CalendlyWidget } from "@/components/contact/CalendlyWidget";
 import { ContactForm } from "@/components/contact/ContactForm";
 import { Button } from "@/components/ui/Button";
+import { CTABand } from "@/components/ui/CTABand";
+import { Surface } from "@/components/ui/Surface";
+import { WHATSAPP_AUDIT_LINK } from "@/lib/env";
 import { PageHero } from "@/components/ui/PageHero";
 import { Section } from "@/components/ui/Section";
 import { pageMetadata } from "@/lib/metadata";
@@ -49,9 +52,46 @@ export default function ContactPage() {
             <div className="mt-6">
               <CalendlyWidget />
             </div>
+
+            {/*
+              What to bring, not what to expect back. A response-time
+              commitment is not stated in any governing document, so none is
+              invented here.
+            */}
+            <Surface className="mt-6" tone="muted">
+              <p className="eyebrow mb-3">What to send</p>
+              <ul className="space-y-2 font-body text-[length:var(--step-0)] leading-relaxed text-ink">
+                <li>The operating problem as you see it today.</li>
+                <li>What you have already tried.</li>
+                <li>Your Founder Dependency Index result, if you have one.</li>
+              </ul>
+            </Surface>
+
+            {WHATSAPP_AUDIT_LINK && (
+              <div className="mt-4">
+                <Button href={WHATSAPP_AUDIT_LINK} external variant="quiet" fullWidth>
+                  Message on WhatsApp
+                </Button>
+              </div>
+            )}
           </div>
         </div>
       </Section>
+
+      <CTABand
+        eyebrow="A lighter first step"
+        title="Not ready to talk? Start with the check."
+        body="The Business Health Check is free and private, and returns your Founder Dependency Index in 12 questions."
+        actions={
+          <Button href="/diagnostic" variant="accent">
+            Start the Business Health Check
+            {/* WEB §5 fixes the label including the arrow. The icon is decorative,
+                so the glyph is restated here for the accessible name only. */}
+            <span className="sr-only"> →</span>
+            <ArrowRight className="h-4 w-4" aria-hidden="true" />
+          </Button>
+        }
+      />
     </>
   );
 }

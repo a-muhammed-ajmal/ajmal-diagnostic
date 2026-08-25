@@ -1,5 +1,7 @@
 'use client';
 import { useState } from 'react';
+import { Button } from '@/components/ui/Button';
+import { Input, Label, Select, Textarea } from '@/components/ui/Field';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
@@ -21,8 +23,6 @@ export function ContactForm() {
     resolver: zodResolver(contactSchema),
   });
 
-  const inputClass = "w-full border border-line rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-brand bg-white text-ink text-[length:var(--step-0)]";
-  const labelClass = "block text-[length:var(--step-0)] font-heading font-semibold text-ink mb-1";
 
   const onSubmit = async (data: ContactFormData) => {
     setError('');
@@ -48,30 +48,30 @@ export function ContactForm() {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
       <div>
-        <label htmlFor="name" className={labelClass}>Full Name</label>
-        <input {...register('name')} id="name" className={inputClass} placeholder="First and last name" />
+        <Label htmlFor="name">Full Name</Label>
+        <Input {...register('name')} id="name" invalid={Boolean(errors.name)} placeholder="First and last name" />
         {errors.name && <p role="alert" className="text-danger text-xs mt-1">Please enter your name</p>}
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
-          <label htmlFor="email" className={labelClass}>Business Email</label>
-          <input {...register('email')} id="email" type="email" className={inputClass} placeholder="you@company.com" />
+          <Label htmlFor="email">Business Email</Label>
+          <Input {...register('email')} id="email" type="email" invalid={Boolean(errors.email)} placeholder="you@company.com" />
           {errors.email && <p role="alert" className="text-danger text-xs mt-1">Valid email required</p>}
         </div>
         <div>
-          <label htmlFor="phone" className={labelClass}>Phone Number</label>
-          <input {...register('phone')} id="phone" type="tel" className={inputClass} placeholder="+971 50 000 0000" />
+          <Label htmlFor="phone">Phone Number</Label>
+          <Input {...register('phone')} id="phone" type="tel" invalid={Boolean(errors.phone)} placeholder="+971 50 000 0000" />
           {errors.phone && <p role="alert" className="text-danger text-xs mt-1">Phone number required</p>}
         </div>
       </div>
       <div>
-        <label htmlFor="companyName" className={labelClass}>Company Name</label>
-        <input {...register('companyName')} id="companyName" className={inputClass} placeholder="Your business name" />
+        <Label htmlFor="companyName">Company Name</Label>
+        <Input {...register('companyName')} id="companyName" invalid={Boolean(errors.companyName)} placeholder="Your business name" />
         {errors.companyName && <p role="alert" className="text-danger text-xs mt-1">Company name required</p>}
       </div>
       <div>
-        <label htmlFor="inquiryType" className={labelClass}>Inquiry Type</label>
-        <select {...register('inquiryType')} id="inquiryType" className={inputClass}>
+        <Label htmlFor="inquiryType">Inquiry Type</Label>
+        <Select {...register('inquiryType')} id="inquiryType" invalid={Boolean(errors.inquiryType)}>
           <option value="">Select...</option>
           <option value="diagnostic-followup">Follow-up on Diagnostic Results</option>
           <option value="strategic-planning">Strategic Planning</option>
@@ -80,12 +80,12 @@ export function ContactForm() {
           <option value="performance-management">Performance Management</option>
           <option value="ai-automation">AI &amp; Automation Advisory</option>
           <option value="general">General Enquiry</option>
-        </select>
+        </Select>
         {errors.inquiryType && <p role="alert" className="text-danger text-xs mt-1">Please select an inquiry type</p>}
       </div>
       <div>
-        <label htmlFor="message" className={labelClass}>Message</label>
-        <textarea {...register('message')} id="message" rows={4} className={inputClass} placeholder="Brief description of your situation and what you are looking to address..." />
+        <Label htmlFor="message">Message</Label>
+        <Textarea {...register('message')} id="message" rows={4} invalid={Boolean(errors.message)} placeholder="Brief description of your situation and what you are looking to address..." />
         {errors.message && <p role="alert" className="text-danger text-xs mt-1">Please provide a brief message (min 20 characters)</p>}
       </div>
       {error && <p role="alert" className="text-danger text-[length:var(--step-0)]">{error}</p>}
@@ -93,13 +93,9 @@ export function ContactForm() {
         By sending this enquiry you agree to our{' '}
         <a href="/privacy" className="text-brand-ink underline hover:text-brand-ink transition-colors">Privacy Policy</a>.
       </p>
-      <button
-        type="submit"
-        disabled={isSubmitting}
-        className="w-full bg-brand text-white font-heading font-bold py-4 rounded-xl hover:bg-brand-hover transition-colors disabled:opacity-50 min-h-[52px]"
-      >
+      <Button type="submit" disabled={isSubmitting} fullWidth className="min-h-[52px]">
         {isSubmitting ? 'Sending...' : 'Send Enquiry →'}
-      </button>
+      </Button>
     </form>
   );
 }
