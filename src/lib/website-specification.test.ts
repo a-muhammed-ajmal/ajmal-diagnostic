@@ -32,13 +32,6 @@ const SCAN_DIRS = ['docs', '.claude'];
 /** Scanned at the repository root. */
 const ROOT_FILES = ['CLAUDE.md', 'AGENTS.md'];
 
-/**
- * `.design-sync/` is text-scanned only. The `.woff2` faces are binary and carry
- * no prose; excluding them by extension keeps the scan meaningful without
- * pretending a font file can be proof-read.
- */
-const DESIGN_SYNC_EXTENSIONS = ['.md', '.mjs', '.css', '.tsx'];
-
 /** Generated or vendored trees that are not part of the governance surface. */
 const SKIP_DIRS = new Set(['node_modules', '.cache', 'learnings', '.next', 'coverage']);
 
@@ -62,9 +55,6 @@ function governanceFiles(): string[] {
   for (const file of ROOT_FILES) {
     const full = join(ROOT, file);
     if (existsSync(full)) files.push(full);
-  }
-  for (const file of walk(join(ROOT, '.design-sync'))) {
-    if (DESIGN_SYNC_EXTENSIONS.some((ext) => file.endsWith(ext))) files.push(file);
   }
   return files;
 }
@@ -120,20 +110,6 @@ const RULES: readonly Rule[] = [
     pattern: /Founder Dependency Index.{0,40}%|%.{0,40}Founder Dependency Index/,
   },
 ];
-
-/**
- * The font pipeline must name the faces it downloads and binds. Renaming a face
- * here without re-downloading the `.woff2` files silently breaks the bundle, so
- * these three are exempt from the typeface rule — and from that rule only.
- */
-const FONT_PIPELINE = new Set([
-  '.design-sync/fetch-fonts.mjs',
-  '.design-sync/build-css.mjs',
-  '.design-sync/fonts/fonts-src.css',
-]);
-
-/** Both typeface rules answer to the pipeline exemption, and only they do. */
-const TYPEFACE_RULES = new Set(['typeface', 'third-face']);
 
 /** The two faces the pairing allows, lower-cased for comparison. */
 const APPROVED_FACES = new Set(['plus jakarta sans', 'lexend']);
@@ -201,7 +177,6 @@ function scan(): string[] {
     const rel = repoPath(file);
     const lines = readFileSync(file, 'utf8').split(/\r?\n/);
     for (const rule of RULES) {
-      if (TYPEFACE_RULES.has(rule.id) && FONT_PIPELINE.has(rel)) continue;
       lines.forEach((line, index) => {
         const hit = rule.pattern.exec(line);
         if (!hit) return;
@@ -210,7 +185,7 @@ function scan(): string[] {
         violations.push(`${rel}:${index + 1} — ${rule.label} — "${hit[0]}"`);
       });
     }
-    if (!FONT_PIPELINE.has(rel)) violations.push(...bindingViolations(rel, lines));
+    violations.push(...bindingViolations(rel, lines));
   }
   return violations;
 }
@@ -275,13 +250,9 @@ describe('prohibited language across the governance surface', () => {
       'AGENTS.md',
       '.claude/skills/frontend-design/SKILL.md',
       '.claude/commands/ship.md',
-      '.design-sync/conventions.md',
-      '.design-sync/previews/IndexBandMeter.tsx',
     ]) {
       expect(scanned).toContain(expected);
     }
-    // Binary faces are excluded on purpose.
-    expect(scanned.some((file) => file.endsWith('.woff2'))).toBe(false);
   });
 
   it('finds no prohibited term', () => {

@@ -2,7 +2,7 @@
 
 **The standing operating rules for the governance documents of Muhammed Ajmal Consulting.**
 
-Read this before touching any file in `docs/`, `.claude/`, or `.design-sync/`.
+Read this before touching any file in `docs/` or `.claude/`.
 
 These are standing rules, not a procedure to run. The one-time migration that
 installed this governance layer completed on 2026-08-24; its phase-by-phase
@@ -140,7 +140,7 @@ Four items were open when this layer was installed. All four closed on 2026-08-2
 
 `src/lib/website-specification.test.ts` scans the governance surface on every CI run and fails on prohibited language. The build once scanned only part of the layer, which is why prohibited language survived in a document for weeks.
 
-**Scope.** Every file under `docs/` and `.claude/`; `CLAUDE.md` and `AGENTS.md` at the repository root; and `.design-sync/` filtered to `.md`, `.mjs`, `.css`, and `.tsx`. Binary `.woff2` faces are excluded — a font file cannot be proof-read. Generated and vendored trees are skipped: `node_modules`, `.cache`, `learnings`, `.next`, `coverage`. 91 files as of 2026-08-25. **This file, `AGENT-RULES.md`, is not in scope** — the root list is exactly `CLAUDE.md` and `AGENTS.md`, so a font name written here is never scanned. Verified against `ROOT_FILES` in the guard.
+**Scope.** Every file under `docs/` and `.claude/`, plus `CLAUDE.md` and `AGENTS.md` at the repository root. Generated and vendored trees are skipped: `node_modules`, `.cache`, `learnings`, `.next`, `coverage`. 63 files as of 2026-08-25. **This file, `AGENT-RULES.md`, is not in scope** — the root list is exactly `CLAUDE.md` and `AGENTS.md`, so a font name written here is never scanned. Verified against `ROOT_FILES` in the guard.
 
 **Fails on:**
 
@@ -154,13 +154,13 @@ Four items were open when this layer was installed. All four closed on 2026-08-2
 
 **The approved pair.** Plus Jakarta Sans for headings and display; Lexend for body, UI, and small text. Nothing else. `font-mono` is Plus Jakarta Sans with tabular figures, not a third family.
 
-**Three exemptions. All narrow, all load-bearing, all verified to be no wider than they need to be.**
+**Two exemptions. Both narrow, both load-bearing, both verified to be no wider than they need to be.**
 
 1. **Prohibition statements.** A line that quotes a banned term inside straight double quotes *and* declares it prohibited is the rule, not a breach of it. ANCHOR §12 reads `"Predictable growth" is prohibited language.` and ANCHOR is a locked file — without this exemption the guard would fail on a document no agent is permitted to edit. Exactly two files rely on it: `docs/ANCHOR.md` and `docs/PRODUCT.md`. A retired typeface reintroduced in ordinary prose still fails.
 
 2. **Refusal wording — `third-face` only.** A line that names a third face in order to reject it is the rule, not a breach of it; the documents must be able to say "not Inter". A line matching the third-face rule is exempt when it carries refusal wording — `never`, `not`, `no`, `avoid`, `instead of`, `rather than`, `retired`, `prohibited`, `forbidden`, or `❌`. This applies to `third-face` alone. A RETIRED face reintroduced in ordinary prose still fails, refusal wording or not.
 
-3. **The font pipeline.** `.design-sync/fetch-fonts.mjs`, `.design-sync/build-css.mjs`, and `.design-sync/fonts/fonts-src.css` are exempt from both typeface rules, and from those only. They must name the faces they download and bind; renaming one without re-downloading the `.woff2` files silently breaks the bundle. Those three are the exact set that would otherwise fail.
+**No path is exempt from the typeface rules.** `.design-sync/` was deleted on 2026-08-25 — it was a one-time Claude Design sync, no longer used, and its font pipeline was the only thing that ever held a path-based exemption. Nothing replaces it. A retired face anywhere on the governance surface now fails, with no file-level escape hatch.
 
 **Sanctioned hardcoded font stacks.** Five files carry a `font-family` outside `globals.css` and `layout.tsx`. These five, and no others:
 
