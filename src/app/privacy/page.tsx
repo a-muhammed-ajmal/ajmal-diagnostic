@@ -14,6 +14,7 @@
  *   - The "Last updated" date is refreshed whenever the policy changes.
  */
 import Link from 'next/link';
+import { ArticleToc, type TocItem } from '@/components/insights/ArticleToc';
 import { PageHero } from '@/components/ui/PageHero';
 import { pageMetadata } from '@/lib/metadata';
 
@@ -53,14 +54,34 @@ const rights: string[] = [
   'Withdraw consent at any time, without affecting processing already carried out.',
 ];
 
+/** Slug for the in-page anchor. Derived from the heading so the two cannot drift. */
+function headingId(heading: string) {
+  return heading.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+}
+
 function Section({ heading, children }: { heading: string; children: React.ReactNode }) {
   return (
     <section className="space-y-3">
-      <h2 className="font-heading font-extrabold text-[length:var(--step-2)] text-ink pt-2">{heading}</h2>
+      <h2 id={headingId(heading)} className="scroll-mt-24 font-heading font-extrabold text-[length:var(--step-3)] text-ink pt-2">{heading}</h2>
       {children}
     </section>
   );
 }
+
+/* Mirrors the section order below. A heading added there must be added here. */
+const TOC_HEADINGS = [
+  'What data we collect',
+  'Why we collect it',
+  'Our lawful basis',
+  'Third parties who process your data',
+  'Cross-border transfer',
+  'How long we keep it',
+  'Your rights under the PDPL',
+  'How to exercise your rights',
+  'Changes to this policy',
+];
+
+const toc: TocItem[] = TOC_HEADINGS.map((heading) => ({ id: headingId(heading), label: heading }));
 
 export default function PrivacyPage() {
   return (
@@ -69,10 +90,19 @@ export default function PrivacyPage() {
         eyebrow="Legal"
         title="Privacy Policy"
         lead={`Last updated: ${LAST_UPDATED}`}
+        orbs={false}
       />
 
+      {/* No orbs, no spoke arc, no marquee on this route (frontend.md §3.10). */}
       <section className="relative overflow-hidden border-y border-line bg-canvas-light px-6 py-12 md:py-16">
-        <div className="max-w-3xl mx-auto relative z-10 space-y-8 font-body text-ink leading-relaxed">
+        <div className="relative z-10 mx-auto flex max-w-6xl gap-12 lg:items-start">
+          {/*
+            Deliberately NOT .article-longform. That class carries the 16px
+            mobile body exception, and its `li` selector matches any descendant
+            — applying it here would silently extend the exception to Privacy.
+            DESIGN §1: no other route may claim it. The measure is set directly.
+          */}
+          <div className="min-w-0 max-w-[68ch] flex-1 space-y-8 font-body text-ink leading-relaxed">
 
           <div className="bg-white border-l-4 border-brand rounded-r-lg p-5 shadow-1">
             <p className="text-[length:var(--step-0)] text-muted">
@@ -176,6 +206,8 @@ export default function PrivacyPage() {
             </p>
           </Section>
 
+          </div>
+          <ArticleToc items={toc} />
         </div>
       </section>
     </>

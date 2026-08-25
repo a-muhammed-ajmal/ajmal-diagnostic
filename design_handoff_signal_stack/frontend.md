@@ -408,8 +408,10 @@ and what to send. Calendly and WhatsApp handoffs already exist in `src/lib/calen
 `src/lib/whatsapp.ts` — reuse them. → `CTABand` offering the Diagnostic as the lighter step.
 
 ### 3.10 Privacy
-`PageHero` compact → `.article-toc` + `.article-longform` prose column, last-updated date above the
-body. No orbs, no SpokeArc, no marquee, one dark `CTABand` at most.
+`PageHero` compact (`orbs={false}`) → `.article-toc` + a plain prose column at `68ch`, last-updated
+date above the body. **Not `.article-longform`** — that class carries the 16px mobile body exception
+and its `li` selector matches any descendant, so applying it here would extend the exception to a
+second route. DESIGN §1 closes it to `/insights/[slug]` alone. No orbs, no SpokeArc, no marquee, one dark `CTABand` at most.
 
 ### 3.11 404 / error — **NOT IN WEB'S REGISTER. DO NOT BUILD YET.**
 There is no `not-found.tsx` or `error.tsx` in the repo today, and WEB §4 does not register a 404.

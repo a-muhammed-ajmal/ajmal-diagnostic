@@ -23,6 +23,8 @@ type PageHeroProps = {
   tone?: "white" | "light" | "tint";
   /** Eyebrow colour. Amber is the accent voice; blue is the default. */
   accent?: "brand" | "amber";
+  /** Ambient radials. On by default; Privacy and the flow turn them off. */
+  orbs?: boolean;
   /**
    * The rotating spoke figure behind the copy. Off by default — it is a
    * marketing device, and the diagnostic flow and admin are deliberately quiet.
@@ -45,11 +47,12 @@ export function PageHero({
   aside,
   tone = "white",
   accent = "brand",
+  orbs = true,
   spokeArc = false,
   signals,
 }: PageHeroProps) {
   return (
-    <Section tone={tone} width="wide" orbs className="py-16 md:py-24">
+    <Section tone={tone} width="wide" orbs={orbs} className="py-16 md:py-24">
       {spokeArc ? <SpokeArc /> : null}
       <div
         className={cn(
