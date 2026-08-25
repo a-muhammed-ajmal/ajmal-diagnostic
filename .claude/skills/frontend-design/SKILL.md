@@ -32,8 +32,6 @@ No Lexend-rendered text exceeds weight 500. Above 500 the loaded Lexend set rend
 
 Both load through `next/font/google` in `layout.tsx`, never a `<link>` tag or a CSS `@import`. They expose `--font-plus-jakarta-sans` and `--font-lexend`; the `@theme` block maps `--font-heading` and `--font-display` onto the first, `--font-body` and `--font-sans` onto the second.
 
-It loads through `next/font/google` in `layout.tsx`, never a `<link>` tag or a CSS `@import`. It exposes `--font-plus-jakarta-sans`, which the `@theme` block maps onto every semantic font token.
-
 ### Type scale
 
 Sizes live once, in the `--step-N` scale on `:root`, re-declared at 768px. Components write `text-[length:var(--step-N)]` and never hardcode a pixel size.
@@ -78,9 +76,9 @@ File: `scripts/audit-type-scale.mjs`
 
 | Line | Exact change |
 | :---- | :---- |
-| 45 | `const ARTICLE_BODY_CEILING = 16;` declared beside `BODY_CEILING = 14` |
-| 145 | `info()` records `longform: !!el.closest('.article-longform')` on every measured element |
-| 259–262 | the prose assertion picks its ceiling per element rather than flat: `const ceiling = b.longform ? ARTICLE_BODY_CEILING : BODY_CEILING;` |
+| 47 | `const ARTICLE_BODY_CEILING = 16;` declared beside `BODY_CEILING = 14` |
+| 154 | `info()` records `longform: !!el.closest('.article-longform')` on every measured element |
+| 316 | the prose assertion picks its ceiling per element rather than flat: `const ceiling = b.longform ? ARTICLE_BODY_CEILING : BODY_CEILING;` |
 
 The flag is set from a `.article-longform` ancestor, so a `<p>` or `<li>` on any
 other route still meets the 14px ceiling. The heading ceiling, the 320px overflow
@@ -109,6 +107,7 @@ Reach for the alias (`bg-brand`, `text-ink`, `border-line`) in components. Reach
 | `--color-brand-hover` | `#0039CC` | CTA hover — 8.6:1 on white |
 | `--color-brand-ink` | `#0037A5` | Blue text on white — 10.1:1 |
 | `--color-brand-tint` | `#E6F0FF` | Light wash, alternating band |
+| `--color-brand-soft` | `#DBEAFE` | Icon tiles, chips, chart fills |
 
 ### Amber
 
@@ -131,6 +130,7 @@ Amber's legitimate homes are fills on dark surfaces, borders, and eyebrow text o
 | `--color-ink` / canvas dark | `#0F172A` |
 | Canvas light | `#F8FAFC` |
 | `--color-muted` | `#475569` — 7.6:1 |
+| `--color-muted-invert` | `#CBD5E1` — 12.0:1 against `#0F172A`. Secondary text on a dark band, the inverse partner for `--color-muted` |
 | `--color-line` / border | `#E2E8F0` |
 
 ### Dark bands
@@ -162,9 +162,11 @@ Use these rather than rebuilding the recipe inline. All declared in `globals.css
 | `.glass-panel` | Translucent white, backdrop blur, hairline border |
 | `.orb` + `.orb-electric` / `.orb-amber` | Ambient blurred background radials |
 | `.hover-lift` | 2px upward shift plus electric glow, 200ms |
+| `.hover-lift-amber` | Swaps only the glow to amber — `box-shadow: var(--shadow-glow-amber)`. Pair with `.hover-lift`; it supplies no lift or transition of its own |
 | `.card-interactive` | Card hover: lift, shadow step, electric border |
 | `.reveal` | Staggered entrance, 100ms apart |
 | `.stage-reveal` / `.heading-reveal` | Scroll-driven reveal |
+| `.animate-fade-in` | Legacy fade-in — 16px slide in from the right over 0.3s. Predates the token scale and uses neither `--dur-*` nor `--ease-*`. Prefer `.reveal`; do not extend this one |
 | `.brand-gradient-text` | Gradient, electric-700 to electric-500 |
 | `.eyebrow` | Uppercase 500-weight label, no letter spacing — sets accent color: `accent-ink` on light, `accent` on dark bands |
 | `.tap-target` | 44px minimum — every icon-only control |
@@ -191,7 +193,7 @@ Shadows are real utilities: `shadow-1` hairline, `shadow-2` card, `shadow-3` mod
 
 ## 4. Shared primitives
 
-Five exist in `src/components/ui/`. Use them instead of re-deriving the recipe.
+Five exist in `src/components/ui/`, across four files — `SectionHeader` is a named export of `Surface.tsx`, not its own file. Use them instead of re-deriving the recipe.
 
 **`<Section>`** — the full-bleed band every section is built from. `tone` of white · light · tint · dark; `width` of prose · narrow · default · wide; `orbs` for ambient radials; `compact` for utility bands; `divided` when a white band follows another white band. It owns the padding, banding, clipping, and orb placement. Do not hand-roll `px-6 py-16 md:py-24` on a new section.
 
@@ -203,7 +205,7 @@ Five exist in `src/components/ui/`. Use them instead of re-deriving the recipe.
 
 **`<SectionHeader>`** — `eyebrow` / `title` / `description`, with `align`.
 
-For the canonical hero and navigation pattern, read `src/components/ui/PageHero.tsx` and `Navigation.tsx`. Those files are the reference, not a sample in this document.
+For the canonical hero and navigation pattern, read `src/components/ui/PageHero.tsx` and `src/components/layout/Navigation.tsx`. Those files are the reference, not a sample in this document.
 
 Components use PascalCase filenames, named exports, explicit prop interfaces, and `cn()` from `src/lib/utils.ts`. Prefer server components; keep `"use client"` boundaries small.
 
