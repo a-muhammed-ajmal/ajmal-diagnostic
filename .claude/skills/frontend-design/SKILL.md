@@ -172,6 +172,7 @@ Use these rather than rebuilding the recipe inline. All declared in `globals.css
 | `.tap-target` | 44px minimum — every icon-only control |
 | `.stage-rail` / `.stage-item` / `.stage-marker` / `.stage-card` | Process and timeline composition |
 | `.article-longform` / `.article-toc` / `.reading-progress` | Insights article chrome |
+| `.spoke-arc` / `.spoke-ring` | Hero-only decorative figure — eight rotating spokes masked to an annulus, plus a dashed counter-rotating ring. Colours derive from `--color-brand` via `color-mix`. Ambient loops (46s / 28s) sit outside the `--dur-*` interaction scale on purpose |
 
 Shadows are real utilities: `shadow-1` hairline, `shadow-2` card, `shadow-3` modal, plus `shadow-glow-electric` and `shadow-glow-amber`. Use those names, not `shadow-lg`.
 
@@ -193,23 +194,39 @@ Shadows are real utilities: `shadow-1` hairline, `shadow-2` card, `shadow-3` mod
 
 ## 4. Shared primitives
 
-Five exist in `src/components/ui/`, across four files — `SectionHeader` is a named export of `Surface.tsx`, not its own file. Use them instead of re-deriving the recipe.
+Eight exist in `src/components/ui/`, across seven files — `SectionHeader` is a named export of `Surface.tsx`, not its own file. Use them instead of re-deriving the recipe.
 
 **`<Section>`** — the full-bleed band every section is built from. `tone` of white · light · tint · dark; `width` of prose · narrow · default · wide; `orbs` for ambient radials; `compact` for utility bands; `divided` when a white band follows another white band. It owns the padding, banding, clipping, and orb placement. Do not hand-roll `px-6 py-16 md:py-24` on a new section.
 
-**`<PageHero>`** — the page opener. Takes `eyebrow` / `title` / `lead` / `actions` / `note` / `aside`, plus `tone` and `accent`. Deliberately asymmetric: 7/5 with an aside, 8-of-12 without. It offers no centered variant on purpose — a centered hero on every page is what makes a site read as one template.
+**`<PageHero>`** — the page opener. Takes `eyebrow` / `title` / `lead` / `actions` / `note` / `aside`, plus `tone` and `accent`. Deliberately asymmetric: 7/5 with an aside, 8-of-12 without. It offers no centered variant on purpose — a centered hero on every page is what makes a site read as one template. Two opt-in extras, both off by default: `spokeArc` for the decorative hero figure, and `signals` for a 3-up row of glass cards under the actions — a separate slot from `aside`, not a replacement for it.
 
 **`<Button>`** — variants `primary` · `secondary` · `quiet` · `accent` · `danger`, plus `fullWidth`. Renders a `next/link` for `href`, a plain anchor for `href` + `external`, a `<button>` otherwise. Focus ring, disabled state, the 200ms hover lift, and the 44px floor are built in.
 
-**`<Surface>`** — card container; `tone` of default · muted · accent · glass, and `interactive` to add `.card-interactive`.
+**`<Surface>`** — card container; `tone` of default · muted · accent · glass, and `interactive` to add `.card-interactive`. Optional `header` renders a tinted header strip — a `--color-brand-tint` band with a hairline bottom edge above a white body. Supplying it moves the padding off the card onto the two regions and clips the corners; omitting it renders exactly as before. There is no separate `Card` component and none is to be created.
 
 **`<SectionHeader>`** — `eyebrow` / `title` / `description`, with `align`.
+
+**`<Input>` / `<Select>` / `<Textarea>` / `<Label>` / `<FieldError>`** — form controls, in `Field.tsx`.
+44px floor (textarea 92px), `--radius-1`, `--color-line` border going `--color-brand` on focus,
+`--color-danger` when `invalid` (which also sets `aria-invalid`). They deliberately set **no**
+font-size: `globals.css` pins `input, select, textarea` to 16px *unlayered*, which outranks any
+Tailwind utility and is what stops iOS zooming on focus. They rely on the global `:focus-visible`
+outline and add no ring of their own.
+
+**`<IconTile>`** — the square that heads a card or rail item. `variant` of numeral · glyph,
+`size` of sm(26) · md(34) · lg(44). Numeral takes the solid `--color-brand` fill with `.font-mono`
+for tabular figures; glyph takes `--color-brand-soft` with a `--color-brand-ink` mark. Decorative by
+default.
+
+**`<Chip>`** — a pill. Static by default (`--color-canvas-light`, `--color-line`, `--step--1` at 500).
+Passing `href` or `onClick` makes it a real control and adds the 44px floor — a filter row is a tap
+target, a marquee label is not.
 
 For the canonical hero and navigation pattern, read `src/components/ui/PageHero.tsx` and `src/components/layout/Navigation.tsx`. Those files are the reference, not a sample in this document.
 
 Components use PascalCase filenames, named exports, explicit prop interfaces, and `cn()` from `src/lib/utils.ts`. Prefer server components; keep `"use client"` boundaries small.
 
-Control heights: `<Button>` is 44px. `min-h-[48px]` and `min-h-[52px]` appear on some admin and diagnostic forms. Those three are the whole ladder — reuse one, do not introduce a fourth.
+Control heights: `<Button>` is 44px. `min-h-[48px]` and `min-h-[52px]` appear on some admin and diagnostic forms. Those three are the whole ladder — reuse one, do not introduce a fourth. A `<Textarea>` is not a control height: it floors at 92px because it is a typing surface, not a target.
 
 ---
 

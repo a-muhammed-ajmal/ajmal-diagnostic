@@ -23,6 +23,17 @@ type PageHeroProps = {
   tone?: "white" | "light" | "tint";
   /** Eyebrow colour. Amber is the accent voice; blue is the default. */
   accent?: "brand" | "amber";
+  /**
+   * The rotating spoke figure behind the copy. Off by default — it is a
+   * marketing device, and the diagnostic flow and admin are deliberately quiet.
+   */
+  spokeArc?: boolean;
+  /**
+   * Optional 3-up row of glass cards under the actions. A separate slot from
+   * `aside`: a route may use either, and the Diagnostic entry uses `aside` for
+   * the empty IndexScale.
+   */
+  signals?: ReactNode[];
 };
 
 export function PageHero({
@@ -34,9 +45,12 @@ export function PageHero({
   aside,
   tone = "white",
   accent = "brand",
+  spokeArc = false,
+  signals,
 }: PageHeroProps) {
   return (
     <Section tone={tone} width="wide" orbs className="py-16 md:py-24">
+      {spokeArc ? <SpokeArc /> : null}
       <div
         className={cn(
           "grid items-center gap-12",
@@ -66,9 +80,37 @@ export function PageHero({
           {note ? (
             <p className="reveal mt-4 font-body text-xs text-muted">{note}</p>
           ) : null}
+          {signals?.length ? (
+            <ul className="mt-10 grid gap-4 sm:grid-cols-3">
+              {signals.map((signal, index) => (
+                <li key={index} className="reveal glass-panel rounded-2xl p-5">
+                  {signal}
+                </li>
+              ))}
+            </ul>
+          ) : null}
         </div>
         {aside ? <div className="lg:col-span-5">{aside}</div> : null}
       </div>
     </Section>
+  );
+}
+
+/**
+ * Decorative hero figure: eight rotating spokes masked to an annulus, with a
+ * dashed ring counter-rotating inside it. Both loops live in `globals.css` and
+ * resolve to a rest frame under `prefers-reduced-motion`.
+ */
+function SpokeArc() {
+  return (
+    <div
+      className="pointer-events-none absolute inset-0 overflow-hidden"
+      aria-hidden="true"
+    >
+      <div className="absolute -right-24 -top-24 h-[34rem] w-[34rem] md:-right-16">
+        <div className="spoke-arc absolute inset-0" />
+        <div className="spoke-ring absolute inset-[18%]" />
+      </div>
+    </div>
   );
 }

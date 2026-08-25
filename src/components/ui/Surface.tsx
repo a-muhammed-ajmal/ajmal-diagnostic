@@ -7,24 +7,52 @@ type SurfaceProps = HTMLAttributes<HTMLElement> & {
    *  so it deliberately opts out of the shared `border` utility. */
   tone?: "default" | "muted" | "accent" | "glass";
   interactive?: boolean;
+  /**
+   * Optional tinted header strip — a brand-tint band with a hairline bottom
+   * edge, holding a numeral tile and a title, with the body on white below.
+   *
+   * Opt-in and off by default: supplying it moves the padding off the card and
+   * onto the two regions, so a card without a header renders exactly as before.
+   */
+  header?: ReactNode;
 };
 
-export function Surface({ children, tone = "default", interactive = false, className, ...props }: SurfaceProps) {
+export function Surface({
+  children,
+  tone = "default",
+  interactive = false,
+  header,
+  className,
+  ...props
+}: SurfaceProps) {
+  const shell = cn(
+    "rounded-2xl",
+    // With a header the strip runs to the card edge, so the padding moves
+    // inward and the corners have to clip it.
+    header ? "overflow-hidden" : "p-6",
+    tone !== "glass" && "border",
+    tone === "default" && "border-line bg-white shadow-1",
+    tone === "muted" && "border-line bg-brand-tint",
+    tone === "accent" && "border-brand/30 bg-brand-soft text-ink",
+    tone === "glass" && "glass-panel",
+    interactive && "card-interactive",
+    className,
+  );
+
+  if (!header) {
+    return (
+      <section className={shell} {...props}>
+        {children}
+      </section>
+    );
+  }
+
   return (
-    <section
-      className={cn(
-        "rounded-2xl p-6",
-        tone !== "glass" && "border",
-        tone === "default" && "border-line bg-white shadow-1",
-        tone === "muted" && "border-line bg-brand-tint",
-        tone === "accent" && "border-brand/30 bg-brand-soft text-ink",
-        tone === "glass" && "glass-panel",
-        interactive && "card-interactive",
-        className,
-      )}
-      {...props}
-    >
-      {children}
+    <section className={shell} {...props}>
+      <div className="flex items-center gap-3 border-b border-line bg-brand-tint px-6 py-4">
+        {header}
+      </div>
+      <div className="p-6">{children}</div>
     </section>
   );
 }

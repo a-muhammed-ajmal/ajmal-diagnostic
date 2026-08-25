@@ -247,6 +247,47 @@ h1, h2, h3, p { overflow-wrap: break-word; }
 .orb-electric { background: var(--color-electric-100); opacity: 0.30; }
 .orb-amber    { background: var(--color-amber-100);    opacity: 0.20; }
 
+/* ── Hero spoke arc ──────────────────────────────────────────────────────── */
+/* Decorative only — aria-hidden, hero band only, one per viewport. Both colours
+   are derived from --color-brand with color-mix rather than written as new
+   literals, so a palette move carries them. The two loop durations are ambient
+   (46s / 28s) and deliberately outside the --dur-1..4 interaction scale, which
+   tops out at 650ms. The global prefers-reduced-motion block collapses both to
+   their rest frame. */
+.spoke-arc,
+.spoke-ring {
+  position: absolute;
+  border-radius: var(--radius-pill);
+  pointer-events: none;
+  opacity: 0.35;
+}
+
+/* Eight spokes: a 6deg mark every 45deg, masked back to an annulus so the
+   centre stays clear of the headline. */
+.spoke-arc {
+  background: repeating-conic-gradient(
+    from 0deg,
+    color-mix(in srgb, var(--color-brand) 22%, transparent) 0deg 6deg,
+    transparent 6deg 45deg
+  );
+  -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 16px), #000 calc(100% - 16px));
+  mask: radial-gradient(farthest-side, transparent calc(100% - 16px), #000 calc(100% - 16px));
+  animation: spoke-rotate 46s linear infinite;
+}
+
+.spoke-ring {
+  border: 1px dashed color-mix(in srgb, var(--color-brand) 28%, transparent);
+  animation: spoke-counter 28s linear infinite;
+}
+
+@media (min-width: 640px) {
+  .spoke-arc,
+  .spoke-ring { opacity: 0.6; }
+}
+
+@keyframes spoke-rotate  { to { transform: rotate(360deg); } }
+@keyframes spoke-counter { to { transform: rotate(-360deg); } }
+
 /* ── Hover micro-interactions ────────────────────────────────────────────── */
 /* The house interaction: a 2px lift plus a glow step, bound to 200ms. */
 .hover-lift { transition: all var(--dur-2) var(--ease-out); }

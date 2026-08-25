@@ -27,3 +27,24 @@
              omitted --color-brand-soft #DBEAFE and --color-muted-invert
              #CBD5E1, the latter while §2 already instructed using
              text-muted-invert on dark bands.
+2026-08-26 — Signal Stack primitives (§2.1). Three new files in
+             src/components/ui/: Field.tsx (Input, Select, Textarea, Label,
+             FieldError), IconTile.tsx, Chip.tsx. Two existing components
+             extended, both opt-in and defaulting off so every current call
+             site renders unchanged: Surface gains a `header` prop for the
+             tinted header strip, and PageHero gains `spokeArc` and `signals`.
+             No Card and no GlassPanel component were created — a tinted card
+             is Surface + header, and a glass panel is Surface tone="glass".
+             Button was not touched: its five shipped variants
+             (primary/secondary/quiet/accent/danger) are correct and the
+             handoff's primary|secondary|ghost|dark-glass was a spec defect.
+             "ghost" maps onto the existing quiet; dark-glass was dropped
+             because every dark band already uses variant="accent" and
+             .glass-panel composes through className.
+             New CSS: .spoke-arc / .spoke-ring in globals.css, with
+             spoke-rotate and spoke-counter keyframes. Both colours derive
+             from --color-brand via color-mix rather than new literals. Their
+             46s / 28s loops are ambient and sit outside the --dur-1..4
+             interaction scale, which tops out at 650ms; the global
+             prefers-reduced-motion block collapses them to a rest frame.
+             No new colour, type, shadow or radius value was introduced.

@@ -23,7 +23,8 @@
 ```text
 src/components/
   layout/      Navigation, Footer
-  ui/          Button and shared primitives
+  ui/          Button, Section, PageHero, Surface + SectionHeader,
+               Field (Input/Select/Textarea/Label/FieldError), IconTile, Chip
   quiz/        QuestionCard, OptionButton, ProgressBar
   contact/     ContactForm, CalendlyWidget
   lead/        LeadCaptureForm
@@ -78,7 +79,24 @@ It picks its element from its props — `href` gives a `next/link`, `href` + `ex
 
 The base class already carries `min-h-11` (the 44px floor), `focus-visible` outline, `transition-all duration-200` with the mandated `-0.5` hover lift, and disabled styling. Don't re-add them.
 
-Pair it with `<Surface>` (`tone`: `default` | `muted` | `accent` | `glass`, plus `interactive`) and `<SectionHeader>` (`eyebrow` / `title` / `description`, `align`) from `Surface.tsx`. The `glass` tone is the glassmorphism panel and brings its own border and shadow.
+Pair it with `<Surface>` (`tone`: `default` | `muted` | `accent` | `glass`, plus `interactive`) and `<SectionHeader>` (`eyebrow` / `title` / `description`, `align`) from `Surface.tsx`. The `glass` tone is the glassmorphism panel and brings its own border and shadow — there is no separate `GlassPanel` component and none is to be created.
+
+`<Surface>` also takes an optional `header`, which renders a tinted header strip: a `--color-brand-tint` band with a hairline bottom edge above a white body. It is opt-in — supplying it moves the padding off the card onto the two regions and clips the corners, so a card without a header renders exactly as before. This is the "card with a tinted header" pattern; do not build a `Card` component for it.
+
+## Form controls
+
+Use `<Input>`, `<Select>`, `<Textarea>`, `<Label>` and `<FieldError>` from `Field.tsx` rather than restating a field recipe in a form. They carry the 44px floor (textarea 92px), `rounded-lg`, the `--color-line` border going `--color-brand` on focus, and `--color-danger` plus `aria-invalid` when `invalid` is set.
+
+Two rules they encode, both easy to break by hand:
+
+- **They set no font-size.** `globals.css` pins `input, select, textarea` to 16px *unlayered*, which outranks any Tailwind utility. Adding `text-[length:var(--step-0)]` to a field is dead weight at best and re-opens the iOS zoom bug if the pin is ever layered.
+- **They add no focus ring.** The global `:focus-visible` outline is the house treatment. `focus:outline-none focus:ring-2` *replaces* it rather than extending it — the older call sites in `ContactForm.tsx` and `FdiDiagnosticFlow.tsx` still do this and are wrong.
+
+## IconTile and Chip
+
+`<IconTile>` is the square heading a card or rail item: `variant` numeral · glyph, `size` sm(26) · md(34) · lg(44). The numeral takes the solid `--color-brand` fill with `.font-mono` for tabular figures; the glyph takes `--color-brand-soft` with a `--color-brand-ink` mark. Decorative by default, so it is `aria-hidden` unless you pass `decorative={false}`.
+
+`<Chip>` is a pill, static by default. Passing `href` or `onClick` turns it into a real control and adds the 44px floor — a filter row is a tap target, a marquee label is not, and forcing 44px on the decorative case would double the height of a marquee.
 
 If a genuinely new shape is needed, add a variant to `Button` rather than duplicating the recipe in a page.
 
