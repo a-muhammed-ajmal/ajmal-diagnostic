@@ -1,9 +1,12 @@
 import { ArrowRight } from "lucide-react";
-import { CommercialLadder, COMMERCIAL_STAGES } from "@/components/home/SystemVisuals";
+import { COMMERCIAL_STAGES } from "@/components/home/SystemVisuals";
+import { Accordion } from "@/components/ui/Accordion";
 import { Button } from "@/components/ui/Button";
+import { CTABand } from "@/components/ui/CTABand";
 import { PageHero } from "@/components/ui/PageHero";
 import { Section } from "@/components/ui/Section";
-import { SectionHeader } from "@/components/ui/Surface";
+import { SectionNav } from "@/components/ui/SectionNav";
+import { Surface, SectionHeader } from "@/components/ui/Surface";
 import { pageMetadata } from "@/lib/metadata";
 import { faqJsonLd, jsonLdScript, serviceJsonLd } from "@/lib/jsonLd";
 
@@ -18,6 +21,11 @@ const evidenceLadder = [
   ["Evidence", "The Business Clarity Audit examines records, workflows, dashboards, decision samples, SOPs, and rework."],
   ["Root cause", "The Business Clarity Audit identifies the binding constraint that a Focused Improvement Sprint can address."],
 ];
+
+/** Anchors for the in-page nav. Derived from the stage list so the two cannot drift. */
+function stageId(title: string) {
+  return title.toLowerCase().replace(/[^a-z0-9]+/g, "-");
+}
 
 /**
  * Published answers only. Every one restates an existing approved position — the Anchor
@@ -60,6 +68,8 @@ const faqs = [
 ];
 
 export default function ServicesPage() {
+  const navItems = COMMERCIAL_STAGES.map((stage) => ({ id: stageId(stage.title), label: stage.title }));
+
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdScript(serviceJsonLd(COMMERCIAL_STAGES.map((stage) => ({ name: stage.title, description: stage.detail })))) }} />
@@ -72,6 +82,9 @@ export default function ServicesPage() {
         actions={
           <Button href="/diagnostic">
             Start the Business Health Check
+            {/* WEB §5 fixes the label including the arrow. The icon is decorative,
+                so the glyph is restated here for the accessible name only. */}
+            <span className="sr-only"> →</span>
             <ArrowRight className="h-4 w-4" aria-hidden="true" />
           </Button>
         }
@@ -102,58 +115,75 @@ export default function ServicesPage() {
         </div>
       </Section>
 
-      <Section width="narrow" tone="light">
+      {/*
+        The five stages, each a full block. Sticky nav from 1024px, a chip row
+        below it. Each stage carries only what ANCHOR §8 and the stage register
+        actually state — what it is and what it commits you to. "What you get",
+        "what it is not" and "who it suits" have no governed source for all five
+        stages, and writing them here would be inventing scope.
+      */}
+      <Section tone="light" width="wide" id="the-journey">
         <SectionHeader
           eyebrow="The engagement journey"
           accent="amber"
           title="Start where the evidence says to start."
         />
-        <CommercialLadder />
+        <div className="mt-12 grid gap-10 lg:grid-cols-12 lg:gap-16">
+          <div className="lg:col-span-3">
+            <SectionNav items={navItems} />
+          </div>
+          <div className="lg:col-span-9">
+            <ol className="stage-rail">
+              {COMMERCIAL_STAGES.map((stage) => (
+                <li key={stage.number} className="stage-item" id={stageId(stage.title)}>
+                  <span className="stage-marker font-mono" aria-hidden="true">
+                    {stage.number}
+                  </span>
+                  <div className="stage-card rounded-2xl bg-white p-6 shadow-1">
+                    <div className="flex flex-wrap items-baseline justify-between gap-3">
+                      <h3 className="font-heading text-[length:var(--step-2)] font-bold text-ink">
+                        {stage.title}
+                      </h3>
+                      <span className="font-mono text-xs text-accent-ink">{stage.commitment}</span>
+                    </div>
+                    <p className="mt-3 font-body text-[length:var(--step-0)] leading-relaxed text-muted">
+                      {stage.detail}
+                    </p>
+                  </div>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </div>
       </Section>
 
-      <Section width="prose">
+      <Section width="prose" divided>
         <SectionHeader eyebrow="Common questions" title="Before you start." />
-        <div className="mt-10 grid gap-3">
-          {faqs.map((faq) => (
-            <details
-              key={faq.question}
-              className="group rounded-2xl border border-line bg-white px-5 shadow-1 transition-all duration-200 open:shadow-2 hover:border-brand"
-            >
-              <summary className="flex min-h-[52px] cursor-pointer list-none items-center justify-between gap-4 py-4 font-heading text-[length:var(--step-0)] font-bold text-ink marker:content-none">
-                {faq.question}
-                <span
-                  className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-brand-soft font-mono text-[length:var(--step-0)] text-brand-ink transition-transform duration-200 group-open:rotate-45"
-                  aria-hidden="true"
-                >
-                  +
-                </span>
-              </summary>
-              <p className="pb-5 font-body text-[length:var(--step-0)] leading-relaxed text-muted">{faq.answer}</p>
-            </details>
-          ))}
-        </div>
+        <Accordion className="mt-10" items={faqs.map(({ question, answer }) => ({ question, answer }))} />
       </Section>
 
-      <Section tone="dark" width="wide" orbs>
-        <div className="grid gap-10 lg:grid-cols-12 lg:items-center lg:gap-16">
-          <div className="lg:col-span-7">
-            <p className="eyebrow mb-3">Start here</p>
-            <h2 className="heading-reveal font-heading text-[length:var(--step-4)] font-extrabold text-white">
-              Start with the Business Health Check.
-            </h2>
-            <p className="mt-4 max-w-xl font-body text-[length:var(--step-0)] leading-relaxed text-muted-invert">
-              It gives an initial, self-reported picture of where founder dependency may appear. A Business Clarity Audit is the evidence-led next step when verification is needed.
+      <CTABand
+        eyebrow="Start here"
+        title="Start with the Business Health Check."
+        body="It gives an initial, self-reported picture of where founder dependency may appear. A Business Clarity Audit is the evidence-led next step when verification is needed."
+        actions={
+          <Button href="/diagnostic" variant="accent">
+            Start the Business Health Check
+            {/* WEB §5 fixes the label including the arrow. The icon is decorative,
+                so the glyph is restated here for the accessible name only. */}
+            <span className="sr-only"> →</span>
+            <ArrowRight className="h-4 w-4" aria-hidden="true" />
+          </Button>
+        }
+        aside={
+          <Surface tone="glass">
+            <p className="eyebrow mb-3">Before the Audit</p>
+            <p className="font-body text-[length:var(--step-0)] leading-relaxed text-muted-invert">
+              Scope and fees are agreed only after the Business Clarity Audit establishes what actually needs to change.
             </p>
-          </div>
-          <div className="lg:col-span-5 lg:justify-self-end">
-            <Button href="/diagnostic" variant="accent">
-              Start the Business Health Check
-              <ArrowRight className="h-4 w-4" aria-hidden="true" />
-            </Button>
-          </div>
-        </div>
-      </Section>
-
+          </Surface>
+        }
+      />
     </>
   );
 }
