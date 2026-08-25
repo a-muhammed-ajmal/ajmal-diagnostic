@@ -379,7 +379,9 @@ this screen is quiet on purpose. Question content and scoring are PRODUCT's, in
 ### 3.5 Diagnostic result — `src/app/results/`
 **The only place `IndexScale` renders a value.** Index + band name, per-area breakdown (three bars),
 the pattern in plain words, **one** next step, then the boundary note. All wording and thresholds are
-PRODUCT's. Email-a-copy form, then `CTABand` (book a call — offered, never required).
+PRODUCT's. **No email-a-copy form.** PRODUCT step 5 sends the report email at submit time
+(`email_sent` is set only after Resend accepts), so a form here would offer a second copy of
+something already sent. The closing band books a call — offered, never required.
 
 ### 3.6 Insights index — `src/app/insights/`
 `PageHero` compact → filter `Chip` row → article `CardGrid` 3-up with tinted headers

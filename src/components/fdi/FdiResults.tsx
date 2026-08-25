@@ -6,6 +6,7 @@ import { track } from '@vercel/analytics';
 import { Button } from '@/components/ui/Button';
 import { CALENDLY_LINK, WHATSAPP_AUDIT_LINK } from '@/lib/env';
 import type { FounderFdiReport } from '@/lib/fdi/public-report';
+import { IndexScale } from '@/components/fdi/IndexScale';
 
 /** Ambient radials. Decorative, and always inside a clipping parent. */
 function Orbs() {
@@ -68,6 +69,9 @@ export function FdiResults() {
       <section className="relative z-10 mx-auto max-w-4xl space-y-5">
 
         {/* The index itself, on the page's one glass panel. */}
+        {/* The ONE surface on the site where IndexScale carries a reading. It is
+            handed the UNROUNDED composite so its band resolves exactly as the
+            engine's did - bands read the unrounded value (PRODUCT SSA6). */}
         <header className="glass-panel rounded-2xl p-7 md:p-10">
           <p className="eyebrow text-brand-ink">Founder Dependency Index</p>
           <h1 className="mt-3 font-heading text-[length:var(--step-5)] font-extrabold text-ink">
@@ -77,6 +81,9 @@ export function FdiResults() {
           <p className="mt-2 font-heading text-[length:var(--step-1)] font-bold text-brand-ink">
             {report.index.band.label}
           </p>
+          <div className="mt-6 max-w-xl">
+            <IndexScale value={report.index.unrounded} display={report.index.display} />
+          </div>
           <p className="mt-5 max-w-2xl font-body text-[length:var(--step-0)] leading-relaxed text-muted">
             This result describes self-reported operating patterns. It is not a diagnosis of root cause.
           </p>
@@ -84,14 +91,24 @@ export function FdiResults() {
 
         <section className="rounded-2xl border border-line bg-white p-6 shadow-1 md:p-8">
           <h2 className="font-heading text-[length:var(--step-3)] font-extrabold text-ink">Component scores</h2>
-          <dl className="mt-5 grid grid-cols-1 gap-4 md:grid-cols-3">
+          {/* Three bars, one per component. Each is a value out of 100, never a
+              percentage - the bar is a length, the figure beside it is the score. */}
+          <dl className="mt-5 space-y-5">
             {report.components.map((component) => (
-              <div key={component.key} className="card-interactive rounded-xl border border-line bg-canvas-light p-4">
-                <dt className="font-heading text-[length:var(--step-0)] text-muted">{component.label}</dt>
-                <dd className="mt-2 font-heading text-[length:var(--step-3)] font-extrabold text-ink">
-                  {component.display}
-                  <span className="font-heading text-[length:var(--step-0)] text-muted"> / 100</span>
-                </dd>
+              <div key={component.key}>
+                <div className="flex items-baseline justify-between gap-4">
+                  <dt className="font-body text-[length:var(--step-0)] text-ink">{component.label}</dt>
+                  <dd className="font-mono shrink-0 font-heading text-[length:var(--step-1)] font-extrabold text-ink">
+                    {component.display}
+                    <span className="font-body text-[length:var(--step--1)] font-medium text-muted"> / 100</span>
+                  </dd>
+                </div>
+                <div className="mt-2 h-[10px] overflow-hidden rounded-full bg-canvas-light" aria-hidden="true">
+                  <div
+                    className="h-full rounded-full bg-brand transition-[width] duration-[400ms] ease-out"
+                    style={{ width: `${component.display}%` }}
+                  />
+                </div>
               </div>
             ))}
           </dl>
