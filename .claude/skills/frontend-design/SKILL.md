@@ -172,6 +172,7 @@ Use these rather than rebuilding the recipe inline. All declared in `globals.css
 | `.tap-target` | 44px minimum — every icon-only control |
 | `.stage-rail` / `.stage-item` / `.stage-marker` / `.stage-card` | Process and timeline composition |
 | `.article-longform` / `.article-toc` / `.reading-progress` | Insights article chrome |
+| `.marquee` / `.marquee-track` | Looping chip track — the set is rendered twice and translated -50% so the loop has no seam. 8% edge mask; pauses on hover. Duplicate set must carry `aria-hidden` |
 | `.spoke-arc` / `.spoke-ring` | Hero-only decorative figure — eight rotating spokes masked to an annulus, plus a dashed counter-rotating ring. Colours derive from `--color-brand` via `color-mix`. Ambient loops (46s / 28s) sit outside the `--dur-*` interaction scale on purpose |
 
 Shadows are real utilities: `shadow-1` hairline, `shadow-2` card, `shadow-3` modal, plus `shadow-glow-electric` and `shadow-glow-amber`. Use those names, not `shadow-lg`.
@@ -229,6 +230,23 @@ Components use PascalCase filenames, named exports, explicit prop interfaces, an
 Control heights: `<Button>` is 44px. `min-h-[48px]` and `min-h-[52px]` appear on some admin and diagnostic forms. Those three are the whole ladder — reuse one, do not introduce a fourth. A `<Textarea>` is not a control height: it floors at 92px because it is a typing surface, not a target.
 
 ---
+
+### Composites
+
+Built on the primitives, in `src/components/ui/` unless noted. Compose these rather than
+re-deriving a section.
+
+| Component | Notes |
+| :---- | :---- |
+| `<CardGrid>` / `<CardGridItem>` | 4/3/2-up collapsing to 1-up. `.reveal` stagger is capped at five children by `globals.css`; `scrollReveal` switches to `.stage-reveal` for sections below the fold |
+| `<StageRail>` | Supplies the markup `.stage-rail` expects. Re-authors none of that CSS |
+| `<SectionNav>` | `.article-toc` above 1024px, a `<Chip>` row below it. The navigation changes shape rather than disappearing |
+| `<Accordion>` | Single-open. Animates `grid-template-rows: 0fr → 1fr` — the one sanctioned layout-property animation, because `height` cannot transition from `auto` |
+| `<Carousel>` | Stepped 3-up, `translate3d`. Never auto-advances |
+| `<CTABand>` | The closing dark band. `.eyebrow` resolves to amber inside `.bg-canvas-dark` unaided |
+| `<TrustMarquee>` | Home and Diagnostic only |
+| `<StickyCTABar>` | Appears once the hero leaves the viewport, via IntersectionObserver on a sentinel — not a scroll listener. Dismissal is `sessionStorage`, so it returns next visit. Never rendered on the diagnostic flow or admin |
+| `<IndexScale>` / `<IndexBandList>` | `src/components/fdi/`. Reads bands from the active FDI config — never restates them. See §7 |
 
 ## 5. Layout and motion
 

@@ -288,6 +288,24 @@ h1, h2, h3, p { overflow-wrap: break-word; }
 @keyframes spoke-rotate  { to { transform: rotate(360deg); } }
 @keyframes spoke-counter { to { transform: rotate(-360deg); } }
 
+/* ── Chip marquee ────────────────────────────────────────────────────────── */
+/* The track holds the chip set twice; translating exactly -50% lands the
+   duplicate where the original started, so the loop has no seam. The duplicate
+   set carries aria-hidden at the call site. Ambient duration again sits outside
+   the --dur-* interaction scale; the global reduced-motion block stops it. */
+.marquee {
+  -webkit-mask: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  mask: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+}
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee-slide 32s linear infinite;
+}
+.marquee:hover .marquee-track { animation-play-state: paused; }
+
+@keyframes marquee-slide { to { transform: translateX(-50%); } }
+
 /* ── Hover micro-interactions ────────────────────────────────────────────── */
 /* The house interaction: a 2px lift plus a glow step, bound to 200ms. */
 .hover-lift { transition: all var(--dur-2) var(--ease-out); }

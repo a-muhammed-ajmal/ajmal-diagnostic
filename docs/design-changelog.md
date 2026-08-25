@@ -48,3 +48,24 @@
              interaction scale, which tops out at 650ms; the global
              prefers-reduced-motion block collapses them to a rest frame.
              No new colour, type, shadow or radius value was introduced.
+2026-08-26 — Signal Stack composites (§2.2). CardGrid, StageRail, SectionNav,
+             Accordion, Carousel, CTABand, TrustMarquee, StickyCTABar in
+             src/components/ui/, and IndexScale/IndexBandList in
+             src/components/fdi/. [DESIGN CHANGE] for TrustMarquee (register
+             item 4) and StickyCTABar (item 6).
+             New CSS: .marquee / .marquee-track with the marquee-slide
+             keyframe. The chip set renders twice and translates exactly -50%
+             so the loop has no seam; the duplicate set is aria-hidden. Its
+             32s loop is ambient and outside --dur-1..4, like the spoke arc.
+             IndexScale reads band labels and ranges from FDI_1_1_CONFIG
+             rather than restating them, so a recalibration cannot leave
+             retired wording on screen. It renders empty unless given both an
+             unrounded value and a display figure — there is no code path that
+             shows a sample reading. PRODUCT §A6 and DESIGN §7 govern it.
+             Accordion animates grid-template-rows 0fr->1fr, the one
+             sanctioned layout-property animation, because height cannot
+             transition from auto.
+             No QuestionStepper component was created. The diagnostic flow
+             already lives in FdiDiagnosticFlow.tsx, whose copy is asserted
+             directly from PRODUCT by site-copy.test.ts; a competing component
+             would fork governed copy. It is restyled in place instead.
