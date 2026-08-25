@@ -50,7 +50,7 @@ export default async function AdminLeadsPage() {
         <div className="bg-white rounded-xl shadow-1 border border-line overflow-hidden">
           <div className="overflow-x-auto">
             <table className="w-full text-[length:var(--step-0)]">
-              <thead className="bg-white text-ink">
+              <thead className="sticky top-0 z-10 bg-white text-ink">
                 <tr>
                   {[
                     "Date",
@@ -117,7 +117,7 @@ export default async function AdminLeadsPage() {
                           </div>
                           {lead.severity_label && (
                             <span
-                              className={cn("text-[10px] font-bold px-2 py-0.5 rounded-full", severityColors[lead.severity_label])}
+                              className={cn("text-[length:var(--step--1)] font-medium px-2 py-0.5 rounded-full", severityColors[lead.severity_label])}
                             >
                               {lead.severity_label}
                             </span>
@@ -130,21 +130,21 @@ export default async function AdminLeadsPage() {
                     </td>
                     <td className="px-4 py-3">
                       <span
-                        className={cn("text-[10px] font-bold px-2 py-0.5 rounded-full", lead.email_sent ? "bg-success-soft text-success" : "bg-danger-soft text-danger")}
+                        className={cn("text-[length:var(--step--1)] font-medium px-2 py-0.5 rounded-full", lead.email_sent ? "bg-success-soft text-success" : "bg-danger-soft text-danger")}
                       >
                         {lead.email_sent ? "✔ Sent" : "✗ Pending"}
                       </span>
                     </td>
                     <td className="px-4 py-3">
                       <span
-                        className={cn("text-[10px] font-bold px-2 py-0.5 rounded-full", lead.ai_plan_generated ? "bg-success-soft text-success" : "bg-line text-muted")}
+                        className={cn("text-[length:var(--step--1)] font-medium px-2 py-0.5 rounded-full", lead.ai_plan_generated ? "bg-success-soft text-success" : "bg-line text-muted")}
                       >
                         {lead.ai_plan_generated ? "✔ Ready" : "—"}
                       </span>
                     </td>
                     <td className="px-4 py-3">
                       <span
-                        className={cn("text-[10px] font-bold px-2 py-0.5 rounded-full", lead.booked_call ? "bg-success-soft text-success" : "bg-line text-muted")}
+                        className={cn("text-[length:var(--step--1)] font-medium px-2 py-0.5 rounded-full", lead.booked_call ? "bg-success-soft text-success" : "bg-line text-muted")}
                       >
                         {lead.booked_call ? "✔ Booked" : "—"}
                       </span>

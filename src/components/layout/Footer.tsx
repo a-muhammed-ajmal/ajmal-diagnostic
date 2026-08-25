@@ -51,7 +51,7 @@ export function Footer() {
                   M<span className="text-accent">A</span>
                 </span>
               </span>
-              <p className="font-heading text-[length:var(--step-0)] font-bold uppercase tracking-widest">
+              <p className="font-heading text-[length:var(--step-0)] font-bold uppercase">
                 Muhammed Ajmal Consulting
               </p>
             </div>
@@ -63,7 +63,7 @@ export function Footer() {
           </div>
 
           <div className="md:col-span-3">
-            <p className="mb-2 font-heading text-xs font-semibold uppercase tracking-widest text-brand-ink">Explore</p>
+            <p className="mb-2 font-heading text-xs font-semibold uppercase text-brand-ink">Explore</p>
             <nav aria-label="Footer navigation">
               <ul>
                 {links.map((link) => (
@@ -81,7 +81,7 @@ export function Footer() {
           </div>
 
           <div className="md:col-span-4">
-            <p className="mb-3 font-heading text-xs font-semibold uppercase tracking-widest text-brand-ink">Start here</p>
+            <p className="mb-3 font-heading text-xs font-semibold uppercase text-brand-ink">Start here</p>
             <Button href="/diagnostic">
               Start the Business Health Check
               {/* WEB §5 fixes the label including the arrow. The icon is decorative,

@@ -138,7 +138,7 @@ export default async function LeadBriefingPage({
               </div>
               {typedLead.severity_label && (
                 <span
-                  className={cn("text-xs font-bold px-3 py-1 rounded-full border", severityColors[typedLead.severity_label])}
+                  className={cn("text-xs font-medium px-3 py-1 rounded-full border", severityColors[typedLead.severity_label])}
                 >
                   {typedLead.severity_label}
                 </span>
@@ -148,7 +148,7 @@ export default async function LeadBriefingPage({
 
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-6 pt-6 border-t border-line">
             <div>
-              <div className="text-[10px] font-heading uppercase tracking-wider text-muted mb-1">
+              <div className="text-[length:var(--step--1)] font-heading uppercase tracking-wider text-muted mb-1">
                 Industry
               </div>
               <div className="font-body text-[length:var(--step-0)] text-ink">
@@ -156,7 +156,7 @@ export default async function LeadBriefingPage({
               </div>
             </div>
             <div>
-              <div className="text-[10px] font-heading uppercase tracking-wider text-muted mb-1">
+              <div className="text-[length:var(--step--1)] font-heading uppercase tracking-wider text-muted mb-1">
                 Team Size
               </div>
               <div className="font-body text-[length:var(--step-0)] text-ink">
@@ -164,7 +164,7 @@ export default async function LeadBriefingPage({
               </div>
             </div>
             <div>
-              <div className="text-[10px] font-heading uppercase tracking-wider text-muted mb-1">
+              <div className="text-[length:var(--step--1)] font-heading uppercase tracking-wider text-muted mb-1">
                 Revenue
               </div>
               <div className="font-body text-[length:var(--step-0)] text-ink">
@@ -172,7 +172,7 @@ export default async function LeadBriefingPage({
               </div>
             </div>
             <div>
-              <div className="text-[10px] font-heading uppercase tracking-wider text-muted mb-1">
+              <div className="text-[length:var(--step--1)] font-heading uppercase tracking-wider text-muted mb-1">
                 Submitted
               </div>
               <div className="font-body text-[length:var(--step-0)] text-ink">
@@ -200,12 +200,12 @@ export default async function LeadBriefingPage({
                       {d.label}
                     </span>
                     {d.isPrimary && (
-                      <span className="text-[10px] font-bold bg-danger-soft text-danger px-2 py-0.5 rounded-full">
+                      <span className="text-[length:var(--step--1)] font-bold bg-danger-soft text-danger px-2 py-0.5 rounded-full">
                         PRIMARY
                       </span>
                     )}
                     {d.isSecondary && (
-                      <span className="text-[10px] font-bold bg-brand-soft text-brand-ink px-2 py-0.5 rounded-full">
+                      <span className="text-[length:var(--step--1)] font-bold bg-brand-soft text-brand-ink px-2 py-0.5 rounded-full">
                         SECONDARY
                       </span>
                     )}
@@ -233,7 +233,7 @@ export default async function LeadBriefingPage({
 
           <div className="mt-4 pt-4 border-t border-line grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <div className="text-[10px] font-heading uppercase tracking-wider text-muted mb-1">
+              <div className="text-[length:var(--step--1)] font-heading uppercase tracking-wider text-muted mb-1">
                 Primary Constraint
               </div>
               <div className="font-body text-[length:var(--step-0)] text-ink font-medium">
@@ -243,7 +243,7 @@ export default async function LeadBriefingPage({
               </div>
             </div>
             <div>
-              <div className="text-[10px] font-heading uppercase tracking-wider text-muted mb-1">
+              <div className="text-[length:var(--step--1)] font-heading uppercase tracking-wider text-muted mb-1">
                 Secondary Constraint
               </div>
               <div className="font-body text-[length:var(--step-0)] text-ink">
@@ -270,7 +270,7 @@ export default async function LeadBriefingPage({
                   <ol className="space-y-2">
                     {thirtyDay.map((item, i) => (
                       <li key={i} className="flex gap-3">
-                        <span className="flex-shrink-0 w-5 h-5 rounded-full bg-danger-soft text-danger text-[10px] font-bold flex items-center justify-center mt-0.5">
+                        <span className="flex-shrink-0 w-5 h-5 rounded-full bg-danger-soft text-danger text-[length:var(--step--1)] font-bold flex items-center justify-center mt-0.5">
                           {i + 1}
                         </span>
                         <span className="font-body text-[length:var(--step-0)] text-ink">
@@ -289,7 +289,7 @@ export default async function LeadBriefingPage({
                   <ol className="space-y-2">
                     {ninetyDay.map((item, i) => (
                       <li key={i} className="flex gap-3">
-                        <span className="flex-shrink-0 w-5 h-5 rounded-full bg-brand-tint text-ink text-[10px] font-bold flex items-center justify-center mt-0.5">
+                        <span className="flex-shrink-0 w-5 h-5 rounded-full bg-brand-tint text-ink text-[length:var(--step--1)] font-bold flex items-center justify-center mt-0.5">
                           {i + 1}
                         </span>
                         <span className="font-body text-[length:var(--step-0)] text-ink">

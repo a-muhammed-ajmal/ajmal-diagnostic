@@ -139,7 +139,7 @@ export function DependencyIndexPreview() {
                   <span className="font-mono text-xs text-accent-ink">{value}</span>
                 </div>
                 <p className="mt-2 font-body text-[length:var(--step-0)] leading-relaxed text-muted">{body}</p>
-                <p className="mt-3 font-mono text-xs uppercase tracking-widest text-muted">4 questions</p>
+                <p className="mt-3 font-mono text-xs uppercase text-muted">4 questions</p>
               </div>
             </li>
           ))}

@@ -52,7 +52,7 @@ export function Navigation() {
             <span className="absolute -right-1 -top-1 h-2.5 w-2.5 rounded-full bg-accent" aria-hidden="true" />
           </div>
           <div>
-            <p className="font-heading text-xs font-bold uppercase leading-none tracking-widest">Muhammed Ajmal</p>
+            <p className="font-heading text-xs font-bold uppercase leading-none">Muhammed Ajmal</p>
             <p className="mt-0.5 hidden font-body text-xs uppercase tracking-[0.2em] text-brand-ink sm:block">Business Operations &amp; Growth</p>
           </div>
         </Link>
