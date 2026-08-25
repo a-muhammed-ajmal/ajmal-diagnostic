@@ -5,6 +5,13 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { useForm, useWatch } from 'react-hook-form';
 import { CURRENT_FDI_QUESTION_SET } from '@/lib/fdi/config';
+import { IndexScale, IndexBandList } from '@/components/fdi/IndexScale';
+import { Button } from '@/components/ui/Button';
+import { CardGrid, CardGridItem } from '@/components/ui/CardGrid';
+import { IconTile } from '@/components/ui/IconTile';
+import { PageHero } from '@/components/ui/PageHero';
+import { Section } from '@/components/ui/Section';
+import { Surface, SectionHeader } from '@/components/ui/Surface';
 import type { FounderFdiReport } from '@/lib/fdi/public-report';
 import { fdiBusinessDetailsSchema, fdiContactSchema } from '@/lib/fdi-server/validation';
 import { cn } from '@/lib/utils';
@@ -53,6 +60,13 @@ type Session = { readonly id: string; readonly token: string; readonly isTest: b
 type ApiResponse = { readonly success: boolean; readonly error?: string };
 type StartResponse = ApiResponse & { readonly sessionId?: string; readonly sessionToken?: string; readonly isTest?: boolean };
 type SubmitResponse = ApiResponse & { readonly report?: FounderFdiReport };
+
+/* ANCHOR SS10.2 - the question each component answers. */
+const INDEX_COMPONENTS: readonly (readonly [string, string])[] = [
+  ['Decision Speed', 'Do decisions and work continue when the founder is unavailable?'],
+  ['Execution Consistency', 'Does recurring work reach a consistent standard without founder supervision?'],
+  ['Operational Visibility', 'Can the founder see what is happening without chasing updates?'],
+];
 
 const componentLabels: Record<string, string> = {
   DS: 'Decision Speed',
@@ -128,10 +142,31 @@ export function FdiDiagnosticFlow() {
   const handleAnswer = async (questionId: string, optionId: string) => {
     setAnswers((current) => ({ ...current, [questionId]: optionId }));
     setError(null);
+    /* One question per screen, auto-advancing 450ms after a selection so the
+       choice is visibly registered before the screen changes. Back stays
+       available throughout. A save failure cancels the advance — the founder
+       must see the error rather than be carried past it. */
+    let advanced = true;
     try {
       await saveProgress({ answers: { [questionId]: optionId } });
     } catch (cause) {
+      advanced = false;
       setError(cause instanceof Error ? cause.message : 'Unable to save that answer. Please try again.');
+    }
+    if (!advanced) return;
+    const last = currentQuestion === CURRENT_FDI_QUESTION_SET.questions.length - 1;
+    window.setTimeout(() => {
+      if (last) setStage('contact');
+      else setCurrentQuestion((value) => value + 1);
+    }, 450);
+  };
+
+  /* Leaving discards an unfinished attempt, which receives no score and no
+     email. That is worth one confirmation. */
+  const exitCheck = () => {
+    const answered = Object.keys(answers).length;
+    if (answered === 0 || window.confirm('Leave the Business Health Check? An unfinished attempt receives no score or email.')) {
+      router.push('/');
     }
   };
 
@@ -168,48 +203,83 @@ export function FdiDiagnosticFlow() {
   });
 
   if (stage === 'intro') {
+    /*
+      SS3.3 entry page. The empty IndexScale is the aside: it renders with no
+      reading, because a sample score on a marketing surface would be an
+      invented metric (DESIGN SS7). No marquee and no sticky bar here.
+    */
+    const startButton = (
+      <Button onClick={() => void start()} disabled={isWorking}>
+        {isWorking ? 'Starting…' : 'Start the Business Health Check →'}
+      </Button>
+    );
+
     return (
-      <div className="relative flex min-h-svh items-center overflow-hidden bg-white px-5 py-8 text-ink sm:py-12">
-        <div className="pointer-events-none absolute inset-0" aria-hidden="true">
-          <div className="orb orb-electric absolute -right-32 -top-40 h-[28rem] w-[28rem]" />
-          <div className="orb orb-amber absolute -bottom-40 -left-32 h-96 w-96" />
-        </div>
-        <section className="relative z-10 mx-auto w-full max-w-3xl text-center">
-          <p className="eyebrow text-brand-ink mb-3">Business Health Check</p>
-          <h1 className="font-heading font-extrabold text-[length:var(--step-4)] leading-tight text-ink">
-            How much does your business still depend on you?
-          </h1>
-          <p className="font-body text-[length:var(--step-0)] text-muted max-w-2xl mx-auto mt-3 leading-relaxed">
-            A free check of how much day-to-day operations still rely on you.
-          </p>
-          <p className="font-body text-[length:var(--step-0)] text-muted max-w-2xl mx-auto mt-2 leading-relaxed">
-            Answer 12 questions about decision-making, execution, and operational visibility. You will receive your Founder Dependency Index and a clear next step.
-          </p>
-          {/* One bordered list on a phone, three cards from sm up — keeps this section inside a single mobile view. */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 sm:gap-2 max-w-2xl mx-auto mt-4 text-left rounded-xl border border-brand/30 sm:border-0 divide-y divide-line sm:divide-y-0 overflow-hidden">
+      <>
+        <PageHero
+          eyebrow="Business Health Check"
+          title="How much does your business still depend on you?"
+          lead="A free check of how much day-to-day operations still rely on you."
+          actions={startButton}
+          note="This is a focused founder-dependency self-report, not a full financial, tax, legal, or business-performance audit."
+          aside={
+            <Surface tone="glass">
+              <p className="eyebrow mb-4">Founder Dependency Index</p>
+              <IndexScale />
+              <div className="mt-6 border-t border-line pt-4">
+                <IndexBandList />
+              </div>
+            </Surface>
+          }
+        />
+
+        <Section tone="tint" width="wide" orbs>
+          <SectionHeader
+            eyebrow="What it measures"
+            title="Three observable operating components."
+            description="Answer 12 questions about decision-making, execution, and operational visibility. You will receive your Founder Dependency Index and a clear next step."
+          />
+          <CardGrid className="mt-12" columns={3} scrollReveal>
+            {INDEX_COMPONENTS.map(([title, body], index) => (
+              <CardGridItem key={title} scrollReveal>
+                <Surface
+                  interactive
+                  className="h-full"
+                  header={
+                    <>
+                      <IconTile variant="numeral" size="md">{'0' + (index + 1)}</IconTile>
+                      <h2 className="font-heading text-[length:var(--step-1)] font-bold text-ink">{title}</h2>
+                    </>
+                  }
+                >
+                  <p className="font-body text-[length:var(--step-0)] leading-relaxed text-muted">{body}</p>
+                </Surface>
+              </CardGridItem>
+            ))}
+          </CardGrid>
+        </Section>
+
+        <Section width="narrow">
+          <SectionHeader eyebrow="How it works" title="Before you start." />
+          <div className="mt-10 grid gap-3 sm:grid-cols-3">
             {[
               ['12 questions', 'Four questions across each operating component'],
               ['Progress saved', 'You can leave before completion; an unfinished attempt receives no score or email'],
               ['Self-report only', 'The result identifies reported patterns. It does not diagnose root causes'],
             ].map(([title, body]) => (
-              <div key={title} className="bg-white/5 px-3 py-2 sm:rounded-xl sm:border sm:border-brand/30">
-                <p className="font-heading font-bold text-brand-ink text-xs">{title}</p>
-                <p className="font-body text-muted text-xs leading-snug sm:mt-1">{body}</p>
+              <div key={title} className="stage-reveal rounded-2xl border border-line bg-white p-5 shadow-1">
+                <h3 className="font-heading text-[length:var(--step-1)] font-bold text-brand-ink">{title}</h3>
+                <p className="mt-2 font-body text-[length:var(--step-0)] leading-relaxed text-muted">{body}</p>
               </div>
             ))}
           </div>
-          {error && <p role="alert" className="mt-4 text-[length:var(--step-0)] text-danger">{error}</p>}
-          <button onClick={start} disabled={isWorking} className="mt-5 min-h-12 rounded-xl bg-brand px-8 py-3 font-body text-[length:var(--step-0)] font-medium text-white shadow-1 transition-all duration-200 ease-out hover:-translate-y-0.5 hover:bg-brand-hover hover:shadow-glow-electric disabled:pointer-events-none disabled:opacity-50">
-            {isWorking ? 'Starting…' : 'Start the Business Health Check →'}
-          </button>
-          <p className="font-body text-xs text-muted mt-3 max-w-xl mx-auto leading-snug">
-            This is a focused founder-dependency self-report, not a full financial, tax, legal, or business-performance audit.
+          {error && <p role="alert" className="mt-6 font-body text-[length:var(--step-0)] text-danger">{error}</p>}
+          <div className="mt-10">{startButton}</div>
+          <p className="mt-4 font-body text-xs text-muted">
+            <a href="/privacy" className="text-brand-ink underline hover:text-brand">Privacy Policy</a>
           </p>
-          <p className="font-body text-xs text-muted mt-2">
-            <a href="/privacy" className="underline text-brand-ink hover:text-brand">Privacy Policy</a>
-          </p>
-        </section>
-      </div>
+        </Section>
+      </>
     );
   }
 
@@ -220,10 +290,6 @@ export function FdiDiagnosticFlow() {
     const fieldError = (message?: string) => message ? <p role="alert" className="font-body text-xs text-danger mt-1">{message}</p> : null;
     return (
       <div className="relative min-h-svh overflow-hidden bg-canvas-light px-4 py-5 sm:py-8">
-        <div className="pointer-events-none absolute inset-0" aria-hidden="true">
-          <div className="orb orb-electric absolute -right-32 -top-40 h-96 w-96" />
-          <div className="orb orb-amber absolute -bottom-40 -left-32 h-80 w-80" />
-        </div>
         <form onSubmit={submit} className="glass-panel relative z-10 mx-auto max-w-xl space-y-3 rounded-2xl p-4 sm:p-6">
           <div>
             <p className="eyebrow text-brand-ink">Your result is ready</p>
@@ -266,13 +332,20 @@ export function FdiDiagnosticFlow() {
   const isLast = currentQuestion === CURRENT_FDI_QUESTION_SET.questions.length - 1;
   const selected = answers[question.id];
   const progress = Math.round(((currentQuestion + 1) / CURRENT_FDI_QUESTION_SET.questions.length) * 100);
+  /* No orbs, no marquee, no sticky bar, no spoke arc on the flow. This screen
+     is quiet on purpose (frontend.md §3.4). */
   return (
     <div className="relative flex min-h-svh items-center overflow-hidden bg-canvas-light px-4 py-5 sm:py-8">
-        <div className="pointer-events-none absolute inset-0" aria-hidden="true">
-          <div className="orb orb-electric absolute -right-32 -top-40 h-96 w-96" />
-          <div className="orb orb-amber absolute -bottom-40 -left-32 h-80 w-80" />
-        </div>
       <section className="relative z-10 mx-auto w-full max-w-2xl">
+        <div className="mb-3 flex justify-end">
+          <button
+            type="button"
+            onClick={exitCheck}
+            className="tap-target inline-flex items-center px-2 font-body text-xs text-muted transition-colors duration-200 ease-out hover:text-ink"
+          >
+            Exit
+          </button>
+        </div>
         <div className="mb-3"><div className="flex justify-between font-body text-xs text-muted mb-1.5"><span>{componentLabels[question.componentKey]}</span><span>Question {currentQuestion + 1} of 12</span></div><div className="h-1.5 overflow-hidden rounded-full bg-line"><div className="h-full rounded-full bg-gradient-to-r from-electric-700 to-electric-500 transition-[width] duration-300" style={{ width: `${progress}%` }} /></div></div>
         <div className="glass-panel rounded-2xl p-4 sm:p-6">
           <p className="eyebrow text-brand-ink">{componentLabels[question.componentKey]}</p>
@@ -287,6 +360,9 @@ export function FdiDiagnosticFlow() {
           {error && <p role="alert" className="text-[length:var(--step-0)] text-danger mt-3">{error}</p>}
           <div className="flex gap-3 mt-4">
             {currentQuestion > 0 && <button type="button" onClick={() => setCurrentQuestion((value) => value - 1)} className="min-h-11 flex-1 rounded-xl border border-line bg-white font-body text-[length:var(--step-0)] font-medium text-ink transition-all duration-200 ease-out hover:-translate-y-0.5 hover:border-brand hover:text-brand-ink">← Back</button>}
+            {/* Auto-advance carries a selected answer forward; this stays as the
+                explicit path for anyone who prefers it, and for reduced-motion
+                users who may not notice the transition. */}
             <button type="button" disabled={!selected} onClick={() => isLast ? setStage('contact') : setCurrentQuestion((value) => value + 1)} className="min-h-11 flex-1 rounded-xl bg-brand font-body text-[length:var(--step-0)] font-medium text-white shadow-1 transition-all duration-200 ease-out hover:-translate-y-0.5 hover:bg-brand-hover hover:shadow-glow-electric disabled:pointer-events-none disabled:opacity-40">{isLast ? 'Continue →' : 'Next →'}</button>
           </div>
         </div>
