@@ -3,8 +3,11 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
+import { CardGrid, CardGridItem } from '@/components/ui/CardGrid';
+import { CTABand } from '@/components/ui/CTABand';
 import { PageHero } from '@/components/ui/PageHero';
 import { Section } from '@/components/ui/Section';
+import { Surface } from '@/components/ui/Surface';
 import {
   CATEGORIES,
   getArticlesByCategory,
@@ -34,16 +37,23 @@ export async function generateMetadata({
   });
 }
 
+/** Same tinted-header card as the Insights index, so the two listings match. */
 function ArticleCard({ article }: { article: Article }) {
   return (
-    <Link
-      href={`/insights/${article.slug}`}
-      className="card-interactive flex h-full flex-col rounded-2xl border border-line bg-white p-5 shadow-1 md:p-6"
-    >
-      <span className="inline-flex w-fit rounded-full bg-brand-soft px-3 py-1 font-heading text-xs font-bold uppercase tracking-widest text-brand-ink">{article.category}</span>
-      <h2 className="mb-2 mt-3 font-heading text-[length:var(--step-1)] font-bold text-ink">{article.title}</h2>
-      <p className="mb-3 font-body text-[length:var(--step-0)] leading-relaxed text-muted">{article.excerpt}</p>
-      <p className="mt-auto font-body text-xs text-muted">{formatDate(article.publishedAt)} · {getReadingTime(article)} min read</p>
+    <Link href={`/insights/${article.slug}`} className="block h-full">
+      <Surface
+        interactive
+        className="h-full"
+        header={
+          <span className="font-body text-[length:var(--step--1)] font-medium uppercase text-brand-ink">
+            {article.category}
+          </span>
+        }
+      >
+        <h2 className="font-heading text-[length:var(--step-1)] font-bold text-ink">{article.title}</h2>
+        <p className="mb-3 mt-2 font-body text-[length:var(--step-0)] leading-relaxed text-muted">{article.excerpt}</p>
+        <p className="font-body text-xs text-muted">{formatDate(article.publishedAt)} · {getReadingTime(article)} min read</p>
+      </Surface>
     </Link>
   );
 }
@@ -76,11 +86,13 @@ export default async function CategoryPage({
 
       <Section tone="light" width="narrow">
         {articles.length > 0 ? (
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+          <CardGrid columns={3} scrollReveal>
             {articles.map((a) => (
-              <ArticleCard key={a.slug} article={a} />
+              <CardGridItem key={a.slug} scrollReveal>
+                <ArticleCard article={a} />
+              </CardGridItem>
             ))}
-          </div>
+          </CardGrid>
         ) : (
           <div className="glass-panel mx-auto max-w-md rounded-2xl p-8">
             <p className="mb-2 font-heading text-[length:var(--step-1)] font-bold text-ink">Nothing published here yet.</p>
@@ -96,6 +108,20 @@ export default async function CategoryPage({
         )}
       </Section>
 
+      <CTABand
+        eyebrow="Start with clarity"
+        title="Reading is a start. Measuring is better."
+        body="The Business Health Check returns your Founder Dependency Index across decision speed, execution consistency, and operational visibility."
+        actions={
+          <Button href="/diagnostic" variant="accent">
+            Start the Business Health Check
+            {/* WEB §5 fixes the label including the arrow. The icon is decorative,
+                so the glyph is restated here for the accessible name only. */}
+            <span className="sr-only"> →</span>
+            <ArrowRight className="h-4 w-4" aria-hidden="true" />
+          </Button>
+        }
+      />
     </>
   );
 }
