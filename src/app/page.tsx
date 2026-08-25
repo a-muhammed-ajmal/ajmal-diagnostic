@@ -148,10 +148,11 @@ export default function HomePage() {
             <CardGridItem key={label} scrollReveal>
               <Surface
                 interactive
+                raised
                 className="h-full"
                 header={
                   <>
-                    <IconTile variant="numeral" size="md">
+                    <IconTile variant="numeral" size="md" className="icon-tile-spring">
                       {String(index + 1).padStart(2, "0")}
                     </IconTile>
                     <h3 className="font-heading text-[length:var(--step-1)] font-bold text-ink">{label}</h3>

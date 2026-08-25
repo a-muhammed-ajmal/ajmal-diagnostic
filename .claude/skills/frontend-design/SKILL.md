@@ -163,7 +163,8 @@ Use these rather than rebuilding the recipe inline. All declared in `globals.css
 | `.orb` + `.orb-electric` / `.orb-amber` | Ambient blurred background radials |
 | `.hover-lift` | 2px upward shift plus electric glow, 200ms |
 | `.hover-lift-amber` | Swaps only the glow to amber — `box-shadow: var(--shadow-glow-amber)`. Pair with `.hover-lift`; it supplies no lift or transition of its own |
-| `.card-interactive` | Card hover: lift, shadow step, electric border |
+| `.card-interactive` | Card hover: lift, shadow step, electric border. **The house gesture — 2px** |
+| `.card-interactive-raised` | Opt-in variant: 6px lift, `--shadow-raised`, and a spring tile via `.icon-tile-spring`. **Not the house gesture.** Marketing card grids only — never admin, never forms, never a control |
 | `.reveal` | Staggered entrance, 100ms apart |
 | `.stage-reveal` / `.heading-reveal` | Scroll-driven reveal |
 | `.animate-fade-in` | Legacy fade-in — 16px slide in from the right over 0.3s. Predates the token scale and uses neither `--dur-*` nor `--ease-*`. Prefer `.reveal`; do not extend this one |
@@ -180,6 +181,8 @@ Use these rather than rebuilding the recipe inline. All declared in `globals.css
 
 Shadows are real utilities: `shadow-1` hairline, `shadow-2` card, `shadow-3` modal, plus `shadow-glow-electric` and `shadow-glow-amber`. Use those names, not `shadow-lg`.
 
+`--shadow-raised` exists for `.card-interactive-raised` alone. It is **not** a fourth step on the 1/2/3 ramp and must not be reached for as one.
+
 ### Tokens
 
 ```
@@ -190,6 +193,7 @@ Shadows are real utilities: `shadow-1` hairline, `shadow-2` card, `shadow-3` mod
 
 --dur-1 120ms  --dur-2 200ms  --dur-3 400ms  --dur-4 650ms
 --ease-out cubic-bezier(0.16, 1, 0.3, 1)   --ease-in cubic-bezier(0.5, 0, 0.75, 0)
+--ease-spring cubic-bezier(0.34, 1.56, 0.64, 1)   /* overshoots — decorative only */
 ```
 
 `--dur-2` is 200ms to match the hover transition standard. In practice: `rounded-lg` for inputs and chips, `rounded-xl` for buttons, `rounded-2xl` for cards. The `prefers-reduced-motion` guard is already global.
@@ -206,7 +210,7 @@ Eight exist in `src/components/ui/`, across seven files — `SectionHeader` is a
 
 **`<Button>`** — variants `primary` · `secondary` · `quiet` · `accent` · `danger`, plus `fullWidth`. Renders a `next/link` for `href`, a plain anchor for `href` + `external`, a `<button>` otherwise. Focus ring, disabled state, the 200ms hover lift, and the 44px floor are built in.
 
-**`<Surface>`** — card container; `tone` of default · muted · accent · glass, and `interactive` to add `.card-interactive`. Optional `header` renders a tinted header strip — a `--color-brand-tint` band with a hairline bottom edge above a white body. Supplying it moves the padding off the card onto the two regions and clips the corners; omitting it renders exactly as before. There is no separate `Card` component and none is to be created.
+**`<Surface>`** — card container; `tone` of default · muted · accent · glass, and `interactive` to add `.card-interactive`. `raised` upgrades `interactive` to the 6px variant — marketing card grids only. Optional `header` renders a tinted header strip — a `--color-brand-tint` band with a hairline bottom edge above a white body. Supplying it moves the padding off the card onto the two regions and clips the corners; omitting it renders exactly as before. There is no separate `Card` component and none is to be created.
 
 **`<SectionHeader>`** — `eyebrow` / `title` / `description`, with `align`.
 
@@ -281,6 +285,12 @@ re-deriving a section.
 ❌ **A `tailwind.config.js`.** Tailwind v4 ignores it entirely.
 
 ❌ **A fourth control height.**
+
+❌ **`.card-interactive-raised` outside a marketing card grid.** It overshoots and lifts 6px. On a
+control, a form, or an admin panel it reads as a bug. The house gesture is `.card-interactive`.
+
+❌ **`--ease-spring` on anything but a small decorative element.** It passes 1 and settles back;
+on a panel or a control that is a wobble, not a spring.
 
 ---
 

@@ -8,6 +8,12 @@ type SurfaceProps = HTMLAttributes<HTMLElement> & {
   tone?: "default" | "muted" | "accent" | "glass";
   interactive?: boolean;
   /**
+   * The raised hover variant — 6px lift, deep shadow, spring tile. NOT the
+   * house gesture: `interactive` (2px) is. Marketing card grids only; never
+   * admin, never forms.
+   */
+  raised?: boolean;
+  /**
    * Optional tinted header strip — a brand-tint band with a hairline bottom
    * edge, holding a numeral tile and a title, with the body on white below.
    *
@@ -21,6 +27,7 @@ export function Surface({
   children,
   tone = "default",
   interactive = false,
+  raised = false,
   header,
   className,
   ...props
@@ -35,7 +42,7 @@ export function Surface({
     tone === "muted" && "border-line bg-brand-tint",
     tone === "accent" && "border-brand/30 bg-brand-soft text-ink",
     tone === "glass" && "glass-panel",
-    interactive && "card-interactive",
+    interactive && (raised ? "card-interactive-raised" : "card-interactive"),
     className,
   );
 

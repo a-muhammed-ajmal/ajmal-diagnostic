@@ -86,3 +86,20 @@
              needed and will not ship. Tinted surfaces use --color-line on
              --color-brand-tint, which reads correctly; the prototypes' #CCE0FF
              was never a token and no surface required it.
+2026-08-26 — [DESIGN CHANGE] register item 5, the last one:
+             .card-interactive-raised. Two genuinely new tokens were required
+             and are now declared: --shadow-raised
+             (0 26px 54px -22px rgba(15,23,42,.32)) and --ease-spring
+             (cubic-bezier(0.34,1.56,0.64,1)).
+             This is NOT the house gesture and does not replace it.
+             .card-interactive at 2px remains the default on every card on the
+             site. The raised variant is opt-in through Surface's `raised`
+             prop, defaulting false, and is restricted to marketing card grids
+             — never admin, never forms, never a control. The spring applies
+             only to a descendant carrying .icon-tile-spring, so the overshoot
+             cannot leak onto a tile used elsewhere.
+             --shadow-raised is not a fourth step on the 1/2/3 shadow ramp and
+             must not be used as one. --ease-spring passes 1 and settles back,
+             which is a wobble on anything larger than a small decorative mark.
+             Applied on exactly one surface today: the Founder Trap card grid
+             on Home.

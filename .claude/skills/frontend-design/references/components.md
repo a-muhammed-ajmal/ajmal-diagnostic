@@ -81,6 +81,8 @@ The base class already carries `min-h-11` (the 44px floor), `focus-visible` outl
 
 Pair it with `<Surface>` (`tone`: `default` | `muted` | `accent` | `glass`, plus `interactive`) and `<SectionHeader>` (`eyebrow` / `title` / `description`, `align`) from `Surface.tsx`. The `glass` tone is the glassmorphism panel and brings its own border and shadow — there is no separate `GlassPanel` component and none is to be created.
 
+`<Surface>` also takes `raised`, which upgrades `interactive` from the 2px house gesture to the 6px `.card-interactive-raised` variant. It is restricted to marketing card grids — never admin, never forms, never a control — and the spring tile inside it needs `.icon-tile-spring` on the `<IconTile>`.
+
 `<Surface>` also takes an optional `header`, which renders a tinted header strip: a `--color-brand-tint` band with a hairline bottom edge above a white body. It is opt-in — supplying it moves the padding off the card onto the two regions and clips the corners, so a card without a header renders exactly as before. This is the "card with a tinted header" pattern; do not build a `Card` component for it.
 
 ## Form controls

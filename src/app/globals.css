@@ -101,6 +101,11 @@
   /* Hover glow — the amber-to-electric alteration called for on CTA hover. */
   --shadow-glow-electric: 0 8px 24px rgba(0, 82, 255, .22), 0 2px 6px rgba(0, 82, 255, .12);
   --shadow-glow-amber:    0 8px 24px rgba(255, 191, 0, .28), 0 2px 6px rgba(212, 158, 0, .16);
+
+  /* [DESIGN CHANGE] register item 5. A deep, offset, negative-spread shadow for
+     the raised card variant only. It is NOT a fourth step on the 1/2/3 ramp and
+     must not be reached for as one. */
+  --shadow-raised: 0 26px 54px -22px rgba(15, 23, 42, .32);
 }
 
 /* ── Non-Tailwind tokens (space, radius, motion, type scale) ─────────────── */
@@ -115,6 +120,9 @@
   --dur-1: 120ms; --dur-2: 200ms; --dur-3: 400ms; --dur-4: 650ms;
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-in:  cubic-bezier(0.5, 0, 0.75, 0);
+  /* [DESIGN CHANGE] register item 5. Overshoots past 1, so it is only ever
+     correct on a small decorative element — never on a control or a panel. */
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
 
   /* ── Type scale — MOBILE CEILINGS (< 768px) ────────────────────────────
      The strict ceilings live here so every one of the ~240 call sites that
@@ -385,6 +393,20 @@ h1, h2, h3, p { overflow-wrap: break-word; }
   box-shadow: var(--shadow-2);
   transform: translateY(-2px);
 }
+
+/* Raised card variant. [DESIGN CHANGE] register item 5 — this is NOT the house
+   gesture. `.card-interactive` (2px) remains the default everywhere. Restricted
+   to marketing card grids: never admin, never forms, never a control. */
+.card-interactive-raised { transition: all var(--dur-2) var(--ease-out); }
+.card-interactive-raised:hover {
+  border-color: var(--color-brand);
+  box-shadow: var(--shadow-raised);
+  transform: translateY(-6px);
+}
+/* The tile springs only as a child of a raised card, so the overshoot cannot
+   leak onto a tile used anywhere else. */
+.card-interactive-raised .icon-tile-spring { transition: transform var(--dur-2) var(--ease-spring); }
+.card-interactive-raised:hover .icon-tile-spring { transform: scale(1.06) rotate(-3deg); }
 
 /* ── Staggered entrance animation ────────────────────────────────────────── */
 /* 100ms apart, matching the delay-100 / delay-200 rhythm in the spec. */
