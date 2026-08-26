@@ -2,7 +2,7 @@
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { useForm, useWatch } from 'react-hook-form';
 import { CURRENT_FDI_QUESTION_SET } from '@/lib/fdi/config';
 import { IndexScale, IndexBandList } from '@/components/fdi/IndexScale';
@@ -96,7 +96,40 @@ export function FdiDiagnosticFlow() {
   const [error, setError] = useState<string | null>(null);
   const [startedAt, setStartedAt] = useState<number | null>(null);
   const [detailsOpen, setDetailsOpen] = useState(false);
+  /* The queued auto-advance, and the position it was queued from. Both are
+     refs: the timer has to read where the founder is when it fires, not where
+     they were when the option was tapped. */
+  const advanceTimer = useRef<number | null>(null);
+  const positionRef = useRef(0);
+  /* Only the most recent selection may move the screen. Anything older — a
+     save still in flight from a question already left behind — is spent. */
+  const answerSeq = useRef(0);
   const question = CURRENT_FDI_QUESTION_SET.questions[currentQuestion];
+
+  const cancelAdvance = useCallback(() => {
+    if (advanceTimer.current !== null) {
+      window.clearTimeout(advanceTimer.current);
+      advanceTimer.current = null;
+    }
+  }, []);
+
+  /* Every move through the questions goes through here, so a queued advance
+     can never land on top of one the founder made themselves. */
+  const goTo = useCallback((index: number) => {
+    cancelAdvance();
+    answerSeq.current += 1;
+    const total = CURRENT_FDI_QUESTION_SET.questions.length;
+    if (index >= total) {
+      positionRef.current = total - 1;
+      setStage('contact');
+      return;
+    }
+    const next = Math.max(0, index);
+    positionRef.current = next;
+    setCurrentQuestion(next);
+  }, [cancelAdvance]);
+
+  useEffect(() => cancelAdvance, [cancelAdvance]);
 
   const finalForm = useForm<FinalStepFields, unknown, FinalStepValues>({
     resolver: zodResolver(finalStepSchema),
@@ -140,24 +173,35 @@ export function FdiDiagnosticFlow() {
   };
 
   const handleAnswer = async (questionId: string, optionId: string) => {
-    setAnswers((current) => ({ ...current, [questionId]: optionId }));
-    setError(null);
     /* One question per screen, auto-advancing 450ms after a selection so the
        choice is visibly registered before the screen changes. Back stays
        available throughout. A save failure cancels the advance — the founder
-       must see the error rather than be carried past it. */
-    let advanced = true;
+       must see the error rather than be carried past it.
+
+       The advance belongs to the question that was answered. Changing your
+       mind, a double tap, a slow save, or tapping Next during the pause each
+       used to leave a second timer running, and the extra tick carried the
+       founder past the following question with nothing recorded for it.
+       Cancelling on the way in, and re-checking the position when the timer
+       fires, keeps one selection to exactly one move. */
+    const answeredAt = positionRef.current;
+    const seq = (answerSeq.current += 1);
+    const isCurrent = () => seq === answerSeq.current && positionRef.current === answeredAt;
+    cancelAdvance();
+    setAnswers((current) => ({ ...current, [questionId]: optionId }));
+    setError(null);
     try {
       await saveProgress({ answers: { [questionId]: optionId } });
     } catch (cause) {
-      advanced = false;
       setError(cause instanceof Error ? cause.message : 'Unable to save that answer. Please try again.');
+      return;
     }
-    if (!advanced) return;
-    const last = currentQuestion === CURRENT_FDI_QUESTION_SET.questions.length - 1;
-    window.setTimeout(() => {
-      if (last) setStage('contact');
-      else setCurrentQuestion((value) => value + 1);
+    if (!isCurrent()) return;
+    cancelAdvance();
+    advanceTimer.current = window.setTimeout(() => {
+      advanceTimer.current = null;
+      if (!isCurrent()) return;
+      goTo(answeredAt + 1);
     }, 450);
   };
 
@@ -359,11 +403,11 @@ export function FdiDiagnosticFlow() {
           </div>
           {error && <p role="alert" className="text-[length:var(--step-0)] text-danger mt-3">{error}</p>}
           <div className="flex gap-3 mt-4">
-            {currentQuestion > 0 && <button type="button" onClick={() => setCurrentQuestion((value) => value - 1)} className="min-h-11 flex-1 rounded-xl border border-line bg-white font-body text-[length:var(--step-0)] font-medium text-ink transition-all duration-200 ease-out hover:-translate-y-0.5 hover:border-brand hover:text-brand-ink">← Back</button>}
+            {currentQuestion > 0 && <button type="button" onClick={() => goTo(currentQuestion - 1)} className="min-h-11 flex-1 rounded-xl border border-line bg-white font-body text-[length:var(--step-0)] font-medium text-ink transition-all duration-200 ease-out hover:-translate-y-0.5 hover:border-brand hover:text-brand-ink">← Back</button>}
             {/* Auto-advance carries a selected answer forward; this stays as the
                 explicit path for anyone who prefers it, and for reduced-motion
                 users who may not notice the transition. */}
-            <button type="button" disabled={!selected} onClick={() => isLast ? setStage('contact') : setCurrentQuestion((value) => value + 1)} className="min-h-11 flex-1 rounded-xl bg-brand font-body text-[length:var(--step-0)] font-medium text-white shadow-1 transition-all duration-200 ease-out hover:-translate-y-0.5 hover:bg-brand-hover hover:shadow-glow-electric disabled:pointer-events-none disabled:opacity-40">{isLast ? 'Continue →' : 'Next →'}</button>
+            <button type="button" disabled={!selected} onClick={() => goTo(currentQuestion + 1)} className="min-h-11 flex-1 rounded-xl bg-brand font-body text-[length:var(--step-0)] font-medium text-white shadow-1 transition-all duration-200 ease-out hover:-translate-y-0.5 hover:bg-brand-hover hover:shadow-glow-electric disabled:pointer-events-none disabled:opacity-40">{isLast ? 'Continue →' : 'Next →'}</button>
           </div>
         </div>
       </section>
