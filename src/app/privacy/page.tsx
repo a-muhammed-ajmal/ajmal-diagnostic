@@ -30,8 +30,8 @@ const PRIVACY_EMAIL = 'privacy@muhammedajmal.com';
 
 const dataCollected: { item: string; detail: string }[] = [
   { item: 'Name', detail: 'To address you and personalise your diagnostic report.' },
-  { item: 'Email address', detail: 'To send your report, respond to enquiries, and — if you opt in — send newsletters.' },
-  { item: 'Mobile number', detail: 'To follow up on your enquiry or diagnostic result.' },
+  { item: 'Email address', detail: 'To send your report, respond to inquiries, and — if you opt in — send newsletters.' },
+  { item: 'Mobile number', detail: 'To follow up on your inquiry or diagnostic result.' },
   { item: 'Company name', detail: 'To contextualise your diagnostic and any conversation that follows.' },
   { item: 'Business details', detail: 'Optional. Sector, number of employees, revenue band (a range, not an exact figure), and how long the business has operated. Skipping them does not affect your result.' },
   { item: 'Business Health Check answers', detail: 'Your responses to the 12 self-report questions, used only to calculate your Founder Dependency Index and deterministic findings.' },
@@ -126,7 +126,7 @@ export default function PrivacyPage() {
 
           <Section heading="Why we collect it">
             <p>
-              We use your data to generate and send your diagnostic report, to respond to enquiries you
+              We use your data to generate and send your diagnostic report, to respond to inquiries you
               send us, and — only if you opt in — to send occasional insights by email. We do not sell
               your data, and we do not share it for advertising.
             </p>
@@ -135,7 +135,7 @@ export default function PrivacyPage() {
           <Section heading="Our lawful basis">
             <p>
               For the diagnostic and the newsletter, our basis is your <strong className="text-ink">consent</strong>,
-              given when you submit your details. For contact enquiries, we process your data to take the
+              given when you submit your details. For contact inquiries, we process your data to take the
               steps you have asked us to take — namely, to respond to you. You can withdraw consent at
               any time using the contact details below.
             </p>
@@ -165,7 +165,7 @@ export default function PrivacyPage() {
 
           <Section heading="How long we keep it">
             <p>
-              We keep diagnostic and enquiry records for as long as there is a genuine prospect of working
+              We keep diagnostic and inquiry records for as long as there is a genuine prospect of working
               together, and for up to 24 months after our last contact, after which they are deleted or
               anonymised. Newsletter subscriptions are kept until you unsubscribe. You can ask us to delete
               your data sooner at any time.

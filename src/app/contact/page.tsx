@@ -28,7 +28,7 @@ export default function ContactPage() {
             <ArrowRight className="h-4 w-4" aria-hidden="true" />
           </Button>
         }
-        note="Built for founder-led UAE businesses with AED 1M–10M annual revenue, 5–50 employees, and operating changes the founder can approve."
+        note="Built for founder-led UAE businesses with AED 1,000,000 to AED 10,000,000 annual revenue, 5–50 employees, and operating changes the founder can approve."
       />
 
       {/* 7/5 split rather than two equal halves: the enquiry form is the primary
@@ -36,7 +36,7 @@ export default function ContactPage() {
       <Section tone="tint" width="wide" orbs>
         <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
           <div className="lg:col-span-7">
-            <h2 className="heading-reveal font-heading text-[length:var(--step-4)] font-extrabold text-ink">Send an enquiry</h2>
+            <h2 className="heading-reveal font-heading text-[length:var(--step-4)] font-extrabold text-ink">Send an inquiry</h2>
             <p className="mt-2 font-body text-[length:var(--step-0)] leading-relaxed text-muted">
               For a specific question or a scope you would like to discuss.
             </p>

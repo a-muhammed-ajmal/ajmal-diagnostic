@@ -61,7 +61,7 @@ The Business Health Check and every paid offer are offers, not frameworks. Strat
 | `/services` | The single commercial path |
 | `/diagnostic` | The Business Health Check |
 | `/results` | The browser-private result for a completed Business Health Check |
-| `/contact` | Enquiry form and direct Calendly booking |
+| `/contact` | Inquiry form and direct Calendly booking |
 | `/insights` | Articles index |
 | `/insights/[slug]` | Individual article |
 | `/insights/category/[slug]` | Category-filtered index |
@@ -100,6 +100,8 @@ The single primary navigation CTA label is exactly **Start the Business Health C
 The footer repeats the core navigation, Privacy, the Business Health Check CTA, and this descriptor: *Business Operations & Growth Consulting for founder-led UAE SMEs, based in Dubai, United Arab Emirates.*
 
 The footer newsletter is factual and opt-in. It must not imply a delivery frequency or content volume that has not been approved.
+
+A subscribe is confirmed only when the record is actually written. A newly added address, or a previously unsubscribed address that is reactivated, receives a confirmation email carrying a working unsubscribe link. A genuinely new address also raises an internal new-subscriber notification. Neither email is sent when an address already on the list is resubmitted, because the public form must not be usable to send repeated mail to an address someone else has typed.
 
 The post-result CTA is exactly **Discuss a Business Clarity Audit** and links to the configured Calendly booking URL. Where a business WhatsApp number is configured, **Message on WhatsApp** may appear as a secondary prefilled enquiry link.
 
@@ -243,7 +245,7 @@ Run before every release.
 - [ ] No historic session record has changed.
 - [ ] Scoring, findings, qualification, report email, and `email_sent` behavior remain deterministic.
 - [ ] A completed session resolves the question, scoring, band, and qualification versions stamped on that session. An FDI-1.0 result is never rescored as FDI-1.1.
-- [ ] `/contact` presents a working Calendly control and a working enquiry form.
+- [ ] `/contact` presents a working Calendly control and a working inquiry form.
 - [ ] The Business Clarity Audit CTA opens the configured Calendly. WhatsApp appears only when valid configuration is present.
 - [ ] No AI-generated report path, no public `/api/submit`, no feature-flag fallback.
 - [ ] No invented index meter, band name, or performance claim.

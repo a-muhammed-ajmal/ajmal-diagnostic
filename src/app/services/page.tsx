@@ -34,7 +34,7 @@ function stageId(title: string) {
  */
 const faqs = [
   {
-    question: "Can we skip the diagnostic and start with the work?",
+    question: "Can we skip the Business Health Check and start with the work?",
     answer: "No. Diagnosis comes before prescription. Without it, an engagement is built on assumption rather than on what the business actually shows.",
   },
   {

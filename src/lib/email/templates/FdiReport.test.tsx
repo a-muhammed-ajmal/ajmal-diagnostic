@@ -17,7 +17,7 @@ const report: FounderFdiReport = {
   concentration: { componentKeys: ['DS', 'EC', 'OV'], labels: ['Decision Speed', 'Execution Consistency', 'Operational Visibility'], raw: 6, unrounded: 50, display: 50 },
   observations: ['Work regularly waits for decisions that depend on you.'],
   limitation: 'This result is based on founder self-report.',
-  nextStep: { label: 'Audit', href: 'https://calendly.com/ajmalconsults/free-business-clarity-consultation' },
+  nextStep: { label: 'Audit', href: 'https://calendly.com/muhammed-ajmal-consulting/operating-conversation' },
 };
 
 it('renders only deterministic founder content', () => {

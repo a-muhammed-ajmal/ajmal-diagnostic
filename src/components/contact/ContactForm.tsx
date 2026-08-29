@@ -5,6 +5,7 @@ import { Input, Label, Select, Textarea } from '@/components/ui/Field';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
+import { INQUIRY_TYPES } from '@/lib/contact/inquiry-types';
 
 const contactSchema = z.object({
   name: z.string().min(2),
@@ -40,7 +41,7 @@ export function ContactForm() {
   if (submitted) return (
     <div className="bg-success-soft border border-success/30 rounded-2xl p-8 text-center">
       <div className="text-success text-[length:var(--step-4)] mb-3">✔</div>
-      <h3 className="font-heading font-bold text-ink text-[length:var(--step-2)] mb-2">Enquiry Received</h3>
+      <h3 className="font-heading font-bold text-ink text-[length:var(--step-2)] mb-2">Inquiry Received</h3>
       <p className="font-body text-muted text-[length:var(--step-0)]">You will receive a response within 24 hours.</p>
     </div>
   );
@@ -73,13 +74,9 @@ export function ContactForm() {
         <Label htmlFor="inquiryType">Inquiry Type</Label>
         <Select {...register('inquiryType')} id="inquiryType" invalid={Boolean(errors.inquiryType)}>
           <option value="">Select...</option>
-          <option value="diagnostic-followup">Follow-up on Diagnostic Results</option>
-          <option value="strategic-planning">Strategic Planning</option>
-          <option value="systems-development">Business Systems Development</option>
-          <option value="process-optimization">Process Optimization</option>
-          <option value="performance-management">Performance Management</option>
-          <option value="ai-automation">AI &amp; Automation Advisory</option>
-          <option value="general">General Enquiry</option>
+          {INQUIRY_TYPES.map((type) => (
+            <option key={type.value} value={type.value}>{type.label}</option>
+          ))}
         </Select>
         {errors.inquiryType && <p role="alert" className="text-danger text-xs mt-1">Please select an inquiry type</p>}
       </div>
@@ -90,11 +87,11 @@ export function ContactForm() {
       </div>
       {error && <p role="alert" className="text-danger text-[length:var(--step-0)]">{error}</p>}
       <p className="text-xs text-muted font-body">
-        By sending this enquiry you agree to our{' '}
+        By sending this inquiry you agree to our{' '}
         <a href="/privacy" className="text-brand-ink underline hover:text-brand-ink transition-colors">Privacy Policy</a>.
       </p>
       <Button type="submit" disabled={isSubmitting} fullWidth className="min-h-[52px]">
-        {isSubmitting ? 'Sending...' : 'Send Enquiry →'}
+        {isSubmitting ? 'Sending...' : 'Send Inquiry →'}
       </Button>
     </form>
   );

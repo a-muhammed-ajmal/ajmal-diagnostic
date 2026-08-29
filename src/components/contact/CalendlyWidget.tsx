@@ -41,7 +41,7 @@ export function CalendlyWidget() {
           onClick={openPopup}
           className="w-full inline-flex items-center justify-center bg-brand text-white font-heading font-bold py-4 px-8 rounded-xl text-[length:var(--step-0)] hover:bg-brand-hover transition-colors shadow-1 min-h-[52px]"
         >
-          Book a Free 30-Minute Consultation →
+          Book a conversation →
         </button>
         <p className="font-body text-xs text-muted text-center mt-3">
           Opens a scheduling window. Takes about a minute.

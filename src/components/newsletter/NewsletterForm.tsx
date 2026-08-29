@@ -23,7 +23,10 @@ export function NewsletterForm() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email }),
       });
-      if (res.ok) { setStatus('success'); setEmail(''); }
+      // A 200 alone is not proof of subscription: the route returns an explicit
+      // success flag, and only that flag means the row was actually written.
+      const body = await res.json().catch(() => null);
+      if (res.ok && body?.success === true) { setStatus('success'); setEmail(''); }
       else setStatus('error');
     } catch { setStatus('error'); }
   };

@@ -8,10 +8,12 @@ import {
   Section,
   Hr,
   Preview,
+  Link,
 } from "@react-email/components";
+import { inquiryTypeLabel } from "@/lib/contact/inquiry-types";
 
 /**
- * Internal notification for a new contact enquiry.
+ * Internal notification for a new contact inquiry.
  *
  * Rendered as React rather than an HTML template literal: every value below is
  * attacker-controlled free text, and React escapes it on render. The previous version
@@ -62,7 +64,7 @@ export function ContactNotificationEmail({
   return (
     <Html>
       <Head />
-      <Preview>{`New enquiry from ${name} at ${companyName}`}</Preview>
+      <Preview>{`New inquiry from ${name} at ${companyName}`}</Preview>
       <Body style={{ backgroundColor: "#FFFFFF", fontFamily: "Arial, sans-serif" }}>
         <Container style={{ maxWidth: "600px", margin: "0 auto", padding: "40px 20px" }}>
           <Text
@@ -78,18 +80,35 @@ export function ContactNotificationEmail({
             MUHAMMED AJMAL CONSULTING
           </Text>
           <Heading style={{ color: "#0F172A", fontSize: "22px", margin: "0 0 4px" }}>
-            New contact enquiry
+            New contact inquiry
           </Heading>
           <Text style={{ color: "#475569", fontSize: "14px", margin: "0 0 24px" }}>
             Submitted through the website contact form.
           </Text>
           <Hr style={{ borderColor: "#E2E8F0", margin: "0 0 24px" }} />
 
+          <Section
+            style={{
+              backgroundColor: "#E6F0FF",
+              borderRadius: "12px",
+              padding: "14px 20px",
+              margin: "0 0 24px",
+            }}
+          >
+            <Text style={{ ...labelStyle, margin: "0 0 4px" }}>Reply to</Text>
+            <Link
+              href={`mailto:${email}`}
+              style={{ color: "#0037A5", fontSize: "16px", fontWeight: "bold", textDecoration: "none" }}
+            >
+              {email}
+            </Link>
+          </Section>
+
           <Field label="Name" value={name} />
           <Field label="Email" value={email} />
           <Field label="Phone" value={phone} />
           <Field label="Company" value={companyName} />
-          <Field label="Enquiry type" value={inquiryType} />
+          <Field label="Inquiry type" value={inquiryTypeLabel(inquiryType)} />
 
           <Section
             style={{

@@ -88,7 +88,7 @@ export function Navigation() {
             {link.label}
           </Link>
         ))}
-        <Button href="/diagnostic" className="mt-3 w-full" onClick={() => setMobileOpen(false)}>Start the Business Health Check →</Button>
+        {!isResults && <Button href="/diagnostic" className="mt-3 w-full" onClick={() => setMobileOpen(false)}>Start the Business Health Check →</Button>}
       </div>
     </nav>
   );

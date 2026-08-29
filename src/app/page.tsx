@@ -12,7 +12,6 @@ import { StageRail } from "@/components/ui/StageRail";
 import { StickyCTABar } from "@/components/ui/StickyCTABar";
 import { Surface, SectionHeader } from "@/components/ui/Surface";
 import { TrustMarquee } from "@/components/ui/TrustMarquee";
-import { IndexScale } from "@/components/fdi/IndexScale";
 import { pageMetadata } from "@/lib/metadata";
 import { jsonLdScript, personAndServiceJsonLd } from "@/lib/jsonLd";
 
@@ -61,7 +60,7 @@ const commercialPath = [
 const qualification = [
   "Founder-led",
   "United Arab Emirates",
-  "AED 1M–10M annual revenue",
+  "AED 1,000,000 to AED 10,000,000 annual revenue",
   "5–50 employees",
   "3+ years operating",
   "Growth still depends heavily on the founder",
@@ -235,27 +234,15 @@ export default function HomePage() {
         </p>
       </Section>
 
-      {/* Proof band. The scale renders EMPTY here — a filled meter on a marketing
-          page would be an invented metric (DESIGN §7). */}
       <Section tone="dark" width="wide" orbs>
-        <div className="grid gap-10 lg:grid-cols-12 lg:items-center lg:gap-16">
-          <div className="lg:col-span-7">
-            <p className="eyebrow mb-3">The measurement</p>
-            <h2 className="heading-reveal font-heading text-[length:var(--step-4)] font-extrabold text-white">
-              Founder dependency, as a number you can act on.
-            </h2>
-            <p className="mt-4 max-w-xl font-body text-[length:var(--step-0)] leading-relaxed text-muted-invert">
-              The Founder Dependency Index converts the pattern into an index out of 100 across three
-              observable components. A high index is the adverse result.
-            </p>
-          </div>
-          <div className="lg:col-span-5">
-            <Surface tone="glass">
-              <p className="eyebrow mb-4">Founder Dependency Index</p>
-              <IndexScale />
-            </Surface>
-          </div>
-        </div>
+        <p className="eyebrow mb-3">The measurement</p>
+        <h2 className="heading-reveal font-heading text-[length:var(--step-4)] font-extrabold text-white">
+          Founder dependency, as a number you can act on.
+        </h2>
+        <p className="mt-4 max-w-xl font-body text-[length:var(--step-0)] leading-relaxed text-muted-invert">
+          The Founder Dependency Index converts the pattern into an index out of 100 across three
+          observable components. A high index is the adverse result.
+        </p>
       </Section>
 
       <Section tone="light" width="wide">
