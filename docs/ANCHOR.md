@@ -289,7 +289,7 @@ Every new offer, framework, service, or message must pass all five. Any "no" mea
 | Standard | Rule |
 | :---- | :---- |
 | Language | US English — optimize, organize, analyze, recognize |
-| Currency | AED 6,500 — code first, comma separator |
+| Currency | AED 4,500 — code first, comma separator |
 | Framework names | Title case, full name on first use, no trademark symbols |
 | Arrows | → only, never doubled |
 | Dashes | Em dash — in prose and in all displayed result strings |
