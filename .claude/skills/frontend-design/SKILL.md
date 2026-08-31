@@ -100,9 +100,12 @@ Reach for the alias (`bg-brand`, `text-ink`, `border-line`) in components. Reach
 
 | Token | Hex | Note |
 | :---- | :---- | :---- |
+| `--color-electric-50` | `#EFF6FF` | |
+| `--color-electric-100` | `#DBEAFE` | `.orb-electric` fill |
 | `--color-electric-500` | `#0052FF` | Brand primary — 5.8:1 on white |
 | `--color-electric-600` | `#0046D5` | |
 | `--color-electric-700` | `#0037A5` | 10.1:1 on white |
+| `--color-electric-900` | `#1E3A8A` | |
 | `--color-brand` | `#0052FF` | Primary fills, CTAs, focus |
 | `--color-brand-hover` | `#0039CC` | CTA hover — 8.6:1 on white |
 | `--color-brand-ink` | `#0037A5` | Blue text on white — 10.1:1 |
@@ -113,6 +116,8 @@ Reach for the alias (`bg-brand`, `text-ink`, `border-line`) in components. Reach
 
 | Token | Hex | Note |
 | :---- | :---- | :---- |
+| `--color-amber-50` | `#FFFBEB` | |
+| `--color-amber-100` | `#FEF3C7` | `.orb-amber` fill |
 | `--color-amber-500` | `#FFBF00` | 1.65:1 on white — **FILL ONLY** |
 | `--color-amber-600` | `#D97706` | ~3.4:1 on white — **fails AA for normal text** |
 | `--color-amber-700` | `#B45309` | Amber text on light — 5.0:1 |
@@ -127,11 +132,28 @@ Amber's legitimate homes are fills on dark surfaces, borders, and eyebrow text o
 
 | Token | Hex |
 | :---- | :---- |
-| `--color-ink` / canvas dark | `#0F172A` |
-| Canvas light | `#F8FAFC` |
-| `--color-muted` | `#475569` — 7.6:1 |
+| `--color-canvas` / `--color-surface` | `#FFFFFF` — page and card ground. Two names, one value |
+| `--color-canvas-light` | `#F8FAFC` — Slate 50, neutral band |
+| `--color-canvas-dark` | `#0F172A` — Slate 900, the dark band |
+| `--color-ink` | `#0F172A` — 17.9:1 on white |
+| `--color-ink-soft` | `#1E293B` — Slate 800 |
+| `--color-muted` | `#475569` — 7.6:1, the lightest legal text |
 | `--color-muted-invert` | `#CBD5E1` — 12.0:1 against `#0F172A`. Secondary text on a dark band, the inverse partner for `--color-muted` |
-| `--color-line` / border | `#E2E8F0` |
+| `--color-line` / `--color-canvas-border` | `#E2E8F0` — Slate 200. Two names, one value; a palette move must change both |
+| `--color-line-strong` | `#CBD5E1` — Slate 300, the heavier divider |
+| `--color-focus` | `#0052FF` — the global `:focus-visible` outline |
+
+### Status
+
+Meaning only. A status color is never reached for as a brand accent — that would be the third accent hue the palette forbids. Each carries a `-soft` background tint.
+
+| Token | Hex | `-soft` |
+| :---- | :---- | :---- |
+| `--color-success` | `#0B6B43` | `#E7F6EE` |
+| `--color-warning` | `#9A5B08` | `#FFF8E6` |
+| `--color-danger` | `#C0281D` | `#FDECEC` |
+
+`--color-warning` is amber's accessible text partner. It is not `--color-accent`, and `--color-accent` is not a warning color.
 
 ### Dark bands
 

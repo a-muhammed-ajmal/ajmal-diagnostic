@@ -46,7 +46,7 @@ src/
     newsletter/     # NewsletterForm
     insights/       # ArticleToc
   lib/
-    supabase/       # server.ts (createAdminClient) + client.ts (createBrowserClient)
+    supabase/       # server.ts (createAdminClient) — server-only, service-role
     ai.ts           # Anthropic client
     email/templates/# React Email templates (DiagnosticReport, ContactNotification)
     fdi/            # ACTIVE instrument — config, questions, scoring, bands, findings
@@ -67,7 +67,7 @@ src/
 ## Coding Standards
 - **Components**: PascalCase filenames, named exports, no default exports for components
 - **API routes**: `route.ts` with named exports (`GET`, `POST`, etc.)
-- **Supabase client**: use `createAdminClient()` from `src/lib/supabase/server.ts` in Route Handlers and Server Components; `createBrowserClient()` from `client.ts` for Client Components
+- **Supabase client**: use `createAdminClient()` from `src/lib/supabase/server.ts` in Route Handlers and Server Components. There is no browser client — every table is RLS-enabled with all privileges revoked from `anon`/`authenticated`, so a client-side read would return nothing anyway
 - **Forms**: always `react-hook-form` + `zod` schema — no uncontrolled inputs
 - **Classes**: `cn()` helper (clsx + tailwind-merge) for conditional Tailwind classes
 - **No raw hex in JSX**: all colors via CSS custom properties defined in `globals.css`
@@ -96,7 +96,7 @@ Route list and page purposes are governed by WEB. Do not restate them here.
 
 ## Key Constraints
 - Tailwind v4 has **no config file** — custom tokens go in `globals.css` inside `@theme {}`
-- Supabase: `createAdminClient()` uses the service-role key (bypasses RLS) — use only in Route Handlers, never client-side
+- Supabase: `createAdminClient()` uses the service-role key (bypasses RLS) — Route Handlers and Server Components only. `server.ts` imports `server-only`, so a client-side import fails the build rather than shipping a broken client
 - Email templates are React components rendered via `@react-email/render` before sending through Resend
 - Admin auth is cookie-based (not Supabase Auth) — see `src/lib/adminAuth.ts`
 - `NEXT_PUBLIC_WHATSAPP_NUMBER` is optional and public by design. When set to the business E.164 number, it exposes a prefilled Business Clarity Audit WhatsApp link; omit it to hide the secondary message route.

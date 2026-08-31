@@ -108,4 +108,4 @@ Every button and icon-only control must meet the `.tap-target` requirement (44×
 
 Default to Server Components. Reach for `"use client"` only for local interaction state, browser APIs, event handlers, or client-only libraries — and keep the boundary as small as possible. Do not convert a whole page to a Client Component because one dropdown needs state.
 
-Use `createAdminClient()` from `src/lib/supabase/server.ts` in Route Handlers and Server Components; `createBrowserClient()` from `client.ts` in Client Components. The admin client holds the service-role key and bypasses RLS — it must never reach the browser.
+Use `createAdminClient()` from `src/lib/supabase/server.ts` in Route Handlers and Server Components. There is no browser client. The admin client holds the service-role key and bypasses RLS, so it must never reach the browser — `server.ts` imports `server-only`, which makes a client-side import a build error rather than a silent failure.
