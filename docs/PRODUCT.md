@@ -511,13 +511,13 @@ The Audit is a commercial offer, not a fifth framework.
 
 ## B9. Intervention selection
 
-The recommendation follows the diagnosed constraint, never the client's preferred tool or a generic package.
+The immediate recommendation follows the diagnosed constraint, never the client's preferred tool or a generic package.
 
-- **Focused Improvement Sprint** — the constraint can be addressed as a focused project.
-- **Business System Build** — the constraint requires a broader operating-system build.
-- **Growth Partner Retainer** — the later ongoing stage, after foundations exist.
+- **Focused Improvement Sprint** — one bounded operating change can materially address the identified binding constraint.
+- **Business System Build** — connected changes across processes, roles, ownership, management systems, reporting, or data are required.
+- **No immediate downstream engagement** — evidence does not support further work, the business is not ready, or another prerequisite must be resolved first.
 
-Never prescribe AI or automation before the underlying process is understood. Never prescribe a website build. Never position motivation or mindset as the intervention.
+The Growth Partner Retainer remains a later stage after foundations exist. Never prescribe AI or automation before the underlying process is understood. Never prescribe a website build. Never position motivation or mindset as the intervention.
 
 ---
 
@@ -531,21 +531,33 @@ Never prescribe AI or automation before the underlying process is understood. Ne
 | Root cause | The evidence-supported explanation of why the dependency occurs |
 | Binding constraint | One clearly stated constraint to address first |
 | Recommended structure | What operating structure removes or reduces it |
-| Recommended next stage | Focused Improvement Sprint, Business System Build, or other approved stage |
+| Recommended next stage | Focused Improvement Sprint, Business System Build, or No immediate downstream engagement |
 | Limitations | Missing or weak evidence that limits confidence |
 
 ---
 
-## B11. Not yet defined
+## B11. Commercial and delivery standard
 
-- Evidence sample sizes, lookback periods, accepted formats, sufficiency thresholds.
-- Case schema, evidence storage, approval checkpoints.
-- Binding-constraint selection test when multiple plausible constraints exist.
-- Report template, sign-off language, confidence language.
-- Decision rules separating a Focused Improvement Sprint from a Business System Build.
-- Price, duration, payment terms, scheduling.
+The initial Business Clarity Audit standard is:
 
-These are open by decision, not by oversight. The Audit is sellable once the last three are set.
+- Fixed fee: **AED 4,500**
+- Normal duration: **10 business days from the confirmed Audit Start Date**
+- First payment: **AED 2,250 on acceptance**
+- Second payment: **AED 2,250 on Business Day 5**
+- Initial evidence request: within one business day after acceptance and first payment
+- Starting evidence normally due: within three business days
+- Additional evidence normally due: within two business days
+- Kickoff: up to 45 minutes
+- Evidence clarification: up to 45 minutes when required
+- Closeout: up to 60 minutes
+
+The Audit Start Date is confirmed after proposal acceptance, first payment, completed Business Health Check availability, primary contact confirmation, initial required evidence receipt, and kickoff availability. Client-caused evidence, access, clarification, decision-maker, or meeting delays pause or move the delivery timetable.
+
+Evidence sufficiency uses only **Sufficient for conclusion**, **Sufficient with stated limitation**, and **Insufficient — more evidence required**. No confidence percentages are used.
+
+Immediate next-stage decisions use only Focused Improvement Sprint, Business System Build, or No immediate downstream engagement.
+
+The standard proposal, Operating Conversation guide, Audit report, delivery controls, onboarding templates, and fictional workflow test are complete reusable operating assets. Improve them only from real sales or delivery evidence.
 
 ---
 
@@ -556,5 +568,11 @@ Claim the mechanism, never an unsupported magnitude. No revenue, profit, or grow
 Full rules in ANCHOR §12.
 
 ---
+
+## B13. Current implementation status
+
+As of August 29, 2026, the Business Health Check is implemented and production-verified as the deterministic founder-dependency self-report defined in Part A. The active version rules, scoring, findings, qualification separation, and report behavior remain governed by the registered version set.
+
+The Business Clarity Audit is operational as the first paid diagnostic stage. Its commercial standard, evidence-sufficiency rule, symptom/cause/binding-constraint rule, immediate next-stage rule, standard proposal, Operating Conversation guide, standard report, delivery controls, onboarding templates, and fictional end-to-end workflow test are complete. The next priority is acquisition and real-client delivery, not further generic Audit design.
 
 END OF PRODUCT SPECIFICATION

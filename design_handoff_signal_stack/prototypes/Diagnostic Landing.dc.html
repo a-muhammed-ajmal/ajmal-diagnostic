@@ -12,9 +12,9 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
 <style>
-  body{margin:0;background:#F8FAFC;color:#0F172A;font-family:'Plus Jakarta Sans',system-ui,sans-serif;-webkit-font-smoothing:antialiased;text-wrap:pretty;}
-  a{color:#0037A5;text-decoration:none;}
-  a:hover{color:#0052FF;}
+  body{margin:0;background:#F8FAFC;color:#000033;font-family:'Plus Jakarta Sans',system-ui,sans-serif;-webkit-font-smoothing:antialiased;text-wrap:pretty;}
+  a{color:#003399;text-decoration:none;}
+  a:hover{color:#0066FF;}
   input,select,textarea{font-family:inherit;font-size:16px;}
   @keyframes mj-rise{from{opacity:0;transform:translate3d(0,20px,0)}to{opacity:1;transform:none}}
   @keyframes mj-scale{from{opacity:0;transform:scale(.97)}to{opacity:1;transform:none}}
@@ -37,45 +37,45 @@
   <div style="position:sticky;top:0;z-index:50;background:rgba(248,250,252,.82);backdrop-filter:blur(14px);border-bottom:1px solid #E2E8F0">
     <div style="max-width:1200px;margin:0 auto;padding:0 24px;height:68px;display:flex;align-items:center;justify-content:space-between;gap:24px">
       <div style="display:flex;align-items:center;gap:10px">
-        <span style="height:30px;width:30px;border-radius:9px;background:#0052FF;color:#fff;display:grid;place-items:center;font-weight:800;font-size:13px;box-shadow:0 8px 20px -8px rgba(0,82,255,.6)">MA</span>
+        <span style="height:30px;width:30px;border-radius:9px;background:#0066FF;color:#fff;display:grid;place-items:center;font-weight:800;font-size:13px;box-shadow:0 8px 20px -8px rgba(0,102,255,.6)">MA</span>
         <span style="font-weight:700;font-size:15px;letter-spacing:-.01em">Muhammed Ajmal</span>
       </div>
       <div style="display:flex;align-items:center;gap:26px">
         <sc-for list="{{ nav }}" as="n" hint-placeholder-count="4">
-          <a href="{{ n.href }}" style="font-size:14px;font-weight:500;color:#475569;transition:color 200ms cubic-bezier(.16,1,.3,1)" style-hover="color:#0052FF">{{ n.label }}</a>
+          <a href="{{ n.href }}" style="font-size:14px;font-weight:500;color:#475569;transition:color 200ms cubic-bezier(.16,1,.3,1)" style-hover="color:#0066FF">{{ n.label }}</a>
         </sc-for>
-        <a href="#start" style="display:inline-flex;align-items:center;gap:8px;height:44px;padding:0 20px;border-radius:12px;background:#0052FF;color:#fff;font-size:14px;font-weight:700;box-shadow:0 10px 24px -10px rgba(0,82,255,.65);transition:transform 200ms cubic-bezier(.16,1,.3,1),box-shadow 200ms cubic-bezier(.16,1,.3,1),background 200ms" style-hover="transform:translateY(-2px);background:#0039CC;box-shadow:0 16px 32px -12px rgba(0,82,255,.7);color:#fff">Start the check</a>
+        <a href="#start" style="display:inline-flex;align-items:center;gap:8px;height:44px;padding:0 20px;border-radius:12px;background:#0066FF;color:#fff;font-size:14px;font-weight:700;box-shadow:0 10px 24px -10px rgba(0,102,255,.65);transition:transform 200ms cubic-bezier(.16,1,.3,1),box-shadow 200ms cubic-bezier(.16,1,.3,1),background 200ms" style-hover="transform:translateY(-2px);background:#0039CC;box-shadow:0 16px 32px -12px rgba(0,102,255,.7);color:#fff">Start the check</a>
       </div>
     </div>
   </div>
 
   <!-- HERO -->
   <div style="position:relative;overflow:hidden;border-bottom:1px solid #E2E8F0;background:linear-gradient(180deg,#fff 0%,#F8FAFC 100%)">
-    <div style="position:absolute;top:-180px;left:-120px;width:520px;height:520px;border-radius:999px;background:radial-gradient(circle,rgba(0,82,255,.16),transparent 66%);filter:blur(20px);animation:mj-orb 16s ease-in-out infinite;pointer-events:none"></div>
-    <div style="position:absolute;bottom:-220px;right:-100px;width:460px;height:460px;border-radius:999px;background:radial-gradient(circle,rgba(255,191,0,.18),transparent 66%);filter:blur(24px);animation:mj-orb 20s ease-in-out infinite reverse;pointer-events:none"></div>
+    <div style="position:absolute;top:-180px;left:-120px;width:520px;height:520px;border-radius:999px;background:radial-gradient(circle,rgba(0,102,255,.16),transparent 66%);filter:blur(20px);animation:mj-orb 16s ease-in-out infinite;pointer-events:none"></div>
+    <div style="position:absolute;bottom:-220px;right:-100px;width:460px;height:460px;border-radius:999px;background:radial-gradient(circle,rgba(255,204,0,.18),transparent 66%);filter:blur(24px);animation:mj-orb 20s ease-in-out infinite reverse;pointer-events:none"></div>
 
     <div style="position:relative;max-width:1200px;margin:0 auto;padding:clamp(48px,7vw,104px) 24px clamp(56px,7vw,96px);display:grid;grid-template-columns:7fr 5fr;gap:clamp(32px,5vw,64px);align-items:center">
       <div style="display:flex;flex-direction:column;gap:22px">
-        <span style="display:inline-flex;align-items:center;gap:9px;align-self:flex-start;font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#0037A5;animation:mj-rise .6s cubic-bezier(.16,1,.3,1) both">
-          <span style="height:7px;width:7px;border-radius:999px;background:#FFBF00;animation:mj-blink 2.4s ease-in-out infinite"></span>Business Health Check
+        <span style="display:inline-flex;align-items:center;gap:9px;align-self:flex-start;font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#003399;animation:mj-rise .6s cubic-bezier(.16,1,.3,1) both">
+          <span style="height:7px;width:7px;border-radius:999px;background:#FFCC00;animation:mj-blink 2.4s ease-in-out infinite"></span>Business Health Check
         </span>
-        <h1 style="margin:0;font-size:clamp(24px,4.4vw,48px);line-height:1.08;font-weight:800;letter-spacing:-.025em;max-width:15ch;animation:mj-rise .7s cubic-bezier(.16,1,.3,1) .06s both">How much does your business still depend on <span style="background:linear-gradient(90deg,#0037A5,#0052FF);-webkit-background-clip:text;background-clip:text;color:transparent">you?</span></h1>
+        <h1 style="margin:0;font-size:clamp(24px,4.4vw,48px);line-height:1.08;font-weight:800;letter-spacing:-.025em;max-width:15ch;animation:mj-rise .7s cubic-bezier(.16,1,.3,1) .06s both">How much does your business still depend on <span style="background:linear-gradient(90deg,#003399,#0066FF);-webkit-background-clip:text;background-clip:text;color:transparent">you?</span></h1>
         <p style="margin:0;max-width:52ch;font-size:clamp(14px,1.4vw,18px);line-height:1.65;color:#475569;animation:mj-rise .7s cubic-bezier(.16,1,.3,1) .14s both">Answer 12 questions about decision-making, execution, and operational visibility. You receive your Founder Dependency Index and a clear next step.</p>
         <div id="start" style="display:flex;flex-wrap:wrap;gap:12px;animation:mj-rise .7s cubic-bezier(.16,1,.3,1) .22s both">
-          <a href="#" style="position:relative;overflow:hidden;display:inline-flex;align-items:center;gap:10px;height:52px;padding:0 26px;border-radius:14px;background:#0052FF;color:#fff;font-size:15px;font-weight:700;box-shadow:0 14px 30px -12px rgba(0,82,255,.7);transition:transform 200ms cubic-bezier(.16,1,.3,1),box-shadow 200ms cubic-bezier(.16,1,.3,1),background 200ms" style-hover="transform:translateY(-2px);background:#0039CC;box-shadow:0 20px 38px -14px rgba(0,82,255,.75);color:#fff" style-after="content:'';position:absolute;top:0;bottom:0;width:38%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.28),transparent);animation:mj-sweep 3.6s ease-in-out infinite">Start the Business Health Check <span style="font-size:17px">→</span></a>
-          <a href="#what" style="display:inline-flex;align-items:center;gap:8px;height:52px;padding:0 24px;border-radius:14px;background:#fff;border:1px solid #E2E8F0;color:#0F172A;font-size:15px;font-weight:600;box-shadow:0 1px 2px rgba(15,23,42,.05);transition:all 200ms cubic-bezier(.16,1,.3,1)" style-hover="transform:translateY(-2px);border-color:#0052FF;color:#0037A5">See what it measures</a>
+          <a href="#" style="position:relative;overflow:hidden;display:inline-flex;align-items:center;gap:10px;height:52px;padding:0 26px;border-radius:14px;background:#0066FF;color:#fff;font-size:15px;font-weight:700;box-shadow:0 14px 30px -12px rgba(0,102,255,.7);transition:transform 200ms cubic-bezier(.16,1,.3,1),box-shadow 200ms cubic-bezier(.16,1,.3,1),background 200ms" style-hover="transform:translateY(-2px);background:#0039CC;box-shadow:0 20px 38px -14px rgba(0,102,255,.75);color:#fff" style-after="content:'';position:absolute;top:0;bottom:0;width:38%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.28),transparent);animation:mj-sweep 3.6s ease-in-out infinite">Start the Business Health Check <span style="font-size:17px">→</span></a>
+          <a href="#what" style="display:inline-flex;align-items:center;gap:8px;height:52px;padding:0 24px;border-radius:14px;background:#fff;border:1px solid #E2E8F0;color:#000033;font-size:15px;font-weight:600;box-shadow:0 1px 2px rgba(0,0,51,.05);transition:all 200ms cubic-bezier(.16,1,.3,1)" style-hover="transform:translateY(-2px);border-color:#0066FF;color:#003399">See what it measures</a>
         </div>
         <div style="display:flex;flex-wrap:wrap;gap:18px;padding-top:6px;animation:mj-rise .7s cubic-bezier(.16,1,.3,1) .3s both">
           <sc-for list="{{ assurances }}" as="a" hint-placeholder-count="3">
             <span style="display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:500;color:#475569">
-              <span style="height:18px;width:18px;border-radius:999px;background:#E6F0FF;color:#0037A5;display:grid;place-items:center;font-size:10px;font-weight:800">✓</span>{{ a }}
+              <span style="height:18px;width:18px;border-radius:999px;background:#E6F0FF;color:#003399;display:grid;place-items:center;font-size:10px;font-weight:800">✓</span>{{ a }}
             </span>
           </sc-for>
         </div>
       </div>
 
       <!-- ASIDE: empty index scale, no sample reading -->
-      <div style="position:relative;border-radius:20px;background:rgba(255,255,255,.72);backdrop-filter:blur(12px);border:1px solid #E2E8F0;box-shadow:0 24px 60px -28px rgba(15,23,42,.28);padding:26px;animation:mj-scale .8s cubic-bezier(.16,1,.3,1) .18s both">
+      <div style="position:relative;border-radius:20px;background:rgba(255,255,255,.72);backdrop-filter:blur(12px);border:1px solid #E2E8F0;box-shadow:0 24px 60px -28px rgba(0,0,51,.28);padding:26px;animation:mj-scale .8s cubic-bezier(.16,1,.3,1) .18s both">
         <div style="display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:6px">
           <span style="font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#475569">Founder Dependency Index</span>
           <span style="font-size:12px;font-weight:600;color:#475569">out of 100</span>
@@ -87,13 +87,13 @@
         <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:20px">
           <sc-for list="{{ bands }}" as="b" hint-placeholder-count="4">
             <div style="display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:10px;background:#F8FAFC;border:1px solid #E2E8F0">
-              <span style="min-width:52px;font-size:12px;font-weight:800;color:#0F172A;font-variant-numeric:tabular-nums">{{ b.range }}</span>
+              <span style="min-width:52px;font-size:12px;font-weight:800;color:#000033;font-variant-numeric:tabular-nums">{{ b.range }}</span>
               <span style="font-size:13px;font-weight:600;color:#475569">{{ b.name }}</span>
             </div>
           </sc-for>
         </div>
         <div style="display:flex;align-items:flex-start;gap:10px;padding:12px 14px;border-radius:12px;background:#FFF8E6;border:1px solid #FFE08A">
-          <span style="font-size:12px;font-weight:800;color:#B45309">Note</span>
+          <span style="font-size:12px;font-weight:800;color:#CC6600">Note</span>
           <span style="font-size:12px;line-height:1.6;color:#475569">No sample reading is shown. The scale stays empty until you complete the check.</span>
         </div>
       </div>
@@ -116,7 +116,7 @@
   <div id="what" style="max-width:1200px;margin:0 auto;padding:clamp(56px,7vw,96px) 24px">
     <div class="mj-rev" style="display:grid;grid-template-columns:5fr 7fr;gap:clamp(24px,4vw,56px);align-items:end;margin-bottom:36px">
       <div>
-        <span style="font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#0037A5">What it measures</span>
+        <span style="font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#003399">What it measures</span>
         <h2 style="margin:10px 0 0;font-size:clamp(22px,3vw,32px);line-height:1.18;font-weight:800;letter-spacing:-.02em">Three operating components. Four questions each.</h2>
       </div>
       <p style="margin:0;font-size:clamp(14px,1.2vw,16px);line-height:1.7;color:#475569">Founder dependency is rarely one problem. It shows up as decisions that only you can sign off, execution that stalls without you in the room, and visibility you carry in your head rather than in the business.</p>
@@ -137,7 +137,7 @@
   <div style="background:#E6F0FF;border-top:1px solid #E2E8F0;border-bottom:1px solid #E2E8F0">
     <div style="max-width:1200px;margin:0 auto;padding:clamp(56px,7vw,96px) 24px;display:grid;grid-template-columns:6fr 6fr;gap:clamp(32px,5vw,64px);align-items:center">
       <div class="mj-rev">
-        <span style="font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#0037A5">How it works</span>
+        <span style="font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#003399">How it works</span>
         <h2 style="margin:10px 0 14px;font-size:clamp(22px,3vw,32px);line-height:1.18;font-weight:800;letter-spacing:-.02em">Twelve questions. Roughly six minutes.</h2>
         <p style="margin:0 0 26px;font-size:clamp(14px,1.2vw,16px);line-height:1.7;color:#475569">Progress is saved as you go. You can leave before the end — an unfinished attempt receives no score and no email.</p>
         <div style="display:flex;flex-direction:column">
@@ -154,10 +154,10 @@
       </div>
 
       <!-- QUESTION PREVIEW (interactive, no scoring shown) -->
-      <div class="mj-rev" style="border-radius:20px;background:#fff;border:1px solid #E2E8F0;box-shadow:0 24px 60px -30px rgba(15,23,42,.3);overflow:hidden">
+      <div class="mj-rev" style="border-radius:20px;background:#fff;border:1px solid #E2E8F0;box-shadow:0 24px 60px -30px rgba(0,0,51,.3);overflow:hidden">
         <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:18px 22px;border-bottom:1px solid #E2E8F0">
           <span style="font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#475569">Question {{ qLabel }} of 12</span>
-          <span style="font-size:12px;font-weight:600;color:#0037A5">{{ qComponent }}</span>
+          <span style="font-size:12px;font-weight:600;color:#003399">{{ qComponent }}</span>
         </div>
         <div style="height:4px;background:#E2E8F0"><div style="{{ progressStyle }}"></div></div>
         <div style="padding:26px 22px">
@@ -172,7 +172,7 @@
           </div>
           <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:22px">
             <span style="font-size:12px;color:#475569">Preview only — nothing is submitted here.</span>
-            <button onClick="{{ nextQ }}" style="height:44px;padding:0 20px;border:0;border-radius:12px;background:#0052FF;color:#fff;font-size:14px;font-weight:700;cursor:pointer;box-shadow:0 10px 24px -10px rgba(0,82,255,.65);transition:all 200ms cubic-bezier(.16,1,.3,1)" style-hover="transform:translateY(-2px);background:#0039CC">Next →</button>
+            <button onClick="{{ nextQ }}" style="height:44px;padding:0 20px;border:0;border-radius:12px;background:#0066FF;color:#fff;font-size:14px;font-weight:700;cursor:pointer;box-shadow:0 10px 24px -10px rgba(0,102,255,.65);transition:all 200ms cubic-bezier(.16,1,.3,1)" style-hover="transform:translateY(-2px);background:#0039CC">Next →</button>
           </div>
         </div>
       </div>
@@ -182,19 +182,19 @@
   <!-- WHAT YOU GET -->
   <div style="max-width:1200px;margin:0 auto;padding:clamp(56px,7vw,96px) 24px">
     <div class="mj-rev" style="max-width:60ch;margin-bottom:36px">
-      <span style="font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#0037A5">What you get</span>
+      <span style="font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#003399">What you get</span>
       <h2 style="margin:10px 0 12px;font-size:clamp(22px,3vw,32px);line-height:1.18;font-weight:800;letter-spacing:-.02em">A read on the pattern, and the one thing to fix first.</h2>
       <p style="margin:0;font-size:clamp(14px,1.2vw,16px);line-height:1.7;color:#475569">The result identifies reported patterns. It does not diagnose root causes — that takes a conversation.</p>
     </div>
     <div style="display:grid;grid-template-columns:7fr 5fr;gap:24px">
-      <div class="mj-rev" style="border-radius:20px;background:#fff;border:1px solid #E2E8F0;box-shadow:0 1px 3px rgba(15,23,42,.07);padding:28px;display:flex;flex-direction:column;gap:20px">
+      <div class="mj-rev" style="border-radius:20px;background:#fff;border:1px solid #E2E8F0;box-shadow:0 1px 3px rgba(0,0,51,.07);padding:28px;display:flex;flex-direction:column;gap:20px">
         <div style="display:flex;align-items:baseline;justify-content:space-between;gap:12px">
           <span style="font-size:15px;font-weight:700">Your report, section by section</span>
           <span style="font-size:12px;font-weight:600;color:#475569">delivered on completion</span>
         </div>
         <sc-for list="{{ reportRows }}" as="r" hint-placeholder-count="4">
           <div style="display:grid;grid-template-columns:28px 1fr;gap:14px;padding-bottom:16px;border-bottom:1px solid #E2E8F0">
-            <span style="height:28px;width:28px;border-radius:9px;background:#E6F0FF;color:#0037A5;display:grid;place-items:center;font-size:12px;font-weight:800">{{ r.n }}</span>
+            <span style="height:28px;width:28px;border-radius:9px;background:#E6F0FF;color:#003399;display:grid;place-items:center;font-size:12px;font-weight:800">{{ r.n }}</span>
             <div>
               <div style="font-size:15px;font-weight:700;margin-bottom:3px">{{ r.title }}</div>
               <div style="font-size:14px;line-height:1.65;color:#475569">{{ r.body }}</div>
@@ -215,18 +215,18 @@
         </div>
       </div>
       <div style="display:flex;flex-direction:column;gap:24px">
-        <div class="mj-rev" style="border-radius:20px;background:#0F172A;color:#fff;padding:28px;box-shadow:0 24px 60px -30px rgba(15,23,42,.5);position:relative;overflow:hidden">
-          <div style="position:absolute;top:-90px;right:-70px;width:240px;height:240px;border-radius:999px;background:radial-gradient(circle,rgba(255,191,0,.28),transparent 65%);filter:blur(10px);animation:mj-orb 18s ease-in-out infinite"></div>
-          <span style="position:relative;font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#FFBF00">Honest limits</span>
+        <div class="mj-rev" style="border-radius:20px;background:#000033;color:#fff;padding:28px;box-shadow:0 24px 60px -30px rgba(0,0,51,.5);position:relative;overflow:hidden">
+          <div style="position:absolute;top:-90px;right:-70px;width:240px;height:240px;border-radius:999px;background:radial-gradient(circle,rgba(255,204,0,.28),transparent 65%);filter:blur(10px);animation:mj-orb 18s ease-in-out infinite"></div>
+          <span style="position:relative;font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#FFCC00">Honest limits</span>
           <div style="position:relative;font-size:clamp(16px,1.6vw,20px);font-weight:700;line-height:1.35;margin:10px 0 12px">This is a self-report, not an audit.</div>
           <p style="position:relative;margin:0;font-size:14px;line-height:1.7;color:#CBD5E1">A focused founder-dependency check — not a full financial, tax, legal, or business-performance audit. It reflects what you report, at the moment you report it.</p>
         </div>
-        <div class="mj-rev" style="border-radius:20px;background:#fff;border:1px solid #E2E8F0;padding:26px;box-shadow:0 1px 3px rgba(15,23,42,.07)">
+        <div class="mj-rev" style="border-radius:20px;background:#fff;border:1px solid #E2E8F0;padding:26px;box-shadow:0 1px 3px rgba(0,0,51,.07)">
           <div style="font-size:15px;font-weight:700;margin-bottom:12px">Who it's for</div>
           <div style="display:flex;flex-direction:column;gap:10px">
             <sc-for list="{{ audience }}" as="a" hint-placeholder-count="3">
               <div style="display:flex;gap:10px;align-items:flex-start;font-size:14px;line-height:1.6;color:#475569">
-                <span style="flex:0 0 auto;height:18px;width:18px;border-radius:999px;background:#E6F0FF;color:#0037A5;display:grid;place-items:center;font-size:10px;font-weight:800;margin-top:2px">✓</span>{{ a }}
+                <span style="flex:0 0 auto;height:18px;width:18px;border-radius:999px;background:#E6F0FF;color:#003399;display:grid;place-items:center;font-size:10px;font-weight:800;margin-top:2px">✓</span>{{ a }}
               </div>
             </sc-for>
           </div>
@@ -241,7 +241,7 @@
     <div style="mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)">
       <div style="display:flex;width:max-content;animation:mj-marquee 34s linear infinite" style-hover="animation-play-state:paused">
         <sc-for list="{{ patterns }}" as="p" hint-placeholder-count="10">
-          <span style="flex:0 0 auto;margin:0 8px;padding:9px 16px;border-radius:999px;background:#F8FAFC;border:1px solid #E2E8F0;font-size:13px;font-weight:600;color:#475569;white-space:nowrap;transition:all 200ms cubic-bezier(.16,1,.3,1)" style-hover="border-color:#0052FF;color:#0037A5;background:#E6F0FF">{{ p }}</span>
+          <span style="flex:0 0 auto;margin:0 8px;padding:9px 16px;border-radius:999px;background:#F8FAFC;border:1px solid #E2E8F0;font-size:13px;font-weight:600;color:#475569;white-space:nowrap;transition:all 200ms cubic-bezier(.16,1,.3,1)" style-hover="border-color:#0066FF;color:#003399;background:#E6F0FF">{{ p }}</span>
         </sc-for>
       </div>
     </div>
@@ -250,11 +250,11 @@
   <!-- FAQ -->
   <div style="max-width:1200px;margin:0 auto;padding:clamp(56px,7vw,96px) 24px;display:grid;grid-template-columns:4fr 8fr;gap:clamp(24px,4vw,56px);align-items:start">
     <div class="mj-rev" style="position:sticky;top:96px">
-      <span style="font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#0037A5">Questions</span>
+      <span style="font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#003399">Questions</span>
       <h2 style="margin:10px 0 12px;font-size:clamp(22px,3vw,32px);line-height:1.18;font-weight:800;letter-spacing:-.02em">Before you start</h2>
       <p style="margin:0;font-size:14px;line-height:1.7;color:#475569">Anything not covered here, ask directly — <a href="#">get in touch</a>.</p>
     </div>
-    <div class="mj-rev" style="border-radius:20px;background:#fff;border:1px solid #E2E8F0;box-shadow:0 1px 3px rgba(15,23,42,.07);overflow:hidden">
+    <div class="mj-rev" style="border-radius:20px;background:#fff;border:1px solid #E2E8F0;box-shadow:0 1px 3px rgba(0,0,51,.07);overflow:hidden">
       <sc-for list="{{ faqs }}" as="f" hint-placeholder-count="5">
         <div style="{{ f.row }}">
           <div onClick="{{ f.toggle }}" style="display:flex;align-items:center;justify-content:space-between;gap:16px;padding:20px 22px;cursor:pointer">
@@ -270,28 +270,28 @@
   </div>
 
   <!-- CLOSING CTA (dark band) -->
-  <div style="position:relative;overflow:hidden;background:#0F172A">
-    <div style="position:absolute;top:-160px;left:12%;width:520px;height:520px;border-radius:999px;background:radial-gradient(circle,rgba(0,82,255,.4),transparent 64%);filter:blur(16px);animation:mj-orb 22s ease-in-out infinite;pointer-events:none"></div>
-    <div style="position:absolute;bottom:-200px;right:6%;width:440px;height:440px;border-radius:999px;background:radial-gradient(circle,rgba(255,191,0,.22),transparent 64%);filter:blur(20px);animation:mj-orb 26s ease-in-out infinite reverse;pointer-events:none"></div>
+  <div style="position:relative;overflow:hidden;background:#000033">
+    <div style="position:absolute;top:-160px;left:12%;width:520px;height:520px;border-radius:999px;background:radial-gradient(circle,rgba(0,102,255,.4),transparent 64%);filter:blur(16px);animation:mj-orb 22s ease-in-out infinite;pointer-events:none"></div>
+    <div style="position:absolute;bottom:-200px;right:6%;width:440px;height:440px;border-radius:999px;background:radial-gradient(circle,rgba(255,204,0,.22),transparent 64%);filter:blur(20px);animation:mj-orb 26s ease-in-out infinite reverse;pointer-events:none"></div>
     <div style="position:relative;max-width:1200px;margin:0 auto;padding:clamp(56px,7vw,104px) 24px;display:grid;grid-template-columns:7fr 5fr;gap:clamp(32px,5vw,64px);align-items:center">
       <div>
-        <span style="font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#FFBF00">Twelve questions</span>
+        <span style="font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#FFCC00">Twelve questions</span>
         <h2 style="margin:12px 0 14px;color:#fff;font-size:clamp(24px,3.6vw,40px);line-height:1.12;font-weight:800;letter-spacing:-.025em;max-width:22ch">Find out what the business can already do without you.</h2>
         <p style="margin:0 0 28px;font-size:clamp(14px,1.3vw,17px);line-height:1.7;color:#CBD5E1;max-width:50ch">Free, no account, and no email required unless you finish. Roughly six minutes.</p>
         <div style="display:flex;flex-wrap:wrap;gap:12px;align-items:center">
-          <a href="#" style="position:relative;overflow:hidden;display:inline-flex;align-items:center;gap:10px;height:52px;padding:0 26px;border-radius:14px;background:#0052FF;color:#fff;font-size:15px;font-weight:700;box-shadow:0 18px 40px -14px rgba(0,82,255,.9);transition:all 200ms cubic-bezier(.16,1,.3,1)" style-hover="transform:translateY(-2px);background:#0039CC;color:#fff" style-after="content:'';position:absolute;top:0;bottom:0;width:38%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.3),transparent);animation:mj-sweep 3.6s ease-in-out infinite">Start the Business Health Check <span style="font-size:17px">→</span></a>
+          <a href="#" style="position:relative;overflow:hidden;display:inline-flex;align-items:center;gap:10px;height:52px;padding:0 26px;border-radius:14px;background:#0066FF;color:#fff;font-size:15px;font-weight:700;box-shadow:0 18px 40px -14px rgba(0,102,255,.9);transition:all 200ms cubic-bezier(.16,1,.3,1)" style-hover="transform:translateY(-2px);background:#0039CC;color:#fff" style-after="content:'';position:absolute;top:0;bottom:0;width:38%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.3),transparent);animation:mj-sweep 3.6s ease-in-out infinite">Start the Business Health Check <span style="font-size:17px">→</span></a>
           <a href="#" style="display:inline-flex;align-items:center;height:52px;padding:0 24px;border-radius:14px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.22);backdrop-filter:blur(8px);color:#fff;font-size:15px;font-weight:600;transition:all 200ms cubic-bezier(.16,1,.3,1)" style-hover="background:rgba(255,255,255,.12);transform:translateY(-2px);color:#fff">Book a call instead</a>
         </div>
       </div>
       <div style="border-radius:20px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.18);backdrop-filter:blur(12px);padding:26px;display:flex;flex-direction:column;gap:14px">
-        <span style="font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#FFBF00">What happens after</span>
+        <span style="font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#FFCC00">What happens after</span>
         <sc-for list="{{ after }}" as="a" hint-placeholder-count="3">
           <div style="display:flex;gap:12px;align-items:flex-start;padding-bottom:12px;border-bottom:1px solid rgba(255,255,255,.12)">
-            <span style="flex:0 0 auto;height:26px;width:26px;border-radius:8px;background:rgba(255,191,0,.18);color:#FFBF00;display:grid;place-items:center;font-size:12px;font-weight:800">{{ a.n }}</span>
+            <span style="flex:0 0 auto;height:26px;width:26px;border-radius:8px;background:rgba(255,204,0,.18);color:#FFCC00;display:grid;place-items:center;font-size:12px;font-weight:800">{{ a.n }}</span>
             <div><div style="font-size:14px;font-weight:700;color:#fff;margin-bottom:2px">{{ a.title }}</div><div style="font-size:13px;line-height:1.6;color:#CBD5E1">{{ a.body }}</div></div>
           </div>
         </sc-for>
-        <span style="font-size:12px;line-height:1.6;color:#94A3B8">No newsletter subscription. Your answers are not shared. <a href="#" style="color:#FFBF00;text-decoration:underline">Privacy Policy</a></span>
+        <span style="font-size:12px;line-height:1.6;color:#94A3B8">No newsletter subscription. Your answers are not shared. <a href="#" style="color:#FFCC00;text-decoration:underline">Privacy Policy</a></span>
       </div>
     </div>
   </div>
@@ -301,16 +301,16 @@
     <div style="max-width:1200px;margin:0 auto;padding:48px 24px 28px;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:32px">
       <div style="display:flex;flex-direction:column;gap:12px">
         <div style="display:flex;align-items:center;gap:10px">
-          <span style="height:30px;width:30px;border-radius:9px;background:#0052FF;color:#fff;display:grid;place-items:center;font-weight:800;font-size:13px">MA</span>
+          <span style="height:30px;width:30px;border-radius:9px;background:#0066FF;color:#fff;display:grid;place-items:center;font-weight:800;font-size:13px">MA</span>
           <span style="font-weight:700;font-size:15px">Muhammed Ajmal</span>
         </div>
         <p style="margin:0;max-width:34ch;font-size:13px;line-height:1.7;color:#475569">Operating advisory for founder-led businesses. Reduce dependency, document the system, hand over the work.</p>
       </div>
       <sc-for list="{{ footerCols }}" as="c" hint-placeholder-count="3">
         <div style="display:flex;flex-direction:column;gap:9px">
-          <div style="font-size:13px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#0F172A;margin-bottom:2px">{{ c.head }}</div>
+          <div style="font-size:13px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#000033;margin-bottom:2px">{{ c.head }}</div>
           <sc-for list="{{ c.links }}" as="l" hint-placeholder-count="3">
-            <a href="#" style="font-size:13px;font-weight:500;color:#475569" style-hover="color:#0052FF">{{ l }}</a>
+            <a href="#" style="font-size:13px;font-weight:500;color:#475569" style-hover="color:#0066FF">{{ l }}</a>
           </sc-for>
         </div>
       </sc-for>
@@ -323,13 +323,13 @@
 
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1280},&quot;accent&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;default&quot;:&quot;#FFBF00&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;options&quot;:[&quot;#FFBF00&quot;,&quot;#B45309&quot;,&quot;#0052FF&quot;],&quot;section&quot;:&quot;Brand&quot;}}">
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1280},&quot;accent&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;default&quot;:&quot;#FFCC00&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;options&quot;:[&quot;#FFCC00&quot;,&quot;#CC6600&quot;,&quot;#0066FF&quot;],&quot;section&quot;:&quot;Brand&quot;}}">
 class Component extends DCLogic {
   state = { faq: 0, q: 0, picked: {} };
 
   renderVals(){
     const S = this.state, EO = 'cubic-bezier(.16,1,.3,1)';
-    const accent = this.props.accent ?? '#FFBF00';
+    const accent = this.props.accent ?? '#FFCC00';
 
     const questions = [
       { component: 'Decision-making', text: 'In the last month, how many decisions moved forward without your sign-off?', opts: ['Almost all of them', 'Most routine ones', 'Only the small ones', 'Practically none'] },
@@ -366,8 +366,8 @@ class Component extends DCLogic {
         { glyph: '◉', title: 'Operational visibility', body: 'Whether the current state of the business is legible to anyone other than you.', signal: 'where the truth lives' }
       ].map((c, i) => ({
         ...c,
-        wrap: `display:flex;flex-direction:column;gap:12px;padding:24px;border-radius:16px;background:#fff;border:1px solid #E2E8F0;box-shadow:0 1px 3px rgba(15,23,42,.07);animation-delay:${i * 0.07}s;transition:transform 200ms ${EO},box-shadow 200ms ${EO},border-color 200ms ${EO}`,
-        tile: `height:42px;width:42px;border-radius:12px;display:grid;place-items:center;font-size:18px;background:#E6F0FF;color:#0037A5;box-shadow:0 8px 20px -12px rgba(0,82,255,.6);transition:transform 200ms cubic-bezier(.34,1.56,.64,1)`
+        wrap: `display:flex;flex-direction:column;gap:12px;padding:24px;border-radius:16px;background:#fff;border:1px solid #E2E8F0;box-shadow:0 1px 3px rgba(0,0,51,.07);animation-delay:${i * 0.07}s;transition:transform 200ms ${EO},box-shadow 200ms ${EO},border-color 200ms ${EO}`,
+        tile: `height:42px;width:42px;border-radius:12px;display:grid;place-items:center;font-size:18px;background:#E6F0FF;color:#003399;box-shadow:0 8px 20px -12px rgba(0,102,255,.6);transition:transform 200ms cubic-bezier(.34,1.56,.64,1)`
       })),
       steps: [
         { n: '1', title: 'Answer twelve questions', body: 'Plain multiple choice. No preparation, no documents to pull.' },
@@ -376,19 +376,19 @@ class Component extends DCLogic {
       ].map((s, i, arr) => ({
         ...s,
         wrap: 'display:grid;grid-template-columns:36px 1fr;gap:16px;position:relative',
-        marker: `height:32px;width:32px;border-radius:999px;background:#0052FF;color:#fff;display:grid;place-items:center;font-size:13px;font-weight:800;box-shadow:0 8px 20px -10px rgba(0,82,255,.7);${i < arr.length - 1 ? 'position:relative' : ''}`
+        marker: `height:32px;width:32px;border-radius:999px;background:#0066FF;color:#fff;display:grid;place-items:center;font-size:13px;font-weight:800;box-shadow:0 8px 20px -10px rgba(0,102,255,.7);${i < arr.length - 1 ? 'position:relative' : ''}`
       })),
       qLabel: String(S.q + 1),
       qComponent: q.component,
       qText: q.text,
-      progressStyle: `height:100%;width:${((S.q + 1) / 12) * 100}%;background:linear-gradient(90deg,#0037A5,#0052FF);transition:width 400ms ${EO}`,
+      progressStyle: `height:100%;width:${((S.q + 1) / 12) * 100}%;background:linear-gradient(90deg,#003399,#0066FF);transition:width 400ms ${EO}`,
       options: q.opts.map((label, i) => {
         const on = S.picked[S.q] === i;
         return {
           label,
           pick: () => this.setState(s => ({ picked: { ...s.picked, [S.q]: i } })),
-          style: `display:flex;align-items:center;gap:12px;padding:14px 16px;border-radius:12px;cursor:pointer;transition:all 200ms ${EO};border:1px solid ${on ? '#0052FF' : '#E2E8F0'};background:${on ? '#E6F0FF' : '#fff'};color:${on ? '#0037A5' : '#0F172A'};box-shadow:${on ? '0 10px 24px -14px rgba(0,82,255,.7)' : 'none'}`,
-          dot: `flex:0 0 auto;height:16px;width:16px;border-radius:999px;border:2px solid ${on ? '#0052FF' : '#CBD5E1'};background:${on ? '#0052FF' : '#fff'};box-shadow:${on ? 'inset 0 0 0 3px #fff' : 'none'};transition:all 200ms ${EO}`
+          style: `display:flex;align-items:center;gap:12px;padding:14px 16px;border-radius:12px;cursor:pointer;transition:all 200ms ${EO};border:1px solid ${on ? '#0066FF' : '#E2E8F0'};background:${on ? '#E6F0FF' : '#fff'};color:${on ? '#003399' : '#000033'};box-shadow:${on ? '0 10px 24px -14px rgba(0,102,255,.7)' : 'none'}`,
+          dot: `flex:0 0 auto;height:16px;width:16px;border-radius:999px;border:2px solid ${on ? '#0066FF' : '#CBD5E1'};background:${on ? '#0066FF' : '#fff'};box-shadow:${on ? 'inset 0 0 0 3px #fff' : 'none'};transition:all 200ms ${EO}`
         };
       }),
       nextQ: () => this.setState(s => ({ q: (s.q + 1) % questions.length })),
@@ -417,7 +417,7 @@ class Component extends DCLogic {
           q: f.q, a: f.a,
           toggle: () => this.setState(s => ({ faq: s.faq === i ? -1 : i })),
           row: `border-bottom:1px solid #E2E8F0;transition:background 200ms ${EO};background:${open ? '#F8FAFC' : '#fff'}`,
-          chev: `flex:0 0 auto;height:28px;width:28px;border-radius:999px;display:grid;place-items:center;font-size:16px;font-weight:700;background:${open ? '#0052FF' : '#F1F5F9'};color:${open ? '#fff' : '#475569'};transition:all 240ms ${EO};transform:rotate(${open ? 45 : 0}deg)`,
+          chev: `flex:0 0 auto;height:28px;width:28px;border-radius:999px;display:grid;place-items:center;font-size:16px;font-weight:700;background:${open ? '#0066FF' : '#F1F5F9'};color:${open ? '#fff' : '#475569'};transition:all 240ms ${EO};transform:rotate(${open ? 45 : 0}deg)`,
           body: `display:grid;grid-template-rows:${open ? '1fr' : '0fr'};opacity:${open ? 1 : 0};transition:grid-template-rows 320ms ${EO},opacity 200ms ${EO}`
         };
       }),

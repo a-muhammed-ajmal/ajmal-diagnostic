@@ -3,7 +3,7 @@ import { ImageResponse } from 'next/og';
 // Site-default Open Graph image. A per-article override lives alongside the article.
 // Literal hex is unavoidable here: ImageResponse is rendered by Satori, which cannot read
 // the CSS custom properties in globals.css. These values match the design tokens exactly
-// (--color-brand #0052FF, --color-accent #FFBF00, --color-ink #0F172A,
+// (--color-brand #0066FF, --color-accent #FFCC00, --color-ink #000033,
 //  --color-muted #475569, --color-brand-tint #E6F0FF).
 
 export const alt = 'Muhammed Ajmal · Business Operations & Growth Consultant';
@@ -35,7 +35,7 @@ export default function OpengraphImage() {
               justifyContent: 'center',
               width: 84,
               height: 84,
-              background: '#0052FF',
+              background: '#0066FF',
               borderRadius: 16,
             }}
           >
@@ -48,7 +48,7 @@ export default function OpengraphImage() {
               }}
             >
               <span style={{ color: '#FFFFFF' }}>M</span>
-              <span style={{ color: '#FFBF00' }}>A</span>
+              <span style={{ color: '#FFCC00' }}>A</span>
             </div>
             <div
               style={{
@@ -57,15 +57,15 @@ export default function OpengraphImage() {
                 right: 8,
                 width: 16,
                 height: 16,
-                borderTop: '4px solid #FFBF00',
-                borderRight: '4px solid #FFBF00',
+                borderTop: '4px solid #FFCC00',
+                borderRight: '4px solid #FFCC00',
               }}
             />
           </div>
           <span
             style={{
               marginLeft: 28,
-              color: '#0F172A',
+              color: '#000033',
               fontSize: 26,
               fontWeight: 700,
               letterSpacing: '4px',
@@ -80,7 +80,7 @@ export default function OpengraphImage() {
         <div
           style={{
             display: 'flex',
-            color: '#0F172A',
+            color: '#000033',
             fontSize: 68,
             fontWeight: 800,
             lineHeight: 1.1,
@@ -93,7 +93,7 @@ export default function OpengraphImage() {
 
         {/* Footer */}
         <div style={{ display: 'flex', alignItems: 'center' }}>
-          <div style={{ width: 48, height: 4, background: '#0052FF', marginRight: 20 }} />
+          <div style={{ width: 48, height: 4, background: '#0066FF', marginRight: 20 }} />
           <span style={{ color: '#475569', fontSize: 24, fontWeight: 600 }}>
             Business Operations &amp; Growth Consultant · Dubai, UAE
           </span>

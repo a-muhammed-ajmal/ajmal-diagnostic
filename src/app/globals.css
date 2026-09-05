@@ -31,36 +31,36 @@
   /* ── Electric Blue scale ───────────────────────────────────────────────── */
   --color-electric-50:  #EFF6FF;
   --color-electric-100: #DBEAFE;
-  --color-electric-500: #0052FF;   /* Brand Primary — 5.8:1 on white */
+  --color-electric-500: #0066FF;   /* Brand Primary — 4.8:1 on white */
   --color-electric-600: #0046D5;
-  --color-electric-700: #0037A5;   /* 10.1:1 on white */
+  --color-electric-700: #003399;   /* 10.9:1 on white */
   --color-electric-900: #1E3A8A;
 
   /* ── Amber scale ───────────────────────────────────────────────────────── */
   --color-amber-50:  #FFFBEB;
   --color-amber-100: #FEF3C7;
-  --color-amber-500: #FFBF00;      /* Brand Secondary — 1.65:1 on white, FILL ONLY */
+  --color-amber-500: #FFCC00;      /* Brand Secondary — 1.51:1 on white, FILL ONLY */
   --color-amber-600: #D97706;
-  --color-amber-700: #B45309;      /* amber TEXT on light — 5.0:1 */
+  --color-amber-700: #CC6600;      /* amber TEXT — 3.8:1 on white (large-text/UI only, below AA-normal) */
 
   /* ── Slate grounding neutrals ──────────────────────────────────────────── */
-  --color-canvas-dark:   #0F172A;  /* Slate 900 */
+  --color-canvas-dark:   #000033;  /* Slate 900 */
   --color-canvas-light:  #F8FAFC;  /* Slate 50 */
   --color-canvas-border: #E2E8F0;  /* Slate 200 */
 
   /* ── Semantic aliases ──────────────────────────────────────────────────── */
-  --color-brand:       #0052FF;    /* primary fills, CTAs, focus */
+  --color-brand:       #0066FF;    /* primary fills, CTAs, focus */
   --color-brand-hover: #0039CC;    /* CTA hover — 8.6:1 on white */
-  --color-brand-ink:   #0037A5;    /* blue TEXT on white — 10.1:1 */
+  --color-brand-ink:   #003399;    /* blue TEXT on white — 10.9:1 */
   --color-brand-tint:  #E6F0FF;    /* light accent wash — alternating band */
   --color-brand-soft:  #DBEAFE;    /* icon tiles, chips, chart fills */
 
-  /* Amber is FILL ONLY. #FFBF00 on white is 1.65:1 — it must sit on a dark
+  /* Amber is FILL ONLY. #FFCC00 on white is 1.51:1 — it must sit on a dark
      slate surface or act as a border highlight. For amber TEXT on a light
-     surface use --color-accent-ink. */
-  --color-accent:       #FFBF00;
+     surface use --color-accent-ink (3.8:1 — large-text/UI only, below AA-normal). */
+  --color-accent:       #FFCC00;
   --color-accent-hover: #D49E00;
-  --color-accent-ink:   #B45309;   /* 5.0:1 on white */
+  --color-accent-ink:   #CC6600;   /* 3.8:1 on white */
   --color-accent-soft:  #FFF8E6;
 
   /* ── Surface + text ────────────────────────────────────────────────────── */
@@ -68,10 +68,10 @@
   --color-surface:     #FFFFFF;
   --color-line:        #E2E8F0;    /* Slate 200 */
   --color-line-strong: #CBD5E1;    /* Slate 300 */
-  --color-ink:         #0F172A;    /* Slate 900 — 17.9:1 on white */
+  --color-ink:         #000033;    /* Slate 900 — 20.0:1 on white */
   --color-ink-soft:    #1E293B;    /* Slate 800 */
   --color-muted:       #475569;    /* Slate 600 — 7.6:1, the lightest legal text */
-  /* Secondary text ON a canvas-dark band (Slate 300, 12.0:1 against #0F172A).
+  /* Secondary text ON a canvas-dark band (Slate 300, 13.5:1 against #000033).
      Dark bands are where amber is allowed to live, and they need an inverse
      partner for --color-muted — never mute inverted text with opacity. */
   --color-muted-invert: #CBD5E1;
@@ -84,7 +84,7 @@
   --color-danger:       #C0281D;
   --color-danger-soft:  #FDECEC;
 
-  --color-focus:        #0052FF;
+  --color-focus:        #0066FF;
 
   /* ── Font sizes ────────────────────────────────────────────────────────── */
   /* `text-xs` is the sanctioned micro-copy utility — badges, table cells, meta
@@ -94,18 +94,18 @@
   --text-xs: var(--step--1);
 
   /* ── Elevation ─────────────────────────────────────────────────────────── */
-  --shadow-1: 0 1px 2px rgba(15, 23, 42, .06);
-  --shadow-2: 0 4px 12px rgba(15, 23, 42, .08), 0 2px 4px rgba(15, 23, 42, .04);
-  --shadow-3: 0 10px 28px rgba(15, 23, 42, .12), 0 4px 8px rgba(15, 23, 42, .06);
+  --shadow-1: 0 1px 2px rgba(0, 0, 51, .06);
+  --shadow-2: 0 4px 12px rgba(0, 0, 51, .08), 0 2px 4px rgba(0, 0, 51, .04);
+  --shadow-3: 0 10px 28px rgba(0, 0, 51, .12), 0 4px 8px rgba(0, 0, 51, .06);
 
   /* Hover glow — the amber-to-electric alteration called for on CTA hover. */
-  --shadow-glow-electric: 0 8px 24px rgba(0, 82, 255, .22), 0 2px 6px rgba(0, 82, 255, .12);
-  --shadow-glow-amber:    0 8px 24px rgba(255, 191, 0, .28), 0 2px 6px rgba(212, 158, 0, .16);
+  --shadow-glow-electric: 0 8px 24px rgba(0, 102, 255, .22), 0 2px 6px rgba(0, 102, 255, .12);
+  --shadow-glow-amber:    0 8px 24px rgba(255, 204, 0, .28), 0 2px 6px rgba(212, 158, 0, .16);
 
   /* [DESIGN CHANGE] register item 5. A deep, offset, negative-spread shadow for
      the raised card variant only. It is NOT a fourth step on the 1/2/3 ramp and
      must not be reached for as one. */
-  --shadow-raised: 0 26px 54px -22px rgba(15, 23, 42, .32);
+  --shadow-raised: 0 26px 54px -22px rgba(0, 0, 51, .32);
 }
 
 /* ── Non-Tailwind tokens (space, radius, motion, type scale) ─────────────── */
@@ -216,8 +216,8 @@ h1, h2, h3, p { overflow-wrap: break-word; }
    per-use `text-*` utility still wins — unlayered here would beat every
    utility, because unlayered CSS outranks every @layer.
    `<Section tone="dark">` exposes no semantic hook; it emits `bg-canvas-dark`,
-   so that is the class the dark-band rule targets. Amber (#FFBF00) is 1.65:1
-   on white and may never be text on a light surface — accent-ink is 5.0:1. */
+   so that is the class the dark-band rule targets. Amber (#FFCC00) is 1.51:1
+   on white and may never be text on a light surface — accent-ink is 3.8:1. */
 @layer base {
   .eyebrow { color: var(--color-accent-ink); }
   .bg-canvas-dark .eyebrow { color: var(--color-accent); }

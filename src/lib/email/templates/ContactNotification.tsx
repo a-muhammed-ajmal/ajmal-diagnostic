@@ -39,7 +39,7 @@ const labelStyle = {
 };
 
 const valueStyle = {
-  color: "#0F172A",
+  color: "#000033",
   fontSize: "15px",
   margin: "0 0 16px",
 };
@@ -69,7 +69,7 @@ export function ContactNotificationEmail({
         <Container style={{ maxWidth: "600px", margin: "0 auto", padding: "40px 20px" }}>
           <Text
             style={{
-              color: "#0037A5",
+              color: "#003399",
               fontSize: "11px",
               fontWeight: "bold",
               letterSpacing: "3px",
@@ -79,7 +79,7 @@ export function ContactNotificationEmail({
           >
             MUHAMMED AJMAL CONSULTING
           </Text>
-          <Heading style={{ color: "#0F172A", fontSize: "22px", margin: "0 0 4px" }}>
+          <Heading style={{ color: "#000033", fontSize: "22px", margin: "0 0 4px" }}>
             New contact inquiry
           </Heading>
           <Text style={{ color: "#475569", fontSize: "14px", margin: "0 0 24px" }}>
@@ -98,7 +98,7 @@ export function ContactNotificationEmail({
             <Text style={{ ...labelStyle, margin: "0 0 4px" }}>Reply to</Text>
             <Link
               href={`mailto:${email}`}
-              style={{ color: "#0037A5", fontSize: "16px", fontWeight: "bold", textDecoration: "none" }}
+              style={{ color: "#003399", fontSize: "16px", fontWeight: "bold", textDecoration: "none" }}
             >
               {email}
             </Link>
@@ -122,7 +122,7 @@ export function ContactNotificationEmail({
             <Text style={labelStyle}>Message</Text>
             <Text
               style={{
-                color: "#0F172A",
+                color: "#000033",
                 fontSize: "14px",
                 lineHeight: "1.7",
                 margin: 0,

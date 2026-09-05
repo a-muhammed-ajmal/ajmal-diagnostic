@@ -103,3 +103,31 @@
              which is a wobble on anything larger than a small decorative mark.
              Applied on exactly one surface today: the Founder Trap card grid
              on Home.
+2026-09-06 — Palette move, five values: --color-brand/electric-500/--color-focus
+             #0052FF->#0066FF; --color-brand-ink/electric-700 #0037A5->#003399;
+             --color-accent/amber-500 #FFBF00->#FFCC00; --color-accent-ink/
+             amber-700 #B45309->#CC6600; --color-ink/--color-canvas-dark
+             #0F172A->#000033. --color-brand-hover and --color-accent-hover were
+             deliberately left at #0039CC/#D49E00 — not part of this move.
+             The rgba() decompositions of brand/ink used in --shadow-1/2/3,
+             --shadow-raised and --shadow-glow-electric/-amber's first stop moved
+             in lockstep so shadows and hover glow stay on-palette; the second
+             --shadow-glow-amber stop (rgba(212,158,0,...), accent-hover) is
+             unaffected. All hardcoded hex outside globals.css moved with it:
+             icon.tsx/apple-icon.tsx/opengraph-image.tsx (Satori has no access to
+             CSS custom properties), the email templates in
+             src/lib/email/templates/, scoring.ts's dimension colors, and
+             calendly.ts's POPUP_THEME (calendly.test.ts is the pinned assertion
+             against drift, per its own comment — updated alongside).
+             Recalculated contrast: brand 5.8:1->4.8:1 (still clears AA-normal,
+             barely); brand-ink 10.1:1->10.9:1; accent 1.65:1->1.51:1 (fill-only,
+             unaffected); ink 17.9:1->20.0:1; muted-invert vs canvas-dark
+             12.0:1->13.5:1. accent-ink 5.0:1->3.8:1 — this is a real regression,
+             now below the 4.5:1 AA-normal-text minimum and legal only at
+             large-text/UI sizes (18px+, or bold 14px+). Accepted as-is per
+             explicit decision, not an oversight. One active pattern is affected
+             by it: `.eyebrow` text in accent-ink on light surfaces (globals.css
+             @layer base) renders at 12px/500-weight, which does not qualify as
+             WCAG large text either — those eyebrows now sit below AA-normal
+             with no size-based exemption. Documented as a known gap in
+             brand-guidelines/SKILL.md rather than silently left stale.

@@ -26,7 +26,7 @@ export interface NewsletterConfirmationEmailProps {
 }
 
 const bodyText = {
-  color: "#0F172A",
+  color: "#000033",
   fontSize: "15px",
   lineHeight: "1.7",
   margin: "0 0 16px",
@@ -43,7 +43,7 @@ export function NewsletterConfirmationEmail({
         <Container style={{ maxWidth: "600px", margin: "0 auto", padding: "40px 20px" }}>
           <Text
             style={{
-              color: "#0037A5",
+              color: "#003399",
               fontSize: "11px",
               fontWeight: "bold",
               letterSpacing: "3px",
@@ -53,7 +53,7 @@ export function NewsletterConfirmationEmail({
           >
             MUHAMMED AJMAL CONSULTING
           </Text>
-          <Heading style={{ color: "#0F172A", fontSize: "22px", margin: "0 0 24px" }}>
+          <Heading style={{ color: "#000033", fontSize: "22px", margin: "0 0 24px" }}>
             You are subscribed
           </Heading>
 

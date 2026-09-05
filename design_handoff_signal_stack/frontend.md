@@ -30,30 +30,30 @@ utility from the `@theme` key, so `--color-brand` is `bg-brand` / `text-brand` /
 
 | Token | Value | Use |
 | --- | --- | --- |
-| `--color-brand` | `#0052FF` | Primary fills, CTAs, focus, active state, numerals |
+| `--color-brand` | `#0066FF` | Primary fills, CTAs, focus, active state, numerals |
 | `--color-brand-hover` | `#0039CC` | Primary button hover fill (8.6:1) |
-| `--color-brand-ink` | `#0037A5` | Blue **text** on white (10.1:1), links, gradient start |
+| `--color-brand-ink` | `#003399` | Blue **text** on white (10.9:1), links, gradient start |
 | `--color-brand-tint` | `#E6F0FF` | Alternating section band, card headers, selected rows |
 | `--color-brand-soft` | `#DBEAFE` | Icon tiles, chips, chart fills |
-| `--color-accent` | `#FFBF00` | **Fill only** (1.65:1) — dark-band text, dots, orbs, borders |
-| `--color-accent-ink` | `#B45309` | Amber **text** on a light surface (5.0:1) |
+| `--color-accent` | `#FFCC00` | **Fill only** (1.51:1) — dark-band text, dots, orbs, borders |
+| `--color-accent-ink` | `#CC6600` | Amber **text** on a light surface (3.8:1 — large-text/UI only) |
 | `--color-accent-soft` | `#FFF8E6` | Amber wash panels |
-| `--color-ink` | `#0F172A` | Body text (17.9:1); also the dark band surface |
+| `--color-ink` | `#000033` | Body text (20.0:1); also the dark band surface |
 | `--color-muted` | `#475569` | Secondary text — the lightest legal text on light (7.6:1) |
-| `--color-muted-invert` | `#CBD5E1` | Secondary text on `--color-ink` (12.0:1) |
+| `--color-muted-invert` | `#CBD5E1` | Secondary text on `--color-ink` (13.5:1) |
 | `--color-line` | `#E2E8F0` | Hairlines, card borders, input borders |
 | `--color-line-strong` | `#CBD5E1` | Emphasised divider |
 | `--color-canvas` / `--color-surface` | `#FFFFFF` | Page and card surface |
 | `--color-canvas-light` | `#F8FAFC` | Inset wells, admin shell |
-| `--color-canvas-dark` | `#0F172A` | Dark band surface (`bg-canvas-dark`) |
+| `--color-canvas-dark` | `#000033` | Dark band surface (`bg-canvas-dark`) |
 | `--color-success` / `--color-warning` / `--color-danger` | `#0B6B43` / `#9A5B08` / `#C0281D` | Status text, each with a `-soft` wash |
 
 **Gradient.** One: `.brand-gradient-text` — `linear-gradient(100deg, electric-700, electric-500)`.
 Both ends clear 4.5:1, so it is safe at any size. Used for the accented clause of an H1 and for
 progress-bar fills. Do not author new gradients.
 
-**Amber rule (from DESIGN, unchanged).** `#FFBF00` is 1.65:1 on white and is **fill only**. Amber text
-on a light surface uses `--color-accent-ink` `#B45309`. Amber is legal as: `.eyebrow` text inside
+**Amber rule (from DESIGN, unchanged).** `#FFCC00` is 1.51:1 on white and is **fill only**. Amber text
+on a light surface uses `--color-accent-ink` `#CC6600` (3.8:1 — large-text/UI only, below AA-normal). Amber is legal as: `.eyebrow` text inside
 `.bg-canvas-dark` (handled automatically in `@layer base`), a status dot, a glass-panel label, an
 `.orb-amber` at 20% opacity, or a border highlight.
 
@@ -119,11 +119,11 @@ Container width comes from `<Section width>`: `prose` 768px · `narrow` 1024px �
 
 | Token | Value | Use |
 | --- | --- | --- |
-| `--shadow-1` | `0 1px 2px rgba(15,23,42,.06)` | Resting card, input |
-| `--shadow-2` | `0 4px 12px rgba(15,23,42,.08), 0 2px 4px rgba(15,23,42,.04)` | Card hover, glass panel |
-| `--shadow-3` | `0 10px 28px rgba(15,23,42,.12), 0 4px 8px rgba(15,23,42,.06)` | Floating panel, sticky bar |
-| `--shadow-glow-electric` | `0 8px 24px rgba(0,82,255,.22), 0 2px 6px rgba(0,82,255,.12)` | Primary CTA hover |
-| `--shadow-glow-amber` | `0 8px 24px rgba(255,191,0,.28), 0 2px 6px rgba(212,158,0,.16)` | Secondary CTA hover |
+| `--shadow-1` | `0 1px 2px rgba(0,0,51,.06)` | Resting card, input |
+| `--shadow-2` | `0 4px 12px rgba(0,0,51,.08), 0 2px 4px rgba(0,0,51,.04)` | Card hover, glass panel |
+| `--shadow-3` | `0 10px 28px rgba(0,0,51,.12), 0 4px 8px rgba(0,0,51,.06)` | Floating panel, sticky bar |
+| `--shadow-glow-electric` | `0 8px 24px rgba(0,102,255,.22), 0 2px 6px rgba(0,102,255,.12)` | Primary CTA hover |
+| `--shadow-glow-amber` | `0 8px 24px rgba(255,204,0,.28), 0 2px 6px rgba(212,158,0,.16)` | Secondary CTA hover |
 
 The deep offset-negative-spread ramp in the Signal Stack prototypes
 (`0 26px 54px -22px …`) is **not in the theme**. Shipping it is a **[DESIGN CHANGE]** — see §2.1 `Card`.
@@ -215,7 +215,7 @@ Hover uses the existing `.card-interactive`: `translateY(-2px)`, `--shadow-2`, b
 `200ms --ease-out`. One compound gesture — title and body never move.
 
 > **[DESIGN CHANGE] — `card-interactive-raised`.** The richer Ossisto hover the brief asks for
-> (`translateY(-6px)`, `0 26px 54px -22px rgba(15,23,42,.32)`, tile `scale(1.06) rotate(-3deg)` on a
+> (`translateY(-6px)`, `0 26px 54px -22px rgba(0,0,51,.32)`, tile `scale(1.06) rotate(-3deg)` on a
 > spring curve) needs three things DESIGN does not have: a 6px lift, a deep shadow token, and a spring
 > ease. Land it as an opt-in `.card-interactive-raised` class in `globals.css` **plus** a DESIGN skill
 > update in the same commit — restricted to marketing card grids, never admin or forms. Until then
@@ -248,8 +248,8 @@ Drift animation (`translate ≤26px`, `scale ≤1.08`, `16–25s ease-in-out inf
 **[DESIGN CHANGE]** — today's orbs are static. Keyframes go in `globals.css`.
 
 **`SpokeArc`** — the hero's rotating figure, and a **[DESIGN CHANGE]**: a conic-gradient ring of 8
-spokes at `rgba(0,82,255,.22)`, radial-masked to an annulus, `rotate 46s linear infinite`, plus a
-concentric `1px dashed rgba(0,82,255,.28)` ring counter-rotating at `28s`. `aria-hidden`,
+spokes at `rgba(0,102,255,.22)`, radial-masked to an annulus, `rotate 46s linear infinite`, plus a
+concentric `1px dashed rgba(0,102,255,.28)` ring counter-rotating at `28s`. `aria-hidden`,
 `pointer-events:none`, hero-only, opacity ≤.6 behind text and `.35` below 640px.
 
 ### 2.2 Composites

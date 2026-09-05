@@ -25,10 +25,10 @@ from reportlab.platypus import (
 )
 
 PAGE_WIDTH, PAGE_HEIGHT = A4
-BRAND = colors.HexColor('#0052FF')
-BRAND_INK = colors.HexColor('#0037A5')
-AMBER_INK = colors.HexColor('#B45309')
-INK = colors.HexColor('#0F172A')
+BRAND = colors.HexColor('#0066FF')
+BRAND_INK = colors.HexColor('#003399')
+AMBER_INK = colors.HexColor('#CC6600')
+INK = colors.HexColor('#000033')
 MUTED = colors.HexColor('#475569')
 LINE = colors.HexColor('#E2E8F0')
 TINT = colors.HexColor('#E6F0FF')
@@ -50,7 +50,7 @@ REGULAR, BOLD = register_fonts()
 
 def inline_markup(value: str) -> str:
     escaped = html.escape(value)
-    escaped = re.sub(r'`([^`]+)`', r'<font name="WebsiteSansBold" color="#0037A5">\1</font>', escaped)
+    escaped = re.sub(r'`([^`]+)`', r'<font name="WebsiteSansBold" color="#003399">\1</font>', escaped)
     escaped = re.sub(r'\*\*([^*]+)\*\*', r'<b>\1</b>', escaped)
     return escaped.replace('->', '→')
 

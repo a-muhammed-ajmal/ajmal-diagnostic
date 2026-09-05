@@ -13,7 +13,7 @@ export const DIMENSION_META: Record<DimensionKey, {
   strategic_clarity: {
     label: "Strategic Clarity",
     description: "The degree to which your business operates with a defined direction, documented priorities, and data-informed decision-making.",
-    color: "#0052FF",
+    color: "#0066FF",
     constraintExplanation: "Your biggest constraint right now is strategic clarity. Without a documented strategy and defined decision-making criteria, your team cannot execute consistently, priorities shift with whoever speaks loudest, and growth depends entirely on your personal judgment every single day. Every operational problem downstream is harder to solve when the direction at the top is ambiguous.",
     secondaryExplanation: "Strategic clarity is a secondary constraint in your business. While you have addressed more pressing bottlenecks, the absence of a fully documented strategic framework creates friction in decision-making and slows execution as you scale.",
     impactStatement: "Without a documented strategy, the same decisions get re-made again and again, and leadership time is spent settling questions a clear framework would have answered once.",
@@ -39,7 +39,7 @@ export const DIMENSION_META: Record<DimensionKey, {
   operations: {
     label: "Operations & Execution",
     description: "How consistently, reliably, and independently your business delivers outcomes — without depending on specific individuals.",
-    color: "#0037A5",
+    color: "#003399",
     constraintExplanation: "Your biggest constraint right now is operational systems. Without documented processes, SOPs, and quality standards, your business cannot scale — every new hire starts from scratch, quality depends on who's involved, and your capacity to deliver is capped by the people currently in the building.",
     secondaryExplanation: "Operational systems are a secondary constraint in your business. While your primary bottleneck demands immediate attention, the absence of fully documented processes means your delivery quality is more variable than it should be — and will become a harder problem as you grow.",
     impactStatement: "When processes live in people's heads instead of on paper, capacity leaks into rework, re-explanation, and inconsistent quality — and the leak widens the moment you try to scale.",
@@ -52,7 +52,7 @@ export const DIMENSION_META: Record<DimensionKey, {
   people_leadership: {
     label: "People & Leadership",
     description: "How clearly defined, accountable, and independently capable your team is — and how much depends on you personally.",
-    color: "#B45309",
+    color: "#CC6600",
     constraintExplanation: "Your biggest constraint right now is people and leadership infrastructure. When roles lack clear KPIs, performance is not formally tracked, and all issues escalate to you, the business can only grow as fast as you personally can handle. Your capacity becomes the ceiling of the entire organization.",
     secondaryExplanation: "People and leadership infrastructure is a secondary constraint in your business. Roles and performance systems need strengthening, but there is a more pressing bottleneck to address first. As that primary issue resolves, the leadership layer will become the next clear focus.",
     impactStatement: "When every issue escalates to the owner, the founder's day fills with operational decisions the team should own — and the business can only grow as fast as one person can absorb.",

@@ -44,7 +44,7 @@ Place a new component in the folder matching its feature. Create a new folder on
 <div style={{ color: 'var(--color-brand-ink)' }}>
 
 // Wrong — hardcoded hex
-<div style={{ color: '#0037A5' }}>
+<div style={{ color: '#003399' }}>
 ```
 
 Two exceptions where literal hex is unavoidable, because CSS custom properties are not available at render time: `icon.tsx` / `apple-icon.tsx` / `opengraph-image.tsx` (Satori / `ImageResponse`) and the email templates in `src/lib/email/templates/`. Values there must still match the tokens.
@@ -73,7 +73,7 @@ Use the shared `<Button>` from [Button.tsx](../../../../src/components/ui/Button
 | `accent` | `bg-accent text-canvas-dark`, hover `bg-accent-hover` + amber glow | Premium/secondary highlight CTA |
 | `danger` | `bg-danger text-white` | Destructive confirm |
 
-The `accent` variant pairs amber with **dark slate text**, never white — `#FFBF00` is 1.65:1 against white.
+The `accent` variant pairs amber with **dark slate text**, never white — `#FFCC00` is 1.51:1 against white.
 
 It picks its element from its props — `href` gives a `next/link`, `href` + `external` gives `<a target="_blank" rel="noreferrer">`, neither gives a `<button>` (default `type="button"`). `fullWidth` spans the container.
 

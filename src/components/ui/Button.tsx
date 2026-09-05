@@ -27,7 +27,7 @@ type NativeButtonProps = ButtonBaseProps & {
 type ButtonProps = LinkButtonProps | NativeButtonProps;
 
 /* Every fill is paired with a text colour that clears 4.5:1 against it. The
-   amber variant is the reason `accent` exists at all: #FFBF00 is 1.65:1 against
+   amber variant is the reason `accent` exists at all: #FFCC00 is 1.51:1 against
    white, so it may only ever carry dark slate text — never white. */
 const variantClasses: Record<ButtonVariant, string> = {
   primary: "bg-brand text-white shadow-1 hover:bg-brand-hover hover:shadow-glow-electric",

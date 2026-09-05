@@ -32,7 +32,7 @@ export function NewsletterSubscriberNotificationEmail({
         <Container style={{ maxWidth: "600px", margin: "0 auto", padding: "40px 20px" }}>
           <Text
             style={{
-              color: "#0037A5",
+              color: "#003399",
               fontSize: "11px",
               fontWeight: "bold",
               letterSpacing: "3px",
@@ -42,10 +42,10 @@ export function NewsletterSubscriberNotificationEmail({
           >
             MUHAMMED AJMAL CONSULTING
           </Text>
-          <Heading style={{ color: "#0F172A", fontSize: "22px", margin: "0 0 24px" }}>
+          <Heading style={{ color: "#000033", fontSize: "22px", margin: "0 0 24px" }}>
             New newsletter subscriber
           </Heading>
-          <Text style={{ color: "#0F172A", fontSize: "15px", lineHeight: "1.7", margin: 0 }}>
+          <Text style={{ color: "#000033", fontSize: "15px", lineHeight: "1.7", margin: 0 }}>
             {`${email} subscribed on ${subscribedOn}.`}
           </Text>
         </Container>

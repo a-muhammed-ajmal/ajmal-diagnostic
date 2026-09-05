@@ -12,9 +12,9 @@ Read this when asked to make an interface "look better," "less generic," or "mor
 
 ## Color Aesthetic
 
-- **Electric blue is the primary.** `--color-brand` (`#0052FF`) for fills, `--color-brand-hover` (`#0039CC`) on hover, `--color-brand-ink` (`#0037A5`) for coloured text on white.
-- **Amber is the secondary, and it is a fill.** `--color-accent` (`#FFBF00`) is 1.65:1 on white. It may sit on dark slate (`--color-canvas-dark`), carry dark text on top of itself, or act as a border highlight — never as text on a light surface. For that, `--color-accent-ink` (`#B45309`).
-- **Slate grounds both.** `--color-ink` (`#0F172A`) for text, `--color-muted` (`#475569`) for secondary, `--color-line` (`#E2E8F0`) for borders, `--color-canvas-light` (`#F8FAFC`) for neutral bands.
+- **Electric blue is the primary.** `--color-brand` (`#0066FF`) for fills, `--color-brand-hover` (`#0039CC`) on hover, `--color-brand-ink` (`#003399`) for coloured text on white.
+- **Amber is the secondary, and it is a fill.** `--color-accent` (`#FFCC00`) is 1.51:1 on white. It may sit on dark slate (`--color-canvas-dark`), carry dark text on top of itself, or act as a border highlight — never as text on a light surface. For that, `--color-accent-ink` (`#CC6600`, 3.8:1 — large-text/UI only, below AA-normal).
+- **Slate grounds both.** `--color-ink` (`#000033`) for text, `--color-muted` (`#475569`) for secondary, `--color-line` (`#E2E8F0`) for borders, `--color-canvas-light` (`#F8FAFC`) for neutral bands.
 - **No purple, no rainbow gradients, no AI pulse effects, no mesh backgrounds.** The sanctioned gradient is `.brand-gradient-text` (electric-700 → electric-500); both ends clear 4.5:1, so unlike the old one it is safe at any size.
 
 ## Depth: glass, orbs, and bands

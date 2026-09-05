@@ -102,13 +102,13 @@ Reach for the alias (`bg-brand`, `text-ink`, `border-line`) in components. Reach
 | :---- | :---- | :---- |
 | `--color-electric-50` | `#EFF6FF` | |
 | `--color-electric-100` | `#DBEAFE` | `.orb-electric` fill |
-| `--color-electric-500` | `#0052FF` | Brand primary — 5.8:1 on white |
+| `--color-electric-500` | `#0066FF` | Brand primary — 4.8:1 on white |
 | `--color-electric-600` | `#0046D5` | |
-| `--color-electric-700` | `#0037A5` | 10.1:1 on white |
+| `--color-electric-700` | `#003399` | 10.9:1 on white |
 | `--color-electric-900` | `#1E3A8A` | |
-| `--color-brand` | `#0052FF` | Primary fills, CTAs, focus |
+| `--color-brand` | `#0066FF` | Primary fills, CTAs, focus |
 | `--color-brand-hover` | `#0039CC` | CTA hover — 8.6:1 on white |
-| `--color-brand-ink` | `#0037A5` | Blue text on white — 10.1:1 |
+| `--color-brand-ink` | `#003399` | Blue text on white — 10.9:1 |
 | `--color-brand-tint` | `#E6F0FF` | Light wash, alternating band |
 | `--color-brand-soft` | `#DBEAFE` | Icon tiles, chips, chart fills |
 
@@ -118,15 +118,15 @@ Reach for the alias (`bg-brand`, `text-ink`, `border-line`) in components. Reach
 | :---- | :---- | :---- |
 | `--color-amber-50` | `#FFFBEB` | |
 | `--color-amber-100` | `#FEF3C7` | `.orb-amber` fill |
-| `--color-amber-500` | `#FFBF00` | 1.65:1 on white — **FILL ONLY** |
+| `--color-amber-500` | `#FFCC00` | 1.51:1 on white — **FILL ONLY** |
 | `--color-amber-600` | `#D97706` | ~3.4:1 on white — **fails AA for normal text** |
-| `--color-amber-700` | `#B45309` | Amber text on light — 5.0:1 |
-| `--color-accent` | `#FFBF00` | |
+| `--color-amber-700` | `#CC6600` | Amber text on light — 3.8:1 |
+| `--color-accent` | `#FFCC00` | |
 | `--color-accent-hover` | `#D49E00` | |
-| `--color-accent-ink` | `#B45309` | 5.0:1 on white |
+| `--color-accent-ink` | `#CC6600` | 3.8:1 on white |
 | `--color-accent-soft` | `#FFF8E6` | |
 
-Amber's legitimate homes are fills on dark surfaces, borders, and eyebrow text on a dark band. For amber text on a light surface, `accent-ink` is the only option that passes.
+Amber's legitimate homes are fills on dark surfaces, borders, and eyebrow text on a dark band. `accent-ink` (3.8:1) is the closest amber gets to text on a light surface, but it now clears only the AA large-text/UI threshold (3:1), not AA normal text (4.5:1) — reserve it for headings, labels, and UI text at 18px+/bold 14px+, never body copy.
 
 ### Neutrals
 
@@ -134,14 +134,14 @@ Amber's legitimate homes are fills on dark surfaces, borders, and eyebrow text o
 | :---- | :---- |
 | `--color-canvas` / `--color-surface` | `#FFFFFF` — page and card ground. Two names, one value |
 | `--color-canvas-light` | `#F8FAFC` — Slate 50, neutral band |
-| `--color-canvas-dark` | `#0F172A` — Slate 900, the dark band |
-| `--color-ink` | `#0F172A` — 17.9:1 on white |
+| `--color-canvas-dark` | `#000033` — Slate 900, the dark band |
+| `--color-ink` | `#000033` — 20.0:1 on white |
 | `--color-ink-soft` | `#1E293B` — Slate 800 |
 | `--color-muted` | `#475569` — 7.6:1, the lightest legal text |
-| `--color-muted-invert` | `#CBD5E1` — 12.0:1 against `#0F172A`. Secondary text on a dark band, the inverse partner for `--color-muted` |
+| `--color-muted-invert` | `#CBD5E1` — 13.5:1 against `#000033`. Secondary text on a dark band, the inverse partner for `--color-muted` |
 | `--color-line` / `--color-canvas-border` | `#E2E8F0` — Slate 200. Two names, one value; a palette move must change both |
 | `--color-line-strong` | `#CBD5E1` — Slate 300, the heavier divider |
-| `--color-focus` | `#0052FF` — the global `:focus-visible` outline |
+| `--color-focus` | `#0066FF` — the global `:focus-visible` outline |
 
 ### Status
 
@@ -298,7 +298,7 @@ re-deriving a section.
 
 ❌ **`text-amber-600`.** `#D97706` lands near 3.4:1 on white and fails AA for normal text. For amber text on a light surface use `text-accent-ink`.
 
-❌ **`#FFBF00` as text on white or light gray.** 1.65:1. Fills and borders only.
+❌ **`#FFCC00` as text on white or light gray.** 1.51:1. Fills and borders only.
 
 ❌ **Muting text with opacity** (`text-ink/60`). Use `text-muted`.
 
@@ -356,8 +356,8 @@ Before declaring any frontend work complete:
 - [ ] Headings and display map to `var(--font-heading)`; body, UI, and small text map to `var(--font-body)`. No third family in any `font-family` declaration.
 - [ ] No body-role text above weight 500. `npm run audit:type` asserts this per element.
 - [ ] `npm run audit:type` passes. It drives a real browser over every route at 375 / 320 / 1920px, asserts the heading and body ceilings, and fails on horizontal overflow at 320px. Run it rather than eyeballing — font sizes are inherited, so a `<p>` handed a card-title step is invisible to code review.
-- [ ] Primary actions use `#0052FF`.
-- [ ] No `text-amber-600` and no `#FFBF00` text on a light surface.
+- [ ] Primary actions use `#0066FF`.
+- [ ] No `text-amber-600` and no `#FFCC00` text on a light surface.
 - [ ] Hover movement bound to 200ms.
 - [ ] All text meets 4.5:1. State is never signalled by color alone.
 - [ ] One `h1` per page; heading levels not skipped.

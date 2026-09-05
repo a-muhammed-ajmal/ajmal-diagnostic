@@ -26,8 +26,8 @@ const ALLOWED_HOSTS = new Set(["calendly.com", "www.calendly.com"]);
  */
 export const POPUP_THEME = {
   background_color: "FFFFFF", // --color-canvas
-  text_color: "0F172A", // --color-ink
-  primary_color: "0052FF", // --color-brand — electric blue
+  text_color: "000033", // --color-ink
+  primary_color: "0066FF", // --color-brand — electric blue
 } as const;
 
 const MISSING_MESSAGE =

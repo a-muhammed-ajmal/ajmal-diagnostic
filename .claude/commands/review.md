@@ -53,7 +53,7 @@ Review `git diff HEAD` (or staged changes) across these dimensions. Output a str
 |---|----------|-----------|---------|-----------|-----|
 | 1 | 🔴 High | Security | Service-role key referenced in client component | foo.tsx:12 | Move to a Route Handler |
 | 2 | 🟡 Medium | Performance | N+1 query inside a loop | admin/leads/page.tsx:88 | Batch the query outside the loop |
-| 3 | 🟢 Low | Convention | Raw `#0052FF` in JSX instead of `bg-brand` | services/page.tsx:40 | Use the Tailwind token class |
+| 3 | 🟢 Low | Convention | Raw `#0066FF` in JSX instead of `bg-brand` | services/page.tsx:40 | Use the Tailwind token class |
 
 Severity scale:
 - 🔴 **High** — must fix before merge (security, data loss, broken RLS, service-role key exposure)
