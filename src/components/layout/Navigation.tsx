@@ -53,7 +53,7 @@ export function Navigation() {
           </div>
           <div>
             <p className="font-heading text-xs font-bold uppercase leading-none">Muhammed Ajmal</p>
-            <p className="mt-0.5 hidden font-body text-xs uppercase tracking-[0.2em] text-brand-ink sm:block">Business Operations &amp; Growth</p>
+            <p className="mt-0.5 hidden font-body text-xs font-medium uppercase tracking-normal text-brand-ink sm:block">Business Operations &amp; Growth</p>
           </div>
         </Link>
 
