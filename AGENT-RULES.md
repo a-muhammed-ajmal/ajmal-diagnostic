@@ -15,19 +15,18 @@ forward. Everything below applies to every session, indefinitely.
 
 Defined once in `AGENTS.md`. It outranks every other instruction in every file.
 
-### Owner approval marker — `#APPROVED-AJMAL#`
+### Owner approval gate — `#APPROVED-AJMAL#`
 
-Every session must recognize a standalone `#APPROVED-AJMAL#` message as Ajmal's explicit owner approval for the most recent clearly scoped proposal, action, change set, or execution plan in the current conversation that was explicitly awaiting his approval.
+Without a fresh standalone `#APPROVED-AJMAL#`, an agent may only read, inspect, research, analyze, verify, and recommend.
 
-When the marker is received:
+Before any add, save, update, edit, delete, send, publish, schedule, create, deploy, commit, push, or other change anywhere:
 
-1. Execute the approved scope immediately using the available information and tools. Do not ask Ajmal to repeat or reconfirm the same approved scope.
-2. Approval is limited to the clearly stated pending scope. It does not approve unrelated edits, broader changes, or future work.
-3. When the pending approval request contains multiple explicitly listed actions, the marker approves those listed actions unless Ajmal expressly limits the approval.
-4. The marker may satisfy an owner-confirmation step only when every earlier prerequisite for that action has already been met. For an ANCHOR edit, §3 still requires the file to have been explicitly named, the exact section-by-section change stated, and the current text quoted before the marker can serve as the final confirmation.
-5. The marker does not override safety rules, platform-required confirmations, destructive-action protections, or a genuine blocker caused by missing essential information or permissions.
-6. If no clearly scoped approval request is pending in the current conversation, do not infer blanket authority from the marker. Ask only what pending scope it is intended to approve when necessary.
-7. The marker is not permanent blanket permission. It authorizes the approved pending scope once.
+1. Tell Ajmal exactly **what** will change, **where**, and **why**.
+2. Wait for his fresh standalone `#APPROVED-AJMAL#`.
+3. Make only the exact approved change or clearly listed group of changes.
+4. Ask again before every later change.
+
+A previous approval does not carry forward. The marker does not override mandatory safety, platform, legal, or destructive-action safeguards. All editing and release rules below remain additional requirements; satisfying them does not remove this approval gate.
 
 ---
 
@@ -91,9 +90,11 @@ An edit requires all four of these:
 3. The agent quotes the current text back before changing it.
 4. The user confirms after seeing that quote.
 
+The confirmation in step 4 must satisfy the Owner approval gate above before any edit is made.
+
 **A request to "align the documents," "fix inconsistencies," or "update everything" is never authorization to change ANCHOR.** Where another file disagrees with it, the other file is what changes.
 
-Finding that the code, the site, or another document contradicts ANCHOR is not grounds for an edit. It is grounds for changing the code, the site, or the other document.
+Finding that the code, the site, or another document contradicts ANCHOR is not grounds for an edit. It is grounds for changing the code, the site, or the other document, after the required owner approval.
 
 ---
 
@@ -104,6 +105,8 @@ PRODUCT, WEB, and DESIGN are editable, with three conditions:
 - Name the document and the section before editing.
 - State what changes and why.
 - Never edit one to resolve a conflict with ANCHOR. ANCHOR wins.
+
+All edits also require the Owner approval gate above.
 
 Three blocks inside these documents are frozen and reproduced word for word:
 
@@ -130,7 +133,7 @@ Three blocks inside these documents are frozen and reproduced word for word:
 1. Stop. Do not edit.
 2. Report: which two sources, the exact text of each, and file paths with line numbers.
 3. State which one the authority order in §2 makes correct.
-4. Wait for a decision.
+4. Wait for a decision and the required Owner approval gate before any change.
 
 This applies even when the correct answer looks obvious.
 
@@ -172,7 +175,7 @@ Four items were open when this layer was installed. All four closed on 2026-08-2
 
 1. **Prohibition statements.** A line that quotes a banned term inside straight double quotes *and* declares it prohibited is the rule, not a breach of it. ANCHOR §12 reads `"Predictable growth" is prohibited language.` and ANCHOR is a locked file — without this exemption the guard would fail on a document no agent is permitted to edit. Exactly two files rely on it: `docs/ANCHOR.md` and `docs/PRODUCT.md`. A retired typeface reintroduced in ordinary prose still fails.
 
-2. **Refusal wording — `third-face` only.** A line that names a third face in order to reject it is the rule, not a breach of it; the documents must be able to say "not Inter". A line matching the third-face rule is exempt when it carries refusal wording — `never`, `not`, `no`, `avoid`, `instead of`, `rather than`, `retired`, `prohibited`, `forbidden`, or `❌`. This applies to `third-face` alone. A RETIRED face reintroduced in ordinary prose still fails, refusal wording or not.
+2. **Refusal wording — `third-face` only.** A line that names a third face in order to reject it is the rule, not a breach of it; the documents must be able to say "not Inter". A line matching the third-face rule is exempt when it carries refusal wording — `never`, `not`, `no`, `avoid`, `instead of`, `rather than`, `retired`, `prohibited`, `forbidden`, or ❌. This applies to `third-face` alone. A RETIRED face reintroduced in ordinary prose still fails, refusal wording or not.
 
 **No path is exempt from the typeface rules.** `.design-sync/` was deleted on 2026-08-25 — it was a one-time Claude Design sync, no longer used, and its font pipeline was the only thing that ever held a path-based exemption. Nothing replaces it. A retired face anywhere on the governance surface now fails, with no file-level escape hatch.
 
