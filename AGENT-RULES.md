@@ -15,6 +15,20 @@ forward. Everything below applies to every session, indefinitely.
 
 Defined once in `AGENTS.md`. It outranks every other instruction in every file.
 
+### Owner approval marker — `#APPROVED-AJMAL#`
+
+Every session must recognize a standalone `#APPROVED-AJMAL#` message as Ajmal's explicit owner approval for the most recent clearly scoped proposal, action, change set, or execution plan in the current conversation that was explicitly awaiting his approval.
+
+When the marker is received:
+
+1. Execute the approved scope immediately using the available information and tools. Do not ask Ajmal to repeat or reconfirm the same approved scope.
+2. Approval is limited to the clearly stated pending scope. It does not approve unrelated edits, broader changes, or future work.
+3. When the pending approval request contains multiple explicitly listed actions, the marker approves those listed actions unless Ajmal expressly limits the approval.
+4. The marker may satisfy an owner-confirmation step only when every earlier prerequisite for that action has already been met. For an ANCHOR edit, §3 still requires the file to have been explicitly named, the exact section-by-section change stated, and the current text quoted before the marker can serve as the final confirmation.
+5. The marker does not override safety rules, platform-required confirmations, destructive-action protections, or a genuine blocker caused by missing essential information or permissions.
+6. If no clearly scoped approval request is pending in the current conversation, do not infer blanket authority from the marker. Ask only what pending scope it is intended to approve when necessary.
+7. The marker is not permanent blanket permission. It authorizes the approved pending scope once.
+
 ---
 
 ## 1. The four documents
